@@ -4,10 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.didaktikapp.R
-import com.example.didaktikapp.databinding.Activity0SplashBinding
-import com.example.didaktikapp.databinding.Activity1PrincipalBinding
 
 import com.example.didaktikapp.databinding.Activity1PrincipalBinding
+
 
 class Activity1_Principal : AppCompatActivity() {
 

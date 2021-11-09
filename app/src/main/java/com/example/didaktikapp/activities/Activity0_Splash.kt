@@ -8,6 +8,7 @@ import android.view.View
 import com.example.didaktikapp.R
 import com.example.didaktikapp.databinding.Activity0SplashBinding
 
+
 class Activity0_Splash : AppCompatActivity() {
     private lateinit var binding: Activity0SplashBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +27,7 @@ class Activity0_Splash : AppCompatActivity() {
                     this.overridePendingTransition(0, 0)
                     finish()
                 }, 2000) // 2000 is the delayed time in milliseconds.
+
 
 
     }

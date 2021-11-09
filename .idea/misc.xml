@@ -3,8 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
         <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/didaktikapp/app/src/main/res/layout/activity0_splash.xml" value="0.2" />
         <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/didaktikapp/app/src/main/res/layout/activity1_principal.xml" value="0.176" />
+=======
+        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/drawable-v23/splash_screen.xml" value="0.1787037037037037" />
+        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/drawable/fondosplash.xml" value="0.1" />
+        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/drawable/splash_screen.xml" value="0.4" />
+        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/activity0_splash.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/activity1_principal.xml" value="0.25416666666666665" />
+>>>>>>> d3e029d75e60bba8d30b4915015c26fe5873f5d2
       </map>
     </option>
   </component>

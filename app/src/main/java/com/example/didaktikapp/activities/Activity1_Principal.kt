@@ -7,11 +7,16 @@ import com.example.didaktikapp.R
 import com.example.didaktikapp.databinding.Activity0SplashBinding
 import com.example.didaktikapp.databinding.Activity1PrincipalBinding
 
+import com.example.didaktikapp.databinding.Activity1PrincipalBinding
+
 class Activity1_Principal : AppCompatActivity() {
+
     private lateinit var binding: Activity1PrincipalBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity1_principal)
+
 
         binding = Activity1PrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -32,5 +37,6 @@ class Activity1_Principal : AppCompatActivity() {
             var i = Intent(this, Activity5_Mapa::class.java)
             startActivity(i)
         }
+
     }
 }

@@ -7,7 +7,7 @@ import com.example.didaktikapp.R
 import com.example.didaktikapp.databinding.Activity0SplashBinding
 
 class Activity0_Splash : AppCompatActivity() {
-    private lateinit var binding:Activity0SplashBinding
+    private lateinit var binding: Activity0SplashBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity0_splash)
@@ -16,8 +16,8 @@ class Activity0_Splash : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.BtnMapa.setOnClickListener(){
-            var mapa = Intent(this, Activity5_Mapa::class.java)
-            startActivity(mapa)
+            var i = Intent(this, Activity1_Principal::class.java)
+            startActivity(i)
         }
     }
 }

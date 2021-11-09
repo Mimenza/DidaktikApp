@@ -10,4 +10,8 @@
     <string name="btnhasi">Hasi</string>
     <string name="btncargar">Cargar</string>
     <string name="btnnueva">Empezar</string>
+
+    <!--LOGIN-->
+    <string name="inputnombre">Nombre</string>
+    <string name="introducirnombre">Pon tu nombre debajo!</string>
 </resources>

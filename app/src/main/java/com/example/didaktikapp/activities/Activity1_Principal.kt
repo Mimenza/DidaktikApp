@@ -30,8 +30,8 @@ class Activity1_Principal : AppCompatActivity() {
         val db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
         super.onCreate(savedInstanceState)
-        getSupportActionBar()?.hide()
         setContentView(R.layout.activity1_principal)
+        getSupportActionBar()?.hide()
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
 
         binding = Activity1PrincipalBinding.inflate(layoutInflater)
@@ -48,6 +48,12 @@ class Activity1_Principal : AppCompatActivity() {
 
             binding.btn1Cargar.setOnClickListener() {
                 ocultartodo()
+            }
+
+            binding.btn1Nuevo.setOnClickListener(){
+
+                var i = Intent(this, Activity2_Login::class.java)
+                startActivity(i)
             }
 
         }
@@ -100,6 +106,7 @@ class Activity1_Principal : AppCompatActivity() {
     }
 
     fun getData(db: FirebaseFirestore) {
+
 
         db.collection("Usuarios")
             .get()

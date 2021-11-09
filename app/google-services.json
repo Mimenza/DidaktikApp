@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "880891126021",
+    "project_id": "sagarra-jo",
+    "storage_bucket": "sagarra-jo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:880891126021:android:62f6e0f502dd0e22b2576c",
+        "android_client_info": {
+          "package_name": "com.example.didaktikapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "880891126021-nmpvjjuptpssr5r1mi2omqsr6at67eui.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLMql2NaMWYL-QriB4Tg-kfRuDrI8qypY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "880891126021-nmpvjjuptpssr5r1mi2omqsr6at67eui.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.didaktikapp">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +13,49 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Didaktikapp">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.Activity4_bienvenida"
+            android:exported="false" />
+        <activity
+            android:name="com.example.didaktikapp.activities.sites.Activity6_6_RezolaSagardotegia"
+            android:exported="false" />
+        <activity
+            android:name="com.example.didaktikapp.activities.sites.Activity6_5_IpintzaSagardotegia"
+            android:exported="false" />
+        <activity
+            android:name="com.example.didaktikapp.activities.sites.Activity6_4_AstigarElkartea"
+            android:exported="false" />
+        <activity
+            android:name="com.example.didaktikapp.activities.sites.Activity4_SagarUzta"
+            android:exported="false" />
+        <activity
+            android:name="com.example.didaktikapp.activities.sites.Activity6_3_ForuPlaza"
+            android:exported="false" />
+        <activity
+            android:name="com.example.didaktikapp.activities.sites.Activity6_2_Murgia"
+            android:exported="false" />
+        <activity
+            android:name="com.example.didaktikapp.activities.sites.Activity6_1_Sagardoetxea"
+            android:exported="false" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".activities.Activity5_Mapa"
+            android:exported="false"
+            android:label="@string/title_activity_activity4_mapa" />
+        <activity
+            android:name=".activities.Activity3_Load"
+            android:exported="false" />
+        <activity
+            android:name=".activities.Activity2_Login"
+            android:exported="false" />
+        <activity
+            android:name=".activities.Activity1_Principal"
+            android:exported="false" />
+        <activity
+            android:name=".activities.Activity0_Splash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,11 +1,12 @@
-package com.example.didaktikapp
+package com.example.didaktikapp.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.didaktikapp.R
 
-class MainActivity : AppCompatActivity() {
+class Activity1_Principal : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity1_principal)
     }
 }

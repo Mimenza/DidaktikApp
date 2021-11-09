@@ -20,11 +20,6 @@ class Activity0_Splash : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        binding.BtnMapa.setOnClickListener(){
-            var i = Intent(this, Activity1_Principal::class.java)
-            startActivity(i)
-        }
-
                 Handler().postDelayed({
                     val intent = Intent(this, Activity1_Principal::class.java)
                     startActivity(intent)

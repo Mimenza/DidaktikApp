@@ -7,16 +7,4 @@
     android:background="@drawable/splash_screen"
     tools:context=".activities.Activity0_Splash">
 
-
-    <Button
-        android:id="@+id/Btn_mapa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Principal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.161" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

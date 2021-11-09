@@ -3,4 +3,11 @@
     <string name="title_activity_activity4_mapa">Activity4_Mapa</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--PRINCIPAL-->
+    <string name="tituloprincipal">SAGARRA JO</string>
+    <string name="nombregrupo">Onandi taldea</string>
+    <string name="btnhasi">Hasi</string>
+    <string name="btncargar">Cargar</string>
+    <string name="btnnueva">Empezar</string>
 </resources>

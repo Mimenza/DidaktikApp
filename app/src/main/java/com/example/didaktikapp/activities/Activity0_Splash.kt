@@ -14,21 +14,17 @@ class Activity0_Splash : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getSupportActionBar()?.hide()
-        setContentView(R.layout.activity0_splash)
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+        setContentView(R.layout.activity0_splash)
 
         binding = Activity0SplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-                Handler().postDelayed({
-                    val intent = Intent(this, Activity1_Principal::class.java)
-                    startActivity(intent)
-                    this.overridePendingTransition(0, 0)
-                    finish()
-                }, 2000) // 2000 is the delayed time in milliseconds.
-
-
-
+        Handler().postDelayed({
+            val intent = Intent(this, Activity1_Principal::class.java)
+            startActivity(intent)
+            this.overridePendingTransition(0, 0)
+            finish()
+        }, 2000)
     }
 }

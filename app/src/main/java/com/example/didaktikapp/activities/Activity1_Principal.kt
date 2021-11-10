@@ -20,8 +20,6 @@ import androidx.annotation.NonNull
 import com.google.android.gms.tasks.OnCompleteListener
 
 
-
-
 class Activity1_Principal : AppCompatActivity() {
 
     private lateinit var binding: Activity1PrincipalBinding
@@ -31,8 +29,8 @@ class Activity1_Principal : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         getSupportActionBar()?.hide()
-        setContentView(R.layout.activity1_principal)
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+        setContentView(R.layout.activity1_principal)
 
         binding = Activity1PrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -49,9 +47,7 @@ class Activity1_Principal : AppCompatActivity() {
             binding.btn1Cargar.setOnClickListener() {
                 ocultartodo()
             }
-
         }
-
     }
 
     fun ocultarbtn() {
@@ -67,20 +63,23 @@ class Activity1_Principal : AppCompatActivity() {
         binding.btnBienvenida.setOnClickListener() {
             var i = Intent(this, Activity4_bienvenida::class.java)
             startActivity(i)
+            this.overridePendingTransition(0, 0)
         }
         binding.btnLoad.setOnClickListener() {
             var i = Intent(this, Activity3_Load::class.java)
             startActivity(i)
+            this.overridePendingTransition(0, 0)
         }
         binding.btnLogin.setOnClickListener() {
             var i = Intent(this, Activity2_Login::class.java)
             startActivity(i)
+            this.overridePendingTransition(0, 0)
         }
         binding.btnMapa.setOnClickListener() {
             var i = Intent(this, Activity5_Mapa::class.java)
             startActivity(i)
+            this.overridePendingTransition(0, 0)
         }
-
     }
 
     fun ocultartodo() {

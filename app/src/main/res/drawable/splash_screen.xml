@@ -7,7 +7,7 @@
 
         <bitmap
             android:gravity="center"
-            android:src="@drawable/upeliosagarra"
+            android:src="@drawable/img_upeliosagarra"
             ></bitmap>
 
     </item>

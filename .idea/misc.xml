@@ -3,18 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-<<<<<<< HEAD
-=======
-        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/activity1_principal.xml" value="0.2" />
-        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/activity2_login.xml" value="0.2" />
-        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/activity3_load.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/activity4_bienvenida.xml" value="0.4" />
-        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/itemuserrecycler.xml" value="0.25416666666666665" />
->>>>>>> d18efdff5f6a485f8f01e2e56c5f5983c5c7b2ef
         <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/didaktikapp/app/src/main/res/layout/activity0_splash.xml" value="0.2" />
         <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/didaktikapp/app/src/main/res/layout/activity1_principal.xml" value="0.264" />
         <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/didaktikapp/app/src/main/res/layout/activity2_login.xml" value="0.176" />
         <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/didaktikapp/app/src/main/res/layout/activity3_load.xml" value="0.264" />
+        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/didaktikapp/app/src/main/res/layout/itemuserrecycler.xml" value="0.14166666666666666" />
         <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/didaktikapp/app/src/main/res/layout/userholder.xml" value="0.264" />
       </map>
     </option>

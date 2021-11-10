@@ -1,23 +1,13 @@
 package com.example.didaktikapp.activities
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
 import com.example.didaktikapp.R
-
 import com.example.didaktikapp.databinding.Activity1PrincipalBinding
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QueryDocumentSnapshot
-
-import com.google.firebase.firestore.QuerySnapshot
-
-import androidx.annotation.NonNull
-
-import com.google.android.gms.tasks.OnCompleteListener
 
 
 class Activity1_Principal : AppCompatActivity() {
@@ -25,7 +15,7 @@ class Activity1_Principal : AppCompatActivity() {
     private lateinit var binding: Activity1PrincipalBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val db: FirebaseFirestore = FirebaseFirestore.getInstance()
+        var db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
         super.onCreate(savedInstanceState)
         getSupportActionBar()?.hide()
@@ -39,13 +29,26 @@ class Activity1_Principal : AppCompatActivity() {
         menu()
         ocultarbtn()
 
+        binding.btn1Menu.setOnClickListener() {
+            //Boton para sacar el menu temporal
+            ocultartodo()
+        }
+
         binding.btn1Hasi.setOnClickListener() {
             binding.btn1Hasi.isVisible = false
             binding.btn1Cargar.isVisible = true
             binding.btn1Nuevo.isVisible = true
 
+            binding.btn1Nuevo.setOnClickListener() {
+                //Nos lleva a la activitie para hacer el login
+                var i = Intent(this, Activity2_Login::class.java)
+                startActivity(i)
+            }
+
             binding.btn1Cargar.setOnClickListener() {
-                ocultartodo()
+                //Nos lleva a la activity para ver todas las partidas creadas
+                var i = Intent(this, Activity3_Load::class.java)
+                startActivity(i)
             }
         }
     }
@@ -99,18 +102,21 @@ class Activity1_Principal : AppCompatActivity() {
     }
 
     fun getData(db: FirebaseFirestore) {
+    /*
 
-        db.collection("Usuarios")
-            .get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    for (document in task.result!!) {
-                        Log.d(TAG, document.id + " => " + document.data)
-                    }
-                } else {
-                    Log.w(TAG, "Error getting documents.", task.exception)
-                }
+        var datos = ""
+        db.collection("Usuarios").get().addOnSuccessListener { documentos ->
+
+            for (documento in documentos) {
+                datos += "${documento.id}: ${documento.data} \n"
+
+                Log.d(TAG, datos)
+
+
             }
-    }
 
+        }*/
+    }
 }
+
+

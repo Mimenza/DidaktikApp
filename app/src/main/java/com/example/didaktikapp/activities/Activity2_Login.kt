@@ -23,7 +23,7 @@ class Activity2_Login : AppCompatActivity() {
         //Firebase
         var db:FirebaseFirestore = FirebaseFirestore.getInstance()
 
-        //Botón alta usuario
+        //Botón alta Usuario
         binding.btn1Hasi.setOnClickListener{
 
             guardardatos(db)

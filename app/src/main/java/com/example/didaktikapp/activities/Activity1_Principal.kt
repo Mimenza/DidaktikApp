@@ -13,8 +13,6 @@ import com.example.didaktikapp.databinding.Activity1PrincipalBinding
 import com.google.firebase.firestore.FirebaseFirestore
 
 
-
-
 class Activity1_Principal : AppCompatActivity() {
 
     private lateinit var binding: Activity1PrincipalBinding
@@ -25,7 +23,7 @@ class Activity1_Principal : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity1_principal)
         getSupportActionBar()?.hide()
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+
 
         binding = Activity1PrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -34,18 +32,25 @@ class Activity1_Principal : AppCompatActivity() {
         menu()
         ocultarbtn()
 
+        binding.btn1Menu.setOnClickListener() {
+            //Boton para sacar el menu temporal
+            ocultartodo()
+        }
+
         binding.btn1Hasi.setOnClickListener() {
             binding.btn1Hasi.isVisible = false
             binding.btn1Cargar.isVisible = true
             binding.btn1Nuevo.isVisible = true
 
-            binding.btn1Cargar.setOnClickListener() {
-                ocultartodo()
+            binding.btn1Nuevo.setOnClickListener() {
+                //Nos lleva a la activitie para hacer el login
+                var i = Intent(this, Activity2_Login::class.java)
+                startActivity(i)
             }
 
-            binding.btn1Nuevo.setOnClickListener(){
-
-                var i = Intent(this, Activity2_Login::class.java)
+            binding.btn1Cargar.setOnClickListener() {
+                //Nos lleva a la activity para ver todas las partidas creadas
+                var i = Intent(this, Activity3_Load::class.java)
                 startActivity(i)
             }
 
@@ -99,7 +104,7 @@ class Activity1_Principal : AppCompatActivity() {
     }
 
     fun getData(db: FirebaseFirestore) {
-
+    /*
 
         var datos = ""
         db.collection("Usuarios").get().addOnSuccessListener { documentos ->
@@ -112,7 +117,8 @@ class Activity1_Principal : AppCompatActivity() {
 
             }
 
-        }
-    }}
+        }*/
+    }
+}
 
 

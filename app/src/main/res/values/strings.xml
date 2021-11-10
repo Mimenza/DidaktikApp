@@ -14,4 +14,7 @@
     <!--LOGIN-->
     <string name="inputnombre">Nombre</string>
     <string name="introducirnombre">Pon tu nombre debajo!</string>
+
+    <!--CARGAR-->
+    <string name="titulocargar">Carga tu partida!</string>
 </resources>

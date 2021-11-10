@@ -3,12 +3,11 @@ package com.example.didaktikapp.activities
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.didaktikapp.Adapter.UsersRecyclerAdapter
-import com.example.didaktikapp.R
 import com.example.didaktikapp.databinding.Activity3LoadBinding
-
 import com.example.reto01.Model.User
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity3_load.*
@@ -25,13 +24,14 @@ class Activity3_Load : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity3_load)
         getSupportActionBar()?.hide()
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+
         binding= Activity3LoadBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         initViews()
         initObjects()
-
     }
 
     private fun initViews(){

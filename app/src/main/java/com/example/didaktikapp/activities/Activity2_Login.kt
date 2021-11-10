@@ -1,5 +1,6 @@
 package com.example.didaktikapp.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -9,21 +10,24 @@ import com.example.didaktikapp.databinding.Activity2LoginBinding
 import com.example.reto01.Model.User
 import com.google.firebase.firestore.FirebaseFirestore
 
+
 class Activity2_Login : AppCompatActivity() {
     private lateinit var binding:Activity2LoginBinding
     lateinit private var Usuario : User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity2_login)
         getSupportActionBar()?.hide()
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+        setContentView(R.layout.activity2_login)
+
         binding= Activity2LoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         //Firebase
         var db:FirebaseFirestore = FirebaseFirestore.getInstance()
         getLastIdUser(db)
+
 
     }
 
@@ -41,6 +45,8 @@ class Activity2_Login : AppCompatActivity() {
 
             }
           var last_id= datos.last().toString().toInt()
+
+
 
             //Botón alta usuario
             binding.btn1Hasi.setOnClickListener{
@@ -70,8 +76,10 @@ class Activity2_Login : AppCompatActivity() {
 
             db.collection("Usuarios").document(((last_id+1).toString())).set(dato)
                 .addOnSuccessListener {
-
                     Toast.makeText(this, "Usuario insertado", Toast.LENGTH_SHORT).show()
+                    var i = Intent(this, Activity4_bienvenida::class.java)
+                    startActivity(i)
+                    this.overridePendingTransition(0, 0)
                 }
                 .addOnFailureListener{
                     Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()

@@ -6,4 +6,30 @@
     android:layout_height="match_parent"
     tools:context=".activities.Activity3_Load">
 
+    <TextView
+        android:id="@+id/txtv3_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/titulocargar"
+        android:textAlignment="center"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.007" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rview3_usuarios"
+        android:layout_width="409dp"
+        android:layout_height="634dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtv3_titulo"
+        app:layout_constraintVertical_bias="1.0"
+        tools:listitem="@layout/itemuserrecycler" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+

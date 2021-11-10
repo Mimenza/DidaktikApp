@@ -4,6 +4,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.Activity4_bienvenida">
+    android:background="@drawable/atzeko_irudia"
+    tools:context=".activities.Activity4_bienvenida"
+    android:scaleType="fitXY">
 
+    <ImageView
+        android:id="@+id/imgv4_manzanatutorial"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.007"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.815"
+        app:srcCompat="@drawable/upeliosagarra" />
+
+    <ImageView
+        android:id="@+id/imgv4_bocadillo"
+        android:layout_width="340dp"
+        android:layout_height="757dp"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.253"
+        app:srcCompat="@drawable/bocadillo" />
+
+    <TextView
+        android:id="@+id/txtv4_bienvenida"
+        android:layout_width="207dp"
+        android:layout_height="309dp"
+        android:text="@string/text_bienvenida"
+
+        android:textSize="14dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.766"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.383" />
 </androidx.constraintlayout.widget.ConstraintLayout>

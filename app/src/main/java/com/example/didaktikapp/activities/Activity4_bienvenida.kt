@@ -8,5 +8,6 @@ class Activity4_bienvenida : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity4_bienvenida)
+        getSupportActionBar()?.hide()
     }
 }

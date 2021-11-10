@@ -27,7 +27,7 @@ class Activity1_Principal : AppCompatActivity() {
     private lateinit var binding: Activity1PrincipalBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        val db: FirebaseFirestore = FirebaseFirestore.getInstance()
+        var db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
         super.onCreate(savedInstanceState)
         getSupportActionBar()?.hide()
@@ -101,17 +101,20 @@ class Activity1_Principal : AppCompatActivity() {
 
     fun getData(db: FirebaseFirestore) {
 
-        db.collection("Usuarios")
-            .get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    for (document in task.result!!) {
-                        Log.d(TAG, document.id + " => " + document.data)
-                    }
-                } else {
-                    Log.w(TAG, "Error getting documents.", task.exception)
+
+        var datos=""
+        db.collection("Usuarios").get().
+        addOnSuccessListener { documentos->
+
+                for (documento in documentos) {
+                    datos += "${documento.id}: ${documento.data} \n"
+
+                    Log.d(TAG, datos)
                 }
-            }
+
+        }
+
+    }
     }
 
-}
+

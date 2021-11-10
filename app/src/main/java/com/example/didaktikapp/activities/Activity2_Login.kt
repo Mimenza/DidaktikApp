@@ -1,5 +1,6 @@
 package com.example.didaktikapp.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -45,8 +46,10 @@ class Activity2_Login : AppCompatActivity() {
 
             db.collection("Usuarios").document("3").set(dato)
                 .addOnSuccessListener {
-
                     Toast.makeText(this, "Usuario insertado", Toast.LENGTH_SHORT).show()
+                    var i = Intent(this, Activity4_bienvenida::class.java)
+                    startActivity(i)
+                    this.overridePendingTransition(0, 0)
                 }
                 .addOnFailureListener{
                     Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()

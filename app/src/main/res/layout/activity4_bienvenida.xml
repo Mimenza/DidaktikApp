@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.815"
-        app:srcCompat="@drawable/upeliosagarra" />
+        app:srcCompat="@drawable/img_upeliosagarra" />
 
     <ImageView
         android:id="@+id/imgv4_bocadillo"

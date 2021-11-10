@@ -11,13 +11,6 @@ import com.example.didaktikapp.R
 
 import com.example.didaktikapp.databinding.Activity1PrincipalBinding
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.QueryDocumentSnapshot
-
-import com.google.firebase.firestore.QuerySnapshot
-
-import androidx.annotation.NonNull
-
-import com.google.android.gms.tasks.OnCompleteListener
 
 
 
@@ -30,8 +23,8 @@ class Activity1_Principal : AppCompatActivity() {
         var db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
         super.onCreate(savedInstanceState)
-        getSupportActionBar()?.hide()
         setContentView(R.layout.activity1_principal)
+        getSupportActionBar()?.hide()
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
 
         binding = Activity1PrincipalBinding.inflate(layoutInflater)
@@ -48,6 +41,12 @@ class Activity1_Principal : AppCompatActivity() {
 
             binding.btn1Cargar.setOnClickListener() {
                 ocultartodo()
+            }
+
+            binding.btn1Nuevo.setOnClickListener(){
+
+                var i = Intent(this, Activity2_Login::class.java)
+                startActivity(i)
             }
 
         }
@@ -102,19 +101,18 @@ class Activity1_Principal : AppCompatActivity() {
     fun getData(db: FirebaseFirestore) {
 
 
-        var datos=""
-        db.collection("Usuarios").get().
-        addOnSuccessListener { documentos->
+        var datos = ""
+        db.collection("Usuarios").get().addOnSuccessListener { documentos ->
 
-                for (documento in documentos) {
-                    datos += "${documento.id}: ${documento.data} \n"
+            for (documento in documentos) {
+                datos += "${documento.id}: ${documento.data} \n"
 
-                    Log.d(TAG, datos)
-                }
+                Log.d(TAG, datos)
+
+
+            }
 
         }
-
-    }
-    }
+    }}
 
 

@@ -8,5 +8,6 @@ class Activity6_3_ForuPlaza : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity6_3_foru_plaza)
+        getSupportActionBar()?.hide()
     }
 }

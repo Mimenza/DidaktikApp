@@ -8,5 +8,6 @@ class Activity6_1_Sagardoetxea : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity6_1_sagardoetxea)
+        getSupportActionBar()?.hide()
     }
 }

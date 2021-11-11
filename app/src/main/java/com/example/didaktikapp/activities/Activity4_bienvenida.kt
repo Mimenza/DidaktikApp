@@ -7,10 +7,8 @@ import android.os.Handler
 import android.view.View
 import android.media.MediaPlayer
 import com.example.didaktikapp.R
-
-
-
-
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 
 class Activity4_bienvenida : AppCompatActivity() {
@@ -22,17 +20,18 @@ class Activity4_bienvenida : AppCompatActivity() {
         getSupportActionBar()?.hide()
 
 
-
         Handler().postDelayed({
             val intent = Intent(this, Activity5_Mapa::class.java)
             startActivity(intent)
             this.overridePendingTransition(0, 0)
             finish()
-        }, 10000)
+        }, 43000)
 
-        var ring:MediaPlayer = MediaPlayer.create(this, R.raw.audio)
-        ring.start()
-
+        runBlocking() {
+            launch {
+                var ring: MediaPlayer = MediaPlayer.create(this@Activity4_bienvenida, R.raw.audio)
+                ring.start()
+            }
+        }
     }
-
 }

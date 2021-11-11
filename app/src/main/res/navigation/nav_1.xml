@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_1"
+    app:startDestination="@id/fragment3_info">
+
+    <fragment
+        android:id="@+id/fragment3_info"
+        android:name="com.example.didaktikapp.fragments.Fragment3_info"
+        android:label="fragment3_info"
+        tools:layout="@layout/fragment3_info" >
+        <action
+            android:id="@+id/action_fragment3_info_to_fragment1_1_juego"
+            app:destination="@id/fragment1_1_juego" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment1_1_juego"
+        android:name="com.example.didaktikapp.fragments.juegos.Fragment1_1_juego"
+        android:label="fragment1_1_juego"
+        tools:layout="@layout/fragment1_1_juego" >
+        <action
+            android:id="@+id/action_fragment1_1_juego_to_fragment2_1_minijuego"
+            app:destination="@id/fragment2_1_minijuego" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment2_1_minijuego"
+        android:name="com.example.didaktikapp.fragments.minijuegos.Fragment2_1_minijuego"
+        android:label="fragment2_1_minijuego"
+        tools:layout="@layout/fragment2_1_minijuego" />
+</navigation>

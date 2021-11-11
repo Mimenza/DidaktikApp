@@ -7,7 +7,6 @@ import android.view.View
 import androidx.core.view.isVisible
 import com.example.didaktikapp.R
 import com.example.didaktikapp.databinding.Activity1PrincipalBinding
-import com.google.firebase.firestore.FirebaseFirestore
 
 
 class Activity1_Principal : AppCompatActivity() {
@@ -15,8 +14,6 @@ class Activity1_Principal : AppCompatActivity() {
     private lateinit var binding: Activity1PrincipalBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        var db: FirebaseFirestore = FirebaseFirestore.getInstance()
-
         super.onCreate(savedInstanceState)
         getSupportActionBar()?.hide()
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
@@ -25,7 +22,6 @@ class Activity1_Principal : AppCompatActivity() {
         binding = Activity1PrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        getData(db)
         menu()
         ocultarbtn()
 
@@ -99,23 +95,6 @@ class Activity1_Principal : AppCompatActivity() {
         binding.btnLogin.isVisible = true
         binding.btnLoad.isVisible = true
         binding.btnBienvenida.isVisible = true
-    }
-
-    fun getData(db: FirebaseFirestore) {
-    /*
-
-        var datos = ""
-        db.collection("Usuarios").get().addOnSuccessListener { documentos ->
-
-            for (documento in documentos) {
-                datos += "${documento.id}: ${documento.data} \n"
-
-                Log.d(TAG, datos)
-
-
-            }
-
-        }*/
     }
 }
 

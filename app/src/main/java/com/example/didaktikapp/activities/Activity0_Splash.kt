@@ -17,6 +17,7 @@ class Activity0_Splash : AppCompatActivity() {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
         setContentView(R.layout.activity0_splash)
 
+
         binding = Activity0SplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

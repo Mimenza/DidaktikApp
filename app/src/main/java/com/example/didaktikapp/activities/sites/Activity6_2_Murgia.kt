@@ -9,5 +9,7 @@ class Activity6_2_Murgia : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity6_2_murgia)
         getSupportActionBar()?.hide()
+
+
     }
 }

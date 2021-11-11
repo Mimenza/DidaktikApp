@@ -21,14 +21,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.176"
-            tools:src="@drawable/atzeko_irudia" />
+            android:src="@drawable/atzeko_irudia" />
 
         <TextView
             android:id="@+id/txtv3f_nombrezona"
             android:layout_width="280dp"
             android:layout_height="48dp"
             android:layout_gravity="center_horizontal"
+            android:text="@string/tituloprincipal"
             android:textAlignment="center"
+            android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -42,6 +44,7 @@
             android:layout_width="374dp"
             android:layout_height="218dp"
             android:layout_gravity="center"
+            android:text="@string/lorem"
             app:layout_constraintBottom_toBottomOf="@+id/btn3f_jugar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.567"

@@ -5,7 +5,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import android.media.MediaPlayer
 import com.example.didaktikapp.R
+
+
+
+
+
 
 class Activity4_bienvenida : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -15,11 +21,18 @@ class Activity4_bienvenida : AppCompatActivity() {
         setContentView(R.layout.activity4_bienvenida)
         getSupportActionBar()?.hide()
 
+
+
         Handler().postDelayed({
             val intent = Intent(this, Activity5_Mapa::class.java)
             startActivity(intent)
             this.overridePendingTransition(0, 0)
             finish()
-        }, 2000)
+        }, 10000)
+
+        var ring:MediaPlayer = MediaPlayer.create(this, R.raw.audio)
+        ring.start()
+
     }
+
 }

@@ -8,5 +8,6 @@ class Activity6_2_Murgia : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity6_2_murgia)
+        getSupportActionBar()?.hide()
     }
 }

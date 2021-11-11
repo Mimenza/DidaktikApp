@@ -11,5 +11,6 @@ class Activity6_1_Sagardoetxea : AppCompatActivity() {
         getSupportActionBar()?.hide()
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
         setContentView(R.layout.activity6_1_sagardoetxea)
+        getSupportActionBar()?.hide()
     }
 }

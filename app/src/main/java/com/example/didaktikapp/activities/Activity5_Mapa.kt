@@ -4,7 +4,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.core.app.ActivityCompat
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.sites.*
@@ -18,8 +17,6 @@ import com.example.didaktikapp.databinding.Activity5MapaBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLngBounds
-import com.google.android.gms.maps.model.Marker
-
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener
 
 
@@ -32,7 +29,6 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getSupportActionBar()?.hide()
-        /*window.setNavigationBarColor(getResources().getColor(R.color.black))*/
 
         binding = Activity5MapaBinding.inflate(layoutInflater)
         setContentView(binding.root)

@@ -35,7 +35,7 @@ class Fragment2_6_minijuego : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment2_minijuego, container, false)
+        return inflater.inflate(R.layout.fragment2_1_minijuego, container, false)
     }
 
     companion object {

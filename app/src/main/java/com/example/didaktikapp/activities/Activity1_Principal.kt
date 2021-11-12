@@ -10,11 +10,13 @@ import com.example.didaktikapp.R
 import com.example.didaktikapp.databinding.Activity1PrincipalBinding
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.lang.Exception
 
 
 class Activity1_Principal : AppCompatActivity() {
 
     private lateinit var binding: Activity1PrincipalBinding
+    private lateinit var audio: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,8 +30,8 @@ class Activity1_Principal : AppCompatActivity() {
         //Audio principal
         runBlocking() {
             launch {
-                var ring:MediaPlayer = MediaPlayer.create(this@Activity1_Principal, R.raw.sarrera)
-                ring.start()
+                audio = MediaPlayer.create(this@Activity1_Principal, R.raw.sarrera)
+                audio.start()
             }
         }
 
@@ -50,7 +52,7 @@ class Activity1_Principal : AppCompatActivity() {
             binding.btn1Nuevo.isVisible = true
 
             binding.btn1Nuevo.setOnClickListener() {
-                //Nos lleva a la activitie para hacer el login
+                //Nos lleva a la activity para hacer el login
                 var i = Intent(this, Activity2_Login::class.java)
                 startActivity(i)
             }
@@ -59,6 +61,18 @@ class Activity1_Principal : AppCompatActivity() {
                 //Nos lleva a la activity para ver todas las partidas creadas
                 var i = Intent(this, Activity3_Load::class.java)
                 startActivity(i)
+            }
+
+            runBlocking {
+                launch {
+                    try {
+                        if (audio.isPlaying())
+                            audio.stop()
+                            audio.release()
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+                }
             }
         }
     }

@@ -1,12 +1,15 @@
 package com.example.didaktikapp.activities
 
 import android.content.Intent
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import com.example.didaktikapp.R
 import com.example.didaktikapp.databinding.Activity1PrincipalBinding
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 
 class Activity1_Principal : AppCompatActivity() {
@@ -21,6 +24,17 @@ class Activity1_Principal : AppCompatActivity() {
 
         binding = Activity1PrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //Audio principal
+        runBlocking() {
+            launch {
+                var ring:MediaPlayer = MediaPlayer.create(this@Activity1_Principal, R.raw.sarrera)
+                ring.start()
+            }
+        }
+
+        //Audio principal fin
+
 
         menu()
         ocultarbtn()

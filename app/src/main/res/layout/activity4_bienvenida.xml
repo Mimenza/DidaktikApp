@@ -17,8 +17,7 @@
         app:layout_constraintHorizontal_bias="0.007"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.815"
-        app:srcCompat="@drawable/img_upeliosagarra" />
+        app:layout_constraintVertical_bias="0.815" />
 
     <ImageView
         android:id="@+id/imgv4_bocadillo"
@@ -38,7 +37,6 @@
         android:layout_width="207dp"
         android:layout_height="309dp"
         android:text="@string/text_bienvenida"
-
         android:textSize="14dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

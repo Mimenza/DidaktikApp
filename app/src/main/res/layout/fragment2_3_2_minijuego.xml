@@ -3,12 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.juegos.Fragment1_1_juego">
+    tools:context=".fragments.minijuegos.Fragment2_3_2_minijuego">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="JUEGO 1" />
+        android:text="@string/hello_blank_fragment" />
 
 </FrameLayout>

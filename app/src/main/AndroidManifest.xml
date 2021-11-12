@@ -26,7 +26,10 @@
             android:exported="false" />
 
         <activity
-            android:name="com.example.didaktikapp.activities.sites.Activity6_3_ForuPlaza"
+            android:name="com.example.didaktikapp.activities.sites.Activity6_3_1_ForuPlaza"
+            android:exported="false" />
+        <activity
+            android:name="com.example.didaktikapp.activities.sites.Activity6_3_2_ForuPlaza"
             android:exported="false" />
         <activity
             android:name="com.example.didaktikapp.activities.sites.Activity6_2_Murgia"

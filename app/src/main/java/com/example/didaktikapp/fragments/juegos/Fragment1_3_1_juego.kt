@@ -1,4 +1,4 @@
-package com.example.didaktikapp.fragments.minijuegos
+package com.example.didaktikapp.fragments.juegos
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,10 +14,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [Fragment2_minijuego.newInstance] factory method to
+ * Use the [Fragment1_juego.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Fragment2_5_minijuego : Fragment() {
+class Fragment1_3_1_juego : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -35,7 +35,7 @@ class Fragment2_5_minijuego : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment2_5_minijuego, container, false)
+        return inflater.inflate(R.layout.fragment1_3_1_juego, container, false)
     }
 
     companion object {
@@ -45,12 +45,12 @@ class Fragment2_5_minijuego : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment Fragment2_minijuego.
+         * @return A new instance of fragment Fragment1_juego.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Fragment2_5_minijuego().apply {
+            Fragment1_3_1_juego().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

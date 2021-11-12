@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.sites.Activity6_3_ForuPlaza">
+    tools:context=".activities.sites.Activity6_3_2_ForuPlaza">
 
 
     <androidx.fragment.app.FragmentContainerView

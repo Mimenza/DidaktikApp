@@ -17,7 +17,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [Fragment2_minijuego.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Fragment2_3_minijuego : Fragment() {
+class Fragment2_3_2_minijuego : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -35,7 +35,7 @@ class Fragment2_3_minijuego : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment2_1_minijuego, container, false)
+        return inflater.inflate(R.layout.fragment2_3_2_minijuego, container, false)
     }
 
     companion object {
@@ -50,7 +50,7 @@ class Fragment2_3_minijuego : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Fragment2_3_minijuego().apply {
+            Fragment2_3_2_minijuego().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

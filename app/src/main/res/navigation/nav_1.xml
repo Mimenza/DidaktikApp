@@ -13,7 +13,33 @@
         <action
             android:id="@+id/action_fragment3_info_to_fragment1_1_juego"
             app:destination="@id/fragment1_1_juego" />
+        <action
+            android:id="@+id/action_fragment3_info_to_fragment1_2_juego"
+            app:destination="@id/fragment1_2_juego" />
+        <action
+            android:id="@+id/action_fragment3_info_to_fragment1_3_1_juego"
+            app:destination="@id/fragment1_3_1_juego" />
+        <action
+            android:id="@+id/action_fragment3_info_to_fragment1_3_2_juego"
+            app:destination="@id/fragment1_3_2_juego" />
+        <action
+            android:id="@+id/action_fragment3_info_to_fragment1_5_juego"
+            app:destination="@id/fragment1_5_juego" />
+        <action
+            android:id="@+id/action_fragment3_info_to_fragment1_4_juego"
+            app:destination="@id/fragment1_4_juego" />
+        <action
+            android:id="@+id/action_fragment3_info_to_fragment1_6_juego"
+            app:destination="@id/fragment1_6_juego" />
+        <action
+            android:id="@+id/action_fragment3_info_to_fragment1_7_juego"
+            app:destination="@id/fragment1_7_juego" />
     </fragment>
+
+
+
+
+
 
     <fragment
         android:id="@+id/fragment1_1_juego"
@@ -23,11 +49,222 @@
         <action
             android:id="@+id/action_fragment1_1_juego_to_fragment2_1_minijuego"
             app:destination="@id/fragment2_1_minijuego" />
+        <action
+            android:id="@+id/action_fragment1_1_juego_to_fragment4_menu"
+            app:destination="@id/fragment4_menu" />
     </fragment>
+
+    <fragment
+        android:id="@+id/fragment1_2_juego"
+        android:name="com.example.didaktikapp.fragments.juegos.Fragment1_2_juego"
+        android:label="fragment1_2_juego"
+        tools:layout="@layout/fragment1_2_juego" >
+
+        <action
+            android:id="@+id/action_fragment1_2_juego_to_fragment2_2_minijuego"
+            app:destination="@id/fragment2_2_minijuego" />
+        <action
+            android:id="@+id/action_fragment1_2_juego_to_fragment4_menu"
+            app:destination="@id/fragment4_menu" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/fragment1_3_1_juego"
+        android:name="com.example.didaktikapp.fragments.juegos.Fragment1_3_1_juego"
+        android:label="fragment1_3_1_juego"
+        tools:layout="@layout/fragment1_3_1_juego" >
+
+        <action
+            android:id="@+id/action_fragment1_3_1_juego_to_fragment2_3_1_minijuego"
+            app:destination="@id/fragment2_3_1_minijuego" />
+        <action
+            android:id="@+id/action_fragment1_3_1_juego_to_fragment4_menu"
+            app:destination="@id/fragment4_menu" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment1_3_2_juego"
+        android:name="com.example.didaktikapp.fragments.juegos.Fragment1_3_2_juego"
+        android:label="fragment1_3_2_juego"
+        tools:layout="@layout/fragment1_3_2_juego" >
+
+        <action
+            android:id="@+id/action_fragment1_3_2_juego_to_fragment2_3_2_minijuego"
+            app:destination="@id/fragment2_3_2_minijuego" />
+        <action
+            android:id="@+id/action_fragment1_3_1_juego_to_fragment4_menu"
+            app:destination="@id/fragment4_menu" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/fragment1_4_juego"
+        android:name="com.example.didaktikapp.fragments.juegos.Fragment1_4_juego"
+        android:label="fragment1_4_juego"
+        tools:layout="@layout/fragment1_4_juego" >
+
+        <action
+            android:id="@+id/action_fragment1_4_juego_to_fragment2_4_minijuego"
+            app:destination="@id/fragment2_4_minijuego" />
+        <action
+            android:id="@+id/action_fragment1_4_juego_to_fragment4_menu"
+            app:destination="@id/fragment4_menu" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment1_5_juego"
+        android:name="com.example.didaktikapp.fragments.juegos.Fragment1_5_juego"
+        android:label="fragment1_5_juego"
+        tools:layout="@layout/fragment1_5_juego" >
+
+        <action
+            android:id="@+id/action_fragment1_5_juego_to_fragment2_5_minijuego"
+            app:destination="@id/fragment2_5_minijuego" />
+        <action
+            android:id="@+id/action_fragment1_5_juego_to_fragment4_menu"
+            app:destination="@id/fragment4_menu" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment1_6_juego"
+        android:name="com.example.didaktikapp.fragments.juegos.Fragment1_6_juego"
+        android:label="fragment1_6_juego"
+        tools:layout="@layout/fragment1_6_juego" >
+
+        <action
+            android:id="@+id/action_fragment1_6_juego_to_fragment2_6_minijuego"
+            app:destination="@id/fragment2_6_minijuego" />
+        <action
+            android:id="@+id/action_fragment1_6_juego_to_fragment4_menu"
+            app:destination="@id/fragment4_menu" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment1_7_juego"
+        android:name="com.example.didaktikapp.fragments.juegos.Fragment1_7_juego"
+        android:label="fragment1_7_juego"
+        tools:layout="@layout/fragment1_7_juego" >
+
+        <action
+            android:id="@+id/action_fragment1_7_juego_to_fragment2_7_minijuego"
+            app:destination="@id/fragment2_7_minijuego" />
+        <action
+            android:id="@+id/action_fragment1_7_juego_to_fragment4_menu"
+            app:destination="@id/fragment4_menu" />
+    </fragment>
+
+
 
     <fragment
         android:id="@+id/fragment2_1_minijuego"
         android:name="com.example.didaktikapp.fragments.minijuegos.Fragment2_1_minijuego"
         android:label="fragment2_1_minijuego"
-        tools:layout="@layout/fragment2_1_minijuego" />
+        tools:layout="@layout/fragment2_1_minijuego" >
+        <action
+            android:id="@+id/action_fragment2_1_minijuego_to_fragment4_menu"
+            app:destination="@id/fragment4_menu" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment2_2_minijuego"
+        android:name="com.example.didaktikapp.fragments.minijuegos.Fragment2_2_minijuego"
+        android:label="fragment2_2_minijuego"
+        tools:layout="@layout/fragment2_2_minijuego" >
+        <action
+            android:id="@+id/action_fragment2_2_minijuego_to_fragment4_menu"
+            app:destination="@id/fragment4_menu" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment2_3_1_minijuego"
+        android:name="com.example.didaktikapp.fragments.minijuegos.Fragment2_3_1_minijuego"
+        android:label="fragment2_3_1_minijuego"
+        tools:layout="@layout/fragment2_3_1_minijuego" >
+        <action
+            android:id="@+id/action_fragment2_3_1_minijuego_to_fragment4_menu"
+            app:destination="@id/fragment4_menu" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment2_3_2_minijuego"
+        android:name="com.example.didaktikapp.fragments.minijuegos.Fragment2_3_2_minijuego"
+        android:label="fragment2_3_2_minijuego"
+        tools:layout="@layout/fragment2_3_2_minijuego" >
+        <action
+            android:id="@+id/action_fragment2_3_2_minijuego_to_fragment4_menu"
+            app:destination="@id/fragment4_menu" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment2_4_minijuego"
+        android:name="com.example.didaktikapp.fragments.minijuegos.Fragment2_4_minijuego"
+        android:label="fragment2_4_minijuego"
+        tools:layout="@layout/fragment2_4_minijuego" >
+        <action
+            android:id="@+id/action_fragment2_4_minijuego_to_fragment4_menu"
+            app:destination="@id/fragment4_menu" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment2_5_minijuego"
+        android:name="com.example.didaktikapp.fragments.minijuegos.Fragment2_5_minijuego"
+        android:label="fragment2_5_minijuego"
+        tools:layout="@layout/fragment2_5_minijuego" >
+        <action
+            android:id="@+id/action_fragment2_5_minijuego_to_fragment4_menu"
+            app:destination="@id/fragment4_menu" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment2_6_minijuego"
+        android:name="com.example.didaktikapp.fragments.minijuegos.Fragment2_6_minijuego"
+        android:label="fragment2_6_minijuego"
+        tools:layout="@layout/fragment2_6_minijuego" >
+        <action
+            android:id="@+id/action_fragment2_6_minijuego_to_fragment4_menu"
+            app:destination="@id/fragment4_menu" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment2_7_minijuego"
+        android:name="com.example.didaktikapp.fragments.minijuegos.Fragment2_7_minijuego"
+        android:label="fragment2_7_minijuego"
+        tools:layout="@layout/fragment2_7_minijuego" >
+        <action
+            android:id="@+id/action_fragment2_7_minijuego_to_fragment4_menu"
+            app:destination="@id/fragment4_menu" />
+    </fragment>
+
+
+
+
+    <fragment
+        android:id="@+id/fragment4_menu"
+        android:name="com.example.didaktikapp.fragments.Fragment4_menu"
+        android:label="fragment4_menu"
+        tools:layout="@layout/fragment4_menu" >
+
+        <action
+            android:id="@+id/action_fragment4_menu_to_fragment5_ajustes"
+            app:destination="@id/fragment5_ajustes" />
+        <action
+            android:id="@+id/action_fragment4_menu_to_fragment6_ayuda"
+            app:destination="@id/fragment6_ayuda" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/fragment6_ayuda"
+        android:name="com.example.didaktikapp.fragments.Fragment6_ayuda"
+        android:label="fragment6_ayuda"
+        tools:layout="@layout/fragment6_ayuda" />
+
+
+    <fragment
+        android:id="@+id/fragment5_ajustes"
+        android:name="com.example.didaktikapp.fragments.Fragment5_ajustes"
+        android:label="fragment5_ajustes"
+        tools:layout="@layout/fragment5_ajustes" />
+
 </navigation>

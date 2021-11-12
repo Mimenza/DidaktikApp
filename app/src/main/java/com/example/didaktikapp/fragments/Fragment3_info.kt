@@ -6,11 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.didaktikapp.R
-import android.content.Intent
-import android.widget.Button
-import android.widget.ImageView
-import com.example.didaktikapp.activities.Activity5_Mapa
-import kotlinx.android.synthetic.main.fragment3_info.*
+import android.os.Handler
+import androidx.navigation.Navigation
+
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -27,7 +25,8 @@ class Fragment3_info : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-   // private lateinit var button_back:ImageView
+
+    // private lateinit var button_back:ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -42,14 +41,13 @@ class Fragment3_info : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        //Inicializar boton
-       /* button_back = imgv3f_backtomap as ImageView
-        button_back.setOnClickListener{
-            val intent = Intent(context, Activity5_Mapa::class.java)
-            startActivity(intent)
-        }*/
+        val view = inflater.inflate(R.layout.fragment3_info, container, false)
 
-        return inflater.inflate(R.layout.fragment3_info, container, false)
+        Handler().postDelayed({
+            Navigation.findNavController(view).navigate(R.id.action_fragment3_info_to_fragment1_1_juego)
+        }, 1000)
+
+        return view
     }
 
     companion object {

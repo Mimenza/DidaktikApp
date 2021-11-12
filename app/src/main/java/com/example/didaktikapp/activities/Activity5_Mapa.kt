@@ -100,6 +100,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
             LatLng(43.28124016860453, -1.9469706252948757),
             LatLng(43.28124645002352, -1.9487146619854678),
             LatLng(43.28009128981247, -1.9489651924963394),
+            LatLng(43.2801245169072, -1.94919315370149280),
             LatLng(43.27989827949647, -1.9495313417852063),
             LatLng(43.27808114110089, -1.9492564399148118),
             LatLng(43.27775413305006, -1.9488400717525682)
@@ -107,7 +108,8 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         var astigarragaNames = arrayListOf<String>(
             "Sagardoetxea",
             "Murgia jauregia",
-            "Foru plaza",
+            "Foru plaza 1",
+            "Foru plaza 2",
             "Astigar elkartea",
             "Ipintza sagardotegia",
             "Rezola sagardotegia"
@@ -130,10 +132,11 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
                     when (i) {
                         0 -> intent = Intent(this, Activity6_1_Sagardoetxea::class.java)
                         1 -> intent = Intent(this, Activity6_2_Murgia::class.java)
-                        2 -> intent = Intent(this, Activity6_3_ForuPlaza::class.java)
-                        3 -> intent = Intent(this, Activity6_4_AstigarElkartea::class.java)
-                        4 -> intent = Intent(this, Activity6_5_IpintzaSagardotegia::class.java)
-                        5 -> intent = Intent(this, Activity6_6_RezolaSagardotegia::class.java)
+                        2 -> intent = Intent(this, Activity6_3_1_ForuPlaza::class.java)
+                        3 -> intent = Intent(this, Activity6_3_2_ForuPlaza::class.java)
+                        4 -> intent = Intent(this, Activity6_4_AstigarElkartea::class.java)
+                        5 -> intent = Intent(this, Activity6_5_IpintzaSagardotegia::class.java)
+                        6 -> intent = Intent(this, Activity6_6_RezolaSagardotegia::class.java)
                     }
                     startActivity(intent)
                     this.overridePendingTransition(0, 0)

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.didaktikapp.R
 import android.os.Handler
+import android.widget.Button
 import androidx.navigation.Navigation
 
 
@@ -42,10 +43,11 @@ class Fragment3_info : Fragment() {
         // Inflate the layout for this fragment
 
         val view = inflater.inflate(R.layout.fragment3_info, container, false)
+        val button:Button = view.findViewById(R.id.btn3f_jugar)
 
-        Handler().postDelayed({
+        button.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment3_info_to_fragment1_1_juego)
-        }, 1000)
+        }
 
         return view
     }

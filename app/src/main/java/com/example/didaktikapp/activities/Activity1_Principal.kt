@@ -43,6 +43,7 @@ class Activity1_Principal : AppCompatActivity() {
         runBlocking() {
             launch {
                 audio = MediaPlayer.create(this@Activity1_Principal, R.raw.abestia)
+                audio.setVolume(0.15F, 0.15F)
                 audio.start()
             }
         }

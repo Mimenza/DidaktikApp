@@ -1,6 +1,7 @@
 package com.example.didaktikapp.activities
 
 import android.content.Intent
+import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +9,9 @@ import android.view.View
 import androidx.core.view.isVisible
 import com.example.didaktikapp.R
 import com.example.didaktikapp.databinding.Activity1PrincipalBinding
+import kotlinx.android.synthetic.main.activity1_principal.*
+import kotlinx.android.synthetic.main.activity4_bienvenida.*
+import kotlinx.android.synthetic.main.activity4_bienvenida.imgv4_manzanatutorial
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.lang.Exception
@@ -26,6 +30,14 @@ class Activity1_Principal : AppCompatActivity() {
 
         binding = Activity1PrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        //Animacion manzana
+
+        img1_upelio.setBackgroundResource(R.drawable.animacion_manzana)
+        val ani = img1_upelio.getBackground() as AnimationDrawable
+        ani.start()
+        //Animacion manzana fin
+
 
         //Audio principal
         runBlocking() {

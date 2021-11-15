@@ -35,8 +35,8 @@
 
     <in.codeshuffle.typewriterview.TypeWriterView
         android:id="@+id/txtv4_bienvenida"
-        android:layout_width="177dp"
-        android:layout_height="114dp"
+        android:layout_width="178dp"
+        android:layout_height="133dp"
         android:scrollHorizontally="true"
         android:textSize="14dp"
         android:textStyle="bold"

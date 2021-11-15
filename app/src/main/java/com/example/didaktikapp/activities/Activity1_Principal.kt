@@ -30,7 +30,7 @@ class Activity1_Principal : AppCompatActivity() {
         //Audio principal
         runBlocking() {
             launch {
-                audio = MediaPlayer.create(this@Activity1_Principal, R.raw.sarrera)
+                audio = MediaPlayer.create(this@Activity1_Principal, R.raw.abestia)
                 audio.start()
             }
         }

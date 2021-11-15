@@ -1,5 +1,6 @@
 package com.example.didaktikapp.activities
 
+import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -8,10 +9,18 @@ import android.os.Handler
 import android.view.View
 import android.media.MediaPlayer
 
-import com.example.didaktikapp.R
+
 import kotlinx.android.synthetic.main.activity4_bienvenida.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import com.example.didaktikapp.R
+import android.text.method.ScrollingMovementMethod
+
+
+
+
+
+
 
 
 class Activity4_bienvenida : AppCompatActivity() {
@@ -31,6 +40,15 @@ class Activity4_bienvenida : AppCompatActivity() {
         //Animacion manzana fin
 
 
+        val typeWriterView = findViewById<View>(R.id.txtv4_bienvenida) as TypeWriterView
+        typeWriterView.animateText(resources.getString(R.string.text_bienvenida))
+        typeWriterView.setDelay(70)
+        typeWriterView.setWithMusic(false)
+        typeWriterView.setMovementMethod(ScrollingMovementMethod())
+
+
+
+
         Handler().postDelayed({
             val intent = Intent(this, Activity5_Mapa::class.java)
             startActivity(intent)
@@ -40,7 +58,7 @@ class Activity4_bienvenida : AppCompatActivity() {
 
         runBlocking() {
             launch {
-                var ring: MediaPlayer = MediaPlayer.create(this@Activity4_bienvenida, R.raw.audio)
+                var ring: MediaPlayer = MediaPlayer.create(this@Activity4_bienvenida, R.raw.sarrera)
                 ring.start()
             }
         }

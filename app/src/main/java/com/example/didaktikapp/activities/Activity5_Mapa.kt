@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.example.didaktikapp.R
@@ -34,6 +35,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private lateinit var binding: Activity5MapaBinding
     private lateinit var fusedLocation: FusedLocationProviderClient
+    private var myCurrentPosition: LatLng = LatLng(45.0, 123.0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,11 +102,13 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
             CircleOptions()
             .center(LatLng(43.285576, -1.941156))
             .radius(50.0)
-            .strokeColor(getResources().getColor(R.color.black))
-            .fillColor(getResources().getColor(R.color.secondary)))
+            .strokeColor(getResources().getColor(R.color.white))
+            .strokeWidth(2f)
+            .fillColor(0x70ff0000))
 
         mMap.setOnMyLocationChangeListener {
             myCircle.setCenter(LatLng(it.latitude, it.longitude))
+            myCurrentPosition = LatLng(it.latitude, it.longitude)
         }
 
         fusedLocation.lastLocation.addOnSuccessListener {
@@ -115,6 +119,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    /*
     fun getLastKnownLocation() {
         if (ActivityCompat.checkSelfPermission(
                 this, android.Manifest.permission.ACCESS_FINE_LOCATION
@@ -146,9 +151,9 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
             }
 
     }
+     */
 
     // Add markers in Map
-
     val markerLIst = arrayListOf<LatLng>(
         LatLng(43.28124016860453, -1.9469706252948757),
         LatLng(43.28124645002352, -1.9487146619854678),
@@ -193,28 +198,55 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
             //Cycle through places array
             for (i in 0..astigarragaMarkers.size - 1) {
                 if (latLon == astigarragaMarkers[i]) {
+                    var distanceToPoint = getDistBetweenPoints(myCurrentPosition, astigarragaMarkers[i])
+                    if (distanceToPoint <= 50) {
 
-                    lateinit var intent: Intent
+                        lateinit var intent: Intent
 
-                    when (i) {
-                        0 ->
-                            intent = Intent(this, Activity6_1_Sagardoetxea::class.java)
+                        when (i) {
+                            0 -> intent = Intent(this, Activity6_1_Sagardoetxea::class.java)
+                            1 -> intent = Intent(this, Activity6_2_Murgia::class.java)
+                            2 -> intent = Intent(this, Activity6_3_1_ForuPlaza::class.java)
+                            3 -> intent = Intent(this, Activity6_3_2_ForuPlaza::class.java)
+                            4 -> intent = Intent(this, Activity6_4_AstigarElkartea::class.java)
+                            5 -> intent = Intent(this, Activity6_5_IpintzaSagardotegia::class.java)
+                            6 -> intent = Intent(this, Activity6_6_RezolaSagardotegia::class.java)
+                        }
+                        startActivity(intent)
+                        this.overridePendingTransition(0, 0)
+                        break
 
-                        1 -> intent = Intent(this, Activity6_2_Murgia::class.java)
-                        2 -> intent = Intent(this, Activity6_3_1_ForuPlaza::class.java)
-                        3 -> intent = Intent(this, Activity6_3_2_ForuPlaza::class.java)
-                        4 -> intent = Intent(this, Activity6_4_AstigarElkartea::class.java)
-                        5 -> intent = Intent(this, Activity6_5_IpintzaSagardotegia::class.java)
-                        6 -> intent = Intent(this, Activity6_6_RezolaSagardotegia::class.java)
+                    } else {
+                        Toast.makeText(this, "No estas suficientemente cerca del punto de juego", Toast.LENGTH_SHORT).show()
+                        break
                     }
-                    startActivity(intent)
-                    this.overridePendingTransition(0, 0)
-
                 }
             }
 
         })
     }
 
+    fun getDistBetweenPoints(localPoint: LatLng, gamePoint: LatLng): Int {
+        val theta: Double = localPoint.longitude - gamePoint.longitude
+        var dist = (Math.sin(deg2rad(localPoint.latitude))
+                * Math.sin(deg2rad(gamePoint.latitude))
+                + (Math.cos(deg2rad(localPoint.latitude))
+                * Math.cos(deg2rad(gamePoint.latitude))
+                * Math.cos(deg2rad(theta))))
+        dist = Math.acos(dist)
+        dist = rad2deg(dist)
+        dist = dist * 60 * 1.1515
+        var kms: Double = dist / 0.62137
+        var meters: Double = kms * 1000
+        return meters.toInt()
+    }
+
+    private fun deg2rad(deg: Double): Double {
+        return deg * Math.PI / 180.0
+    }
+
+    private fun rad2deg(rad: Double): Double {
+        return rad * 180.0 / Math.PI
+    }
 
 }

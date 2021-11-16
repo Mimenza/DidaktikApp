@@ -133,5 +133,13 @@ class DbHandler {
          */
         fun getUser() = this.usuario
 
+        fun setUser(pUser: User) {
+            this.usuario = pUser
+        }
+
+        fun setLastUserId(pNumber: Int) {
+            this.lastUserid = pNumber
+        }
+
     }
 }

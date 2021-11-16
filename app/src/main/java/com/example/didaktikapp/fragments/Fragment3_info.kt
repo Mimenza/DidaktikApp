@@ -46,7 +46,6 @@ class Fragment3_info : Fragment() {
         val view = inflater.inflate(R.layout.fragment3_info, container, false)
         val button:Button = view.findViewById(R.id.btn3f_jugar)
 
-
         button.setOnClickListener{
             Navigation.findNavController(view).navigate(R.id.action_fragment3_info_to_fragment1_1_juego)
 
@@ -62,12 +61,13 @@ class Fragment3_info : Fragment() {
         if (arguments!=null)
         {
             val titulo= getArguments()?.getString("titulo_juego1")
-            println(titulo)
             val descripcion= getArguments()?.getString("descripcion_juego1")
             val imagen= getArguments()?.getString("imagen_juego1")
+
             val etTitulo= view?.findViewById<TextView>(R.id.txtv3f_nombrezona)
             val imgvImagen= view?.findViewById<ImageView>(R.id.imgv3f_fotozona)
             val etDescripcion= view?.findViewById<TextView>(R.id.txtv3f_textozona)
+
             if (etTitulo != null) {
                 etTitulo.setText(titulo.toString())
             }

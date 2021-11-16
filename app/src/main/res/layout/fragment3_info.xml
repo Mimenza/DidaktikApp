@@ -15,18 +15,18 @@
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:layout_gravity="center|top"
+            android:layout_marginTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.176"
-            android:src="@drawable/atzeko_irudia" />
+            app:layout_constraintVertical_bias="0.176" />
 
         <TextView
             android:id="@+id/txtv3f_nombrezona"
-            android:layout_width="280dp"
-            android:layout_height="48dp"
+            android:layout_width="281dp"
+            android:layout_height="56dp"
             android:layout_gravity="center_horizontal"
             android:textAlignment="center"
             android:textSize="24sp"
@@ -40,9 +40,10 @@
 
         <TextView
             android:id="@+id/txtv3f_textozona"
-            android:layout_width="374dp"
-            android:layout_height="218dp"
+            android:layout_width="382dp"
+            android:layout_height="256dp"
             android:layout_gravity="center"
+            android:layout_marginTop="110dp"
             app:layout_constraintBottom_toBottomOf="@+id/btn3f_jugar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.567"
@@ -67,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
-            android:text="Jugar"
+            android:text="@string/jugar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"

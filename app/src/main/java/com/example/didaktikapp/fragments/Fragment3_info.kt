@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.didaktikapp.R
-import android.os.Handler
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.Navigation
 
@@ -44,13 +44,14 @@ class Fragment3_info : Fragment() {
         // Inflate the layout for this fragment
 
         val view = inflater.inflate(R.layout.fragment3_info, container, false)
+        val button:Button = view.findViewById(R.id.btn3f_jugar)
 
-     val button :Button= view.findViewById(R.id.btn3f_jugar)
 
         button.setOnClickListener{
             Navigation.findNavController(view).navigate(R.id.action_fragment3_info_to_fragment1_1_juego)
 
         }
+
 
 
         return view
@@ -60,13 +61,18 @@ class Fragment3_info : Fragment() {
         super.onActivityCreated(savedInstanceState)
         if (arguments!=null)
         {
-            val titulo= getArguments()?.getString("titulo_juego")
+            val titulo= getArguments()?.getString("titulo_juego1")
             println(titulo)
-            val descripcion= getArguments()?.getString("descripcion")
+            val descripcion= getArguments()?.getString("descripcion_juego1")
+            val imagen= getArguments()?.getString("imagen_juego1")
             val etTitulo= view?.findViewById<TextView>(R.id.txtv3f_nombrezona)
+            val imgvImagen= view?.findViewById<ImageView>(R.id.imgv3f_fotozona)
             val etDescripcion= view?.findViewById<TextView>(R.id.txtv3f_textozona)
             if (etTitulo != null) {
                 etTitulo.setText(titulo.toString())
+            }
+            if (imgvImagen != null) {
+                imgvImagen.setBackgroundResource(imagen.toString().toInt())
             }
             if (etDescripcion != null) {
                 etDescripcion.setText(descripcion.toString())

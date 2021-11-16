@@ -6,18 +6,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.example.didaktikapp.R
-import com.example.didaktikapp.databinding.Activity5MapaBinding
-import com.example.didaktikapp.databinding.Activity61SagardoetxeaBinding
 import com.example.didaktikapp.fragments.Fragment3_info
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.maps.GoogleMap
 
 
 class Activity6_1_Sagardoetxea : AppCompatActivity() {
 
     var bundle:Bundle=Bundle()
     lateinit var fragment:Fragment
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,12 +23,14 @@ class Activity6_1_Sagardoetxea : AppCompatActivity() {
         getSupportActionBar()?.hide()
 
 
-        bundle.putString("titulo_juego", "Sagardoetxea")
-        bundle.putString("descripcion", "Esto es una prueba para pasar los datos de activity a fragment")
+        //Poner  datos y pasar a fragment
+        bundle.putString("titulo_juego1", resources.getString(R.string.titulo1_juego))
+        bundle.putString("imagen_juego1",R.drawable.sagardoetxea.toString())
+        bundle.putString("descripcion_juego1",resources.getString(R.string.text_1juego))
+
         fragment= Fragment3_info()
         fragment.arguments=bundle
         CargarFragment(fragment)
-
 
 
     }
@@ -42,6 +39,5 @@ class Activity6_1_Sagardoetxea : AppCompatActivity() {
         transaccion.replace(R.id.contenedor, fragment)
         transaccion.addToBackStack(null)
         transaccion.commit() }
-
 
 }

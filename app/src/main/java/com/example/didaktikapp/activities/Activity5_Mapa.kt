@@ -1,5 +1,6 @@
 package com.example.didaktikapp.activities
 
+import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +19,12 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener
+import com.google.android.gms.maps.model.CircleOptions
+
+import com.google.android.gms.maps.model.Circle
+
+
+
 
 
 class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
@@ -76,6 +83,8 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         mMap.setMaxZoomPreference(18F)
         mMap.setMinZoomPreference(14F)
 
+
+
         // Constrain the camera target to the Astigarraga bounds.
         val astigarragaBounds = LatLngBounds(
             LatLng(43.269625, -1.959532), LatLng(43.285576, -1.941156)
@@ -85,35 +94,90 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
 
         addMarkers()
 
+        var myCircle: Circle = mMap.addCircle(
+            CircleOptions()
+            .center(LatLng(43.285576, -1.941156))
+            .radius(50.0)
+            .strokeColor(getResources().getColor(R.color.black))
+            .fillColor(getResources().getColor(R.color.secondary)))
+
+        mMap.setOnMyLocationChangeListener {
+            myCircle.setCenter(LatLng(it.latitude, it.longitude))
+        }
+
         fusedLocation.lastLocation.addOnSuccessListener {
             if (it != null) {
                 val ubicacion = LatLng(it.latitude, it.longitude)
-
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ubicacion, 16F))
             }
         }
     }
 
+    fun getLastKnownLocation() {
+        if (ActivityCompat.checkSelfPermission(
+                this, android.Manifest.permission.ACCESS_FINE_LOCATION
+            )
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                1
+            )
+            return
+        }
+        fusedLocation.lastLocation
+            .addOnSuccessListener { location->
+                if (location != null) {
+                    mMap.addCircle(
+                        CircleOptions()
+                            .center(LatLng(location.latitude, location.longitude))
+                            .radius(300.0)
+                            .strokeColor(getResources().getColor(R.color.black))
+                            .fillColor(getResources().getColor(R.color.secondary))
+                    )
+
+                    // use your location object
+                    // get latitude , longitude and other info from this
+                }
+
+            }
+
+    }
+
     // Add markers in Map
+
+    val markerLIst = arrayListOf<LatLng>(
+        LatLng(43.28124016860453, -1.9469706252948757),
+        LatLng(43.28124645002352, -1.9487146619854678),
+        LatLng(43.28009128981247, -1.9489651924963394),
+        LatLng(43.2801245169072, -1.94919315370149280),
+        LatLng(43.27989827949647, -1.9495313417852063),
+        LatLng(43.27808114110089, -1.9492564399148118),
+        LatLng(43.27775413305006, -1.9488400717525682),
+    )
+
+    var markerNames = arrayListOf<String>(
+        "Sagardoetxea",
+        "Murgia jauregia",
+        "Foru plaza 1",
+        "Foru plaza 2",
+        "Astigar elkartea",
+        "Ipintza sagardotegia",
+        "Rezola sagardotegia"
+    )
+
+    var lastUserPoint: Int = 3
+
     private fun addMarkers() {
-        val astigarragaMarkers = arrayListOf<LatLng>(
-            LatLng(43.28124016860453, -1.9469706252948757),
-            LatLng(43.28124645002352, -1.9487146619854678),
-            LatLng(43.28009128981247, -1.9489651924963394),
-            LatLng(43.2801245169072, -1.94919315370149280),
-            LatLng(43.27989827949647, -1.9495313417852063),
-            LatLng(43.27808114110089, -1.9492564399148118),
-            LatLng(43.27775413305006, -1.9488400717525682)
-        )
-        var astigarragaNames = arrayListOf<String>(
-            "Sagardoetxea",
-            "Murgia jauregia",
-            "Foru plaza 1",
-            "Foru plaza 2",
-            "Astigar elkartea",
-            "Ipintza sagardotegia",
-            "Rezola sagardotegia"
-        )
+        var astigarragaMarkers: MutableList<LatLng> = ArrayList()
+        var astigarragaNames: MutableList<String> = ArrayList()
+
+        for (i in 0..lastUserPoint) {
+            astigarragaMarkers.add(markerLIst[i])
+            astigarragaNames.add(markerNames[i])
+        }
+
 
         for (i in 0..astigarragaMarkers.size - 1) {
             mMap.addMarker(

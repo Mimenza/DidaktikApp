@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.media.MediaPlayer
+import android.text.TextUtils
 
 
 import kotlinx.android.synthetic.main.activity4_bienvenida.*
@@ -43,8 +44,8 @@ class Activity4_bienvenida : AppCompatActivity() {
         val typeWriterView = findViewById<View>(R.id.txtv4_bienvenida) as TypeWriterView
         typeWriterView.animateText(resources.getString(R.string.text_bienvenida))
         typeWriterView.setDelay(70)
-        typeWriterView.setWithMusic(false)
-        typeWriterView.setMovementMethod(ScrollingMovementMethod())
+
+
 
 
 

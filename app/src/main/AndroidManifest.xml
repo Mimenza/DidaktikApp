@@ -38,10 +38,11 @@
             android:name="com.example.didaktikapp.activities.sites.Activity6_1_Sagardoetxea"
             android:exported="false" />
 
+
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
         <activity
             android:name=".activities.Activity5_Mapa"
             android:exported="false"

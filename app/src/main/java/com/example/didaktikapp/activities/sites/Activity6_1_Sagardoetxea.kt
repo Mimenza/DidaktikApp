@@ -24,13 +24,15 @@ class Activity6_1_Sagardoetxea : AppCompatActivity() {
 
 
         //Poner  datos y pasar a fragment
-        bundle.putString("titulo_juego1", resources.getString(R.string.titulo1_juego))
-        bundle.putString("imagen_juego1",R.drawable.sagardoetxea.toString())
-        bundle.putString("descripcion_juego1",resources.getString(R.string.text_1juego))
+        bundle.putString("titulo", resources.getString(R.string.titulo1_juego))
+        bundle.putString("imagen",R.drawable.sagardoetxea.toString())
+        bundle.putString("descripcion",resources.getString(R.string.text_1juego))
 
         fragment= Fragment3_info()
         fragment.arguments=bundle
+        println("por aquí")
         CargarFragment(fragment)
+        println("por aqui tambien")
 
 
     }

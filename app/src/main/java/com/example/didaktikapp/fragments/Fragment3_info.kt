@@ -44,27 +44,11 @@ class Fragment3_info : Fragment() {
         // Inflate the layout for this fragment
 
         val view = inflater.inflate(R.layout.fragment3_info, container, false)
-        val button:Button = view.findViewById(R.id.btn3f_jugar)
-
-
-        button.setOnClickListener{
-            Navigation.findNavController(view).navigate(R.id.action_fragment3_info_to_fragment1_1_juego)
-
-        }
-
-
-
-        return view
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         if (arguments!=null)
         {
-            val titulo= getArguments()?.getString("titulo_juego1")
-            println(titulo)
-            val descripcion= getArguments()?.getString("descripcion_juego1")
-            val imagen= getArguments()?.getString("imagen_juego1")
+            val titulo= getArguments()?.getString("titulo")
+            val descripcion= getArguments()?.getString("descripcion")
+            val imagen= getArguments()?.getString("imagen")
             val etTitulo= view?.findViewById<TextView>(R.id.txtv3f_nombrezona)
             val imgvImagen= view?.findViewById<ImageView>(R.id.imgv3f_fotozona)
             val etDescripcion= view?.findViewById<TextView>(R.id.txtv3f_textozona)
@@ -78,7 +62,31 @@ class Fragment3_info : Fragment() {
                 etDescripcion.setText(descripcion.toString())
             }
 
-        }}
+            when(titulo){
+                resources.getString(R.string.titulo1_juego)-> {
+                    val button:Button = view.findViewById(R.id.btn3f_jugar)
+                    button.setOnClickListener{
+                        Navigation.findNavController(view).navigate(R.id.action_fragment3_info_to_fragment1_1_juego)
+                    }
+
+                }
+                resources.getString(R.string.titulo2_juego)-> {
+                    val button:Button = view.findViewById(R.id.btn3f_jugar)
+                    button.setOnClickListener{
+                        Navigation.findNavController(view).navigate(R.id.action_fragment3_info_to_fragment1_2_juego)
+                    }
+
+                }
+
+
+            }
+
+
+        }
+        return view
+    }
+
+
 
     companion object {
         /**

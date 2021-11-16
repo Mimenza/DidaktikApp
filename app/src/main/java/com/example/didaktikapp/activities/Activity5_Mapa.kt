@@ -23,7 +23,7 @@ import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener
 
 
 class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
-
+    //private  lateinit var intent: Intent
     private lateinit var mMap: GoogleMap
     private lateinit var binding: Activity5MapaBinding
     private lateinit var fusedLocation: FusedLocationProviderClient
@@ -123,34 +123,43 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
             )
         }
 
-        mMap.setOnInfoWindowClickListener(OnInfoWindowClickListener { marker ->
-            val latLon = marker.position
-
+        mMap.setOnInfoWindowClickListener { marker ->
+            var posicion: Int?= -1
+            val latLon= marker.position
+            println(latLon.toString())
             //Cycle through places array
             for (i in 0..astigarragaMarkers.size - 1) {
-                if (latLon == astigarragaMarkers[i]) {
+                if (latLon == astigarragaMarkers[i] )
+                posicion=i}
 
-                    lateinit var intent: Intent
+            when (posicion) {
+                0 -> println("pos0")
+                1 -> println("pos1")
 
-                    when (i) {
-                        0 ->
-                            intent = Intent(this, Activity6_1_Sagardoetxea::class.java)
+                else->println("posicion inexistente")
+            }
 
+
+
+/*                    when (posicion) {
+                        0 -> intent = Intent(this, Activity6_1_Sagardoetxea::class.java)
                         1 -> intent = Intent(this, Activity6_2_Murgia::class.java)
                         2 -> intent = Intent(this, Activity6_3_1_ForuPlaza::class.java)
                         3 -> intent = Intent(this, Activity6_3_2_ForuPlaza::class.java)
                         4 -> intent = Intent(this, Activity6_4_AstigarElkartea::class.java)
                         5 -> intent = Intent(this, Activity6_5_IpintzaSagardotegia::class.java)
                         6 -> intent = Intent(this, Activity6_6_RezolaSagardotegia::class.java)
+                        else->println("posicion inexistente")
                     }
                     startActivity(intent)
-                    this.overridePendingTransition(0, 0)
+            finish()*/
+                    //this.overridePendingTransition(0, 0)
 
                 }
             }
 
-        })
-    }
+        }
 
 
-}
+
+

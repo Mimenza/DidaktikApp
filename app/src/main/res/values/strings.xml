@@ -27,4 +27,13 @@
     <string name="botonnext">SIGUIENTE</string>
     <string name="botonhelp">AYUDA</string>
     <string name="botonajustes">AJUSTES</string>
+    <string name="text_1juego">"Lehenengo geldiunera iritsi gara! Sagardoetxera! Sagardoetxea Euskal Sagardogintzaren eta horren kulturaren museoa da. Naturarekin kontaktuan izanez, hainbat gauza ikas daitezke bertan.  Horretarako, hiru gune ditu. Lehenengoa museo gunea da. Bertan sagarraren historia lantzen da, jokoen, argazkien… bitartez eta sagardo goxo-goxoa nola egiten den ikasten da. Horrez gain, panel informatibo ugari daude, oso interesgarriak gainera! Bigarren gunea sagastia da. Sagastira sagarrondoak ikustera joaten da eta nola ez, sagar ezberdinak ezagutzera. Gainera, bertan hainbat lan egiteko aukera dago!  Azkeneko gunea dastatzea denez, sagardo bilakatu aurretik sagar zukua dastatzeko aukera egoten da. A ze goxoa!! Mmmm!! "</string>
+    <string name="titulo1_juego">"1. JARDUERA: SAGARDOETXEA "</string>
+    <string name="jugar">Jolastu</string>
+
+    <!--FRAGMENT AJUSTES -->
+    <string name="ajustes">AJUSTES</string>
+    <string name="botonidioma">IDIOMA</string>
+    <string name="botonoscuro">OSCURO</string>
+    <string name="botonacercade">ACERCA DE</string>
 </resources>

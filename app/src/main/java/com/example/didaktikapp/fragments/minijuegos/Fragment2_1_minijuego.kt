@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
 
@@ -38,10 +40,16 @@ class Fragment2_1_minijuego : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment2_1_minijuego, container, false)
+        val button: Button = view.findViewById(R.id.btnf2_1siguiente)
+        val ajustes: ImageButton = view.findViewById(R.id.btnf2_1ajustes)
 
-        Handler().postDelayed({
+        button.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment2_1_minijuego_to_fragment4_menu)
-        }, 1000)
+        }
+
+        ajustes.setOnClickListener(){
+            Navigation.findNavController(view).navigate(R.id.action_fragment2_1_minijuego_to_fragment4_menu)
+        }
         return view
     }
 

@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.sites.*
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -15,6 +16,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.didaktikapp.databinding.Activity5MapaBinding
+import com.example.didaktikapp.fragments.Fragment3_info
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLngBounds
@@ -193,8 +195,11 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
                 if (latLon == astigarragaMarkers[i]) {
 
                     lateinit var intent: Intent
+
                     when (i) {
-                        0 -> intent = Intent(this, Activity6_1_Sagardoetxea::class.java)
+                        0 ->
+                            intent = Intent(this, Activity6_1_Sagardoetxea::class.java)
+
                         1 -> intent = Intent(this, Activity6_2_Murgia::class.java)
                         2 -> intent = Intent(this, Activity6_3_1_ForuPlaza::class.java)
                         3 -> intent = Intent(this, Activity6_3_2_ForuPlaza::class.java)
@@ -204,8 +209,12 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
                     }
                     startActivity(intent)
                     this.overridePendingTransition(0, 0)
+
                 }
             }
+
         })
     }
+
+
 }

@@ -51,8 +51,6 @@ class Fragment3_info : Fragment() {
 
         }
 
-
-
         return view
     }
 

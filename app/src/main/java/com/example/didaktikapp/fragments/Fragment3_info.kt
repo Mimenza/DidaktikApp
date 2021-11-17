@@ -12,7 +12,6 @@ import android.widget.TextView
 import androidx.navigation.Navigation
 
 
-
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -44,10 +43,11 @@ class Fragment3_info : Fragment() {
         // Inflate the layout for this fragment
 
         val view = inflater.inflate(R.layout.fragment3_info, container, false)
-        val button:Button = view.findViewById(R.id.btn3f_jugar)
+        val button: Button = view.findViewById(R.id.btn3f_jugar)
 
-        button.setOnClickListener{
-            Navigation.findNavController(view).navigate(R.id.action_fragment3_info_to_fragment1_1_juego)
+        button.setOnClickListener {
+            Navigation.findNavController(view)
+                .navigate(R.id.action_fragment3_info_to_fragment1_1_juego)
 
         }
 
@@ -58,27 +58,37 @@ class Fragment3_info : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        if (arguments!=null)
-        {
-            val titulo= getArguments()?.getString("titulo_juego1")
-            val descripcion= getArguments()?.getString("descripcion_juego1")
-            val imagen= getArguments()?.getString("imagen_juego1")
 
-            val etTitulo= view?.findViewById<TextView>(R.id.txtv3f_nombrezona)
-            val imgvImagen= view?.findViewById<ImageView>(R.id.imgv3f_fotozona)
-            val etDescripcion= view?.findViewById<TextView>(R.id.txtv3f_textozona)
+        val sharedPreferences = this.activity?.getSharedPreferences("site", 0)
+        val numero = sharedPreferences?.getString("numero", null)?.toInt()
 
-            if (etTitulo != null) {
-                etTitulo.setText(titulo.toString())
-            }
-            if (imgvImagen != null) {
-                imgvImagen.setBackgroundResource(imagen.toString().toInt())
-            }
-            if (etDescripcion != null) {
-                etDescripcion.setText(descripcion.toString())
-            }
+        val tvTitulo: TextView? = view?.findViewById<TextView>(R.id.txtv3f_nombrezona)
+        val imgvImagen: ImageView? = view?.findViewById<ImageView>(R.id.imgv3f_fotozona)
+        val tvDescripcion: TextView? = view?.findViewById<TextView>(R.id.txtv3f_textozona)
 
-        }}
+        var titulo: String = ""
+        var imagen: String = ""
+        var descripcion: String = ""
+
+        when (numero) {
+            0 -> {
+                titulo = resources.getString(R.string.titulo1_juego)
+                imagen = R.drawable.sagardoetxea.toString()
+                descripcion = resources.getString(R.string.text_1juego)
+            }
+        }
+
+        if (tvTitulo != null) {
+            tvTitulo.setText(titulo)
+        }
+        if (imgvImagen != null) {
+            imgvImagen.setBackgroundResource(imagen.toInt())
+        }
+        if (tvDescripcion != null) {
+            tvDescripcion.setText(descripcion)
+        }
+
+    }
 
     companion object {
         /**

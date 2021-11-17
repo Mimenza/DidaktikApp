@@ -25,6 +25,12 @@ import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener
 import com.google.android.gms.maps.model.CircleOptions
 
 import com.google.android.gms.maps.model.Circle
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+
+import com.google.android.gms.maps.model.Marker
+
+
+
 
 
 
@@ -36,6 +42,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: Activity5MapaBinding
     private lateinit var fusedLocation: FusedLocationProviderClient
     private var myCurrentPosition: LatLng = LatLng(45.0, 123.0)
+    private var lastUserPoint: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +57,10 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
         fusedLocation = LocationServices.getFusedLocationProviderClient(this)
+
+        if (DbHandler.getUser() != null && DbHandler.getUser()!!.ultima_puntuacion != null) {
+            lastUserPoint = DbHandler.getUser()!!.ultima_puntuacion!!
+        }
     }
 
     /**
@@ -119,40 +130,6 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    /*
-    fun getLastKnownLocation() {
-        if (ActivityCompat.checkSelfPermission(
-                this, android.Manifest.permission.ACCESS_FINE_LOCATION
-            )
-            != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                1
-            )
-            return
-        }
-        fusedLocation.lastLocation
-            .addOnSuccessListener { location->
-                if (location != null) {
-                    mMap.addCircle(
-                        CircleOptions()
-                            .center(LatLng(location.latitude, location.longitude))
-                            .radius(300.0)
-                            .strokeColor(getResources().getColor(R.color.black))
-                            .fillColor(getResources().getColor(R.color.secondary))
-                    )
-
-                    // use your location object
-                    // get latitude , longitude and other info from this
-                }
-
-            }
-
-    }
-     */
-
     // Add markers in Map
     val markerLIst = arrayListOf<LatLng>(
         LatLng(43.28124016860453, -1.9469706252948757),
@@ -174,22 +151,42 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         "Rezola sagardotegia"
     )
 
-    var lastUserPoint: Int = 3
+    //var lastUserPoint: Int = 0
+    //lastUserPoint = DbHandler.getUser()!!.ultima_puntuacion!!
+
+    //var lastUserPoint: Int = if (DbHandler.getUser()!!.ultima_puntuacion != null) DbHandler.getUser()!!.ultima_puntuacion!! else 0
 
     private fun addMarkers() {
         var astigarragaMarkers: MutableList<LatLng> = ArrayList()
         var astigarragaNames: MutableList<String> = ArrayList()
 
-        for (i in 0..lastUserPoint) {
+        //for (i in 0..lastUserPoint) {
+        for (i in 0..markerLIst.size-1) {
             astigarragaMarkers.add(markerLIst[i])
             astigarragaNames.add(markerNames[i])
         }
 
 
         for (i in 0..astigarragaMarkers.size - 1) {
-            mMap.addMarker(
-                MarkerOptions().position(astigarragaMarkers[i]).title(astigarragaNames[i])
+            val markerPointIcon = mMap.addMarker(
+                MarkerOptions()
+                    .position(astigarragaMarkers[i])
+                    .title(astigarragaNames[i])
+                    .icon(
+                        BitmapDescriptorFactory
+                            .defaultMarker(BitmapDescriptorFactory.HUE_RED)
+                    )
             )
+
+            if (markerPointIcon != null) {
+                if (i < lastUserPoint) {
+                    markerPointIcon.setIcon(BitmapDescriptorFactory
+                        .defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                } else if (i == lastUserPoint) {
+                    markerPointIcon.setIcon(BitmapDescriptorFactory
+                        .defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
+                }
+            }
         }
 
         mMap.setOnInfoWindowClickListener(OnInfoWindowClickListener { marker ->
@@ -200,20 +197,26 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
                 if (latLon == astigarragaMarkers[i]) {
                     var distanceToPoint = getDistBetweenPoints(myCurrentPosition, astigarragaMarkers[i])
                     if (distanceToPoint <= 50) {
-
-                        lateinit var intent: Intent
-
-                        when (i) {
-                            0 -> intent = Intent(this, Activity6_1_Sagardoetxea::class.java)
-                            1 -> intent = Intent(this, Activity6_2_Murgia::class.java)
-                            2 -> intent = Intent(this, Activity6_3_1_ForuPlaza::class.java)
-                            3 -> intent = Intent(this, Activity6_3_2_ForuPlaza::class.java)
-                            4 -> intent = Intent(this, Activity6_4_AstigarElkartea::class.java)
-                            5 -> intent = Intent(this, Activity6_5_IpintzaSagardotegia::class.java)
-                            6 -> intent = Intent(this, Activity6_6_RezolaSagardotegia::class.java)
+                        if (i <= lastUserPoint) {
+                            lateinit var intent: Intent
+                            when (i) {
+                                0 -> intent = Intent(this, Activity6_1_Sagardoetxea::class.java)
+                                1 -> intent = Intent(this, Activity6_2_Murgia::class.java)
+                                2 -> intent = Intent(this, Activity6_3_1_ForuPlaza::class.java)
+                                3 -> intent = Intent(this, Activity6_3_2_ForuPlaza::class.java)
+                                4 -> intent = Intent(this, Activity6_4_AstigarElkartea::class.java)
+                                5 -> intent =
+                                    Intent(this, Activity6_5_IpintzaSagardotegia::class.java)
+                                6 -> intent =
+                                    Intent(this, Activity6_6_RezolaSagardotegia::class.java)
+                            }
+                            startActivity(intent)
+                            this.overridePendingTransition(0, 0)
+                        } else {
+                            Toast.makeText(this, "Primero debes superar el nivel naranja", Toast.LENGTH_SHORT).show()
                         }
-                        startActivity(intent)
-                        this.overridePendingTransition(0, 0)
+
+
                         break
 
                     } else {

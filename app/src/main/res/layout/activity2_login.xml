@@ -56,5 +56,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.282"
-        app:srcCompat="@drawable/img_upeliosagarra" />
+        app:srcCompat="@drawable/img_upeliosagarra_small" />
 </androidx.constraintlayout.widget.ConstraintLayout>

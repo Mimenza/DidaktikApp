@@ -32,18 +32,26 @@ class Activity2_Login : AppCompatActivity() {
         binding.btn1Hasi.setOnClickListener() {
             if (binding.txt2Nombre.text.isNotBlank()) {
                 val querydb = DbHandler.getDbInstance().collection("Usuarios")
-                //val query = querydb.whereEqualTo("nombre", binding.txt2Nombre.text.toString())
-                val query = querydb
+                val query = querydb.whereEqualTo("nombre", binding.txt2Nombre.text.toString())
+                //val query = querydb
                 .get()
                 .addOnSuccessListener { rows ->
                     // FIXME TENER EN CUENTA rows.size dado que puede bailar un valor +1/-1
                     DbHandler.setLastUserId(rows.size())
                     println("******** FILAS: " + rows.size())
-                    for (document in rows) {
-                        println("${document.id} => ${document.data}")
-                    }
-                    /*
                     if (rows.size() > 0) {
+                        querydb.get()
+                            .addOnSuccessListener { rowsTotal ->
+                                var vId:Int = rows.documents[0]["id"].toString().replace("u","").toInt()
+                                var vNombre:String = rows.documents[0]["nombre"].toString()
+                                var vAdmin:Int = rows.documents[0]["admin"].toString().toInt()
+                                var vPuntuacion:Int = rows.documents[0]["puntuacion"].toString().toInt()
+                                var vUltimoPto:Int = rows.documents[0]["ultimo_punto"].toString().toInt()
+                                DbHandler.setUser(User(vId, vNombre, vAdmin, vPuntuacion, vUltimoPto))
+                                DbHandler.setLastUserId(rowsTotal.size())
+                                Toast.makeText(this, "Usuario Logeado correctamente", Toast.LENGTH_SHORT).show()
+                            }
+                        /*
                         var vId:Int = rows.documents[0]["id"].toString().replace("u","").toInt()
                         var vNombre:String = rows.documents[0]["nombre"].toString()
                         var vAdmin:Int = rows.documents[0]["admin"].toString().toInt()
@@ -51,22 +59,32 @@ class Activity2_Login : AppCompatActivity() {
                         var vUltimoPto:Int = rows.documents[0]["ultimo_punto"].toString().toInt()
                         DbHandler.setUser(User(vId, vNombre, vAdmin, vPuntuacion, vUltimoPto))
                         Toast.makeText(this, "Usuario Logeado correctamente", Toast.LENGTH_SHORT).show()
+
+                         */
                     } else {
-                        val defaultData = hashMapOf(
-                            "admin" to 0,
-                            "id" to "u"+((DbHandler.getLastUserId() +1).toString()),
-                            "nombre" to binding.txt2Nombre.text.toString(),
-                            "puntuacion" to 0,
-                            "ultimo_punto" to 0)
-                        querydb.document("Usuarios").set(defaultData)
-                        DbHandler.setUser(User(rows.size(), vNombre, vAdmin, vPuntuacion, vUltimoPto))
-                        Toast.makeText(this, "Usuario insertado correctamente", Toast.LENGTH_SHORT).show()
+                        querydb.get()
+                            .addOnSuccessListener { rowsTotal ->
+                                val defaultData = hashMapOf(
+                                    "admin" to 0,
+                                    "id" to "u"+(rowsTotal.size() + 1),
+                                    "nombre" to binding.txt2Nombre.text.toString(),
+                                    "puntuacion" to 0,
+                                    "ultimo_punto" to 0)
+                                //querydb.document("Usuarios", ).set(defaultData)
+                                querydb.document((rowsTotal.size()+1).toString()).set(defaultData)
+                                DbHandler.setUser(User(rowsTotal.size()+1, binding.txt2Nombre.text.toString(), 0, 0, 0))
+                                DbHandler.setLastUserId(rowsTotal.size() + 1)
+                                Toast.makeText(this, "Usuario insertado correctamente", Toast.LENGTH_SHORT).show()
+                            }
+
+
+
                     }
                     var i = Intent(this, Activity4_bienvenida::class.java)
                     startActivity(i)
                     this.overridePendingTransition(0, 0)
 
-                     */
+
                 }
                 .addOnFailureListener { exception ->
                     val functionName = object{}.javaClass.enclosingMethod.name

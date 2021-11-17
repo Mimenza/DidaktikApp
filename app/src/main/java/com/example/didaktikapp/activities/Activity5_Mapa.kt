@@ -1,15 +1,12 @@
 package com.example.didaktikapp.activities
 
-import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
-import androidx.fragment.app.Fragment
 import com.example.didaktikapp.R
-import com.example.didaktikapp.activities.sites.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -17,23 +14,13 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.didaktikapp.databinding.Activity5MapaBinding
-import com.example.didaktikapp.fragments.Fragment3_info
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener
 import com.google.android.gms.maps.model.CircleOptions
-
 import com.google.android.gms.maps.model.Circle
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
-
-import com.google.android.gms.maps.model.Marker
-
-
-
-
-
-
 
 
 class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
@@ -42,7 +29,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: Activity5MapaBinding
     private lateinit var fusedLocation: FusedLocationProviderClient
     private var myCurrentPosition: LatLng = LatLng(45.0, 123.0)
-    private var lastUserPoint: Int = 0
+    private var lastUserPoint: Int = 5
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,7 +99,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         var myCircle: Circle = mMap.addCircle(
             CircleOptions()
             .center(LatLng(43.285576, -1.941156))
-            .radius(50.0)
+            .radius(500.0)
             .strokeColor(getResources().getColor(R.color.white))
             .strokeWidth(2f)
             .fillColor(0x70ff0000))
@@ -191,25 +178,27 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
 
         mMap.setOnInfoWindowClickListener(OnInfoWindowClickListener { marker ->
             val latLon = marker.position
+            var numero:Int=0
 
             //Cycle through places array
             for (i in 0..astigarragaMarkers.size - 1) {
                 if (latLon == astigarragaMarkers[i]) {
                     var distanceToPoint = getDistBetweenPoints(myCurrentPosition, astigarragaMarkers[i])
-                    if (distanceToPoint <= 50) {
+                    if (distanceToPoint <= 500) {
                         if (i <= lastUserPoint) {
-                            lateinit var intent: Intent
+                           var intent:Intent =  Intent(this, Activity6_Site::class.java)
                             when (i) {
-                                0 -> intent = Intent(this, Activity6_1_Sagardoetxea::class.java)
-                                1 -> intent = Intent(this, Activity6_2_Murgia::class.java)
-                                2 -> intent = Intent(this, Activity6_3_1_ForuPlaza::class.java)
-                                3 -> intent = Intent(this, Activity6_3_2_ForuPlaza::class.java)
-                                4 -> intent = Intent(this, Activity6_4_AstigarElkartea::class.java)
-                                5 -> intent =
-                                    Intent(this, Activity6_5_IpintzaSagardotegia::class.java)
-                                6 -> intent =
-                                    Intent(this, Activity6_6_RezolaSagardotegia::class.java)
+                                0 -> numero =0
+                                1 -> numero =1
+                                2 -> numero =2
+                                3 -> numero =3
+                                4 -> numero =4
+                                5 -> numero =5
+                                6 -> numero =6
                             }
+
+                            intent.putExtra("numero",numero)
+
                             startActivity(intent)
                             this.overridePendingTransition(0, 0)
                         } else {

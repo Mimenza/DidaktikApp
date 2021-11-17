@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/atzeko_irudia"
+    android:background="@drawable/img_atzeko_irudia"
     tools:context=".activities.Activity4_bienvenida"
     android:scaleType="fitXY">
 
@@ -31,7 +31,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.96"
-        app:srcCompat="@drawable/bocadillo" />
+        app:srcCompat="@drawable/img_bocadillo" />
 
     <in.codeshuffle.typewriterview.TypeWriterView
         android:id="@+id/txtv4_bienvenida"

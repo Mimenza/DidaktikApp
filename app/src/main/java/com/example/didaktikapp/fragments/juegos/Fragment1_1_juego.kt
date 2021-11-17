@@ -41,13 +41,13 @@ class Fragment1_1_juego : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment1_1_juego, container, false)
         val button: Button = view.findViewById(R.id.btnf1_1siguiente)
-        val ajutes: ImageButton = view.findViewById(R.id.btnf1_1_ajustes)
+        val ajustes: ImageButton = view.findViewById(R.id.btnf1_1_ajustes)
 
         button.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment1_1_juego_to_fragment2_1_minijuego)
         }
 
-        ajutes.setOnClickListener(){
+        ajustes.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment1_1_juego_to_fragment4_menu)
         }
 

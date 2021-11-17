@@ -86,7 +86,7 @@ class Activity1_Principal : AppCompatActivity() {
                 var i = Intent(this, Activity3_Load::class.java)
                 startActivity(i)
             }
-
+            /*
             runBlocking {
                 launch {
                     try {
@@ -98,8 +98,46 @@ class Activity1_Principal : AppCompatActivity() {
                     }
                 }
             }
+             */
         }
     }
+
+    override fun onPause() {
+        super.onPause()
+        audio.pause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        audio.start()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        runBlocking() {
+            launch {
+                audio = MediaPlayer.create(
+                    this@Activity1_Principal,
+                    com.example.didaktikapp.R.raw.abestia
+                )
+                audio.setVolume(0.15F, 0.15F)
+                audio.start()
+            }
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        audio.stop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        audio.stop()
+    }
+
+
+
 
 
     private fun showAjustes() {

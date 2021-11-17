@@ -48,10 +48,7 @@ class Fragment3_info : Fragment() {
         val sharedPreferences = this.activity?.getSharedPreferences("site", 0)
         val numero = sharedPreferences?.getString("numero", null)?.toInt()
 
-<<<<<<< HEAD
-        return view
-    }
-=======
+
         val tvTitulo: TextView? = view?.findViewById<TextView>(R.id.txtv3f_nombrezona)
         val imgvImagen: ImageView? = view?.findViewById<ImageView>(R.id.imgv3f_fotozona)
         val tvDescripcion: TextView? = view?.findViewById<TextView>(R.id.txtv3f_textozona)
@@ -72,8 +69,6 @@ class Fragment3_info : Fragment() {
                         .navigate(R.id.action_fragment3_info_to_fragment1_1_juego)
 
                 }
->>>>>>> 8219e3d7b2a9e4a61f0a08dad70879a6bd93d94b
-
             }
             1-> {
                 titulo = resources.getString(R.string.titulo2_juego)

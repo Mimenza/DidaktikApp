@@ -10,6 +10,7 @@
         android:id="@+id/txtv3_titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
         android:text="@string/titulocargar"
         android:textAlignment="center"
         android:textSize="34sp"

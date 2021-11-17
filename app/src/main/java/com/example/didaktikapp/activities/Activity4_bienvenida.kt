@@ -16,12 +16,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import com.example.didaktikapp.R
 import android.text.method.ScrollingMovementMethod
-
-
-
-
-
-
+import java.lang.System.`in`
 
 
 class Activity4_bienvenida : AppCompatActivity() {
@@ -40,15 +35,10 @@ class Activity4_bienvenida : AppCompatActivity() {
         ani.start()
         //Animacion manzana fin
 
-
         val typeWriterView = findViewById<View>(R.id.txtv4_bienvenida) as TypeWriterView
+        typeWriterView.setWithMusic(false)
         typeWriterView.animateText(resources.getString(R.string.text_bienvenida))
         typeWriterView.setDelay(70)
-
-
-
-
-
 
         Handler().postDelayed({
             val intent = Intent(this, Activity5_Mapa::class.java)

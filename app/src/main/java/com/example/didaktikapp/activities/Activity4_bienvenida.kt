@@ -16,10 +16,14 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import com.example.didaktikapp.R
 import android.text.method.ScrollingMovementMethod
+import com.example.didaktikapp.databinding.Activity2LoginBinding
+import com.example.didaktikapp.databinding.Activity4BienvenidaBinding
 import java.lang.System.`in`
 
 
 class Activity4_bienvenida : AppCompatActivity() {
+
+    private lateinit var binding: Activity4BienvenidaBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +31,9 @@ class Activity4_bienvenida : AppCompatActivity() {
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
         setContentView(R.layout.activity4_bienvenida)
         getSupportActionBar()?.hide()
+
+        binding= Activity4BienvenidaBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         //Animacion manzana
 
@@ -40,11 +47,19 @@ class Activity4_bienvenida : AppCompatActivity() {
         typeWriterView.animateText(resources.getString(R.string.text_bienvenida))
         typeWriterView.setDelay(70)
 
+        binding.btnv4Saltar.visibility = View.GONE
+        //binding.btnv4Saltar.isEnabled = false
+
         Handler().postDelayed({
-            val intent = Intent(this, Activity5_Mapa::class.java)
-            startActivity(intent)
-            this.overridePendingTransition(0, 0)
-            finish()
+            binding.btnv4Saltar.visibility = View.VISIBLE
+        }, 5000)
+
+        binding.btnv4Saltar.setOnClickListener() {
+            abrirMapa()
+        }
+
+        Handler().postDelayed({
+            abrirMapa()
         }, 43000)
 
         runBlocking() {
@@ -53,5 +68,12 @@ class Activity4_bienvenida : AppCompatActivity() {
                 ring.start()
             }
         }
+    }
+
+    private fun abrirMapa() {
+        val intent = Intent(this, Activity5_Mapa::class.java)
+        startActivity(intent)
+        this.overridePendingTransition(0, 0)
+        finish()
     }
 }

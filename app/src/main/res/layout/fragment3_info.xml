@@ -12,69 +12,64 @@
 
         <ImageView
             android:id="@+id/imgv3f_fotozona"
-            android:layout_width="300dp"
-            android:layout_height="300dp"
+            android:layout_width="291dp"
+            android:layout_height="283dp"
             android:layout_gravity="center|top"
-            android:layout_marginTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.176" />
+            app:layout_constraintTop_toBottomOf="@+id/txtv3f_nombrezona"
+            app:layout_constraintVertical_bias="0.026" />
 
         <TextView
             android:id="@+id/txtv3f_nombrezona"
             android:layout_width="281dp"
             android:layout_height="56dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="64dp"
             android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.572"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.023" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txtv3f_textozona"
             android:layout_width="382dp"
             android:layout_height="256dp"
             android:layout_gravity="center"
-            android:layout_marginTop="110dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             app:layout_constraintBottom_toBottomOf="@+id/btn3f_jugar"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.567"
+            app:layout_constraintHorizontal_bias="0.551"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.822" />
+            app:layout_constraintTop_toBottomOf="@+id/imgv3f_fotozona"
+            app:layout_constraintVertical_bias="0.135" />
 
         <ImageView
             android:id="@+id/imgv3f_backtomap"
             android:layout_width="47dp"
             android:layout_height="48dp"
+            android:layout_marginTop="44dp"
             android:src="@drawable/ic_baseline_arrow_back_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.043"
+            app:layout_constraintEnd_toStartOf="@+id/txtv3f_nombrezona"
+            app:layout_constraintHorizontal_bias="0.842"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.023" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btn3f_jugar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
+            android:layout_marginBottom="10dp"
             android:text="@string/jugar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.976" />
+            app:layout_constraintStart_toStartOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

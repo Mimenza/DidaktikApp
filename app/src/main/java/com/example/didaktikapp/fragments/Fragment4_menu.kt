@@ -11,6 +11,9 @@ import android.widget.Button
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity1_Principal
+import android.app.Activity
+import com.example.didaktikapp.activities.Activity5_Mapa
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -56,13 +59,23 @@ class Fragment4_menu : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_fragment4_menu_to_fragment6_ayuda)
         }
 
+        repetir.setOnClickListener(){
+            Navigation.findNavController(view).navigate(R.id.action_fragment4_menu_to_fragment3_info)
+        }
+
         //Navegacion a activities
-        /*inicio.setOnClickListener(){
-            val intent = Intent(this, Activity1_Principal::class.java)
+        inicio.setOnClickListener(){
+            val i = Intent(activity, Activity1_Principal::class.java)
+            startActivity(i)
+            (activity as Activity?)!!.overridePendingTransition(0, 0)
+        }
 
-            startActivity(intent)
+        siguiente.setOnClickListener(){
+            val i = Intent(activity, Activity5_Mapa::class.java)
+            startActivity(i)
+            (activity as Activity?)!!.overridePendingTransition(0, 0)
 
-        }*/
+        }
 
         return view
     }

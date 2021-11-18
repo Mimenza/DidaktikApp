@@ -29,7 +29,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: Activity5MapaBinding
     private lateinit var fusedLocation: FusedLocationProviderClient
     private var myCurrentPosition: LatLng = LatLng(45.0, 123.0)
-    private var lastUserPoint: Int = 5
+    private var lastUserPoint: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,7 +99,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         var myCircle: Circle = mMap.addCircle(
             CircleOptions()
             .center(LatLng(43.285576, -1.941156))
-            .radius(500.0)
+            .radius(50.0)
             .strokeColor(getResources().getColor(R.color.white))
             .strokeWidth(2f)
             .fillColor(0x70ff0000))
@@ -184,7 +184,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
             for (i in 0..astigarragaMarkers.size - 1) {
                 if (latLon == astigarragaMarkers[i]) {
                     var distanceToPoint = getDistBetweenPoints(myCurrentPosition, astigarragaMarkers[i])
-                    if (distanceToPoint <= 500) {
+                    if (distanceToPoint <= 50) {
                         if (i <= lastUserPoint) {
                            var intent:Intent =  Intent(this, Activity6_Site::class.java)
                             when (i) {

@@ -77,8 +77,6 @@ class Activity2_Login : AppCompatActivity() {
                                 Toast.makeText(this, "Usuario insertado correctamente", Toast.LENGTH_SHORT).show()
                             }
 
-
-
                     }
                     var i = Intent(this, Activity4_bienvenida::class.java)
                     startActivity(i)

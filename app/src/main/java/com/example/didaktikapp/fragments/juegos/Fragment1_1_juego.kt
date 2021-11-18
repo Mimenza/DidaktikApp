@@ -1,5 +1,9 @@
 package com.example.didaktikapp.fragments.juegos
 
+import `in`.codeshuffle.typewriterview.TypeWriterView
+import android.graphics.Canvas
+import android.graphics.Color
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
@@ -10,6 +14,18 @@ import android.widget.Button
 import android.widget.ImageButton
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import android.util.Log
+import java.util.ArrayList
+
+import android.graphics.Paint
+
+
+
+
+
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +41,11 @@ class Fragment1_1_juego : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+    var paint = Paint()
+    val canvas = Canvas()
+    private val position1:List<Float> = ArrayList()
+    private val position2:List<Float> = ArrayList()
+    private val position3:List<Float> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -42,6 +62,7 @@ class Fragment1_1_juego : Fragment() {
         val view = inflater.inflate(R.layout.fragment1_1_juego, container, false)
         val button: Button = view.findViewById(R.id.btnf1_1siguiente)
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_1_ajustes)
+        var ring: MediaPlayer
 
         button.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment1_1_juego_to_fragment2_1_minijuego)
@@ -51,8 +72,28 @@ class Fragment1_1_juego : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_fragment1_1_juego_to_fragment4_menu)
         }
 
+        //Typewriter juego 1 tutorial
+        val typeWriterView = view.findViewById(R.id.txtv1_1tutorialjuego1) as TypeWriterView
+        typeWriterView.setWithMusic(false)
+        typeWriterView.animateText(resources.getString(R.string.jositajositext))
+        typeWriterView.setDelay(70)
+        //Typewriter juego 1 tutorial fin
+
+        //Audio juego 1
+        runBlocking() {
+            launch {
+                ring = MediaPlayer.create(context, R.raw.juego1audio)
+                ring.start()
+            }
+        }
+        //Audio juego 1 fin
+
+
         return view
     }
+
+
+
 
     companion object {
         /**

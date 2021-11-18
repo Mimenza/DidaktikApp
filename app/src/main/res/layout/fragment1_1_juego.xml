@@ -11,27 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="JUEGO 1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <Button
             android:id="@+id/btnf1_1siguiente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SiGUIENTE"
+            android:text="@string/siguiente"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.474"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.699" />
+            app:layout_constraintVertical_bias="0.953" />
 
         <ImageButton
             android:id="@+id/btnf1_1_ajustes"
@@ -44,8 +34,94 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.174"
+            app:layout_constraintVertical_bias="0.065"
             tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/txtv1_1azalpena1"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:text="Gune honetan hainbat sagar mota ezagutuko eta hartuko dituzu."
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.914"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.176" />
+
+        <TextView
+            android:id="@+id/txtv1_1azalpena2"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:text="@string/juego1_azalpena2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.915"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.375" />
+
+        <TextView
+            android:id="@+id/txtv1_1azalpena3"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:text="@string/juego1_azalpena3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.915"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.597" />
+
+        <in.codeshuffle.typewriterview.TypeWriterView
+            android:id="@+id/txtv1_1tutorialjuego1"
+            android:layout_width="356dp"
+            android:layout_height="130dp"
+            android:focusable="true"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.849"
+            tools:ignore="MissingClass" />
+
+        <ImageView
+            android:id="@+id/imgv1_1imagen1"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:src="@drawable/img_juego1_1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.095"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.16" />
+
+        <ImageView
+            android:id="@+id/imgv1_1imagen2"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:src="@drawable/img_juego1_2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.095"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.404" />
+
+        <ImageView
+            android:id="@+id/imgv1_1imagen3"
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:src="@drawable/img_juego1_3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.095"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.623" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

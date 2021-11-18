@@ -18,36 +18,12 @@
         <activity
             android:name=".activities.Activity4_bienvenida"
             android:exported="false" />
-        <activity
-            android:name=".activities.sites.Activity6_6_RezolaSagardotegia"
-            android:exported="false" />
-        <activity
-            android:name=".activities.sites.Activity6_5_IpintzaSagardotegia"
-            android:exported="false" />
-        <activity
-            android:name=".activities.sites.Activity6_4_AstigarElkartea"
-            android:exported="false" />
-        <activity
-            android:name=".activities.sites.Activity6_3_1_ForuPlaza"
-            android:exported="false" />
-        <activity
-            android:name=".activities.sites.Activity6_3_2_ForuPlaza"
-            android:exported="false" />
-        <activity
-            android:name=".activities.sites.Activity6_2_Murgia"
-            android:exported="false" />
-        <activity
-            android:name=".activities.sites.Activity6_1_Sagardoetxea"
-            android:exported="false" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
         <activity
             android:name=".activities.Activity5_Mapa"
-            android:exported="false"
-            android:label="@string/title_activity_activity4_mapa" />
+            android:exported="false" />
         <activity
             android:name=".activities.Activity3_Load"
             android:exported="false" />

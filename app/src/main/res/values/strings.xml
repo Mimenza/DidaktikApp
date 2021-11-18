@@ -1,32 +1,30 @@
 <resources>
     <string name="app_name">Sagarra jo</string>
-    <string name="title_activity_activity4_mapa">Activity4_Mapa</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lorem">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+    <string name="btnsaltar">Saltatu</string>
 
     <!--PRINCIPAL-->
     <string name="tituloprincipal">SAGARRA JO</string>
     <string name="nombregrupo">Onandi taldea</string>
     <string name="btnhasi">Hasi</string>
-    <string name="btncargar">Cargar</string>
-    <string name="btnnueva">Empezar</string>
+    <string name="btncargar">Kargatu</string>
+    <string name="btnnueva">Hasi</string>
 
     <!--LOGIN-->
-    <string name="inputnombre">Nombre</string>
-    <string name="introducirnombre">Pon tu nombre debajo!</string>
-
+    <string name="inputnombre">Izena</string>
+    <string name="introducirnombre">Jarri zure izena azpian</string>
 
     <!--CARGAR-->
-    <string name="titulocargar">Carga tu partida!</string>
+    <string name="titulocargar">Kargatu zure partida!</string>
     <string name="text_bienvenida">Kaixo, lagunok! Ni Upelio sagarra naiz, Astigarragako sagarrik ederrena. Gaurkoan nirekin batera Astigarraga ezagutuko duzue. Gainera, nik sagardo bilakatu nahi dut eta ezin dut bakarrik egin. Beraz, zuen laguntza eta indar guztiak behar ditut! Horretarako Astigarragan zehar ibilbide bat egingo dugu, txoko ezberdinak ezagutuz eta nire ametsa egi bilakatzeko horietako bakoitzean erronka ezberdin bat pasatu beharko duzue. Horretarako oso oso adi egon beharko zarete! Prest zaudete? Goazen!</string>
-    <string name="lorem">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
 
     <!--FRAGMENT MENU -->
-    <string name="botonhome">INICIO</string>
-    <string name="botonagain">REPETIR</string>
-    <string name="botonnext">SIGUIENTE</string>
-    <string name="botonhelp">AYUDA</string>
-    <string name="botonajustes">AJUSTES</string>
+    <string name="botonhome">HASIERA</string>
+    <string name="botonagain">ERREPIKATU</string>
+    <string name="botonnext">HURRENGOA</string>
+    <string name="botonhelp">LAGUNTZA</string>
+    <string name="botonajustes">EZARPENAK</string>
     <string name="text_1juego">"Lehenengo geldiunera iritsi gara! Sagardoetxera! Sagardoetxea Euskal Sagardogintzaren eta horren kulturaren museoa da. Naturarekin kontaktuan izanez, hainbat gauza ikas daitezke bertan.  Horretarako, hiru gune ditu. Lehenengoa museo gunea da. Bertan sagarraren historia lantzen da, jokoen, argazkien… bitartez eta sagardo goxo-goxoa nola egiten den ikasten da. Horrez gain, panel informatibo ugari daude, oso interesgarriak gainera! Bigarren gunea sagastia da. Sagastira sagarrondoak ikustera joaten da eta nola ez, sagar ezberdinak ezagutzera. Gainera, bertan hainbat lan egiteko aukera dago!  Azkeneko gunea dastatzea denez, sagardo bilakatu aurretik sagar zukua dastatzeko aukera egoten da. A ze goxoa!! Mmmm!! "</string>
     <string name="titulo1_juego">"1. JARDUERA: SAGARDOETXEA "</string>
     <string name="text_2juego">"Begira non gauden! Murgia Jauregian! Gune berezia inondik inora, magiaz eta xarmaz betea dagoelako. Donostiatik kilometro gutxira kokatua dago, Astigarragan. Murgia Jauregia XI. mendean sortu zen eta hasiera batean, Murgia familiaren dorretxea izan zen, jauregi bilakatu aurretik.  Jauregia, muino baten gainean dago, Urumea ibarraren gainean eta barruan historiaz betetako egongelak eta guneak ditu. Duela mende asko, zenbait sute jasan zituen jauregiak eta ondorioz, hainbat aldiz berregin behar izan zuten. Gainera, ikusten duzuen bezala, egungo sarrera nagusiaren gainean Murgia sendiaren armarria dago. Azkenik, gero ikusiko dugun moduan, Astigarragan Sagardo berriaren eguna edo Txotx irekiera ospatzen da eta normalean, egun horretako hasiera Murgiako jauregian egiten da. "</string>
@@ -34,10 +32,10 @@
     <string name="jugar">Jolastu</string>
 
     <!--FRAGMENT AJUSTES -->
-    <string name="ajustes">AJUSTES</string>
-    <string name="botonidioma">IDIOMA</string>
-    <string name="botonoscuro">OSCURO</string>
-    <string name="botonacercade">ACERCA DE</string>
+    <string name="ajustes">EZARPENAK</string>
+    <string name="botonidioma">HIZKUNTZA</string>
+    <string name="botonoscuro">MODU ILUNA</string>
+    <string name="botonacercade">NORTZUK GARA</string>
     <string name="titulo31_juego">3. JARDUERA: SANTA ANA</string>
     <string name="text_31juego">"Badakizue non gauden, ezta? Herriko Foru plazan! Badakizue zer ospatzen den hemen uztailaren 26an? Norbaitek asmatu du? Santa Ana, ezta? Dakizuenez, Santa Anan gure herriko sagardogileek eta Sagardun Patzuergoko kideek beren sagardoa jartzen dute festako edalontzi berezi batean, jendeak sagardo ezberdinak dastatzeko asmoz. Horrez gain, txorizo eta haragi gisatuko pintxoak ere salgai egoten dira. Zelako goxo dagoen guztia! Norbaitek daki noiztik ospatzen den jai egun hau? 1976 urtetik, Euskal Herrian ospatzen direnen artean zaharrena! Gainera, dakizuenez, idi-demak izaten dira sagardo dastaketarekin batera. Horrez gain, zanpantzarrak ere herritik barrena ibiltzen dira zintzarriak astinduz. Herri osoa alaitzen dute! "</string>
     <string name="text_32juego">"Laugarren geldiunera iritsi gara! Foru Plazara!!! Sagar Uzta ospatzen den tokira!  Irailean ospatzen den jaia da Sagar Uzta! Jende guztiarentzako prestatutako festa da eta gaur egunean zehar burutzen diren hainbat ekintza eta jarduera ikasiko ditugu.  Badakizue zein da festa honetarako motiboa? Sagarrak biltzeko garaia heltzen dela! Hori dela eta, egun hori sagardoa egiteko prozesua erakusteko eta herritartzeko asmoarekin ospatzen da.  Baina, zeintzuk dira egun honetan burutzen diren ekintzak edo jarduerak? Adi egon! Gero, informazio honekin bi ariketa egin beharko dituzuelako sagardoa egiteko hurrengo pausua zein den ezagutu ahal izateko. Egunean zehar askotariko ekintzak daude: goizean Musika Eskolako txistulariek esnatzen dute herria, sagar dantza dantzatzen da eta txalaparta doinua entzuten da. Gainera, lehengo zanpatze erakusketa, bertako sagar erakusketa eta artisau produktuen salmenta, eta sagardo dastatze eta salmenta egiten da, baita sagarrak probatzeko aukera dago ere.  "</string>

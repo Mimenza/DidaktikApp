@@ -35,13 +35,13 @@
             <Button
                 android:id="@+id/btn5f_idioma"
                 style="@style/botonesMenu"
-                android:drawableLeft="@drawable/ic_repetir"
+                android:drawableLeft="@drawable/ic_language"
                 android:text="@string/botonidioma" />
 
             <Button
                 android:id="@+id/btn5f_oscuro"
                 style="@style/botonesMenu"
-                android:drawableLeft="@drawable/ic_siguiente"
+                android:drawableLeft="@drawable/ic_moon"
                 android:text="@string/botonoscuro" />
 
             <Button

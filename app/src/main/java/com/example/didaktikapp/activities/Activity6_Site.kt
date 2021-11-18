@@ -2,6 +2,7 @@ package com.example.didaktikapp.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.example.didaktikapp.R
 
 class Activity6_Site : AppCompatActivity() {
@@ -9,6 +10,9 @@ class Activity6_Site : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         getSupportActionBar()?.hide()
         setContentView(R.layout.activity6_site)
+
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+
 
         val newInt: Int?
         newInt = if (savedInstanceState == null) {

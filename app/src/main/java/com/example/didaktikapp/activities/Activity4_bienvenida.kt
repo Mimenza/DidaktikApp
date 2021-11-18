@@ -24,6 +24,7 @@ import java.lang.System.`in`
 class Activity4_bienvenida : AppCompatActivity() {
 
     private lateinit var binding: Activity4BienvenidaBinding
+    private lateinit var ring: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,13 +65,14 @@ class Activity4_bienvenida : AppCompatActivity() {
 
         runBlocking() {
             launch {
-                var ring: MediaPlayer = MediaPlayer.create(this@Activity4_bienvenida, R.raw.sarrera)
+                ring = MediaPlayer.create(this@Activity4_bienvenida, R.raw.sarrera)
                 ring.start()
             }
         }
     }
 
     private fun abrirMapa() {
+        ring.stop()
         val intent = Intent(this, Activity5_Mapa::class.java)
         startActivity(intent)
         this.overridePendingTransition(0, 0)

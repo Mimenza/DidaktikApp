@@ -251,6 +251,9 @@
         <action
             android:id="@+id/action_fragment4_menu_to_fragment6_ayuda"
             app:destination="@id/fragment6_ayuda" />
+        <action
+            android:id="@+id/action_fragment4_menu_to_fragment3_info"
+            app:destination="@id/fragment3_info" />
     </fragment>
 
 

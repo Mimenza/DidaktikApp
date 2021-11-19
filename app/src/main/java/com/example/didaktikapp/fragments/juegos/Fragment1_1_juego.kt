@@ -43,9 +43,9 @@ class Fragment1_1_juego : Fragment() {
     private var param2: String? = null
     var paint = Paint()
     val canvas = Canvas()
-    private val position1:List<Float> = ArrayList()
-    private val position2:List<Float> = ArrayList()
-    private val position3:List<Float> = ArrayList()
+    private val p1:List<Float> = ArrayList()
+    private val p2:List<Float> = ArrayList()
+    private val p3:List<Float> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -87,6 +87,7 @@ class Fragment1_1_juego : Fragment() {
             }
         }
         //Audio juego 1 fin
+
 
 
         return view

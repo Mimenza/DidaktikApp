@@ -1,11 +1,22 @@
 package com.example.didaktikapp.fragments
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.os.Bundle
+import android.text.Layout
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.Button
+import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.didaktikapp.R
+import android.widget.FrameLayout
+
+
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,8 +46,28 @@ class Fragment5_ajustes : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment5_ajustes, container, false)
+        val view = inflater.inflate(R.layout.fragment5_ajustes, container, false)
+        val buttonAcercaDe: Button = view.findViewById(R.id.btn5f_acercade)
+
+
+        buttonAcercaDe.setOnClickListener{ showAcercaDeInfo()}
+
+        return view
     }
+
+    fun showAcercaDeInfo(){
+        var dialog = Dialog(requireContext())
+        val layout:View = layoutInflater.inflate(R.layout.acercadedialog, null)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(layout)
+        dialog.show()
+        dialog.window!!.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
+    }
+
+
 
     companion object {
         /**

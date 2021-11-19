@@ -70,8 +70,7 @@ class Activity1_Principal : AppCompatActivity() {
             showbtn()
         }
 
-        binding.btn1Hasi.setOnClickListener() {
-            binding.btn1Hasi.isVisible = false
+
             binding.btn1Cargar.isVisible = true
             binding.btn1Nuevo.isVisible = true
 
@@ -99,7 +98,7 @@ class Activity1_Principal : AppCompatActivity() {
                 }
             }
              */
-        }
+
     }
 
     override fun onPause() {
@@ -136,10 +135,6 @@ class Activity1_Principal : AppCompatActivity() {
         audio.stop()
     }
 
-
-
-
-
     private fun showAjustes() {
     val fragment :Fragment = Fragment5_ajustes()
 
@@ -164,7 +159,6 @@ class Activity1_Principal : AppCompatActivity() {
             vertodo()
 
         }
-
 
     }
 
@@ -204,7 +198,7 @@ class Activity1_Principal : AppCompatActivity() {
         //ocultamos lo que no nos interesa
         binding.btn1Nuevo.isVisible = false
         binding.btn1Cargar.isVisible = false
-        binding.btn1Hasi.isVisible = false
+
         binding.img1Upelio.isVisible = false
         binding.txtv1Gruponombre.isVisible = false
         binding.txtv1Titulo.isVisible = false
@@ -212,7 +206,8 @@ class Activity1_Principal : AppCompatActivity() {
 
     fun vertodo() {
         //ocultamos lo que no nos interesa
-        binding.btn1Hasi.isVisible = true
+        binding.btn1Nuevo.isVisible = true
+        binding.btn1Cargar.isVisible = true
         binding.img1Upelio.isVisible = true
         binding.txtv1Gruponombre.isVisible = true
         binding.txtv1Titulo.isVisible = true
@@ -220,6 +215,7 @@ class Activity1_Principal : AppCompatActivity() {
 
     fun showbtn(){
         //sacamos lo que nos interesa
+
         binding.btnMapa.isVisible = true
         binding.btnLogin.isVisible = true
         binding.btnLoad.isVisible = true

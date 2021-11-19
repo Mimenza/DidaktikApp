@@ -30,6 +30,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var fusedLocation: FusedLocationProviderClient
     private var myCurrentPosition: LatLng = LatLng(45.0, 123.0)
     private var lastUserPoint: Int = 0
+    private var isAdmin: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,8 +46,13 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
 
         fusedLocation = LocationServices.getFusedLocationProviderClient(this)
 
-        if (DbHandler.getUser() != null && DbHandler.getUser()!!.ultima_puntuacion != null) {
-            lastUserPoint = DbHandler.getUser()!!.ultima_puntuacion!!
+        if (DbHandler.getUser() != null) {
+            if (DbHandler.getUser()!!.ultima_puntuacion != null) {
+                lastUserPoint = DbHandler.getUser()!!.ultima_puntuacion!!
+            }
+            if (DbHandler.getUser()!!.admin != null) {
+                isAdmin = DbHandler.getUser()!!.admin!!
+            }
         }
     }
 
@@ -138,11 +144,6 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         "Rezola sagardotegia"
     )
 
-    //var lastUserPoint: Int = 0
-    //lastUserPoint = DbHandler.getUser()!!.ultima_puntuacion!!
-
-    //var lastUserPoint: Int = if (DbHandler.getUser()!!.ultima_puntuacion != null) DbHandler.getUser()!!.ultima_puntuacion!! else 0
-
     private fun addMarkers() {
         var astigarragaMarkers: MutableList<LatLng> = ArrayList()
         var astigarragaNames: MutableList<String> = ArrayList()
@@ -152,7 +153,6 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
             astigarragaMarkers.add(markerLIst[i])
             astigarragaNames.add(markerNames[i])
         }
-
 
         for (i in 0..astigarragaMarkers.size - 1) {
             val markerPointIcon = mMap.addMarker(
@@ -180,38 +180,42 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
             val latLon = marker.position
             var numero:Int=0
 
+            fun irAPunto(puntoSeleccionado: Int) {
+                var intent:Intent =  Intent(this, Activity6_Site::class.java)
+                when (puntoSeleccionado) {
+                    0 -> numero =0
+                    1 -> numero =1
+                    2 -> numero =2
+                    3 -> numero =3
+                    4 -> numero =4
+                    5 -> numero =5
+                    6 -> numero =6
+                }
+
+                intent.putExtra("numero",numero)
+
+                startActivity(intent)
+                this.overridePendingTransition(0, 0)
+            }
+
             //Cycle through places array
             for (i in 0..astigarragaMarkers.size - 1) {
                 if (latLon == astigarragaMarkers[i]) {
                     var distanceToPoint = getDistBetweenPoints(myCurrentPosition, astigarragaMarkers[i])
-                    if (distanceToPoint <= 50) {
-                        if (i <= lastUserPoint) {
-                           var intent:Intent =  Intent(this, Activity6_Site::class.java)
-                            when (i) {
-                                0 -> numero =0
-                                1 -> numero =1
-                                2 -> numero =2
-                                3 -> numero =3
-                                4 -> numero =4
-                                5 -> numero =5
-                                6 -> numero =6
-                            }
-
-                            intent.putExtra("numero",numero)
-
-                            startActivity(intent)
-                            this.overridePendingTransition(0, 0)
-                        } else {
-                            Toast.makeText(this, "Primero debes superar el nivel naranja", Toast.LENGTH_SHORT).show()
-                        }
-
-
-                        break
-
+                    if (isAdmin == 1) {
+                        irAPunto(i)
                     } else {
-                        Toast.makeText(this, "No estas suficientemente cerca del punto de juego", Toast.LENGTH_SHORT).show()
-                        break
+                        if (distanceToPoint <= 50) {
+                            if (i <= lastUserPoint) {
+                                irAPunto(i)
+                            } else {
+                                Toast.makeText(this, "Primero debes superar el nivel naranja", Toast.LENGTH_SHORT).show()
+                            }
+                        } else {
+                            Toast.makeText(this, "No estas suficientemente cerca del punto de juego", Toast.LENGTH_SHORT).show()
+                        }
                     }
+                    break
                 }
             }
 

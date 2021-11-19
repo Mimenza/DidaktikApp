@@ -8,17 +8,12 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.media.MediaPlayer
-import android.text.TextUtils
-
 
 import kotlinx.android.synthetic.main.activity4_bienvenida.*
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import com.example.didaktikapp.R
-import android.text.method.ScrollingMovementMethod
-import com.example.didaktikapp.databinding.Activity2LoginBinding
 import com.example.didaktikapp.databinding.Activity4BienvenidaBinding
-import java.lang.System.`in`
+import kotlinx.coroutines.*
+import java.util.*
 
 
 class Activity4_bienvenida : AppCompatActivity() {
@@ -26,8 +21,14 @@ class Activity4_bienvenida : AppCompatActivity() {
     private lateinit var binding: Activity4BienvenidaBinding
     private lateinit var ring: MediaPlayer
 
+    private lateinit var skipButtonHandler: Handler
+    private lateinit var autoFinalizarHandler: Handler
+
+    private var autoOpenMap: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         getSupportActionBar()?.hide()
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
         setContentView(R.layout.activity4_bienvenida)
@@ -47,26 +48,29 @@ class Activity4_bienvenida : AppCompatActivity() {
         typeWriterView.setWithMusic(false)
         typeWriterView.animateText(resources.getString(R.string.text_bienvenida))
         typeWriterView.setDelay(70)
-
         binding.btnv4Saltar.visibility = View.GONE
-        //binding.btnv4Saltar.isEnabled = false
+
 
         Handler().postDelayed({
             binding.btnv4Saltar.visibility = View.VISIBLE
         }, 5000)
 
         binding.btnv4Saltar.setOnClickListener() {
+            autoOpenMap = false
             abrirMapa()
         }
 
         Handler().postDelayed({
-            abrirMapa()
-        }, 43000)
+            if (autoOpenMap) {
+                abrirMapa()
+            }
+        }, 10000)
 
         runBlocking() {
             launch {
                 ring = MediaPlayer.create(this@Activity4_bienvenida, R.raw.sarrera)
                 ring.start()
+                ring.duration
             }
         }
     }

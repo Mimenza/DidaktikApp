@@ -56,10 +56,15 @@ class Fragment5_ajustes : Fragment() {
     }
 
     fun showAcercaDeInfo(){
-        var dialog = AlertDialog.Builder(requireContext())
+        var dialog = Dialog(requireContext())
         val layout:View = layoutInflater.inflate(R.layout.acercadedialog, null)
-        dialog.setView(layout)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(layout)
         dialog.show()
+        dialog.window!!.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
     }
 
 

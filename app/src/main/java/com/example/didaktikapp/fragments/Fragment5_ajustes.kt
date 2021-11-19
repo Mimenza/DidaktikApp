@@ -62,8 +62,7 @@ class Fragment5_ajustes : Fragment() {
         dialog.setContentView(layout)
         dialog.show()
         dialog.window!!.setLayout(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT
+            900, 1400
         )
     }
 

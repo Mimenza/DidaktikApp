@@ -93,6 +93,10 @@ class Activity2_Login : AppCompatActivity() {
 
     }
 
+    private fun handlerCallTest() {
+        
+    }
+
 
 
     /*

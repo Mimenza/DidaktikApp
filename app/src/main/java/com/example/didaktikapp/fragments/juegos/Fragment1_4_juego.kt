@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
+import androidx.navigation.Navigation
 import com.example.didaktikapp.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -35,7 +38,17 @@ class Fragment1_4_juego : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment1_4_juego, container, false)
+        val view = inflater.inflate(R.layout.fragment1_4_juego, container, false)
+        val button: Button = view.findViewById(R.id.btnf1_4_siguiente)
+        val ajustes: ImageButton = view.findViewById(R.id.btnf1_4_ajustes)
+
+        button.setOnClickListener(){
+            Navigation.findNavController(view).navigate(R.id.action_fragment1_4_juego_to_fragment2_4_minijuego)
+        }
+        ajustes.setOnClickListener(){
+            Navigation.findNavController(view).navigate(R.id.action_fragment1_4_juego_to_fragment4_menu)
+        }
+        return view
     }
 
     companion object {

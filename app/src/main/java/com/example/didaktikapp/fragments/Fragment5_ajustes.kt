@@ -2,20 +2,18 @@ package com.example.didaktikapp.fragments
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
+import android.text.InputType
 import android.text.Layout
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.Button
-import android.widget.LinearLayout
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.didaktikapp.R
-import android.widget.FrameLayout
-
-
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -32,6 +30,7 @@ class Fragment5_ajustes : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private val pass: String = "admin"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,9 +47,11 @@ class Fragment5_ajustes : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment5_ajustes, container, false)
         val buttonAcercaDe: Button = view.findViewById(R.id.btn5f_acercade)
+        val buttonAdmin: Button = view.findViewById(R.id.btn5f_admin)
 
 
         buttonAcercaDe.setOnClickListener{ showAcercaDeInfo()}
+        buttonAdmin.setOnClickListener{ showdialog()}
 
         return view
     }
@@ -64,6 +65,26 @@ class Fragment5_ajustes : Fragment() {
         dialog.window!!.setLayout(
             900, 1400
         )
+    }
+
+    fun showdialog(){
+        val builder: AlertDialog.Builder = android.app.AlertDialog.Builder(requireContext())
+        builder.setTitle("Admin Password")
+        val input = EditText(requireContext())
+        input.setHint("Enter the admin password")
+        input.inputType = InputType.TYPE_CLASS_TEXT
+        builder.setView(input)
+
+        builder.setPositiveButton("Iniciar", DialogInterface.OnClickListener { dialog, which ->
+            //var m_Text = input.text.toString()
+            if (pass.equals(input.text.toString())) {
+                Toast.makeText(requireContext(), "MODO ADMIN ACTIVADO CORRECTAMENTE", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "ERROR MODO ADMIN", Toast.LENGTH_SHORT).show()
+            }
+        })
+        builder.setNegativeButton("Cancelar", DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
+        builder.show()
     }
 
 

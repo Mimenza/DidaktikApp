@@ -49,6 +49,14 @@
                 style="@style/botonesMenu"
                 android:drawableLeft="@drawable/ic_ayuda"
                 android:text="@string/botonacercade" />
+
+            <Button
+                android:id="@+id/btn5f_admin"
+                style="@style/botonesMenu"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
+                android:drawableLeft="@drawable/ic_ayuda"
+                android:text="ADMIN" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

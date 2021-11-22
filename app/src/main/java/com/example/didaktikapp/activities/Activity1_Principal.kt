@@ -19,9 +19,10 @@ import com.example.didaktikapp.fragments.Fragment5_ajustes
 
 class Activity1_Principal : AppCompatActivity() {
 
+    private var fragment :Fragment? = null
     private lateinit var binding: Activity1PrincipalBinding
     private lateinit var audio: MediaPlayer
-    var show: Int = 0
+    var ajustesShowing: Boolean = false
     var firstTime :Boolean= true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -135,31 +136,27 @@ class Activity1_Principal : AppCompatActivity() {
         audio.stop()
     }
 
-    private fun showAjustes() {
-    val fragment :Fragment = Fragment5_ajustes()
-
-        if (show == 0) {
-            //el fragment esta oculto
-            if(firstTime == true){
-                //es la primera vez
-                supportFragmentManager.beginTransaction().add(R.id.framelayout1, fragment).commit()
-                firstTime = false
-             }
-             else {
-                 //el fragment ya ha sido añadido
-                framelayout1.isVisible= true
-            }
-
-            show = 1
-            ocultartodo()
-        } else {
-            //el fragment es visible
-            framelayout1.isVisible= false
-            show = 0
+    override fun onBackPressed() {
+        if (fragment != null) {
+            supportFragmentManager.beginTransaction().remove(fragment!!).commit();
             vertodo()
-
+            fragment = null
+            ajustesShowing = false
+        } else {
+            super.onBackPressed()
         }
+    }
 
+
+
+    private fun showAjustes() {
+        if (ajustesShowing) {
+            return
+        }
+        ajustesShowing = true
+        fragment = Fragment5_ajustes()
+        supportFragmentManager.beginTransaction().add(R.id.framelayout1, fragment!!).commit()
+        ocultartodo()
     }
 
     fun ocultarbtn() {

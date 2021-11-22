@@ -21,6 +21,7 @@
 
     <!--FRAGMENT MENU -->
     <string name="botonhome">HASIERA</string>
+    <string name="botonmapa">MAPA</string>
     <string name="botonagain">ERREPIKATU</string>
     <string name="botonnext">HURRENGOA</string>
     <string name="botonhelp">LAGUNTZA</string>

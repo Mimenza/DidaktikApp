@@ -56,13 +56,12 @@ class Fragment3_info : Fragment() {
         var titulo: String = ""
         var imagen: String = ""
         var descripcion: String = ""
-
+        val button: Button = view.findViewById(R.id.btn3f_jugar)
         when (numero) {
             0 -> {
                 titulo = resources.getString(R.string.titulo1_juego)
                 imagen = R.drawable.img_sagardoetxea.toString()
                 descripcion = resources.getString(R.string.text_1juego)
-                val button: Button = view.findViewById(R.id.btn3f_jugar)
 
                 button.setOnClickListener {
                     Navigation.findNavController(view)
@@ -74,7 +73,6 @@ class Fragment3_info : Fragment() {
                 titulo = resources.getString(R.string.titulo2_juego)
                 imagen = R.drawable.img_murgiajauregia.toString()
                 descripcion = resources.getString(R.string.text_2juego)
-                val button: Button = view.findViewById(R.id.btn3f_jugar)
 
                 button.setOnClickListener {
                     Navigation.findNavController(view)
@@ -86,26 +84,56 @@ class Fragment3_info : Fragment() {
                 titulo = resources.getString(R.string.titulo31_juego)
                 imagen = R.drawable.img_foruplaza.toString()
                 descripcion = resources.getString(R.string.text_31juego)
+
+               button.setOnClickListener {
+                    Navigation.findNavController(view)
+                        .navigate(R.id.action_fragment3_info_to_fragment1_3_1_juego)
+
+                }
             }
             3-> {
                 titulo = resources.getString(R.string.titulo32_juego)
                 imagen = R.drawable.img_foruplaza2.toString()
                 descripcion = resources.getString(R.string.text_32juego)
+
+                button.setOnClickListener {
+                    Navigation.findNavController(view)
+                        .navigate(R.id.action_fragment3_info_to_fragment1_3_2_juego)
+
+                }
             }
             4-> {
                 titulo = resources.getString(R.string.titulo4_juego)
                 imagen = R.drawable.img_astigarelkartea.toString()
                 descripcion = resources.getString(R.string.text_4juego)
+
+                button.setOnClickListener {
+                    Navigation.findNavController(view)
+                        .navigate(R.id.action_fragment3_info_to_fragment1_4_juego)
+
+                }
             }
             5-> {
                 titulo = resources.getString(R.string.titulo5_juego)
                 imagen = R.drawable.img_ipintzasagardotegia.toString()
                 descripcion = resources.getString(R.string.text_5juego)
+
+                button.setOnClickListener {
+                    Navigation.findNavController(view)
+                        .navigate(R.id.action_fragment3_info_to_fragment1_5_juego)
+
+                }
             }
             6-> {
                 titulo = resources.getString(R.string.titulo6_juego)
                 imagen = R.drawable.img_rezolasagardotegia.toString()
                 descripcion = resources.getString(R.string.text_6juego)
+
+                button.setOnClickListener {
+                    Navigation.findNavController(view)
+                        .navigate(R.id.action_fragment3_info_to_fragment1_6_juego)
+
+                }
             }
 
 

@@ -2,10 +2,8 @@ package com.example.didaktikapp.fragments.juegos
 
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.graphics.Canvas
-import android.graphics.Color
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,16 +14,8 @@ import androidx.navigation.Navigation
 import com.example.didaktikapp.R
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import android.util.Log
 import java.util.ArrayList
-
 import android.graphics.Paint
-
-
-
-
-
-
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -43,9 +33,9 @@ class Fragment1_1_juego : Fragment() {
     private var param2: String? = null
     var paint = Paint()
     val canvas = Canvas()
-    private val p1:List<Float> = ArrayList()
-    private val p2:List<Float> = ArrayList()
-    private val p3:List<Float> = ArrayList()
+    private val p1: List<Float> = ArrayList()
+    private val p2: List<Float> = ArrayList()
+    private val p3: List<Float> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -64,11 +54,11 @@ class Fragment1_1_juego : Fragment() {
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_1_ajustes)
         var ring: MediaPlayer
 
-        button.setOnClickListener(){
+        button.setOnClickListener() {
             Navigation.findNavController(view).navigate(R.id.action_fragment1_1_juego_to_fragment2_1_minijuego)
         }
 
-        ajustes.setOnClickListener(){
+        ajustes.setOnClickListener() {
             Navigation.findNavController(view).navigate(R.id.action_fragment1_1_juego_to_fragment4_menu)
         }
 
@@ -88,13 +78,8 @@ class Fragment1_1_juego : Fragment() {
         }
         //Audio juego 1 fin
 
-
-
         return view
     }
-
-
-
 
     companion object {
         /**

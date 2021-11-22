@@ -29,7 +29,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: Activity5MapaBinding
     private lateinit var fusedLocation: FusedLocationProviderClient
     private var myCurrentPosition: LatLng = LatLng(45.0, 123.0)
-    private var lastUserPoint: Int = 0
+    private var lastUserPoint: Int = 7
     private var isAdmin: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -105,7 +105,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         var myCircle: Circle = mMap.addCircle(
             CircleOptions()
             .center(LatLng(43.285576, -1.941156))
-            .radius(50.0)
+            .radius(500.0)
             .strokeColor(getResources().getColor(R.color.white))
             .strokeWidth(2f)
             .fillColor(0x70ff0000))
@@ -205,7 +205,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
                     if (isAdmin == 1) {
                         irAPunto(i)
                     } else {
-                        if (distanceToPoint <= 50) {
+                        if (distanceToPoint <= 500) {
                             if (i <= lastUserPoint) {
                                 irAPunto(i)
                             } else {

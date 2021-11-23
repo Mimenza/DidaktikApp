@@ -97,6 +97,16 @@ class Activity4_bienvenida : AppCompatActivity() {
         }
     }
 
+    override fun onStop() {
+        ring.stop()
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        ring.stop()
+        super.onDestroy()
+    }
+
     private fun abrirMapa() {
         ring.stop()
         val intent = Intent(this, Activity5_Mapa::class.java)

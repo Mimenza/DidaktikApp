@@ -14,6 +14,7 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.marginStart
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.DbHandler
 

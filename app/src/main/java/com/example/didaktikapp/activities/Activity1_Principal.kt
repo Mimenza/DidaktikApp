@@ -147,8 +147,6 @@ class Activity1_Principal : AppCompatActivity() {
         }
     }
 
-
-
     private fun showAjustes() {
         if (ajustesShowing) {
             return

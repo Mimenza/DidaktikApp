@@ -58,8 +58,6 @@ class Activity4_bienvenida : AppCompatActivity() {
         typeWriterView.setDelay(70)
         binding.btnv4Saltar.visibility = View.GONE
 
-
-
         for (item in ritmoList) {
             var parado: Boolean = false
             Handler().postDelayed({

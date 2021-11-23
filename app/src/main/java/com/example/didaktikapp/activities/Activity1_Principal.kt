@@ -175,7 +175,8 @@ class Activity1_Principal : AppCompatActivity() {
             this.overridePendingTransition(0, 0)
         }
         binding.btnLoad.setOnClickListener() {
-            var i = Intent(this, Activity3_Load::class.java)
+            var i = Intent(this, Activity6_Site::class.java)
+            i.putExtra("numero",0)
             startActivity(i)
             this.overridePendingTransition(0, 0)
         }

@@ -135,9 +135,6 @@ class Fragment3_info : Fragment() {
 
                 }
             }
-
-
-
         }
 
         if (tvTitulo != null) {
@@ -149,12 +146,8 @@ class Fragment3_info : Fragment() {
         if (tvDescripcion != null) {
             tvDescripcion.setText(descripcion)
         }
-
         return view
     }
-
-
-
     companion object {
         /**
          * Use this factory method to create a new instance of

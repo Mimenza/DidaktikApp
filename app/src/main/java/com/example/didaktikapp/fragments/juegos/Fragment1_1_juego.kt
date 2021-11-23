@@ -18,12 +18,25 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.util.ArrayList
 import android.graphics.Paint
+
 import android.graphics.Path
 import android.view.MotionEvent
 import android.widget.ImageView
 import android.widget.TextView
 import android.view.View.OnTouchListener
 import androidx.core.content.ContextCompat
+
+
+import android.graphics.drawable.AnimationDrawable
+import android.os.Handler
+import android.view.animation.AnimationUtils
+import android.view.animation.TranslateAnimation
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.view.isVisible
+import kotlinx.android.synthetic.main.activity4_bienvenida.*
+import kotlinx.android.synthetic.main.fragment1_1_juego.*
+import kotlinx.coroutines.delay
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -41,7 +54,14 @@ class Fragment1_1_juego : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     var paint = Paint()
+
     var canvas = Canvas()
+
+
+    private val p1: List<Float> = ArrayList()
+    private val p2: List<Float> = ArrayList()
+    private val p3: List<Float> = ArrayList()
+    private lateinit var vistaanimada: TranslateAnimation
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,14 +81,16 @@ class Fragment1_1_juego : Fragment() {
         val view = inflater.inflate(R.layout.fragment1_1_juego, container, false)
         val button: Button = view.findViewById(R.id.btnf1_1siguiente)
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_1_ajustes)
-        var ring: MediaPlayer
+        var audio: MediaPlayer
 
         button.setOnClickListener() {
-            Navigation.findNavController(view).navigate(R.id.action_fragment1_1_juego_to_fragment2_1_minijuego)
+            Navigation.findNavController(view)
+                .navigate(R.id.action_fragment1_1_juego_to_fragment2_1_minijuego)
         }
 
         ajustes.setOnClickListener() {
-            Navigation.findNavController(view).navigate(R.id.action_fragment1_1_juego_to_fragment4_menu)
+            Navigation.findNavController(view)
+                .navigate(R.id.action_fragment1_1_juego_to_fragment4_menu)
         }
 
         //Juego
@@ -99,20 +121,28 @@ class Fragment1_1_juego : Fragment() {
         canvas.drawPath(fillPath, paint)
 
         //Typewriter juego 1 tutorial
-        val typeWriterView = view.findViewById(R.id.txtv1_1tutorialjuego1) as TypeWriterView
-        typeWriterView.setWithMusic(false)
-        typeWriterView.animateText(resources.getString(R.string.jositajositext))
-        typeWriterView.setDelay(70)
+        Handler().postDelayed({
+            typewriter(view)
+        }, 2000)
+
         //Typewriter juego 1 tutorial fin
 
         //Audio juego 1
         runBlocking() {
             launch {
-                ring = MediaPlayer.create(context, R.raw.juego1audio)
-                ring.start()
+                audio = MediaPlayer.create(context, R.raw.juego1audio)
+                audio.start()
+                audio.setOnCompletionListener {
+
+                    Handler().postDelayed({
+                        //llama a la funcion para la animacion de salida cuando el audio se termina
+                        exitAnimationfun(view)
+                    }, 1000)
+                }
             }
         }
-        //Audio juego 1 fin
+        //animacion para la descripcion
+        starAnimationfun(view)
 
 
 
@@ -122,6 +152,64 @@ class Fragment1_1_juego : Fragment() {
     }
 
 
+    private fun typewriter(view: View) {
+        val typeWriterView = view.findViewById(R.id.txtv1_1tutorialjuego1) as TypeWriterView
+        typeWriterView.setWithMusic(false)
+        typeWriterView.animateText(resources.getString(R.string.jositajositext))
+        typeWriterView.setDelay(70)
+    }
+
+    private fun starAnimationfun(view:View) {
+        // animacion fondo gris
+        val txt_animacion = view.findViewById(R.id.txtv1_1fondogris) as TextView
+        val aniFade = AnimationUtils.loadAnimation(context,R.anim.fade)
+        txt_animacion.startAnimation(aniFade)
+
+        //animacion entrada upelio
+        vistaanimada= TranslateAnimation (-1000f,0f, 0f, 0f)
+        vistaanimada.duration=2000
+        val upelio = view.findViewById(R.id.imgv1_1_upelio) as ImageView
+        upelio.startAnimation(vistaanimada)
+
+        //llamamos a la animacion para animar a upelio
+        Handler().postDelayed({
+            upelio.isVisible=false
+            talkAnimationfun(view)
+        }, 2000)
+
+    }
+
+    private fun talkAnimationfun(view:View) {
+        val upelio = view.findViewById(R.id.imgv1_1_upelio2) as ImageView
+        upelio.setBackgroundResource(R.drawable.animacion_manzana)
+        val ani = upelio.getBackground() as AnimationDrawable
+        ani.start()
+
+    }
+
+    private fun exitAnimationfun(view:View){
+        //escondemos la manzanda de la animacion
+        val upelioanimado = view.findViewById(R.id.imgv1_1_upelio2) as ImageView
+        upelioanimado.isVisible = false
+
+        //animacion salido upelio
+        vistaanimada= TranslateAnimation (0f,1000f, 0f, 0f)
+        vistaanimada.duration=2000
+
+        //vistaanimada.fillAfter = true
+        val upelio = view.findViewById(R.id.imgv1_1_upelio) as ImageView
+        upelio.startAnimation(vistaanimada)
+
+        //animacion fondo gris
+        Handler().postDelayed({
+            val txt_animacion = view.findViewById(R.id.txtv1_1fondogris) as TextView
+            val aniFade = AnimationUtils.loadAnimation(context,R.anim.fade_out)
+            txt_animacion.startAnimation(aniFade)
+            txtv1_1tutorialjuego1.startAnimation(aniFade)
+            txtv1_1tutorialjuego1.isVisible=false
+            txt_animacion.isVisible=false
+        }, 1000)
+ }
 
 
 

@@ -15,6 +15,7 @@ import com.example.didaktikapp.databinding.Activity4BienvenidaBinding
 import kotlinx.coroutines.*
 import java.util.*
 
+data class ritmo(var tiempo: Int, var velocidad: Int)
 
 class Activity4_bienvenida : AppCompatActivity() {
 
@@ -23,6 +24,13 @@ class Activity4_bienvenida : AppCompatActivity() {
 
     private lateinit var skipButtonHandler: Handler
     private lateinit var autoFinalizarHandler: Handler
+
+    val ritmoList = listOf(
+        ritmo(5000,10),
+        ritmo(9500,70),
+        ritmo(11000,10),
+        ritmo(18000,70),
+    )
 
     private var autoOpenMap: Boolean = false
 
@@ -50,6 +58,20 @@ class Activity4_bienvenida : AppCompatActivity() {
         typeWriterView.setDelay(70)
         binding.btnv4Saltar.visibility = View.GONE
 
+        for (item in ritmoList) {
+            var parado: Boolean = false
+            Handler().postDelayed({
+                parado = !parado
+                if (parado) {
+                    typeWriterView.removeAnimation()
+                } else {
+                    typeWriterView.animate()
+                }
+                println("****** VELOCIDAD CAMBIADA A: " + item.velocidad)
+                //typeWriterView.setDelay(item.velocidad)
+            }, item.tiempo.toLong())
+        }
+
 
         Handler().postDelayed({
             binding.btnv4Saltar.visibility = View.VISIBLE
@@ -73,6 +95,16 @@ class Activity4_bienvenida : AppCompatActivity() {
                 ring.duration
             }
         }
+    }
+
+    override fun onStop() {
+        ring.stop()
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        ring.stop()
+        super.onDestroy()
     }
 
     private fun abrirMapa() {

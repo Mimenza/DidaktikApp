@@ -20,7 +20,8 @@
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.828" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -49,6 +50,12 @@
                 style="@style/botonesMenu"
                 android:drawableLeft="@drawable/ic_ayuda"
                 android:text="@string/botonacercade" />
+
+            <Button
+                android:id="@+id/btn5f_admin"
+                style="@style/botonesMenu"
+                android:drawableLeft="@drawable/ic_ayuda"
+                android:text="ADMIN" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -30,7 +30,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var fusedLocation: FusedLocationProviderClient
     private var myCurrentPosition: LatLng = LatLng(45.0, 123.0)
     private var lastUserPoint: Int = 7
-    private var isAdmin: Int = 0
+    private var minimumRadius: Int = 50
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,9 +49,6 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         if (DbHandler.getUser() != null) {
             if (DbHandler.getUser()!!.ultima_puntuacion != null) {
                 lastUserPoint = DbHandler.getUser()!!.ultima_puntuacion!!
-            }
-            if (DbHandler.getUser()!!.admin != null) {
-                isAdmin = DbHandler.getUser()!!.admin!!
             }
         }
     }
@@ -105,7 +102,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         var myCircle: Circle = mMap.addCircle(
             CircleOptions()
             .center(LatLng(43.285576, -1.941156))
-            .radius(500.0)
+            .radius(minimumRadius.toDouble())
             .strokeColor(getResources().getColor(R.color.white))
             .strokeWidth(2f)
             .fillColor(0x70ff0000))
@@ -202,10 +199,10 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
             for (i in 0..astigarragaMarkers.size - 1) {
                 if (latLon == astigarragaMarkers[i]) {
                     var distanceToPoint = getDistBetweenPoints(myCurrentPosition, astigarragaMarkers[i])
-                    if (isAdmin == 1) {
+                    if (DbHandler.getAdmin()) {
                         irAPunto(i)
                     } else {
-                        if (distanceToPoint <= 500) {
+                        if (distanceToPoint <= minimumRadius) {
                             if (i <= lastUserPoint) {
                                 irAPunto(i)
                             } else {

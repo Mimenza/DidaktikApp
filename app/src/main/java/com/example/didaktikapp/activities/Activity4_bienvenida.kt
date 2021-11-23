@@ -58,8 +58,6 @@ class Activity4_bienvenida : AppCompatActivity() {
         typeWriterView.setDelay(70)
         binding.btnv4Saltar.visibility = View.GONE
 
-
-
         for (item in ritmoList) {
             var parado: Boolean = false
             Handler().postDelayed({
@@ -97,6 +95,16 @@ class Activity4_bienvenida : AppCompatActivity() {
                 ring.duration
             }
         }
+    }
+
+    override fun onStop() {
+        ring.stop()
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        ring.stop()
+        super.onDestroy()
     }
 
     private fun abrirMapa() {

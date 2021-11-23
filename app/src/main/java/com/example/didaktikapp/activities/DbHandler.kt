@@ -11,6 +11,7 @@ class DbHandler {
         private var lastUserid: Int = 0
         private var usuario: User? = null
         private var dbInstance: FirebaseFirestore? = null
+        private var isAdmin: Boolean = true
 
         fun getDbInstance(): FirebaseFirestore {
             if (dbInstance == null) {
@@ -132,6 +133,12 @@ class DbHandler {
 
          */
         fun getUser() = this.usuario
+
+        fun getAdmin() = this.isAdmin
+
+        fun setAdmin() {
+            this.isAdmin = true
+        }
 
         fun setUser(pUser: User) {
             this.usuario = pUser

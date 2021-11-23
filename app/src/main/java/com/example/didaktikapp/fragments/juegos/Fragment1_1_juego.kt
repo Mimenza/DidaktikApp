@@ -1,7 +1,9 @@
 package com.example.didaktikapp.fragments.juegos
 
 import `in`.codeshuffle.typewriterview.TypeWriterView
+import android.annotation.SuppressLint
 import android.graphics.Canvas
+import android.graphics.Color
 import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,6 +18,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.util.ArrayList
 import android.graphics.Paint
+import android.graphics.Path
+import android.view.MotionEvent
+import android.widget.ImageView
+import android.widget.TextView
+import android.view.View.OnTouchListener
+import androidx.core.content.ContextCompat
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,10 +41,9 @@ class Fragment1_1_juego : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     var paint = Paint()
-    val canvas = Canvas()
-    private val p1: List<Float> = ArrayList()
-    private val p2: List<Float> = ArrayList()
-    private val p3: List<Float> = ArrayList()
+    var canvas = Canvas()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -44,6 +52,7 @@ class Fragment1_1_juego : Fragment() {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -62,6 +71,33 @@ class Fragment1_1_juego : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_fragment1_1_juego_to_fragment4_menu)
         }
 
+        //Juego
+        val imagen1 :ImageView = view.findViewById(R.id.imgv1_1imagen1)
+        val imagen2 :ImageView = view.findViewById(R.id.imgv1_1imagen2)
+        val imagen3 :ImageView = view.findViewById(R.id.imgv1_1imagen3)
+        val text1 :TextView = view.findViewById(R.id.txtv1_1azalpena1)
+        val text2 :TextView = view.findViewById(R.id.txtv1_1azalpena2)
+        val text3 :TextView = view.findViewById(R.id.txtv1_1azalpena3)
+
+          imagen1.setOnTouchListener(OnTouchListener { v, event ->
+              println("img1 " + event.x )
+             true
+          })
+
+
+        val color = ContextCompat.getColor(requireContext(), R.color.black)
+        paint.color = color
+        paint.style= Paint.Style.FILL
+        canvas.drawPaint( paint)
+
+
+        //Path
+        val fillPath = Path()
+        fillPath.moveTo(imagen1.x, imagen1.y); // Your origin point
+        println(imagen1.x)
+        fillPath.lineTo(text3.x, text3.y); // First point
+        canvas.drawPath(fillPath, paint)
+
         //Typewriter juego 1 tutorial
         val typeWriterView = view.findViewById(R.id.txtv1_1tutorialjuego1) as TypeWriterView
         typeWriterView.setWithMusic(false)
@@ -78,8 +114,16 @@ class Fragment1_1_juego : Fragment() {
         }
         //Audio juego 1 fin
 
+
+
+
         return view
+
     }
+
+
+
+
 
     companion object {
         /**

@@ -1,51 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.juegos.Fragment1_2_juego">
+    tools:context=".fragments.juegos.Fragment1_2_juego"
+    android:fillViewport="true">
 
-    <!-- TODO: Update blank fragment layout -->
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="15dp"
+    android:gravity="center">
+
+
+    <ImageButton
+        android:id="@+id/btnf1_2_ajustes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:src="@drawable/ic_ajustes_black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.174"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/txtv1_2_pregunta1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:text="@string/que1_juego2"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="22sp"
+      />
+    <!--Horizontal  Linear Layout-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ProgressBar
+            android:id="@+id/custom_progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:max="4"
+            android:minHeight="50dp"
+            android:progress="0"
+            android:indeterminate="false"
+
+            />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/txtv1_2_progreessbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="JUEGO 2"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:gravity="center"
+            android:padding="15dp"
+            android:textColorLink="#7A8089"
+            android:text="1/4"
+            android:textSize="14dp"/>
+    </LinearLayout>
 
-        <Button
-            android:id="@+id/btnf1_2siguiente"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SiGUIENTE"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.699" />
+    <TextView
+        android:id="@+id/txtv1_2_respuesta1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/que1_ans1_juego2"
+        android:layout_margin="10dp"
+        android:background="@drawable/juego2_option_border_bg"
+        android:gravity="center"
+        android:padding="15dp"
+        tools:text="@string/que1_ans1_juego2"
+        android:textColor="#7A8089"
+        android:textSize="18sp" />
 
-        <ImageButton
-            android:id="@+id/btnf1_2_ajustes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:src="@drawable/ic_ajustes_black"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.174"
-            tools:ignore="SpeakableTextPresentCheck" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/txtv1_2_respuesta2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/juego2_option_border_bg"
+        android:gravity="center"
+        android:padding="15dp"
+        android:textColorLink="#7A8089"
+        android:textSize="18sp"
+        android:text="@string/que1_ans2_juego2"/>
+
+    <TextView
+        android:id="@+id/txtv1_2_respuesta3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/juego2_option_border_bg"
+        android:gravity="center"
+        android:padding="15dp"
+        android:textColorLink="#7A8089"
+        android:textSize="18sp"
+        android:text="@string/que1_ans3_juego2"/>
+
+    <TextView
+        android:id="@+id/txtv1_2_respuesta4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/juego2_option_border_bg"
+        android:gravity="center"
+        android:padding="15dp"
+        android:textColorLink="#7A8089"
+        android:textSize="18sp"
+        android:text="@string/que1_ans4_juego2"/>
+
+    <Button
+        android:id="@+id/btnf1_2siguiente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/siguiente"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.866" />
+</LinearLayout>
+
+</ScrollView>

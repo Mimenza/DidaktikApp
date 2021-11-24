@@ -1,6 +1,8 @@
 package com.example.didaktikapp.fragments.juegos
 
 import android.annotation.SuppressLint
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +15,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
+import com.google.android.material.color.MaterialColors.getColor
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,7 +33,7 @@ class Fragment1_5_juego : Fragment() {
     private var param2: String? = null
 
     var manzanaList: MutableList<draggableImg>? = mutableListOf()
-    private lateinit var objetivo: ImageView
+    //private lateinit var objetivo: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,13 +54,21 @@ class Fragment1_5_juego : Fragment() {
 
         val mznTest: ImageView = view.findViewById(R.id.imgManzanaTest)
         val mznTest3: ImageView = view.findViewById(R.id.imgManzanaTest3)
+
+        //mznTest3.setColorFilter(getColor(view, requireContext().getResources().getColor(R.color.white)), PorterDuff.Mode.SRC_ATOP);
+            //mznTest3.imageTintMode = getColor(R.color.white)
         val mznTest4: ImageView = view.findViewById(R.id.imgManzanaTest4)
-        objetivo = view.findViewById(R.id.imageView3)
+
+        var objetivo1: ImageView = view.findViewById(R.id.objetivo1)
+        var objetivo2: ImageView = view.findViewById(R.id.objetivo2)
+            objetivo2.setColorFilter(Color.argb(255, 255, 0, 255))
+        var objetivo3: ImageView = view.findViewById(R.id.objetivo3)
+            objetivo3.setColorFilter(Color.argb(255, 0, 0, 255))
 
 
-        manzanaList!!.add(draggableImg(mznTest,objetivo))
-        manzanaList!!.add(draggableImg(mznTest3,objetivo))
-        manzanaList!!.add(draggableImg(mznTest4,objetivo))
+        manzanaList!!.add(draggableImg(mznTest,objetivo1))
+        manzanaList!!.add(draggableImg(mznTest3,objetivo2))
+        manzanaList!!.add(draggableImg(mznTest4,objetivo3))
 
         for (item in manzanaList!!) {
             item.origen.setOnTouchListener(listener)
@@ -83,23 +94,39 @@ class Fragment1_5_juego : Fragment() {
             MotionEvent.ACTION_UP -> {
                 view.x = motionEvent.rawX - view.width/2
                 view.y = motionEvent.rawY - view.height/2
-                println("**** MANZANA: "+ view.x + " // " + view.y)
+//                println("**** MANZANA: "+ view.x + " // " + view.y)
 
+                var posX = getObjetivoFromList(view)!!.getLeft()
+                var posY = getObjetivoFromList(view)!!.getTop()
+                var sizeX = getObjetivoFromList(view)!!.width
+                var sizeY = getObjetivoFromList(view)!!.height
+                /*
                 var posX = objetivo.getLeft()
+
                 var posY = objetivo.getTop()
                 var sizeX = objetivo.width
                 var sizeY = objetivo.height
-                println("**** OBJETIVO: "+ posX + " // " + posY)
+                 */
+//                println("**** OBJETIVO: "+ posX + " // " + posY)
 
                 if ( (view.x + view.width/2) >= posX && (view.y + view.height/2) >= posY && (view.x + view.width/2) <= posX+sizeX && (view.y + view.height/2) <= posY+sizeY) {
                     view.visibility = View.GONE
-                    Toast.makeText(requireContext(), "Haz metido la manzana en el cuadrado", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(requireContext(), "Haz metido la manzana en el cuadrado", Toast.LENGTH_SHORT).show()
                 } else {
-                    Toast.makeText(requireContext(), "ERROR AL METER LA MANZANA", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(requireContext(), "ERROR AL METER LA MANZANA", Toast.LENGTH_SHORT).show()
                 }
             }
         }
         true
+    }
+
+    private fun getObjetivoFromList(view: View): ImageView? {
+        for (item in manzanaList!!) {
+            if (item.origen == view) {
+                return item.destino
+            }
+        }
+        return null
     }
 
     companion object {

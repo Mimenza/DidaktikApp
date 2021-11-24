@@ -21,8 +21,6 @@ import android.graphics.Paint
 
 import android.graphics.Path
 import android.view.MotionEvent
-import android.widget.ImageView
-import android.widget.TextView
 import android.view.View.OnTouchListener
 import androidx.core.content.ContextCompat
 
@@ -94,10 +92,10 @@ class Fragment1_1_juego : Fragment() {
         }
 
         //Juego
-        val imagen1 :ImageView = view.findViewById(R.id.imgv1_1imagen1)
+        val imagen1 : ImageView = view.findViewById(R.id.imgv1_1imagen1)
         val imagen2 :ImageView = view.findViewById(R.id.imgv1_1imagen2)
         val imagen3 :ImageView = view.findViewById(R.id.imgv1_1imagen3)
-        val text1 :TextView = view.findViewById(R.id.txtv1_1azalpena1)
+        val text1 : TextView = view.findViewById(R.id.txtv1_1azalpena1)
         val text2 :TextView = view.findViewById(R.id.txtv1_1azalpena2)
         val text3 :TextView = view.findViewById(R.id.txtv1_1azalpena3)
 

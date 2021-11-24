@@ -1,13 +1,19 @@
 package com.example.didaktikapp.activities
 
 import `in`.codeshuffle.typewriterview.TypeWriterView
+import android.Manifest
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.drawable.AnimationDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.media.MediaPlayer
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 
 import kotlinx.android.synthetic.main.activity4_bienvenida.*
 import com.example.didaktikapp.R
@@ -108,10 +114,34 @@ class Activity4_bienvenida : AppCompatActivity() {
     }
 
     private fun abrirMapa() {
+        //Check for GPS permisions
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
+            return
+        }
         ring.stop()
         val intent = Intent(this, Activity5_Mapa::class.java)
         startActivity(intent)
         this.overridePendingTransition(0, 0)
         finish()
     }
+
+    @SuppressLint("MissingSuperCall")
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        when (requestCode) {
+            1 -> {
+                if (grantResults.isNotEmpty() && grantResults[0] ==
+                    PackageManager.PERMISSION_GRANTED) {
+                    if ((ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)) {
+                        Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
+                }
+                return
+            }
+        }
+    }
+
+
 }

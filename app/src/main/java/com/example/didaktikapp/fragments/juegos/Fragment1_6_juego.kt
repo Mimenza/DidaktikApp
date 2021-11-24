@@ -34,11 +34,6 @@ class Fragment1_6_juego : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    var manzanaList: MutableList<draggableImg>? = mutableListOf()
-
-    private lateinit var objetivo: ImageView
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -55,23 +50,6 @@ class Fragment1_6_juego : Fragment() {
         val view = inflater.inflate(R.layout.fragment1_6_juego, container, false)
         val button: Button = view.findViewById(R.id.btnf1_6_siguiente)
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_6_ajustes)
-        val mznTest: ImageView = view.findViewById(R.id.imgManzanaTest)
-        val mznTest3: ImageView = view.findViewById(R.id.imgManzanaTest3)
-        val mznTest4: ImageView = view.findViewById(R.id.imgManzanaTest4)
-        objetivo = view.findViewById(R.id.imageView3)
-
-
-        manzanaList!!.add(draggableImg(mznTest,objetivo))
-        manzanaList!!.add(draggableImg(mznTest3,objetivo))
-        manzanaList!!.add(draggableImg(mznTest4,objetivo))
-
-        for (item in manzanaList!!) {
-            item.origen.setOnTouchListener(listener)
-        }
-
-
-
-
 
         button.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment1_6_juego_to_fragment2_6_minijuego)
@@ -79,39 +57,9 @@ class Fragment1_6_juego : Fragment() {
         ajustes.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment1_6_juego_to_fragment4_menu)
         }
-        mznTest.setOnTouchListener(listener)
         return view
     }
 
-    @SuppressLint("ClickableViewAccessibility")
-    var listener = View.OnTouchListener { view, motionEvent ->
-        val action = motionEvent.action
-        when(action) {
-            MotionEvent.ACTION_MOVE -> {
-                view.y = motionEvent.rawY - view.height/2
-                view.x = motionEvent.rawX - view.width/2
-            }
-            MotionEvent.ACTION_UP -> {
-                view.x = motionEvent.rawX - view.width/2
-                view.y = motionEvent.rawY - view.height/2
-                println("**** MANZANA: "+ view.x + " // " + view.y)
-
-                var posX = objetivo.getLeft()
-                var posY = objetivo.getTop()
-                var sizeX = objetivo.width
-                var sizeY = objetivo.height
-                println("**** OBJETIVO: "+ posX + " // " + posY)
-
-                if ( (view.x + view.width/2) >= posX && (view.y + view.height/2) >= posY && (view.x + view.width/2) <= posX+sizeX && (view.y + view.height/2) <= posY+sizeY) {
-                    view.visibility = View.GONE
-                    Toast.makeText(requireContext(), "Haz metido la manzana en el cuadrado", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(requireContext(), "ERROR AL METER LA MANZANA", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-        true
-        }
 
     companion object {
         /**

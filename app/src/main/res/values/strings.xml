@@ -47,10 +47,10 @@
     <string name="titulo5_juego">6. JARDUERA: AGIN LABURU</string>
     <string name="text_6juego">"Azken geldiunera iritsi gara! Zelako bidaia polita egiten ari garen! Badakizue zer den txotx irekiera? Urtarrilaren hasieran Astigarragan ospatzen den ekitaldi bat da Txotx irekiera, Sagardo Berriaren eguna ere deiturikoa. Txotx denboraldiari hasiera emateko, eta urteko sagardo berria dastatzeko asmoz, urtero, sagardotegi desberdin batek ekitaldi bat antolatzen du sagardotegian bertan.  Sagardo berria dastatzen duen lehenengo pertsona, gonbidatu famatu bat izan ohi da: mendizalea, abeslaria, bertsolaria, futbolaria…  Ziur urteren bateko gonbidaturen bat ezaguna egingo zaizuela: Izaro Andres abeslaria, Xabi Alonso futbolaria, Indurain txirrindularia... Esan dezakegu, gonbidatuak garrantzia handia duela jai honetan, bera baita eguneko protagonistetako bat. Astigarragako sagardo berria dastatu baino lehen, gonbidatuari, besteak beste, Sagar Dantza dantzatu, txistua jo eta txalaparta jotzen zaio. Gonbidatuak urteko sagardoa probatu ondoren, ikusleek ere sagardo berria probatu eta bazkari jendetsu bat egiten da sagardotegian bertan, edonor joan daiteke bazkarira. "</string>
     <string name="titulo6_juego">7. GUNEA: TXOTX IREKIERA</string>
-    <string name="siguiente">Hurruengoa</string>
+    <string name="siguiente">Hurrengoa</string>
     <string name="azalpena1_juego1">Gune honetan hainbat sagar mota ezagutuko eta hartuko dituzu.</string>
     <string name="juego1_azalpena2">Gune honetan sagar zukua dastatuko duzu.</string>
-    <string name="juego1_azalpena3" >Gune honetan sagarraren historia eta sagadoaren prozesuak landuko dituzu.</string>
+    <string name="juego1_azalpena3">Gune honetan sagarraren historia eta sagadoaren prozesuak landuko dituzu.</string>
     <string name="jositajositext">Misioari ekiteko, lehenik eta behin “Josi `ta josi” jolasera jolastu beharko duzue. Horretarako pantailaren alde batean sagardoetxeko 3 guneak eta horien argazkiak agertzen zaizkizue eta beste aldean, bertako zereginak. Beraz, guneak eginkizunekin lotu behar dituzue.</string>
     <string name="ideaoriginal">• IDEA ORIGINAL •</string>
     <string name="equipodesarrollo">• EQUIPO DE DESARROLLO •</string>
@@ -74,4 +74,6 @@
     <string name="que4_ans2_juego2">Leihoak</string>
     <string name="que4_ans3_juego2">Zuhaitzak</string>
     <string name="que4_ans4_juego2">Hostoak</string>
+    <string name="emaitza">Emaitza</string>
+    <string name="amaitu">Amaitu</string>
 </resources>

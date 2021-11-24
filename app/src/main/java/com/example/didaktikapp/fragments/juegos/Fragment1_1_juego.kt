@@ -20,9 +20,7 @@ import java.util.ArrayList
 import android.graphics.Paint
 
 import android.graphics.Path
-import android.view.MotionEvent
-import android.widget.ImageView
-import android.widget.TextView
+
 import android.view.View.OnTouchListener
 import androidx.core.content.ContextCompat
 

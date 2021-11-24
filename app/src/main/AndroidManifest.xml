@@ -13,14 +13,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Didaktikapp">
         <activity
+            android:name=".activities.Activity7_Juego2_Results"
+            android:exported="true" />
+        <activity
             android:name=".activities.Activity6_Site"
             android:exported="false" />
         <activity
             android:name=".activities.Activity4_bienvenida"
             android:exported="false" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
         <activity
             android:name=".activities.Activity5_Mapa"
             android:exported="false" />

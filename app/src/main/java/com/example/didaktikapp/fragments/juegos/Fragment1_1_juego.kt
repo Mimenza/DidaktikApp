@@ -32,7 +32,6 @@ import kotlinx.android.synthetic.main.activity4_bienvenida.*
 import kotlinx.android.synthetic.main.fragment1_1_juego.*
 
 
-
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -88,23 +87,23 @@ class Fragment1_1_juego : Fragment() {
         }
 
         //Juego
-        val imagen1 : ImageView = view.findViewById(R.id.imgv1_1imagen1)
-        val imagen2 :ImageView = view.findViewById(R.id.imgv1_1imagen2)
-        val imagen3 :ImageView = view.findViewById(R.id.imgv1_1imagen3)
-        val text1 : TextView = view.findViewById(R.id.txtv1_1azalpena1)
-        val text2 :TextView = view.findViewById(R.id.txtv1_1azalpena2)
-        val text3 :TextView = view.findViewById(R.id.txtv1_1azalpena3)
+        val imagen1: ImageView = view.findViewById(R.id.imgv1_1imagen1)
+        val imagen2: ImageView = view.findViewById(R.id.imgv1_1imagen2)
+        val imagen3: ImageView = view.findViewById(R.id.imgv1_1imagen3)
+        val text1: TextView = view.findViewById(R.id.txtv1_1azalpena1)
+        val text2: TextView = view.findViewById(R.id.txtv1_1azalpena2)
+        val text3: TextView = view.findViewById(R.id.txtv1_1azalpena3)
 
-          imagen1.setOnTouchListener(OnTouchListener { v, event ->
-              println("img1 " + event.x )
-             true
-          })
+        imagen1.setOnTouchListener(OnTouchListener { v, event ->
+            println("img1 " + event.x)
+            true
+        })
 
 
         val color = ContextCompat.getColor(requireContext(), R.color.black)
         paint.color = color
-        paint.style= Paint.Style.FILL
-        canvas.drawPaint( paint)
+        paint.style = Paint.Style.FILL
+        canvas.drawPaint(paint)
 
 
         //Path
@@ -137,11 +136,7 @@ class Fragment1_1_juego : Fragment() {
         }
         //animacion para la descripcion
         starAnimationfun(view)
-
-
-
-
-        return view
+     return view
 
     }
 
@@ -153,27 +148,27 @@ class Fragment1_1_juego : Fragment() {
         typeWriterView.setDelay(70)
     }
 
-    private fun starAnimationfun(view:View) {
+    private fun starAnimationfun(view: View) {
         // animacion fondo gris
         val txt_animacion = view.findViewById(R.id.txtv1_1fondogris) as TextView
-        val aniFade = AnimationUtils.loadAnimation(context,R.anim.fade)
+        val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade)
         txt_animacion.startAnimation(aniFade)
 
         //animacion entrada upelio
-        vistaanimada= TranslateAnimation (-1000f,0f, 0f, 0f)
-        vistaanimada.duration=2000
+        vistaanimada = TranslateAnimation(-1000f, 0f, 0f, 0f)
+        vistaanimada.duration = 2000
         val upelio = view.findViewById(R.id.imgv1_1_upelio) as ImageView
         upelio.startAnimation(vistaanimada)
 
         //llamamos a la animacion para animar a upelio
         Handler().postDelayed({
-            upelio.isVisible=false
+            upelio.isVisible = false
             talkAnimationfun(view)
         }, 2000)
 
     }
 
-    private fun talkAnimationfun(view:View) {
+    private fun talkAnimationfun(view: View) {
         val upelio = view.findViewById(R.id.imgv1_1_upelio2) as ImageView
         upelio.setBackgroundResource(R.drawable.animacion_manzana)
         val ani = upelio.getBackground() as AnimationDrawable
@@ -181,14 +176,14 @@ class Fragment1_1_juego : Fragment() {
 
     }
 
-    private fun exitAnimationfun(view:View){
+    private fun exitAnimationfun(view: View) {
         //escondemos la manzanda de la animacion
         val upelioanimado = view.findViewById(R.id.imgv1_1_upelio2) as ImageView
         upelioanimado.isVisible = false
 
         //animacion salido upelio
-        vistaanimada= TranslateAnimation (0f,1000f, 0f, 0f)
-        vistaanimada.duration=2000
+        vistaanimada = TranslateAnimation(0f, 1000f, 0f, 0f)
+        vistaanimada.duration = 2000
 
         //vistaanimada.fillAfter = true
         val upelio = view.findViewById(R.id.imgv1_1_upelio) as ImageView
@@ -197,14 +192,13 @@ class Fragment1_1_juego : Fragment() {
         //animacion fondo gris
         Handler().postDelayed({
             val txt_animacion = view.findViewById(R.id.txtv1_1fondogris) as TextView
-            val aniFade = AnimationUtils.loadAnimation(context,R.anim.fade_out)
+            val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
             txt_animacion.startAnimation(aniFade)
             txtv1_1tutorialjuego1.startAnimation(aniFade)
-            txtv1_1tutorialjuego1.isVisible=false
-            txt_animacion.isVisible=false
+            txtv1_1tutorialjuego1.isVisible = false
+            txt_animacion.isVisible = false
         }, 1000)
- }
-
+    }
 
 
     companion object {

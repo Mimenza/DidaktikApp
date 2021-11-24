@@ -8,10 +8,16 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.media.MediaPlayer
+import android.view.animation.AnimationUtils
+import android.view.animation.TranslateAnimation
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.view.isVisible
 
 import kotlinx.android.synthetic.main.activity4_bienvenida.*
 import com.example.didaktikapp.R
 import com.example.didaktikapp.databinding.Activity4BienvenidaBinding
+import kotlinx.android.synthetic.main.fragment1_1_juego.*
 import kotlinx.coroutines.*
 import java.util.*
 
@@ -20,8 +26,8 @@ data class ritmo(var tiempo: Int, var velocidad: Int)
 class Activity4_bienvenida : AppCompatActivity() {
 
     private lateinit var binding: Activity4BienvenidaBinding
-    private lateinit var ring: MediaPlayer
-
+    private lateinit var audio: MediaPlayer
+    private lateinit var vistaanimada: TranslateAnimation
     private lateinit var skipButtonHandler: Handler
     private lateinit var autoFinalizarHandler: Handler
 
@@ -45,33 +51,7 @@ class Activity4_bienvenida : AppCompatActivity() {
         binding= Activity4BienvenidaBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //Animacion manzana
-
-        imgv4_manzanatutorial.setBackgroundResource(R.drawable.animacion_manzana)
-        val ani = imgv4_manzanatutorial.getBackground() as AnimationDrawable
-        ani.start()
-        //Animacion manzana fin
-
-        val typeWriterView = findViewById<View>(R.id.txtv4_bienvenida) as TypeWriterView
-        typeWriterView.setWithMusic(false)
-        typeWriterView.animateText(resources.getString(R.string.text_bienvenida))
-        typeWriterView.setDelay(70)
-        binding.btnv4Saltar.visibility = View.GONE
-
-        for (item in ritmoList) {
-            var parado: Boolean = false
-            Handler().postDelayed({
-                parado = !parado
-                if (parado) {
-                    typeWriterView.removeAnimation()
-                } else {
-                    typeWriterView.animate()
-                }
-                println("****** VELOCIDAD CAMBIADA A: " + item.velocidad)
-                //typeWriterView.setDelay(item.velocidad)
-            }, item.tiempo.toLong())
-        }
-
+        writeText()
 
         Handler().postDelayed({
             binding.btnv4Saltar.visibility = View.VISIBLE
@@ -88,30 +68,101 @@ class Activity4_bienvenida : AppCompatActivity() {
             }
         }, 10000)
 
+        audioSound()
+    }
+
+    private fun writeText() {
+        //funcion que escribe el texto
+        val typeWriterView = findViewById<View>(R.id.txtv4_bienvenida) as TypeWriterView
+        typeWriterView.setWithMusic(false)
+        typeWriterView.animateText(resources.getString(R.string.text_bienvenida))
+        typeWriterView.setDelay(70)
+        binding.btnv4Saltar.visibility = View.GONE
+
+        /*for (item in ritmoList) {
+            var parado: Boolean = false
+            Handler().postDelayed({
+                parado = !parado
+                if (parado) {
+                    typeWriterView.removeAnimation()
+                } else {
+                    typeWriterView.animate()
+                }
+                println("****** VELOCIDAD CAMBIADA A: " + item.velocidad)
+                //typeWriterView.setDelay(item.velocidad)
+            }, item.tiempo.toLong())
+        }*/
+    }
+
+    private fun audioSound() {
+        //funcion para la reproduccion del sonido
         runBlocking() {
             launch {
-                ring = MediaPlayer.create(this@Activity4_bienvenida, R.raw.sarrera)
-                ring.start()
-                ring.duration
+                audio = MediaPlayer.create(this@Activity4_bienvenida, R.raw.sarrera)
+                audio.start()
+                audio.duration
+                audio.setOnCompletionListener {
+                    exitAnimationfun()
+                }
             }
         }
+        //animacion para la descripcion
+        starAnimationfun()
     }
 
     override fun onStop() {
-        ring.stop()
+        audio.stop()
         super.onStop()
     }
 
     override fun onDestroy() {
-        ring.stop()
+        audio.stop()
         super.onDestroy()
     }
 
     private fun abrirMapa() {
-        ring.stop()
+        audio.stop()
         val intent = Intent(this, Activity5_Mapa::class.java)
         startActivity(intent)
         this.overridePendingTransition(0, 0)
         finish()
+    }
+
+    private fun starAnimationfun() {
+        //animacion entrada upelio
+        vistaanimada = TranslateAnimation(-1000f, 0f, 0f, 0f)
+        vistaanimada.duration = 2000
+        imgv4_upelio.startAnimation(vistaanimada)
+
+        //llamamos a la animacion para animar a upelio
+        Handler().postDelayed({
+            imgv4_upelio.isVisible = false
+            talkAnimationfun()
+        }, 2000)
+
+    }
+
+    private fun talkAnimationfun() {
+        imgv4_manzanatutorial.setBackgroundResource(R.drawable.animacion_manzana)
+        val ani = imgv4_manzanatutorial.getBackground() as AnimationDrawable
+        ani.start()
+
+    }
+
+    private fun exitAnimationfun() {
+        //escondemos la manzanda de la animacion
+        imgv4_manzanatutorial.isVisible = false
+
+        //animacion salido upelio
+        vistaanimada = TranslateAnimation(0f, -1000f, 0f, 0f)
+        vistaanimada.duration = 2000
+
+        //vistaanimada.fillAfter = true
+        imgv4_upelio.startAnimation(vistaanimada)
+
+        Handler().postDelayed({
+            abrirMapa()
+        }, 2000)
+
     }
 }

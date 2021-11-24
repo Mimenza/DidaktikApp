@@ -18,15 +18,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.util.ArrayList
 import android.graphics.Paint
-
 import android.graphics.Path
-import android.view.MotionEvent
-import android.widget.ImageView
-import android.widget.TextView
 import android.view.View.OnTouchListener
 import androidx.core.content.ContextCompat
-
-
 import android.graphics.drawable.AnimationDrawable
 import android.os.Handler
 import android.view.animation.AnimationUtils
@@ -36,7 +30,7 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.activity4_bienvenida.*
 import kotlinx.android.synthetic.main.fragment1_1_juego.*
-import kotlinx.coroutines.delay
+
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -94,10 +88,10 @@ class Fragment1_1_juego : Fragment() {
         }
 
         //Juego
-        val imagen1 :ImageView = view.findViewById(R.id.imgv1_1imagen1)
+        val imagen1 : ImageView = view.findViewById(R.id.imgv1_1imagen1)
         val imagen2 :ImageView = view.findViewById(R.id.imgv1_1imagen2)
         val imagen3 :ImageView = view.findViewById(R.id.imgv1_1imagen3)
-        val text1 :TextView = view.findViewById(R.id.txtv1_1azalpena1)
+        val text1 : TextView = view.findViewById(R.id.txtv1_1azalpena1)
         val text2 :TextView = view.findViewById(R.id.txtv1_1azalpena2)
         val text3 :TextView = view.findViewById(R.id.txtv1_1azalpena3)
 

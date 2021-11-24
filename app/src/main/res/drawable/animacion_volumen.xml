@@ -1,0 +1,6 @@
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+    <item android:drawable="@drawable/ic_volumen0" android:duration="500" />
+    <item android:drawable="@drawable/ic_volumen1" android:duration="500" />
+    <item android:drawable="@drawable/ic_volumen2" android:duration="500" />
+</animation-list>

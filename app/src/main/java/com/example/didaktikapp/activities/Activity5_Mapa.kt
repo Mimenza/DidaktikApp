@@ -11,16 +11,11 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.example.didaktikapp.databinding.Activity5MapaBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener
-import com.google.android.gms.maps.model.CircleOptions
-import com.google.android.gms.maps.model.Circle
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.*
 
 
 class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
@@ -64,20 +59,13 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         //Check for GPS permisions
-        if (ActivityCompat.checkSelfPermission(
-                this, android.Manifest.permission.ACCESS_FINE_LOCATION
-            )
-            != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                1
-            )
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
             return
         }
 
         mMap = googleMap
+        mMap.clear()
 
         mMap.isMyLocationEnabled = true
         mMap.uiSettings.isZoomControlsEnabled = true
@@ -87,8 +75,6 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         //Set min and max zoom
         mMap.setMaxZoomPreference(18F)
         mMap.setMinZoomPreference(14F)
-
-
 
         // Constrain the camera target to the Astigarraga bounds.
         val astigarragaBounds = LatLngBounds(
@@ -107,17 +93,23 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
             .strokeWidth(2f)
             .fillColor(0x70ff0000))
 
+        var firstFocusAnimation = false
         mMap.setOnMyLocationChangeListener {
             myCircle.setCenter(LatLng(it.latitude, it.longitude))
             myCurrentPosition = LatLng(it.latitude, it.longitude)
-        }
-
-        fusedLocation.lastLocation.addOnSuccessListener {
-            if (it != null) {
-                val ubicacion = LatLng(it.latitude, it.longitude)
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ubicacion, 16F))
+            if (!firstFocusAnimation) {
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.latitude, it.longitude), 16F))
+                firstFocusAnimation = true
             }
         }
+        /*
+        fusedLocation.lastLocation.addOnSuccessListener {
+            if (it != null) {
+                //val ubicacion = LatLng(it.latitude, it.longitude)
+                //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ubicacion, 16F))
+            }
+        }
+         */
     }
 
     // Add markers in Map

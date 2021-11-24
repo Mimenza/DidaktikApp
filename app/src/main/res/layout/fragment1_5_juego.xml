@@ -12,16 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="JUEGO 5"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <Button
             android:id="@+id/btnf1_5_siguiente"
             android:layout_width="wrap_content"
@@ -76,13 +66,38 @@
             tools:layout_editor_absoluteY="139dp" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/objetivo1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="508dp"
+            android:scaleType="fitXY"
+            android:src="@android:drawable/screen_background_dark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.157"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/objetivo2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="508dp"
+            android:scaleType="fitXY"
+            android:src="@android:drawable/screen_background_dark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/objetivo3"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginTop="516dp"
             android:scaleType="fitXY"
             android:src="@android:drawable/screen_background_dark"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.869"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

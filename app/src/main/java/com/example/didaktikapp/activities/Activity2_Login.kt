@@ -36,7 +36,6 @@ class Activity2_Login : AppCompatActivity() {
                 //val query = querydb
                 .get()
                 .addOnSuccessListener { rows ->
-                    // FIXME TENER EN CUENTA rows.size dado que puede bailar un valor +1/-1
                     DbHandler.setLastUserId(rows.size())
                     println("******** FILAS: " + rows.size())
                     if (rows.size() > 0) {
@@ -51,16 +50,6 @@ class Activity2_Login : AppCompatActivity() {
                                 DbHandler.setLastUserId(rowsTotal.size())
                                 Toast.makeText(this, "Usuario Logeado correctamente", Toast.LENGTH_SHORT).show()
                             }
-                        /*
-                        var vId:Int = rows.documents[0]["id"].toString().replace("u","").toInt()
-                        var vNombre:String = rows.documents[0]["nombre"].toString()
-                        var vAdmin:Int = rows.documents[0]["admin"].toString().toInt()
-                        var vPuntuacion:Int = rows.documents[0]["puntuacion"].toString().toInt()
-                        var vUltimoPto:Int = rows.documents[0]["ultimo_punto"].toString().toInt()
-                        DbHandler.setUser(User(vId, vNombre, vAdmin, vPuntuacion, vUltimoPto))
-                        Toast.makeText(this, "Usuario Logeado correctamente", Toast.LENGTH_SHORT).show()
-
-                         */
                     } else {
                         querydb.get()
                             .addOnSuccessListener { rowsTotal ->
@@ -93,63 +82,9 @@ class Activity2_Login : AppCompatActivity() {
 
     }
 
-
-
-    /*
-    private fun  getLastIdUser(db:FirebaseFirestore){
-
-        var datos=""
-        db.collection("Usuarios").get().
-        addOnSuccessListener { documentos->
-
-            for (documento in documentos){
-
-
-               datos+="${documento.id}"
-
-            }
-          var last_id= datos.last().toString().toInt()
-
-
-
-            //Botón alta usuario
-            binding.btn1Hasi.setOnClickListener{
-
-                guardardatos(db, last_id)
-            }
-        }
-
+    fun iniciarActividadDeBienvenida() {
+        
     }
 
 
-    private fun guardardatos(db:FirebaseFirestore, last_id:Int){
-        //Si los datos están rellenos
-
-
-
-
-        if (binding.txt2Nombre.text.isNotBlank()){
-
-            val dato= hashMapOf(
-                "admin" to 0,
-                "id" to "u"+((last_id+1).toString()),
-                "nombre" to binding.txt2Nombre.text.toString(),
-                 "puntuacion" to 0,
-                 "ultimo_punto" to 0)
-
-
-            db.collection("Usuarios").document(((last_id+1).toString())).set(dato)
-                .addOnSuccessListener {
-                    Toast.makeText(this, "Usuario insertado", Toast.LENGTH_SHORT).show()
-                    var i = Intent(this, Activity4_bienvenida::class.java)
-                    startActivity(i)
-                    this.overridePendingTransition(0, 0)
-                }
-                .addOnFailureListener{
-                    Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
-                }
-        }
-
-    }
-     */
 }

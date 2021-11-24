@@ -19,10 +19,6 @@ import kotlinx.coroutines.runBlocking
 import java.util.ArrayList
 import android.graphics.Paint
 import android.graphics.Path
-<<<<<<< HEAD
-
-=======
->>>>>>> de216ee979e06df1c091eb599693c846351c4c7f
 import android.view.View.OnTouchListener
 import androidx.core.content.ContextCompat
 import android.graphics.drawable.AnimationDrawable

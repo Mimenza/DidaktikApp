@@ -50,43 +50,5 @@
             app:layout_constraintVertical_bias="0.174"
             tools:ignore="SpeakableTextPresentCheck" />
 
-        <ImageView
-            android:id="@+id/imgManzanaTest"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/img_upeliosagarra_small"
-            tools:layout_editor_absoluteX="149dp"
-            tools:layout_editor_absoluteY="39dp" />
-
-        <ImageView
-            android:id="@+id/imgManzanaTest4"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/img_upeliosagarra_small"
-            tools:layout_editor_absoluteX="249dp"
-            tools:layout_editor_absoluteY="180dp" />
-
-        <ImageView
-            android:id="@+id/imgManzanaTest3"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/img_upeliosagarra_small"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="139dp" />
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="516dp"
-            android:scaleType="fitXY"
-            android:src="@android:drawable/screen_background_dark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

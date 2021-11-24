@@ -21,9 +21,8 @@ class Activity1_Principal : AppCompatActivity() {
 
     private var fragment :Fragment? = null
     private lateinit var binding: Activity1PrincipalBinding
-    private lateinit var audio: MediaPlayer
+    private var audio: MediaPlayer? = null
     var ajustesShowing: Boolean = false
-    var firstTime :Boolean= true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,8 +54,8 @@ class Activity1_Principal : AppCompatActivity() {
                     this@Activity1_Principal,
                     com.example.didaktikapp.R.raw.abestia
                 )
-                audio.setVolume(0.15F, 0.15F)
-                audio.start()
+                audio?.setVolume(0.15F, 0.15F)
+                audio?.start()
             }
         }
 
@@ -99,17 +98,17 @@ class Activity1_Principal : AppCompatActivity() {
                 }
             }
              */
-
     }
 
     override fun onPause() {
         super.onPause()
-        audio.pause()
+        audio?.pause()
     }
 
     override fun onResume() {
         super.onResume()
-        audio.start()
+        // TODO: preguntar si esta el audio empezado
+        audio?.start()
     }
 
     override fun onRestart() {
@@ -120,20 +119,21 @@ class Activity1_Principal : AppCompatActivity() {
                     this@Activity1_Principal,
                     com.example.didaktikapp.R.raw.abestia
                 )
-                audio.setVolume(0.15F, 0.15F)
-                audio.start()
+                audio?.setVolume(0.15F, 0.15F)
+                audio?.start()
             }
         }
     }
 
     override fun onStop() {
         super.onStop()
-        audio.stop()
+        audio?.stop()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        audio.stop()
+        audio?.release()
+        //audio = null
     }
 
     override fun onBackPressed() {

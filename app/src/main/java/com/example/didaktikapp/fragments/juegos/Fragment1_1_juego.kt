@@ -1,11 +1,8 @@
 package com.example.didaktikapp.fragments.juegos
 
 import `in`.codeshuffle.typewriterview.TypeWriterView
-import android.graphics.Canvas
-import android.graphics.Color
 import android.media.MediaPlayer
 import android.os.Bundle
-import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,16 +13,12 @@ import androidx.navigation.Navigation
 import com.example.didaktikapp.R
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import android.util.Log
-import java.util.ArrayList
-
-import android.graphics.Paint
-
-
-
-
-
-
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
+import kotlinx.android.synthetic.main.fragment1_1_juego.*
+import kotlinx.android.synthetic.main.fragment4_menu.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,11 +34,26 @@ class Fragment1_1_juego : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    var paint = Paint()
-    val canvas = Canvas()
-    private val p1:List<Float> = ArrayList()
-    private val p2:List<Float> = ArrayList()
-    private val p3:List<Float> = ArrayList()
+
+    var progress: Int = 0
+    var pressedImg: Int = 0
+
+    var point1: Boolean = false
+    var point2: Boolean = false
+    var point3: Boolean = false
+
+    var border1: Boolean = false
+    var border2: Boolean = false
+    var border3: Boolean = false
+
+    lateinit var img1: ImageView
+    lateinit var img2: ImageView
+    lateinit var img3: ImageView
+
+    lateinit var txtv1: TextView
+    lateinit var txtv2: TextView
+    lateinit var txtv3: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -64,12 +72,14 @@ class Fragment1_1_juego : Fragment() {
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_1_ajustes)
         var ring: MediaPlayer
 
-        button.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment1_1_juego_to_fragment2_1_minijuego)
+        button.setOnClickListener() {
+            Navigation.findNavController(view)
+                .navigate(R.id.action_fragment1_1_juego_to_fragment2_1_minijuego)
         }
 
-        ajustes.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment1_1_juego_to_fragment4_menu)
+        ajustes.setOnClickListener() {
+            Navigation.findNavController(view)
+                .navigate(R.id.action_fragment1_1_juego_to_fragment4_menu)
         }
 
         //Typewriter juego 1 tutorial
@@ -88,13 +98,193 @@ class Fragment1_1_juego : Fragment() {
         }
         //Audio juego 1 fin
 
+        img1 = view.findViewById<ImageView>(R.id.imgv1_1imagen1)
+        img2 = view.findViewById<ImageView>(R.id.imgv1_1imagen2)
+        img3 = view.findViewById<ImageView>(R.id.imgv1_1imagen3)
 
+        txtv1 = view.findViewById<TextView>(R.id.txtv1_1azalpena1)
+        txtv2 = view.findViewById<TextView>(R.id.txtv1_1azalpena2)
+        txtv3 = view.findViewById<TextView>(R.id.txtv1_1azalpena3)
+
+        img1.setOnClickListener() {
+            pressedImg = 1
+
+            if (!point1) {
+                if (!border1) {
+                    setBorder(img1, "black")
+                    border1 = true
+                } else {
+                    unsetBorder(img1)
+                    border1 = false
+                }
+            }
+
+            if (!point2) {
+                unsetBorder(img2)
+                border2 = false
+            }
+
+            if (!point3) {
+                unsetBorder(img3)
+                border3 = false
+            }
+        }
+
+        img2.setOnClickListener() {
+            pressedImg = 2
+            println(pressedImg)
+
+            if (!point2) {
+                if (!border2) {
+                    setBorder(img2, "black")
+                    border2 = true
+                } else {
+                    unsetBorder(img2)
+                    border2 = false
+                }
+            }
+
+            if (!point1) {
+                unsetBorder(img1)
+                border1 = false
+            }
+
+            if (!point3) {
+                unsetBorder(img3)
+                border3 = false
+            }
+        }
+
+        img3.setOnClickListener() {
+            pressedImg = 3
+            println(pressedImg)
+
+            if (!point3) {
+                if (!border3) {
+                    setBorder(img3, "black")
+                    border3 = true
+                } else {
+                    unsetBorder(img3)
+                    border3 = false
+                }
+            }
+
+            if (!point1) {
+                unsetBorder(img1)
+                border1 = false
+            }
+
+            if (!point2) {
+                unsetBorder(img2)
+                border2 = false
+            }
+        }
+
+        txtv1.setOnClickListener() {
+            if (pressedImg == 2) {
+                if (!point2) {
+                    progress++
+                    point2 = true
+                    setBorder(img2, "green")
+                    setBorder(txtv1, "green")
+                    checkProgress(view, progress)
+                }
+            } else {
+                resetGame()
+            }
+        }
+
+        txtv2.setOnClickListener() {
+            if (pressedImg == 3) {
+                if (!point3) {
+                    progress++
+                    point3 = true
+                    setBorder(img3, "green")
+                    setBorder(txtv2, "green")
+                    checkProgress(view, progress)
+                }
+            } else {
+                resetGame()
+            }
+        }
+
+        txtv3.setOnClickListener() {
+            if (pressedImg == 1) {
+                if (!point1) {
+                    progress++
+                    point1 = true
+                    setBorder(img1, "green")
+                    setBorder(txtv3, "green")
+                    checkProgress(view, progress)
+                }
+            } else {
+                resetGame()
+            }
+        }
 
         return view
     }
 
+    private fun setBorder(img: ImageView, color: String) {
+        var colorId = 0
+        when(color){
+            "black" -> colorId = R.drawable.bg_border_black
+            "green" -> colorId = R.drawable.bg_border_green
+        }
 
+        img.setBackground(context?.let { it ->
+            ContextCompat.getDrawable(it, colorId)
+        })
+    }
 
+    private fun setBorder(txtv: TextView, color: String) {
+        var colorId = 0
+        when(color){
+            "black" -> colorId = R.drawable.bg_border_black
+            "green" -> colorId = R.drawable.bg_border_green
+        }
+
+        txtv.setBackground(context?.let { it ->
+            ContextCompat.getDrawable(it, colorId)
+        })
+    }
+
+    private fun unsetBorder(img: ImageView) {
+        img.setBackgroundResource(0)
+    }
+
+    private fun unsetBorder(txtv: TextView) {
+        txtv.setBackgroundResource(0)
+    }
+
+    private fun resetGame() {
+        progress = 0
+        pressedImg = 0
+
+        unsetBorder(img1)
+        unsetBorder(img2)
+        unsetBorder(img3)
+
+        unsetBorder(txtv1)
+        unsetBorder(txtv2)
+        unsetBorder(txtv3)
+
+        point1 = false
+        point2 = false
+        point3 = false
+
+        border1 = false
+        border2 = false
+        border3 = false
+    }
+
+    private fun checkProgress(view: View, progress: Int) {
+        if (progress == 3) {
+            val btnNext: Button = view.findViewById<Button>(R.id.btnf1_1siguiente)
+
+            btnNext.isVisible = true
+        }
+    }
 
     companion object {
         /**

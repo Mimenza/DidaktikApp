@@ -33,8 +33,6 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 
-data class draggableImg(var origen: ImageView, var destino: ImageView)
-
 class Fragment1_6_juego : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null

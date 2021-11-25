@@ -27,6 +27,9 @@ private const val ARG_PARAM2 = "param2"
  * Use the [Fragment1_juego.newInstance] factory method to
  * create an instance of this fragment.
  */
+
+data class draggableImg(var origen: ImageView, var destino: ImageView)
+
 class Fragment1_5_juego : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -52,6 +55,31 @@ class Fragment1_5_juego : Fragment() {
         val button: Button = view.findViewById(R.id.btnf1_5_siguiente)
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_5_ajustes)
 
+        val imgOrigenCamisa: ImageView = view.findViewById(R.id.imgOrigenCamisa)
+        val imgOrigenCinturon: ImageView = view.findViewById(R.id.imgOrigenCinturon)
+        val imgOrigenGorro: ImageView = view.findViewById(R.id.imgOrigenGorro)
+        val imgOrigenManzana: ImageView = view.findViewById(R.id.imgOrigenManzana)
+        val imgOrigenZapatos: ImageView = view.findViewById(R.id.imgOrigenZapatos)
+
+        val imgObjetivoCamisa: ImageView = view.findViewById(R.id.imgObjetivoCamisa)
+        val imgObjetivoCinturon: ImageView = view.findViewById(R.id.imgObjetivoCinturon)
+        val imgObjetivoGorro: ImageView = view.findViewById(R.id.imgObjetivoGorro)
+        val imgObjetivoManzana: ImageView = view.findViewById(R.id.imgObjetivoManzana)
+        val imgObjetivoZapatos: ImageView = view.findViewById(R.id.imgObjetivoZapatos)
+
+        manzanaList!!.add(draggableImg(imgOrigenCamisa,imgObjetivoCamisa))
+        manzanaList!!.add(draggableImg(imgOrigenCinturon,imgObjetivoCinturon))
+        manzanaList!!.add(draggableImg(imgOrigenGorro,imgObjetivoGorro))
+        manzanaList!!.add(draggableImg(imgOrigenManzana,imgObjetivoManzana))
+        manzanaList!!.add(draggableImg(imgOrigenZapatos,imgObjetivoZapatos))
+
+        for (item in manzanaList!!) {
+            item.origen.setOnTouchListener(listener)
+            item.destino.setColorFilter(Color.argb(150, 0, 80, 200))
+        }
+
+        /*
+
         val mznTest: ImageView = view.findViewById(R.id.imgManzanaTest)
         val mznTest3: ImageView = view.findViewById(R.id.imgManzanaTest3)
 
@@ -73,6 +101,8 @@ class Fragment1_5_juego : Fragment() {
         for (item in manzanaList!!) {
             item.origen.setOnTouchListener(listener)
         }
+
+         */
 
         button.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment1_5_juego_to_fragment2_5_minijuego)
@@ -96,10 +126,12 @@ class Fragment1_5_juego : Fragment() {
                 view.y = motionEvent.rawY - view.height/2
 //                println("**** MANZANA: "+ view.x + " // " + view.y)
 
-                var posX = getObjetivoFromList(view)!!.getLeft()
-                var posY = getObjetivoFromList(view)!!.getTop()
-                var sizeX = getObjetivoFromList(view)!!.width
-                var sizeY = getObjetivoFromList(view)!!.height
+                var objetivoEncontrado: View = getObjetivoFromList(view)!!
+
+                var posX = objetivoEncontrado.getLeft()
+                var posY = objetivoEncontrado.getTop()
+                var sizeX = objetivoEncontrado.width
+                var sizeY = objetivoEncontrado.height
                 /*
                 var posX = objetivo.getLeft()
 
@@ -110,7 +142,11 @@ class Fragment1_5_juego : Fragment() {
 //                println("**** OBJETIVO: "+ posX + " // " + posY)
 
                 if ( (view.x + view.width/2) >= posX && (view.y + view.height/2) >= posY && (view.x + view.width/2) <= posX+sizeX && (view.y + view.height/2) <= posY+sizeY) {
-                    view.visibility = View.GONE
+                    //view.visibility = View.GONE
+                    view.x = posX.toFloat()
+                    view.y = posY.toFloat()
+                    //view.removeListener
+
                     //Toast.makeText(requireContext(), "Haz metido la manzana en el cuadrado", Toast.LENGTH_SHORT).show()
                 } else {
                     //Toast.makeText(requireContext(), "ERROR AL METER LA MANZANA", Toast.LENGTH_SHORT).show()

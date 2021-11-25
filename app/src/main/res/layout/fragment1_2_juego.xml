@@ -20,6 +20,7 @@
         android:id="@+id/btnf1_2_ajustes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="right"
         android:minHeight="48dp"
         android:src="@drawable/ic_ajustes_black"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -40,11 +41,20 @@
         android:textColor="@color/black"
         android:textSize="22sp"
       />
+
     <!--Horizontal  Linear Layout-->
+    <ImageView
+        android:id="@+id/imgv1_2defaultimage"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/img_interrogacion" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
 
         <ProgressBar
             android:id="@+id/custom_progressBar"
@@ -52,12 +62,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:indeterminate="false"
             android:max="4"
             android:minHeight="50dp"
-            android:progress="0"
-            android:indeterminate="false"
-
-            />
+            android:theme="@style/ProgressBarStyle"
+            android:progress="0" />
 
         <TextView
             android:id="@+id/txtv1_2_progreessbar"
@@ -76,7 +85,7 @@
         android:layout_height="wrap_content"
         android:text="@string/que1_ans1_juego2"
         android:layout_margin="10dp"
-        android:background="@drawable/juego2_option_border_bg"
+        android:background="@drawable/juego2_default_option_border_bg"
         android:gravity="center"
         android:padding="15dp"
         tools:text="@string/que1_ans1_juego2"
@@ -89,7 +98,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@drawable/juego2_option_border_bg"
+        android:background="@drawable/juego2_default_option_border_bg"
         android:gravity="center"
         android:padding="15dp"
         android:textColorLink="#7A8089"
@@ -101,7 +110,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@drawable/juego2_option_border_bg"
+        android:background="@drawable/juego2_default_option_border_bg"
         android:gravity="center"
         android:padding="15dp"
         android:textColorLink="#7A8089"
@@ -113,7 +122,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@drawable/juego2_option_border_bg"
+        android:background="@drawable/juego2_default_option_border_bg"
         android:gravity="center"
         android:padding="15dp"
         android:textColorLink="#7A8089"
@@ -125,6 +134,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/siguiente"
+        android:layout_marginTop="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

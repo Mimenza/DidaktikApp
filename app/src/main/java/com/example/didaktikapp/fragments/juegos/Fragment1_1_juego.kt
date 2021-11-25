@@ -1,22 +1,22 @@
 package com.example.didaktikapp.fragments.juegos
 
+import com.example.didaktikapp.R
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.media.MediaPlayer
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.widget.ImageView
+import android.widget.TextView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import androidx.navigation.Navigation
-import com.example.didaktikapp.R
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.launch
 import kotlinx.android.synthetic.main.fragment1_1_juego.*
 import kotlinx.android.synthetic.main.fragment4_menu.*
 
@@ -35,24 +35,26 @@ class Fragment1_1_juego : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    var progress: Int = 0
-    var pressedImg: Int = 0
+    private var audio: MediaPlayer? = null
 
-    var point1: Boolean = false
-    var point2: Boolean = false
-    var point3: Boolean = false
+    private var progress: Int = 0
+    private var pressedImg: Int = 0
 
-    var border1: Boolean = false
-    var border2: Boolean = false
-    var border3: Boolean = false
+    private var point1: Boolean = false
+    private var point2: Boolean = false
+    private var point3: Boolean = false
 
-    lateinit var img1: ImageView
-    lateinit var img2: ImageView
-    lateinit var img3: ImageView
+    private var border1: Boolean = false
+    private var border2: Boolean = false
+    private var border3: Boolean = false
 
-    lateinit var txtv1: TextView
-    lateinit var txtv2: TextView
-    lateinit var txtv3: TextView
+    private lateinit var img1: ImageView
+    private lateinit var img2: ImageView
+    private lateinit var img3: ImageView
+
+    private lateinit var txtv1: TextView
+    private lateinit var txtv2: TextView
+    private lateinit var txtv3: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,14 +72,13 @@ class Fragment1_1_juego : Fragment() {
         val view = inflater.inflate(R.layout.fragment1_1_juego, container, false)
         val button: Button = view.findViewById(R.id.btnf1_1siguiente)
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_1_ajustes)
-        var ring: MediaPlayer
 
-        button.setOnClickListener() {
+        button.setOnClickListener {
             Navigation.findNavController(view)
                 .navigate(R.id.action_fragment1_1_juego_to_fragment2_1_minijuego)
         }
 
-        ajustes.setOnClickListener() {
+        ajustes.setOnClickListener {
             Navigation.findNavController(view)
                 .navigate(R.id.action_fragment1_1_juego_to_fragment4_menu)
         }
@@ -90,173 +91,270 @@ class Fragment1_1_juego : Fragment() {
         //Typewriter juego 1 tutorial fin
 
         //Audio juego 1
-        runBlocking() {
+        runBlocking {
             launch {
-                ring = MediaPlayer.create(context, R.raw.juego1audio)
-                ring.start()
+                audio = MediaPlayer.create(context, R.raw.juego1audio)
+                audio?.start()
             }
         }
         //Audio juego 1 fin
 
-        img1 = view.findViewById<ImageView>(R.id.imgv1_1imagen1)
-        img2 = view.findViewById<ImageView>(R.id.imgv1_1imagen2)
-        img3 = view.findViewById<ImageView>(R.id.imgv1_1imagen3)
+        img1 = view.findViewById(R.id.imgv1_1imagen1)
+        img2 = view.findViewById(R.id.imgv1_1imagen2)
+        img3 = view.findViewById(R.id.imgv1_1imagen3)
 
-        txtv1 = view.findViewById<TextView>(R.id.txtv1_1azalpena1)
-        txtv2 = view.findViewById<TextView>(R.id.txtv1_1azalpena2)
-        txtv3 = view.findViewById<TextView>(R.id.txtv1_1azalpena3)
+        txtv1 = view.findViewById(R.id.txtv1_1azalpena1)
+        txtv2 = view.findViewById(R.id.txtv1_1azalpena2)
+        txtv3 = view.findViewById(R.id.txtv1_1azalpena3)
 
-        img1.setOnClickListener() {
-            pressedImg = 1
+        img1.setOnClickListener {
+            //Comprueba que no hay ningun audio reproduciendose
+            if (audio?.isPlaying == false) {
+                //Guarda en que imagen has clickado
+                pressedImg = 1
 
-            if (!point1) {
-                if (!border1) {
-                    setBorder(img1, "black")
-                    border1 = true
-                } else {
-                    unsetBorder(img1)
-                    border1 = false
+                //Mira que no hayas conseguido el punto 1
+                if (!point1) {
+                    //Si no tiene el borde se lo pone y si no se lo quita
+                    border1 = if (!border1) {
+                        setBorder(img1, "black")
+                        true
+                    } else {
+                        unsetBorder(img1)
+                        false
+                    }
                 }
-            }
 
-            if (!point2) {
-                unsetBorder(img2)
-                border2 = false
-            }
-
-            if (!point3) {
-                unsetBorder(img3)
-                border3 = false
-            }
-        }
-
-        img2.setOnClickListener() {
-            pressedImg = 2
-            println(pressedImg)
-
-            if (!point2) {
-                if (!border2) {
-                    setBorder(img2, "black")
-                    border2 = true
-                } else {
+                //Quita los bordes a las imagenes 2 y 3 comprobando que no los haya conseguido
+                if (!point2) {
                     unsetBorder(img2)
                     border2 = false
                 }
-            }
 
-            if (!point1) {
-                unsetBorder(img1)
-                border1 = false
-            }
-
-            if (!point3) {
-                unsetBorder(img3)
-                border3 = false
-            }
-        }
-
-        img3.setOnClickListener() {
-            pressedImg = 3
-            println(pressedImg)
-
-            if (!point3) {
-                if (!border3) {
-                    setBorder(img3, "black")
-                    border3 = true
-                } else {
+                if (!point3) {
                     unsetBorder(img3)
                     border3 = false
                 }
             }
-
-            if (!point1) {
-                unsetBorder(img1)
-                border1 = false
-            }
-
-            if (!point2) {
-                unsetBorder(img2)
-                border2 = false
-            }
         }
 
-        txtv1.setOnClickListener() {
-            if (pressedImg == 2) {
+        img2.setOnClickListener {
+            //Comprueba que no hay ningun audio reproduciendose
+            if (audio?.isPlaying == false) {
+                //Guarda en que imagen has clickado
+                pressedImg = 2
+
+                //Mira que no hayas conseguido el punto 2
                 if (!point2) {
-                    progress++
-                    point2 = true
-                    setBorder(img2, "green")
-                    setBorder(txtv1, "green")
-                    checkProgress(view, progress)
+                    //Si no tiene el borde se lo pone y si no se lo quita
+                    border2 = if (!border2) {
+                        setBorder(img2, "black")
+                        true
+                    } else {
+                        unsetBorder(img2)
+                        false
+                    }
                 }
-            } else {
-                resetGame()
-            }
-        }
 
-        txtv2.setOnClickListener() {
-            if (pressedImg == 3) {
-                if (!point3) {
-                    progress++
-                    point3 = true
-                    setBorder(img3, "green")
-                    setBorder(txtv2, "green")
-                    checkProgress(view, progress)
-                }
-            } else {
-                resetGame()
-            }
-        }
-
-        txtv3.setOnClickListener() {
-            if (pressedImg == 1) {
+                //Quita los bordes a las imagenes 1 y 3 comprobando que no los haya conseguido
                 if (!point1) {
-                    progress++
-                    point1 = true
-                    setBorder(img1, "green")
-                    setBorder(txtv3, "green")
-                    checkProgress(view, progress)
+                    unsetBorder(img1)
+                    border1 = false
                 }
-            } else {
-                resetGame()
+
+                if (!point3) {
+                    unsetBorder(img3)
+                    border3 = false
+                }
+            }
+        }
+
+        img3.setOnClickListener {
+            //Comprueba que no hay ningun audio reproduciendose
+            if (audio?.isPlaying == false) {
+                //Guarda en que imagen has clickado
+                pressedImg = 3
+
+                //Mira que no hayas conseguido el punto 3
+                if (!point3) {
+                    //Si no tiene el borde se lo pone y si no se lo quita
+                    border3 = if (!border3) {
+                        setBorder(img3, "black")
+                        true
+                    } else {
+                        unsetBorder(img3)
+                        false
+                    }
+                }
+
+                //Quita los bordes a las imagenes 1 y 2 comprobando que no los haya conseguido
+                if (!point1) {
+                    unsetBorder(img1)
+                    border1 = false
+                }
+
+                if (!point2) {
+                    unsetBorder(img2)
+                    border2 = false
+                }
+            }
+        }
+
+        txtv1.setOnClickListener {
+            //Comprueba que no hay ningun audio reproduciendose
+            if (audio?.isPlaying == false) {
+                if (pressedImg == 2) {
+                    if (!point2) {
+                        progress++
+                        point2 = true
+                        setBorder(img2, "green")
+                        setBorder(txtv1, "green")
+                        checkProgress(view, progress)
+                    }
+                } else {
+                    when (pressedImg) {
+                        1 -> setBorder(img1, "red")
+                        2 -> setBorder(img2, "red")
+                        3 -> setBorder(img3, "red")
+                    }
+                    setBorder(txtv1, "red")
+
+                    runBlocking {
+                        launch {
+                            audio = MediaPlayer.create(context, R.raw.juego1_gaizki)
+                            audio?.start()
+                            audio?.setOnCompletionListener {
+                                resetGame()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        txtv2.setOnClickListener {
+            //Comprueba que no hay ningun audio reproduciendose
+            if (audio?.isPlaying == false) {
+                if (pressedImg == 3) {
+                    if (!point3) {
+                        progress++
+                        point3 = true
+                        setBorder(img3, "green")
+                        setBorder(txtv2, "green")
+                        checkProgress(view, progress)
+                    }
+                } else {
+                    when (pressedImg) {
+                        1 -> setBorder(img1, "red")
+                        2 -> setBorder(img2, "red")
+                        3 -> setBorder(img3, "red")
+                    }
+                    setBorder(txtv2, "red")
+
+                    runBlocking {
+                        launch {
+                            audio = MediaPlayer.create(context, R.raw.juego1_gaizki)
+                            audio?.start()
+                            audio?.setOnCompletionListener {
+                                resetGame()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        txtv3.setOnClickListener {
+            //Comprueba que no hay ningun audio reproduciendose
+            if (audio?.isPlaying == false) {
+
+                if (pressedImg == 1) {
+                    if (!point1) {
+                        progress++
+                        point1 = true
+                        setBorder(img1, "green")
+                        setBorder(txtv3, "green")
+                        checkProgress(view, progress)
+                    }
+                } else {
+                    when (pressedImg) {
+                        1 -> setBorder(img1, "red")
+                        2 -> setBorder(img2, "red")
+                        3 -> setBorder(img3, "red")
+                    }
+                    setBorder(txtv3, "red")
+
+                    runBlocking {
+                        launch {
+                            audio = MediaPlayer.create(context, R.raw.juego1_gaizki)
+                            audio?.start()
+                            audio?.setOnCompletionListener {
+                                resetGame()
+                            }
+                        }
+                    }
+                }
             }
         }
 
         return view
     }
 
+    /**
+     * Coloca bordes de colores a una ImageView
+     * @param img la ImageView a la que se le pone el borde
+     * @param color el color del borde
+     */
     private fun setBorder(img: ImageView, color: String) {
         var colorId = 0
-        when(color){
+        when (color) {
             "black" -> colorId = R.drawable.bg_border_black
             "green" -> colorId = R.drawable.bg_border_green
+            "red" -> colorId = R.drawable.bg_border_red
         }
 
-        img.setBackground(context?.let { it ->
+        img.background = context?.let { it ->
             ContextCompat.getDrawable(it, colorId)
-        })
+        }
     }
 
+    /**
+     * Coloca bordes de colores a un TextView
+     * @param txtv el TextView al que se le pone el borde
+     * @param color el color del borde
+     */
     private fun setBorder(txtv: TextView, color: String) {
         var colorId = 0
-        when(color){
+        when (color) {
             "black" -> colorId = R.drawable.bg_border_black
             "green" -> colorId = R.drawable.bg_border_green
+            "red" -> colorId = R.drawable.bg_border_red
         }
 
-        txtv.setBackground(context?.let { it ->
+        txtv.background = context?.let { it ->
             ContextCompat.getDrawable(it, colorId)
-        })
+        }
     }
 
+    /**
+     * Quita el borde a una ImageView
+     * @param img la imagen a la que se le quita el borde
+     */
     private fun unsetBorder(img: ImageView) {
         img.setBackgroundResource(0)
     }
 
+    /**
+     * Quita el borde a un TextView
+     * @param txtv el TextView al que se le quita el borde
+     */
     private fun unsetBorder(txtv: TextView) {
         txtv.setBackgroundResource(0)
     }
 
+    /**
+     * Vacia todas las variable para resetear el juego
+     */
     private fun resetGame() {
         progress = 0
         pressedImg = 0
@@ -278,11 +376,24 @@ class Fragment1_1_juego : Fragment() {
         border3 = false
     }
 
+    /**
+     * Comprueba el progreso del juego
+     * @param view la vista en la que se encuentra
+     * @param progress el progeso de la partida
+     */
     private fun checkProgress(view: View, progress: Int) {
         if (progress == 3) {
-            val btnNext: Button = view.findViewById<Button>(R.id.btnf1_1siguiente)
+            runBlocking {
+                launch {
+                    audio = MediaPlayer.create(context, R.raw.juego1_ongi)
+                    audio?.start()
+                    audio?.setOnCompletionListener {
+                        val btnNext: Button = view.findViewById(R.id.btnf1_1siguiente)
 
-            btnNext.isVisible = true
+                        btnNext.isVisible = true
+                    }
+                }
+            }
         }
     }
 

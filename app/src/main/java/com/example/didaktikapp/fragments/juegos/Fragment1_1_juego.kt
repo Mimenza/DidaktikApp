@@ -3,7 +3,6 @@ package com.example.didaktikapp.fragments.juegos
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
 import android.graphics.Canvas
-import android.graphics.Color
 import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,13 +15,9 @@ import androidx.navigation.Navigation
 import com.example.didaktikapp.R
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import java.util.ArrayList
 import android.graphics.Paint
 import android.graphics.Path
-<<<<<<< HEAD
 
-=======
->>>>>>> de216ee979e06df1c091eb599693c846351c4c7f
 import android.view.View.OnTouchListener
 import androidx.core.content.ContextCompat
 import android.graphics.drawable.AnimationDrawable
@@ -55,9 +50,6 @@ class Fragment1_1_juego : Fragment() {
     var canvas = Canvas()
 
 
-    private val p1: List<Float> = ArrayList()
-    private val p2: List<Float> = ArrayList()
-    private val p3: List<Float> = ArrayList()
     private lateinit var vistaanimada: TranslateAnimation
 
 
@@ -76,7 +68,7 @@ class Fragment1_1_juego : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment1_1_juego, container, false)
-        val button: Button = view.findViewById(R.id.btnf1_1siguiente)
+        val button: Button = view.findViewById(R.id.btnf1_1saltartutorial)
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_1_ajustes)
         var audio: MediaPlayer
 

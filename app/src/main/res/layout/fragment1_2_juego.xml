@@ -1,146 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl2_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.juegos.Fragment1_2_juego"
-    android:fillViewport="true">
+    tools:context=".fragments.juegos.Fragment1_2_juego">
 
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="15dp"
-    android:gravity="center">
-
-
-    <ImageButton
-        android:id="@+id/btnf1_2_ajustes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:minHeight="48dp"
-        android:src="@drawable/ic_ajustes_black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.174"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <TextView
-        android:id="@+id/txtv1_2_pregunta1"
+    <!-- TODO: Update blank fragment layout -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl1_2juego"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/que1_juego2"
-        android:layout_margin="10dp"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textSize="22sp"
-      />
-
-    <!--Horizontal  Linear Layout-->
-    <ImageView
-        android:id="@+id/imgv1_2defaultimage"
-        android:layout_width="125dp"
-        android:layout_height="125dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/img_interrogacion" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
 
-        <ProgressBar
-            android:id="@+id/custom_progressBar"
-            style="?android:attr/progressBarStyleHorizontal"
+        <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:indeterminate="false"
-            android:max="4"
-            android:minHeight="50dp"
-            android:theme="@style/ProgressBarStyle"
-            android:progress="0" />
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageButton
+                android:id="@+id/btnf1_2_ajustes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:minHeight="48dp"
+                android:src="@drawable/ic_ajustes_black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.174"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <TextView
+                android:id="@+id/txtv1_2_pregunta1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:text="@string/que1_juego2"
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+            <!--Horizontal  Linear Layout-->
+            <ImageView
+                android:id="@+id/imgv1_2defaultimage"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/img_interrogacion" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <ProgressBar
+                    android:id="@+id/custom_progressBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:indeterminate="false"
+                    android:max="4"
+                    android:minHeight="50dp"
+                    android:progress="0"
+                    android:theme="@style/ProgressBarStyle" />
+
+                <TextView
+                    android:id="@+id/txtv1_2_progreessbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="15dp"
+                    android:text="1/4"
+                    android:textColorLink="#7A8089"
+                    android:textSize="14dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/img1_2_trofeo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/juego2_default_option_border_bg"
+                android:gravity="center"
+                android:padding="15dp"
+                android:text="@string/que1_ans1_juego2"
+                android:textColor="#7A8089"
+                android:textSize="18sp"
+                tools:text="@string/que1_ans1_juego2" />
+
+
+            <TextView
+                android:id="@+id/txtv1_2_respuesta2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/juego2_default_option_border_bg"
+                android:gravity="center"
+                android:padding="15dp"
+                android:text="@string/que1_ans2_juego2"
+                android:textColorLink="#7A8089"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txtv1_2_respuesta3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/juego2_default_option_border_bg"
+                android:gravity="center"
+                android:padding="15dp"
+                android:text="@string/que1_ans3_juego2"
+                android:textColorLink="#7A8089"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/txtv1_2_respuesta4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/juego2_default_option_border_bg"
+                android:gravity="center"
+                android:padding="15dp"
+                android:text="@string/que1_ans4_juego2"
+                android:textColorLink="#7A8089"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btnf1_2siguiente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/siguiente"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.866" />
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/txtv1_2_progreessbar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="15dp"
-            android:textColorLink="#7A8089"
-            android:text="1/4"
-            android:textSize="14dp"/>
-    </LinearLayout>
+            android:id="@+id/txtv1_2fondogris"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#D3000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txtv1_2_respuesta1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/que1_ans1_juego2"
-        android:layout_margin="10dp"
-        android:background="@drawable/juego2_default_option_border_bg"
-        android:gravity="center"
-        android:padding="15dp"
-        tools:text="@string/que1_ans1_juego2"
-        android:textColor="#7A8089"
-        android:textSize="18sp" />
+        <in.codeshuffle.typewriterview.TypeWriterView
+            android:id="@+id/txtv1_2tutorialjuego2"
+            android:layout_width="327dp"
+            android:layout_height="422dp"
+            android:focusable="true"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.13999999"
+            tools:ignore="MissingClass" />
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/imgv1_2_upelio"
+            android:layout_width="323dp"
+            android:layout_height="316dp"
+            android:src="@drawable/img_upeliosagarra"
+            app:layout_constraintBottom_toBottomOf="@+id/txtv1_2fondogris"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.79" />
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/imgv1_2_upelio2"
+            android:layout_width="323dp"
+            android:layout_height="316dp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtv1_2fondogris"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.79" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <TextView
-        android:id="@+id/txtv1_2_respuesta2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/juego2_default_option_border_bg"
-        android:gravity="center"
-        android:padding="15dp"
-        android:textColorLink="#7A8089"
-        android:textSize="18sp"
-        android:text="@string/que1_ans2_juego2"/>
-
-    <TextView
-        android:id="@+id/txtv1_2_respuesta3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/juego2_default_option_border_bg"
-        android:gravity="center"
-        android:padding="15dp"
-        android:textColorLink="#7A8089"
-        android:textSize="18sp"
-        android:text="@string/que1_ans3_juego2"/>
-
-    <TextView
-        android:id="@+id/txtv1_2_respuesta4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/juego2_default_option_border_bg"
-        android:gravity="center"
-        android:padding="15dp"
-        android:textColorLink="#7A8089"
-        android:textSize="18sp"
-        android:text="@string/que1_ans4_juego2"/>
-
-    <Button
-        android:id="@+id/btnf1_2siguiente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/siguiente"
-        android:layout_marginTop="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.866" />
-</LinearLayout>
-
-</ScrollView>
+</FrameLayout>

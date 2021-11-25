@@ -2,19 +2,19 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fl1_fragment"
+    android:id="@+id/fl2_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.juegos.Fragment1_1_juego">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl1_1juego"
+        android:id="@+id/cl1_2juego"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/btnf1_1siguiente"
+            android:id="@+id/btnf1_1saltartutorial"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/siguiente"

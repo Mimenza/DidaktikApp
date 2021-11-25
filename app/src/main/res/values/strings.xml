@@ -74,4 +74,10 @@
     <string name="que4_ans2_juego2">Leihoak</string>
     <string name="que4_ans3_juego2">Zuhaitzak</string>
     <string name="que4_ans4_juego2">Hostoak</string>
+
+    <!--FRAGMENT JUEGO6 -->
+    <string name="titulo">KANTU-KANTA JOLASAREN TESTUA\n Oraingoan, “Kantu- kanta” ariketa egin beharko duzue. Pantailan entzun berri duzuen bertsoa agertuko zaizue, bete beharreko hutsune batzuekin. Zuek, hutsune horiek  bete beharko dituzue hitz batekin, orain entzun berri duzuen bertsoaz oroituz. Oraintxe ikusiko dut zer nolako memoria duzuen… animo!
+</string>
+    <string name="bertso">Sagardotegiari\n Bedeinkatua izan dadila …………. grazia\n Bai eta ere kupira gabe edaten duen ………..;\n Edari honek jende askori ematen dio ……...,\n Hau edan gabe egotea da neretzat penitentzia.\n ……...dagon sagardoak dit ematen tentazioa\n Prezisamente edan beharra daukat pertsekuzioa;\n Mila deabruz josirikako orain duen ………..\n Zaleak asko geran medioz dauka …………...\n
+</string>
 </resources>

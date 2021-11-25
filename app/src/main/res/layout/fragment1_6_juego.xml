@@ -79,6 +79,7 @@
             android:layout_height="236dp"
             android:text="@string/bertso"
             android:textSize="18sp"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.533"
@@ -86,17 +87,16 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.588" />
 
-        <TextView
+        <in.codeshuffle.typewriterview.TypeWriterView
             android:id="@+id/txtv1_6_titulo"
-            android:layout_width="309dp"
-            android:layout_height="162dp"
-            android:text="@string/titulo"
-            app:layout_constraintBottom_toBottomOf="@+id/imgv1_6_fondo"
+            android:layout_width="365dp"
+            android:layout_height="473dp"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.183" />
+            app:layout_constraintVertical_bias="0.612" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

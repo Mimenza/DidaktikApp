@@ -1,15 +1,11 @@
 package com.example.didaktikapp.fragments.juegos
 
-import android.annotation.SuppressLint
-import android.app.Activity
+import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.graphics.drawable.AnimationDrawable
-import android.media.Image
 import android.media.MediaPlayer
-import android.media.MediaPlayer.create
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
@@ -20,7 +16,6 @@ import kotlinx.android.synthetic.main.activity1_principal.*
 import kotlinx.android.synthetic.main.fragment1_6_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import org.w3c.dom.Text
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -39,6 +34,8 @@ class Fragment1_6_juego : Fragment() {
     private var param2: String? = null
     private var sonido = false
     private var audio: MediaPlayer? = null
+    private var firstTime: Boolean = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -56,69 +53,88 @@ class Fragment1_6_juego : Fragment() {
         val button: Button = view.findViewById(R.id.btnf1_6_siguiente)
 
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_6_ajustes)
-        val buttonSonido :ImageButton = view.findViewById(R.id.btnf1_6_sonido)
+        val buttonSonido: ImageButton = view.findViewById(R.id.btnf1_6_sonido)
 
-        button.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment1_6_juego_to_fragment2_6_minijuego)
+        button.setOnClickListener() {
+            Navigation.findNavController(view)
+                .navigate(R.id.action_fragment1_6_juego_to_fragment2_6_minijuego)
         }
-        ajustes.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment1_6_juego_to_fragment4_menu)
+        ajustes.setOnClickListener() {
+            Navigation.findNavController(view)
+                .navigate(R.id.action_fragment1_6_juego_to_fragment4_menu)
         }
-        buttonSonido.setOnClickListener(){
+        buttonSonido.setOnClickListener() {
             startAudio(view)
         }
+
         animacionVolumen(view)
         return view
     }
 
-    private fun animacionVolumen(view:View) {
-        val volumen:TextView = view.findViewById(R.id.txtv1_6_volumen)
+    private fun animacionVolumen(view: View) {
+        //Funcion para la animacion del icono del volumen mientras se reproduce el audio del bertso
+        //Recogemos el icono del volumen y le añadimos la animacion
+        val volumen: TextView = view.findViewById(R.id.txtv1_6_volumen)
         volumen.setBackgroundResource(R.drawable.animacion_volumen)
         val ani = volumen.getBackground() as AnimationDrawable
         ani.start()
 
+        //Funcion para empezar audio bertso
         startAudio(view)
 
+        //Variable para settear que el audio ya ha sido escuchado 1 vez
         sonido = true
 
-        volumen.setOnClickListener(){
+        //Cuando clickamos sobre el icono del volumen el audio se para o sigue
+        volumen.setOnClickListener() {
             //cuando clickas en la foto el audio para o sigue
-            if(sonido == true){
+            if (sonido == true) {
                 volumen.setBackgroundResource(R.drawable.ic_volumenoff)
                 sonido = false
                 audio?.pause()
-            }
-            else{
+            } else {
                 volumen.setBackgroundResource(R.drawable.animacion_volumen)
                 val ani = volumen.getBackground() as AnimationDrawable
                 ani.start()
                 sonido = true
                 audio?.start()
             }
-
         }
+
         val fondo: TextView = view.findViewById(R.id.imgv1_6_fondo)
-        fondo.setOnClickListener(){
-            //cuando clickamos fuera de la foto, la musica y el fondo se van
+        //Cuando clickamos fuera de la foto, la musica y el fondo se van
+        fondo.setOnClickListener() {
+
             imgv1_6_fondo.isVisible = false
             txtv1_6_volumen.isVisible = false
             audio?.stop()
+
+            //lanzamos el segundo audio(bertso)
+            startAudio2(view)
         }
     }
 
-    private fun startAudio(view:View) {
+    private fun startAudio(view: View) {
+        //Funcion que reproduce el primer audio (bertso)
 
-        val fondo : TextView = view.findViewById(R.id.imgv1_6_fondo)
-        val volumen:TextView = view.findViewById(R.id.txtv1_6_volumen)
-        if (!fondo.isVisible){
+        //escondemos el boton de reproducir el audio mientras el audio ya se esta reproducciendo
+        val reproducirAudio: ImageButton = view.findViewById(R.id.btnf1_6_sonido)
+        reproducirAudio.isVisible = false
+
+        //Recogemos tanto el fondo gris como el icono del volumen
+        val fondo: TextView = view.findViewById(R.id.imgv1_6_fondo)
+        val volumen: TextView = view.findViewById(R.id.txtv1_6_volumen)
+
+        //si no estan visibles sacamos el fondo y el icono del microfono
+        if (!fondo.isVisible) {
             fondo.isVisible = true
-            volumen.isVisible = true
+            volumen.isVisible=false
         }
 
         runBlocking() {
             launch {
                 audio = MediaPlayer.create(
-                    context,R.raw.bertsoa
+                    context, R.raw.bertsoa
                 )
                 audio?.setVolume(0.15F, 0.15F)
                 audio?.start()
@@ -126,11 +142,52 @@ class Fragment1_6_juego : Fragment() {
                 audio?.setOnCompletionListener {
                     imgv1_6_fondo.isVisible = false
                     txtv1_6_volumen.isVisible = false
+                    startAudio2(view)
                 }
             }
         }
     }
 
+    private fun startAudio2(view: View) {
+        //Funcion para el segundo audio(descripcion del juego)
+
+        //Si es la primera vez que se reproduce el berso si que se escuchara la descripcion, sino no.
+        if (firstTime) {
+            //reproducimo el audio
+            runBlocking() {
+                launch {
+                    audio = MediaPlayer.create(
+                        context, R.raw.kantu_kantajolasa
+                    )
+                    audio?.setVolume(0.15F, 0.15F)
+                    audio?.start()
+
+                    audio?.setOnCompletionListener {
+                        //cuando el audio se termine escondemos el texto y sacamos el bertso
+                        txtv1_6_titulo.isVisible = false
+                        txtv1_6_texto.isVisible=true
+                    }
+                }
+            }
+
+            typewriter(view)
+
+            //Variable para settear que el texto ya ha sido escrito
+            firstTime = false
+        }
+
+        //hacemos que el boton de reproducir el audio sea visible al terminar el audio
+        val reproducirAudio: ImageButton = view.findViewById(R.id.btnf1_6_sonido)
+        reproducirAudio.isVisible = true
+    }
+
+    private fun typewriter(view: View) {
+
+        val typeWriterView = view.findViewById(R.id.txtv1_6_titulo) as TypeWriterView
+        typeWriterView.setWithMusic(false)
+        typeWriterView.animateText(resources.getString(R.string.titulo))
+        typeWriterView.setDelay(70)
+    }
 
     companion object {
         /**
@@ -150,5 +207,16 @@ class Fragment1_6_juego : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        audio?.pause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // TODO: preguntar si esta el audio empezado
+        audio?.start()
     }
 }

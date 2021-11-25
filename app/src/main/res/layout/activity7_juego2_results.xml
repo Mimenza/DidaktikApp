@@ -1,55 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cons7_juego2results"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:orientation="vertical"
-    android:padding="20dp"
-    android:gravity="center_horizontal">
+    android:layout_height="match_parent" >
 
 
-        <TextView
-            android:id="@+id/txtv7_result"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:gravity="center"
-            android:text="@string/emaitza"
-            android:textColor="@color/black"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+ <FrameLayout
+        android:id="@+id/framelayoutjuego2results"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.297">
 
-        <ImageView
-            android:id="@+id/txtv1_2_respuesta1"
-            android:layout_width="330dp"
-            android:layout_height="283dp"
-            android:src="@drawable/img_trofeo" />
+    </FrameLayout>
 
 
-        <TextView
-            android:id="@+id/txtv7_scoreuser"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textSize="18sp"
-            android:textStyle="bold"
+            android:layout_height="match_parent"
             android:gravity="center"
-            tools:text="Zure emaitza: 9/10!" />
+            android:orientation="vertical">
 
-        <Button
-            android:id="@+id/btn7_terminar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/amaitu"
-            android:layout_marginTop="100dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.866" />
+                <TextView
+                    android:id="@+id/txtv7_result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:gravity="center"
+                    android:text="@string/emaitza"
+                    android:textColor="@color/black"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
 
+                <ImageView
+                    android:id="@+id/img1_2_trofeo"
+                    android:layout_width="330dp"
+                    android:layout_height="283dp"
+                    android:src="@drawable/img_trofeo" />
 
-</LinearLayout>
+                <TextView
+                    android:id="@+id/txtv7_scoreuser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:text="Zure emaitza: 9/10!" />
+
+                <Button
+                    android:id="@+id/btn7_terminar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="120dp"
+                    android:text="@string/amaitu"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.866" />
+
+                <Button
+                    android:id="@+id/btn7_saiatuberriro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/saiatuberriro"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.866" />
+
+        </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -78,12 +78,14 @@
 
     <!--FRAGMENT JUEGO6 -->
     <string name="titulo">Oraingoan, “Kantu- kanta” ariketa egin beharko duzue. Pantailan entzun berri duzuen bertsoa agertuko zaizue, bete beharreko hutsune batzuekin. Zuek, hutsune horiek  bete beharko dituzue hitz batekin, orain entzun berri duzuen bertsoaz oroituz. Oraintxe ikusiko dut zer nolako memoria duzuen… animo!
-</string>
+    </string>
     <string name="bertso">Sagardotegiari\n Bedeinkatua izan dadila …………. grazia\n Bai eta ere kupira gabe edaten duen ………..;\n Edari honek jende askori ematen dio ……...,\n Hau edan gabe egotea da neretzat penitentzia.\n ……...dagon sagardoak dit ematen tentazioa\n Prezisamente edan beharra daukat pertsekuzioa;\n Mila deabruz josirikako orain duen ………..\n Zaleak asko geran medioz dauka …………...\n
-</string>
+    </string>
 
-
+    <!--FRAGMENT JUEGO2 -->
     <string name="emaitza">Emaitza</string>
     <string name="amaitu">Amaitu</string>
+    <string name="ezetzigarrijolasa">Bigarren jolasaren izena “Ezetz igarri?” da. Beraz, lagunduko didazue asmakizunak asmatzen? Goazen, ba! Eta gogoratu, asmakizuna asmatzen baduzu, horren argazkia atera beharko duzula.</string>
+    <string name="saiatuberriro">Saiatu berriro</string>
 
 </resources>

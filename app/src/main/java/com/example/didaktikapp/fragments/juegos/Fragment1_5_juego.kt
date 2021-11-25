@@ -2,7 +2,6 @@ package com.example.didaktikapp.fragments.juegos
 
 import android.annotation.SuppressLint
 import android.graphics.Color
-import android.graphics.PorterDuff
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,7 +14,6 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
-import com.google.android.material.color.MaterialColors.getColor
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,14 +26,28 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 
-data class draggableImg(var origen: ImageView, var destino: ImageView)
+//Objeto para gestionar facilmente los juegos que requieran drag and drop.
+data class DragnDropImage(var origen: ImageView, var objetivo: ImageView, var acertado: Boolean = false)
 
 class Fragment1_5_juego : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
-    var manzanaList: MutableList<draggableImg>? = mutableListOf()
+    private lateinit var button: Button
+
+    val listaOrigen = listOf(R.id.imgOrigenCamisa, R.id.imgOrigenCinturon, R.id.imgOrigenGorro, R.id.imgOrigenManzana, R.id.imgOrigenZapatos)
+    val listaObjetivos = listOf(R.id.imgObjetivoCamisa, R.id.imgObjetivoCinturon, R.id.imgObjetivoGorro, R.id.imgObjetivoManzana, R.id.imgObjetivoZapatos)
+
+    val listaImagenes = listOf(
+        listOf(R.id.imgOrigenCamisa,R.id.imgObjetivoCamisa),
+        listOf(R.id.imgOrigenCinturon,R.id.imgObjetivoCinturon),
+        listOf(R.id.imgOrigenGorro,R.id.imgObjetivoGorro),
+        listOf(R.id.imgOrigenManzana,R.id.imgObjetivoManzana),
+        listOf(R.id.imgOrigenZapatos,R.id.imgObjetivoZapatos)
+    )
+
+    var manzanaList: MutableList<DragnDropImage>? = mutableListOf()
     //private lateinit var objetivo: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,54 +64,43 @@ class Fragment1_5_juego : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment1_5_juego, container, false)
-        val button: Button = view.findViewById(R.id.btnf1_5_siguiente)
+        button = view.findViewById(R.id.btnf1_5_siguiente)
+        button.visibility = View.GONE
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_5_ajustes)
 
+
+        for (vItemList in listaImagenes) {
+            var vItemOrigen: ImageView = view.findViewById(vItemList[0])
+            var vItemDestino: ImageView = view.findViewById(vItemList[1])
+            manzanaList!!.add(DragnDropImage(vItemOrigen,vItemDestino))
+            vItemDestino.setColorFilter(Color.argb(150, 0, 80, 200))
+            vItemOrigen.setOnTouchListener(listener)
+        }
+        /*
+
+        //Imagenes de Origen (Estas van a ser draggables)
         val imgOrigenCamisa: ImageView = view.findViewById(R.id.imgOrigenCamisa)
         val imgOrigenCinturon: ImageView = view.findViewById(R.id.imgOrigenCinturon)
         val imgOrigenGorro: ImageView = view.findViewById(R.id.imgOrigenGorro)
         val imgOrigenManzana: ImageView = view.findViewById(R.id.imgOrigenManzana)
         val imgOrigenZapatos: ImageView = view.findViewById(R.id.imgOrigenZapatos)
 
+        //Imageens de destino (Estas van a ser estaticas para indicar al usuario donde deben ir)
         val imgObjetivoCamisa: ImageView = view.findViewById(R.id.imgObjetivoCamisa)
         val imgObjetivoCinturon: ImageView = view.findViewById(R.id.imgObjetivoCinturon)
         val imgObjetivoGorro: ImageView = view.findViewById(R.id.imgObjetivoGorro)
         val imgObjetivoManzana: ImageView = view.findViewById(R.id.imgObjetivoManzana)
         val imgObjetivoZapatos: ImageView = view.findViewById(R.id.imgObjetivoZapatos)
 
-        manzanaList!!.add(draggableImg(imgOrigenCamisa,imgObjetivoCamisa))
-        manzanaList!!.add(draggableImg(imgOrigenCinturon,imgObjetivoCinturon))
-        manzanaList!!.add(draggableImg(imgOrigenGorro,imgObjetivoGorro))
-        manzanaList!!.add(draggableImg(imgOrigenManzana,imgObjetivoManzana))
-        manzanaList!!.add(draggableImg(imgOrigenZapatos,imgObjetivoZapatos))
+        manzanaList!!.add(DragnDropImage(imgOrigenCamisa,imgObjetivoCamisa))
+        manzanaList!!.add(DragnDropImage(imgOrigenCinturon,imgObjetivoCinturon))
+        manzanaList!!.add(DragnDropImage(imgOrigenGorro,imgObjetivoGorro))
+        manzanaList!!.add(DragnDropImage(imgOrigenManzana,imgObjetivoManzana))
+        manzanaList!!.add(DragnDropImage(imgOrigenZapatos,imgObjetivoZapatos))
 
         for (item in manzanaList!!) {
             item.origen.setOnTouchListener(listener)
-            item.destino.setColorFilter(Color.argb(150, 0, 80, 200))
-        }
-
-        /*
-
-        val mznTest: ImageView = view.findViewById(R.id.imgManzanaTest)
-        val mznTest3: ImageView = view.findViewById(R.id.imgManzanaTest3)
-
-        //mznTest3.setColorFilter(getColor(view, requireContext().getResources().getColor(R.color.white)), PorterDuff.Mode.SRC_ATOP);
-            //mznTest3.imageTintMode = getColor(R.color.white)
-        val mznTest4: ImageView = view.findViewById(R.id.imgManzanaTest4)
-
-        var objetivo1: ImageView = view.findViewById(R.id.objetivo1)
-        var objetivo2: ImageView = view.findViewById(R.id.objetivo2)
-            objetivo2.setColorFilter(Color.argb(255, 255, 0, 255))
-        var objetivo3: ImageView = view.findViewById(R.id.objetivo3)
-            objetivo3.setColorFilter(Color.argb(255, 0, 0, 255))
-
-
-        manzanaList!!.add(draggableImg(mznTest,objetivo1))
-        manzanaList!!.add(draggableImg(mznTest3,objetivo2))
-        manzanaList!!.add(draggableImg(mznTest4,objetivo3))
-
-        for (item in manzanaList!!) {
-            item.origen.setOnTouchListener(listener)
+            item.objetivo.setColorFilter(Color.argb(150, 0, 80, 200))
         }
 
          */
@@ -115,51 +116,57 @@ class Fragment1_5_juego : Fragment() {
 
     @SuppressLint("ClickableViewAccessibility")
     var listener = View.OnTouchListener { view, motionEvent ->
-        val action = motionEvent.action
-        when(action) {
-            MotionEvent.ACTION_MOVE -> {
-                view.y = motionEvent.rawY - view.height/2
-                view.x = motionEvent.rawX - view.width/2
-            }
-            MotionEvent.ACTION_UP -> {
-                view.x = motionEvent.rawX - view.width/2
-                view.y = motionEvent.rawY - view.height/2
-//                println("**** MANZANA: "+ view.x + " // " + view.y)
+        var itemInList: DragnDropImage? = findItemByOrigen(view)
+        if (itemInList != null) {
+            if (!itemInList.acertado) {
+                val action = motionEvent.action
+                when(action) {
+                    MotionEvent.ACTION_MOVE -> {
+                        view.y = motionEvent.rawY - view.height/2
+                        view.x = motionEvent.rawX - view.width/2
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        view.x = motionEvent.rawX - view.width/2
+                        view.y = motionEvent.rawY - view.height/2
+                        var objetivoEncontrado: View = itemInList!!.objetivo
+                        var posX = objetivoEncontrado.getLeft()
+                        var posY = objetivoEncontrado.getTop()
+                        var sizeX = objetivoEncontrado.width
+                        var sizeY = objetivoEncontrado.height
 
-                var objetivoEncontrado: View = getObjetivoFromList(view)!!
+                        if ( (view.x + view.width/2) >= posX && (view.y + view.height/2) >= posY && (view.x + view.width/2) <= posX+sizeX && (view.y + view.height/2) <= posY+sizeY) {
+                            //view.visibility = View.GONE
+                            view.x = posX.toFloat()
+                            view.y = posY.toFloat()
+                            itemInList.acertado = true
 
-                var posX = objetivoEncontrado.getLeft()
-                var posY = objetivoEncontrado.getTop()
-                var sizeX = objetivoEncontrado.width
-                var sizeY = objetivoEncontrado.height
-                /*
-                var posX = objetivo.getLeft()
-
-                var posY = objetivo.getTop()
-                var sizeX = objetivo.width
-                var sizeY = objetivo.height
-                 */
-//                println("**** OBJETIVO: "+ posX + " // " + posY)
-
-                if ( (view.x + view.width/2) >= posX && (view.y + view.height/2) >= posY && (view.x + view.width/2) <= posX+sizeX && (view.y + view.height/2) <= posY+sizeY) {
-                    //view.visibility = View.GONE
-                    view.x = posX.toFloat()
-                    view.y = posY.toFloat()
-                    //view.removeListener
-
-                    //Toast.makeText(requireContext(), "Haz metido la manzana en el cuadrado", Toast.LENGTH_SHORT).show()
-                } else {
-                    //Toast.makeText(requireContext(), "ERROR AL METER LA MANZANA", Toast.LENGTH_SHORT).show()
+                            if (juegoCompletado()) {
+                                button.visibility = View.VISIBLE
+                                Toast.makeText(requireContext(), "FINALIZADO !!", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
                 }
             }
         }
         true
     }
 
-    private fun getObjetivoFromList(view: View): ImageView? {
+    private fun juegoCompletado(): Boolean {
+        var finalizado: Boolean = true
+        for (item in manzanaList!!) {
+            if (!item.acertado) {
+                finalizado = false
+                break
+            }
+        }
+        return finalizado
+    }
+
+    private fun findItemByOrigen(view: View): DragnDropImage? {
         for (item in manzanaList!!) {
             if (item.origen == view) {
-                return item.destino
+                return item
             }
         }
         return null

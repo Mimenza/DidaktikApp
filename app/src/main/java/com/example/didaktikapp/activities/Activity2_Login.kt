@@ -34,8 +34,9 @@ class Activity2_Login : AppCompatActivity(), DbHandler.queryResponseDone {
                 Toast.makeText(this, "[ERROR] Escriba un nombre", Toast.LENGTH_SHORT).show()
             }
         }
-
     }
+
+
 
     /*
         Generamos un metodo generico para iniciarlizar la siguiente actividad dado que lo llamamos
@@ -81,10 +82,13 @@ class Activity2_Login : AppCompatActivity(), DbHandler.queryResponseDone {
     override fun responseDbUserRegister(response: Boolean) {
         if (!response) {
             Toast.makeText(this, "[ERROR] No se ha podido registrar", Toast.LENGTH_SHORT).show()
+            binding.progressBar.visibility = View.GONE
+            binding.btn1Hasi.isEnabled = true
             return
         }
         Toast.makeText(this, "REGISTRADO CORRECTAMENTE", Toast.LENGTH_SHORT).show()
         startActivityBienvenida()
+        finish()
     }
 
 

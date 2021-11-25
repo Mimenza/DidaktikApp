@@ -16,21 +16,21 @@
             android:id="@+id/btnf1_5_siguiente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="28dp"
             android:text="SiGUIENTE"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.953" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
             android:id="@+id/btnf1_5_ajustes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="119dp"
+            android:layout_marginBottom="448dp"
             android:minHeight="48dp"
             android:src="@drawable/ic_ajustes_black"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,67 +39,137 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageView
-            android:id="@+id/imgManzanaTest"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:id="@+id/imgMunecoPrincipal2"
+            android:layout_width="282dp"
+            android:layout_height="335dp"
+            android:layout_marginTop="208dp"
             android:scaleType="fitXY"
-            android:src="@drawable/img_upeliosagarra_small"
-            tools:layout_editor_absoluteX="149dp"
-            tools:layout_editor_absoluteY="39dp" />
-
-        <ImageView
-            android:id="@+id/imgManzanaTest4"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/img_upeliosagarra_small"
-            tools:layout_editor_absoluteX="249dp"
-            tools:layout_editor_absoluteY="180dp" />
-
-        <ImageView
-            android:id="@+id/imgManzanaTest3"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/img_upeliosagarra_small"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="139dp" />
-
-        <ImageView
-            android:id="@+id/objetivo1"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="508dp"
-            android:scaleType="fitXY"
-            android:src="@android:drawable/screen_background_dark"
+            android:src="@drawable/juego5_muneco"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.157"
+            app:layout_constraintHorizontal_bias="0.364"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/objetivo2"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="508dp"
+            android:id="@+id/imgObjetivoGorro"
+            android:layout_width="72dp"
+            android:layout_height="87dp"
+            android:layout_marginTop="148dp"
             android:scaleType="fitXY"
-            android:src="@android:drawable/screen_background_dark"
+            android:src="@drawable/juego5_gorro"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.439"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/objetivo3"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="516dp"
+            android:id="@+id/imgObjetivoCamisa"
+            android:layout_width="194dp"
+            android:layout_height="141dp"
+            android:layout_marginTop="312dp"
             android:scaleType="fitXY"
-            android:src="@android:drawable/screen_background_dark"
+            android:src="@drawable/juego5_camisa"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.869"
+            app:layout_constraintHorizontal_bias="0.391"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgObjetivoCinturon"
+            android:layout_width="92dp"
+            android:layout_height="98dp"
+            android:layout_marginTop="392dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/juego5_cintuiron"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.435"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgObjetivoZapatos"
+            android:layout_width="92dp"
+            android:layout_height="98dp"
+            android:layout_marginTop="496dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/juego5_zapatos"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.206"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgObjetivoManzana"
+            android:layout_width="92dp"
+            android:layout_height="98dp"
+            android:layout_marginTop="328dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/juego5_manzana"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.852"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgOrigenGorro"
+            android:layout_width="72dp"
+            android:layout_height="87dp"
+            android:layout_marginTop="148dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/juego5_gorro"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.439"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgOrigenCamisa"
+            android:layout_width="194dp"
+            android:layout_height="141dp"
+            android:layout_marginTop="312dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/juego5_camisa"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.391"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgOrigenCinturon"
+            android:layout_width="92dp"
+            android:layout_height="98dp"
+            android:layout_marginTop="392dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/juego5_cintuiron"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.435"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgOrigenZapatos"
+            android:layout_width="92dp"
+            android:layout_height="98dp"
+            android:layout_marginTop="496dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/juego5_zapatos"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.206"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgOrigenManzana"
+            android:layout_width="92dp"
+            android:layout_height="98dp"
+            android:layout_marginTop="328dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/juego5_manzana"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.852"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

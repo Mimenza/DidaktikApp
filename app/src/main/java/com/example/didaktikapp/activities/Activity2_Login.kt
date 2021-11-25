@@ -8,12 +8,12 @@ import android.widget.Toast
 import com.example.didaktikapp.R
 import com.example.didaktikapp.databinding.Activity2LoginBinding
 import com.example.reto01.Model.User
-import com.google.firebase.firestore.FirebaseFirestore
 
 
-class Activity2_Login : AppCompatActivity() {
+class Activity2_Login : AppCompatActivity(), DbHandler.queryResponseDone {
     private lateinit var binding:Activity2LoginBinding
     lateinit private var Usuario : User
+    private val dbHandlerInstance = DbHandler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,66 +24,71 @@ class Activity2_Login : AppCompatActivity() {
         binding= Activity2LoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //Firebase
-        //var db:FirebaseFirestore = FirebaseFirestore.getInstance()
-        //getLastIdUser(db)
-
-
         binding.btn1Hasi.setOnClickListener() {
             if (binding.txt2Nombre.text.isNotBlank()) {
-                val querydb = DbHandler.getDbInstance().collection("Usuarios")
-                val query = querydb.whereEqualTo("nombre", binding.txt2Nombre.text.toString())
-                //val query = querydb
-                .get()
-                .addOnSuccessListener { rows ->
-                    DbHandler.setLastUserId(rows.size())
-                    println("******** FILAS: " + rows.size())
-                    if (rows.size() > 0) {
-                        querydb.get()
-                            .addOnSuccessListener { rowsTotal ->
-                                var vId:Int = rows.documents[0]["id"].toString().replace("u","").toInt()
-                                var vNombre:String = rows.documents[0]["nombre"].toString()
-                                var vAdmin:Int = rows.documents[0]["admin"].toString().toInt()
-                                var vPuntuacion:Int = rows.documents[0]["puntuacion"].toString().toInt()
-                                var vUltimoPto:Int = rows.documents[0]["ultimo_punto"].toString().toInt()
-                                DbHandler.setUser(User(vId, vNombre, vAdmin, vPuntuacion, vUltimoPto))
-                                DbHandler.setLastUserId(rowsTotal.size())
-                                Toast.makeText(this, "Usuario Logeado correctamente", Toast.LENGTH_SHORT).show()
-                            }
-                    } else {
-                        querydb.get()
-                            .addOnSuccessListener { rowsTotal ->
-                                val defaultData = hashMapOf(
-                                    "admin" to 0,
-                                    "id" to "u"+(rowsTotal.size() + 1),
-                                    "nombre" to binding.txt2Nombre.text.toString(),
-                                    "puntuacion" to 0,
-                                    "ultimo_punto" to 0)
-                                //querydb.document("Usuarios", ).set(defaultData)
-                                querydb.document((rowsTotal.size()+1).toString()).set(defaultData)
-                                DbHandler.setUser(User(rowsTotal.size()+1, binding.txt2Nombre.text.toString(), 0, 0, 0))
-                                DbHandler.setLastUserId(rowsTotal.size() + 1)
-                                Toast.makeText(this, "Usuario insertado correctamente", Toast.LENGTH_SHORT).show()
-                            }
-
-                    }
-                    var i = Intent(this, Activity4_bienvenida::class.java)
-                    startActivity(i)
-                    this.overridePendingTransition(0, 0)
-
-
-                }
-                .addOnFailureListener { exception ->
-                    val functionName = object{}.javaClass.enclosingMethod.name
-                    println("[ERROR] Found at: ${functionName.toString()}")
-                }
+                // Llamamos al metodo Login de la clase hibrida que gestiona queriess de la BD.
+                dbHandlerInstance.requestDbUserLogin(binding.txt2Nombre.text.toString(), this)
+                binding.progressBar.visibility = View.VISIBLE
+                binding.btn1Hasi.isEnabled = false
+            } else {
+                Toast.makeText(this, "[ERROR] Escriba un nombre", Toast.LENGTH_SHORT).show()
             }
         }
-
     }
 
-    fun iniciarActividadDeBienvenida() {
-        
+
+
+    /*
+        Generamos un metodo generico para iniciarlizar la siguiente actividad dado que lo llamamos
+        desde diferentes metodos. En caso de necesitar hacer un cambio, no necesitaremos realizar el
+        cambio en todos los metodos desde los que se llama
+     */
+    private fun startActivityBienvenida() {
+        var bvIntent = Intent(this, Activity4_bienvenida::class.java)
+        startActivity(bvIntent)
+        this.overridePendingTransition(0, 0)
+    }
+
+    /*
+        Overrideamos el callback  del login dado que FIREBASE usa funciones asincronas
+     */
+    override fun responseDbUserLogin(accountToRegister: String?) {
+        if (accountToRegister != null) {
+            /*
+                Si el parametro que recibimos en este callback es distinto de Null llamamos
+                al metodo de Contar usuarios para posteriormente registrar al usuario
+                * NOTA: Se llama primero al metodo de contar usuarios dado que, la key de los registros
+                *       En FIREBASE es personalizada y no auto-generada
+             */
+            dbHandlerInstance.requestDbUserCount(accountToRegister, this)
+            return
+        }
+        Toast.makeText(this, "LOGEADO CORRECTAMENTE", Toast.LENGTH_SHORT).show()
+        startActivityBienvenida()
+    }
+
+    /*
+        Overrideamos el callback de Contar Usuarios para proceder a registrar el usuario
+     */
+    override fun responseDbUserCount(byRegister: String?, response: Int) {
+        if (byRegister != null) {
+            dbHandlerInstance.requestDbUserRegister(byRegister, this)
+        }
+    }
+
+    /*
+        Overrideamos el callback del Register para proseguir con instrucciones secuenciales.
+     */
+    override fun responseDbUserRegister(response: Boolean) {
+        if (!response) {
+            Toast.makeText(this, "[ERROR] No se ha podido registrar", Toast.LENGTH_SHORT).show()
+            binding.progressBar.visibility = View.GONE
+            binding.btn1Hasi.isEnabled = true
+            return
+        }
+        Toast.makeText(this, "REGISTRADO CORRECTAMENTE", Toast.LENGTH_SHORT).show()
+        startActivityBienvenida()
+        finish()
     }
 
 

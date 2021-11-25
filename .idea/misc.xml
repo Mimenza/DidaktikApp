@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
         <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/activity4_bienvenida.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/activity6_site.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/activity7_juego2_results.xml" value="0.25416666666666665" />
@@ -12,6 +13,10 @@
         <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment1_3_2_juego.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment3_info.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment4_menu.xml" value="0.25416666666666665" />
+=======
+        <entry key="..\:/Users/Luis/Documents/GitHub/DidaktikApp/app/src/main/res/layout/activity2_login.xml" value="0.371875" />
+        <entry key="..\:/Users/Luis/Documents/GitHub/DidaktikApp/app/src/main/res/layout/fragment1_5_juego.xml" value="0.371875" />
+>>>>>>> a868446360462f2cd1028634298d36b8bc84da07
       </map>
     </option>
   </component>

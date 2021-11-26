@@ -39,7 +39,7 @@
                     android:textStyle="bold" />
 
                 <ImageView
-                    android:id="@+id/img1_2_trofeo"
+                    android:id="@+id/txtv1_2_respuesta1"
                     android:layout_width="330dp"
                     android:layout_height="283dp"
                     android:src="@drawable/img_trofeo" />

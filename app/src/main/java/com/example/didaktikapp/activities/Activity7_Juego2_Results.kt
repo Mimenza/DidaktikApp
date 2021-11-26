@@ -108,7 +108,7 @@ class Activity7_Juego2_Results : AppCompatActivity() {
         btn7_terminar.isVisible=false
         btn7_saiatuberriro.isVisible=false
         txtv7_result.isVisible=false
-        img1_2_trofeo.isVisible=false
+        txtv1_2_respuesta1.isVisible=false
         txtv7_scoreuser.isVisible=false
     }
 }

@@ -1,21 +1,34 @@
 package com.example.didaktikapp.activities
 
+import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.drawable.AnimationDrawable
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.animation.TranslateAnimation
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import com.example.didaktikapp.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.example.didaktikapp.databinding.Activity5MapaBinding
+import com.example.didaktikapp.fragments.Fragment5_ajustes
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener
 import com.google.android.gms.maps.model.*
+import kotlinx.android.synthetic.main.activity4_bienvenida.*
+import kotlinx.android.synthetic.main.activity5_mapa.*
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 
 class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
@@ -26,6 +39,10 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
     private var myCurrentPosition: LatLng = LatLng(45.0, 123.0)
     private var lastUserPoint: Int = 7
     private var minimumRadius: Int = 50
+    private lateinit var audio: MediaPlayer
+    private lateinit var vistaanimada: TranslateAnimation
+    private var fragment :Fragment? = null
+    var ajustesShowing: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +63,110 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
                 lastUserPoint = DbHandler.getUser()!!.ultima_puntuacion!!
             }
         }
+
+        //Typewriter mapa tutorial
+        Handler(Looper.getMainLooper()).postDelayed({
+            typewriter()
+        }, 2000)
+        //Typewriter mapa tutorial fin
+        audioSound()
+
+        //Ajustes desde el mapa
+        binding.btn5Ajustes.setOnClickListener{
+            //Push del fragment al activity mapa
+            showAjustes()
+            //Ocultamos el mapa
+            ocultarMapa()
+        }
+
     }
+
+    private fun showAjustes(){
+
+        if (ajustesShowing) {
+            return
+        }
+        ajustesShowing = true
+        fragment = Fragment5_ajustes()
+        supportFragmentManager.beginTransaction().add(R.id.framelayoutajustes, fragment!!).commit()
+
+    }
+
+    private fun ocultarMapa(){
+
+
+        binding.btn5Ajustes.isVisible=false
+        binding.framelayoutmapa.isVisible=false
+
+    }
+
+
+    private fun typewriter() {
+        val typeWriterView = txtv5_presentacionmapa as TypeWriterView
+        typeWriterView.setWithMusic(false)
+        typeWriterView.animateText(resources.getString(R.string.text_bienvenidamapa))
+        typeWriterView.setDelay(70)
+    }
+
+
+    private fun audioSound() {
+        //funcion para la reproduccion del sonido
+        runBlocking() {
+            launch {
+                audio = MediaPlayer.create(this@Activity5_Mapa, R.raw.mapa_aurkezpena)
+                audio.start()
+                audio.duration
+                audio.setOnCompletionListener {
+                    exitAnimationfun()
+                }
+
+            }
+        }
+        starAnimationfun()
+
+    }
+
+       private fun starAnimationfun() {
+
+           //animacion salido upelio
+           vistaanimada = TranslateAnimation(-1000f, 0f, 0f, 0f)
+           vistaanimada.duration = 2000
+
+           //vistaanimada.fillAfter = true
+           imgv5_manzanatutorial.startAnimation(vistaanimada)
+           imgv5_bocadillo.startAnimation(vistaanimada)
+           txtv5_presentacionmapa.startAnimation(vistaanimada)
+
+           //llamamos a la animacion para animar a upelio
+           Handler(Looper.getMainLooper()).postDelayed({
+
+               talkAnimationfun()
+           }, 2000)
+       }
+
+    private fun talkAnimationfun() {
+        imgv5_manzanatutorial.setBackgroundResource(R.drawable.animacion_manzana)
+        val ani = imgv5_manzanatutorial.getBackground() as AnimationDrawable
+        ani.start()
+
+    }
+    private fun exitAnimationfun() {
+        //escondemos la manzanda de la animacion
+        imgv5_manzanatutorial.isVisible = false
+        imgv5_bocadillo.isVisible= false
+        txtv5_presentacionmapa.isVisible=false
+
+        //animacion salido upelio
+        vistaanimada = TranslateAnimation(0f, 1000f, 0f, 0f)
+        vistaanimada.duration = 2000
+
+        //vistaanimada.fillAfter = true
+        imgv5_manzanatutorial.startAnimation(vistaanimada)
+        imgv5_bocadillo.startAnimation(vistaanimada)
+        txtv5_presentacionmapa.startAnimation(vistaanimada)
+
+    }
+
 
     /**
      * Manipulates the map once available.

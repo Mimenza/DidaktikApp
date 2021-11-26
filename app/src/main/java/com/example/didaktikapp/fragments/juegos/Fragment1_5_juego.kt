@@ -14,6 +14,12 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
+import android.graphics.Canvas
+import android.graphics.Paint
+import android.text.Layout
+import androidx.constraintlayout.widget.ConstraintLayout
+import java.util.*
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,6 +41,7 @@ class Fragment1_5_juego : Fragment() {
     private var param2: String? = null
 
     private lateinit var button: Button
+    private lateinit var myLayout: ConstraintLayout
 
     val listaOrigen = listOf(R.id.imgOrigenCamisa, R.id.imgOrigenCinturon, R.id.imgOrigenGorro, R.id.imgOrigenManzana, R.id.imgOrigenZapatos)
     val listaObjetivos = listOf(R.id.imgObjetivoCamisa, R.id.imgObjetivoCinturon, R.id.imgObjetivoGorro, R.id.imgObjetivoManzana, R.id.imgObjetivoZapatos)
@@ -67,6 +74,7 @@ class Fragment1_5_juego : Fragment() {
         button = view.findViewById(R.id.btnf1_5_siguiente)
         button.visibility = View.GONE
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_5_ajustes)
+        myLayout = view.findViewById(R.id.mainlayout)
 
 
         for (vItemList in listaImagenes) {
@@ -89,6 +97,9 @@ class Fragment1_5_juego : Fragment() {
     @SuppressLint("ClickableViewAccessibility")
     var listener = View.OnTouchListener { view, motionEvent ->
         var itemInList: DragnDropImage? = findItemByOrigen(view)
+
+        var opX = view.x
+        var opY = view.y
         if (itemInList != null) {
             if (!itemInList.acertado) {
                 val action = motionEvent.action
@@ -111,6 +122,19 @@ class Fragment1_5_juego : Fragment() {
                             view.x = posX.toFloat()
                             view.y = posY.toFloat()
                             itemInList.acertado = true
+                            /*
+                            val canvas = Canvas()
+                            val paintLine = Paint()
+                            paintLine.isAntiAlias = true
+                            paintLine.color = Color.RED
+                            paintLine.strokeWidth = 5f
+                            canvas.drawLine(opX, opY, posX.toFloat(), posY.toFloat(), paintLine)
+                            myLayout.addView(canvas,0);
+
+                             */
+                            view.y = opX
+                            view.x = opY
+
 
                             if (juegoCompletado()) {
                                 button.visibility = View.VISIBLE
@@ -122,6 +146,23 @@ class Fragment1_5_juego : Fragment() {
             }
         }
         true
+    }
+
+    fun LinePlacer(btn: Button?, call:Int,cPlayer:Int?){
+        var xStart=btn!!.getTop().toFloat()
+        var yStart=btn!!.getLeft().toFloat()
+        var xStop=xStart+100
+        var yStop=yStart+100
+        var paint=Paint()
+        paint.setColor(Color.RED)
+        Draw(xStart,yStart,yStop,xStop,paint)
+    }
+
+    fun Draw(xStart:Float,yStart:Float,yStop:Float,xStop:Float,paint: Paint){
+        var canvas=Canvas()
+        paint.setColor(Color.RED)
+        paint.setStrokeWidth(2f)
+        canvas.drawLine(xStart,yStart,xStop,yStop,paint)
     }
 
     private fun juegoCompletado(): Boolean {

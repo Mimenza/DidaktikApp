@@ -83,8 +83,10 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
 
         mMap.setLatLngBoundsForCameraTarget(astigarragaBounds)
 
+        //Añadir Markers junto a sus nombres
         addMarkers()
 
+        //Añadir Area para mostrar al usuario si algun punto esta cerca de su radio o no
         var myCircle: Circle = mMap.addCircle(
             CircleOptions()
             .center(LatLng(43.285576, -1.941156))
@@ -93,67 +95,44 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
             .strokeWidth(2f)
             .fillColor(0x70ff0000))
 
+        //Variable para comprobar si la primera animacion se ha realiado correctamente
         var firstFocusAnimation = false
         mMap.setOnMyLocationChangeListener {
+            //Metodos para establecer la nueva posicion del radio que rodea la ubicacion del usuario
             myCircle.setCenter(LatLng(it.latitude, it.longitude))
             myCurrentPosition = LatLng(it.latitude, it.longitude)
             if (!firstFocusAnimation) {
+                //Condicion para focalizar al usuario por primera vez
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.latitude, it.longitude), 16F))
                 firstFocusAnimation = true
             }
         }
-        /*
-        fusedLocation.lastLocation.addOnSuccessListener {
-            if (it != null) {
-                //val ubicacion = LatLng(it.latitude, it.longitude)
-                //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ubicacion, 16F))
-            }
-        }
-         */
     }
 
-    // Add markers in Map
-    val markerLIst = arrayListOf<LatLng>(
-        LatLng(43.28124016860453, -1.9469706252948757),
-        LatLng(43.28124645002352, -1.9487146619854678),
-        LatLng(43.28009128981247, -1.9489651924963394),
-        LatLng(43.2801245169072, -1.94919315370149280),
-        LatLng(43.27989827949647, -1.9495313417852063),
-        LatLng(43.27808114110089, -1.9492564399148118),
-        LatLng(43.27775413305006, -1.9488400717525682),
-    )
-
-    var markerNames = arrayListOf<String>(
-        "Sagardoetxea",
-        "Murgia jauregia",
-        "Foru plaza 1",
-        "Foru plaza 2",
-        "Astigar elkartea",
-        "Ipintza sagardotegia",
-        "Rezola sagardotegia"
+    val placesList = arrayListOf<ArrayList<Any>>(
+        arrayListOf("Sagardoetxea",LatLng(43.28124016860453, -1.9469706252948757)),
+        arrayListOf("Murgia jauregia",LatLng(43.28124645002352, -1.9487146619854678)),
+        arrayListOf("Foru plaza 1",LatLng(43.28009128981247, -1.9489651924963394)),
+        arrayListOf("Foru plaza 2",LatLng(43.2801245169072, -1.94919315370149280)),
+        arrayListOf("Astigar elkartea",LatLng(43.27989827949647, -1.9495313417852063)),
+        arrayListOf("Ipintza sagardotegia",LatLng(43.27808114110089, -1.9492564399148118)),
+        arrayListOf("Rezola sagardotegia",LatLng(43.27775413305006, -1.9488400717525682)),
     )
 
     private fun addMarkers() {
-        var astigarragaMarkers: MutableList<LatLng> = ArrayList()
-        var astigarragaNames: MutableList<String> = ArrayList()
-
-        //for (i in 0..lastUserPoint) {
-        for (i in 0..markerLIst.size-1) {
-            astigarragaMarkers.add(markerLIst[i])
-            astigarragaNames.add(markerNames[i])
-        }
-
-        for (i in 0..astigarragaMarkers.size - 1) {
+        for ((i,item) in placesList.withIndex()) {
+            // We create the Marker and their options
             val markerPointIcon = mMap.addMarker(
                 MarkerOptions()
-                    .position(astigarragaMarkers[i])
-                    .title(astigarragaNames[i])
+                    .position(item[1] as LatLng)
+                    .title(item[0] as String)
                     .icon(
                         BitmapDescriptorFactory
                             .defaultMarker(BitmapDescriptorFactory.HUE_RED)
                     )
             )
 
+            //We check the kind of user and, in case that is NOT ADMIN
             if (markerPointIcon != null) {
                 if (DbHandler.getAdmin()) {
                     markerPointIcon.setIcon(BitmapDescriptorFactory
@@ -172,30 +151,17 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
 
         mMap.setOnInfoWindowClickListener(OnInfoWindowClickListener { marker ->
             val latLon = marker.position
-            var numero:Int=0
 
             fun irAPunto(puntoSeleccionado: Int) {
-                var intent:Intent =  Intent(this, Activity6_Site::class.java)
-                when (puntoSeleccionado) {
-                    0 -> numero =0
-                    1 -> numero =1
-                    2 -> numero =2
-                    3 -> numero =3
-                    4 -> numero =4
-                    5 -> numero =5
-                    6 -> numero =6
-                }
-
-                intent.putExtra("numero",numero)
-
+                val intent:Intent =  Intent(this, Activity6_Site::class.java)
+                intent.putExtra("numero",puntoSeleccionado)
                 startActivity(intent)
                 this.overridePendingTransition(0, 0)
             }
 
-            //Cycle through places array
-            for (i in 0..astigarragaMarkers.size - 1) {
-                if (latLon == astigarragaMarkers[i]) {
-                    var distanceToPoint = getDistBetweenPoints(myCurrentPosition, astigarragaMarkers[i])
+            for ((i,item) in placesList.withIndex()) {
+                if (item[1] as LatLng == latLon) {
+                    var distanceToPoint = getDistBetweenPoints(myCurrentPosition, latLon)
                     if (DbHandler.getAdmin()) {
                         irAPunto(i)
                     } else {
@@ -212,7 +178,6 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
                     break
                 }
             }
-
         })
     }
 

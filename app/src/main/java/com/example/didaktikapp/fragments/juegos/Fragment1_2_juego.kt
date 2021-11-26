@@ -82,7 +82,7 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
             progressBar = view.findViewById(R.id.custom_progressBar)
             txtProgressBar =view.findViewById(R.id.txtv1_2_progreessbar)
             question1= view.findViewById(R.id.txtv1_2_pregunta1)
-            question1_answer1= view.findViewById(R.id.img1_2_trofeo)
+            question1_answer1= view.findViewById(R.id.txtv1_2_respuesta1)
             question1_answer2= view.findViewById(R.id.txtv1_2_respuesta2)
             question1_answer3= view.findViewById(R.id.txtv1_2_respuesta3)
             question1_answer4= view.findViewById(R.id.txtv1_2_respuesta4)
@@ -219,6 +219,8 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         question1_answer3!!.text= question!!.optionThree
         question1_answer4!!.text= question!!.optionFour
 
+
+
     }
 
     //COLOR Y FONDO POR DEFECTO DE LAS RESPUESTAS
@@ -245,8 +247,8 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
      //Según el botón que hayamos clickado, pasamos la id a la función selectedOptionView
         when(v?.id){
 
-            R.id.img1_2_trofeo->{
-                  selectedOptionView(img1_2_trofeo, 1)
+            R.id.txtv1_2_respuesta1->{
+                  selectedOptionView(txtv1_2_respuesta1, 1)
             }
             R.id.txtv1_2_respuesta2->{
                 selectedOptionView(txtv1_2_respuesta2, 2)
@@ -261,11 +263,17 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
             //El usuario no ha elegido la opcion, cuando elija nos movemos de posicion
                 if (mSelectedOptionPosition==0){
                     mCurrentPosition++
+                    //Habilitamos las respuestas al clickar la respuesta
+                    question1_answer1.isEnabled=true
+                    question1_answer2.isEnabled=true
+                    question1_answer3.isEnabled=true
+                    question1_answer4.isEnabled=true
                     //Si mi posicion es menor o igual que el tamaño de la lista, reseteamos la pregunta
                     when{
                         mCurrentPosition<=mQuestionList!!.size->{
 
                              setQuestion()
+
                         }else->{
 
                          /*Nos redirecciona a la activity de resultados,
@@ -306,6 +314,13 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
                   }
 
                     mSelectedOptionPosition=0
+                    //Deshabilitamos las respuestas al clickar la respuesta
+                    question1_answer1.isEnabled=false
+                    question1_answer2.isEnabled=false
+                    question1_answer3.isEnabled=false
+                    question1_answer4.isEnabled=false
+
+
                 }
 
             }

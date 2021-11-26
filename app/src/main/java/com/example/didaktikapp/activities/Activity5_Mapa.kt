@@ -155,12 +155,17 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
             )
 
             if (markerPointIcon != null) {
-                if (i < lastUserPoint) {
+                if (DbHandler.getAdmin()) {
                     markerPointIcon.setIcon(BitmapDescriptorFactory
                         .defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-                } else if (i == lastUserPoint) {
-                    markerPointIcon.setIcon(BitmapDescriptorFactory
-                        .defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
+                } else {
+                    if (i < lastUserPoint) {
+                        markerPointIcon.setIcon(BitmapDescriptorFactory
+                            .defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                    } else if (i == lastUserPoint) {
+                        markerPointIcon.setIcon(BitmapDescriptorFactory
+                            .defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
+                    }
                 }
             }
         }

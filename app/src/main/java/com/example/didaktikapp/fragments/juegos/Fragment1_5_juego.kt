@@ -76,34 +76,6 @@ class Fragment1_5_juego : Fragment() {
             vItemDestino.setColorFilter(Color.argb(150, 0, 80, 200))
             vItemOrigen.setOnTouchListener(listener)
         }
-        /*
-
-        //Imagenes de Origen (Estas van a ser draggables)
-        val imgOrigenCamisa: ImageView = view.findViewById(R.id.imgOrigenCamisa)
-        val imgOrigenCinturon: ImageView = view.findViewById(R.id.imgOrigenCinturon)
-        val imgOrigenGorro: ImageView = view.findViewById(R.id.imgOrigenGorro)
-        val imgOrigenManzana: ImageView = view.findViewById(R.id.imgOrigenManzana)
-        val imgOrigenZapatos: ImageView = view.findViewById(R.id.imgOrigenZapatos)
-
-        //Imageens de destino (Estas van a ser estaticas para indicar al usuario donde deben ir)
-        val imgObjetivoCamisa: ImageView = view.findViewById(R.id.imgObjetivoCamisa)
-        val imgObjetivoCinturon: ImageView = view.findViewById(R.id.imgObjetivoCinturon)
-        val imgObjetivoGorro: ImageView = view.findViewById(R.id.imgObjetivoGorro)
-        val imgObjetivoManzana: ImageView = view.findViewById(R.id.imgObjetivoManzana)
-        val imgObjetivoZapatos: ImageView = view.findViewById(R.id.imgObjetivoZapatos)
-
-        manzanaList!!.add(DragnDropImage(imgOrigenCamisa,imgObjetivoCamisa))
-        manzanaList!!.add(DragnDropImage(imgOrigenCinturon,imgObjetivoCinturon))
-        manzanaList!!.add(DragnDropImage(imgOrigenGorro,imgObjetivoGorro))
-        manzanaList!!.add(DragnDropImage(imgOrigenManzana,imgObjetivoManzana))
-        manzanaList!!.add(DragnDropImage(imgOrigenZapatos,imgObjetivoZapatos))
-
-        for (item in manzanaList!!) {
-            item.origen.setOnTouchListener(listener)
-            item.objetivo.setColorFilter(Color.argb(150, 0, 80, 200))
-        }
-
-         */
 
         button.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment1_5_juego_to_fragment2_5_minijuego)

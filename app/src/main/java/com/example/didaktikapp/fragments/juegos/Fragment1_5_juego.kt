@@ -14,9 +14,6 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.text.Layout
 import androidx.constraintlayout.widget.ConstraintLayout
 import java.util.*
 
@@ -41,10 +38,9 @@ class Fragment1_5_juego : Fragment() {
     private var param2: String? = null
 
     private lateinit var button: Button
-    private lateinit var myLayout: ConstraintLayout
+    private lateinit var myLayout: View
 
-    val listaOrigen = listOf(R.id.imgOrigenCamisa, R.id.imgOrigenCinturon, R.id.imgOrigenGorro, R.id.imgOrigenManzana, R.id.imgOrigenZapatos)
-    val listaObjetivos = listOf(R.id.imgObjetivoCamisa, R.id.imgObjetivoCinturon, R.id.imgObjetivoGorro, R.id.imgObjetivoManzana, R.id.imgObjetivoZapatos)
+    private lateinit var globalView: View
 
     val listaImagenes = listOf(
         listOf(R.id.imgOrigenCamisa,R.id.imgObjetivoCamisa),
@@ -71,10 +67,16 @@ class Fragment1_5_juego : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment1_5_juego, container, false)
+        globalView = view
         button = view.findViewById(R.id.btnf1_5_siguiente)
         button.visibility = View.GONE
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_5_ajustes)
-        myLayout = view.findViewById(R.id.mainlayout)
+        //myLayout = view.findViewById(R.id.mainlayout)
+        myLayout = view.findViewById<ConstraintLayout>(R.id.mainlayout)
+
+
+
+
 
 
         for (vItemList in listaImagenes) {
@@ -94,48 +96,41 @@ class Fragment1_5_juego : Fragment() {
         return view
     }
 
-    @SuppressLint("ClickableViewAccessibility")
-    var listener = View.OnTouchListener { view, motionEvent ->
-        var itemInList: DragnDropImage? = findItemByOrigen(view)
+    var opX: Float = 0F
+    var opY: Float = 0F
 
-        var opX = view.x
-        var opY = view.y
+    @SuppressLint("ClickableViewAccessibility")
+    var listener = View.OnTouchListener { viewElement, motionEvent ->
+        var itemInList: DragnDropImage? = findItemByOrigen(viewElement)
         if (itemInList != null) {
             if (!itemInList.acertado) {
                 val action = motionEvent.action
                 when(action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        opX = viewElement.x
+                        opY = viewElement.y
+                    }
                     MotionEvent.ACTION_MOVE -> {
-                        view.y = motionEvent.rawY - view.height/2
-                        view.x = motionEvent.rawX - view.width/2
+                        viewElement.x = motionEvent.rawX - viewElement.width/2
+                        viewElement.y = motionEvent.rawY - viewElement.height/2
                     }
                     MotionEvent.ACTION_UP -> {
-                        view.x = motionEvent.rawX - view.width/2
-                        view.y = motionEvent.rawY - view.height/2
+                        viewElement.x = motionEvent.rawX - viewElement.width/2
+                        viewElement.y = motionEvent.rawY - viewElement.height/2
                         var objetivoEncontrado: View = itemInList!!.objetivo
                         var posX = objetivoEncontrado.getLeft()
                         var posY = objetivoEncontrado.getTop()
                         var sizeX = objetivoEncontrado.width
                         var sizeY = objetivoEncontrado.height
 
-                        if ( (view.x + view.width/2) >= posX && (view.y + view.height/2) >= posY && (view.x + view.width/2) <= posX+sizeX && (view.y + view.height/2) <= posY+sizeY) {
-                            //view.visibility = View.GONE
-                            view.x = posX.toFloat()
-                            view.y = posY.toFloat()
+                        if ( (viewElement.x + viewElement.width/2) >= posX && (viewElement.y + viewElement.height/2) >= posY && (viewElement.x + viewElement.width/2) <= posX+sizeX && (viewElement.y + viewElement.height/2) <= posY+sizeY) {
+                            //viewElement.visibility = View.GONE
+                            //viewElement.x = opX
+                            //viewElement.y = opY
+                            viewElement.x = posX.toFloat()
+                            viewElement.y = posY.toFloat()
+                            //Utils.drawLine(globalView, requireContext(),opX,opY,posX.toFloat(),posY.toFloat(),15F, (0..255).random(),(0..255).random(),(0..255).random())
                             itemInList.acertado = true
-                            /*
-                            val canvas = Canvas()
-                            val paintLine = Paint()
-                            paintLine.isAntiAlias = true
-                            paintLine.color = Color.RED
-                            paintLine.strokeWidth = 5f
-                            canvas.drawLine(opX, opY, posX.toFloat(), posY.toFloat(), paintLine)
-                            myLayout.addView(canvas,0);
-
-                             */
-                            view.y = opX
-                            view.x = opY
-
-
                             if (juegoCompletado()) {
                                 button.visibility = View.VISIBLE
                                 Toast.makeText(requireContext(), "FINALIZADO !!", Toast.LENGTH_SHORT).show()
@@ -146,23 +141,6 @@ class Fragment1_5_juego : Fragment() {
             }
         }
         true
-    }
-
-    fun LinePlacer(btn: Button?, call:Int,cPlayer:Int?){
-        var xStart=btn!!.getTop().toFloat()
-        var yStart=btn!!.getLeft().toFloat()
-        var xStop=xStart+100
-        var yStop=yStart+100
-        var paint=Paint()
-        paint.setColor(Color.RED)
-        Draw(xStart,yStart,yStop,xStop,paint)
-    }
-
-    fun Draw(xStart:Float,yStart:Float,yStop:Float,xStop:Float,paint: Paint){
-        var canvas=Canvas()
-        paint.setColor(Color.RED)
-        paint.setStrokeWidth(2f)
-        canvas.drawLine(xStart,yStart,xStop,yStop,paint)
     }
 
     private fun juegoCompletado(): Boolean {
@@ -204,4 +182,7 @@ class Fragment1_5_juego : Fragment() {
                 }
             }
     }
+
 }
+
+

@@ -3,6 +3,9 @@ package com.example.didaktikapp.fragments.juegos
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
+import androidx.core.text.HtmlCompat;
+import android.text.Spanned;
+import android.widget.TextView;
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -66,6 +69,34 @@ class Fragment1_6_juego : Fragment() {
             startAudio(view)
         }
 
+
+        //=====================================
+        val bertsotxt : TextView = view.findViewById(R.id.txtv1_6_texto)
+
+        val htmlString = "Sagardotegiari<br/><br/>\n" +
+                "\n" +
+                "        Bedeinkatua izan dadila &#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009; grazia<br/><br/>\n" +
+                "\n" +
+                "        Bai eta ere kupira gabe edaten duen &#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;;<br/><br/>\n" +
+                "\n" +
+                "        Edari honek jende askori ematen dio &#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;,<br/><br/>\n" +
+                "\n" +
+                "        Hau edan gabe egotea da neretzat penitentzia.<br/><br/>\n" +
+                "\n" +
+                "        &#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009; dagon sagardoak dit ematen tentazioa<br/><br/>\n" +
+                "\n" +
+                "        Prezisamente edan beharra daukat pertsekuzioa;<br/><br/>\n" +
+                "\n" +
+                "        Mila deabruz josirikako orain duen &#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;<br/><br/>\n" +
+                "\n" +
+                "        Zaleak asko geran medioz dauka &#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;"
+
+        val spanned = HtmlCompat.fromHtml(htmlString, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
+        val tvOutput = bertsotxt as TextView
+
+        tvOutput.text = spanned
+        //=====================================
         animacionVolumen(view)
         return view
     }
@@ -127,7 +158,7 @@ class Fragment1_6_juego : Fragment() {
         //si no estan visibles sacamos el fondo y el icono del microfono
         if (!fondo.isVisible) {
             fondo.isVisible = true
-            volumen.isVisible=false
+            volumen.isVisible = false
         }
 
         runBlocking() {
@@ -164,7 +195,7 @@ class Fragment1_6_juego : Fragment() {
                     audio?.setOnCompletionListener {
                         //cuando el audio se termine escondemos el texto y sacamos el bertso
                         txtv1_6_titulo.isVisible = false
-                        txtv1_6_texto.isVisible=true
+                        txtv1_6_texto.isVisible = true
                     }
                 }
             }

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Sagarra jo</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -79,7 +80,23 @@
     <!--FRAGMENT JUEGO6 -->
     <string name="titulo">Oraingoan, “Kantu- kanta” ariketa egin beharko duzue. Pantailan entzun berri duzuen bertsoa agertuko zaizue, bete beharreko hutsune batzuekin. Zuek, hutsune horiek  bete beharko dituzue hitz batekin, orain entzun berri duzuen bertsoaz oroituz. Oraintxe ikusiko dut zer nolako memoria duzuen… animo!
     </string>
-    <string name="bertso">Sagardotegiari\n Bedeinkatua izan dadila …………. grazia\n Bai eta ere kupira gabe edaten duen ………..;\n Edari honek jende askori ematen dio ……...,\n Hau edan gabe egotea da neretzat penitentzia.\n ……...dagon sagardoak dit ematen tentazioa\n Prezisamente edan beharra daukat pertsekuzioa;\n Mila deabruz josirikako orain duen ………..\n Zaleak asko geran medioz dauka …………...\n
+    <string name="bertso">Sagardotegiari<br/><br/>
+
+        Bedeinkatua izan dadila &#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009; grazia<br/><br/>
+
+        Bai eta ere kupira gabe edaten duen &#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;;<br/><br/>
+
+        Edari honek jende askori ematen dio &#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;,<br/><br/>
+
+        Hau edan gabe egotea da neretzat penitentzia.<br/><br/>
+
+        &#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009; dagon sagardoak dit ematen tentazioa<br/><br/>
+
+        Prezisamente edan beharra daukat pertsekuzioa;<br/><br/>
+
+        Mila deabruz josirikako orain duen &#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;<br/><br/>
+
+        Zaleak asko geran medioz dauka &#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;
     </string>
 
     <!--FRAGMENT JUEGO2 -->
@@ -87,5 +104,6 @@
     <string name="amaitu">Amaitu</string>
     <string name="ezetzigarrijolasa">Bigarren jolasaren izena “Ezetz igarri?” da. Beraz, lagunduko didazue asmakizunak asmatzen? Goazen, ba! Eta gogoratu, asmakizuna asmatzen baduzu, horren argazkia atera beharko duzula.</string>
     <string name="saiatuberriro">Saiatu berriro</string>
+    <string name="text_bienvenidamapa">Hau izango da egingo behar duzuen ibilbidea ni sagardo bilakatzeko. Zorte on!</string>
 
 </resources>

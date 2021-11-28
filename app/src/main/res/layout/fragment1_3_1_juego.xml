@@ -10,17 +10,8 @@
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/imgv1_6_fondo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="JUEGO 3.1"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:id="@+id/mainlayout">
 
         <Button
             android:id="@+id/btnf1_3_1_siguiente"
@@ -32,7 +23,7 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.699" />
+            app:layout_constraintVertical_bias="0.976" />
 
         <ImageButton
             android:id="@+id/btnf1_3_1_ajustes"
@@ -47,5 +38,158 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.174"
             tools:ignore="SpeakableTextPresentCheck" />
+
+        <ImageView
+            android:id="@+id/puzzle_pieza_otest1"
+            android:layout_width="50dp"
+            android:layout_weight="0.25"
+            android:scaleType="fitXY"
+            android:layout_height="50dp"
+            android:src="@drawable/puzzle_0000_capa_1"/>
+
+        <ImageView
+            android:id="@+id/puzzle_pieza_otest2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_weight="0.25"
+            android:scaleType="fitXY"
+            android:src="@drawable/puzzle_0000_capa_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="310dp"
+            android:layout_marginTop="184dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/btnf1_3_1_siguiente"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.33"
+                android:weightSum="1"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/puzzle_pieza_o_1"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.25"
+                    android:scaleType="fitXY"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/puzzle_0000_capa_1"/>
+
+                <ImageView
+                    android:id="@+id/puzzle_pieza_o_2"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.25"
+                    android:scaleType="fitXY"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/puzzle_0001_capa_2"/>
+
+                <ImageView
+                    android:id="@+id/puzzle_pieza_o_3"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.25"
+                    android:scaleType="fitXY"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/puzzle_0002_capa_3"/>
+
+                <ImageView
+                    android:id="@+id/puzzle_pieza_o_4"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.25"
+                    android:scaleType="fitXY"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/puzzle_0003_capa_4"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.33"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/puzzle_pieza_o_5"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.25"
+                    android:scaleType="fitXY"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/puzzle_0004_capa_5"/>
+
+                <ImageView
+                    android:id="@+id/puzzle_pieza_o_6"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.25"
+                    android:scaleType="fitXY"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/puzzle_0005_capa_6"/>
+
+                <ImageView
+                    android:id="@+id/puzzle_pieza_o_7"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.25"
+                    android:scaleType="fitXY"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/puzzle_0006_capa_7"/>
+
+                <ImageView
+                    android:id="@+id/puzzle_pieza_o_8"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.25"
+                    android:scaleType="fitXY"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/puzzle_0007_capa_8"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.33"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/puzzle_pieza_o_9"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.25"
+                    android:scaleType="fitXY"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/puzzle_0008_capa_9"/>
+
+                <ImageView
+                    android:id="@+id/puzzle_pieza_o_10"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.25"
+                    android:scaleType="fitXY"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/puzzle_0009_capa_10"/>
+
+                <ImageView
+                    android:id="@+id/puzzle_pieza_o_11"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.25"
+                    android:scaleType="fitXY"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/puzzle_0010_capa_11"/>
+
+                <ImageView
+                    android:id="@+id/puzzle_pieza_o_12"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.25"
+                    android:scaleType="fitXY"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/puzzle_0011_capa_12"/>
+
+            </LinearLayout>
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -45,6 +45,14 @@
                 android:layout_height="200dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="550dp"
+                android:src="@drawable/img_upeliosagarra"
+                android:contentDescription="TODO" />
+            <ImageView
+                android:id="@+id/imgv5_manzanatutorial_animado"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="550dp"
                 android:src="@drawable/img_upeliosagarra" />
 
             <ImageView

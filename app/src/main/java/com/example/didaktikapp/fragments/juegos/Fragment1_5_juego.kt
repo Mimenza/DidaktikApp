@@ -1,5 +1,6 @@
 package com.example.didaktikapp.fragments.juegos
 
+import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
@@ -8,16 +9,28 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.graphics.drawable.AnimationDrawable
+import android.media.MediaPlayer
+import android.net.Uri
+import android.os.Handler
+import android.os.Looper
 import android.text.Layout
+import android.view.animation.AnimationUtils
+import android.view.animation.TranslateAnimation
+import android.widget.*
+import androidx.browser.customtabs.CustomTabsClient.getPackageName
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
+import kotlinx.android.synthetic.main.fragment1_1_juego.*
+import kotlinx.android.synthetic.main.fragment1_2_juego.*
+import kotlinx.android.synthetic.main.fragment1_2_juego.txtv1_2tutorialjuego2
+import kotlinx.android.synthetic.main.fragment1_5_juego.*
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.util.*
 
 
@@ -39,9 +52,10 @@ class Fragment1_5_juego : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+    private lateinit var video: VideoView
     private lateinit var button: Button
     private lateinit var myLayout: ConstraintLayout
+    private lateinit var vistaanimada:TranslateAnimation
 
     val listaOrigen = listOf(R.id.imgOrigenCamisa, R.id.imgOrigenCinturon, R.id.imgOrigenGorro, R.id.imgOrigenManzana, R.id.imgOrigenZapatos)
     val listaObjetivos = listOf(R.id.imgObjetivoCamisa, R.id.imgObjetivoCinturon, R.id.imgObjetivoGorro, R.id.imgObjetivoManzana, R.id.imgObjetivoZapatos)
@@ -71,10 +85,28 @@ class Fragment1_5_juego : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment1_5_juego, container, false)
-        button = view.findViewById(R.id.btnf1_5_siguiente)
+        button = view.findViewById(R.id.btnf1_5_siguienteajuego)
+
         button.visibility = View.GONE
+        //----------------VIDEO on start on destroy---------------------------
+        video= view.findViewById(R.id.videoViewjuego5)
+        video.isVisible=false
+        //Creating MediaController
+        val mediaController = MediaController(requireContext())
+        mediaController.setAnchorView(video)
+        //specify the location of media file
+        val uri:Uri =
+            Uri.parse("android.resource://" + requireContext().getPackageName() + "/" + R.raw.juego5video)
+        //Setting MediaController and URI, then starting the videoView
+        video.setMediaController(mediaController)
+        video.setVideoURI(uri)
+        video.requestFocus()
+        video.start()
+        //----------------VIDEO FIN---------------------------
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_5_ajustes)
+        val btnVerVideo: Button = view.findViewById(R.id.btnf1_5_siguienteavideo)
         myLayout = view.findViewById(R.id.mainlayout)
+        var audio: MediaPlayer
 
 
         for (vItemList in listaImagenes) {
@@ -88,11 +120,108 @@ class Fragment1_5_juego : Fragment() {
         button.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment1_5_juego_to_fragment2_5_minijuego)
         }
-        ajustes.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment1_5_juego_to_fragment4_menu)
+        ajustes.setOnClickListener() {
+            Navigation.findNavController(view)
+                .navigate(R.id.action_fragment1_5_juego_to_fragment4_menu)
         }
+        btnVerVideo.setOnClickListener() {
+           verVideo()
+        }
+
+        //Typewriter juego 5 tutorial
+        Handler(Looper.getMainLooper()).postDelayed({
+            typewriter(view)
+        }, 2000)
+        //Typewriter juego 5 tutorial fin
+
+        //Audio juego 5
+        runBlocking() {
+            launch {
+                audio = MediaPlayer.create(context, R.raw.juego5audio)
+                audio.start()
+
+            }
+            //animacion para la descripcion
+            starAnimationfun(view)
+        }
+
         return view
     }
+
+    override fun onDestroy() {
+        video.stopPlayback()
+        super.onDestroy()
+    }
+
+    override fun onStop() {
+        video.stopPlayback()
+        super.onStop()
+    }
+
+    private fun typewriter(view: View) {
+        val typeWriterView = view.findViewById(R.id.txtv1_5tutorialjuego5) as TypeWriterView
+        typeWriterView.setWithMusic(false)
+        typeWriterView.animateText(resources.getString(R.string.sagardantzajolasa))
+        typeWriterView.setDelay(70)
+    }
+
+    private fun starAnimationfun(view: View) {
+        // animacion fondo gris
+        val txtAnimacion = view.findViewById(R.id.txtv1_5tutorialjuego5) as TextView
+        val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade)
+        txtAnimacion.startAnimation(aniFade)
+
+        //animacion entrada upelio
+        vistaanimada = TranslateAnimation(-1000f, 0f, 0f, 0f)
+        vistaanimada.duration = 2000
+        val upelio = view.findViewById(R.id.imgv1_5_upelio) as ImageView
+        upelio.startAnimation(vistaanimada)
+
+        //llamamos a la animacion para animar a upelio
+        Handler(Looper.getMainLooper()).postDelayed({
+            upelio.isVisible = false
+            talkAnimationfun(view)
+        }, 2000)
+
+    }
+
+    private fun talkAnimationfun(view: View) {
+        val upelio = view.findViewById(R.id.imgv1_5_upelio2) as ImageView
+        upelio.setBackgroundResource(R.drawable.animacion_manzana)
+        val ani = upelio.background as AnimationDrawable
+        ani.start()
+
+    }
+
+    private fun verVideo(){
+
+        //Ocultamos acciones menos el video
+        imgv1_5_upelio.isVisible=false
+        imgv1_5_upelio2.isVisible=false
+        txtv1_5tutorialjuego5.isVisible=false
+        videoViewjuego5.isVisible=true
+
+        btnf1_5_siguienteavideo.isVisible=false
+        btnf1_5_siguienteajuego.isVisible=true
+
+        btnf1_5_siguienteajuego.setOnClickListener{
+
+            exitAnimationfun()
+        }
+
+    }
+
+    private fun exitAnimationfun() {
+
+        //Ocultamos las acciones
+        videoViewjuego5.isVisible=false
+        btnf1_5_siguienteajuego.isVisible=false
+        txtv1_5fondogris.isVisible=false
+        btnf1_5_siguiente.isVisible=false
+
+
+    }
+
 
     @SuppressLint("ClickableViewAccessibility")
     var listener = View.OnTouchListener { view, motionEvent ->

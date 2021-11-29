@@ -1,5 +1,7 @@
 package com.example.didaktikapp.fragments
 
+import `in`.codeshuffle.typewriterview.TypeWriterView
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,7 +11,10 @@ import com.example.didaktikapp.R
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.navigation.Navigation
+import com.example.didaktikapp.activities.Activity5_Mapa
+import kotlinx.android.synthetic.main.activity5_mapa.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -57,6 +62,16 @@ class Fragment3_info : Fragment() {
         var imagen: String = ""
         var descripcion: String = ""
         val button: Button = view.findViewById(R.id.btn3f_jugar)
+        val buttonBackToMap: ImageView = view.findViewById(R.id.imgv3f_backtomap)
+        buttonBackToMap.setOnClickListener{
+            activity?.let{
+                val intent = Intent (it, Activity5_Mapa::class.java)
+                it.startActivity(intent)
+            }
+            //Ocultamos el tutorial, para que no salga siempre solo en la primera vez
+            ocultarUpelioAnimacion(view)
+        }
+
         when (numero) {
             0 -> {
                 titulo = resources.getString(R.string.titulo1_juego)
@@ -147,6 +162,27 @@ class Fragment3_info : Fragment() {
             tvDescripcion.setText(descripcion)
         }
         return view
+    }
+
+
+    private fun ocultarUpelioAnimacion(view:View){
+
+
+        val upelio: ImageView? = view?.findViewById<ImageView>(R.id.imgv5_manzanatutorial_animado)
+        val bocadillo: ImageView? = view?.findViewById<ImageView>(R.id.imgv5_bocadillo)
+        val tvDescripcion: TextView? = view?.findViewById<TextView>(R.id.txtv5_presentacionmapa)
+
+
+        if (upelio != null) {
+            upelio.isVisible=false
+        }
+        if (bocadillo != null) {
+            bocadillo.isVisible=false
+        }
+        if (tvDescripcion != null) {
+            tvDescripcion.isVisible=false
+        }
+
     }
     companion object {
         /**

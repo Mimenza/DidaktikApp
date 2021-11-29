@@ -172,5 +172,86 @@
             app:layout_constraintBottom_toBottomOf="parent" />
 
 
+
+        <TextView
+            android:id="@+id/txtv1_5fondogris"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#D3000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/imgv1_5_upelio2"
+            android:layout_width="323dp"
+            android:layout_height="316dp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtv1_5fondogris"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.79" />
+
+        <in.codeshuffle.typewriterview.TypeWriterView
+            android:id="@+id/txtv1_5tutorialjuego5"
+            android:layout_width="327dp"
+            android:layout_height="422dp"
+            android:focusable="true"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.13999999"
+            tools:ignore="MissingClass" />
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/imgv1_5_upelio"
+            android:layout_width="323dp"
+            android:layout_height="316dp"
+            android:src="@drawable/img_upeliosagarra"
+            app:layout_constraintBottom_toBottomOf="@+id/txtv1_5fondogris"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.79" />
+
+        <VideoView
+            android:id="@+id/videoViewjuego5"
+            android:layout_width="wrap_content"
+            android:layout_height="308dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.498" />
+
+
+        <Button
+            android:id="@+id/btnf1_5_siguienteavideo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="28dp"
+            android:text="@string/ikusibideoa"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btnf1_5_siguienteajuego"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="28dp"
+            android:text="@string/jolastu"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

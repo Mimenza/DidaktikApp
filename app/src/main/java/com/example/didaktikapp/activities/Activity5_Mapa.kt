@@ -9,7 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View.GONE
 import android.view.animation.TranslateAnimation
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
@@ -133,28 +135,29 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
            vistaanimada.duration = 2000
 
            //vistaanimada.fillAfter = true
+
            imgv5_manzanatutorial.startAnimation(vistaanimada)
            imgv5_bocadillo.startAnimation(vistaanimada)
            txtv5_presentacionmapa.startAnimation(vistaanimada)
 
            //llamamos a la animacion para animar a upelio
            Handler(Looper.getMainLooper()).postDelayed({
-
+           binding.imgv5Manzanatutorial.isVisible=false
                talkAnimationfun()
            }, 2000)
        }
 
     private fun talkAnimationfun() {
-        imgv5_manzanatutorial.setBackgroundResource(R.drawable.animacion_manzana)
-        val ani = imgv5_manzanatutorial.getBackground() as AnimationDrawable
+        imgv5_manzanatutorial_animado.setBackgroundResource(R.drawable.animacion_manzana)
+        val ani = imgv5_manzanatutorial_animado.getBackground() as AnimationDrawable
         ani.start()
 
     }
     private fun exitAnimationfun() {
         //escondemos la manzanda de la animacion
-        imgv5_manzanatutorial.isVisible = false
         imgv5_bocadillo.isVisible= false
         txtv5_presentacionmapa.isVisible=false
+        imgv5_manzanatutorial_animado.isVisible = false
 
         //animacion salido upelio
         vistaanimada = TranslateAnimation(0f, 1000f, 0f, 0f)

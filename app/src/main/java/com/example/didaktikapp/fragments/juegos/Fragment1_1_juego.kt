@@ -2,6 +2,7 @@ package com.example.didaktikapp.fragments.juegos
 
 import com.example.didaktikapp.R
 import `in`.codeshuffle.typewriterview.TypeWriterView
+import android.content.Intent
 import android.media.MediaPlayer
 import androidx.fragment.app.Fragment
 import android.os.Handler
@@ -20,6 +21,9 @@ import android.graphics.drawable.AnimationDrawable
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
+import com.example.didaktikapp.Model.Constantsjuego2
+import com.example.didaktikapp.activities.Activity5_Mapa
+import com.example.didaktikapp.activities.Activity7_Juego2_Results
 import kotlinx.coroutines.runBlocking
 import kotlinx.android.synthetic.main.fragment1_1_juego.*
 import kotlinx.coroutines.launch
@@ -77,6 +81,7 @@ class Fragment1_1_juego : Fragment() {
         val button: Button = view.findViewById(R.id.btnf1_1saltartutorial)
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_1_ajustes)
 
+
         img1 = view.findViewById(R.id.imgv1_1imagen1)
         img2 = view.findViewById(R.id.imgv1_1imagen2)
         img3 = view.findViewById(R.id.imgv1_1imagen3)
@@ -94,6 +99,8 @@ class Fragment1_1_juego : Fragment() {
             Navigation.findNavController(view)
                 .navigate(R.id.action_fragment1_1_juego_to_fragment4_menu)
         }
+
+
 
         //Typewriter juego 1 tutorial
         Handler(Looper.getMainLooper()).postDelayed({

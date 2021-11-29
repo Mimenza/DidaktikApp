@@ -3,34 +3,24 @@ package com.example.didaktikapp.fragments.juegos
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.graphics.drawable.AnimationDrawable
+import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
-import com.example.didaktikapp.R
-<<<<<<< HEAD
-import android.graphics.Canvas
-import android.graphics.Paint
-import android.graphics.drawable.AnimationDrawable
-import android.media.MediaPlayer
-import android.net.Uri
-import android.os.Handler
-import android.os.Looper
-import android.text.Layout
 import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
 import android.widget.*
-import androidx.browser.customtabs.CustomTabsClient.getPackageName
-=======
->>>>>>> 55a7a4e4e406c7c0d09c2aa87d762fe30ff974b3
+import androidx.navigation.Navigation
+import com.example.didaktikapp.R
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
-import kotlinx.android.synthetic.main.fragment1_1_juego.*
-import kotlinx.android.synthetic.main.fragment1_2_juego.*
-import kotlinx.android.synthetic.main.fragment1_2_juego.txtv1_2tutorialjuego2
 import kotlinx.android.synthetic.main.fragment1_5_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -55,16 +45,12 @@ class Fragment1_5_juego : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private lateinit var video: VideoView
-    private lateinit var button: Button
-<<<<<<< HEAD
-    private lateinit var myLayout: ConstraintLayout
-    private lateinit var vistaanimada:TranslateAnimation
-=======
-    private lateinit var myLayout: View
->>>>>>> 55a7a4e4e406c7c0d09c2aa87d762fe30ff974b3
 
+    private lateinit var button: Button
+    private lateinit var myLayout: View
+    private lateinit var video: VideoView
     private lateinit var globalView: View
+    private lateinit var vistaanimada: TranslateAnimation
 
     val listaImagenes = listOf(
         listOf(R.id.imgOrigenCamisa,R.id.imgObjetivoCamisa),
@@ -91,43 +77,19 @@ class Fragment1_5_juego : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment1_5_juego, container, false)
-<<<<<<< HEAD
-        button = view.findViewById(R.id.btnf1_5_siguienteajuego)
-
-=======
         globalView = view
         button = view.findViewById(R.id.btnf1_5_siguiente)
->>>>>>> 55a7a4e4e406c7c0d09c2aa87d762fe30ff974b3
         button.visibility = View.GONE
-        //----------------VIDEO on start on destroy---------------------------
-        video= view.findViewById(R.id.videoViewjuego5)
-        video.isVisible=false
-        //Creating MediaController
-        val mediaController = MediaController(requireContext())
-        mediaController.setAnchorView(video)
-        //specify the location of media file
-        val uri:Uri =
-            Uri.parse("android.resource://" + requireContext().getPackageName() + "/" + R.raw.juego5video)
-        //Setting MediaController and URI, then starting the videoView
-        video.setMediaController(mediaController)
-        video.setVideoURI(uri)
-        video.requestFocus()
-        video.start()
-        //----------------VIDEO FIN---------------------------
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_5_ajustes)
-<<<<<<< HEAD
         val btnVerVideo: Button = view.findViewById(R.id.btnf1_5_siguienteavideo)
-        myLayout = view.findViewById(R.id.mainlayout)
-        var audio: MediaPlayer
-=======
+        val btnIrAJuego: Button = view.findViewById(R.id.btnf1_5_siguienteajuego)
+
         //myLayout = view.findViewById(R.id.mainlayout)
         myLayout = view.findViewById<ConstraintLayout>(R.id.mainlayout)
 
 
 
-
->>>>>>> 55a7a4e4e406c7c0d09c2aa87d762fe30ff974b3
-
+        btnIrAJuego.isVisible=false
 
         for (vItemList in listaImagenes) {
             var vItemOrigen: ImageView = view.findViewById(vItemList[0])
@@ -140,12 +102,12 @@ class Fragment1_5_juego : Fragment() {
         button.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment1_5_juego_to_fragment2_5_minijuego)
         }
-        ajustes.setOnClickListener() {
-            Navigation.findNavController(view)
-                .navigate(R.id.action_fragment1_5_juego_to_fragment4_menu)
+        ajustes.setOnClickListener(){
+            Navigation.findNavController(view).navigate(R.id.action_fragment1_5_juego_to_fragment4_menu)
         }
+
         btnVerVideo.setOnClickListener() {
-           verVideo()
+            verVideo()
         }
 
         //Typewriter juego 5 tutorial
@@ -154,7 +116,17 @@ class Fragment1_5_juego : Fragment() {
         }, 2000)
         //Typewriter juego 5 tutorial fin
 
+
+        audioTutorial(view)
+        videoTutorial(view)
+
+        return view
+    }
+
+    private fun audioTutorial(view: View){
+
         //Audio juego 5
+        var audio: MediaPlayer
         runBlocking() {
             launch {
                 audio = MediaPlayer.create(context, R.raw.juego5audio)
@@ -164,11 +136,31 @@ class Fragment1_5_juego : Fragment() {
             //animacion para la descripcion
             starAnimationfun(view)
         }
-
-        return view
     }
 
-<<<<<<< HEAD
+
+    private fun videoTutorial(view: View)
+    {
+        //----------------VIDEO on start on destroy---------------------------
+        video= view.findViewById(R.id.videoViewjuego5)
+        video.isVisible=false
+        //Creating MediaController
+        val mediaController = MediaController(requireContext())
+        mediaController.setAnchorView(video)
+        //specify the location of media file
+        val uri: Uri =
+            Uri.parse("android.resource://" + requireContext().getPackageName() + "/" + R.raw.juego5video)
+        //Setting MediaController and URI, then starting the videoView
+        video.setMediaController(mediaController)
+        video.setVideoURI(uri)
+        video.requestFocus()
+        video.start()
+        //----------------VIDEO FIN---------------------------
+
+
+    }
+
+
     override fun onDestroy() {
         video.stopPlayback()
         super.onDestroy()
@@ -178,6 +170,10 @@ class Fragment1_5_juego : Fragment() {
         video.stopPlayback()
         super.onStop()
     }
+
+
+
+
 
     private fun typewriter(view: View) {
         val typeWriterView = view.findViewById(R.id.txtv1_5tutorialjuego5) as TypeWriterView
@@ -244,13 +240,8 @@ class Fragment1_5_juego : Fragment() {
     }
 
 
-    @SuppressLint("ClickableViewAccessibility")
-    var listener = View.OnTouchListener { view, motionEvent ->
-        var itemInList: DragnDropImage? = findItemByOrigen(view)
-=======
     var opX: Float = 0F
     var opY: Float = 0F
->>>>>>> 55a7a4e4e406c7c0d09c2aa87d762fe30ff974b3
 
     @SuppressLint("ClickableViewAccessibility")
     var listener = View.OnTouchListener { viewElement, motionEvent ->
@@ -286,7 +277,7 @@ class Fragment1_5_juego : Fragment() {
                             itemInList.acertado = true
                             if (juegoCompletado()) {
                                 button.visibility = View.VISIBLE
-                                Toast.makeText(requireContext(), "FINALIZADO !!", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(requireContext(), "Bikain!", Toast.LENGTH_SHORT).show()
                             }
                         }
                     }

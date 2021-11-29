@@ -137,18 +137,20 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
            //vistaanimada.fillAfter = true
 
            imgv5_manzanatutorial.startAnimation(vistaanimada)
+           imgv5_manzanatutorial_animado.startAnimation(vistaanimada)
            imgv5_bocadillo.startAnimation(vistaanimada)
            txtv5_presentacionmapa.startAnimation(vistaanimada)
 
            //llamamos a la animacion para animar a upelio
            Handler(Looper.getMainLooper()).postDelayed({
-           binding.imgv5Manzanatutorial.isVisible=false
+
                talkAnimationfun()
            }, 2000)
        }
 
     private fun talkAnimationfun() {
-        imgv5_manzanatutorial_animado.setBackgroundResource(R.drawable.animacion_manzana)
+        imgv5_manzanatutorial.isVisible=false
+        imgv5_manzanatutorial.setBackgroundResource(R.drawable.animacion_manzana)
         val ani = imgv5_manzanatutorial_animado.getBackground() as AnimationDrawable
         ani.start()
 

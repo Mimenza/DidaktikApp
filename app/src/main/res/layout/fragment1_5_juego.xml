@@ -9,9 +9,9 @@
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainlayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/mainlayout">
+        android:layout_height="match_parent">
 
         <Button
             android:id="@+id/btnf1_5_siguiente"
@@ -118,10 +118,10 @@
             android:layout_marginTop="148dp"
             android:scaleType="fitXY"
             android:src="@drawable/juego5_gorro"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.439"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/imgOrigenCamisa"
@@ -130,10 +130,10 @@
             android:layout_marginTop="312dp"
             android:scaleType="fitXY"
             android:src="@drawable/juego5_camisa"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.391"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/imgOrigenCinturon"
@@ -142,10 +142,10 @@
             android:layout_marginTop="392dp"
             android:scaleType="fitXY"
             android:src="@drawable/juego5_cintuiron"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.435"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/imgOrigenZapatos"
@@ -154,22 +154,21 @@
             android:layout_marginTop="496dp"
             android:scaleType="fitXY"
             android:src="@drawable/juego5_zapatos"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.206"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
             android:id="@+id/imgOrigenManzana"
             android:layout_width="92dp"
             android:layout_height="98dp"
-            android:layout_marginTop="328dp"
+            android:layout_marginStart="300dp"
+            android:layout_marginTop="616dp"
             android:scaleType="fitXY"
             android:src="@drawable/juego5_manzana"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.852"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

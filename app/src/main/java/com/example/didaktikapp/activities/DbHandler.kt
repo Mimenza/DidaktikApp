@@ -52,6 +52,12 @@ class DbHandler {
         getDbInstance().collection("Usuarios").whereEqualTo("nombre", pUsername).get()
         .addOnSuccessListener {
             if (it.size() > 0) {
+                var vId:Int = it.documents[0]["id"].toString().replace("u","").toInt()
+                var vNombre:String = it.documents[0]["nombre"].toString()
+                var vAdmin:Int = it.documents[0]["admin"].toString().toInt()
+                var vPuntuacion:Int = it.documents[0]["puntuacion"].toString().toInt()
+                var vUltimoPto:Int = it.documents[0]["ultimo_punto"].toString().toInt()
+                setUser(User(vId, vNombre, vAdmin, vPuntuacion, vUltimoPto))
                 callback.responseDbUserLogin(null)
             } else {
                 callback.responseDbUserLogin(pUsername)

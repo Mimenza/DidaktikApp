@@ -88,7 +88,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/img1_2_trofeo"
+                android:id="@+id/txtv1_2_respuesta1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"

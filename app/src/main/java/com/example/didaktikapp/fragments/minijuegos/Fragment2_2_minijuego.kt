@@ -14,7 +14,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
 import com.example.didaktikapp.fragments.Fragment5_ajustes
-import com.example.didaktikapp.fragments.juegos.Fragment1_2_juego
 import kotlinx.android.synthetic.main.activity7_juego2_results.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -54,7 +53,7 @@ class Fragment2_2_minijuego : Fragment() {
         val btnterminar: Button? = view?.findViewById(R.id.btn7_terminar)
         val btnRetry: Button? = view?.findViewById(R.id.btn7_saiatuberriro)
         val txtResult: TextView? = view?.findViewById(R.id.txtv7_result)
-        val imgTrofeo: ImageView? = view?.findViewById(R.id.img1_2_trofeo)
+        val imgTrofeo: ImageView? = view?.findViewById(R.id.txtv1_2_respuesta1)
         val scoreuser: TextView? = view?.findViewById(R.id.txtv7_scoreuser)
         val txtvminijuego: TextView? = view?.findViewById(R.id.txtv2_2minijuego2)
 

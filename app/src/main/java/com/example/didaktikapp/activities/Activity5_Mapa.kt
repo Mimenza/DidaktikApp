@@ -1,21 +1,34 @@
 package com.example.didaktikapp.activities
 
+import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.drawable.AnimationDrawable
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.animation.TranslateAnimation
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import com.example.didaktikapp.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.example.didaktikapp.databinding.Activity5MapaBinding
+import com.example.didaktikapp.fragments.Fragment5_ajustes
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener
 import com.google.android.gms.maps.model.*
+import kotlinx.android.synthetic.main.activity4_bienvenida.*
+import kotlinx.android.synthetic.main.activity5_mapa.*
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 
 class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
@@ -26,6 +39,10 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
     private var myCurrentPosition: LatLng = LatLng(45.0, 123.0)
     private var lastUserPoint: Int = 7
     private var minimumRadius: Int = 50
+    private lateinit var audio: MediaPlayer
+    private lateinit var vistaanimada: TranslateAnimation
+    private var fragment :Fragment? = null
+    var ajustesShowing: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +63,110 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
                 lastUserPoint = DbHandler.getUser()!!.ultima_puntuacion!!
             }
         }
+
+        //Typewriter mapa tutorial
+        Handler(Looper.getMainLooper()).postDelayed({
+            typewriter()
+        }, 2000)
+        //Typewriter mapa tutorial fin
+        audioSound()
+
+        //Ajustes desde el mapa
+        binding.btn5Ajustes.setOnClickListener{
+            //Push del fragment al activity mapa
+            showAjustes()
+            //Ocultamos el mapa
+            ocultarMapa()
+        }
+
     }
+
+    private fun showAjustes(){
+
+        if (ajustesShowing) {
+            return
+        }
+        ajustesShowing = true
+        fragment = Fragment5_ajustes()
+        supportFragmentManager.beginTransaction().add(R.id.framelayoutajustes, fragment!!).commit()
+
+    }
+
+    private fun ocultarMapa(){
+
+
+        binding.btn5Ajustes.isVisible=false
+        binding.framelayoutmapa.isVisible=false
+
+    }
+
+
+    private fun typewriter() {
+        val typeWriterView = txtv5_presentacionmapa as TypeWriterView
+        typeWriterView.setWithMusic(false)
+        typeWriterView.animateText(resources.getString(R.string.text_bienvenidamapa))
+        typeWriterView.setDelay(70)
+    }
+
+
+    private fun audioSound() {
+        //funcion para la reproduccion del sonido
+        runBlocking() {
+            launch {
+                audio = MediaPlayer.create(this@Activity5_Mapa, R.raw.mapa_aurkezpena)
+                audio.start()
+                audio.duration
+                audio.setOnCompletionListener {
+                    exitAnimationfun()
+                }
+
+            }
+        }
+        starAnimationfun()
+
+    }
+
+       private fun starAnimationfun() {
+
+           //animacion salido upelio
+           vistaanimada = TranslateAnimation(-1000f, 0f, 0f, 0f)
+           vistaanimada.duration = 2000
+
+           //vistaanimada.fillAfter = true
+           imgv5_manzanatutorial.startAnimation(vistaanimada)
+           imgv5_bocadillo.startAnimation(vistaanimada)
+           txtv5_presentacionmapa.startAnimation(vistaanimada)
+
+           //llamamos a la animacion para animar a upelio
+           Handler(Looper.getMainLooper()).postDelayed({
+
+               talkAnimationfun()
+           }, 2000)
+       }
+
+    private fun talkAnimationfun() {
+        imgv5_manzanatutorial.setBackgroundResource(R.drawable.animacion_manzana)
+        val ani = imgv5_manzanatutorial.getBackground() as AnimationDrawable
+        ani.start()
+
+    }
+    private fun exitAnimationfun() {
+        //escondemos la manzanda de la animacion
+        imgv5_manzanatutorial.isVisible = false
+        imgv5_bocadillo.isVisible= false
+        txtv5_presentacionmapa.isVisible=false
+
+        //animacion salido upelio
+        vistaanimada = TranslateAnimation(0f, 1000f, 0f, 0f)
+        vistaanimada.duration = 2000
+
+        //vistaanimada.fillAfter = true
+        imgv5_manzanatutorial.startAnimation(vistaanimada)
+        imgv5_bocadillo.startAnimation(vistaanimada)
+        txtv5_presentacionmapa.startAnimation(vistaanimada)
+
+    }
+
 
     /**
      * Manipulates the map once available.
@@ -83,8 +203,10 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
 
         mMap.setLatLngBoundsForCameraTarget(astigarragaBounds)
 
+        //Añadir Markers junto a sus nombres
         addMarkers()
 
+        //Añadir Area para mostrar al usuario si algun punto esta cerca de su radio o no
         var myCircle: Circle = mMap.addCircle(
             CircleOptions()
             .center(LatLng(43.285576, -1.941156))
@@ -93,104 +215,73 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
             .strokeWidth(2f)
             .fillColor(0x70ff0000))
 
+        //Variable para comprobar si la primera animacion se ha realiado correctamente
         var firstFocusAnimation = false
         mMap.setOnMyLocationChangeListener {
+            //Metodos para establecer la nueva posicion del radio que rodea la ubicacion del usuario
             myCircle.setCenter(LatLng(it.latitude, it.longitude))
             myCurrentPosition = LatLng(it.latitude, it.longitude)
             if (!firstFocusAnimation) {
+                //Condicion para focalizar al usuario por primera vez
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.latitude, it.longitude), 16F))
                 firstFocusAnimation = true
             }
         }
-        /*
-        fusedLocation.lastLocation.addOnSuccessListener {
-            if (it != null) {
-                //val ubicacion = LatLng(it.latitude, it.longitude)
-                //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(ubicacion, 16F))
-            }
-        }
-         */
     }
 
-    // Add markers in Map
-    val markerLIst = arrayListOf<LatLng>(
-        LatLng(43.28124016860453, -1.9469706252948757),
-        LatLng(43.28124645002352, -1.9487146619854678),
-        LatLng(43.28009128981247, -1.9489651924963394),
-        LatLng(43.2801245169072, -1.94919315370149280),
-        LatLng(43.27989827949647, -1.9495313417852063),
-        LatLng(43.27808114110089, -1.9492564399148118),
-        LatLng(43.27775413305006, -1.9488400717525682),
-    )
-
-    var markerNames = arrayListOf<String>(
-        "Sagardoetxea",
-        "Murgia jauregia",
-        "Foru plaza 1",
-        "Foru plaza 2",
-        "Astigar elkartea",
-        "Ipintza sagardotegia",
-        "Rezola sagardotegia"
+    val placesList = arrayListOf<ArrayList<Any>>(
+        arrayListOf("Sagardoetxea",LatLng(43.28124016860453, -1.9469706252948757)),
+        arrayListOf("Murgia jauregia",LatLng(43.28124645002352, -1.9487146619854678)),
+        arrayListOf("Foru plaza 1",LatLng(43.28009128981247, -1.9489651924963394)),
+        arrayListOf("Foru plaza 2",LatLng(43.2801245169072, -1.94919315370149280)),
+        arrayListOf("Astigar elkartea",LatLng(43.27989827949647, -1.9495313417852063)),
+        arrayListOf("Ipintza sagardotegia",LatLng(43.27808114110089, -1.9492564399148118)),
+        arrayListOf("Rezola sagardotegia",LatLng(43.27775413305006, -1.9488400717525682)),
     )
 
     private fun addMarkers() {
-        var astigarragaMarkers: MutableList<LatLng> = ArrayList()
-        var astigarragaNames: MutableList<String> = ArrayList()
-
-        //for (i in 0..lastUserPoint) {
-        for (i in 0..markerLIst.size-1) {
-            astigarragaMarkers.add(markerLIst[i])
-            astigarragaNames.add(markerNames[i])
-        }
-
-        for (i in 0..astigarragaMarkers.size - 1) {
+        for ((i,item) in placesList.withIndex()) {
+            // We create the Marker and their options
             val markerPointIcon = mMap.addMarker(
                 MarkerOptions()
-                    .position(astigarragaMarkers[i])
-                    .title(astigarragaNames[i])
+                    .position(item[1] as LatLng)
+                    .title(item[0] as String)
                     .icon(
                         BitmapDescriptorFactory
                             .defaultMarker(BitmapDescriptorFactory.HUE_RED)
                     )
             )
 
+            //We check the kind of user and, in case that is NOT ADMIN
             if (markerPointIcon != null) {
-                if (i < lastUserPoint) {
+                if (DbHandler.getAdmin()) {
                     markerPointIcon.setIcon(BitmapDescriptorFactory
                         .defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
-                } else if (i == lastUserPoint) {
-                    markerPointIcon.setIcon(BitmapDescriptorFactory
-                        .defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
+                } else {
+                    if (i < lastUserPoint) {
+                        markerPointIcon.setIcon(BitmapDescriptorFactory
+                            .defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                    } else if (i == lastUserPoint) {
+                        markerPointIcon.setIcon(BitmapDescriptorFactory
+                            .defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
+                    }
                 }
             }
         }
 
         mMap.setOnInfoWindowClickListener(OnInfoWindowClickListener { marker ->
             val latLon = marker.position
-            var numero:Int=0
 
             fun irAPunto(puntoSeleccionado: Int) {
-                var intent:Intent =  Intent(this, Activity6_Site::class.java)
-                when (puntoSeleccionado) {
-                    0 -> numero =0
-                    1 -> numero =1
-                    2 -> numero =2
-                    3 -> numero =3
-                    4 -> numero =4
-                    5 -> numero =5
-                    6 -> numero =6
-                }
-
-                intent.putExtra("numero",numero)
-
+                val intent:Intent =  Intent(this, Activity6_Site::class.java)
+                intent.putExtra("numero",puntoSeleccionado)
                 startActivity(intent)
                 this.overridePendingTransition(0, 0)
             }
 
-            //Cycle through places array
-            for (i in 0..astigarragaMarkers.size - 1) {
-                if (latLon == astigarragaMarkers[i]) {
-                    var distanceToPoint = getDistBetweenPoints(myCurrentPosition, astigarragaMarkers[i])
+            for ((i,item) in placesList.withIndex()) {
+                if (item[1] as LatLng == latLon) {
+                    var distanceToPoint = getDistBetweenPoints(myCurrentPosition, latLon)
                     if (DbHandler.getAdmin()) {
                         irAPunto(i)
                     } else {
@@ -207,7 +298,6 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
                     break
                 }
             }
-
         })
     }
 

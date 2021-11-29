@@ -144,7 +144,8 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
            //llamamos a la animacion para animar a upelio
            Handler(Looper.getMainLooper()).postDelayed({
 
-               talkAnimationfun()
+                // Desactivado temporalmente dado que el mapa peta
+               //talkAnimationfun()
            }, 2000)
        }
 

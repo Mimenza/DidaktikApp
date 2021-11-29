@@ -14,4 +14,9 @@
         <item name="colorAccent">@color/primary</item>
     </style>
 
+    <style name="animation">
+        <item name="android:windowEnterAnimation">@anim/fade</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
+
 </resources>

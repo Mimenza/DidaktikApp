@@ -78,6 +78,44 @@ class Fragment5_ajustes : Fragment() {
 
     fun showModoAdminDialog(){
         val builder: AlertDialog.Builder = android.app.AlertDialog.Builder(requireContext())
+        builder.setView(R.layout.admin_login_dialog)
+
+        val dialog = builder.create()
+        dialog.show()
+
+        val txtAdmin: TextView = dialog.findViewById(R.id.txtPassword)
+        val btnCancel: TextView = dialog.findViewById(R.id.adminCancel)
+        val btnLogin: TextView = dialog.findViewById(R.id.adminLogin)
+
+        btnCancel.setOnClickListener() {
+            dialog.dismiss()
+        }
+
+        btnLogin.setOnClickListener() {
+            if (pass.equals(txtAdmin.text.toString())) {
+                DbHandler.setAdmin()
+                Toast.makeText(requireContext(), "Modo Administrador activado correctamente", Toast.LENGTH_SHORT).show()
+                dialog.dismiss()
+            } else {
+                Toast.makeText(requireContext(), "Error al activar el modo administrador", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        //dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        /*
+        var dialog: Dialog = Dialog(requireContext())
+        dialog.setContentView(R.layout.admin_login_dialog)
+        //dialog.window.setBackgroundDrawable(getDrawable())
+        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog.setCancelable(false)
+        dialog.window?.attributes?.windowAnimations = R.style.animation
+
+         */
+
+
+        /*
+        val builder: AlertDialog.Builder = android.app.AlertDialog.Builder(requireContext())
         builder.setTitle("Modo Administrador")
         val input = EditText(requireContext())
         input.setHint("Ingrese la contraseña de administrador")
@@ -96,6 +134,8 @@ class Fragment5_ajustes : Fragment() {
         })
         builder.setNegativeButton("Cancelar", DialogInterface.OnClickListener { dialog, which -> dialog.cancel() })
         builder.show()
+
+         */
     }
 
 

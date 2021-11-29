@@ -9,4 +9,5 @@
     <color name="marron">#b17c54</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="red">#E03817</color>
+    <color name="smoothGray">#ccc</color>
 </resources>

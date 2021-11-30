@@ -102,10 +102,10 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
             typewriter(view)
         }, 2000)
 
-        //Audio juego 2
+        //Audio juego 2 tutorial
         runBlocking() {
             launch {
-                audio = MediaPlayer.create(context, R.raw.juego2audio)
+                audio = MediaPlayer.create(context, R.raw.juego2audiotutorial)
                 audio.start()
                 audio.setOnCompletionListener {
 

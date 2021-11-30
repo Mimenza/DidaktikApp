@@ -49,6 +49,7 @@ class Fragment1_5_juego : Fragment() {
     private lateinit var button: Button
     private lateinit var myLayout: View
     private lateinit var video: VideoView
+    private var audio: MediaPlayer? = null
     private lateinit var globalView: View
     private lateinit var vistaanimada: TranslateAnimation
 
@@ -163,6 +164,7 @@ class Fragment1_5_juego : Fragment() {
 
     override fun onDestroy() {
         video.stopPlayback()
+
         super.onDestroy()
     }
 

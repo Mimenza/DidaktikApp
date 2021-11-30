@@ -115,7 +115,7 @@ class Fragment1_1_juego : Fragment() {
         //Audio juego 1
         runBlocking {
             launch {
-                audio = MediaPlayer.create(context, R.raw.juego1audio)
+                audio = MediaPlayer.create(context, R.raw.juego1audiotutorial)
                 audio?.start()
                 audio?.setOnCompletionListener {
                     Handler(Looper.getMainLooper()).postDelayed({

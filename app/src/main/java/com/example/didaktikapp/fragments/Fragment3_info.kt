@@ -1,6 +1,11 @@
 package com.example.didaktikapp.fragments
 
+import `in`.codeshuffle.typewriterview.TypeWriterView
+import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +14,12 @@ import com.example.didaktikapp.R
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.navigation.Navigation
+import com.example.didaktikapp.activities.Activity5_Mapa
+import kotlinx.android.synthetic.main.activity5_mapa.*
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -26,6 +36,7 @@ class Fragment3_info : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var audio: MediaPlayer? = null
 
     // private lateinit var button_back:ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,6 +68,17 @@ class Fragment3_info : Fragment() {
         var imagen: String = ""
         var descripcion: String = ""
         val button: Button = view.findViewById(R.id.btn3f_jugar)
+        val buttonBackToMap: ImageView = view.findViewById(R.id.imgv3f_backtomap)
+
+        buttonBackToMap.setOnClickListener{
+            activity?.let{
+                val intent = Intent (it, Activity5_Mapa::class.java)
+                it.startActivity(intent)
+            }
+            //Ocultamos el tutorial, para que no salga siempre solo en la primera vez
+
+        }
+
         when (numero) {
             0 -> {
                 titulo = resources.getString(R.string.titulo1_juego)
@@ -134,6 +156,8 @@ class Fragment3_info : Fragment() {
                         .navigate(R.id.action_fragment3_info_to_fragment1_6_juego)
 
                 }
+
+                audioTutorialJuego6()
             }
         }
 
@@ -148,6 +172,37 @@ class Fragment3_info : Fragment() {
         }
         return view
     }
+
+
+    fun audioTutorialJuego6(){
+
+
+        //Audio juego 6
+        runBlocking {
+            launch {
+                audio = MediaPlayer.create(context, R.raw.juego6audio)
+                audio?.start()
+
+            }
+
+
+        }
+
+    }
+
+
+
+    override fun onDestroy() {
+        audio?.stop()
+        super.onDestroy()
+    }
+
+    override fun onStop() {
+        audio?.stop()
+        super.onStop()
+    }
+
+
     companion object {
         /**
          * Use this factory method to create a new instance of

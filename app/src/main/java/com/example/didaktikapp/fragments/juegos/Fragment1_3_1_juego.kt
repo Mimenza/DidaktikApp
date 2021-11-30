@@ -15,6 +15,9 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
+import android.view.ViewTreeObserver
+import android.view.ViewTreeObserver.OnGlobalLayoutListener
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,11 +35,24 @@ class Fragment1_3_1_juego : Fragment() {
     private var param2: String? = null
 
     private lateinit var globalView: View
+    private lateinit var button: Button
+    var totalWidth: Int = 0
+    var totalHeight: Int = 0
 
     val listaImagenes = listOf(
-        listOf(R.id.puzzle_pieza_o_1,R.id.puzzle_pieza_o_2),
-        listOf(R.id.puzzle_pieza_o_3,R.id.puzzle_pieza_o_4),
-        listOf(R.id.puzzle_pieza_otest1,R.id.puzzle_pieza_otest2),
+        listOf(R.id.puzzle_pieza_o_1,R.id.puzzle_pieza_d_1),
+        listOf(R.id.puzzle_pieza_o_2,R.id.puzzle_pieza_d_2),
+        listOf(R.id.puzzle_pieza_o_3,R.id.puzzle_pieza_d_3),
+        listOf(R.id.puzzle_pieza_o_4,R.id.puzzle_pieza_d_4),
+        listOf(R.id.puzzle_pieza_o_5,R.id.puzzle_pieza_d_5),
+        listOf(R.id.puzzle_pieza_o_6,R.id.puzzle_pieza_d_6),
+        listOf(R.id.puzzle_pieza_o_7,R.id.puzzle_pieza_d_7),
+        listOf(R.id.puzzle_pieza_o_8,R.id.puzzle_pieza_d_8),
+        listOf(R.id.puzzle_pieza_o_9,R.id.puzzle_pieza_d_9),
+        listOf(R.id.puzzle_pieza_o_10,R.id.puzzle_pieza_d_10),
+        listOf(R.id.puzzle_pieza_o_11,R.id.puzzle_pieza_d_11),
+        listOf(R.id.puzzle_pieza_o_12,R.id.puzzle_pieza_d_12),
+        //listOf(R.id.puzzle_pieza_otest1,R.id.puzzle_pieza_otest2),
     )
 
     var manzanaList: MutableList<DragnDropImage>? = mutableListOf()
@@ -56,20 +72,23 @@ class Fragment1_3_1_juego : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment1_3_1_juego, container, false)
         globalView = view
-        val button: Button = view.findViewById(R.id.btnf1_3_1_siguiente)
+        button = view.findViewById(R.id.btnf1_3_1_siguiente)
+        button.visibility = View.GONE
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_3_1_ajustes)
 
-        for (vItemList in listaImagenes) {
-            var vItemOrigen: ImageView = view.findViewById(vItemList[0])
-            var vItemDestino: ImageView = view.findViewById(vItemList[1])
-            manzanaList!!.add(DragnDropImage(vItemOrigen,vItemDestino))
-            vItemDestino.setColorFilter(Color.argb(150, 0, 80, 200))
-            vItemOrigen.setOnTouchListener(listener)
-        }
+        view.viewTreeObserver.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                view.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                totalWidth = view.width
+                totalHeight = view.height
+                prepairPuzzleElements()
+            }
+        })
 
-        val constraintLayoutFound = globalView.findViewById<ConstraintLayout>(R.id.mainlayout)
+        /*
         var newView: ImageView
         newView = ImageView(requireContext())
+        val constraintLayoutFound = globalView.findViewById<ConstraintLayout>(R.id.mainlayout)
         constraintLayoutFound.addView(newView)
         newView.layoutParams.height = 200
         newView.layoutParams.width = 200
@@ -77,6 +96,8 @@ class Fragment1_3_1_juego : Fragment() {
         newView.y = 200F
         newView.setBackgroundColor(Color.BLUE)
         newView.setImageResource(R.drawable.sagarragorria)
+
+         */
 
 
 
@@ -89,43 +110,68 @@ class Fragment1_3_1_juego : Fragment() {
         return view
     }
 
+
+    fun prepairPuzzleElements() {
+        for (vItemList in listaImagenes) {
+            var vItemOrigen: ImageView = globalView.findViewById(vItemList[0])
+            var vItemDestino: ImageView = globalView.findViewById(vItemList[1])
+            vItemOrigen.getLayoutParams().width = vItemDestino.width
+            vItemOrigen.getLayoutParams().height = vItemDestino.height
+            vItemOrigen.x = ((0..totalWidth - vItemDestino.width).random()).toFloat()
+            vItemOrigen.y = ((0..totalHeight - vItemDestino.height).random()).toFloat()
+            manzanaList!!.add(DragnDropImage(vItemOrigen,vItemDestino))
+            vItemDestino.setColorFilter(Color.argb(150, 0, 80, 200))
+            vItemOrigen.setOnTouchListener(listener)
+        }
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     var listener = View.OnTouchListener { viewElement, motionEvent ->
         var itemInList: DragnDropImage? = findItemByOrigen(viewElement)
         if (itemInList != null) {
             if (!itemInList.acertado) {
+                viewElement.bringToFront()
                 val action = motionEvent.action
                 when(action) {
                     MotionEvent.ACTION_MOVE -> {
                         viewElement.x = motionEvent.rawX - viewElement.width/2
                         viewElement.y = motionEvent.rawY - viewElement.height/2
                     }
-                    /*
                     MotionEvent.ACTION_UP -> {
                         viewElement.x = motionEvent.rawX - viewElement.width/2
                         viewElement.y = motionEvent.rawY - viewElement.height/2
                         var objetivoEncontrado: View = itemInList!!.objetivo
-                        var posX = objetivoEncontrado.getLeft()
-                        var posY = objetivoEncontrado.getTop()
+                        val location = IntArray(2)
+                        objetivoEncontrado.getLocationOnScreen(location);
+                        var posX = location[0]
+                        var posY = location[1]
                         var sizeX = objetivoEncontrado.width
                         var sizeY = objetivoEncontrado.height
-
                         if ( (viewElement.x + viewElement.width/2) >= posX && (viewElement.y + viewElement.height/2) >= posY && (viewElement.x + viewElement.width/2) <= posX+sizeX && (viewElement.y + viewElement.height/2) <= posY+sizeY) {
-                            //viewElement.visibility = View.GONE
-                            //viewElement.x = opX
-                            //viewElement.y = opY
                             viewElement.x = posX.toFloat()
                             viewElement.y = posY.toFloat()
-                            //Utils.drawLine(globalView, requireContext(),opX,opY,posX.toFloat(),posY.toFloat(),15F, (0..255).random(),(0..255).random(),(0..255).random())
                             itemInList.acertado = true
+                            if (juegoCompletado()) {
+                                button.visibility = View.VISIBLE
+                                Toast.makeText(requireContext(), "Bikain!", Toast.LENGTH_SHORT).show()
+                            }
                         }
                     }
-
-                     */
                 }
             }
         }
         true
+    }
+
+    private fun juegoCompletado(): Boolean {
+        var finalizado: Boolean = true
+        for (item in manzanaList!!) {
+            if (!item.acertado) {
+                finalizado = false
+                break
+            }
+        }
+        return finalizado
     }
 
     private fun findItemByOrigen(view: View): DragnDropImage? {

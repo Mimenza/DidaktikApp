@@ -82,6 +82,7 @@ class Fragment1_1_juego : Fragment() {
         val view = inflater.inflate(R.layout.fragment1_1_juego, container, false)
         layout = view.findViewById(R.id.cl1_1juego)
 
+
         img1 = view.findViewById(R.id.imgv1_1imagen1)
         img2 = view.findViewById(R.id.imgv1_1imagen2)
         img3 = view.findViewById(R.id.imgv1_1imagen3)
@@ -102,6 +103,8 @@ class Fragment1_1_juego : Fragment() {
             Navigation.findNavController(view)
                 .navigate(R.id.action_fragment1_1_juego_to_fragment4_menu)
         }
+
+
 
         //Typewriter juego 1 tutorial
         Handler(Looper.getMainLooper()).postDelayed({

@@ -1,12 +1,14 @@
 package com.example.didaktikapp.fragments.juegos
 
 import `in`.codeshuffle.typewriterview.TypeWriterView
+import android.annotation.SuppressLint
 import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
 import androidx.core.text.HtmlCompat;
-import android.text.Spanned;
 import android.widget.TextView;
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +21,8 @@ import kotlinx.android.synthetic.main.activity1_principal.*
 import kotlinx.android.synthetic.main.fragment1_6_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import android.widget.EditText
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,7 +40,6 @@ class Fragment1_6_juego : Fragment() {
     private var param2: String? = null
     private var sonido = false
     private var audio: MediaPlayer? = null
-    private var firstTime: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +49,7 @@ class Fragment1_6_juego : Fragment() {
         }
     }
 
+    @SuppressLint("ResourceAsColor")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -55,7 +59,6 @@ class Fragment1_6_juego : Fragment() {
         val button: Button = view.findViewById(R.id.btnf1_6_siguiente)
 
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_6_ajustes)
-        val buttonSonido: ImageButton = view.findViewById(R.id.btnf1_6_sonido)
 
         button.setOnClickListener() {
             Navigation.findNavController(view)
@@ -65,40 +68,259 @@ class Fragment1_6_juego : Fragment() {
             Navigation.findNavController(view)
                 .navigate(R.id.action_fragment1_6_juego_to_fragment4_menu)
         }
-        buttonSonido.setOnClickListener() {
-            startAudio(view)
-        }
-
 
         //=====================================
-        val bertsotxt : TextView = view.findViewById(R.id.txtv1_6_texto)
+        val blank = "&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;"
 
-        val htmlString = "Sagardotegiari<br/><br/>\n" +
+        val bertsotxt: TextView = view.findViewById(R.id.txtv1_6_bertso)
+
+        var input1 = blank + "<b>1</b>" + blank
+        var input2 = blank + "<b>2</b>" + blank
+        var input3 = blank + "<b>3</b>" + blank
+        var input4 = blank + "<b>4</b>" + blank
+        var input5 = blank + "<b>5</b>" + blank
+        var input6 = blank + "<b>6</b>" + blank
+
+        //=====================================
+        var respuesta1 = false
+        var respuesta2 = false
+        var respuesta3 = false
+        var respuesta4 = false
+        var respuesta5 = false
+        var respuesta6 = false
+        //=====================================
+        //funcion para rellenar el bertso
+        insertHtml(bertsotxt, input1, input2, input3, input4, input5, input6)
+
+        animacionVolumen(view)
+
+        //JUEGO========================================================================
+
+        var clickedButton = 0
+        //arraylist con las respuestas correctas
+        var respuestas = listOf(
+            "sagardoaren",
+            "guztia",
+            "bizia",
+            "kupelan",
+            "prezioa",
+            "estimazioa"
+        )
+
+        //declaramos los botones
+        val input1btn: TextView = view.findViewById(R.id.txtv1_6_input1)
+        val input2btn: TextView = view.findViewById(R.id.txtv1_6_input2)
+        val input3btn: TextView = view.findViewById(R.id.txtv1_6_input3)
+        val input4btn: TextView = view.findViewById(R.id.txtv1_6_input4)
+        val input5btn: TextView = view.findViewById(R.id.txtv1_6_input5)
+        val input6btn: TextView = view.findViewById(R.id.txtv1_6_input6)
+        val comprobarbtn: Button = view.findViewById(R.id.btn1_6_comprobar)
+
+        //declaramos los inputText
+        val inputgeneral0: EditText = view.findViewById(R.id.txtv1_6_inputgeneral0)
+
+
+        //listeners para saber que input hemos clickado
+        input1btn.setOnClickListener() {
+            clickedButton = 1
+            inputgeneral0.setHint("escribe respuesta 1")
+        }
+        input2btn.setOnClickListener() {
+            clickedButton = 2
+            inputgeneral0.setHint("escribe respuesta 2")
+        }
+        input3btn.setOnClickListener() {
+            clickedButton = 3
+            inputgeneral0.setHint("escribe respuesta 3")
+        }
+        input4btn.setOnClickListener() {
+            clickedButton = 4
+            inputgeneral0.setHint("escribe respuesta 4")
+        }
+        input5btn.setOnClickListener() {
+            clickedButton = 5
+            inputgeneral0.setHint("escribe respuesta 5")
+        }
+        input6btn.setOnClickListener() {
+            clickedButton = 6
+            inputgeneral0.setHint("escribe respuesta 6")
+        }
+
+        //=====================================
+        //para comprobar si la respuesta es la correcta
+
+        comprobarbtn.setOnClickListener() {
+
+            //Si el input no esta vacio y si hemos clickado en alguna opcion
+            if (!inputgeneral0.text.isBlank() || clickedButton != 0) {
+
+                var respuestaCorrecta = respuestas[clickedButton - 1]
+                var respuestaIntroducida = inputgeneral0.text.toString()
+
+                respuestaCorrecta = respuestaCorrecta.replace("\\s".toRegex(), "")
+                respuestaIntroducida = respuestaIntroducida.replace("\\s".toRegex(), "")
+
+                if (respuestaCorrecta.equals(respuestaIntroducida)) {
+                    //respuesta correcta
+
+                    //seteamos el valor correcto en los inputs
+                    // guardamos que inputs hemos ya introducido correctamente
+                    //escondemos el click de los inputs para que no puedan clickar en algo que esta ya bien
+
+                    inputgeneral0.setHint("Aukeratu beste bat!")
+
+                    when (clickedButton) {
+                        1 -> {
+                            input1 = respuestaCorrecta
+                            respuesta1 = true
+                            input1btn.isVisible = false
+
+                        }
+                        2 -> {
+                            input2 = respuestaCorrecta
+                            respuesta2 = true
+                            input2btn.isVisible = false
+
+                        }
+                        3 -> {
+                            input3 = respuestaCorrecta
+                            respuesta3 = true
+                            input3btn.isVisible = false
+
+                        }
+                        4 -> {
+                            input4 = respuestaCorrecta
+                            respuesta4 = true
+                            input4btn.isVisible = false
+
+                        }
+                        5 -> {
+                            input5 = respuestaCorrecta
+                            respuesta5 = true
+                            input5btn.isVisible = false
+
+                        }
+                        6 -> {
+                            input6 = respuestaCorrecta
+                            respuesta6 = true
+                            input6btn.isVisible = false
+
+                        }
+                    }
+
+                    //volvemos a llamar a la funcion para actualizar los datos
+                    insertHtml(bertsotxt, input1, input2, input3, input4, input5, input6)
+
+                    //limpiamos el input text
+                    inputgeneral0.setText("")
+
+                    //deseleccinamos el botton clickado
+                    clickedButton = 0
+
+                    //checkeamos si hemos compleado toodo el juego o no
+                    checkGameStatus(
+                        respuesta1,
+                        respuesta2,
+                        respuesta3,
+                        respuesta4,
+                        respuesta5,
+                        respuesta6,
+                        view
+                    )
+                } else {
+                    //respuesta incorrecta
+
+                    //escondemos el input y el boton
+
+                    val input: EditText = view.findViewById(R.id.txtv1_6_inputgeneral0)
+                    val btn: Button = view.findViewById(R.id.btn1_6_comprobar)
+
+                    input.isVisible = false
+                    btn.isVisible = false
+                    //reproducimos audio de juego terminado y reiniciamos el juego
+
+                    runBlocking {
+                        launch {
+                            audio = MediaPlayer.create(context, R.raw.gaizkiaudioa)
+                            audio?.start()
+                            audio?.setOnCompletionListener {
+                                Handler(Looper.getMainLooper()).postDelayed({
+                                    //recargamos el juego
+
+                                }, 1000)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        //=====================================
+
+        return view
+    }
+
+    private fun checkGameStatus(respuesta1: Boolean,respuesta2: Boolean,respuesta3: Boolean,respuesta4: Boolean,respuesta5: Boolean,respuesta6: Boolean,view: View) {
+
+        if (respuesta1 == true && respuesta2 == true && respuesta3 == true && respuesta4 == true && respuesta5 == true && respuesta6 == true) {
+
+            //escondemos el input y el boton
+
+            val input: EditText = view.findViewById(R.id.txtv1_6_inputgeneral0)
+            val btn: Button = view.findViewById(R.id.btn1_6_comprobar)
+
+            input.isVisible = false
+            btn.isVisible = false
+
+            //reproducimos el audio de juego terminado y sacamos el boton para poder seguir
+
+            runBlocking {
+                launch {
+                    audio = MediaPlayer.create(context, R.raw.ongiaudioa6)
+                    audio?.start()
+                    audio?.setOnCompletionListener {
+                        Handler(Looper.getMainLooper()).postDelayed({
+
+                            val btnsiguiente: Button = view.findViewById(R.id.btnf1_6_siguiente)
+
+                            //sacamos el boton para el siguiente minijuego
+                            btnsiguiente.isVisible = true
+
+                        }, 1000)
+                    }
+                }
+            }
+
+
+        }
+
+    }
+
+    private fun insertHtml(bertsotxt: TextView,input1: String,input2: String,input3: String,input4: String,input5: String,input6: String ){
+
+        var htmlString = "<h2>Sagardotegiari</h2><br/><br/>\n" +
                 "\n" +
-                "        Bedeinkatua izan dadila &#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009; grazia<br/><br/>\n" +
+                "        Bedeinkatua izan dadila " + input1 + " grazia<br/><br/>\n" +
                 "\n" +
-                "        Bai eta ere kupira gabe edaten duen &#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;;<br/><br/>\n" +
+                "        Bai eta ere kupira gabe edaten duen " + input2 + ";<br/><br/>\n" +
                 "\n" +
-                "        Edari honek jende askori ematen dio &#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;,<br/><br/>\n" +
+                "        Edari honek jende askori ematen dio " + input3 + ";,<br/><br/>\n" +
                 "\n" +
                 "        Hau edan gabe egotea da neretzat penitentzia.<br/><br/>\n" +
                 "\n" +
-                "        &#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009; dagon sagardoak dit ematen tentazioa<br/><br/>\n" +
+                "        " + input4 + " dagon sagardoak dit ematen tentazioa<br/><br/>\n" +
                 "\n" +
                 "        Prezisamente edan beharra daukat pertsekuzioa;<br/><br/>\n" +
                 "\n" +
-                "        Mila deabruz josirikako orain duen &#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;<br/><br/>\n" +
+                "        Mila deabruz josirikako orain duen " + input5 + "<br/><br/>\n" +
                 "\n" +
-                "        Zaleak asko geran medioz dauka &#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;"
+                "        Zaleak asko geran medioz dauka " + input6
 
         val spanned = HtmlCompat.fromHtml(htmlString, HtmlCompat.FROM_HTML_MODE_COMPACT)
 
         val tvOutput = bertsotxt as TextView
 
         tvOutput.text = spanned
-        //=====================================
-        animacionVolumen(view)
-        return view
     }
 
     private fun animacionVolumen(view: View) {
@@ -147,10 +369,6 @@ class Fragment1_6_juego : Fragment() {
     private fun startAudio(view: View) {
         //Funcion que reproduce el primer audio (bertso)
 
-        //escondemos el boton de reproducir el audio mientras el audio ya se esta reproducciendo
-        val reproducirAudio: ImageButton = view.findViewById(R.id.btnf1_6_sonido)
-        reproducirAudio.isVisible = false
-
         //Recogemos tanto el fondo gris como el icono del volumen
         val fondo: TextView = view.findViewById(R.id.imgv1_6_fondo)
         val volumen: TextView = view.findViewById(R.id.txtv1_6_volumen)
@@ -181,8 +399,6 @@ class Fragment1_6_juego : Fragment() {
     private fun startAudio2(view: View) {
         //Funcion para el segundo audio(descripcion del juego)
 
-        //Si es la primera vez que se reproduce el berso si que se escuchara la descripcion, sino no.
-        if (firstTime) {
             //reproducimo el audio
             runBlocking() {
                 launch {
@@ -193,31 +409,32 @@ class Fragment1_6_juego : Fragment() {
                     audio?.start()
 
                     audio?.setOnCompletionListener {
-                        //cuando el audio se termine escondemos el texto y sacamos el bertso
-                        txtv1_6_titulo.isVisible = false
-                        txtv1_6_texto.isVisible = true
+                        //cuando el audio se termine escondemos el texto y sacamos el bertso y los inputs
+                        txtv1_6_explicacion.isVisible = false
+                        txtv1_6_bertso.isVisible = true
+
+                        val input: EditText = view.findViewById(R.id.txtv1_6_inputgeneral0)
+                        val btn: Button = view.findViewById(R.id.btn1_6_comprobar)
+
+                        input.isVisible = true
+                        btn.isVisible = true
                     }
                 }
-            }
+
 
             typewriter(view)
 
-            //Variable para settear que el texto ya ha sido escrito
-            firstTime = false
         }
-
-        //hacemos que el boton de reproducir el audio sea visible al terminar el audio
-        val reproducirAudio: ImageButton = view.findViewById(R.id.btnf1_6_sonido)
-        reproducirAudio.isVisible = true
     }
 
     private fun typewriter(view: View) {
 
-        val typeWriterView = view.findViewById(R.id.txtv1_6_titulo) as TypeWriterView
+        val typeWriterView = view.findViewById(R.id.txtv1_6_explicacion) as TypeWriterView
         typeWriterView.setWithMusic(false)
         typeWriterView.animateText(resources.getString(R.string.titulo))
         typeWriterView.setDelay(70)
     }
+
 
     companion object {
         /**

@@ -9,7 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.renderscript.ScriptGroup
+import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.animation.TranslateAnimation
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
@@ -29,6 +34,8 @@ import kotlinx.android.synthetic.main.activity4_bienvenida.*
 import kotlinx.android.synthetic.main.activity5_mapa.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import android.view.animation.Animation
+import kotlinx.android.synthetic.main.activity1_principal.*
 
 
 class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
@@ -50,6 +57,10 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
 
         binding = Activity5MapaBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.imgv5Manzanatutorial.visibility = GONE
+        binding.imgv5ManzanatutorialAnimado.visibility = GONE
+        binding.imgv5Bocadillo.visibility = GONE
+        binding.txtv5Presentacionmapa.visibility = GONE
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
@@ -65,11 +76,14 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         }
 
         //Typewriter mapa tutorial
-        Handler(Looper.getMainLooper()).postDelayed({
-            typewriter()
-        }, 2000)
-        //Typewriter mapa tutorial fin
-        audioSound()
+        if (!Utils.getExplicacionFinalizada()) {
+            println("*******************ENTRA ANIMACION")
+            Handler(Looper.getMainLooper()).postDelayed({
+                typewriter()
+            }, 2000)
+            //Typewriter mapa tutorial fin
+            audioSound()
+        }
 
         //Ajustes desde el mapa
         binding.btn5Ajustes.setOnClickListener{
@@ -78,26 +92,21 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
             //Ocultamos el mapa
             ocultarMapa()
         }
-
     }
 
-    private fun showAjustes(){
 
+    private fun showAjustes(){
         if (ajustesShowing) {
             return
         }
         ajustesShowing = true
         fragment = Fragment5_ajustes()
         supportFragmentManager.beginTransaction().add(R.id.framelayoutajustes, fragment!!).commit()
-
     }
 
     private fun ocultarMapa(){
-
-
         binding.btn5Ajustes.isVisible=false
         binding.framelayoutmapa.isVisible=false
-
     }
 
 
@@ -118,52 +127,69 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
                 audio.duration
                 audio.setOnCompletionListener {
                     exitAnimationfun()
+                    Utils.setExplicacionFinalizada()
                 }
-
             }
         }
         starAnimationfun()
+    }
 
+    override fun onDestroy() {
+        audio?.stop()
+        super.onDestroy()
     }
 
        private fun starAnimationfun() {
+           binding.imgv5Manzanatutorial.visibility = VISIBLE
+           binding.imgv5Bocadillo.visibility = VISIBLE
+           binding.txtv5Presentacionmapa.visibility = VISIBLE
 
-           //animacion salido upelio
-           vistaanimada = TranslateAnimation(-1000f, 0f, 0f, 0f)
-           vistaanimada.duration = 2000
+           val vistaanimadaInicio = TranslateAnimation(-1000f, 0f, 0f, 0f)
+           vistaanimadaInicio.duration = 2000
 
-           //vistaanimada.fillAfter = true
-           imgv5_manzanatutorial.startAnimation(vistaanimada)
-           imgv5_bocadillo.startAnimation(vistaanimada)
-           txtv5_presentacionmapa.startAnimation(vistaanimada)
+           imgv5_manzanatutorial.startAnimation(vistaanimadaInicio)
+           imgv5_manzanatutorial_animado.startAnimation(vistaanimadaInicio)
+           imgv5_bocadillo.startAnimation(vistaanimadaInicio)
+           txtv5_presentacionmapa.startAnimation(vistaanimadaInicio)
 
-           //llamamos a la animacion para animar a upelio
-           Handler(Looper.getMainLooper()).postDelayed({
-
-               talkAnimationfun()
-           }, 2000)
+           vistaanimadaInicio.setAnimationListener(object : Animation.AnimationListener {
+               override fun onAnimationStart(animation: Animation) {}
+               override fun onAnimationEnd(animation: Animation) {
+                   talkAnimationfun()
+               }
+               override fun onAnimationRepeat(animation: Animation) {}
+           })
        }
 
     private fun talkAnimationfun() {
-        imgv5_manzanatutorial.setBackgroundResource(R.drawable.animacion_manzana)
-        val ani = imgv5_manzanatutorial.getBackground() as AnimationDrawable
+        binding.imgv5Manzanatutorial.visibility = GONE
+        binding.imgv5ManzanatutorialAnimado.visibility = VISIBLE
+        binding.imgv5ManzanatutorialAnimado.setBackgroundResource(R.drawable.animacion_manzana)
+        val ani = binding.imgv5ManzanatutorialAnimado.getBackground() as AnimationDrawable
         ani.start()
-
     }
+
     private fun exitAnimationfun() {
-        //escondemos la manzanda de la animacion
-        imgv5_manzanatutorial.isVisible = false
-        imgv5_bocadillo.isVisible= false
-        txtv5_presentacionmapa.isVisible=false
-
+        binding.imgv5Manzanatutorial.visibility = VISIBLE
+        binding.imgv5ManzanatutorialAnimado.visibility = GONE
         //animacion salido upelio
-        vistaanimada = TranslateAnimation(0f, 1000f, 0f, 0f)
-        vistaanimada.duration = 2000
+        val vistaanimadaFinal = TranslateAnimation(0f, 1000f, 0f, 0f)
+        vistaanimadaFinal.duration = 2000
 
-        //vistaanimada.fillAfter = true
-        imgv5_manzanatutorial.startAnimation(vistaanimada)
-        imgv5_bocadillo.startAnimation(vistaanimada)
-        txtv5_presentacionmapa.startAnimation(vistaanimada)
+        imgv5_manzanatutorial.startAnimation(vistaanimadaFinal)
+        imgv5_bocadillo.startAnimation(vistaanimadaFinal)
+        txtv5_presentacionmapa.startAnimation(vistaanimadaFinal)
+
+        vistaanimadaFinal.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationStart(animation: Animation) {}
+            override fun onAnimationEnd(animation: Animation) {
+                binding.imgv5ManzanatutorialAnimado.visibility = GONE
+                binding.imgv5Bocadillo.visibility = GONE
+                binding.txtv5Presentacionmapa.visibility = GONE
+                binding.imgv5Manzanatutorial.visibility = GONE
+            }
+            override fun onAnimationRepeat(animation: Animation) {}
+        })
 
     }
 
@@ -270,6 +296,10 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         }
 
         mMap.setOnInfoWindowClickListener(OnInfoWindowClickListener { marker ->
+            if(!Utils.getExplicacionFinalizada()) {
+                Toast.makeText(this, "Espera a que termine la explicacion", Toast.LENGTH_SHORT).show()
+                return@OnInfoWindowClickListener
+            }
             val latLon = marker.position
 
             fun irAPunto(puntoSeleccionado: Int) {

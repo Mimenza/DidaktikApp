@@ -2,7 +2,10 @@ package com.example.didaktikapp.fragments
 
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +18,8 @@ import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import com.example.didaktikapp.activities.Activity5_Mapa
 import kotlinx.android.synthetic.main.activity5_mapa.*
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -31,6 +36,7 @@ class Fragment3_info : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var audio: MediaPlayer? = null
 
     // private lateinit var button_back:ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,13 +69,14 @@ class Fragment3_info : Fragment() {
         var descripcion: String = ""
         val button: Button = view.findViewById(R.id.btn3f_jugar)
         val buttonBackToMap: ImageView = view.findViewById(R.id.imgv3f_backtomap)
+
         buttonBackToMap.setOnClickListener{
             activity?.let{
                 val intent = Intent (it, Activity5_Mapa::class.java)
                 it.startActivity(intent)
             }
             //Ocultamos el tutorial, para que no salga siempre solo en la primera vez
-            ocultarUpelioAnimacion(view)
+
         }
 
         when (numero) {
@@ -149,6 +156,8 @@ class Fragment3_info : Fragment() {
                         .navigate(R.id.action_fragment3_info_to_fragment1_6_juego)
 
                 }
+
+                audioTutorialJuego6(view)
             }
         }
 
@@ -165,25 +174,35 @@ class Fragment3_info : Fragment() {
     }
 
 
-    private fun ocultarUpelioAnimacion(view:View){
+    fun audioTutorialJuego6(view:View){
 
 
-        val upelio: ImageView? = view?.findViewById<ImageView>(R.id.imgv5_manzanatutorial_animado)
-        val bocadillo: ImageView? = view?.findViewById<ImageView>(R.id.imgv5_bocadillo)
-        val tvDescripcion: TextView? = view?.findViewById<TextView>(R.id.txtv5_presentacionmapa)
+        //Audio juego 6
+        runBlocking {
+            launch {
+                audio = MediaPlayer.create(context, R.raw.juego6audio)
+                audio?.start()
+
+            }
 
 
-        if (upelio != null) {
-            upelio.isVisible=false
-        }
-        if (bocadillo != null) {
-            bocadillo.isVisible=false
-        }
-        if (tvDescripcion != null) {
-            tvDescripcion.isVisible=false
         }
 
     }
+
+
+
+    override fun onDestroy() {
+        audio?.stop()
+        super.onDestroy()
+    }
+
+    override fun onStop() {
+        audio?.stop()
+        super.onStop()
+    }
+
+
     companion object {
         /**
          * Use this factory method to create a new instance of

@@ -435,6 +435,7 @@ class Fragment1_6_juego : Fragment() {
         typeWriterView.setDelay(70)
     }
 
+
     companion object {
         /**
          * Use this factory method to create a new instance of

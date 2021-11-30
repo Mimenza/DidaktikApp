@@ -157,7 +157,7 @@ class Fragment3_info : Fragment() {
 
                 }
 
-                audioTutorialJuego6(view)
+                audioTutorialJuego6()
             }
         }
 
@@ -174,7 +174,7 @@ class Fragment3_info : Fragment() {
     }
 
 
-    fun audioTutorialJuego6(view:View){
+    fun audioTutorialJuego6(){
 
 
         //Audio juego 6

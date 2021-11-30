@@ -17,9 +17,11 @@ import android.widget.TextView
 import android.widget.Button
 import android.widget.ImageButton
 import android.graphics.drawable.AnimationDrawable
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
+import com.example.didaktikapp.Model.CustomLine
 import kotlinx.coroutines.runBlocking
 import kotlinx.android.synthetic.main.fragment1_1_juego.*
 import kotlinx.coroutines.launch
@@ -37,6 +39,10 @@ class Fragment1_1_juego : Fragment() {
     private var param2: String? = null
 
     private lateinit var vistaAnimada: TranslateAnimation
+    private lateinit var layout: ConstraintLayout
+    private lateinit var customLine: CustomLine
+
+    private val customLines = arrayListOf<CustomLine>()
 
     private var audio: MediaPlayer? = null
 
@@ -74,6 +80,7 @@ class Fragment1_1_juego : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment1_1_juego, container, false)
+        layout = view.findViewById(R.id.cl1_1juego)
 
         img1 = view.findViewById(R.id.imgv1_1imagen1)
         img2 = view.findViewById(R.id.imgv1_1imagen2)
@@ -122,12 +129,11 @@ class Fragment1_1_juego : Fragment() {
             //Comprueba que no hay ningun audio reproduciendose
             if (audio?.isPlaying == false) {
                 //Guarda en que imagen has clickado
-                    if(pressedImg != 1){
-                        pressedImg = 1
-                    }else{
-                        pressedImg = 0
-                    }
-
+                if (pressedImg != 1) {
+                    pressedImg = 1
+                } else {
+                    pressedImg = 0
+                }
 
                 //Mira que no hayas conseguido el punto 1
                 if (!point1) {
@@ -136,19 +142,19 @@ class Fragment1_1_juego : Fragment() {
                         setBorder(img1, "black")
                         true
                     } else {
-                        unsetBorder(img1)
+                        img1.setBackgroundResource(0)
                         false
                     }
                 }
 
                 //Quita los bordes a las imagenes 2 y 3 comprobando que no los haya conseguido
                 if (!point2) {
-                    unsetBorder(img2)
+                    img2.setBackgroundResource(0)
                     border2 = false
                 }
 
                 if (!point3) {
-                    unsetBorder(img3)
+                    img3.setBackgroundResource(0)
                     border3 = false
                 }
             }
@@ -167,19 +173,19 @@ class Fragment1_1_juego : Fragment() {
                         setBorder(img2, "black")
                         true
                     } else {
-                        unsetBorder(img2)
+                        img2.setBackgroundResource(0)
                         false
                     }
                 }
 
                 //Quita los bordes a las imagenes 1 y 3 comprobando que no los haya conseguido
                 if (!point1) {
-                    unsetBorder(img1)
+                    img1.setBackgroundResource(0)
                     border1 = false
                 }
 
                 if (!point3) {
-                    unsetBorder(img3)
+                    img3.setBackgroundResource(0)
                     border3 = false
                 }
             }
@@ -198,19 +204,19 @@ class Fragment1_1_juego : Fragment() {
                         setBorder(img3, "black")
                         true
                     } else {
-                        unsetBorder(img3)
+                        img3.setBackgroundResource(0)
                         false
                     }
                 }
 
                 //Quita los bordes a las imagenes 1 y 2 comprobando que no los haya conseguido
                 if (!point1) {
-                    unsetBorder(img1)
+                    img1.setBackgroundResource(0)
                     border1 = false
                 }
 
                 if (!point2) {
-                    unsetBorder(img2)
+                    img2.setBackgroundResource(0)
                     border2 = false
                 }
             }
@@ -225,13 +231,23 @@ class Fragment1_1_juego : Fragment() {
                         point2 = true
                         setBorder(img2, "green")
                         setBorder(txtv1, "green")
+                        setLine(img2, txtv1, "green")
                         checkProgress(view, progress)
                     }
                 } else if (pressedImg != 0) {
                     when (pressedImg) {
-                        1 -> setBorder(img1, "red")
-                        2 -> setBorder(img2, "red")
-                        3 -> setBorder(img3, "red")
+                        1 -> {
+                            setBorder(img1, "red")
+                            setLine(img1, txtv1, "red")
+                        }
+                        2 -> {
+                            setBorder(img2, "red")
+                            setLine(img2, txtv1, "red")
+                        }
+                        3 -> {
+                            setBorder(img3, "red")
+                            setLine(img3, txtv1, "red")
+                        }
                     }
                     setBorder(txtv1, "red")
 
@@ -258,13 +274,23 @@ class Fragment1_1_juego : Fragment() {
                         point3 = true
                         setBorder(img3, "green")
                         setBorder(txtv2, "green")
+                        setLine(img3, txtv2, "green")
                         checkProgress(view, progress)
                     }
                 } else if (pressedImg != 0) {
                     when (pressedImg) {
-                        1 -> setBorder(img1, "red")
-                        2 -> setBorder(img2, "red")
-                        3 -> setBorder(img3, "red")
+                        1 -> {
+                            setBorder(img1, "red")
+                            setLine(img1, txtv2, "red")
+                        }
+                        2 -> {
+                            setBorder(img2, "red")
+                            setLine(img2, txtv2, "red")
+                        }
+                        3 -> {
+                            setBorder(img3, "red")
+                            setLine(img3, txtv2, "red")
+                        }
                     }
                     setBorder(txtv2, "red")
 
@@ -292,13 +318,23 @@ class Fragment1_1_juego : Fragment() {
                         point1 = true
                         setBorder(img1, "green")
                         setBorder(txtv3, "green")
+                        setLine(img1, txtv3, "green")
                         checkProgress(view, progress)
                     }
                 } else if (pressedImg != 0) {
                     when (pressedImg) {
-                        1 -> setBorder(img1, "red")
-                        2 -> setBorder(img2, "red")
-                        3 -> setBorder(img3, "red")
+                        1 -> {
+                            setBorder(img1, "red")
+                            setLine(img1, txtv3, "red")
+                        }
+                        2 -> {
+                            setBorder(img2, "red")
+                            setLine(img2, txtv3, "red")
+                        }
+                        3 -> {
+                            setBorder(img3, "red")
+                            setLine(img3, txtv3, "red")
+                        }
                     }
                     setBorder(txtv3, "red")
 
@@ -316,6 +352,31 @@ class Fragment1_1_juego : Fragment() {
             pressedImg = 0
         }
         return view
+    }
+
+    /**
+     * Dibuja una linea entre una ImgView y un TextView
+     * @param img la ImageView donde empieza la linea
+     * @param txtv el TextView donde termina la linea
+     * @param color el color de la linea
+     */
+    private fun setLine(img: ImageView?, txtv: TextView?, color: String) {
+        val startX: Float = img!!.x + img.width
+        val startY: Float = img.y + img.height / 2
+
+        val endX: Float = txtv!!.x
+        val endY: Float = txtv.y + txtv.height / 2
+
+        when (color) {
+            "green" ->
+                customLine =
+                    CustomLine(requireContext(), startX, startY, endX, endY, 15F, 162, 224, 23)
+            "red" ->
+                customLine =
+                    CustomLine(requireContext(), startX, startY, endX, endY, 15F, 224, 56, 23)
+        }
+        customLines.add(customLine)
+        layout.addView(customLine)
     }
 
     /**
@@ -429,35 +490,19 @@ class Fragment1_1_juego : Fragment() {
     }
 
     /**
-     * Quita el borde a una ImageView
-     * @param img la imagen a la que se le quita el borde
-     */
-    private fun unsetBorder(img: ImageView) {
-        img.setBackgroundResource(0)
-    }
-
-    /**
-     * Quita el borde a un TextView
-     * @param txtv el TextView al que se le quita el borde
-     */
-    private fun unsetBorder(txtv: TextView) {
-        txtv.setBackgroundResource(0)
-    }
-
-    /**
-     * Vacia todas las variables para resetear el juego
+     * Resetea el juego vaciando las variables y borrando las lineas
      */
     private fun resetGame() {
         progress = 0
         pressedImg = 0
 
-        unsetBorder(img1)
-        unsetBorder(img2)
-        unsetBorder(img3)
+        img1.setBackgroundResource(0)
+        img2.setBackgroundResource(0)
+        img3.setBackgroundResource(0)
 
-        unsetBorder(txtv1)
-        unsetBorder(txtv2)
-        unsetBorder(txtv3)
+        txtv1.setBackgroundResource(0)
+        txtv2.setBackgroundResource(0)
+        txtv3.setBackgroundResource(0)
 
         point1 = false
         point2 = false
@@ -466,6 +511,10 @@ class Fragment1_1_juego : Fragment() {
         border1 = false
         border2 = false
         border3 = false
+
+        for (i in 0 until customLines.size) {
+            layout.removeView(customLines[i])
+        }
     }
 
     /**

@@ -65,6 +65,7 @@ class Activity2_Login : AppCompatActivity(), DbHandler.queryResponseDone {
         }
         Toast.makeText(this, "LOGEADO CORRECTAMENTE", Toast.LENGTH_SHORT).show()
         startActivityBienvenida()
+        finish()
     }
 
     /*

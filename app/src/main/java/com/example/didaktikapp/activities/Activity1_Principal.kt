@@ -33,8 +33,6 @@ class Activity1_Principal : AppCompatActivity() {
         binding = Activity1PrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-
         //Boton para ver los ajustes
         btn1_ajustes.setOnClickListener() {
             showAjustes()

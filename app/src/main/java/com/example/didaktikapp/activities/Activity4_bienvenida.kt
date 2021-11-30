@@ -2,16 +2,15 @@ package com.example.didaktikapp.activities
 
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.drawable.AnimationDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.media.MediaPlayer
-import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 
 import kotlinx.android.synthetic.main.activity4_bienvenida.*
@@ -20,6 +19,7 @@ import com.example.didaktikapp.databinding.Activity4BienvenidaBinding
 import kotlinx.android.synthetic.main.fragment1_1_juego.*
 import kotlinx.coroutines.*
 import java.util.*
+
 
 data class ritmo(var tiempo: Int, var velocidad: Int)
 
@@ -59,12 +59,12 @@ class Activity4_bienvenida : AppCompatActivity() {
 
         binding.btnv4Saltar.setOnClickListener() {
             autoOpenMap = false
-            abrirMapa()
+            comprobarPermisosMapa()
         }
 
         Handler().postDelayed({
             if (autoOpenMap) {
-                abrirMapa()
+                comprobarPermisosMapa()
             }
         }, 10000)
 
@@ -128,6 +128,14 @@ class Activity4_bienvenida : AppCompatActivity() {
         finish()
     }
 
+    private fun comprobarPermisosMapa() {
+        if (!isMapPermissionGranted()) {
+            askForMapPermission()
+        } else {
+            abrirMapa()
+        }
+    }
+
     private fun starAnimationfun() {
         //animacion entrada upelio
         vistaanimada = TranslateAnimation(-1000f, 0f, 0f, 0f)
@@ -139,14 +147,12 @@ class Activity4_bienvenida : AppCompatActivity() {
             imgv4_upelio.isVisible = false
             talkAnimationfun()
         }, 2000)
-
     }
 
     private fun talkAnimationfun() {
         imgv4_manzanatutorial.setBackgroundResource(R.drawable.animacion_manzana)
         val ani = imgv4_manzanatutorial.getBackground() as AnimationDrawable
         ani.start()
-
     }
 
     private fun exitAnimationfun() {
@@ -161,8 +167,28 @@ class Activity4_bienvenida : AppCompatActivity() {
         imgv4_upelio.startAnimation(vistaanimada)
 
         Handler().postDelayed({
-            abrirMapa()
+            comprobarPermisosMapa()
         }, 2000)
-
     }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String?>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (grantResults.size > 0 && grantResults[0] != -1 ) {
+            abrirMapa()
+        } else {
+            finish()
+        }
+    }
+
+    fun isMapPermissionGranted(): Boolean {
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            return true
+        }
+        return false
+    }
+
+    fun askForMapPermission() {
+        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
+    }
+
 }

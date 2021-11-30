@@ -160,10 +160,13 @@ class Fragment1_3_2_juego : Fragment() {
     }
 
     private fun typewriter(view: View) {
+        /*
         val typeWriterView = view.findViewById(R.id.txtv1_3_2_tutorialjuego4) as TypeWriterView
         typeWriterView.setWithMusic(false)
         typeWriterView.animateText(resources.getString(R.string.juego4tutorial))
         typeWriterView.setDelay(65)
+
+         */
     }
     private fun talkAnimationfun(view: View) {
         val upelio = view.findViewById(R.id.imgv1_3_2_upelio2) as ImageView

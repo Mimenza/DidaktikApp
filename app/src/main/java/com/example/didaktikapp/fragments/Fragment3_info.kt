@@ -107,7 +107,7 @@ class Fragment3_info : Fragment() {
                 imagen = R.drawable.img_foruplaza.toString()
                 descripcion = resources.getString(R.string.text_31juego)
 
-               button.setOnClickListener {
+                button.setOnClickListener {
                     Navigation.findNavController(view)
                         .navigate(R.id.action_fragment3_info_to_fragment1_3_1_juego)
 
@@ -145,6 +145,7 @@ class Fragment3_info : Fragment() {
                         .navigate(R.id.action_fragment3_info_to_fragment1_5_juego)
 
                 }
+                audioTutorialZona6()
             }
             6-> {
                 titulo = resources.getString(R.string.titulo6_juego)
@@ -157,7 +158,7 @@ class Fragment3_info : Fragment() {
 
                 }
 
-                audioTutorialJuego6()
+                audioTutorialZona7()
             }
         }
 
@@ -174,13 +175,27 @@ class Fragment3_info : Fragment() {
     }
 
 
-    fun audioTutorialJuego6(){
 
+    fun audioTutorialZona6(){
 
-        //Audio juego 6
+        //Audio zona 6 info
         runBlocking {
             launch {
                 audio = MediaPlayer.create(context, R.raw.juego6audio)
+                audio?.start()
+
+            }
+        }
+
+    }
+
+    fun audioTutorialZona7(){
+
+
+        //Audio zona 7 info
+        runBlocking {
+            launch {
+                audio = MediaPlayer.create(context, R.raw.juego7audio)
                 audio?.start()
 
             }

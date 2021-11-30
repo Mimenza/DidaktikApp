@@ -50,7 +50,6 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var vistaanimada: TranslateAnimation
     private var fragment :Fragment? = null
     var ajustesShowing: Boolean = false
-    var audioFinished = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,7 +76,8 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         }
 
         //Typewriter mapa tutorial
-        if (!Utils.getExplicacion()) {
+        if (!Utils.getExplicacionFinalizada()) {
+            println("*******************ENTRA ANIMACION")
             Handler(Looper.getMainLooper()).postDelayed({
                 typewriter()
             }, 2000)
@@ -94,8 +94,8 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun showAjustes(){
 
+    private fun showAjustes(){
         if (ajustesShowing) {
             return
         }
@@ -127,13 +127,16 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
                 audio.duration
                 audio.setOnCompletionListener {
                     exitAnimationfun()
-                    audioFinished = true
                     Utils.setExplicacionFinalizada()
                 }
             }
         }
         starAnimationfun()
+    }
 
+    override fun onDestroy() {
+        audio?.stop()
+        super.onDestroy()
     }
 
        private fun starAnimationfun() {
@@ -293,7 +296,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         }
 
         mMap.setOnInfoWindowClickListener(OnInfoWindowClickListener { marker ->
-            if(!audioFinished) {
+            if(!Utils.getExplicacionFinalizada()) {
                 Toast.makeText(this, "Espera a que termine la explicacion", Toast.LENGTH_SHORT).show()
                 return@OnInfoWindowClickListener
             }

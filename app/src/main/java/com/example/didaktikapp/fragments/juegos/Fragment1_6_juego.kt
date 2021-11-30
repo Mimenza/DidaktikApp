@@ -8,6 +8,7 @@ import androidx.core.text.HtmlCompat;
 import android.widget.TextView;
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -372,6 +373,7 @@ class Fragment1_6_juego : Fragment() {
         typeWriterView.animateText(resources.getString(R.string.titulo))
         typeWriterView.setDelay(70)
     }
+
 
     companion object {
         /**

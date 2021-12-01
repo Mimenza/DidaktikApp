@@ -49,16 +49,25 @@ class Fragment1_5_juego : Fragment() {
     private lateinit var button: Button
     private lateinit var myLayout: View
     private lateinit var video: VideoView
+    private var audio: MediaPlayer? = null
     private lateinit var globalView: View
     private lateinit var vistaanimada: TranslateAnimation
     private var audio: MediaPlayer? = null
 
     val listaImagenes = listOf(
+        listOf(R.id.img_gorro_move,R.id.img_gorro_destino),
+        listOf(R.id.img_ropa_move,R.id.img_ropa_destino),
+        listOf(R.id.img_guantedcha_move,R.id.img_guantedcha_destino),
+        listOf(R.id.img_guanteizq_move,R.id.img_guanteizq_destino),
+        listOf(R.id.img_botas_move,R.id.img_botas_destino),
+        /*
+        // OLD LIST (DONT REMOVE)
         listOf(R.id.imgOrigenCamisa,R.id.imgObjetivoCamisa),
         listOf(R.id.imgOrigenCinturon,R.id.imgObjetivoCinturon),
         listOf(R.id.imgOrigenGorro,R.id.imgObjetivoGorro),
         listOf(R.id.imgOrigenManzana,R.id.imgObjetivoManzana),
         listOf(R.id.imgOrigenZapatos,R.id.imgObjetivoZapatos)
+         */
     )
 
     var manzanaList: MutableList<DragnDropImage>? = mutableListOf()
@@ -166,7 +175,11 @@ class Fragment1_5_juego : Fragment() {
 
     override fun onDestroy() {
         video.stopPlayback()
+<<<<<<< HEAD
         audio?.stop()
+=======
+
+>>>>>>> 78426beee97428a73ccfa2773a51379a18d058d3
         super.onDestroy()
     }
 

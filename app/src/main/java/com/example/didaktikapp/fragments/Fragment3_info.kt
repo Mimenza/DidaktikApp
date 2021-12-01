@@ -90,6 +90,7 @@ class Fragment3_info : Fragment() {
                         .navigate(R.id.action_fragment3_info_to_fragment1_1_juego)
 
                 }
+                audioTutorialZona1()
             }
             1-> {
                 titulo = resources.getString(R.string.titulo2_juego)
@@ -101,17 +102,19 @@ class Fragment3_info : Fragment() {
                         .navigate(R.id.action_fragment3_info_to_fragment1_2_juego)
 
                 }
+                audioTutorialZona2()
             }
             2-> {
                 titulo = resources.getString(R.string.titulo31_juego)
                 imagen = R.drawable.img_foruplaza.toString()
                 descripcion = resources.getString(R.string.text_31juego)
 
-               button.setOnClickListener {
+                button.setOnClickListener {
                     Navigation.findNavController(view)
                         .navigate(R.id.action_fragment3_info_to_fragment1_3_1_juego)
 
                 }
+                audioTutorialZona3()
             }
             3-> {
                 titulo = resources.getString(R.string.titulo32_juego)
@@ -123,6 +126,8 @@ class Fragment3_info : Fragment() {
                         .navigate(R.id.action_fragment3_info_to_fragment1_3_2_juego)
 
                 }
+                audioTutorialZona4()
+
             }
             4-> {
                 titulo = resources.getString(R.string.titulo4_juego)
@@ -134,6 +139,7 @@ class Fragment3_info : Fragment() {
                         .navigate(R.id.action_fragment3_info_to_fragment1_4_juego)
 
                 }
+                audioTutorialZona5()
             }
             5-> {
                 titulo = resources.getString(R.string.titulo5_juego)
@@ -145,6 +151,7 @@ class Fragment3_info : Fragment() {
                         .navigate(R.id.action_fragment3_info_to_fragment1_5_juego)
 
                 }
+                audioTutorialZona6()
             }
             6-> {
                 titulo = resources.getString(R.string.titulo6_juego)
@@ -157,7 +164,7 @@ class Fragment3_info : Fragment() {
 
                 }
 
-                audioTutorialJuego6()
+                audioTutorialZona7()
             }
         }
 
@@ -174,18 +181,89 @@ class Fragment3_info : Fragment() {
     }
 
 
-    fun audioTutorialJuego6(){
+    fun audioTutorialZona1(){
 
+        //Audio zona 1 info
+        runBlocking {
+            launch {
+                audio = MediaPlayer.create(context, R.raw.juego1audio)
+                audio?.start()
 
-        //Audio juego 6
+            }
+        }
+
+    }
+    fun audioTutorialZona2(){
+
+        //Audio zona 2 info
+        runBlocking {
+            launch {
+                audio = MediaPlayer.create(context, R.raw.juego2audio)
+                audio?.start()
+
+            }
+        }
+
+    }
+    fun audioTutorialZona3(){
+
+        //Audio zona 3 info
+        runBlocking {
+            launch {
+                audio = MediaPlayer.create(context, R.raw.juego3audio)
+                audio?.start()
+
+            }
+        }
+
+    }
+    fun audioTutorialZona4(){
+
+        //Audio zona 7 info
+        runBlocking {
+            launch {
+                audio = MediaPlayer.create(context, R.raw.juego4audio)
+                audio?.start()
+
+            }
+        }
+
+    }
+    fun audioTutorialZona5(){
+
+        //Audio zona 6 info
+        runBlocking {
+            launch {
+                audio = MediaPlayer.create(context, R.raw.juego5audio)
+                audio?.start()
+
+            }
+        }
+
+    }
+    fun audioTutorialZona6(){
+
+        //Audio zona 6 info
         runBlocking {
             launch {
                 audio = MediaPlayer.create(context, R.raw.juego6audio)
                 audio?.start()
 
             }
+        }
+
+    }
+
+    fun audioTutorialZona7(){
 
 
+        //Audio zona 7 info
+        runBlocking {
+            launch {
+                audio = MediaPlayer.create(context, R.raw.juego7audio)
+                audio?.start()
+
+            }
         }
 
     }

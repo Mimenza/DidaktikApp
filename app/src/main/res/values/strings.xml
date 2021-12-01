@@ -135,13 +135,57 @@
     <!--BOTONES-->
     <string name="jugar">Jolastu</string>
     <string name="siguiente">Hurrengoa</string>
-    <string name="ayudajuego1">ayuda juego1</string>
-    <string name="ayudajuego2">ayuda juego2</string>
-    <string name="ayudajuego3">ayuda juego3</string>
-    <string name="ayudajuego4">ayuda juego4</string>
-    <string name="ayudajuego5">ayuda juego5</string>
-    <string name="ayudajuego6">ayuda juego6</string>
-    <string name="ayudajuego7">ayuda juego7</string>
+
+
+    <!--AYUDA-->
+    <string name="ayudajuego1">Jarduera honek Astigarragako ondare nagusia pixka bat ezagutzen lagunduko die,
+hau da, sagardoa. Bertan ikasleek sagardoetxearen gune guztiak ezagutuko dituzte,
+baita horietako bakoitzean zer egiten den eta horrek ibilbidean zehar egin beharko
+duten guztiaren ikuspegi orokor bat izaten lagunduko die. Bertara ailegatzeko, beste
+jarduera guztietan bezala, mapa erabiliko dute eta informazioa jaso ondoren, ariketa bat
+burutuko dute sagardoetxeko guneen argazkiak bertan egiten denarekin lotuz (hau da,
+argazkiak eta hitzak lotu behar dituzte).</string>
+
+    <string name="ayudajuego2">Jarduera honetan Murgia jauregiaren inguruko informazioa jasoko dute. Ondoren,
+jolas bat burutzeko eskatu diegu, kasu honetan, asmakizunak asmatu beharko dituzte,
+gure ustez, ikasleentzako oso erakargarriak direnak. Azken finean asmakizunek
+ikasleei era dibertigarri batean pentsatzeko aukera ematen die. Gainera, asmakizun
+guztiak Murgia jauregiaren inguruko elementuak direnez, hura hobeto ezagutzen
+lagunduko die.</string>
+    <string name="ayudajuego3">Jarduera honen bidez, Astigarragako Santa Ana egunean egiten denaren berri
+izango dute, hura hobeto ezagutzeko asmoz.
+Horretarako, app-an ezarritako informazioa irakurri eta entzungo dute, ondoren
+joko batzuk burutzeko. Kasu honetan, Santa Ana festan egoten diren zanpantzarren puzzlea egin beharko dute. Behin puzzlea eginda, zanpantzarrekin zerikusia duten bi
+galdera erantzun beharko dituzte.</string>
+    <string name="ayudajuego4">Jarduera honek Astigarragako Sagar Uzta eguna ezagutzen lagunduko die.
+Horretarako, ikasleak Foru Plazara joango dira. Bertan, Sagar Uztaren inguruko
+informazioa jasoko dute Upelio sagarraren partetik eta gero, letra-zopa (egunean zehar
+festa honetan burutzen diren jardueren izen batzuk eta ospatzen ez diren beste jardueren
+izenak topatu beharko dituzte) osatu beharko dute. Hori egin ostean, egia-gezurra
+(letra-zopan aurkitutako ekintzak egun horretan burutzen diren edo ez adieraztea)
+ariketa burutu beharko dute.</string>
+    <string name="ayudajuego5">Jarduera honek Astigarragako Sagar Dantza ezagutzeko aukera emango die.
+Horretarako, ikasleak Astigar elkartera joango dira. Bertan ikasleek Upelio sagarraren
+partetik dantzaren informazioa jasoko dute eta bideo bat ikusiko dute. Hori egin
+ondoren, ikasleek Sagar dantzan erabiltzen diren ohiko jantziak ezagutzeko, hurrengo
+ariketa proposatuko diegu: app-ean agertuko den txotxongilo bat jantziko dute,
+horretarako dantzan eramaten duten arroparen argazkiak eskura jarriko dizkiegu eta
+argazki bakoitza txotxongiloaren atal bakoitzarekin erlazionatu beharko dute.</string>
+    <string name="ayudajuego6">Astigarragako ondare immaterialaren beste zati garrantzitsua ezagutzen lagunduko
+die. Gune honetan, ikasleek Astigarragako bertsolari famatuaren berri izango dute, hain
+zuzen ere, Agin Labururen berri, hura hobeto ezagutzeko asmoz.
+Ipintza Sagardotegian elkartuko dira harekin eta bertan, Aginek “Sagardoari”
+izeneko bertsoaren zati bat abestuko du. Ikasleek bertsoa entzun eta gozatu ondoren,
+app-an ezarritako informazioa irakurri eta entzuteaz gain, Aginek abestutako bertsoa
+agertuko zaie hutsune batzuekin. Ikasleek orduan, hutsune horiek bete beharko dituzte hitzekin, entzun berri duten bertsoaz oroituz. Ondoren, ikasle guztiek elkarrekin
+bertsoa ozen abestuko dute.</string>
+    <string name="ayudajuego7">Jarduera honek Astigarragako Txox irekieraren eguna ezagutzen lagunduko die.
+Egun horretan, Txotx irekieraren nondik norakoa ezagutzeko, Rezola Sagardotegira
+joango dira. Bertan ikasleek Upelio sagarraren partetik informazioa jaso eta gero,
+galdera sorta bati erantzuna eman beharko diote ikasleek. Galdera horiei erantzuna
+emateko, Upelio sagarrak emandako azalpenean adi egoteaz gain, sagardotegiaren
+albotik pasatzen den jendearen, hau da, astigartarren laguntza ere izango dute; beraiei
+galderak egiteko aukera izango baitute.</string>
 
 
 </resources>

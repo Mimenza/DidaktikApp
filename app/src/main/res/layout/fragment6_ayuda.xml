@@ -21,7 +21,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.36" />
         <ImageView
-            android:id="@+id/imgv6f_backtomenu"
+            android:id="@+id/imgv6f_backtogame"
             android:layout_width="47dp"
             android:layout_height="48dp"
             android:layout_marginTop="44dp"

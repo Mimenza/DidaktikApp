@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.Navigation
 import com.example.didaktikapp.R
 import kotlinx.android.synthetic.main.fragment6_ayuda.*
 
@@ -37,15 +39,20 @@ class Fragment6_ayuda : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment1_1_juego, container, false)
+        val view = inflater.inflate(R.layout.fragment6_ayuda, container, false)
         val tvDescripcion: TextView? = view?.findViewById<TextView>(R.id.txtv6_ayuda)
+        val btnBackToGame: ImageView = view.findViewById(R.id.imgv6f_backtogame)
         //Recojemos el shared prefs
 
-
+        btnBackToGame.setOnClickListener{
+            Navigation.findNavController(view)
+                .navigate(R.id.action_fragment6_ayuda_to_fragment4_menu)
+        }
 
         val sharedPreferences = this.activity?.getSharedPreferences("site", 0)
         val numero = sharedPreferences?.getString("numero", null)?.toInt()
 
+        println(numero)
         var descripcionTitulo: String = ""
 
 
@@ -66,8 +73,6 @@ class Fragment6_ayuda : Fragment() {
 
             tvDescripcion.setText(descripcionTitulo)
         }
-
-
 
         return view
     }

@@ -288,7 +288,11 @@
         android:id="@+id/fragment6_ayuda"
         android:name="com.example.didaktikapp.fragments.Fragment6_ayuda"
         android:label="fragment6_ayuda"
-        tools:layout="@layout/fragment6_ayuda" />
+        tools:layout="@layout/fragment6_ayuda" >
+        <action
+            android:id="@+id/action_fragment6_ayuda_to_fragment4_menu"
+            app:destination="@id/fragment4_menu" />
+    </fragment>
 
 
     <fragment

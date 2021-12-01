@@ -64,6 +64,7 @@ class Fragment2_2_minijuego : Fragment() {
       //de activity(Resultsactivity) a fragment
             showMenu()
 
+
             if (btnterminar != null) {
                 btnterminar.isVisible=false
             }

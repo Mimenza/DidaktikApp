@@ -1,6 +1,5 @@
 package com.example.didaktikapp.fragments.juegos
 
-import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
@@ -22,10 +21,8 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
-import com.example.didaktikapp.Model.CustomLine
 import com.example.didaktikapp.R
-import kotlinx.android.synthetic.main.fragment1_1_juego.*
-import kotlinx.android.synthetic.main.fragment1_3_2_juego.*
+import kotlinx.android.synthetic.main.fragment1_7_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
@@ -62,7 +59,7 @@ class Fragment1_3_2_juego : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment1_3_2_juego, container, false)
+        val view = inflater.inflate(R.layout.fragment1_7_juego, container, false)
         globalView = view
         val button: Button = view.findViewById(R.id.btnf1_3_2_siguiente)
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_3_2_ajustes)

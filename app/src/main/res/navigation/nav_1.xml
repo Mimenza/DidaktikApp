@@ -92,7 +92,7 @@
         android:id="@+id/fragment1_3_2_juego"
         android:name="com.example.didaktikapp.fragments.juegos.Fragment1_3_2_juego"
         android:label="fragment1_3_2_juego"
-        tools:layout="@layout/fragment1_3_2_juego" >
+        tools:layout="@layout/fragment1_7_juego" >
 
         <action
             android:id="@+id/action_fragment1_3_2_juego_to_fragment2_3_2_minijuego"

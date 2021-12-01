@@ -13,6 +13,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
+import com.example.didaktikapp.fragments.Fragment4_menu
 import com.example.didaktikapp.fragments.Fragment5_ajustes
 import kotlinx.android.synthetic.main.activity7_juego2_results.*
 
@@ -97,7 +98,7 @@ class Fragment2_2_minijuego : Fragment() {
             return
         }
         menuShowing = true
-        fragment = Fragment5_ajustes()
+        fragment = Fragment4_menu()
         fragManager?.beginTransaction()?.add(R.id.framelayoutjuego2results, fragment!!)?.commit()
 
 

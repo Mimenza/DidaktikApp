@@ -3,29 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Julen/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/activity5_mapa.xml" value="0.1796875" />
-        <entry key="..\:/Users/Julen/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment1_1_juego.xml" value="0.1640625" />
-        <entry key="..\:/Users/Julen/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment1_2_juego.xml" value="0.1640625" />
-        <entry key="..\:/Users/Julen/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment1_3_2_juego.xml" value="0.1796875" />
-        <entry key="..\:/Users/Julen/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment1_3_juego.xml" value="0.1640625" />
-        <entry key="..\:/Users/Julen/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment1_5_juego.xml" value="0.1" />
-        <entry key="..\:/Users/Julen/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment1_6_juego.xml" value="0.1640625" />
-        <entry key="..\:/Users/Julen/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment1_7_juego.xml" value="0.1640625" />
-        <entry key="..\:/Users/Julen/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment2_5_minijuego.xml" value="0.1640625" />
-        <entry key="..\:/Users/Julen/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment2_6_minijuego.xml" value="0.1640625" />
-        <entry key="..\:/Users/Julen/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment2_7_minijuego.xml" value="0.1640625" />
-        <entry key="..\:/Users/Luis/Documents/GitHub/DidaktikApp/app/src/main/res/layout/fragment1_5_juego.xml" value="0.36615384615384616" />
-        <entry key="..\:/Users/Luis/Documents/GitHub/DidaktikApp/app/src/main/res/layout/fragment1_5_juego_Copia.xml" value="0.371875" />
-        <entry key="..\:/Users/Luis/Documents/GitHub/DidaktikApp/app/src/main/res/layout/fragment1_6_juego.xml" value="0.371875" />
+        <entry key="..\:/Users/ik_2dm3/Documents/git/DidaktikApp/app/src/main/res/layout/activity1_principal.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ik_2dm3/Documents/git/DidaktikApp/app/src/main/res/layout/activity3_load.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ik_2dm3/Documents/git/DidaktikApp/app/src/main/res/layout/admin_login_dialog.xml" value="0.4" />
+        <entry key="..\:/Users/ik_2dm3/Documents/git/DidaktikApp/app/src/main/res/layout/fragment4_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ik_2dm3/Documents/git/DidaktikApp/app/src/main/res/layout/fragment5_ajustes.xml" value="0.25416666666666665" />
       </map>
-    </option>
-  </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
-  <component name="SuppressABINotification">
-    <option name="modulesWithSuppressedNotConfigured">
-      <set>
-        <option value="didaktikapp.app" />
-      </set>
     </option>
   </component>
 </project>

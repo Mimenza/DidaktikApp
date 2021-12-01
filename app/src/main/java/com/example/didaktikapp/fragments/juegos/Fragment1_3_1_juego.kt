@@ -2,6 +2,8 @@ package com.example.didaktikapp.fragments.juegos
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,6 +19,7 @@ import androidx.navigation.Navigation
 import com.example.didaktikapp.R
 import android.view.ViewTreeObserver
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
+import com.example.didaktikapp.Model.DragnDropImage
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -120,7 +123,12 @@ class Fragment1_3_1_juego : Fragment() {
             vItemOrigen.x = ((0..totalWidth - vItemDestino.width).random()).toFloat()
             vItemOrigen.y = ((0..totalHeight - vItemDestino.height).random()).toFloat()
             manzanaList!!.add(DragnDropImage(vItemOrigen,vItemDestino))
-            vItemDestino.setColorFilter(Color.argb(150, 0, 80, 200))
+            //vItemDestino.setColorFilter(Color.argb(150, 0, 80, 200))
+            val matrix = ColorMatrix()
+            matrix.setSaturation(0f)
+            val filter = ColorMatrixColorFilter(matrix)
+            vItemDestino.setColorFilter(filter)
+            vItemDestino.setAlpha(70)
             vItemOrigen.setOnTouchListener(listener)
         }
     }

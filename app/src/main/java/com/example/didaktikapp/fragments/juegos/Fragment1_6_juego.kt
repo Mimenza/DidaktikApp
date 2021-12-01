@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.view.animation.TranslateAnimation
 import android.widget.*
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
@@ -22,13 +24,14 @@ import kotlinx.android.synthetic.main.fragment1_6_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import android.widget.EditText
+import kotlinx.android.synthetic.main.fragment1_1_juego.*
 
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-
+private lateinit var vistaAnimada: TranslateAnimation
 /**
  * A simple [Fragment] subclass.
  * Use the [Fragment1_juego.newInstance] factory method to
@@ -247,6 +250,10 @@ class Fragment1_6_juego : Fragment() {
                                 Handler(Looper.getMainLooper()).postDelayed({
                                     //recargamos el juego
 
+                                    Navigation.findNavController(view)
+                                        .navigate(R.id.action_fragment1_6_juego_self)
+
+
                                 }, 1000)
                             }
                         }
@@ -353,17 +360,6 @@ class Fragment1_6_juego : Fragment() {
             }
         }
 
-        val fondo: TextView = view.findViewById(R.id.imgv1_6_fondo)
-        //Cuando clickamos fuera de la foto, la musica y el fondo se van
-        fondo.setOnClickListener() {
-
-            imgv1_6_fondo.isVisible = false
-            txtv1_6_volumen.isVisible = false
-            audio?.stop()
-
-            //lanzamos el segundo audio(bertso)
-            startAudio2(view)
-        }
     }
 
     private fun startAudio(view: View) {
@@ -384,44 +380,47 @@ class Fragment1_6_juego : Fragment() {
                 audio = MediaPlayer.create(
                     context, R.raw.bertsoa
                 )
-                audio?.setVolume(0.15F, 0.15F)
+                audio?.setVolume(2F, 2F)
                 audio?.start()
 
                 audio?.setOnCompletionListener {
-                    imgv1_6_fondo.isVisible = false
                     txtv1_6_volumen.isVisible = false
                     startAudio2(view)
                 }
             }
         }
+
+        //Cuando clickamos fuera de la foto, la musica se van
+        fondo.setOnClickListener() {
+            txtv1_6_volumen.isVisible = false
+            audio?.stop()
+
+            //lanzamos el segundo audio(bertso)
+            startAudio2(view)
+        }
     }
 
     private fun startAudio2(view: View) {
         //Funcion para el segundo audio(descripcion del juego)
-
+        //disable set on click listener
+        val fondo: TextView = view.findViewById(R.id.imgv1_6_fondo)
+        fondo.setOnClickListener(null)
             //reproducimo el audio
             runBlocking() {
                 launch {
+                    starAnimationfun(view)
+
                     audio = MediaPlayer.create(
                         context, R.raw.kantu_kantajolasa
                     )
-                    audio?.setVolume(0.15F, 0.15F)
+                    // audio?.setVolume(0.15F, 0.15F)
                     audio?.start()
 
                     audio?.setOnCompletionListener {
                         //cuando el audio se termine escondemos el texto y sacamos el bertso y los inputs
-                        txtv1_6_explicacion.isVisible = false
-                        txtv1_6_bertso.isVisible = true
-
-                        val input: EditText = view.findViewById(R.id.txtv1_6_inputgeneral0)
-                        val btn: Button = view.findViewById(R.id.btn1_6_comprobar)
-
-                        input.isVisible = true
-                        btn.isVisible = true
+                        exitAnimationfun(view)
                     }
                 }
-
-
             typewriter(view)
 
         }
@@ -435,6 +434,68 @@ class Fragment1_6_juego : Fragment() {
         typeWriterView.setDelay(70)
     }
 
+    private fun starAnimationfun(view: View) {
+       //Animacion entrada upelio
+        vistaAnimada = TranslateAnimation(-1000f, 0f, 0f, 0f)
+        vistaAnimada.duration = 2000
+        val upelio = view.findViewById(R.id.imgv1_6_upelio) as ImageView
+        upelio.startAnimation(vistaAnimada)
+
+        //llamamos a la animacion para animar a upelio
+        Handler(Looper.getMainLooper()).postDelayed({
+            upelio.isVisible = false
+            talkAnimationfun(view)
+        }, 2000)
+
+    }
+
+    private fun exitAnimationfun(view: View) {
+
+        //animacion salida de upelio
+        vistaAnimada = TranslateAnimation(0f, 1000f, 0f, 0f)
+        vistaAnimada.duration = 2000
+
+        val upelio = view.findViewById(R.id.imgv1_6_upelio) as ImageView
+        upelio.startAnimation(vistaAnimada)
+
+        val upelioAnimado = view.findViewById(R.id.imgv1_6_upelio2) as ImageView
+        upelioAnimado.isVisible = false
+
+        //difuminado fondo gris y las letras
+        Handler(Looper.getMainLooper()).postDelayed({
+            val txtAnimacion = view.findViewById(R.id.imgv1_6_fondo) as TextView
+            val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+            txtAnimacion.startAnimation(aniFade)
+            txtAnimacion.isVisible = false
+        }, 1000)
+
+
+        //aparece el bertso
+        Handler().postDelayed({
+            txtv1_6_explicacion.isVisible = false
+            txtv1_6_bertso.isVisible = true
+
+            val input: EditText = view.findViewById(R.id.txtv1_6_inputgeneral0)
+            val btn: Button = view.findViewById(R.id.btn1_6_comprobar)
+
+            input.isVisible = true
+            btn.isVisible = true
+
+        }, 2000)
+
+
+
+
+
+
+    }
+
+    private fun talkAnimationfun(view: View) {
+        val upelio = view.findViewById(R.id.imgv1_6_upelio2) as ImageView
+        upelio.setBackgroundResource(R.drawable.animacion_manzana)
+        val ani = upelio.background as AnimationDrawable
+        ani.start()
+    }
 
     companion object {
         /**

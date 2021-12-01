@@ -39,9 +39,10 @@ class Fragment2_5_minijuego : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment2_5_minijuego, container, false)
-        val button: Button = view.findViewById(R.id.btnf2_2siguiente)
-        val ajustes: ImageButton = view.findViewById(R.id.btnf2_2ajustes)
+        //val button: Button = view.findViewById(R.id.btnf2_2siguiente)
+        //val ajustes: ImageButton = view.findViewById(R.id.btnf2_2ajustes)
 
+        /*
         button.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment2_5_minijuego_to_fragment4_menu)
         }
@@ -49,6 +50,8 @@ class Fragment2_5_minijuego : Fragment() {
         ajustes.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment2_5_minijuego_to_fragment4_menu)
         }
+
+         */
         return view
     }
 

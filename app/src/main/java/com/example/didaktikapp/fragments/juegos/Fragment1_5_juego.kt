@@ -2,7 +2,6 @@ package com.example.didaktikapp.fragments.juegos
 
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
 import android.net.Uri
@@ -10,10 +9,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
 import android.widget.*
@@ -24,7 +19,11 @@ import androidx.core.view.isVisible
 import kotlinx.android.synthetic.main.fragment1_5_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import java.util.*
+import android.graphics.ColorMatrixColorFilter
+
+import android.graphics.ColorMatrix
+import android.view.*
+import com.example.didaktikapp.Model.DragnDropImage
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -32,14 +31,6 @@ import java.util.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Fragment1_juego.newInstance] factory method to
- * create an instance of this fragment.
- */
-
-//Objeto para gestionar facilmente los juegos que requieran drag and drop.
-data class DragnDropImage(var origen: ImageView, var objetivo: ImageView, var acertado: Boolean = false)
 
 class Fragment1_5_juego : Fragment() {
     // TODO: Rename and change types of parameters
@@ -53,6 +44,11 @@ class Fragment1_5_juego : Fragment() {
     private lateinit var globalView: View
     private lateinit var vistaanimada: TranslateAnimation
 
+    //After using View Listener, we can get the full width and height
+    var totalWidth: Int = 0
+    var totalHeight: Int = 0
+
+    //We store the resources ID in a list to later create the element and apply then an event
     val listaImagenes = listOf(
         listOf(R.id.img_gorro_move,R.id.img_gorro_destino),
         listOf(R.id.img_ropa_move,R.id.img_ropa_destino),
@@ -92,21 +88,20 @@ class Fragment1_5_juego : Fragment() {
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_5_ajustes)
         val btnVerVideo: Button = view.findViewById(R.id.btnf1_5_siguienteavideo)
         val btnIrAJuego: Button = view.findViewById(R.id.btnf1_5_siguienteajuego)
-
-        //myLayout = view.findViewById(R.id.mainlayout)
         myLayout = view.findViewById<ConstraintLayout>(R.id.mainlayout)
-
-
 
         btnIrAJuego.isVisible=false
 
-        for (vItemList in listaImagenes) {
-            var vItemOrigen: ImageView = view.findViewById(vItemList[0])
-            var vItemDestino: ImageView = view.findViewById(vItemList[1])
-            manzanaList!!.add(DragnDropImage(vItemOrigen,vItemDestino))
-            vItemDestino.setColorFilter(Color.argb(150, 0, 80, 200))
-            vItemOrigen.setOnTouchListener(listener)
-        }
+        //We set a Global View Listener since it is not fill up even with the events onCreatedView...etc
+        view.viewTreeObserver.addOnGlobalLayoutListener(object :
+            ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                view.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                totalWidth = view.width
+                totalHeight = view.height
+                prepairVestimentaElements()
+            }
+        })
 
         button.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment1_5_juego_to_fragment2_5_minijuego)
@@ -125,11 +120,26 @@ class Fragment1_5_juego : Fragment() {
         }, 2000)
         //Typewriter juego 5 tutorial fin
 
-
         audioTutorial(view)
         videoTutorial(view)
 
         return view
+    }
+
+    private fun prepairVestimentaElements() {
+        for (vItemList in listaImagenes) {
+            var vItemOrigen: ImageView = globalView.findViewById(vItemList[0])
+            var vItemDestino: ImageView = globalView.findViewById(vItemList[1])
+            vItemOrigen.x = ((0..totalWidth - vItemDestino.width).random()).toFloat()
+            vItemOrigen.y = ((0..totalHeight - vItemDestino.height).random()).toFloat()
+            manzanaList!!.add(DragnDropImage(vItemOrigen,vItemDestino))
+            val matrix = ColorMatrix()
+            matrix.setSaturation(0f)
+            val filter = ColorMatrixColorFilter(matrix)
+            vItemDestino.setColorFilter(filter)
+            vItemDestino.setAlpha(70)
+            vItemOrigen.setOnTouchListener(listener)
+        }
     }
 
     private fun audioTutorial(view: View){
@@ -258,6 +268,7 @@ class Fragment1_5_juego : Fragment() {
         var itemInList: DragnDropImage? = findItemByOrigen(viewElement)
         if (itemInList != null) {
             if (!itemInList.acertado) {
+                viewElement.bringToFront()
                 val action = motionEvent.action
                 when(action) {
                     MotionEvent.ACTION_DOWN -> {
@@ -285,6 +296,8 @@ class Fragment1_5_juego : Fragment() {
                             viewElement.y = posY.toFloat()
                             //Utils.drawLine(globalView, requireContext(),opX,opY,posX.toFloat(),posY.toFloat(),15F, (0..255).random(),(0..255).random(),(0..255).random())
                             itemInList.acertado = true
+                            sendToTopImagesNotFinished()
+                            viewElement.setOnTouchListener(null)
                             if (juegoCompletado()) {
                                 button.visibility = View.VISIBLE
                                 Toast.makeText(requireContext(), "Bikain!", Toast.LENGTH_SHORT).show()
@@ -306,6 +319,14 @@ class Fragment1_5_juego : Fragment() {
             }
         }
         return finalizado
+    }
+
+    private fun sendToTopImagesNotFinished() {
+        for (item in manzanaList!!) {
+            if (!item.acertado) {
+                item.origen.bringToFront()
+            }
+        }
     }
 
     private fun findItemByOrigen(view: View): DragnDropImage? {

@@ -149,6 +149,9 @@
         <action
             android:id="@+id/action_fragment1_6_juego_to_fragment4_menu"
             app:destination="@id/fragment4_menu" />
+        <action
+            android:id="@+id/action_fragment1_6_juego_self"
+            app:destination="@id/fragment1_6_juego" />
     </fragment>
 
 

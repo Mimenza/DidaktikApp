@@ -184,7 +184,9 @@ class Fragment1_5_juego : Fragment() {
 
     override fun onDestroy() {
         video.stopPlayback()
+
         audio?.stop()
+
         super.onDestroy()
     }
 

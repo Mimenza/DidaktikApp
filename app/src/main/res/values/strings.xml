@@ -135,6 +135,13 @@
     <!--BOTONES-->
     <string name="jugar">Jolastu</string>
     <string name="siguiente">Hurrengoa</string>
+    <string name="ayudajuego1">ayuda juego1</string>
+    <string name="ayudajuego2">ayuda juego2</string>
+    <string name="ayudajuego3">ayuda juego3</string>
+    <string name="ayudajuego4">ayuda juego4</string>
+    <string name="ayudajuego5">ayuda juego5</string>
+    <string name="ayudajuego6">ayuda juego6</string>
+    <string name="ayudajuego7">ayuda juego7</string>
 
 
 </resources>

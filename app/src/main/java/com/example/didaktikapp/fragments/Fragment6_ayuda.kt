@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import com.example.didaktikapp.R
+import kotlinx.android.synthetic.main.fragment6_ayuda.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +37,39 @@ class Fragment6_ayuda : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment6_ayuda, container, false)
+        val view = inflater.inflate(R.layout.fragment1_1_juego, container, false)
+        val tvDescripcion: TextView? = view?.findViewById<TextView>(R.id.txtv6_ayuda)
+        //Recojemos el shared prefs
+
+
+
+        val sharedPreferences = this.activity?.getSharedPreferences("site", 0)
+        val numero = sharedPreferences?.getString("numero", null)?.toInt()
+
+        var descripcionTitulo: String = ""
+
+
+        when(numero){
+
+            0->  {descripcionTitulo=resources.getString(R.string.ayudajuego1)}
+            1->  {descripcionTitulo=resources.getString(R.string.ayudajuego2)}
+            2->  {descripcionTitulo=resources.getString(R.string.ayudajuego3)}
+            3->  {descripcionTitulo=resources.getString(R.string.ayudajuego4)}
+            4->  {descripcionTitulo=resources.getString(R.string.ayudajuego5)}
+            5->  {descripcionTitulo=resources.getString(R.string.ayudajuego6)}
+            6->  {descripcionTitulo=resources.getString(R.string.ayudajuego7)}
+
+
+        }
+
+        if (tvDescripcion!=null){
+
+            tvDescripcion.setText(descripcionTitulo)
+        }
+
+
+
+        return view
     }
 
     companion object {

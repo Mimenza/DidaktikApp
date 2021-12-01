@@ -102,6 +102,9 @@ class Fragment1_1_juego : Fragment() {
         ajustes.setOnClickListener {
             Navigation.findNavController(view)
                 .navigate(R.id.action_fragment1_1_juego_to_fragment4_menu)
+
+
+
         }
 
 

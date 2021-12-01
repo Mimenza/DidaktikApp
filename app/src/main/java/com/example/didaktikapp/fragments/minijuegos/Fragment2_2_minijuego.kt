@@ -51,7 +51,6 @@ class Fragment2_2_minijuego : Fragment() {
         val view = inflater.inflate(R.layout.fragment2_2_minijuego, container, false)
         val button: Button = view.findViewById(R.id.btnf2_2siguiente)
         val ajustes: ImageButton = view.findViewById(R.id.btnf2_2ajustes)
-        val btnAjustes: ImageButton = view.findViewById(R.id.btnf1_3_2_ajustes)
         val btnterminar: Button? = view?.findViewById(R.id.btn7_terminar)
         val btnRetry: Button? = view?.findViewById(R.id.btn7_saiatuberriro)
         val txtResult: TextView? = view?.findViewById(R.id.txtv7_result)
@@ -62,9 +61,7 @@ class Fragment2_2_minijuego : Fragment() {
 
         button.setOnClickListener(){
 
-        //de activity(Resultsactivity) a fragment
-            button.isVisible=false
-            btnAjustes.isVisible=false
+      //de activity(Resultsactivity) a fragment
             showMenu()
 
             if (btnterminar != null) {
@@ -95,8 +92,6 @@ class Fragment2_2_minijuego : Fragment() {
     }
 
     fun showMenu(){
-
-
         val fragManager:FragmentManager? = fragmentManager
 
         if (menuShowing) {

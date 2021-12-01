@@ -35,19 +35,30 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/txtv3f_textozona"
-            android:layout_width="382dp"
-            android:layout_height="256dp"
-            android:layout_gravity="center"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            app:layout_constraintBottom_toBottomOf="@+id/btn3f_jugar"
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="413dp"
+            android:layout_height="253dp"
+            android:layout_marginTop="330dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.551"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imgv3f_fotozona"
-            app:layout_constraintVertical_bias="0.135" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtv3f_textozona"
+                    android:layout_width="382dp"
+                    android:layout_height="256dp"
+                    android:layout_gravity="center"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp" />
+            </LinearLayout>
+        </ScrollView>
 
         <ImageView
             android:id="@+id/imgv3f_backtomap"

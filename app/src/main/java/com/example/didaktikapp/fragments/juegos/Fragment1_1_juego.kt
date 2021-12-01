@@ -2,7 +2,6 @@ package com.example.didaktikapp.fragments.juegos
 
 import com.example.didaktikapp.R
 import `in`.codeshuffle.typewriterview.TypeWriterView
-import android.content.Intent
 import android.media.MediaPlayer
 import androidx.fragment.app.Fragment
 import android.os.Handler
@@ -18,12 +17,11 @@ import android.widget.TextView
 import android.widget.Button
 import android.widget.ImageButton
 import android.graphics.drawable.AnimationDrawable
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
-import com.example.didaktikapp.Model.Constantsjuego2
-import com.example.didaktikapp.activities.Activity5_Mapa
-import com.example.didaktikapp.activities.Activity7_Juego2_Results
+import com.example.didaktikapp.Model.CustomLine
 import kotlinx.coroutines.runBlocking
 import kotlinx.android.synthetic.main.fragment1_1_juego.*
 import kotlinx.coroutines.launch
@@ -41,6 +39,10 @@ class Fragment1_1_juego : Fragment() {
     private var param2: String? = null
 
     private lateinit var vistaAnimada: TranslateAnimation
+    private lateinit var layout: ConstraintLayout
+    private lateinit var customLine: CustomLine
+
+    private val customLines = arrayListOf<CustomLine>()
 
     private var audio: MediaPlayer? = null
 
@@ -78,8 +80,7 @@ class Fragment1_1_juego : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment1_1_juego, container, false)
-        val button: Button = view.findViewById(R.id.btnf1_1saltartutorial)
-        val ajustes: ImageButton = view.findViewById(R.id.btnf1_1_ajustes)
+        layout = view.findViewById(R.id.cl1_1juego)
 
 
         img1 = view.findViewById(R.id.imgv1_1imagen1)
@@ -89,6 +90,9 @@ class Fragment1_1_juego : Fragment() {
         txtv1 = view.findViewById(R.id.txtv1_1azalpena1)
         txtv2 = view.findViewById(R.id.txtv1_1azalpena2)
         txtv3 = view.findViewById(R.id.txtv1_1azalpena3)
+
+        val button: Button = view.findViewById(R.id.btnf1_1saltartutorial)
+        val ajustes: ImageButton = view.findViewById(R.id.btnf1_1_ajustes)
 
         button.setOnClickListener {
             Navigation.findNavController(view)
@@ -111,7 +115,7 @@ class Fragment1_1_juego : Fragment() {
         //Audio juego 1
         runBlocking {
             launch {
-                audio = MediaPlayer.create(context, R.raw.juego1audio)
+                audio = MediaPlayer.create(context, R.raw.juego1audiotutorial)
                 audio?.start()
                 audio?.setOnCompletionListener {
                     Handler(Looper.getMainLooper()).postDelayed({
@@ -128,7 +132,11 @@ class Fragment1_1_juego : Fragment() {
             //Comprueba que no hay ningun audio reproduciendose
             if (audio?.isPlaying == false) {
                 //Guarda en que imagen has clickado
-                pressedImg = 1
+                if (pressedImg != 1) {
+                    pressedImg = 1
+                } else {
+                    pressedImg = 0
+                }
 
                 //Mira que no hayas conseguido el punto 1
                 if (!point1) {
@@ -137,19 +145,19 @@ class Fragment1_1_juego : Fragment() {
                         setBorder(img1, "black")
                         true
                     } else {
-                        unsetBorder(img1)
+                        img1.setBackgroundResource(0)
                         false
                     }
                 }
 
                 //Quita los bordes a las imagenes 2 y 3 comprobando que no los haya conseguido
                 if (!point2) {
-                    unsetBorder(img2)
+                    img2.setBackgroundResource(0)
                     border2 = false
                 }
 
                 if (!point3) {
-                    unsetBorder(img3)
+                    img3.setBackgroundResource(0)
                     border3 = false
                 }
             }
@@ -168,19 +176,19 @@ class Fragment1_1_juego : Fragment() {
                         setBorder(img2, "black")
                         true
                     } else {
-                        unsetBorder(img2)
+                        img2.setBackgroundResource(0)
                         false
                     }
                 }
 
                 //Quita los bordes a las imagenes 1 y 3 comprobando que no los haya conseguido
                 if (!point1) {
-                    unsetBorder(img1)
+                    img1.setBackgroundResource(0)
                     border1 = false
                 }
 
                 if (!point3) {
-                    unsetBorder(img3)
+                    img3.setBackgroundResource(0)
                     border3 = false
                 }
             }
@@ -199,19 +207,19 @@ class Fragment1_1_juego : Fragment() {
                         setBorder(img3, "black")
                         true
                     } else {
-                        unsetBorder(img3)
+                        img3.setBackgroundResource(0)
                         false
                     }
                 }
 
                 //Quita los bordes a las imagenes 1 y 2 comprobando que no los haya conseguido
                 if (!point1) {
-                    unsetBorder(img1)
+                    img1.setBackgroundResource(0)
                     border1 = false
                 }
 
                 if (!point2) {
-                    unsetBorder(img2)
+                    img2.setBackgroundResource(0)
                     border2 = false
                 }
             }
@@ -226,13 +234,23 @@ class Fragment1_1_juego : Fragment() {
                         point2 = true
                         setBorder(img2, "green")
                         setBorder(txtv1, "green")
+                        setLine(img2, txtv1, "green")
                         checkProgress(view, progress)
                     }
-                } else {
+                } else if (pressedImg != 0) {
                     when (pressedImg) {
-                        1 -> setBorder(img1, "red")
-                        2 -> setBorder(img2, "red")
-                        3 -> setBorder(img3, "red")
+                        1 -> {
+                            setBorder(img1, "red")
+                            setLine(img1, txtv1, "red")
+                        }
+                        2 -> {
+                            setBorder(img2, "red")
+                            setLine(img2, txtv1, "red")
+                        }
+                        3 -> {
+                            setBorder(img3, "red")
+                            setLine(img3, txtv1, "red")
+                        }
                     }
                     setBorder(txtv1, "red")
 
@@ -247,6 +265,7 @@ class Fragment1_1_juego : Fragment() {
                     }
                 }
             }
+            pressedImg = 0
         }
 
         txtv2.setOnClickListener {
@@ -258,13 +277,23 @@ class Fragment1_1_juego : Fragment() {
                         point3 = true
                         setBorder(img3, "green")
                         setBorder(txtv2, "green")
+                        setLine(img3, txtv2, "green")
                         checkProgress(view, progress)
                     }
-                } else {
+                } else if (pressedImg != 0) {
                     when (pressedImg) {
-                        1 -> setBorder(img1, "red")
-                        2 -> setBorder(img2, "red")
-                        3 -> setBorder(img3, "red")
+                        1 -> {
+                            setBorder(img1, "red")
+                            setLine(img1, txtv2, "red")
+                        }
+                        2 -> {
+                            setBorder(img2, "red")
+                            setLine(img2, txtv2, "red")
+                        }
+                        3 -> {
+                            setBorder(img3, "red")
+                            setLine(img3, txtv2, "red")
+                        }
                     }
                     setBorder(txtv2, "red")
 
@@ -279,6 +308,7 @@ class Fragment1_1_juego : Fragment() {
                     }
                 }
             }
+            pressedImg = 0
         }
 
         txtv3.setOnClickListener {
@@ -291,13 +321,23 @@ class Fragment1_1_juego : Fragment() {
                         point1 = true
                         setBorder(img1, "green")
                         setBorder(txtv3, "green")
+                        setLine(img1, txtv3, "green")
                         checkProgress(view, progress)
                     }
-                } else {
+                } else if (pressedImg != 0) {
                     when (pressedImg) {
-                        1 -> setBorder(img1, "red")
-                        2 -> setBorder(img2, "red")
-                        3 -> setBorder(img3, "red")
+                        1 -> {
+                            setBorder(img1, "red")
+                            setLine(img1, txtv3, "red")
+                        }
+                        2 -> {
+                            setBorder(img2, "red")
+                            setLine(img2, txtv3, "red")
+                        }
+                        3 -> {
+                            setBorder(img3, "red")
+                            setLine(img3, txtv3, "red")
+                        }
                     }
                     setBorder(txtv3, "red")
 
@@ -312,24 +352,58 @@ class Fragment1_1_juego : Fragment() {
                     }
                 }
             }
+            pressedImg = 0
         }
         return view
     }
 
-    private fun typewriter(view: View) {
-        val typeWriterView = view.findViewById(R.id.txtv1_6_explicacion) as TypeWriterView
-        typeWriterView.setWithMusic(false)
-        typeWriterView.animateText(resources.getString(R.string.titulo))
-        typeWriterView.setDelay(70)
+    /**
+     * Dibuja una linea entre una ImgView y un TextView
+     * @param img la ImageView donde empieza la linea
+     * @param txtv el TextView donde termina la linea
+     * @param color el color de la linea
+     */
+    private fun setLine(img: ImageView?, txtv: TextView?, color: String) {
+        val startX: Float = img!!.x + img.width
+        val startY: Float = img.y + img.height / 2
+
+        val endX: Float = txtv!!.x
+        val endY: Float = txtv.y + txtv.height / 2
+
+        when (color) {
+            "green" ->
+                customLine =
+                    CustomLine(requireContext(), startX, startY, endX, endY, 15F, 162, 224, 23)
+            "red" ->
+                customLine =
+                    CustomLine(requireContext(), startX, startY, endX, endY, 15F, 224, 56, 23)
+        }
+        customLines.add(customLine)
+        layout.addView(customLine)
     }
 
+    /**
+     * Hace que el texto del juego se escriba letra por letra
+     * @param view la vista en la que se encuentra
+     */
+    private fun typewriter(view: View) {
+        val typeWriterView = view.findViewById(R.id.txtv1_1tutorialjuego1) as TypeWriterView
+        typeWriterView.setWithMusic(false)
+        typeWriterView.animateText(resources.getString(R.string.jositajositext))
+        typeWriterView.setDelay(65)
+    }
+
+    /**
+     * Muestra la manzana de la animacion con una transicion
+     * @param view la vista en la que se encuentra
+     */
     private fun starAnimationfun(view: View) {
-        // animacion fondo gris
+        //Animacion fondo gris
         val txtAnimacion = view.findViewById(R.id.txtv1_1fondogris) as TextView
         val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade)
         txtAnimacion.startAnimation(aniFade)
 
-        //animacion entrada upelio
+        //Animacion entrada upelio
         vistaAnimada = TranslateAnimation(-1000f, 0f, 0f, 0f)
         vistaAnimada.duration = 2000
         val upelio = view.findViewById(R.id.imgv1_1_upelio) as ImageView
@@ -343,28 +417,24 @@ class Fragment1_1_juego : Fragment() {
 
     }
 
-    private fun talkAnimationfun(view: View) {
-        val upelio = view.findViewById(R.id.imgv1_1_upelio2) as ImageView
-        upelio.setBackgroundResource(R.drawable.animacion_manzana)
-        val ani = upelio.background as AnimationDrawable
-        ani.start()
 
-    }
-
+    /**
+     * Esconde la manzana de la animacion con una transicion
+     * @param view la vista en la que se encuentra
+     */
     private fun exitAnimationfun(view: View) {
-        //escondemos la manzanda de la animacion
-        val upelioanimado = view.findViewById(R.id.imgv1_1_upelio2) as ImageView
-        upelioanimado.isVisible = false
+        val upelioAnimado = view.findViewById(R.id.imgv1_1_upelio2) as ImageView
+        upelioAnimado.isVisible = false
 
-        //animacion salido upelio
+        //Animacion upelio salido
         vistaAnimada = TranslateAnimation(0f, 1000f, 0f, 0f)
         vistaAnimada.duration = 2000
 
-        //vistaanimada.fillAfter = true
+        //VistaAnimada.fillAfter = true
         val upelio = view.findViewById(R.id.imgv1_1_upelio) as ImageView
         upelio.startAnimation(vistaAnimada)
 
-        //animacion fondo gris
+        //Animacion fondo gris
         Handler(Looper.getMainLooper()).postDelayed({
             val txtAnimacion = view.findViewById(R.id.txtv1_1fondogris) as TextView
             val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
@@ -373,6 +443,17 @@ class Fragment1_1_juego : Fragment() {
             txtv1_1tutorialjuego1.isVisible = false
             txtAnimacion.isVisible = false
         }, 1000)
+    }
+
+    /**
+     * Anima la manzana como que habla
+     * @param view la vista en la que se encuentra
+     */
+    private fun talkAnimationfun(view: View) {
+        val upelio = view.findViewById(R.id.imgv1_1_upelio2) as ImageView
+        upelio.setBackgroundResource(R.drawable.animacion_manzana)
+        val ani = upelio.background as AnimationDrawable
+        ani.start()
     }
 
     /**
@@ -412,35 +493,19 @@ class Fragment1_1_juego : Fragment() {
     }
 
     /**
-     * Quita el borde a una ImageView
-     * @param img la imagen a la que se le quita el borde
-     */
-    private fun unsetBorder(img: ImageView) {
-        img.setBackgroundResource(0)
-    }
-
-    /**
-     * Quita el borde a un TextView
-     * @param txtv el TextView al que se le quita el borde
-     */
-    private fun unsetBorder(txtv: TextView) {
-        txtv.setBackgroundResource(0)
-    }
-
-    /**
-     * Vacia todas las variable para resetear el juego
+     * Resetea el juego vaciando las variables y borrando las lineas
      */
     private fun resetGame() {
         progress = 0
         pressedImg = 0
 
-        unsetBorder(img1)
-        unsetBorder(img2)
-        unsetBorder(img3)
+        img1.setBackgroundResource(0)
+        img2.setBackgroundResource(0)
+        img3.setBackgroundResource(0)
 
-        unsetBorder(txtv1)
-        unsetBorder(txtv2)
-        unsetBorder(txtv3)
+        txtv1.setBackgroundResource(0)
+        txtv2.setBackgroundResource(0)
+        txtv3.setBackgroundResource(0)
 
         point1 = false
         point2 = false
@@ -449,6 +514,10 @@ class Fragment1_1_juego : Fragment() {
         border1 = false
         border2 = false
         border3 = false
+
+        for (i in 0 until customLines.size) {
+            layout.removeView(customLines[i])
+        }
     }
 
     /**

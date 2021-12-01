@@ -380,7 +380,7 @@ class Fragment1_6_juego : Fragment() {
                 audio = MediaPlayer.create(
                     context, R.raw.bertsoa
                 )
-                audio?.setVolume(2F, 2F)
+                audio?.setVolume(0.5F, 0.5F)
                 audio?.start()
 
                 audio?.setOnCompletionListener {

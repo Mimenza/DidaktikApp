@@ -13,6 +13,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
+import com.example.didaktikapp.fragments.Fragment4_menu
 import com.example.didaktikapp.fragments.Fragment5_ajustes
 import kotlinx.android.synthetic.main.activity7_juego2_results.*
 
@@ -50,6 +51,7 @@ class Fragment2_2_minijuego : Fragment() {
         val view = inflater.inflate(R.layout.fragment2_2_minijuego, container, false)
         val button: Button = view.findViewById(R.id.btnf2_2siguiente)
         val ajustes: ImageButton = view.findViewById(R.id.btnf2_2ajustes)
+        val btnAjustes: ImageButton = view.findViewById(R.id.btnf1_3_2_ajustes)
         val btnterminar: Button? = view?.findViewById(R.id.btn7_terminar)
         val btnRetry: Button? = view?.findViewById(R.id.btn7_saiatuberriro)
         val txtResult: TextView? = view?.findViewById(R.id.txtv7_result)
@@ -60,7 +62,9 @@ class Fragment2_2_minijuego : Fragment() {
 
         button.setOnClickListener(){
 
-      //de activity(Resultsactivity) a fragment
+        //de activity(Resultsactivity) a fragment
+            button.isVisible=false
+            btnAjustes.isVisible=false
             showMenu()
 
             if (btnterminar != null) {
@@ -91,13 +95,15 @@ class Fragment2_2_minijuego : Fragment() {
     }
 
     fun showMenu(){
+
+
         val fragManager:FragmentManager? = fragmentManager
 
         if (menuShowing) {
             return
         }
         menuShowing = true
-        fragment = Fragment5_ajustes()
+        fragment = Fragment4_menu()
         fragManager?.beginTransaction()?.add(R.id.framelayoutjuego2results, fragment!!)?.commit()
 
 

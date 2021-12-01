@@ -73,7 +73,7 @@
             app:layout_constraintHorizontal_bias="0.533"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.42000002" />
+            app:layout_constraintVertical_bias="0.45999998" />
 
         <in.codeshuffle.typewriterview.TypeWriterView
             android:id="@+id/txtv1_6_explicacion"
@@ -88,25 +88,25 @@
 
         <TextView
             android:id="@+id/txtv1_6_input1"
-            android:layout_width="80dp"
-            android:layout_height="30dp"
+            android:layout_width="82dp"
+            android:layout_height="70dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.728"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.293" />
+            app:layout_constraintVertical_bias="0.24000001" />
 
         <TextView
             android:id="@+id/txtv1_6_input2"
-            android:layout_width="80dp"
-            android:layout_height="30dp"
+            android:layout_width="93dp"
+            android:layout_height="31dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.906"
+            app:layout_constraintHorizontal_bias="0.92"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.349" />
+            app:layout_constraintVertical_bias="0.32999998" />
 
         <TextView
             android:id="@+id/txtv1_6_input3"
@@ -117,7 +117,7 @@
             app:layout_constraintHorizontal_bias="0.906"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.405" />
+            app:layout_constraintVertical_bias="0.38" />
 
         <TextView
             android:id="@+id/txtv1_6_input4"
@@ -128,7 +128,7 @@
             app:layout_constraintHorizontal_bias="0.048"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.513" />
+            app:layout_constraintVertical_bias="0.49" />
 
         <TextView
             android:id="@+id/txtv1_6_input5"
@@ -139,7 +139,7 @@
             app:layout_constraintHorizontal_bias="0.942"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.641" />
+            app:layout_constraintVertical_bias="0.62" />
 
         <TextView
             android:id="@+id/txtv1_6_input6"
@@ -150,7 +150,7 @@
             app:layout_constraintHorizontal_bias="0.936"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.699" />
+            app:layout_constraintVertical_bias="0.68" />
 
         <EditText
             android:id="@+id/txtv1_6_inputgeneral0"

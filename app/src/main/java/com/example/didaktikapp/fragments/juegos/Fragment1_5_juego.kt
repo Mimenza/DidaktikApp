@@ -43,6 +43,7 @@ class Fragment1_5_juego : Fragment() {
     private var audio: MediaPlayer? = null
     private lateinit var globalView: View
     private lateinit var vistaanimada: TranslateAnimation
+    private var audio: MediaPlayer? = null
 
     //After using View Listener, we can get the full width and height
     var totalWidth: Int = 0
@@ -111,7 +112,9 @@ class Fragment1_5_juego : Fragment() {
         }
 
         btnVerVideo.setOnClickListener() {
+
             verVideo()
+
         }
 
         //Typewriter juego 5 tutorial
@@ -148,7 +151,7 @@ class Fragment1_5_juego : Fragment() {
         var audio: MediaPlayer
         runBlocking() {
             launch {
-                audio = MediaPlayer.create(context, R.raw.juego5audio)
+                audio = MediaPlayer.create(context, R.raw.juego6audio)
                 audio.start()
 
             }
@@ -182,17 +185,31 @@ class Fragment1_5_juego : Fragment() {
 
     override fun onDestroy() {
         video.stopPlayback()
+<<<<<<< HEAD
+        audio?.stop()
+=======
 
+>>>>>>> 78426beee97428a73ccfa2773a51379a18d058d3
         super.onDestroy()
     }
 
     override fun onStop() {
         video.stopPlayback()
+        audio?.stop()
         super.onStop()
     }
 
+    override fun onPause() {
 
+        audio?.pause()
+        super.onPause()
+    }
 
+    override fun onResume() {
+        super.onResume()
+        // TODO: preguntar si esta el audio empezado
+        audio?.start()
+    }
 
 
     private fun typewriter(view: View) {

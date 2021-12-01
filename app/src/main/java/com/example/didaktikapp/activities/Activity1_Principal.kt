@@ -136,17 +136,22 @@ class Activity1_Principal : AppCompatActivity() {
 
     override fun onBackPressed() {
         if (fragment != null) {
-            supportFragmentManager.beginTransaction().remove(fragment!!).commit();
-            vertodo()
-            fragment = null
-            ajustesShowing = false
+            cerrarAjustes()
         } else {
             super.onBackPressed()
         }
     }
 
+    private fun cerrarAjustes() {
+        supportFragmentManager.beginTransaction().remove(fragment!!).commit();
+        vertodo()
+        fragment = null
+        ajustesShowing = false
+    }
+
     private fun showAjustes() {
         if (ajustesShowing) {
+            cerrarAjustes()
             return
         }
         ajustesShowing = true

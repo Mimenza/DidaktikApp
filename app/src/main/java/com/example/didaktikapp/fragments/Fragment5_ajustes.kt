@@ -55,11 +55,7 @@ class Fragment5_ajustes : Fragment() {
 
         buttonAcercaDe.setOnClickListener{ showAcercaDeInfo()}
         buttonAdmin.setOnClickListener{
-            if (!DbHandler.getAdmin()) {
-                showModoAdminDialog()
-            } else {
-                Toast.makeText(requireContext(), "ERROR: Ya esta activado el modo administrador", Toast.LENGTH_SHORT).show()
-            }
+            showModoAdminDialog()
         }
 
         return view
@@ -81,23 +77,43 @@ class Fragment5_ajustes : Fragment() {
         builder.setView(R.layout.admin_login_dialog)
 
         val dialog = builder.create()
+
+
         dialog.show()
 
         val txtAdmin: TextView = dialog.findViewById(R.id.txtPassword)
         val btnCancel: TextView = dialog.findViewById(R.id.adminCancel)
         val btnLogin: TextView = dialog.findViewById(R.id.adminLogin)
+        val txtInfo: TextView = dialog.findViewById(R.id.adminDialogInfoText)
+
+        if (!DbHandler.getAdmin()) {
+            txtAdmin.visibility = View.VISIBLE
+            txtInfo.visibility = View.VISIBLE
+            btnLogin.setBackgroundColor(getResources().getColor(R.color.primary))
+        } else {
+            txtInfo.visibility = View.GONE
+            txtAdmin.visibility = View.GONE
+            btnLogin.text = "LOGOUT"
+            btnLogin.setBackgroundColor(getResources().getColor(R.color.red))
+        }
 
         btnCancel.setOnClickListener() {
             dialog.dismiss()
         }
 
         btnLogin.setOnClickListener() {
-            if (pass.equals(txtAdmin.text.toString())) {
-                DbHandler.setAdmin()
-                Toast.makeText(requireContext(), "Modo Administrador activado correctamente", Toast.LENGTH_SHORT).show()
-                dialog.dismiss()
+            if (!DbHandler.getAdmin()) {
+                if (pass.equals(txtAdmin.text.toString())) {
+                    DbHandler.setAdmin(true)
+                    Toast.makeText(requireContext(), "Modo Administrador activado correctamente", Toast.LENGTH_SHORT).show()
+                    dialog.dismiss()
+                } else {
+                    Toast.makeText(requireContext(), "Error al activar el modo administrador", Toast.LENGTH_SHORT).show()
+                }
             } else {
-                Toast.makeText(requireContext(), "Error al activar el modo administrador", Toast.LENGTH_SHORT).show()
+                DbHandler.setAdmin(false)
+                dialog.dismiss()
+                Toast.makeText(requireContext(), "Modo Administrador desactivado correctamente", Toast.LENGTH_SHORT).show()
             }
         }
 

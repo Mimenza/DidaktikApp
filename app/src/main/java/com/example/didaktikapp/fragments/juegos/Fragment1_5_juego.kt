@@ -43,7 +43,6 @@ class Fragment1_5_juego : Fragment() {
     private var audio: MediaPlayer? = null
     private lateinit var globalView: View
     private lateinit var vistaanimada: TranslateAnimation
-    private var audio: MediaPlayer? = null
 
     //After using View Listener, we can get the full width and height
     var totalWidth: Int = 0
@@ -185,11 +184,7 @@ class Fragment1_5_juego : Fragment() {
 
     override fun onDestroy() {
         video.stopPlayback()
-<<<<<<< HEAD
         audio?.stop()
-=======
-
->>>>>>> 78426beee97428a73ccfa2773a51379a18d058d3
         super.onDestroy()
     }
 

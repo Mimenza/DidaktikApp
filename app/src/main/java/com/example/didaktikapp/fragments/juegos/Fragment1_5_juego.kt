@@ -51,6 +51,7 @@ class Fragment1_5_juego : Fragment() {
     private lateinit var video: VideoView
     private lateinit var globalView: View
     private lateinit var vistaanimada: TranslateAnimation
+    private var audio: MediaPlayer? = null
 
     val listaImagenes = listOf(
         listOf(R.id.imgOrigenCamisa,R.id.imgObjetivoCamisa),
@@ -107,7 +108,9 @@ class Fragment1_5_juego : Fragment() {
         }
 
         btnVerVideo.setOnClickListener() {
+
             verVideo()
+
         }
 
         //Typewriter juego 5 tutorial
@@ -129,7 +132,7 @@ class Fragment1_5_juego : Fragment() {
         var audio: MediaPlayer
         runBlocking() {
             launch {
-                audio = MediaPlayer.create(context, R.raw.juego5audio)
+                audio = MediaPlayer.create(context, R.raw.juego6audio)
                 audio.start()
 
             }
@@ -163,16 +166,27 @@ class Fragment1_5_juego : Fragment() {
 
     override fun onDestroy() {
         video.stopPlayback()
+        audio?.stop()
         super.onDestroy()
     }
 
     override fun onStop() {
         video.stopPlayback()
+        audio?.stop()
         super.onStop()
     }
 
+    override fun onPause() {
 
+        audio?.pause()
+        super.onPause()
+    }
 
+    override fun onResume() {
+        super.onResume()
+        // TODO: preguntar si esta el audio empezado
+        audio?.start()
+    }
 
 
     private fun typewriter(view: View) {

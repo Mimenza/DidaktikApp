@@ -37,6 +37,7 @@
             android:id="@+id/btnf2_2ajustes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minHeight="48dp"
             android:src="@drawable/ic_ajustes_black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -44,7 +44,6 @@ class Fragment1_5_juego : Fragment() {
     private lateinit var globalView: View
     private lateinit var vistaanimada: TranslateAnimation
 
-
     //After using View Listener, we can get the full width and height
     var totalWidth: Int = 0
     var totalHeight: Int = 0

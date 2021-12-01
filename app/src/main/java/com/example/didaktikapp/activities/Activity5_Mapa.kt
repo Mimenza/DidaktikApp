@@ -1,6 +1,7 @@
 package com.example.didaktikapp.activities
 
 import `in`.codeshuffle.typewriterview.TypeWriterView
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.drawable.AnimationDrawable
@@ -40,6 +41,7 @@ import kotlinx.android.synthetic.main.activity1_principal.*
 
 class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
 
+    private val thisActivity: Activity = this
     private lateinit var mMap: GoogleMap
     private lateinit var binding: Activity5MapaBinding
     private lateinit var fusedLocation: FusedLocationProviderClient
@@ -50,6 +52,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var vistaanimada: TranslateAnimation
     private var fragment :Fragment? = null
     var ajustesShowing: Boolean = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,7 +79,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         }
 
         //Typewriter mapa tutorial
-        if (!Utils.getExplicacionFinalizada()) {
+        if (Utils.getUserPreferences(thisActivity,"mapTutorial","finalizado") == null) {
             println("*******************ENTRA ANIMACION")
             Handler(Looper.getMainLooper()).postDelayed({
                 typewriter()
@@ -127,7 +130,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
                 audio.duration
                 audio.setOnCompletionListener {
                     exitAnimationfun()
-                    Utils.setExplicacionFinalizada()
+                    Utils.setUserPreferences(thisActivity,"mapTutorial", "finalizado","true")
                 }
             }
         }
@@ -296,7 +299,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         }
 
         mMap.setOnInfoWindowClickListener(OnInfoWindowClickListener { marker ->
-            if(!Utils.getExplicacionFinalizada()) {
+            if(Utils.getUserPreferences(thisActivity,"mapTutorial","finalizado") == null) {
                 Toast.makeText(this, "Espera a que termine la explicacion", Toast.LENGTH_SHORT).show()
                 return@OnInfoWindowClickListener
             }

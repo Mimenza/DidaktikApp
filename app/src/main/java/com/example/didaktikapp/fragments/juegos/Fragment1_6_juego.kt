@@ -413,7 +413,7 @@ class Fragment1_6_juego : Fragment() {
                     starAnimationfun(view)
 
                     audio = MediaPlayer.create(
-                        context, R.raw.kantu_kantajolasa
+                        context, R.raw.juego6audiotutorial
                     )
                     // audio?.setVolume(0.15F, 0.15F)
                     audio?.start()

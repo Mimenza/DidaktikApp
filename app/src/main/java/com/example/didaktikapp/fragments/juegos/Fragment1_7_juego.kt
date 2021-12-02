@@ -1,6 +1,5 @@
 package com.example.didaktikapp.fragments.juegos
 
-import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -18,7 +17,6 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
@@ -103,7 +101,7 @@ class Fragment1_7_juego : Fragment() {
         var audio: MediaPlayer
         runBlocking() {
             launch {
-                audio = MediaPlayer.create(context, R.raw.juego7_audiotutorial)
+                audio = MediaPlayer.create(context, R.raw.juego7audiotutorial)
                 audio.start()
                 audio?.setOnCompletionListener {
                     Handler(Looper.getMainLooper()).postDelayed({

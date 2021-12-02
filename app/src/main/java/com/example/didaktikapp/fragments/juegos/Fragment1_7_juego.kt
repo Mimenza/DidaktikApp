@@ -36,7 +36,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [Fragment1_juego.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Fragment1_3_2_juego : Fragment() {
+class Fragment1_7_juego : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -61,11 +61,11 @@ class Fragment1_3_2_juego : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment1_7_juego, container, false)
         globalView = view
-        val button: Button = view.findViewById(R.id.btnf1_3_2_siguiente)
-        val ajustes: ImageButton = view.findViewById(R.id.btnf1_3_2_ajustes)
+        val button: Button = view.findViewById(R.id.btnf1_7_siguiente)
+        val ajustes: ImageButton = view.findViewById(R.id.btnf1_7_ajustes)
         button.visibility=GONE
 
-
+/*
         val constraintLayoutFound = globalView.findViewById<ConstraintLayout>(R.id.mainlayout)
         var newView: ImageView
         newView = ImageView(requireContext())
@@ -74,15 +74,18 @@ class Fragment1_3_2_juego : Fragment() {
         newView.x = 300F
         newView.y = 500F
         newView.setBackgroundColor(Color.BLUE)
+
+
         //newView.setImageResource(R.drawable.sagarragorria)
 
         constraintLayoutFound.addView(newView)
+        */
 
         button.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment1_3_2_juego_to_fragment2_3_2_minijuego)
+            Navigation.findNavController(view).navigate(R.id.action_fragment1_7_juego_to_fragment2_7_minijuego)
         }
         ajustes.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment1_3_2_juego_to_fragment4_menu)
+            Navigation.findNavController(view).navigate(R.id.action_fragment1_7_juego_to_fragment4_menu)
         }
 
         //Typewriter juego 4 tutorial
@@ -100,7 +103,7 @@ class Fragment1_3_2_juego : Fragment() {
         var audio: MediaPlayer
         runBlocking() {
             launch {
-                audio = MediaPlayer.create(context, R.raw.juego4_audiotutorial)
+                audio = MediaPlayer.create(context, R.raw.juego7_audiotutorial)
                 audio.start()
                 audio?.setOnCompletionListener {
                     Handler(Looper.getMainLooper()).postDelayed({
@@ -116,14 +119,14 @@ class Fragment1_3_2_juego : Fragment() {
 
     private fun starAnimationfun(view: View) {
         //Animacion fondo gris
-        val txtAnimacion = view.findViewById(R.id.txtv1_3_2_fondogris) as TextView
+        val txtAnimacion = view.findViewById(R.id.txtv1_7_fondogris) as TextView
         val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade)
         txtAnimacion.startAnimation(aniFade)
 
         //Animacion entrada upelio
         vistaAnimada = TranslateAnimation(-1000f, 0f, 0f, 0f)
         vistaAnimada.duration = 2000
-        val upelio = view.findViewById(R.id.imgv1_3_2_upelio) as ImageView
+        val upelio = view.findViewById(R.id.imgv1_7_upelio) as ImageView
         upelio.startAnimation(vistaAnimada)
 
         //llamamos a la animacion para animar a upelio
@@ -134,7 +137,7 @@ class Fragment1_3_2_juego : Fragment() {
 
     }
     private fun exitAnimationfun(view: View) {
-        val upelioAnimado = view.findViewById(R.id.imgv1_3_2_upelio2) as ImageView
+        val upelioAnimado = view.findViewById(R.id.imgv1_7_upelio2) as ImageView
         upelioAnimado.isVisible = false
 
         //Animacion upelio salido
@@ -142,23 +145,23 @@ class Fragment1_3_2_juego : Fragment() {
         vistaAnimada.duration = 2000
 
         //VistaAnimada.fillAfter = true
-        val upelio = view.findViewById(R.id.imgv1_3_2_upelio) as ImageView
+        val upelio = view.findViewById(R.id.imgv1_7_upelio) as ImageView
         upelio.startAnimation(vistaAnimada)
 
         //Animacion fondo gris
         Handler(Looper.getMainLooper()).postDelayed({
-            val txtAnimacion = view.findViewById(R.id.txtv1_3_2_fondogris) as TextView
+            val txtAnimacion = view.findViewById(R.id.txtv1_7_fondogris) as TextView
             val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
             txtAnimacion.startAnimation(aniFade)
-            txtv1_3_2_tutorialjuego4.startAnimation(aniFade)
-            txtv1_3_2_tutorialjuego4.isVisible = false
+            txtv1_7_tutorialjuego4.startAnimation(aniFade)
+            txtv1_7_tutorialjuego4.isVisible = false
             txtAnimacion.isVisible = false
         }, 1000)
     }
 
     private fun typewriter(view: View) {
         /*
-        val typeWriterView = view.findViewById(R.id.txtv1_3_2_tutorialjuego4) as TypeWriterView
+        val typeWriterView = view.findViewById(R.id.txtv1_7_tutorialjuego4) as TypeWriterView
         typeWriterView.setWithMusic(false)
         typeWriterView.animateText(resources.getString(R.string.juego4tutorial))
         typeWriterView.setDelay(65)
@@ -166,7 +169,7 @@ class Fragment1_3_2_juego : Fragment() {
          */
     }
     private fun talkAnimationfun(view: View) {
-        val upelio = view.findViewById(R.id.imgv1_3_2_upelio2) as ImageView
+        val upelio = view.findViewById(R.id.imgv1_7_upelio2) as ImageView
         upelio.setBackgroundResource(R.drawable.animacion_manzana)
         val ani = upelio.background as AnimationDrawable
         ani.start()
@@ -208,7 +211,7 @@ class Fragment1_3_2_juego : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Fragment1_3_2_juego().apply {
+            Fragment1_7_juego().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

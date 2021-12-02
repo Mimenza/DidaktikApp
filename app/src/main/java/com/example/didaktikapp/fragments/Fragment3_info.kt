@@ -123,7 +123,7 @@ class Fragment3_info : Fragment() {
 
                 button.setOnClickListener {
                     Navigation.findNavController(view)
-                        .navigate(R.id.action_fragment3_info_to_fragment1_3_2_juego)
+                        .navigate(R.id.action_fragment3_info_to_fragment1_4_juego)
 
                 }
                 audioTutorialZona4()
@@ -136,7 +136,7 @@ class Fragment3_info : Fragment() {
 
                 button.setOnClickListener {
                     Navigation.findNavController(view)
-                        .navigate(R.id.action_fragment3_info_to_fragment1_4_juego)
+                        .navigate(R.id.action_fragment3_info_to_fragment1_5_juego)
 
                 }
                 audioTutorialZona5()
@@ -148,7 +148,7 @@ class Fragment3_info : Fragment() {
 
                 button.setOnClickListener {
                     Navigation.findNavController(view)
-                        .navigate(R.id.action_fragment3_info_to_fragment1_5_juego)
+                        .navigate(R.id.action_fragment3_info_to_fragment1_6_juego)
 
                 }
                 audioTutorialZona6()
@@ -160,7 +160,7 @@ class Fragment3_info : Fragment() {
 
                 button.setOnClickListener {
                     Navigation.findNavController(view)
-                        .navigate(R.id.action_fragment3_info_to_fragment1_6_juego)
+                        .navigate(R.id.action_fragment3_info_to_fragment1_7_juego)
 
                 }
 

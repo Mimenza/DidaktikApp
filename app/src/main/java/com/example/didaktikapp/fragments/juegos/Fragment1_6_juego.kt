@@ -99,7 +99,7 @@ class Fragment1_6_juego : Fragment() {
 
         //JUEGO========================================================================
 
-        var clickedButton = 0
+        var clickedButton = 1
         //arraylist con las respuestas correctas
         var respuestas = listOf(
             "sagardoaren",
@@ -121,6 +121,8 @@ class Fragment1_6_juego : Fragment() {
 
         //declaramos los inputText
         val inputgeneral0: EditText = view.findViewById(R.id.txtv1_6_inputgeneral0)
+
+        inputgeneral0.setHint("escribe respuesta 1")
 
 
         //listeners para saber que input hemos clickado
@@ -411,7 +413,7 @@ class Fragment1_6_juego : Fragment() {
                     starAnimationfun(view)
 
                     audio = MediaPlayer.create(
-                        context, R.raw.kantu_kantajolasa
+                        context, R.raw.juego6audiotutorial
                     )
                     // audio?.setVolume(0.15F, 0.15F)
                     audio?.start()

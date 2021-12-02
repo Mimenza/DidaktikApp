@@ -111,7 +111,6 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-
     private fun showAjustes(){
         if (ajustesShowing) {
             return
@@ -121,11 +120,31 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         supportFragmentManager.beginTransaction().add(R.id.framelayoutajustes, fragment!!).commit()
     }
 
+    override fun onBackPressed() {
+        if (fragment != null) {
+            cerrarAjustes()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
+    private fun cerrarAjustes() {
+        supportFragmentManager.beginTransaction().remove(fragment!!).commit();
+        fragment = null
+        ajustesShowing = false
+        verMapa()
+
+    }
+
+    private fun verMapa(){
+        binding.btn5Ajustes.isVisible=true
+        binding.framelayoutmapa.isVisible=true
+    }
+
     private fun ocultarMapa(){
         binding.btn5Ajustes.isVisible=false
         binding.framelayoutmapa.isVisible=false
     }
-
 
     private fun typewriter() {
         val typeWriterView = txtv5_presentacionmapa as TypeWriterView
@@ -133,7 +152,6 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         typeWriterView.animateText(resources.getString(R.string.text_bienvenidamapa))
         typeWriterView.setDelay(70)
     }
-
 
     private fun audioSound() {
         //funcion para la reproduccion del sonido
@@ -152,11 +170,13 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
     }
 
     override fun onDestroy() {
-        audio?.stop()
+        if(this::audio.isInitialized){
+            audio?.stop()
+        }
         super.onDestroy()
     }
 
-       private fun starAnimationfun() {
+    private fun starAnimationfun() {
            binding.imgv5Manzanatutorial.visibility = VISIBLE
            binding.imgv5Bocadillo.visibility = VISIBLE
            binding.txtv5Presentacionmapa.visibility = VISIBLE
@@ -370,5 +390,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
     private fun rad2deg(rad: Double): Double {
         return rad * 180.0 / Math.PI
     }
+
+
 
 }

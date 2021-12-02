@@ -532,7 +532,7 @@ class Fragment1_1_juego : Fragment() {
         if (progress == 3) {
             runBlocking {
                 launch {
-                    audio = MediaPlayer.create(context, R.raw.juego1_ongi)
+                    audio = MediaPlayer.create(context, R.raw.juego1ongi)
                     audio?.start()
                     audio?.setOnCompletionListener {
                         val btnNext: Button = view.findViewById(R.id.btnf1_1saltartutorial)

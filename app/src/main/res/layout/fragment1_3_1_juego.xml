@@ -23,7 +23,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
             app:layout_constraintVertical_bias="0.976" />
 
         <ImageButton
@@ -43,7 +42,7 @@
         <LinearLayout
             android:id="@+id/juego3_preguntas_layout"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="220dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -55,37 +54,51 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center_vertical"
-                android:text="Pregunta1"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="10dp"
+                android:text="@string/juego3_pregunta1"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
                 android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/juego3_pregunta1"
+            <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="testrespuseta"
-                android:padding="10dp"
-                android:layout_marginTop="10dp"
-                android:textSize="18sp"
-                android:background="@color/smoothGray"/>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal|center_vertical">
+
+                <RadioButton
+                    android:id="@+id/pregunta1_respuesta_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="Bai"
+                    android:layout_marginEnd="40dp"
+                    android:buttonTint="@color/primary"/>
+
+                <RadioButton
+                    android:id="@+id/pregunta1_respuesta_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="Ez"
+                    android:layout_marginStart="40dp"
+                    android:buttonTint="@color/primary"/>
+            </RadioGroup>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center_vertical"
-                android:text="Pregunta2"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
+                android:text="@string/juego3_pregunta2"
+                android:layout_marginStart="20dp"
                 android:textSize="18sp"/>
 
             <EditText
-                android:id="@+id/juego3_pregunta2"
+                android:id="@+id/juego3_pregunta2_respuesta1"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="Respuesta 2"
+                android:hint="Erantzun"
                 android:padding="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="5dp"
                 android:textSize="18sp"
                 android:background="@color/smoothGray"/>
 
@@ -94,8 +107,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:text="comprobar"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginTop="10dp"/>
 
         </LinearLayout>

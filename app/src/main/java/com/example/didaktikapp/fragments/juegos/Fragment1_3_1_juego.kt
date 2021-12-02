@@ -37,6 +37,7 @@ class Fragment1_3_1_juego : Fragment() {
 
     private lateinit var globalView: View
     private lateinit var button: Button
+    private lateinit var preguntasLayout: LinearLayout
     var totalWidth: Int = 0
     var totalHeight: Int = 0
 
@@ -76,9 +77,14 @@ class Fragment1_3_1_juego : Fragment() {
         button = view.findViewById(R.id.btnf1_3_1_siguiente)
         button.visibility = View.GONE
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_3_1_ajustes)
-        val preguntasLayout: LinearLayout = view.findViewById(R.id.juego3_preguntas_layout)
+        val btnComprobarRespuesta: Button = globalView.findViewById(R.id.juego3_btnComprobar)
+        preguntasLayout = view.findViewById(R.id.juego3_preguntas_layout)
 
         preguntasLayout.visibility =  View.GONE
+
+        btnComprobarRespuesta.setOnClickListener() {
+            comprobarRespuestas()
+        }
 
         view.viewTreeObserver.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
             override fun onGlobalLayout() {
@@ -163,7 +169,8 @@ class Fragment1_3_1_juego : Fragment() {
                             sendToTopImagesNotFinished()
                             viewElement.setOnTouchListener(null)
                             if (juegoCompletado()) {
-                                button.visibility = View.VISIBLE
+                                iniciarPreguntas()
+                                //button.visibility = View.VISIBLE
                                 Toast.makeText(requireContext(), "Bikain!", Toast.LENGTH_SHORT).show()
                             }
                         }
@@ -172,6 +179,32 @@ class Fragment1_3_1_juego : Fragment() {
             }
         }
         true
+    }
+
+    private fun iniciarPreguntas() {
+        ocultarPuzzle()
+        preguntasLayout.visibility = View.VISIBLE
+    }
+
+    private fun comprobarRespuestas() {
+        val radio1: RadioButton = globalView.findViewById(R.id.pregunta1_respuesta_1)
+        val editTextRespuesta: EditText = globalView.findViewById(R.id.juego3_pregunta2_respuesta1)
+        val btnComprobarRespuesta: Button = globalView.findViewById(R.id.juego3_btnComprobar)
+
+        if (radio1.isSelected && editTextRespuesta.text.toString().trim().toLowerCase().equals("zanpantzarrak")) {
+            editTextRespuesta.isEnabled = false
+            btnComprobarRespuesta.visibility = View.GONE
+            button.visibility = View.VISIBLE
+        } else {
+            Toast.makeText(requireContext(), "Intentalo de nuevo!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun ocultarPuzzle() {
+        for (item in manzanaList!!) {
+            item.origen.visibility = View.GONE
+            item.objetivo.visibility = View.GONE
+        }
     }
 
     private fun sendToTopImagesNotFinished() {

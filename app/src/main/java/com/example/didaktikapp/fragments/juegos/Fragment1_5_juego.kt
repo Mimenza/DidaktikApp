@@ -212,7 +212,7 @@ class Fragment1_5_juego : Fragment() {
     private fun typewriter(view: View) {
         val typeWriterView = view.findViewById(R.id.txtv1_5tutorialjuego5) as TypeWriterView
         typeWriterView.setWithMusic(false)
-        typeWriterView.animateText(resources.getString(R.string.sagardantzajolasa))
+        typeWriterView.animateText(resources.getString(R.string.sagardantzajolasatutorial))
         typeWriterView.setDelay(70)
     }
 

@@ -88,8 +88,8 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
 
         //Metemos los datos del usuario en el mapa
 
-        txtv_5nombre.text=userName
-        txtv_5puntuacion.text= puntuacion.toString()
+      //  txtv_5nombre.text=userName
+       // txtv_5puntuacion.text= puntuacion.toString()
 
 
         //Typewriter mapa tutorial

@@ -47,6 +47,8 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var fusedLocation: FusedLocationProviderClient
     private var myCurrentPosition: LatLng = LatLng(45.0, 123.0)
     private var lastUserPoint: Int = 7
+    private var userName:String? = null
+    private var puntuacion:Int? = null
     private var minimumRadius: Int = 50
     private lateinit var audio: MediaPlayer
     private lateinit var vistaanimada: TranslateAnimation
@@ -76,7 +78,19 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
             if (DbHandler.getUser()!!.ultima_puntuacion != null) {
                 lastUserPoint = DbHandler.getUser()!!.ultima_puntuacion!!
             }
+            if(DbHandler.getUser()!!.nombre!=null){
+                userName=DbHandler.getUser()!!.nombre!!
+            }
+            if(DbHandler.getUser()!!.puntuacion!=null){
+                puntuacion=DbHandler.getUser()!!.puntuacion!!
+            }
         }
+
+        //Metemos los datos del usuario en el mapa
+
+        txtv_5nombre.text=userName
+        txtv_5puntuacion.text= puntuacion.toString()
+
 
         //Typewriter mapa tutorial
         if (Utils.getUserPreferences(thisActivity,"mapTutorial","finalizado") == null) {

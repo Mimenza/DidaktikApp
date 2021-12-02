@@ -9,20 +9,21 @@
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainlayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/mainlayout">
+        android:layout_height="match_parent">
 
         <Button
             android:id="@+id/btnf1_3_1_siguiente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:text="SiGUIENTE"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
             app:layout_constraintVertical_bias="0.976" />
 
         <ImageButton
@@ -38,6 +39,66 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.174"
             tools:ignore="SpeakableTextPresentCheck" />
+
+        <LinearLayout
+            android:id="@+id/juego3_preguntas_layout"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="220dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:text="Pregunta1"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/juego3_pregunta1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="testrespuseta"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                android:background="@color/smoothGray"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:text="Pregunta2"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"/>
+
+            <EditText
+                android:id="@+id/juego3_pregunta2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Respuesta 2"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                android:background="@color/smoothGray"/>
+
+            <Button
+                android:id="@+id/juego3_btnComprobar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="comprobar"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

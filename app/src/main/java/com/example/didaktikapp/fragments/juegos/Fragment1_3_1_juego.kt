@@ -5,20 +5,18 @@ import android.graphics.Color
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.os.Bundle
+import android.text.Layout
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
 import android.view.ViewTreeObserver
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
+import android.widget.*
 import com.example.didaktikapp.Model.DragnDropImage
 
 
@@ -78,6 +76,9 @@ class Fragment1_3_1_juego : Fragment() {
         button = view.findViewById(R.id.btnf1_3_1_siguiente)
         button.visibility = View.GONE
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_3_1_ajustes)
+        val preguntasLayout: LinearLayout = view.findViewById(R.id.juego3_preguntas_layout)
+
+        preguntasLayout.visibility =  View.GONE
 
         view.viewTreeObserver.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
             override fun onGlobalLayout() {
@@ -159,6 +160,8 @@ class Fragment1_3_1_juego : Fragment() {
                             viewElement.x = posX.toFloat()
                             viewElement.y = posY.toFloat()
                             itemInList.acertado = true
+                            sendToTopImagesNotFinished()
+                            viewElement.setOnTouchListener(null)
                             if (juegoCompletado()) {
                                 button.visibility = View.VISIBLE
                                 Toast.makeText(requireContext(), "Bikain!", Toast.LENGTH_SHORT).show()
@@ -169,6 +172,14 @@ class Fragment1_3_1_juego : Fragment() {
             }
         }
         true
+    }
+
+    private fun sendToTopImagesNotFinished() {
+        for (item in manzanaList!!) {
+            if (!item.acertado) {
+                item.origen.bringToFront()
+            }
+        }
     }
 
     private fun juegoCompletado(): Boolean {

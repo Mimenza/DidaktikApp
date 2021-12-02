@@ -20,9 +20,6 @@
             android:id="@+id/action_fragment3_info_to_fragment1_3_1_juego"
             app:destination="@id/fragment1_3_1_juego" />
         <action
-            android:id="@+id/action_fragment3_info_to_fragment1_3_2_juego"
-            app:destination="@id/fragment1_3_2_juego" />
-        <action
             android:id="@+id/action_fragment3_info_to_fragment1_5_juego"
             app:destination="@id/fragment1_5_juego" />
         <action
@@ -85,25 +82,6 @@
             android:id="@+id/action_fragment1_3_1_juego_to_fragment4_menu"
             app:destination="@id/fragment4_menu" />
     </fragment>
-
-
-
-    <fragment
-        android:id="@+id/fragment1_3_2_juego"
-        android:name="com.example.didaktikapp.fragments.juegos.Fragment1_3_2_juego"
-        android:label="fragment1_3_2_juego"
-        tools:layout="@layout/fragment1_7_juego" >
-
-        <action
-            android:id="@+id/action_fragment1_3_2_juego_to_fragment2_3_2_minijuego"
-            app:destination="@id/fragment2_3_2_minijuego" />
-        <action
-            android:id="@+id/action_fragment1_3_2_juego_to_fragment4_menu"
-            app:destination="@id/fragment4_menu" />
-    </fragment>
-
-
-
 
     <fragment
         android:id="@+id/fragment1_4_juego"
@@ -205,20 +183,6 @@
             android:id="@+id/action_fragment2_3_1_minijuego_to_fragment4_menu"
             app:destination="@id/fragment4_menu" />
     </fragment>
-
-
-
-    <fragment
-        android:id="@+id/fragment2_3_2_minijuego"
-        android:name="com.example.didaktikapp.fragments.minijuegos.Fragment2_3_2_minijuego"
-        android:label="fragment2_3_2_minijuego"
-        tools:layout="@layout/fragment2_3_2_minijuego" >
-        <action
-            android:id="@+id/action_fragment2_3_2_minijuego_to_fragment4_menu"
-            app:destination="@id/fragment4_menu" />
-    </fragment>
-
-
 
     <fragment
         android:id="@+id/fragment2_4_minijuego"

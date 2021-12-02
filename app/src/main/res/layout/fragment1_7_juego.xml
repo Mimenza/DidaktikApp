@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.juegos.Fragment1_3_2_juego">
+    tools:context=".fragments.juegos.Fragment1_7_juego">
 
 
     <!-- TODO: Update blank fragment layout -->
@@ -14,7 +14,7 @@
         android:id="@+id/mainlayout">
 
         <Button
-            android:id="@+id/btnf1_3_2_siguiente"
+            android:id="@+id/btnf1_7_siguiente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="SiGUIENTE"
@@ -26,7 +26,7 @@
             app:layout_constraintVertical_bias="0.976" />
 
         <ImageButton
-            android:id="@+id/btnf1_3_2_ajustes"
+            android:id="@+id/btnf1_7_ajustes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minHeight="48dp"
@@ -40,7 +40,7 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
-            android:id="@+id/txtv1_3_2_fondogris"
+            android:id="@+id/txtv1_7_fondogris"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="#D3000000"
@@ -49,17 +49,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
-            android:id="@+id/imgv1_3_2_upelio2"
+            android:id="@+id/imgv1_7_upelio2"
             android:layout_width="323dp"
             android:layout_height="316dp"
-            app:layout_constraintBottom_toBottomOf="@+id/txtv1_3_2_fondogris"
+            app:layout_constraintBottom_toBottomOf="@+id/txtv1_7_fondogris"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.79" />
 
         <in.codeshuffle.typewriterview.TypeWriterView
-            android:id="@+id/txtv1_3_2_tutorialjuego4"
+            android:id="@+id/txtv1_7_tutorialjuego4"
             android:layout_width="327dp"
             android:layout_height="422dp"
             android:focusable="true"
@@ -68,18 +68,17 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.491"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.13999999"
+            app:layout_constraintVertical_bias="0.132"
             tools:ignore="MissingClass" />
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
-            android:id="@+id/imgv1_3_2_upelio"
+            android:id="@+id/imgv1_7_upelio"
             android:layout_width="323dp"
             android:layout_height="316dp"
             android:src="@drawable/img_upeliosagarra"
-            app:layout_constraintBottom_toBottomOf="@+id/txtv1_3_2_fondogris"
+            app:layout_constraintBottom_toBottomOf="@+id/txtv1_7_fondogris"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

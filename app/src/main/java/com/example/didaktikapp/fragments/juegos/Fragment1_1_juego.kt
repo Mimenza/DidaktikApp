@@ -259,7 +259,7 @@ class Fragment1_1_juego : Fragment() {
 
                     runBlocking {
                         launch {
-                            audio = MediaPlayer.create(context, R.raw.juego1_gaizki)
+                            audio = MediaPlayer.create(context, R.raw.gaizkiaudioa)
                             audio?.start()
                             audio?.setOnCompletionListener {
                                 resetGame()
@@ -302,7 +302,7 @@ class Fragment1_1_juego : Fragment() {
 
                     runBlocking {
                         launch {
-                            audio = MediaPlayer.create(context, R.raw.juego1_gaizki)
+                            audio = MediaPlayer.create(context, R.raw.gaizkiaudioa)
                             audio?.start()
                             audio?.setOnCompletionListener {
                                 resetGame()
@@ -346,7 +346,7 @@ class Fragment1_1_juego : Fragment() {
 
                     runBlocking {
                         launch {
-                            audio = MediaPlayer.create(context, R.raw.juego1_gaizki)
+                            audio = MediaPlayer.create(context, R.raw.gaizkiaudioa)
                             audio?.start()
                             audio?.setOnCompletionListener {
                                 resetGame()

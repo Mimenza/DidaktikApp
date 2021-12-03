@@ -1,6 +1,8 @@
 package com.example.didaktikapp.fragments.juegos
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Context
 import android.graphics.Color
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
@@ -16,6 +18,7 @@ import androidx.navigation.Navigation
 import com.example.didaktikapp.R
 import android.view.ViewTreeObserver
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import com.example.didaktikapp.Model.DragnDropImage
 
@@ -121,6 +124,7 @@ class Fragment1_3_1_juego : Fragment() {
     }
 
 
+
     fun prepairPuzzleElements() {
         for (vItemList in listaImagenes) {
             var vItemOrigen: ImageView = globalView.findViewById(vItemList[0])
@@ -188,16 +192,34 @@ class Fragment1_3_1_juego : Fragment() {
 
     private fun comprobarRespuestas() {
         val radio1: RadioButton = globalView.findViewById(R.id.pregunta1_respuesta_1)
+        val radio2: RadioButton = globalView.findViewById(R.id.pregunta1_respuesta_2)
         val editTextRespuesta: EditText = globalView.findViewById(R.id.juego3_pregunta2_respuesta1)
         val btnComprobarRespuesta: Button = globalView.findViewById(R.id.juego3_btnComprobar)
 
-        if (radio1.isSelected && editTextRespuesta.text.toString().trim().toLowerCase().equals("zanpantzarrak")) {
+        if (radio1.isChecked && editTextRespuesta.text.toString().trim().toLowerCase().equals("zanpantzarrak")) {
             editTextRespuesta.isEnabled = false
+            radio1.isEnabled = false
+            radio2.isEnabled = false
             btnComprobarRespuesta.visibility = View.GONE
             button.visibility = View.VISIBLE
+            Toast.makeText(requireContext(), "Zorionak, proba gainditu duzu !", Toast.LENGTH_SHORT).show()
+            hideKeyboard()
         } else {
-            Toast.makeText(requireContext(), "Intentalo de nuevo!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Saiatu berriro", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun Fragment.hideKeyboard() {
+        view?.let { activity?.hideKeyboard(it) }
+    }
+
+    fun Activity.hideKeyboard() {
+        hideKeyboard(currentFocus ?: View(this))
+    }
+
+    fun Context.hideKeyboard(view: View) {
+        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     private fun ocultarPuzzle() {

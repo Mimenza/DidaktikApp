@@ -125,7 +125,12 @@
     <!--FRAGMENT JUEGO6 -->
     <string name="text_6juego">"Azken geldiunera iritsi gara! Zelako bidaia polita egiten ari garen! Badakizue zer den txotx irekiera? Urtarrilaren hasieran Astigarragan ospatzen den ekitaldi bat da Txotx irekiera, Sagardo Berriaren eguna ere deiturikoa. Txotx denboraldiari hasiera emateko, eta urteko sagardo berria dastatzeko asmoz, urtero, sagardotegi desberdin batek ekitaldi bat antolatzen du sagardotegian bertan.  Sagardo berria dastatzen duen lehenengo pertsona, gonbidatu famatu bat izan ohi da: mendizalea, abeslaria, bertsolaria, futbolaria…  Ziur urteren bateko gonbidaturen bat ezaguna egingo zaizuela: Izaro Andres abeslaria, Xabi Alonso futbolaria, Indurain txirrindularia... Esan dezakegu, gonbidatuak garrantzia handia duela jai honetan, bera baita eguneko protagonistetako bat. Astigarragako sagardo berria dastatu baino lehen, gonbidatuari, besteak beste, Sagar Dantza dantzatu, txistua jo eta txalaparta jotzen zaio. Gonbidatuak urteko sagardoa probatu ondoren, ikusleek ere sagardo berria probatu eta bazkari jendetsu bat egiten da sagardotegian bertan, edonor joan daiteke bazkarira. "</string>
     <string name="titulo6_juego">7. GUNEA: TXOTX IREKIERA</string>
-
+    <string name="erantzuna1">1 galderaren erantzuna</string>
+    <string name="erantzuna2">2 galderaren erantzuna</string>
+    <string name="erantzuna3">3 galderaren erantzuna</string>
+    <string name="erantzuna4">4 galderaren erantzuna</string>
+    <string name="erantzuna5">5 galderaren erantzuna</string>
+    <string name="erantzuna6">6 galderaren erantzuna</string>
 
     <!--ACERCA DE -->
     <string name="equipodesarrollo">• EQUIPO DE DESARROLLO •</string>

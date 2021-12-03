@@ -122,33 +122,32 @@ class Fragment1_6_juego : Fragment() {
         //declaramos los inputText
         val inputgeneral0: EditText = view.findViewById(R.id.txtv1_6_inputgeneral0)
 
-        inputgeneral0.setHint("escribe respuesta 1")
-
+        inputgeneral0.setHint(R.string.erantzuna1)
 
         //listeners para saber que input hemos clickado
         input1btn.setOnClickListener() {
             clickedButton = 1
-            inputgeneral0.setHint("escribe respuesta 1")
+            inputgeneral0.setHint(R.string.erantzuna1)
         }
         input2btn.setOnClickListener() {
             clickedButton = 2
-            inputgeneral0.setHint("escribe respuesta 2")
+            inputgeneral0.setHint(R.string.erantzuna2)
         }
         input3btn.setOnClickListener() {
             clickedButton = 3
-            inputgeneral0.setHint("escribe respuesta 3")
+            inputgeneral0.setHint(R.string.erantzuna3)
         }
         input4btn.setOnClickListener() {
             clickedButton = 4
-            inputgeneral0.setHint("escribe respuesta 4")
+            inputgeneral0.setHint(R.string.erantzuna4)
         }
         input5btn.setOnClickListener() {
             clickedButton = 5
-            inputgeneral0.setHint("escribe respuesta 5")
+            inputgeneral0.setHint(R.string.erantzuna5)
         }
         input6btn.setOnClickListener() {
             clickedButton = 6
-            inputgeneral0.setHint("escribe respuesta 6")
+            inputgeneral0.setHint(R.string.erantzuna6)
         }
 
         //=====================================

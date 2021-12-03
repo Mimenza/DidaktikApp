@@ -69,7 +69,7 @@ class Activity3_Load : AppCompatActivity() {
     private fun cargarAdapter(){
 
         //Cargar el adapter después de llamar a la bbdd
-        val adapter = UsersRecyclerAdapter(listUsers, context)
+        val adapter = UsersRecyclerAdapter(this,listUsers, context)
 
         recyclerViewUsers.layoutManager = LinearLayoutManager(context)
         recyclerViewUsers.adapter = adapter

@@ -64,7 +64,6 @@
             android:id="@+id/txtv1_6_bertso"
             android:layout_width="371dp"
             android:layout_height="466dp"
-            android:text="@string/bertso"
             android:textAlignment="center"
             android:textSize="17sp"
             android:visibility="invisible"
@@ -108,6 +107,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.32999998" />
+
+        <ImageButton
+            android:id="@+id/btnf1_6_sonido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:src="@drawable/ic_volumen1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.093"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/txtv1_6_input3"

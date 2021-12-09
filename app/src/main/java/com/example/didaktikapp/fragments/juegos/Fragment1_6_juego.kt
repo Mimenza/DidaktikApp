@@ -308,21 +308,21 @@ class Fragment1_6_juego : Fragment() {
 
         var htmlString = "<h2>Sagardotegiari</h2><br/><br/>\n" +
                 "\n" +
-                "        Bedeinkatua izan dadila " + input1 + " grazia<br/><br/>\n" +
+                "        Bedeinkatua izan dadila <b>" + input1 + "</b> grazia<br/><br/>\n" +
                 "\n" +
-                "        Bai eta ere kupira gabe edaten duen " + input2 + ";<br/><br/>\n" +
+                "        Bai eta ere kupira gabe edaten duen <b>" + input2 + "</b>;<br/><br/>\n" +
                 "\n" +
-                "        Edari honek jende askori ematen dio " + input3 + ";,<br/><br/>\n" +
+                "        Edari honek jende askori ematen dio <b>" + input3 + "</b>;,<br/><br/>\n" +
                 "\n" +
                 "        Hau edan gabe egotea da neretzat penitentzia.<br/><br/>\n" +
                 "\n" +
-                "        " + input4 + " dagon sagardoak dit ematen tentazioa<br/><br/>\n" +
+                "        <b>" + input4 + "</b> dagon sagardoak dit ematen tentazioa<br/><br/>\n" +
                 "\n" +
                 "        Prezisamente edan beharra daukat pertsekuzioa;<br/><br/>\n" +
                 "\n" +
-                "        Mila deabruz josirikako orain duen " + input5 + "<br/><br/>\n" +
+                "        Mila deabruz josirikako orain duen <b>" + input5 + "</b><br/><br/>\n" +
                 "\n" +
-                "        Zaleak asko geran medioz dauka " + input6
+                "        Zaleak asko geran medioz dauka <b>" + input6 +"</b>"
 
         val spanned = HtmlCompat.fromHtml(htmlString, HtmlCompat.FROM_HTML_MODE_COMPACT)
 

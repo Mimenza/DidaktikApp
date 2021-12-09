@@ -40,7 +40,7 @@ class Fragment1_5_juego : Fragment() {
     private lateinit var button: Button
     private lateinit var myLayout: View
     private lateinit var video: VideoView
-    private var audio: MediaPlayer? = null
+    private lateinit var audio: MediaPlayer
     private lateinit var globalView: View
     private lateinit var vistaanimada: TranslateAnimation
 
@@ -147,7 +147,6 @@ class Fragment1_5_juego : Fragment() {
     private fun audioTutorial(view: View){
 
         //Audio juego 5
-        var audio: MediaPlayer
         runBlocking() {
             launch {
                 audio = MediaPlayer.create(context, R.raw.juego6audio)
@@ -313,6 +312,7 @@ class Fragment1_5_juego : Fragment() {
                             sendToTopImagesNotFinished()
                             viewElement.setOnTouchListener(null)
                             if (juegoCompletado()) {
+                                audio.stop()
                                 button.visibility = View.VISIBLE
                                 Toast.makeText(requireContext(), "Bikain!", Toast.LENGTH_SHORT).show()
                             }

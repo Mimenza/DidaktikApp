@@ -46,7 +46,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding: Activity5MapaBinding
     private lateinit var fusedLocation: FusedLocationProviderClient
     private var myCurrentPosition: LatLng = LatLng(45.0, 123.0)
-    private var lastUserPoint: Int = 7
+    private var lastUserPoint: Int = 0
     private var userName:String? = null
     private var puntuacion:Int? = null
     private var minimumRadius: Int = 50

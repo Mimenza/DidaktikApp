@@ -4,6 +4,7 @@ package com.example.didaktikapp.activities
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -25,6 +26,8 @@ class Activity7_Juego2_Results : AppCompatActivity() {
 
     var minijuegoShowing: Boolean = false
     var juegoShowing: Boolean = false
+    private lateinit var audio: MediaPlayer
+
     override fun onCreate(savedInstanceState:Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity7_juego2_results)
@@ -44,8 +47,6 @@ class Activity7_Juego2_Results : AppCompatActivity() {
         //Boton finish que nos redirecciona al mapa
 
 
-
-        var audio: MediaPlayer
      if (correctAnswers>=2) {
          //Audio acierto
          runBlocking() {
@@ -59,6 +60,7 @@ class Activity7_Juego2_Results : AppCompatActivity() {
              showMinijuego2()
             //Ocultamos los botones
             ocultaracciones()
+            audio.stop()
          }
          //Ocultamos boton intentar de nuevo
 

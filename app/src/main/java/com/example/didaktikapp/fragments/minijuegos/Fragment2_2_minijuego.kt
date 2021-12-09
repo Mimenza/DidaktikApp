@@ -62,6 +62,7 @@ class Fragment2_2_minijuego : Fragment() {
         button.setOnClickListener(){
 
       //de activity(Resultsactivity) a fragment
+            button.visibility = View.GONE
             showMenu()
 
 

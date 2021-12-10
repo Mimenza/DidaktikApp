@@ -178,6 +178,9 @@ galderak egiteko aukera izango baitute.</string>
     <string name="juego3_pregunta1">Argazki horretan agertzen dena Santa Ana festan egoten da?</string>
     <string name="juego3_pregunta2">Nortzuk dira?</string>
     <string name="botonclaro">MODU ARGIA</string>
+    <string name="español">Gaztelania</string>
+    <string name="euskera">Euskara</string>
+    <string name="Idiomas">Hizkuntzak</string>
 
 
 </resources>

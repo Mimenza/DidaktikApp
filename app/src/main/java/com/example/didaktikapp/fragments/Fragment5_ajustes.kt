@@ -13,10 +13,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.*
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.marginStart
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.DbHandler
+import android.content.SharedPreferences
+import androidx.core.view.isVisible
+import com.example.didaktikapp.Model.Theme
+import com.example.didaktikapp.activities.Activity1_Principal
+import kotlinx.android.synthetic.main.activity1_principal.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -51,6 +57,14 @@ class Fragment5_ajustes : Fragment() {
         val view = inflater.inflate(R.layout.fragment5_ajustes, container, false)
         val buttonAcercaDe: Button = view.findViewById(R.id.btn5f_acercade)
         val buttonAdmin: Button = view.findViewById(R.id.btn5f_admin)
+        val buttonTheme: Button = view.findViewById(R.id.btn5f_oscuro)
+
+
+
+        val sharedPreferences = this.activity?.getSharedPreferences("modoclaro", 0)
+        var editor = sharedPreferences?.edit()
+        editor!!.putString("tipo","").apply()
+
 
 
         buttonAcercaDe.setOnClickListener{ showAcercaDeInfo()}
@@ -58,7 +72,22 @@ class Fragment5_ajustes : Fragment() {
             showModoAdminDialog()
         }
 
+        buttonTheme.setOnClickListener{
+            changeTheme()
+            //Ocultar acciones
+            //botones para ocultar acciones
+
+
+        }
+
+
         return view
+    }
+
+    fun changeTheme(){
+
+           var tema= Theme()
+           tema.checkTheme(requireContext())
     }
 
     fun showAcercaDeInfo(){

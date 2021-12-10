@@ -43,6 +43,7 @@ class Fragment1_3_1_juego : Fragment() {
     private lateinit var preguntasLayout: LinearLayout
     var totalWidth: Int = 0
     var totalHeight: Int = 0
+    var puzzleShowing: Boolean = false
 
     val listaImagenes = listOf(
         listOf(R.id.puzzle_pieza_o_1,R.id.puzzle_pieza_d_1),
@@ -115,7 +116,11 @@ class Fragment1_3_1_juego : Fragment() {
 
 
         button.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment1_3_1_juego_to_fragment2_3_1_minijuego)
+            if (puzzleShowing) {
+                Navigation.findNavController(view).navigate(R.id.action_fragment1_3_1_juego_to_fragment2_3_1_minijuego)
+            }else {
+                iniciarPreguntas()
+            }
         }
         ajustes.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment1_3_1_juego_to_fragment4_menu)
@@ -173,8 +178,8 @@ class Fragment1_3_1_juego : Fragment() {
                             sendToTopImagesNotFinished()
                             viewElement.setOnTouchListener(null)
                             if (juegoCompletado()) {
-                                iniciarPreguntas()
-                                //button.visibility = View.VISIBLE
+                                //iniciarPreguntas()
+                                button.visibility = View.VISIBLE
                                 Toast.makeText(requireContext(), "Bikain!", Toast.LENGTH_SHORT).show()
                             }
                         }
@@ -186,6 +191,8 @@ class Fragment1_3_1_juego : Fragment() {
     }
 
     private fun iniciarPreguntas() {
+        button.visibility = View.GONE
+        puzzleShowing = true
         ocultarPuzzle()
         preguntasLayout.visibility = View.VISIBLE
     }

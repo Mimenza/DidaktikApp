@@ -9,7 +9,7 @@
     <string name="tituloprincipal">SAGARRA JO</string>
     <string name="nombregrupo">Onandi taldea</string>
     <string name="btnhasi">Hasi</string>
-    <string name="btncargar">Kargatu</string>
+    <string name="btncargar">Partida Kargatu</string>
     <string name="btnnueva">Partida berria</string>
 
     <!--LOGIN-->
@@ -31,7 +31,7 @@
     <!--FRAGMENT AJUSTES -->
     <string name="ajustes">EZARPENAK</string>
     <string name="botonidioma">HIZKUNTZA</string>
-    <string name="botonoscuro">MODU ILUNA</string>
+    <string name="botonoscuro">ALDATU GAIA</string>
     <string name="botonacercade">NORTZUK GARA</string>
 
     <!--FRAGMENT JUEGO1 -->
@@ -101,24 +101,7 @@
 
     <string name="titulo">Oraingoan, “Kantu- kanta” ariketa egin beharko duzue. Pantailan entzun berri duzuen bertsoa agertuko zaizue, bete beharreko hutsune batzuekin. Zuek, hutsune horiek  bete beharko dituzue hitz batekin, orain entzun berri duzuen bertsoaz oroituz. Oraintxe ikusiko dut zer nolako memoria duzuen… animo!
     </string>
-    <string name="bertso">Sagardotegiari<br/><br/>
 
-        Bedeinkatua izan dadila &#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009; grazia<br/><br/>
-
-        Bai eta ere kupira gabe edaten duen &#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;;<br/><br/>
-
-        Edari honek jende askori ematen dio &#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;,<br/><br/>
-
-        Hau edan gabe egotea da neretzat penitentzia.<br/><br/>
-
-        &#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009; dagon sagardoak dit ematen tentazioa<br/><br/>
-
-        Prezisamente edan beharra daukat pertsekuzioa;<br/><br/>
-
-        Mila deabruz josirikako orain duen &#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;<br/><br/>
-
-        Zaleak asko geran medioz dauka &#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;
-    </string>
     <string name="comprobatu">komprobatu</string>
 
 
@@ -194,6 +177,11 @@ galderak egiteko aukera izango baitute.</string>
     <string name="sagardantzajolasatutorial">“Txotxongiloa janzten” jolasera jolastu beharko duzue. Horretarako pantailaren alde batean txotxongilo bat agertuko da eta bestean, arropa prenda desberdinak. Jolasa gainditzeko, prenda bakoitza txotxongiloaren parte bakoitzarekin lotu beharko duzue, hau da, prenda bakoitzak duen zenbakia txotxongiloaren zein ataletan doan adierazi beharko duzue prendaren zenbakia txotxongiloan adieraziz. Animo!</string>
     <string name="juego3_pregunta1">Argazki horretan agertzen dena Santa Ana festan egoten da?</string>
     <string name="juego3_pregunta2">Nortzuk dira?</string>
+    <string name="botonclaro">MODU ARGIA</string>
+    <string name="español">Gaztelania</string>
+    <string name="euskera">Euskara</string>
+    <string name="Idiomas">Hizkuntzak</string>
+    <string name="tema">Tema</string>
 
 
 </resources>

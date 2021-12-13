@@ -392,6 +392,4 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         return rad * 180.0 / Math.PI
     }
 
-
-
 }

@@ -10,4 +10,13 @@
     <color name="transparent">#00FFFFFF</color>
     <color name="red">#E03817</color>
     <color name="smoothGray">#ccc</color>
+
+    <!--DARK THEME-->
+    <color name="darkprimary">#6cae00</color>
+    <color name="darksecondary">#c50c1c</color>
+    <color name="darkprimaryVariant">#a2cc1d</color>
+    <color name="darksecondaryVariant">#c85545</color>
+
+
+
 </resources>

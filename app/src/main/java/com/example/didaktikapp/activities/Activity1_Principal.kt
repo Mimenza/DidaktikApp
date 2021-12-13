@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.lang.Exception
 import androidx.fragment.app.Fragment
+
 import com.example.didaktikapp.R
 import com.example.didaktikapp.fragments.Fragment5_ajustes
 
@@ -27,11 +28,13 @@ class Activity1_Principal : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getSupportActionBar()?.hide()
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+        //getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
         setContentView(R.layout.activity1_principal)
 
         binding = Activity1PrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
         //Boton para ver los ajustes
         btn1_ajustes.setOnClickListener() {

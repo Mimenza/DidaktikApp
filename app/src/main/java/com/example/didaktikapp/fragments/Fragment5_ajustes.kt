@@ -1,22 +1,27 @@
 package com.example.didaktikapp.fragments
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
-import android.content.DialogInterface
+import android.content.Context
 import android.os.Bundle
-import android.text.InputType
-import android.text.Layout
-import android.text.method.PasswordTransformationMethod
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.*
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.marginStart
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.DbHandler
+import android.content.res.Configuration
+import android.preference.PreferenceManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityCompat.recreate
+import com.example.didaktikapp.Model.MyPreferences
+import com.example.didaktikapp.activities.Activity1_Principal
+import kotlinx.android.synthetic.main.activity1_principal.*
+import java.util.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -51,6 +56,14 @@ class Fragment5_ajustes : Fragment() {
         val view = inflater.inflate(R.layout.fragment5_ajustes, container, false)
         val buttonAcercaDe: Button = view.findViewById(R.id.btn5f_acercade)
         val buttonAdmin: Button = view.findViewById(R.id.btn5f_admin)
+        val buttonTheme: Button = view.findViewById(R.id.btn5f_oscuro)
+        val buttonIdiomas: Button = view.findViewById(R.id.btn5f_idioma)
+
+
+        val sharedPreferences = this.activity?.getSharedPreferences("modoclaro", 0)
+        var editor = sharedPreferences?.edit()
+        editor!!.putString("tipo","").apply()
+
 
 
         buttonAcercaDe.setOnClickListener{ showAcercaDeInfo()}
@@ -58,8 +71,118 @@ class Fragment5_ajustes : Fragment() {
             showModoAdminDialog()
         }
 
+        buttonTheme.setOnClickListener{
+            chooseThemeDialog()
+
+        }
+
+        buttonIdiomas.setOnClickListener{
+
+            chooseLanguageDialog()
+        }
+
+
         return view
     }
+
+
+          fun chooseThemeDialog(){
+
+              val builder = AlertDialog.Builder(requireContext())
+              builder.setTitle(getString(R.string.tema))
+              val styles = arrayOf("Claro", "Oscuro")
+              val checkedItem = MyPreferences(requireContext()).darkMode
+
+              builder.setSingleChoiceItems(styles, checkedItem) { dialog, which ->
+
+                  when (which) {
+                      0 -> {
+                          AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                          MyPreferences(requireContext()).darkMode = 0
+
+                          dialog.dismiss()
+                      }
+                      1 -> {
+                          AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                          MyPreferences(requireContext()).darkMode = 1
+
+                          dialog.dismiss()
+                      }
+
+                  }
+              }
+
+              val dialog = builder.create()
+              dialog.show()
+              //Segun la opcion seleccionada, clickamos oscuro o claro
+              checkTheme()
+          }
+
+
+    fun checkTheme(){
+
+        when (MyPreferences(requireContext()).darkMode) {
+            0 -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+            }
+            1 -> {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
+            }
+
+        }
+    }
+
+    //IDIOMAS DIALOG
+    fun chooseLanguageDialog() {
+
+        val spanish = getString(R.string.español)
+        val euskera = getString(R.string.euskera)
+
+        val languages = arrayOf(euskera, spanish)
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(getString(R.string.Idiomas))
+
+        val checkedItem = MyPreferences(requireContext()).lang
+
+        builder.setSingleChoiceItems(languages, checkedItem) { dialog, which ->
+            when (which) {
+                0 -> {
+                    setLocate("eu")
+
+                    MyPreferences(requireContext()).lang = 0
+                    dialog.dismiss()
+                }
+                1 -> {
+                    setLocate("es")
+
+                    MyPreferences(requireContext()).lang = 1
+                    dialog.dismiss()
+                }
+
+
+            }
+
+        }
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    //for change language
+    fun setLocate(lang: String) {
+        val locale= Locale(lang)
+        Locale.setDefault(locale)
+        val config = Configuration()
+        config.locale =locale
+        requireContext().resources?.updateConfiguration(config, requireContext().resources.displayMetrics)
+        //   val editor = getSharedPreferences("settings", Context.MODE_PRIVATE).edit()
+        //editor.putString("my_lang", lang)
+        // editor.apply()
+    }
+
+
+
 
     fun showAcercaDeInfo(){
         var dialog = Dialog(requireContext())

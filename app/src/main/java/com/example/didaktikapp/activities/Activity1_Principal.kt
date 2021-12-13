@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.lang.Exception
 import androidx.fragment.app.Fragment
+
 import com.example.didaktikapp.R
 import com.example.didaktikapp.fragments.Fragment5_ajustes
 
@@ -32,6 +33,8 @@ class Activity1_Principal : AppCompatActivity() {
 
         binding = Activity1PrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
         //Boton para ver los ajustes
         btn1_ajustes.setOnClickListener() {

@@ -10,7 +10,6 @@
         android:id="@+id/txtv_2_titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="@string/introducirnombre"
         android:text="@string/introducirnombre"
         android:textAlignment="center"
         android:textSize="34sp"
@@ -20,7 +19,7 @@
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintVertical_bias="0.07" />
 
     <Button
         android:id="@+id/btn1_hasi"
@@ -32,7 +31,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.792" />
+        app:layout_constraintVertical_bias="0.88" />
 
     <EditText
         android:id="@+id/txt2_nombre"
@@ -45,18 +44,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.63" />
+        app:layout_constraintVertical_bias="0.653" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="292dp"
+        android:layout_height="315dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.282"
-        app:srcCompat="@drawable/img_upeliosagarra_small" />
+        app:srcCompat="@drawable/img_upeliosagarra" />
 
     <ProgressBar
         android:id="@+id/progressBar"

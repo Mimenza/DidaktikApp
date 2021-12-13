@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.view.animation.AnimationUtils
+import androidx.core.content.ContentProviderCompat.requireContext
+import com.example.didaktikapp.Model.MyPreferences
 import com.example.didaktikapp.R
 import com.example.didaktikapp.databinding.Activity0SplashBinding
 

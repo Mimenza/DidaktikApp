@@ -1,6 +1,5 @@
 package com.example.didaktikapp.fragments
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
@@ -14,13 +13,11 @@ import android.widget.*
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.DbHandler
 import android.content.res.Configuration
-import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.app.ActivityCompat.recreate
+
 import com.example.didaktikapp.Model.MyPreferences
 import com.example.didaktikapp.activities.Activity1_Principal
-import kotlinx.android.synthetic.main.activity1_principal.*
 import java.util.*
 
 
@@ -59,10 +56,8 @@ class Fragment5_ajustes : Fragment() {
         val buttonTheme: Button = view.findViewById(R.id.btn5f_oscuro)
         val buttonIdiomas: Button = view.findViewById(R.id.btn5f_idioma)
 
-
-        val sharedPreferences = this.activity?.getSharedPreferences("modoclaro", 0)
-        var editor = sharedPreferences?.edit()
-        editor!!.putString("tipo","").apply()
+        //Segun la opcion seleccionada, clickamos oscuro o claro
+        checkTheme(requireContext())
 
 
 
@@ -99,12 +94,14 @@ class Fragment5_ajustes : Fragment() {
                       0 -> {
                           AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                           MyPreferences(requireContext()).darkMode = 0
+                          ( requireContext() as  AppCompatActivity).delegate.applyDayNight()
 
                           dialog.dismiss()
                       }
                       1 -> {
                           AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                           MyPreferences(requireContext()).darkMode = 1
+                          ( requireContext() as  AppCompatActivity).delegate.applyDayNight()
 
                           dialog.dismiss()
                       }
@@ -114,20 +111,21 @@ class Fragment5_ajustes : Fragment() {
 
               val dialog = builder.create()
               dialog.show()
-              //Segun la opcion seleccionada, clickamos oscuro o claro
-              checkTheme()
+
           }
 
 
-    fun checkTheme(){
+    fun checkTheme(requireContext:Context) {
 
-        when (MyPreferences(requireContext()).darkMode) {
+        when (MyPreferences(requireContext).darkMode) {
             0 -> {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                ( requireContext  as  AppCompatActivity).delegate.applyDayNight()
 
             }
             1 -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                ( requireContext as  AppCompatActivity).delegate.applyDayNight()
 
             }
 
@@ -137,6 +135,8 @@ class Fragment5_ajustes : Fragment() {
     //IDIOMAS DIALOG
     fun chooseLanguageDialog() {
 
+
+        var activity = Activity1_Principal()
         val spanish = getString(R.string.español)
         val euskera = getString(R.string.euskera)
 
@@ -144,20 +144,20 @@ class Fragment5_ajustes : Fragment() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(getString(R.string.Idiomas))
 
-        val checkedItem = MyPreferences(requireContext()).lang
+        val checkedItem = MyPreferences(activity).lang
 
         builder.setSingleChoiceItems(languages, checkedItem) { dialog, which ->
             when (which) {
                 0 -> {
                     setLocate("eu")
 
-                    MyPreferences(requireContext()).lang = 0
+                    MyPreferences(activity).lang = 0
                     dialog.dismiss()
                 }
                 1 -> {
                     setLocate("es")
 
-                    MyPreferences(requireContext()).lang = 1
+                    MyPreferences(activity).lang = 1
                     dialog.dismiss()
                 }
 
@@ -180,7 +180,6 @@ class Fragment5_ajustes : Fragment() {
         //editor.putString("my_lang", lang)
         // editor.apply()
     }
-
 
 
 

@@ -24,6 +24,7 @@ class Activity1_Principal : AppCompatActivity() {
     private lateinit var binding: Activity1PrincipalBinding
     private var audio: MediaPlayer? = null
     var ajustesShowing: Boolean = false
+    private lateinit var activity:Activity1_Principal
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +34,8 @@ class Activity1_Principal : AppCompatActivity() {
 
         binding = Activity1PrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
 
 
@@ -110,6 +113,9 @@ class Activity1_Principal : AppCompatActivity() {
         super.onResume()
         // TODO: preguntar si esta el audio empezado
         audio?.start()
+
+
+
     }
 
     override fun onRestart() {

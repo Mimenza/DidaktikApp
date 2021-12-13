@@ -1,5 +1,6 @@
 package com.example.didaktikapp.activities
 
+import android.app.PendingIntent.getActivity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.didaktikapp.R
+import com.example.didaktikapp.fragments.Fragment5_ajustes
 import kotlinx.android.synthetic.main.fragment3_info.*
 
 class Activity6_Site : AppCompatActivity() {
@@ -37,7 +39,11 @@ class Activity6_Site : AppCompatActivity() {
         println("NUMERO "+newInt)
 
 
+
+
     }
+
+
 
 
 }

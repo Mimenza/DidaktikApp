@@ -82,12 +82,14 @@ class Activity1_Principal : AppCompatActivity() {
                 //Nos lleva a la activity para hacer el login
                 var i = Intent(this, Activity2_Login::class.java)
                 startActivity(i)
+                this.overridePendingTransition(0, 0)
             }
 
             binding.btn1Cargar.setOnClickListener() {
                 //Nos lleva a la activity para ver todas las partidas creadas
                 var i = Intent(this, Activity3_Load::class.java)
                 startActivity(i)
+                this.overridePendingTransition(0, 0)
             }
             /*
             runBlocking {

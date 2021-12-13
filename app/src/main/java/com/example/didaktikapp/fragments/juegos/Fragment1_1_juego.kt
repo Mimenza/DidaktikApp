@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.CustomLine
+import com.example.didaktikapp.activities.Activity6_Site
 import kotlinx.coroutines.runBlocking
 import kotlinx.android.synthetic.main.fragment1_1_juego.*
 import kotlinx.coroutines.launch
@@ -100,10 +101,10 @@ class Fragment1_1_juego : Fragment() {
         }
 
         ajustes.setOnClickListener {
-            Navigation.findNavController(view)
-                .navigate(R.id.action_fragment1_1_juego_to_fragment4_menu)
+            /*Navigation.findNavController(view)
+                .navigate(R.id.action_fragment1_1_juego_to_fragment4_menu)*/
 
-
+            (activity as Activity6_Site?)?.showMenu()
 
         }
 

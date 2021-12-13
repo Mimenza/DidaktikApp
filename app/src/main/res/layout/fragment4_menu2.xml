@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Fragment4_menu">
+    tools:context=".fragments.Fragment4_menu2">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -22,31 +22,31 @@
             tools:layout_editor_absoluteX="0dp">
 
             <Button
-                android:id="@+id/btn4f_repetir"
+                android:id="@+id/btn4f_repetir2"
                 style="@style/botonesMenu"
                 android:drawableLeft="@drawable/ic_repetir"
                 android:text="@string/botonagain" />
 
             <Button
-                android:id="@+id/btn4f_ajustes"
+                android:id="@+id/btn4f_ajustes2"
                 style="@style/botonesMenu"
                 android:drawableLeft="@drawable/ic_ajustes"
                 android:text="@string/botonajustes" />
 
             <Button
-                android:id="@+id/btn4f_siguiente"
+                android:id="@+id/btn4f_siguiente2"
                 style="@style/botonesMenu"
                 android:drawableLeft="@drawable/ic_siguiente"
                 android:text="@string/botonmapa" />
 
             <Button
-                android:id="@+id/btn4f_inicio"
+                android:id="@+id/btn4f_inicio2"
                 style="@style/botonesMenu"
                 android:drawableLeft="@drawable/ic_home"
                 android:text="@string/botonhome" />
 
             <Button
-                android:id="@+id/btn4f_ayuda"
+                android:id="@+id/btn4f_ayuda2"
                 style="@style/botonesMenu"
                 android:drawableLeft="@drawable/ic_ayuda"
                 android:text="@string/botonhelp" />

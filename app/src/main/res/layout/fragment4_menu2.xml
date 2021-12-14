@@ -22,12 +22,6 @@
             tools:layout_editor_absoluteX="0dp">
 
             <Button
-                android:id="@+id/btn4f_repetir2"
-                style="@style/botonesMenu"
-                android:drawableLeft="@drawable/ic_repetir"
-                android:text="@string/botonagain" />
-
-            <Button
                 android:id="@+id/btn4f_ajustes2"
                 style="@style/botonesMenu"
                 android:drawableLeft="@drawable/ic_ajustes"

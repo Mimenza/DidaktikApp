@@ -92,12 +92,18 @@ class Fragment1_1_juego : Fragment() {
         txtv2 = view.findViewById(R.id.txtv1_1azalpena2)
         txtv3 = view.findViewById(R.id.txtv1_1azalpena3)
 
-        val button: Button = view.findViewById(R.id.btnf1_1saltartutorial)
+        val button: Button = view.findViewById(R.id.btnf1_1siguienteJuego)
+        val buttonAgain: Button = view.findViewById(R.id.btnf1_1repetirJuego)
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_1ajustes)
 
         button.setOnClickListener {
             Navigation.findNavController(view)
                 .navigate(R.id.action_fragment1_1_juego_to_fragment2_1_minijuego)
+        }
+
+        buttonAgain.setOnClickListener(){
+            Navigation.findNavController(view)
+                .navigate(R.id.action_fragment1_1_juego_self)
         }
 
         ajustes.setOnClickListener {
@@ -536,9 +542,11 @@ class Fragment1_1_juego : Fragment() {
                     audio = MediaPlayer.create(context, R.raw.juego1ongi)
                     audio?.start()
                     audio?.setOnCompletionListener {
-                        val btnNext: Button = view.findViewById(R.id.btnf1_1saltartutorial)
+                        val btnNext: Button = view.findViewById(R.id.btnf1_1siguienteJuego)
+                        val btnAgain: Button = view.findViewById(R.id.btnf1_1repetirJuego)
 
                         btnNext.isVisible = true
+                        btnAgain.isVisible = true
                     }
                 }
             }

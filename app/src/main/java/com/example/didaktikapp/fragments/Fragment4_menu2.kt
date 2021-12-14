@@ -49,7 +49,6 @@ class Fragment4_menu2 : Fragment() {
         val ajustes: Button = view.findViewById(R.id.btn4f_ajustes2)
         val ayuda: Button = view.findViewById(R.id.btn4f_ayuda2)
         val inicio: Button = view.findViewById(R.id.btn4f_inicio2)
-        val repetir: Button = view.findViewById(R.id.btn4f_repetir2)
         val siguiente: Button = view.findViewById(R.id.btn4f_siguiente2)
 
         //Navegacion a los framents
@@ -58,10 +57,6 @@ class Fragment4_menu2 : Fragment() {
         }
 
         ayuda.setOnClickListener{
-
-        }
-
-        repetir.setOnClickListener(){
 
         }
 

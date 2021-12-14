@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_fragment1_1_juego_to_fragment4_menu"
             app:destination="@id/fragment4_menu" />
+        <action
+            android:id="@+id/action_fragment1_1_juego_self"
+            app:destination="@id/fragment1_1_juego" />
     </fragment>
 
 
@@ -65,6 +68,9 @@
         <action
             android:id="@+id/action_fragment1_2_juego_to_fragment4_menu"
             app:destination="@id/fragment4_menu" />
+        <action
+            android:id="@+id/action_fragment1_2_juego_self"
+            app:destination="@id/fragment1_2_juego" />
     </fragment>
 
 
@@ -81,6 +87,9 @@
         <action
             android:id="@+id/action_fragment1_3_1_juego_to_fragment4_menu"
             app:destination="@id/fragment4_menu" />
+        <action
+            android:id="@+id/action_fragment1_3_1_juego_self"
+            app:destination="@id/fragment1_3_1_juego" />
     </fragment>
 
     <fragment
@@ -95,6 +104,9 @@
         <action
             android:id="@+id/action_fragment1_4_juego_to_fragment4_menu"
             app:destination="@id/fragment4_menu" />
+        <action
+            android:id="@+id/action_fragment1_4_juego_self"
+            app:destination="@id/fragment1_4_juego" />
     </fragment>
 
 
@@ -111,6 +123,9 @@
         <action
             android:id="@+id/action_fragment1_5_juego_to_fragment4_menu"
             app:destination="@id/fragment4_menu" />
+        <action
+            android:id="@+id/action_fragment1_5_juego_self"
+            app:destination="@id/fragment1_5_juego" />
     </fragment>
 
 
@@ -146,6 +161,9 @@
         <action
             android:id="@+id/action_fragment1_7_juego_to_fragment4_menu"
             app:destination="@id/fragment4_menu" />
+        <action
+            android:id="@+id/action_fragment1_7_juego_self"
+            app:destination="@id/fragment1_7_juego" />
     </fragment>
 
 
@@ -158,6 +176,9 @@
         <action
             android:id="@+id/action_fragment2_1_minijuego_to_fragment4_menu"
             app:destination="@id/fragment4_menu" />
+        <action
+            android:id="@+id/action_fragment2_1_minijuego_self"
+            app:destination="@id/fragment2_1_minijuego" />
     </fragment>
 
 
@@ -170,6 +191,9 @@
         <action
             android:id="@+id/action_fragment2_2_minijuego_to_fragment4_menu"
             app:destination="@id/fragment4_menu" />
+        <action
+            android:id="@+id/action_fragment2_2_minijuego_self"
+            app:destination="@id/fragment2_2_minijuego" />
     </fragment>
 
 
@@ -182,6 +206,9 @@
         <action
             android:id="@+id/action_fragment2_3_1_minijuego_to_fragment4_menu"
             app:destination="@id/fragment4_menu" />
+        <action
+            android:id="@+id/action_fragment2_3_1_minijuego_self"
+            app:destination="@id/fragment2_3_1_minijuego" />
     </fragment>
 
     <fragment
@@ -192,6 +219,9 @@
         <action
             android:id="@+id/action_fragment2_4_minijuego_to_fragment4_menu"
             app:destination="@id/fragment4_menu" />
+        <action
+            android:id="@+id/action_fragment2_4_minijuego_self"
+            app:destination="@id/fragment2_4_minijuego" />
     </fragment>
 
 
@@ -204,6 +234,9 @@
         <action
             android:id="@+id/action_fragment2_5_minijuego_to_fragment4_menu"
             app:destination="@id/fragment4_menu" />
+        <action
+            android:id="@+id/action_fragment2_5_minijuego_self"
+            app:destination="@id/fragment2_5_minijuego" />
     </fragment>
 
 
@@ -216,6 +249,9 @@
         <action
             android:id="@+id/action_fragment2_6_minijuego_to_fragment4_menu"
             app:destination="@id/fragment4_menu" />
+        <action
+            android:id="@+id/action_fragment2_6_minijuego_self"
+            app:destination="@id/fragment2_6_minijuego" />
     </fragment>
 
 
@@ -228,6 +264,9 @@
         <action
             android:id="@+id/action_fragment2_7_minijuego_to_fragment4_menu"
             app:destination="@id/fragment4_menu" />
+        <action
+            android:id="@+id/action_fragment2_7_minijuego_self"
+            app:destination="@id/fragment2_7_minijuego" />
     </fragment>
 
 

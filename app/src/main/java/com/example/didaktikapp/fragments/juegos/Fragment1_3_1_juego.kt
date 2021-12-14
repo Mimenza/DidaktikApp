@@ -21,6 +21,8 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import com.example.didaktikapp.Model.DragnDropImage
+import com.example.didaktikapp.activities.DbHandler
+import com.example.reto01.Model.User
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -33,7 +35,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [Fragment1_juego.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Fragment1_3_1_juego : Fragment() {
+class Fragment1_3_1_juego : Fragment(), DbHandler.queryResponseDone {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -177,8 +179,11 @@ class Fragment1_3_1_juego : Fragment() {
                             itemInList.acertado = true
                             sendToTopImagesNotFinished()
                             viewElement.setOnTouchListener(null)
-                            if (juegoCompletado()) {
+                            if (puzzleCompletado()) {
                                 //iniciarPreguntas()
+                                    var myUser: User = DbHandler.getUser()!!
+                                myUser.puntuacion = myUser.puntuacion!! + 5
+                                DbHandler().requestDbUserUpdate(this)
                                 button.visibility = View.VISIBLE
                                 Toast.makeText(requireContext(), "Bikain!", Toast.LENGTH_SHORT).show()
                             }
@@ -246,7 +251,7 @@ class Fragment1_3_1_juego : Fragment() {
         }
     }
 
-    private fun juegoCompletado(): Boolean {
+    private fun puzzleCompletado(): Boolean {
         var finalizado: Boolean = true
         for (item in manzanaList!!) {
             if (!item.acertado) {
@@ -285,4 +290,9 @@ class Fragment1_3_1_juego : Fragment() {
                 }
             }
     }
+
+    override fun responseDbUserUpdated(response: Boolean) {
+        println("************* UPDATE RESPONSE: " +response.toString())
+    }
+
 }

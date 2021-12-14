@@ -55,7 +55,9 @@ class Activity3_Load : AppCompatActivity() {
         addOnSuccessListener { documentos->
             for (documento in documentos){
                 Usuario = User()
+                Usuario.id = documento.data.get("id").toString().replace("u","").toInt()
                 Usuario.nombre=documento.data.get("nombre").toString()
+                Usuario.tutorialFinalizado=documento.data.get("tutorialFinalizado").toString().toInt()
                 Usuario.ultima_puntuacion=documento.data.get("ultimo_punto").toString().toInt()
                 Usuario.puntuacion=documento.data.get("puntuacion").toString().toInt()
                 listUsers.add(Usuario)

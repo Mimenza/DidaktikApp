@@ -3,6 +3,7 @@ package com.example.didaktikapp.activities
 import android.widget.Toast
 import com.example.reto01.Model.User
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 
 class DbHandler {
 
@@ -32,6 +33,7 @@ class DbHandler {
 
         fun setUser(pUser: User) {
             this.usuario = pUser
+            println("************ USUARIO CARGADO: " + this.usuario)
         }
 
         fun setLastUserId(pNumber: Int) {
@@ -71,29 +73,34 @@ class DbHandler {
 
     }
 
-    /*
     fun requestDbUserUpdate(callback: queryResponseDone) {
         if (usuario == null) {
             return
         }
+        //FIXME ESTO PUEDE TAL VEZ PUEDE SER MEJORADO AHORRANDO LA CONSULTA DE BUSCAR EL USUARIO
         getDbInstance().collection("Usuarios").whereEqualTo("nombre", usuario!!.nombre).get()
             .addOnSuccessListener {
                 if (it.size() > 0) {
-
+                    val userData = hashMapOf(
+                        "tutorialFinalizado" to usuario!!.tutorialFinalizado,
+                        "puntuacion" to usuario!!.puntuacion,
+                        "ultimo_punto" to usuario!!.ultima_puntuacion)
+                    getDbInstance().collection("Usuarios").document(usuario!!.id.toString())
+                        .set(userData, SetOptions.merge())
+                        .addOnSuccessListener {
+                            callback.responseDbUserUpdated(true)
+                        }
+                        .addOnFailureListener {
+                            callback.responseDbUserUpdated(false)
+                        }
                 } else {
-
+                    callback.responseDbUserUpdated(false)
                 }
-
-
-                getDbInstance().collection("Usuarios").document(newQuickId.toString())
-                    .set(defaultData, )
-                    .addOnSuccessListener {
-
-                    }
+            }
+            .addOnFailureListener {
+                callback.responseDbUserUpdated(false)
             }
     }
-
-     */
 
     fun requestDbUserRegister(pUsername: String, callback: queryResponseDone) {
         val newQuickId: Int = lastUserid + 1
@@ -118,10 +125,12 @@ class DbHandler {
 
 
     interface queryResponseDone {
-        fun responseDbUserLogin(accountRegister: String?)
+        fun responseDbUserLogin(accountRegister: String?) {}
 
-        fun responseDbUserCount(accountRegister: String?, response: Int)
+        fun responseDbUserCount(accountRegister: String?, response: Int) {}
 
-        fun responseDbUserRegister(response: Boolean)
+        fun responseDbUserRegister(response: Boolean) {}
+
+        fun responseDbUserUpdated(response: Boolean) {}
     }
 }

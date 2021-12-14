@@ -101,19 +101,20 @@ class Fragment1_1_juego : Fragment() {
                 .navigate(R.id.action_fragment1_1_juego_to_fragment2_1_minijuego)
         }
 
-        buttonAgain.setOnClickListener(){
+        buttonAgain.setOnClickListener() {
             Navigation.findNavController(view)
                 .navigate(R.id.action_fragment1_1_juego_self)
         }
 
         ajustes.setOnClickListener {
-            /*Navigation.findNavController(view)
-                .navigate(R.id.action_fragment1_1_juego_to_fragment4_menu)*/
+            if (audio?.isPlaying == false){
+                /*Navigation.findNavController(view)
+                    .navigate(R.id.action_fragment1_1_juego_to_fragment4_menu)*/
 
-            (activity as Activity6_Site?)?.menuCheck()
+                (activity as Activity6_Site?)?.menuCheck()
 
+            }
         }
-
 
 
         //Typewriter juego 1 tutorial
@@ -383,7 +384,17 @@ class Fragment1_1_juego : Fragment() {
         when (color) {
             "green" ->
                 customLine =
-                    CustomLine(requireContext(), startX-7, startY-7, endX+7, endY+7, 15F, 162, 224, 23)
+                    CustomLine(
+                        requireContext(),
+                        startX - 7,
+                        startY - 7,
+                        endX + 7,
+                        endY + 7,
+                        15F,
+                        162,
+                        224,
+                        23
+                    )
             "red" ->
                 customLine =
                     CustomLine(requireContext(), startX, startY, endX, endY, 15F, 224, 56, 23)

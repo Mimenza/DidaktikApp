@@ -6,6 +6,7 @@ import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isVisible
 import com.example.didaktikapp.databinding.Activity1PrincipalBinding
 import kotlinx.android.synthetic.main.activity1_principal.*
@@ -35,7 +36,19 @@ class Activity1_Principal : AppCompatActivity() {
         binding = Activity1PrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        //Shared preferences tema oscuro
+        val sharedPreferences = getSharedPreferences("com.example.didaktikapp_preferences", 0)
+        val numero:Int = sharedPreferences.getInt("io.github.manuelernesto.DARK_STATUS", 0)
+        if (numero==0){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            delegate.applyDayNight()
 
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            delegate.applyDayNight()
+
+        }
+        //Shared preferences tema oscuro fin
 
 
 

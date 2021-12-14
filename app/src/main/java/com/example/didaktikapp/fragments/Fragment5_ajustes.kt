@@ -1,5 +1,6 @@
 package com.example.didaktikapp.fragments
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
@@ -15,6 +16,9 @@ import com.example.didaktikapp.activities.DbHandler
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat.recreate
+import androidx.core.content.ContextCompat
 
 import com.example.didaktikapp.Model.MyPreferences
 import com.example.didaktikapp.activities.Activity1_Principal
@@ -67,7 +71,7 @@ class Fragment5_ajustes : Fragment() {
         }
 
         buttonTheme.setOnClickListener{
-            chooseThemeDialog()
+            chooseThemeDialog(view)
 
         }
 
@@ -81,7 +85,7 @@ class Fragment5_ajustes : Fragment() {
     }
 
 
-          fun chooseThemeDialog(){
+          fun chooseThemeDialog(view:View){
 
               val builder = AlertDialog.Builder(requireContext())
               builder.setTitle(getString(R.string.tema))
@@ -102,6 +106,8 @@ class Fragment5_ajustes : Fragment() {
                           AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                           MyPreferences(requireContext()).darkMode = 1
                           ( requireContext() as  AppCompatActivity).delegate.applyDayNight()
+
+
 
                           dialog.dismiss()
                       }
@@ -136,7 +142,7 @@ class Fragment5_ajustes : Fragment() {
     fun chooseLanguageDialog() {
 
 
-        var activity = Activity1_Principal()
+
         val spanish = getString(R.string.español)
         val euskera = getString(R.string.euskera)
 
@@ -144,20 +150,20 @@ class Fragment5_ajustes : Fragment() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle(getString(R.string.Idiomas))
 
-        val checkedItem = MyPreferences(activity).lang
+        val checkedItem = MyPreferences(requireContext()).lang
 
         builder.setSingleChoiceItems(languages, checkedItem) { dialog, which ->
             when (which) {
                 0 -> {
                     setLocate("eu")
-
-                    MyPreferences(activity).lang = 0
+                     recreate(requireContext() as Activity)
+                    MyPreferences(requireContext()).lang = 0
                     dialog.dismiss()
                 }
                 1 -> {
                     setLocate("es")
-
-                    MyPreferences(activity).lang = 1
+                    recreate(requireContext() as Activity)
+                    MyPreferences(requireContext()).lang = 1
                     dialog.dismiss()
                 }
 

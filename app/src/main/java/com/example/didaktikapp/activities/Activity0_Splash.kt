@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.view.animation.AnimationUtils
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.didaktikapp.Model.MyPreferences
 import com.example.didaktikapp.R
@@ -28,7 +29,19 @@ class Activity0_Splash : AppCompatActivity() {
             binding.txtv0Upelio.startAnimation(aniFade)
 
         }, 2000)*/
+        //Shared preferences tema oscuro
+        val sharedPreferences = getSharedPreferences("com.example.didaktikapp_preferences", 0)
+        val numero:Int = sharedPreferences.getInt("io.github.manuelernesto.DARK_STATUS", 0)
+        if (numero==0){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            delegate.applyDayNight()
 
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            delegate.applyDayNight()
+
+        }
+        //Shared preferences tema oscuro fin
         Handler().postDelayed({
 
             val intent = Intent(this, Activity1_Principal::class.java)

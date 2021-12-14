@@ -197,13 +197,15 @@ class Fragment1_3_1_juego : Fragment() {
         preguntasLayout.visibility = View.VISIBLE
     }
 
+    private var respuestaPreguntasjuego2: String = "zanpantzarrak"
+
     private fun comprobarRespuestas() {
         val radio1: RadioButton = globalView.findViewById(R.id.pregunta1_respuesta_1)
         val radio2: RadioButton = globalView.findViewById(R.id.pregunta1_respuesta_2)
         val editTextRespuesta: EditText = globalView.findViewById(R.id.juego3_pregunta2_respuesta1)
         val btnComprobarRespuesta: Button = globalView.findViewById(R.id.juego3_btnComprobar)
 
-        if (radio1.isChecked && editTextRespuesta.text.toString().trim().toLowerCase().equals("zanpantzarrak")) {
+        if (radio1.isChecked && editTextRespuesta.text.toString().trim().toLowerCase().equals(respuestaPreguntasjuego2)) {
             editTextRespuesta.isEnabled = false
             radio1.isEnabled = false
             radio2.isEnabled = false

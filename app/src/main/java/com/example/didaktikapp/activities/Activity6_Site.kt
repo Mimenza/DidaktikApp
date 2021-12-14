@@ -7,11 +7,13 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.didaktikapp.R
 import com.example.didaktikapp.fragments.Fragment4_menu
 import com.example.didaktikapp.fragments.Fragment4_menu2
 import com.example.didaktikapp.fragments.Fragment5_ajustes
+import kotlinx.android.synthetic.main.activity6_site.*
 import kotlinx.android.synthetic.main.fragment3_info.*
 
 class Activity6_Site : AppCompatActivity() {
@@ -19,6 +21,9 @@ class Activity6_Site : AppCompatActivity() {
     private var fragment : String? = null
     var menuShowing: Boolean = false
     var ajustesShowing: Boolean = false
+
+    private var menuFirst:Boolean = true
+    private var ajustesFirst:Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +46,6 @@ class Activity6_Site : AppCompatActivity() {
 
         println("NUMERO "+newInt)
 
-
     }
 
     override fun onResume() {
@@ -51,28 +55,85 @@ class Activity6_Site : AppCompatActivity() {
 
         super.onResume()
     }
-    fun showMenu() {
-        if (menuShowing) {
-            cerrarMenu()
-            return
+
+    fun menuCheck(){
+
+        if(menuFirst){
+            addMenu()
+            menuFirst = false
+        }else{
+            showMenu()
         }
+    }
+
+    fun ajustesCheck(){
+
+        if(ajustesFirst){
+            addAjustes()
+            ajustesFirst = false
+        }else{
+            showAjustes()
+        }
+    }
+
+    fun addMenu() {
+        //añadimos el fragment del menu
 
         menuShowing = true
         fragment = "Fragment4"
-        supportFragmentManager.beginTransaction().add(R.id.framelayout6_menu, Fragment4_menu2()!!).commit()
+        supportFragmentManager.beginTransaction().add(R.id.framelayout6_menu, Fragment4_menu2()!!)
+            .addToBackStack(null).commit()
 
-
+        showMenu()
     }
 
-    fun showAjustes() {
-        if (ajustesShowing) {
-            cerrarMenu()
-            return
-        }
+    fun showMenu() {
+        //enseñamos el container del fragment del menu
+
+        menuShowing = true
+        fragment = "Fragment4"
+
+        framelayout6_menu.isVisible=true
+        /*supportFragmentManager.beginTransaction().show(Fragment4_menu2()!!).commit()*/
+    }
+
+    fun addAjustes() {
+        //añadimos el fragment de ajustes
 
         ajustesShowing = true
         fragment = "Fragment5"
-        supportFragmentManager.beginTransaction().add(R.id.framelayout6_menu, Fragment5_ajustes()!!).commit()
+        supportFragmentManager.beginTransaction().add(R.id.framelayout6_ajustes, Fragment5_ajustes()!!)
+            .addToBackStack(null).commit()
+        showAjustes()
+    }
+
+    fun showAjustes() {
+        //enseñamos el container del fragment de ajutes
+
+        ajustesShowing = true
+        fragment = "Fragment5"
+        framelayout6_ajustes.isVisible=true
+       /* supportFragmentManager.beginTransaction().show(Fragment5_ajustes()!!).commit()*/
+    }
+
+    private fun cerrarAjustes() {
+        //escondemos el container del fragment del menu
+
+        framelayout6_ajustes.isVisible=false
+        /*supportFragmentManager.beginTransaction().hide(Fragment5_ajustes()!!).commit();*/
+        fragment = "Fragment4"
+        ajustesShowing= false
+
+    }
+
+    private fun cerrarMenu() {
+        //escondemos el container del fragment de ajustes
+
+        framelayout6_menu.isVisible=false
+        /*supportFragmentManager.beginTransaction().hide(Fragment4_menu2()!!).commit();*/
+        fragment = null
+        menuShowing = false
+
     }
 
     override fun onBackPressed() {
@@ -88,22 +149,6 @@ class Activity6_Site : AppCompatActivity() {
         else {
             super.onBackPressed()
         }
-    }
-
-    private fun cerrarAjustes() {
-
-        supportFragmentManager.beginTransaction().remove(Fragment5_ajustes()!!).commit();
-        fragment = "Fragment4"
-        ajustesShowing= false
-
-    }
-
-    private fun cerrarMenu() {
-
-        supportFragmentManager.beginTransaction().remove(Fragment4_menu2()!!).commit();
-        fragment = null
-        menuShowing = false
-
     }
 
 }

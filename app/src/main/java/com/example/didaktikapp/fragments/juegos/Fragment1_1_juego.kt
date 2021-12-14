@@ -104,7 +104,7 @@ class Fragment1_1_juego : Fragment() {
             /*Navigation.findNavController(view)
                 .navigate(R.id.action_fragment1_1_juego_to_fragment4_menu)*/
 
-            (activity as Activity6_Site?)?.showMenu()
+            (activity as Activity6_Site?)?.menuCheck()
 
         }
 

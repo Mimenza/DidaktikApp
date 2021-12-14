@@ -54,7 +54,7 @@ class Fragment4_menu2 : Fragment() {
 
         //Navegacion a los framents
         ajustes.setOnClickListener{
-            (activity as Activity6_Site)?.showAjustes()
+            (activity as Activity6_Site)?.ajustesCheck()
         }
 
         ayuda.setOnClickListener{

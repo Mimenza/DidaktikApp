@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment5layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.Fragment5_ajustes">
@@ -43,7 +44,7 @@
             <Button
                 android:id="@+id/btn5f_oscuro"
                 style="@style/botonesMenu"
-                android:drawableLeft="@drawable/ic_moon"
+                android:drawableLeft="@drawable/ic_theme"
                 android:text="@string/botonoscuro" />
 
             <Button

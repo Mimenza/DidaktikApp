@@ -1,20 +1,15 @@
 package com.example.didaktikapp.activities
 
-import android.content.Intent
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import com.example.didaktikapp.R
-import com.example.didaktikapp.fragments.Fragment4_menu
 import com.example.didaktikapp.fragments.Fragment4_menu2
 import com.example.didaktikapp.fragments.Fragment5_ajustes
 import kotlinx.android.synthetic.main.activity6_site.*
-import kotlinx.android.synthetic.main.fragment3_info.*
+
 
 class Activity6_Site : AppCompatActivity() {
 
@@ -95,6 +90,7 @@ class Activity6_Site : AppCompatActivity() {
 
         framelayout6_menu.isVisible=true
         /*supportFragmentManager.beginTransaction().show(Fragment4_menu2()!!).commit()*/
+4
     }
 
     fun addAjustes() {
@@ -150,5 +146,7 @@ class Activity6_Site : AppCompatActivity() {
             super.onBackPressed()
         }
     }
+
+
 
 }

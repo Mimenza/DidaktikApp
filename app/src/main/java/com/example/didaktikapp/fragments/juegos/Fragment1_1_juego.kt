@@ -93,7 +93,7 @@ class Fragment1_1_juego : Fragment() {
         txtv3 = view.findViewById(R.id.txtv1_1azalpena3)
 
         val button: Button = view.findViewById(R.id.btnf1_1saltartutorial)
-        val ajustes: ImageButton = view.findViewById(R.id.btnf1_1_ajustes)
+        val ajustes: ImageButton = view.findViewById(R.id.btnf1_1ajustes)
 
         button.setOnClickListener {
             Navigation.findNavController(view)
@@ -377,7 +377,7 @@ class Fragment1_1_juego : Fragment() {
         when (color) {
             "green" ->
                 customLine =
-                    CustomLine(requireContext(), startX, startY, endX, endY, 15F, 162, 224, 23)
+                    CustomLine(requireContext(), startX-7, startY-7, endX+7, endY+7, 15F, 162, 224, 23)
             "red" ->
                 customLine =
                     CustomLine(requireContext(), startX, startY, endX, endY, 15F, 224, 56, 23)

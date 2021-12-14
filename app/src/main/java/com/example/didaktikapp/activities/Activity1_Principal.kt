@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.lang.Exception
 import androidx.fragment.app.Fragment
+
 import com.example.didaktikapp.R
 import com.example.didaktikapp.fragments.Fragment5_ajustes
 
@@ -23,6 +24,7 @@ class Activity1_Principal : AppCompatActivity() {
     private lateinit var binding: Activity1PrincipalBinding
     private var audio: MediaPlayer? = null
     var ajustesShowing: Boolean = false
+    private lateinit var activity:Activity1_Principal
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +34,10 @@ class Activity1_Principal : AppCompatActivity() {
 
         binding = Activity1PrincipalBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+
+
 
         //Boton para ver los ajustes
         btn1_ajustes.setOnClickListener() {
@@ -76,12 +82,14 @@ class Activity1_Principal : AppCompatActivity() {
                 //Nos lleva a la activity para hacer el login
                 var i = Intent(this, Activity2_Login::class.java)
                 startActivity(i)
+                this.overridePendingTransition(0, 0)
             }
 
             binding.btn1Cargar.setOnClickListener() {
                 //Nos lleva a la activity para ver todas las partidas creadas
                 var i = Intent(this, Activity3_Load::class.java)
                 startActivity(i)
+                this.overridePendingTransition(0, 0)
             }
             /*
             runBlocking {
@@ -107,6 +115,9 @@ class Activity1_Principal : AppCompatActivity() {
         super.onResume()
         // TODO: preguntar si esta el audio empezado
         audio?.start()
+
+
+
     }
 
     override fun onRestart() {

@@ -1,6 +1,9 @@
 package com.example.didaktikapp.fragments.juegos
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
+import android.media.Image
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -8,18 +11,20 @@ import android.os.Handler
 import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
+import com.example.didaktikapp.Model.DragnDropImage
 import com.example.didaktikapp.R
+import com.example.didaktikapp.activities.DbHandler
+import com.example.reto01.Model.User
 import kotlinx.android.synthetic.main.fragment1_7_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -43,6 +48,7 @@ class Fragment1_7_juego : Fragment() {
     private var audio: MediaPlayer? = null
     private var viewActiva = false
     private lateinit var vistaAnimada: TranslateAnimation
+    var manzanaList: MutableList<DragnDropImage>? = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,13 +92,28 @@ class Fragment1_7_juego : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_fragment1_7_juego_to_fragment4_menu)
         }
 
+        /*
+        // COMENTADO PARA EL DESARROLLO DEL JUEGO
         //Typewriter juego 4 tutorial
         Handler(Looper.getMainLooper()).postDelayed({
             typewriter(view)
         }, 2000)
         //Typewriter juego 4 tutorial fin
         audioTutorial(view)
+         */
+        finalizarQuickIntro(view)
         return view
+    }
+
+    fun iniciarJuegoRecogerManzanas() {
+        startTimeCounter()
+    }
+
+    fun finalizarQuickIntro(view: View) {
+        exitAnimationfun(view)
+        val img: ImageView = view.findViewById(R.id.imgv1_7_upelio) as ImageView
+        img.visibility = GONE
+        iniciarJuegoRecogerManzanas()
     }
 
     fun audioTutorial(view: View){
@@ -184,12 +205,105 @@ class Fragment1_7_juego : Fragment() {
         super.onStop()
     }
 
+    fun generarManzana() {
+        var imgManzanaGenerada: ImageView = ImageView(requireContext())
+        //newView = ImageView(requireContext())
+        val constraintLayoutFound = globalView.findViewById<ConstraintLayout>(R.id.mainlayout)
+        constraintLayoutFound.addView(imgManzanaGenerada)
+        imgManzanaGenerada.layoutParams.height = 200
+        imgManzanaGenerada.layoutParams.width = 200
+      //  newView.x = 200F
+       // newView.y = 200F
+        imgManzanaGenerada.x = ((0..globalView.width - 200).random()).toFloat()
+        imgManzanaGenerada.y = ((0..globalView.height - 200).random()).toFloat()
+        //imgManzanaGenerada.setBackgroundColor(Color.BLUE)
 
 
-    fun startTimeCounter(view: View, timeInSeconds: Int) {
+        var tipoManzana = (0..1).random()
+        var mznGnrDestino: ImageView
+        if (tipoManzana == 1) {
+            imgManzanaGenerada.setImageResource(R.drawable.sagarragorria)
+            mznGnrDestino = globalView.findViewById(R.id.juegox_basurero)
+        } else {
+            imgManzanaGenerada.setImageResource(R.drawable.sagarraberdea)
+            mznGnrDestino = globalView.findViewById(R.id.juegox_cesta)
+        }
+        manzanaList!!.add(DragnDropImage(imgManzanaGenerada,mznGnrDestino))
+
+        imgManzanaGenerada.setOnTouchListener(listener)
+
+        //OPTIONAL TO DO
+        //val newAnimation: AnimatorSet = AnimatorSet()
+        //newAnimation.stop
+
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    var listener = View.OnTouchListener { viewElement, motionEvent ->
+        var itemInList: DragnDropImage? = findItemByOrigen(viewElement)
+        if (itemInList != null) {
+            if (!itemInList.acertado) {
+                viewElement.bringToFront()
+                val action = motionEvent.action
+                when(action) {
+                    MotionEvent.ACTION_MOVE -> {
+                        viewElement.x = motionEvent.rawX - viewElement.width/2
+                        viewElement.y = motionEvent.rawY - viewElement.height/2
+                    }
+                    MotionEvent.ACTION_UP -> {
+
+                        viewElement.x = motionEvent.rawX - viewElement.width/2
+                        viewElement.y = motionEvent.rawY - viewElement.height/2
+                        var objetivoEncontrado: View = itemInList!!.objetivo
+                        val location = IntArray(2)
+                        objetivoEncontrado.getLocationOnScreen(location);
+                        var posX = location[0]
+                        var posY = location[1]
+                        var sizeX = objetivoEncontrado.width
+                        var sizeY = objetivoEncontrado.height
+                        if ( (viewElement.x + viewElement.width/2) >= posX && (viewElement.y + viewElement.height/2) >= posY && (viewElement.x + viewElement.width/2) <= posX+sizeX && (viewElement.y + viewElement.height/2) <= posY+sizeY) {
+                            viewElement.x = posX.toFloat()
+                            viewElement.y = posY.toFloat()
+                            itemInList.acertado = true
+
+                            viewElement.visibility = GONE
+                            viewElement.setOnTouchListener(null)
+                            /*
+                            sendToTopImagesNotFinished()
+                            viewElement.setOnTouchListener(null)
+                            if (puzzleCompletado()) {
+                                //iniciarPreguntas()
+                                var myUser: User = DbHandler.getUser()!!
+                                myUser.puntuacion = myUser.puntuacion!! + 5
+                                DbHandler().requestDbUserUpdate(this)
+                                button.visibility = View.VISIBLE
+                                Toast.makeText(requireContext(), "Bikain!", Toast.LENGTH_SHORT).show()
+                            }
+
+                             */
+                        }
+                    }
+                }
+            }
+        }
+        true
+    }
+
+    private fun findItemByOrigen(view: View): DragnDropImage? {
+        for (item in manzanaList!!) {
+            if (item.origen == view) {
+                return item
+            }
+        }
+        return null
+    }
+
+    //fun startTimeCounter(view: View, timeInSeconds: Int) {
+    fun startTimeCounter() {
         object: CountDownTimer(50000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 //Each second create an element
+                generarManzana()
             }
             override fun onFinish() {
                 //Timer Finished + Might this should show win screen

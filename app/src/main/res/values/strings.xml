@@ -185,6 +185,10 @@ galderak egiteko aukera izango baitute.</string>
     <string name="euskera">Euskara</string>
     <string name="Idiomas">Hizkuntzak</string>
     <string name="tema">Tema</string>
+    <string name="que1_ans1_juego7">28. txotx irekiera</string>
+    <string name="que1_ans2_juego7">25. txotx irekiera</string>
+    <string name="que1_ans3_juego7">23. txotx irekiera</string>
+    <string name="que1_juego7">Aurten zenbagarren txotx irekiera izango dugu aurten?</string>
 
 
 </resources>

@@ -31,6 +31,12 @@ class DbHandler {
             this.isAdmin = value
         }
 
+        fun setTutorialFinalizado() {
+            this.usuario!!.tutorialFinalizado = 1
+        }
+
+        fun getTutorialFinalizado() = this.usuario!!.tutorialFinalizado
+
         fun setUser(pUser: User) {
             this.usuario = pUser
             println("************ USUARIO CARGADO: " + this.usuario)

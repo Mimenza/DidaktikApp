@@ -40,7 +40,7 @@ import android.view.animation.Animation
 import kotlinx.android.synthetic.main.activity1_principal.*
 
 
-class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
+class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.queryResponseDone {
 
     private val thisActivity: Activity = this
     private lateinit var mMap: GoogleMap
@@ -94,8 +94,8 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
 
 
         //Typewriter mapa tutorial
-        if (Utils.getUserPreferences(thisActivity,"mapTutorial","finalizado") == null) {
-            println("*******************ENTRA ANIMACION")
+        //if (Utils.getUserPreferences(thisActivity,"mapTutorial","finalizado") == null) {
+        if (DbHandler.getTutorialFinalizado() == 0) {
             Handler(Looper.getMainLooper()).postDelayed({
                 typewriter()
             }, 2000)
@@ -154,6 +154,13 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         typeWriterView.setDelay(70)
     }
 
+    //Este metodo es creado dado que las sentencias que estan dentro de el no pueden estar dentro del hilo de ejecucion del audio.
+    private fun actualizarTutorialFinalizado() {
+        DbHandler.setTutorialFinalizado()
+        // En este caso, no overrideamos la respuesta de esta actualizacion dado que no es algo 'NECESARIO'
+        DbHandler().requestDbUserUpdate(this)
+    }
+
     private fun audioSound() {
         //funcion para la reproduccion del sonido
         runBlocking() {
@@ -163,7 +170,8 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
                 audio.duration
                 audio.setOnCompletionListener {
                     exitAnimationfun()
-                    Utils.setUserPreferences(thisActivity,"mapTutorial", "finalizado","true")
+                    DbHandler.setTutorialFinalizado()
+                    actualizarTutorialFinalizado()
                 }
             }
         }
@@ -334,7 +342,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback {
         }
 
         mMap.setOnInfoWindowClickListener(OnInfoWindowClickListener { marker ->
-            if(Utils.getUserPreferences(thisActivity,"mapTutorial","finalizado") == null) {
+            if(DbHandler.getTutorialFinalizado() == 0) {
                 Toast.makeText(this, "Espera a que termine la explicacion", Toast.LENGTH_SHORT).show()
                 return@OnInfoWindowClickListener
             }

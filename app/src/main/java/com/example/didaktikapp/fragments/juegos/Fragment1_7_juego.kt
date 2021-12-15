@@ -48,7 +48,10 @@ class Fragment1_7_juego : Fragment() {
     private var audio: MediaPlayer? = null
     private var viewActiva = false
     private lateinit var vistaAnimada: TranslateAnimation
+
     var manzanaList: MutableList<DragnDropImage>? = mutableListOf()
+    val duracionJuego: Int = 60 // Duracion en segundos
+    val intervaloGeneracionManzanas = 3 //Duracion en segundos
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -215,7 +218,7 @@ class Fragment1_7_juego : Fragment() {
       //  newView.x = 200F
        // newView.y = 200F
         imgManzanaGenerada.x = ((0..globalView.width - 200).random()).toFloat()
-        imgManzanaGenerada.y = ((0..globalView.height - 200).random()).toFloat()
+        imgManzanaGenerada.y = ((0..globalView.height/2 - 200).random()).toFloat()
         //imgManzanaGenerada.setBackgroundColor(Color.BLUE)
 
 
@@ -298,15 +301,22 @@ class Fragment1_7_juego : Fragment() {
         return null
     }
 
+    private fun removeListenerManzanas() {
+        for (item in manzanaList!!) {
+            if (item.origen == view) {
+                item.origen.setOnTouchListener(null)
+            }
+        }
+    }
+
     //fun startTimeCounter(view: View, timeInSeconds: Int) {
     fun startTimeCounter() {
-        object: CountDownTimer(50000, 1000) {
+        object: CountDownTimer((duracionJuego*1000).toLong(), (intervaloGeneracionManzanas*1000).toLong()) {
             override fun onTick(millisUntilFinished: Long) {
-                //Each second create an element
                 generarManzana()
             }
             override fun onFinish() {
-                //Timer Finished + Might this should show win screen
+                removeListenerManzanas()
             }
         }.start()
     }

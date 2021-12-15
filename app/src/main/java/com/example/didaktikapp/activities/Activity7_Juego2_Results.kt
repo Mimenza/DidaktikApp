@@ -4,7 +4,6 @@ package com.example.didaktikapp.activities
 import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -39,6 +38,7 @@ class Activity7_Juego2_Results : AppCompatActivity() {
         //Recojemos los datos del intent en el fragment del juego 2
        val totalQuestions= intent.getIntExtra(Constantsjuego2.TOTAL_QUESTIONS, 0)
         val correctAnswers= intent.getIntExtra(Constantsjuego2.CORRECT_ANSWERS, 0)
+
 
 
         txtv7_scoreuser.text="Zure emaitza: $correctAnswers/$totalQuestions"

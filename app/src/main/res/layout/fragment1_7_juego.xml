@@ -5,11 +5,11 @@
     android:id="@+id/fl7_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.juegos.Fragment1_2_juego">
+    tools:context=".fragments.juegos.Fragment1_7_juego">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cl1_2juego"
+        android:id="@+id/cl1_7juego"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:indeterminate="false"
-                    android:max="4"
+                    android:max="11"
                     android:minHeight="50dp"
                     android:progress="0"
                     android:theme="@style/ProgressBarStyle" />
@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="15dp"
-                    android:text="1/4"
+                    android:text="1/11"
                     android:textColorLink="#7A8089"
                     android:textSize="14dp" />
             </LinearLayout>
@@ -167,7 +167,7 @@
             tools:ignore="MissingClass" />
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
-            android:id="@+id/imgv1_2_upelio"
+            android:id="@+id/imgv1_7_upelio"
             android:layout_width="323dp"
             android:layout_height="316dp"
             android:src="@drawable/img_upeliosagarra"

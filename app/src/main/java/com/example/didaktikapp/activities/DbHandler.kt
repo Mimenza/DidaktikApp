@@ -4,6 +4,7 @@ import android.widget.Toast
 import com.example.reto01.Model.User
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import kotlinx.coroutines.test.withTestContext
 
 class DbHandler {
 
@@ -39,11 +40,20 @@ class DbHandler {
 
         fun setUser(pUser: User) {
             this.usuario = pUser
-            println("************ USUARIO CARGADO: " + this.usuario)
         }
 
         fun setLastUserId(pNumber: Int) {
             this.lastUserid = pNumber
+        }
+
+        fun userAumentarPuntuacion(pAumento: Int) {
+            this.usuario!!.puntuacion = this.usuario!!.puntuacion!! + pAumento
+        }
+
+        fun userActualizarUltimoPunto(pNuevoPunto: Int) {
+            if (pNuevoPunto > this.usuario!!.ultima_puntuacion!!) {
+                this.usuario!!.ultima_puntuacion = pNuevoPunto
+            }
         }
 
     }

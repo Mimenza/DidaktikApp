@@ -3,26 +3,21 @@ package com.example.didaktikapp.fragments.juegos
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.graphics.Color
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.os.Bundle
-import android.text.Layout
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
-import android.view.ViewTreeObserver
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import com.example.didaktikapp.Model.DragnDropImage
 import com.example.didaktikapp.activities.DbHandler
-import com.example.reto01.Model.User
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -36,6 +31,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class Fragment1_3_1_juego : Fragment(), DbHandler.queryResponseDone {
+    private val thisJuegoId = 3
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -101,25 +97,10 @@ class Fragment1_3_1_juego : Fragment(), DbHandler.queryResponseDone {
             }
         })
 
-        /*
-        var newView: ImageView
-        newView = ImageView(requireContext())
-        val constraintLayoutFound = globalView.findViewById<ConstraintLayout>(R.id.mainlayout)
-        constraintLayoutFound.addView(newView)
-        newView.layoutParams.height = 200
-        newView.layoutParams.width = 200
-        newView.x = 200F
-        newView.y = 200F
-        newView.setBackgroundColor(Color.BLUE)
-        newView.setImageResource(R.drawable.sagarragorria)
-
-         */
-
-
-
         button.setOnClickListener(){
             if (puzzleShowing) {
-                Navigation.findNavController(view).navigate(R.id.action_fragment1_3_1_juego_to_fragment2_3_1_minijuego)
+                DbHandler.userActualizarUltimoPunto(thisJuegoId)
+                DbHandler().requestDbUserUpdate(this)
             }else {
                 iniciarPreguntas()
             }
@@ -130,7 +111,9 @@ class Fragment1_3_1_juego : Fragment(), DbHandler.queryResponseDone {
         return view
     }
 
-
+    override fun responseDbUserUpdated(responde: Boolean) {
+        Navigation.findNavController(globalView).navigate(R.id.action_fragment1_3_1_juego_to_fragment2_3_1_minijuego)
+    }
 
     fun prepairPuzzleElements() {
         for (vItemList in listaImagenes) {
@@ -180,10 +163,8 @@ class Fragment1_3_1_juego : Fragment(), DbHandler.queryResponseDone {
                             sendToTopImagesNotFinished()
                             viewElement.setOnTouchListener(null)
                             if (puzzleCompletado()) {
-                                //iniciarPreguntas()
-                                    var myUser: User = DbHandler.getUser()!!
-                                myUser.puntuacion = myUser.puntuacion!! + 5
-                                DbHandler().requestDbUserUpdate(this)
+                                DbHandler.userAumentarPuntuacion(5)
+                                //DbHandler().requestDbUserUpdate(this)
                                 button.visibility = View.VISIBLE
                                 Toast.makeText(requireContext(), "Bikain!", Toast.LENGTH_SHORT).show()
                             }
@@ -289,10 +270,6 @@ class Fragment1_3_1_juego : Fragment(), DbHandler.queryResponseDone {
                     putString(ARG_PARAM2, param2)
                 }
             }
-    }
-
-    override fun responseDbUserUpdated(response: Boolean) {
-        println("************* UPDATE RESPONSE: " +response.toString())
     }
 
 }

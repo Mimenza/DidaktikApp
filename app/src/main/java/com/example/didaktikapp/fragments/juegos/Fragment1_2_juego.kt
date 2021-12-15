@@ -40,6 +40,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class Fragment1_2_juego : Fragment(), View.OnClickListener {
+    private val thisJuegoId = 2
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null

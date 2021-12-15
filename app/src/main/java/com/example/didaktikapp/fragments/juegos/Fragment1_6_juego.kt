@@ -40,6 +40,7 @@ private lateinit var vistaAnimada: TranslateAnimation
  */
 
 class Fragment1_6_juego : Fragment() {
+    private val thisJuegoId = 6
     private var param1: String? = null
     private var param2: String? = null
     private var sonido = false

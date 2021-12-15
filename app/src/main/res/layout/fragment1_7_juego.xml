@@ -39,34 +39,6 @@
             app:layout_constraintVertical_bias="0.174"
             tools:ignore="SpeakableTextPresentCheck" />
 
-        <ImageView
-            android:layout_width="371dp"
-            android:layout_height="522dp"
-            android:layout_marginTop="40dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/juegox_arbol"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/juegox_cesta"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/juegox_cestamanzana"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <ImageView
-            android:id="@+id/juegox_basurero"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/juegox_basurero"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
         <TextView
             android:id="@+id/txtv1_7_fondogris"
             android:layout_width="fill_parent"

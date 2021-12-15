@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.didaktikapp.Adapter.UsersRecyclerAdapter
@@ -30,8 +31,17 @@ class Activity3_Load : AppCompatActivity() {
         binding= Activity3LoadBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        initViews()
-        initObjects()
+
+        comprobarPermisos()
+    }
+
+    private fun comprobarPermisos() {
+        if (!Utils.comprobarPermisosMap(this)) {
+            askForMapPermission()
+        } else {
+            initViews()
+            initObjects()
+        }
     }
 
     private fun initViews(){
@@ -75,5 +85,19 @@ class Activity3_Load : AppCompatActivity() {
 
         recyclerViewUsers.layoutManager = LinearLayoutManager(context)
         recyclerViewUsers.adapter = adapter
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String?>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (grantResults.size > 0 && grantResults[0] != -1 ) {
+            initViews()
+            initObjects()
+        } else {
+            finish()
+        }
+    }
+
+    private fun askForMapPermission() {
+        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
     }
 }

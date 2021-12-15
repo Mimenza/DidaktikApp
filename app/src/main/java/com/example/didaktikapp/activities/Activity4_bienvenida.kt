@@ -126,7 +126,7 @@ class Activity4_bienvenida : AppCompatActivity() {
     }
 
     private fun comprobarPermisosMapa() {
-        if (!isMapPermissionGranted()) {
+        if (!Utils.comprobarPermisosMap(this)) {
             askForMapPermission()
         } else {
             abrirMapa()
@@ -177,14 +177,7 @@ class Activity4_bienvenida : AppCompatActivity() {
         }
     }
 
-    fun isMapPermissionGranted(): Boolean {
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            return true
-        }
-        return false
-    }
-
-    fun askForMapPermission() {
+    private fun askForMapPermission() {
         ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
     }
 

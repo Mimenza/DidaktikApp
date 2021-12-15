@@ -121,19 +121,24 @@ class Fragment1_1_juego : Fragment() {
 
         //Typewriter juego 1 tutorial
         Handler(Looper.getMainLooper()).postDelayed({
-            typewriter(view)
+            if (getView() != null) {
+                typewriter(view)
+            }
         }, 2000)
         //Typewriter juego 1 tutorial fin
 
         //Audio juego 1
+
         runBlocking {
             launch {
                 audio = MediaPlayer.create(context, R.raw.juego1audiotutorial)
                 audio?.start()
                 audio?.setOnCompletionListener {
                     Handler(Looper.getMainLooper()).postDelayed({
-                        //Llama a la funcion para la animacion de salida cuando el audio se termina
-                        exitAnimationfun(view)
+                        if (getView() != null) {
+                            //Llama a la funcion para la animacion de salida cuando el audio se termina
+                            exitAnimationfun(view)
+                        }
                     }, 1000)
                 }
             }
@@ -370,6 +375,11 @@ class Fragment1_1_juego : Fragment() {
         return view
     }
 
+    override fun onDestroy() {
+        audio?.stop()
+        super.onDestroy()
+    }
+
     /**
      * Dibuja una linea entre una ImgView y un TextView
      * @param img la ImageView donde empieza la linea
@@ -434,8 +444,10 @@ class Fragment1_1_juego : Fragment() {
 
         //llamamos a la animacion para animar a upelio
         Handler(Looper.getMainLooper()).postDelayed({
-            upelio.isVisible = false
-            talkAnimationfun(view)
+            if (getView() != null) {
+                upelio.isVisible = false
+                talkAnimationfun(view)
+            }
         }, 2000)
 
     }
@@ -459,12 +471,14 @@ class Fragment1_1_juego : Fragment() {
 
         //Animacion fondo gris
         Handler(Looper.getMainLooper()).postDelayed({
-            val txtAnimacion = view.findViewById(R.id.txtv1_1fondogris) as TextView
-            val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
-            txtAnimacion.startAnimation(aniFade)
-            txtv1_1tutorialjuego1.startAnimation(aniFade)
-            txtv1_1tutorialjuego1.isVisible = false
-            txtAnimacion.isVisible = false
+            if (getView() != null) {
+                val txtAnimacion = view.findViewById(R.id.txtv1_1fondogris) as TextView
+                val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+                txtAnimacion.startAnimation(aniFade)
+                txtv1_1tutorialjuego1.startAnimation(aniFade)
+                txtv1_1tutorialjuego1.isVisible = false
+                txtAnimacion.isVisible = false
+            }
         }, 1000)
     }
 

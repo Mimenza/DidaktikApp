@@ -72,22 +72,6 @@ class Fragment1_7_juego : Fragment() {
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_7_ajustes)
         button.visibility=GONE
 
-/*
-        val constraintLayoutFound = globalView.findViewById<ConstraintLayout>(R.id.mainlayout)
-        var newView: ImageView
-        newView = ImageView(requireContext())
-        newView.layoutParams.height = 200
-        newView.layoutParams.width = 200
-        newView.x = 300F
-        newView.y = 500F
-        newView.setBackgroundColor(Color.BLUE)
-
-
-        //newView.setImageResource(R.drawable.sagarragorria)
-
-        constraintLayoutFound.addView(newView)
-        */
-
         button.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment1_7_juego_to_fragment2_7_minijuego)
         }

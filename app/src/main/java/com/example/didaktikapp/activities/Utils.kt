@@ -2,8 +2,10 @@ package com.example.didaktikapp.activities
 
 import android.app.Activity
 import android.content.Context
+import android.content.pm.PackageManager
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
 import com.example.didaktikapp.Model.CustomLine
 import com.example.didaktikapp.R
 import java.lang.Exception
@@ -47,5 +49,13 @@ class Utils {
             }
             return null
         }
+
+        fun comprobarPermisosMap(pContext: Context): Boolean {
+            if (ActivityCompat.checkSelfPermission(pContext, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                return true
+            }
+            return false
+        }
     }
+
 }

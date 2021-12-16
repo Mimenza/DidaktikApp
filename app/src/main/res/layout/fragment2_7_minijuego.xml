@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl2_7_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.minijuegos.Fragment2_7_minijuego">
@@ -12,17 +13,17 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/txtv2_2minijuego2"
+            android:id="@+id/txtv2_7minijuego7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MINIJUEGO 3.2"
+            android:text="MINIJUEGO 7"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/btnf2_3_2siguiente"
+            android:id="@+id/btnf2_7siguiente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="SIGUIENTE"
@@ -34,7 +35,7 @@
             app:layout_constraintVertical_bias="0.69" />
 
         <ImageButton
-            android:id="@+id/btnf2_3_2ajustes"
+            android:id="@+id/btnf2_7ajustes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_ajustes_black"

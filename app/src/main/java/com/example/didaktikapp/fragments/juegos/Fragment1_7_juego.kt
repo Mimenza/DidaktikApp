@@ -92,10 +92,10 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
 
 
         button.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment1_2_juego_to_fragment2_2_minijuego)
+            Navigation.findNavController(view).navigate(R.id.action_fragment1_7_juego_to_fragment2_7_minijuego)
         }
         ajustes.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment1_2_juego_to_fragment4_menu)
+            Navigation.findNavController(view).navigate(R.id.action_fragment1_7_juego_to_fragment4_menu)
         }
 
 
@@ -380,7 +380,7 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Fragment1_2_juego().apply {
+            Fragment1_7_juego().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

@@ -22,6 +22,7 @@ import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.Constantsjuego2
 import com.example.didaktikapp.Model.Preguntasjuego2
 import com.example.didaktikapp.R
+import com.example.didaktikapp.activities.Activity6_Site
 import com.example.didaktikapp.activities.Activity7_Juego2_Results
 import kotlinx.android.synthetic.main.fragment1_1_juego.*
 import kotlinx.android.synthetic.main.fragment1_2_juego.*
@@ -94,7 +95,10 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
             Navigation.findNavController(view).navigate(R.id.action_fragment1_2_juego_to_fragment2_2_minijuego)
         }
         ajustes.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment1_2_juego_to_fragment4_menu)
+
+                (activity as Activity6_Site?)?.menuCheck()
+
+
         }
 
 

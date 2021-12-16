@@ -55,18 +55,31 @@
             app:layout_constraintVertical_bias="0.08"
             tools:ignore="SpeakableTextPresentCheck" />
 
+        <ImageView
+            android:id="@+id/imgv1_1imagen2"
+            android:layout_width="149.8dp"
+            android:layout_height="115dp"
+            android:padding="5dp"
+            android:src="@drawable/img_juego1_2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.094"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.509" />
+
         <TextView
-            android:id="@+id/txtv1_1azalpena1"
+            android:id="@+id/txtv1_1azalpena3"
             android:layout_width="165dp"
             android:layout_height="95.5dp"
             android:padding="5dp"
-            android:text="Gune honetan hainbat sagar mota ezagutuko eta hartuko dituzu."
+            android:text="@string/juego1_azalpena3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.918"
+            app:layout_constraintHorizontal_bias="0.916"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.253" />
+            app:layout_constraintVertical_bias="0.728" />
 
         <ImageView
             android:id="@+id/imgv1_1imagen3"
@@ -79,20 +92,20 @@
             app:layout_constraintHorizontal_bias="0.094"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.716" />
+            app:layout_constraintVertical_bias="0.728" />
 
         <TextView
-            android:id="@+id/txtv1_1azalpena3"
+            android:id="@+id/txtv1_1azalpena1"
             android:layout_width="165dp"
             android:layout_height="95.5dp"
             android:padding="5dp"
-            android:text="@string/juego1_azalpena3"
+            android:text="Gune honetan hainbat sagar mota ezagutuko eta hartuko dituzu."
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.918"
+            app:layout_constraintHorizontal_bias="0.916"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.716" />
+            app:layout_constraintVertical_bias="0.264" />
 
         <ImageView
             android:id="@+id/imgv1_1imagen1"
@@ -105,20 +118,7 @@
             app:layout_constraintHorizontal_bias="0.094"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.253" />
-
-        <ImageView
-            android:id="@+id/imgv1_1imagen2"
-            android:layout_width="149.8dp"
-            android:layout_height="115dp"
-            android:padding="5dp"
-            android:src="@drawable/img_juego1_2"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.094"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.497" />
+            app:layout_constraintVertical_bias="0.266" />
 
         <TextView
             android:id="@+id/txtv1_1azalpena2"
@@ -128,10 +128,10 @@
             android:text="@string/juego1_azalpena2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.918"
+            app:layout_constraintHorizontal_bias="0.916"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.497" />
+            app:layout_constraintVertical_bias="0.508" />
 
         <TextView
             android:id="@+id/txtv1_1titulo"
@@ -151,7 +151,7 @@
             android:id="@+id/txtv1_1fondogris"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="#D3000000"
+            android:background="#85000000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

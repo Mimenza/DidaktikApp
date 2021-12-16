@@ -23,6 +23,7 @@ import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.DragnDropImage
 import com.example.didaktikapp.R
+import com.example.didaktikapp.activities.Activity6_Site
 import com.example.didaktikapp.activities.DbHandler
 import com.example.reto01.Model.User
 import kotlinx.android.synthetic.main.fragment1_7_juego.*
@@ -72,7 +73,11 @@ class Fragment1_7_juego : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_fragment1_7_juego_to_fragment2_7_minijuego)
         }
         ajustes.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment1_7_juego_to_fragment4_menu)
+            if (audio?.isPlaying == false){
+
+                (activity as Activity6_Site?)?.menuCheck()
+
+            }
         }
 
 

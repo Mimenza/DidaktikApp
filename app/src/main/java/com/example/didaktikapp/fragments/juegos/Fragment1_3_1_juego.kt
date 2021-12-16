@@ -17,6 +17,7 @@ import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import com.example.didaktikapp.Model.DragnDropImage
+import com.example.didaktikapp.activities.Activity6_Site
 import com.example.didaktikapp.activities.DbHandler
 
 
@@ -106,7 +107,9 @@ class Fragment1_3_1_juego : Fragment(), DbHandler.queryResponseDone {
             }
         }
         ajustes.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment1_3_1_juego_to_fragment4_menu)
+
+                        (activity as Activity6_Site?)?.menuCheck()
+
         }
         return view
     }

@@ -24,6 +24,7 @@ import android.graphics.ColorMatrixColorFilter
 import android.graphics.ColorMatrix
 import android.view.*
 import com.example.didaktikapp.Model.DragnDropImage
+import com.example.didaktikapp.activities.Activity6_Site
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -108,7 +109,10 @@ class Fragment1_5_juego : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_fragment1_5_juego_to_fragment2_5_minijuego)
         }
         ajustes.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment1_5_juego_to_fragment4_menu)
+
+                (activity as Activity6_Site?)?.menuCheck()
+
+
         }
 
         btnVerVideo.setOnClickListener() {

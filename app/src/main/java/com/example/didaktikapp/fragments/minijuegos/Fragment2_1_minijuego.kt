@@ -3,15 +3,12 @@ package com.example.didaktikapp.fragments.minijuegos
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.DragnDropImage
@@ -34,9 +31,17 @@ class Fragment2_1_minijuego : Fragment() {
 
     private lateinit var globalView: View
     private lateinit var button: Button
+
+    private lateinit var cesta: ImageView
+    private lateinit var basurero: ImageView
+    private lateinit var txtAciertos: TextView
     var manzanaList: MutableList<DragnDropImage>? = mutableListOf()
     val duracionJuego: Int = 60 // Duracion en segundos
     val intervaloGeneracionManzanas = 3 //Duracion en segundos
+    val aciertosRequeridos: Int = 5
+    var aciertosActuales: Int = 0
+    var minijuegoFinalizado: Boolean = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +60,11 @@ class Fragment2_1_minijuego : Fragment() {
         globalView = view
         button = view.findViewById(R.id.btnf2_1siguiente)
         val ajustes: ImageButton = view.findViewById(R.id.btnf2_1ajustes)
+
+        cesta = view.findViewById((R.id.juegox_cesta))
+        basurero = view.findViewById((R.id.juegox_basurero))
+        txtAciertos = view.findViewById((R.id.manzanasAciertos))
+
 
         button.visibility = View.GONE
 
@@ -91,10 +101,10 @@ class Fragment2_1_minijuego : Fragment() {
         var mznGnrDestino: ImageView
         if (tipoManzana == 1) {
             imgManzanaGenerada.setImageResource(R.drawable.sagarragorria)
-            mznGnrDestino = globalView.findViewById(R.id.juegox_basurero)
+            mznGnrDestino = basurero
         } else {
             imgManzanaGenerada.setImageResource(R.drawable.sagarraberdea)
-            mznGnrDestino = globalView.findViewById(R.id.juegox_cesta)
+            mznGnrDestino = cesta
         }
         manzanaList!!.add(DragnDropImage(imgManzanaGenerada,mznGnrDestino))
 
@@ -122,39 +132,57 @@ class Fragment2_1_minijuego : Fragment() {
 
                         viewElement.x = motionEvent.rawX - viewElement.width/2
                         viewElement.y = motionEvent.rawY - viewElement.height/2
-                        var objetivoEncontrado: View = itemInList!!.objetivo
-                        val location = IntArray(2)
-                        objetivoEncontrado.getLocationOnScreen(location);
-                        var posX = location[0]
-                        var posY = location[1]
-                        var sizeX = objetivoEncontrado.width
-                        var sizeY = objetivoEncontrado.height
-                        if ( (viewElement.x + viewElement.width/2) >= posX && (viewElement.y + viewElement.height/2) >= posY && (viewElement.x + viewElement.width/2) <= posX+sizeX && (viewElement.y + viewElement.height/2) <= posY+sizeY) {
-                            viewElement.x = posX.toFloat()
-                            viewElement.y = posY.toFloat()
+                        //var objetivoEncontrado: View = itemInList!!.objetivo
+                        // Basurero Vars
+                        val basureroLocation = IntArray(2)
+                        basurero.getLocationOnScreen(basureroLocation);
+                        var basureroPosX = basureroLocation[0]
+                        var basureroPosY = basureroLocation[1]
+                        var basureroSizeX = cesta.width
+                        var basureroSizeY = cesta.height
+                        // Cesta Vars
+                        val cestaLocation = IntArray(2)
+                        cesta.getLocationOnScreen(cestaLocation);
+                        var cestaPosX = cestaLocation[0]
+                        var cestaPosY = cestaLocation[1]
+                        var cestaSizeX = cesta.width
+                        var cestaSizeY = cesta.height
+                        if ( (viewElement.x + viewElement.width/2) >= cestaPosX && (viewElement.y + viewElement.height/2) >= cestaPosY && (viewElement.x + viewElement.width/2) <= cestaPosX+cestaSizeX && (viewElement.y + viewElement.height/2) <= cestaPosY+cestaSizeY) {
+                            comprobarInsercionManzana(itemInList, cesta)
                             itemInList.acertado = true
 
                             viewElement.visibility = View.GONE
                             viewElement.setOnTouchListener(null)
-                            /*
-                            sendToTopImagesNotFinished()
-                            viewElement.setOnTouchListener(null)
-                            if (puzzleCompletado()) {
-                                //iniciarPreguntas()
-                                var myUser: User = DbHandler.getUser()!!
-                                myUser.puntuacion = myUser.puntuacion!! + 5
-                                DbHandler().requestDbUserUpdate(this)
-                                button.visibility = View.VISIBLE
-                                Toast.makeText(requireContext(), "Bikain!", Toast.LENGTH_SHORT).show()
-                            }
+                        } else if ((viewElement.x + viewElement.width/2) >= basureroPosX && (viewElement.y + viewElement.height/2) >= basureroPosY && (viewElement.x + viewElement.width/2) <= basureroPosX+cestaSizeX && (viewElement.y + viewElement.height/2) <= basureroPosY+basureroSizeY) {
+                            comprobarInsercionManzana(itemInList, basurero)
+                            itemInList.acertado = true
 
-                             */
+                            viewElement.visibility = View.GONE
+                            viewElement.setOnTouchListener(null)
                         }
                     }
                 }
             }
         }
         true
+    }
+
+    private fun comprobarInsercionManzana(item: DragnDropImage, objetivoInsertado: ImageView) {
+        //item.acertado = true
+        if (item.objetivo == objetivoInsertado) {
+            aciertosActuales++
+            txtAciertos.text = aciertosActuales.toString()
+        }
+        comprobarJuegoFinalizado()
+    }
+
+    private fun comprobarJuegoFinalizado() {
+        if (aciertosActuales >= 5) {
+            button.visibility = View.VISIBLE
+            minijuegoFinalizado = true
+            Toast.makeText(requireContext(), "ZORIONAK !!", Toast.LENGTH_SHORT).show()
+            removeManzanasListener()
+        }
     }
 
     private fun findItemByOrigen(view: View): DragnDropImage? {
@@ -166,11 +194,9 @@ class Fragment2_1_minijuego : Fragment() {
         return null
     }
 
-    private fun removeListenerManzanas() {
+    private fun removeManzanasListener() {
         for (item in manzanaList!!) {
-            if (item.origen == view) {
-                item.origen.setOnTouchListener(null)
-            }
+            item.origen.setOnTouchListener(null)
         }
     }
 
@@ -178,11 +204,16 @@ class Fragment2_1_minijuego : Fragment() {
     fun startTimeCounter() {
         object: CountDownTimer((duracionJuego*1000).toLong(), (intervaloGeneracionManzanas*1000).toLong()) {
             override fun onTick(millisUntilFinished: Long) {
-                generarManzana()
+                if (!minijuegoFinalizado) {
+                    generarManzana()
+                }
             }
             override fun onFinish() {
-                removeListenerManzanas()
-                button.visibility = View.VISIBLE
+                //removeListenerManzanas()
+                //button.visibility = View.VISIBLE
+                //Actualmente queremos que no dejen de aparecer manzanas
+                //FIXME Tal vez se necesite limitar el numero de manzanas activas para evitar que se llene la pantalla de ellas
+                startTimeCounter()
             }
         }.start()
     }

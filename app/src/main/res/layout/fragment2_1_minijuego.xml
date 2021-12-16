@@ -22,6 +22,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/manzanasAciertos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toTopOf="@+id/btnf2_1siguiente"
+            app:layout_constraintEnd_toStartOf="@+id/juegox_basurero"
+            app:layout_constraintStart_toEndOf="@+id/juegox_cesta" />
+
         <ImageView
             android:id="@+id/juegox_cesta"
             android:layout_width="160dp"
@@ -30,6 +40,7 @@
             android:src="@drawable/juegox_cestamanzana"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
 
         <ImageView
             android:id="@+id/juegox_basurero"

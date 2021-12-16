@@ -18,63 +18,38 @@ import com.example.didaktikapp.activities.DbHandler
 import com.example.reto01.Model.User
 import kotlinx.android.synthetic.main.itemuserrecycler.view.*
 
-class UsersRecyclerAdapter(val pContext: Context, private val listUsers: List<User>,  val context:Context) : RecyclerView.Adapter<UsersRecyclerAdapter.UserViewHolder>(), DbHandler.queryResponseDone{
+class UsersRecyclerAdapter(val pContext: Context, private val listUsers: List<User>,  val context:Context) : RecyclerView.Adapter<UsersRecyclerAdapter.UserViewHolder>() {
 
-    val dbHandlerInstance = DbHandler()
     private val thisActivity: Activity = Activity()
 
-    override fun onCreateViewHolder(
-        parent:ViewGroup,
-        viewType:Int
-    ):UsersRecyclerAdapter.UserViewHolder {
-        val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.itemuserrecycler, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UsersRecyclerAdapter.UserViewHolder {
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.itemuserrecycler, parent, false)
         return UserViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder:UsersRecyclerAdapter.UserViewHolder, i:Int) {
-        var usuario = listUsers[i]
-        holder.textViewName.text = usuario.nombre
-        holder.textViewPuntuacion.text = usuario.puntuacion.toString()
-        holder.textViewLastPuntuacion.text = usuario.ultima_puntuacion.toString()
+        holder.render(listUsers[i])
     }
 
     override fun getItemCount():Int {
         return listUsers.size
     }
 
-    fun requestLoadUserData(pString: String) {
-        dbHandlerInstance.requestDbUserLogin(pString, this)
-    }
-    override fun responseDbUserLogin(accountToRegister: String?) {
+    fun requestLoadUserData(pUserObject: User) {
+        DbHandler.setUser(pUserObject)
         var bvIntent = Intent(pContext, Activity5_Mapa::class.java)
         pContext.startActivity(bvIntent)
         (pContext as Activity).finish()
     }
 
-    override fun responseDbUserCount(accountRegister: String?, response: Int) {
-        //PASS
-    }
-
-    override fun responseDbUserRegister(response: Boolean) {
-        //PASS
-    }
-
-    inner class UserViewHolder(view:View) : RecyclerView.ViewHolder(view) {
-
-        var cardUser:CardView
-        var textViewName:TextView
-        var textViewPuntuacion:TextView
-        var textViewLastPuntuacion:TextView
-
-        init {
-            textViewName = view.txtv_nombre as TextView
-            textViewPuntuacion = view.txtv_puntuacion as TextView
-            textViewLastPuntuacion = view.txtv_ultimopunto as TextView
-            cardUser = view.cardUser as CardView
+    inner class UserViewHolder(val view:View) : RecyclerView.ViewHolder(view) {
+        fun render(item: User) {
+            view.txtv_nombre.text = item.nombre
+            view.txtv_puntuacion.text = item.puntuacion.toString()
+            view.txtv_ultimopunto.text = item.ultima_puntuacion.toString()
 
             view.setOnClickListener() {
-                requestLoadUserData(textViewName.text.toString())
+                requestLoadUserData(item)
             }
         }
     }

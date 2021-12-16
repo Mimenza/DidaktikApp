@@ -3,24 +3,21 @@ package com.example.didaktikapp.fragments.juegos
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.graphics.Color
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.os.Bundle
-import android.text.Layout
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
-import android.view.ViewTreeObserver
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import com.example.didaktikapp.Model.DragnDropImage
+import com.example.didaktikapp.activities.DbHandler
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -33,7 +30,8 @@ private const val ARG_PARAM2 = "param2"
  * Use the [Fragment1_juego.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Fragment1_3_1_juego : Fragment() {
+class Fragment1_3_1_juego : Fragment(), DbHandler.queryResponseDone {
+    private val thisJuegoId = 3
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -99,25 +97,10 @@ class Fragment1_3_1_juego : Fragment() {
             }
         })
 
-        /*
-        var newView: ImageView
-        newView = ImageView(requireContext())
-        val constraintLayoutFound = globalView.findViewById<ConstraintLayout>(R.id.mainlayout)
-        constraintLayoutFound.addView(newView)
-        newView.layoutParams.height = 200
-        newView.layoutParams.width = 200
-        newView.x = 200F
-        newView.y = 200F
-        newView.setBackgroundColor(Color.BLUE)
-        newView.setImageResource(R.drawable.sagarragorria)
-
-         */
-
-
-
         button.setOnClickListener(){
             if (puzzleShowing) {
-                Navigation.findNavController(view).navigate(R.id.action_fragment1_3_1_juego_to_fragment2_3_1_minijuego)
+                DbHandler.userActualizarUltimoPunto(thisJuegoId)
+                DbHandler().requestDbUserUpdate(this)
             }else {
                 iniciarPreguntas()
             }
@@ -128,7 +111,9 @@ class Fragment1_3_1_juego : Fragment() {
         return view
     }
 
-
+    override fun responseDbUserUpdated(responde: Boolean) {
+        Navigation.findNavController(globalView).navigate(R.id.action_fragment1_3_1_juego_to_fragment2_3_1_minijuego)
+    }
 
     fun prepairPuzzleElements() {
         for (vItemList in listaImagenes) {
@@ -177,8 +162,9 @@ class Fragment1_3_1_juego : Fragment() {
                             itemInList.acertado = true
                             sendToTopImagesNotFinished()
                             viewElement.setOnTouchListener(null)
-                            if (juegoCompletado()) {
-                                //iniciarPreguntas()
+                            if (puzzleCompletado()) {
+                                DbHandler.userAumentarPuntuacion(5)
+                                //DbHandler().requestDbUserUpdate(this)
                                 button.visibility = View.VISIBLE
                                 Toast.makeText(requireContext(), "Bikain!", Toast.LENGTH_SHORT).show()
                             }
@@ -197,13 +183,15 @@ class Fragment1_3_1_juego : Fragment() {
         preguntasLayout.visibility = View.VISIBLE
     }
 
+    private var respuestaPreguntasjuego2: String = "zanpantzarrak"
+
     private fun comprobarRespuestas() {
         val radio1: RadioButton = globalView.findViewById(R.id.pregunta1_respuesta_1)
         val radio2: RadioButton = globalView.findViewById(R.id.pregunta1_respuesta_2)
         val editTextRespuesta: EditText = globalView.findViewById(R.id.juego3_pregunta2_respuesta1)
         val btnComprobarRespuesta: Button = globalView.findViewById(R.id.juego3_btnComprobar)
 
-        if (radio1.isChecked && editTextRespuesta.text.toString().trim().toLowerCase().equals("zanpantzarrak")) {
+        if (radio1.isChecked && editTextRespuesta.text.toString().trim().toLowerCase().equals(respuestaPreguntasjuego2)) {
             editTextRespuesta.isEnabled = false
             radio1.isEnabled = false
             radio2.isEnabled = false
@@ -244,7 +232,7 @@ class Fragment1_3_1_juego : Fragment() {
         }
     }
 
-    private fun juegoCompletado(): Boolean {
+    private fun puzzleCompletado(): Boolean {
         var finalizado: Boolean = true
         for (item in manzanaList!!) {
             if (!item.acertado) {
@@ -283,4 +271,5 @@ class Fragment1_3_1_juego : Fragment() {
                 }
             }
     }
+
 }

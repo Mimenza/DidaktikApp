@@ -2,22 +2,16 @@ package com.example.didaktikapp.activities
 
 import android.app.Activity
 import android.content.Context
+import android.content.pm.PackageManager
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
 import com.example.didaktikapp.Model.CustomLine
 import com.example.didaktikapp.R
 import java.lang.Exception
 
 class Utils {
     companion object {
-
-        private var explicacionMapaFinalizada: Boolean = false
-
-        fun setExplicacionFinalizada() {
-            this.explicacionMapaFinalizada = true
-        }
-
-        fun getExplicacionFinalizada() = this.explicacionMapaFinalizada
 
         fun drawLine(globalView: View, context: Context, startX: Float, startY: Float, endX: Float, endY: Float, width: Float, r: Int, g: Int, b: Int) {
             val myLinObjecte = CustomLine(context,startX,startY,endX,endY,width, r,g,b)
@@ -47,5 +41,13 @@ class Utils {
             }
             return null
         }
+
+        fun comprobarPermisosMap(pContext: Context): Boolean {
+            if (ActivityCompat.checkSelfPermission(pContext, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                return true
+            }
+            return false
+        }
     }
+
 }

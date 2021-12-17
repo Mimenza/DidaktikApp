@@ -106,6 +106,7 @@ class Fragment1_6_juego : Fragment() {
         var respuesta4 = false
         var respuesta5 = false
         var respuesta6 = false
+
         //=====================================
         //funcion para rellenar el bertso
         insertHtml(bertsotxt, input1, input2, input3, input4, input5, input6)
@@ -313,20 +314,18 @@ class Fragment1_6_juego : Fragment() {
                     audio?.setOnCompletionListener {
                         Handler(Looper.getMainLooper()).postDelayed({
                             if (getView() != null) {
-                                val btnsiguiente: Button = view.findViewById(R.id.btnf1_6_siguiente)
 
-<<<<<<< HEAD
                             val btnsiguiente: Button = view.findViewById(R.id.btnf1_6siguienteJuego)
                             val btnrepetir : Button = view.findViewById(R.id.btnf1_6repetirJuego)
+
                             //sacamos el boton para el siguiente minijuego
                             btnsiguiente.isVisible = true
                             btnrepetir.isVisible = true
 
-=======
                                 //sacamos el boton para el siguiente minijuego
                                 btnsiguiente.isVisible = true
                             }
->>>>>>> fad75e5a4a9c64a5fd9758dffcf31b6d53dfe274
+
                         }, 1000)
                     }
                 }

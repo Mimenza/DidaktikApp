@@ -332,7 +332,7 @@
             android:layout_height="422dp"
             android:focusable="true"
             android:textColor="@color/white"
-            android:textSize="24dp"
+            android:textSize="20dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

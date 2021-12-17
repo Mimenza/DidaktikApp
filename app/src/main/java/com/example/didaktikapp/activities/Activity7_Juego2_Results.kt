@@ -14,6 +14,7 @@ import com.example.didaktikapp.R
 
 import com.example.didaktikapp.fragments.juegos.Fragment1_2_juego
 import com.example.didaktikapp.fragments.minijuegos.Fragment2_2_minijuego
+import kotlinx.android.synthetic.main.activity7_1_juego7_results.*
 
 import kotlinx.android.synthetic.main.activity7_juego2_results.*
 import kotlinx.coroutines.launch
@@ -62,9 +63,18 @@ class Activity7_Juego2_Results : AppCompatActivity() {
             ocultaracciones()
             audio.stop()
          }
+         btn7_saiatuberriro.setOnClickListener {
+
+             //Mostramos fragment juego7
+             showFragmentJuego2()
+             //Ocultamos los botones
+             ocultaracciones()
+
+         }
+
          //Ocultamos boton intentar de nuevo
 
-         btn7_saiatuberriro.isVisible=false
+         btn7_saiatuberriro2.isVisible=false
      }else{
          //Audio error
          runBlocking() {
@@ -74,7 +84,8 @@ class Activity7_Juego2_Results : AppCompatActivity() {
              }
          }
          btn7_terminar.isVisible=false
-         btn7_saiatuberriro.setOnClickListener {
+         btn7_saiatuberriro.isVisible=false
+         btn7_saiatuberriro2.setOnClickListener {
 
                //Mostramos fragment juego2
                showFragmentJuego2()
@@ -112,5 +123,6 @@ class Activity7_Juego2_Results : AppCompatActivity() {
         txtv7_result.isVisible=false
         txtv1_2_respuesta1.isVisible=false
         txtv7_scoreuser.isVisible=false
+        btn7_saiatuberriro2.isVisible=false
     }
 }

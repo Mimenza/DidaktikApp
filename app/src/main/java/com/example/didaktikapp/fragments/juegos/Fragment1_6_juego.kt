@@ -3,6 +3,7 @@ package com.example.didaktikapp.fragments.juegos
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
 import android.graphics.drawable.AnimationDrawable
+import android.media.Image
 import android.media.MediaPlayer
 import androidx.core.text.HtmlCompat;
 import android.widget.TextView;
@@ -63,12 +64,12 @@ class Fragment1_6_juego : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment1_6_juego, container, false)
-        val button: Button = view.findViewById(R.id.btnf1_6_siguiente)
-
+        val btnsiguiente: Button = view.findViewById(R.id.btnf1_6siguienteJuego)
+        val btnrepertir : Button = view.findViewById(R.id.btnf1_6repetirJuego)
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_6_ajustes)
         val buttonSonido: ImageButton = view.findViewById(R.id.btnf1_6_sonido)
 
-        button.setOnClickListener() {
+        btnsiguiente.setOnClickListener() {
             Navigation.findNavController(view)
                 .navigate(R.id.action_fragment1_6_juego_to_fragment2_6_minijuego)
         }
@@ -82,7 +83,10 @@ class Fragment1_6_juego : Fragment() {
         buttonSonido.setOnClickListener() {
            animacionVolumen(view)
         }
-
+        btnrepertir.setOnClickListener(){
+            Navigation.findNavController(view)
+                .navigate(R.id.action_fragment1_6_juego_self)
+        }
         //=====================================
         val blank = "&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;"
 
@@ -102,6 +106,7 @@ class Fragment1_6_juego : Fragment() {
         var respuesta4 = false
         var respuesta5 = false
         var respuesta6 = false
+
         //=====================================
         //funcion para rellenar el bertso
         insertHtml(bertsotxt, input1, input2, input3, input4, input5, input6)
@@ -309,11 +314,19 @@ class Fragment1_6_juego : Fragment() {
                     audio?.setOnCompletionListener {
                         Handler(Looper.getMainLooper()).postDelayed({
                             if (getView() != null) {
-                                val btnsiguiente: Button = view.findViewById(R.id.btnf1_6_siguiente)
+
+                            val btnsiguiente: Button = view.findViewById(R.id.btnf1_6siguienteJuego)
+                            val btnrepetir : Button = view.findViewById(R.id.btnf1_6repetirJuego)
+
+                            //sacamos el boton para el siguiente minijuego
+                            btnsiguiente.isVisible = true
+                            btnrepetir.isVisible = true
+
 
                                 //sacamos el boton para el siguiente minijuego
-                                btnsiguiente.isVisible = true
+
                             }
+
                         }, 1000)
                     }
                 }
@@ -472,7 +485,8 @@ class Fragment1_6_juego : Fragment() {
         val fondo: TextView = view.findViewById(R.id.imgv1_6_fondo)
         fondo.setOnClickListener(null)
 
-        //Si es la primera vez que se reproduce el berso si que se escuchara la descripcion, sino no.
+        val btnVolumen : ImageButton = view.findViewById(R.id.btnf1_6_sonido)
+        btnVolumen.isVisible = false
 
             //reproducimo el audio
             runBlocking() {
@@ -488,6 +502,8 @@ class Fragment1_6_juego : Fragment() {
                     audio?.setOnCompletionListener {
                         //cuando el audio se termine escondemos el texto y sacamos el bertso y los inputs
                         exitAnimationfun(view)
+
+                        btnVolumen.isVisible = true
                     }
                 }
                 typewriter(view)
@@ -495,11 +511,6 @@ class Fragment1_6_juego : Fragment() {
             }
             //Variable para settear que el texto ya ha sido escrito y no es la primera vez
             firstTime = false
-
-            //hacemos que el boton de reproducir el audio sea visible al terminar el audio
-            val reproducirAudio: ImageButton = view.findViewById(R.id.btnf1_6_sonido)
-            reproducirAudio.isVisible = true
-
     }
 
     private fun typewriter(view: View) {

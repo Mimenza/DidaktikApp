@@ -25,16 +25,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+
             <TextView
                 android:id="@+id/txtv1_1titulo"
                 android:layout_width="250dp"
                 android:layout_height="50dp"
+                android:layout_marginTop="18dp"
                 android:gravity="center"
-                android:layout_marginTop="40dp"
                 android:text="@string/nombre_2juego"
                 android:textSize="32dp"
                 android:textStyle="bold" />
-
 
             <ImageButton
                 android:id="@+id/btnf1_2_ajustes"
@@ -62,11 +62,12 @@
                 android:textColor="@color/black"
                 android:textSize="22sp" />
             <!--Horizontal  Linear Layout-->
+
             <ImageView
                 android:id="@+id/imgv1_2defaultimage"
                 android:layout_width="125dp"
                 android:layout_height="125dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="5dp"
                 android:src="@drawable/img_interrogacion" />
 
             <LinearLayout
@@ -153,13 +154,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:minHeight="48dp"
                 android:text="@string/siguiente"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.866" />
+                app:layout_constraintVertical_bias="0.866"
+                tools:ignore="TouchTargetSizeCheck" />
 
         </LinearLayout>
 

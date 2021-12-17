@@ -66,9 +66,16 @@ class Activity7_1_Juego7_Results : AppCompatActivity() {
                 ocultaracciones()
                 audio.stop()
             }
-            //Ocultamos boton intentar de nuevo
+            btn7_1_saiatuberriro.setOnClickListener {
 
-            btn7_1_saiatuberriro.isVisible=false
+                //Mostramos fragment juego7
+                showFragmentJuego7()
+                //Ocultamos los botones
+                ocultaracciones()
+
+            }
+            btn7_1_saiatuberriro2.isVisible=false
+
         }else{
             //Audio error
             runBlocking() {
@@ -78,7 +85,8 @@ class Activity7_1_Juego7_Results : AppCompatActivity() {
                 }
             }
             btn7_1_terminar.isVisible=false
-            btn7_1_saiatuberriro.setOnClickListener {
+            btn7_1_saiatuberriro.isVisible=false
+            btn7_1_saiatuberriro2.setOnClickListener {
 
                 //Mostramos fragment juego7
                 showFragmentJuego7()
@@ -116,5 +124,6 @@ class Activity7_1_Juego7_Results : AppCompatActivity() {
         txtv7_1_result.isVisible=false
         txtv7_1_respuesta1.isVisible=false
         txtv7_1_scoreuser.isVisible=false
+        btn7_1_saiatuberriro2.isVisible=false
     }
 }

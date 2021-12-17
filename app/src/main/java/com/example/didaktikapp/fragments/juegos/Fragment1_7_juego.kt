@@ -137,8 +137,10 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
                 audio.setOnCompletionListener {
 
                     Handler().postDelayed({
-                        //llama a la funcion para la animacion de salida cuando el audio se termina
-                        exitAnimationfun(view)
+                        if (getView() != null) {
+                            //llama a la funcion para la animacion de salida cuando el audio se termina
+                            exitAnimationfun(view)
+                        }
                     }, 1000)
                 }
             }
@@ -167,9 +169,11 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
 
         //llamamos a la animacion para animar a upelio
         Handler().postDelayed({
-            upelio.isVisible = false
-            talkAnimationfun(view)
-            typewriter(view)
+            if (getView() != null) {
+                upelio.isVisible = false
+                talkAnimationfun(view)
+                typewriter(view)
+            }
         }, 2000)
 
     }
@@ -196,12 +200,14 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
 
         //animacion fondo gris
         Handler().postDelayed({
-            val txt_animacion = view.findViewById(R.id.txtv1_7fondogris) as TextView
-            val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
-            txt_animacion.startAnimation(aniFade)
-            txtv1_7tutorialjuego7.startAnimation(aniFade)
-            txtv1_7tutorialjuego7.isVisible = false
-            txt_animacion.isVisible = false
+            if (getView() != null) {
+                val txt_animacion = view.findViewById(R.id.txtv1_7fondogris) as TextView
+                val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+                txt_animacion.startAnimation(aniFade)
+                txtv1_7tutorialjuego7.startAnimation(aniFade)
+                txtv1_7tutorialjuego7.isVisible = false
+                txt_animacion.isVisible = false
+            }
         }, 1000)
     }
 

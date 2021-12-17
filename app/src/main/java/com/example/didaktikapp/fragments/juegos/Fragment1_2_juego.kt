@@ -59,6 +59,7 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
     private lateinit var btnSiguiente : Button
     private  var mCorrectAnswers: Int = 0
     private lateinit var vistaanimada:TranslateAnimation
+    private var audio: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,7 +80,6 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         //Inicializar vistas
         val button:Button = view.findViewById(R.id.btnf1_2siguiente)
         val ajustes:ImageButton = view.findViewById(R.id.btnf1_2_ajustes)
-        var audio: MediaPlayer
 
             progressBar = view.findViewById(R.id.custom_progressBar)
             txtProgressBar =view.findViewById(R.id.txtv1_2_progreessbar)
@@ -104,20 +104,24 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
 
         //Typewriter juego 2 tutorial
         Handler().postDelayed({
-            typewriter(view)
+            if (getView() != null) {
+                typewriter(view)
+            }
         }, 2000)
 
         //Audio juego 2 tutorial
         runBlocking() {
             launch {
                 audio = MediaPlayer.create(context, R.raw.juego2audiotutorial)
-                audio.start()
-                audio.setOnCompletionListener {
+                audio?.start()
+                audio?.setOnCompletionListener {
 
-                    Handler().postDelayed({
-                        //llama a la funcion para la animacion de salida cuando el audio se termina
-                        exitAnimationfun(view)
-                    }, 1000)
+                    //Handler().postDelayed({
+                        //if (getView() != null) {
+                            //llama a la funcion para la animacion de salida cuando el audio se termina
+                            exitAnimationfun(view)
+                        //}
+                    //}, 1000)
                 }
             }
         }
@@ -162,8 +166,10 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
 
         //llamamos a la animacion para animar a upelio
         Handler().postDelayed({
-            upelio.isVisible = false
-            talkAnimationfun(view)
+            if (getView() != null) {
+                upelio.isVisible = false
+                talkAnimationfun(view)
+            }
         }, 2000)
 
     }
@@ -190,12 +196,14 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
 
         //animacion fondo gris
         Handler().postDelayed({
-            val txt_animacion = view.findViewById(R.id.txtv1_2fondogris) as TextView
-            val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
-            txt_animacion.startAnimation(aniFade)
-            txtv1_2tutorialjuego2.startAnimation(aniFade)
-            txtv1_2tutorialjuego2.isVisible = false
-            txt_animacion.isVisible = false
+            if (getView() != null) {
+                val txt_animacion = view.findViewById(R.id.txtv1_2fondogris) as TextView
+                val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+                txt_animacion.startAnimation(aniFade)
+                txtv1_2tutorialjuego2.startAnimation(aniFade)
+                txtv1_2tutorialjuego2.isVisible = false
+                txt_animacion.isVisible = false
+            }
         }, 1000)
     }
 
@@ -385,6 +393,23 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
             requireContext(), R.drawable.juego2_selected_option_border_bg)
 
     }
+
+    //AUDIO EVENTS FIX ON DESTROYING
+    override fun onDestroy() {
+        audio?.stop()
+        super.onDestroy()
+    }
+
+    override fun onPause() {
+        audio?.pause()
+        super.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        audio?.start()
+    }
+
     companion object {
         /**
          * Use this factory method to create a new instance of

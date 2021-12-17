@@ -42,7 +42,7 @@ class Fragment1_5_juego : Fragment() {
     private lateinit var button: Button
     private lateinit var myLayout: View
     private lateinit var video: VideoView
-    private lateinit var audio: MediaPlayer
+    private var audio: MediaPlayer? = null
     private lateinit var globalView: View
     private lateinit var vistaanimada: TranslateAnimation
 
@@ -123,7 +123,9 @@ class Fragment1_5_juego : Fragment() {
 
         //Typewriter juego 5 tutorial
         Handler(Looper.getMainLooper()).postDelayed({
-            typewriter(view)
+            if (getView() != null) {
+                typewriter(view)
+            }
         }, 2000)
         //Typewriter juego 5 tutorial fin
 
@@ -155,7 +157,7 @@ class Fragment1_5_juego : Fragment() {
         runBlocking() {
             launch {
                 audio = MediaPlayer.create(context, R.raw.juego6audio)
-                audio.start()
+                audio?.start()
 
             }
             //animacion para la descripcion
@@ -185,7 +187,8 @@ class Fragment1_5_juego : Fragment() {
 
     }
 
-
+    /*
+    //Old Way to stop it
     override fun onDestroy() {
         video.stopPlayback()
 
@@ -208,9 +211,9 @@ class Fragment1_5_juego : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        // TODO: preguntar si esta el audio empezado
         audio?.start()
     }
+     */
 
 
     private fun typewriter(view: View) {
@@ -234,8 +237,10 @@ class Fragment1_5_juego : Fragment() {
 
         //llamamos a la animacion para animar a upelio
         Handler(Looper.getMainLooper()).postDelayed({
-            upelio.isVisible = false
-            talkAnimationfun(view)
+            if (getView() != null) {
+                upelio.isVisible = false
+                talkAnimationfun(view)
+            }
         }, 2000)
 
     }
@@ -317,7 +322,7 @@ class Fragment1_5_juego : Fragment() {
                             sendToTopImagesNotFinished()
                             viewElement.setOnTouchListener(null)
                             if (juegoCompletado()) {
-                                audio.stop()
+                                audio?.stop()
                                 button.visibility = View.VISIBLE
                                 Toast.makeText(requireContext(), "Bikain!", Toast.LENGTH_SHORT).show()
                             }
@@ -355,6 +360,28 @@ class Fragment1_5_juego : Fragment() {
             }
         }
         return null
+    }
+
+    override fun onDestroy() {
+        audio?.stop()
+        super.onDestroy()
+    }
+
+    override fun onPause() {
+        //video.stopPlayback()
+        if (video != null && video.isPlaying) {
+            video.pause()
+        }
+        audio?.pause()
+        super.onPause()
+    }
+
+    override fun onResume() {
+        if (video != null && !video.isPlaying) {
+            video.resume()
+        }
+        super.onResume()
+        audio?.start()
     }
 
     companion object {

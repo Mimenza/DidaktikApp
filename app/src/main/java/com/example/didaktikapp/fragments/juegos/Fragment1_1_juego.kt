@@ -375,11 +375,6 @@ class Fragment1_1_juego : Fragment() {
         return view
     }
 
-    override fun onDestroy() {
-        audio?.stop()
-        super.onDestroy()
-    }
-
     /**
      * Dibuja una linea entre una ImgView y un TextView
      * @param img la ImageView donde empieza la linea
@@ -396,20 +391,11 @@ class Fragment1_1_juego : Fragment() {
         when (color) {
             "green" ->
                 customLine =
-                    CustomLine(
-                        requireContext(),
-                        startX - 7,
-                        startY - 7,
-                        endX + 7,
-                        endY + 7,
-                        15F,
-                        162,
-                        224,
-                        23
+                    CustomLine(requireContext(), startX -7, startY -7, endX +7, endY +7, 15F, 162, 224, 23
                     )
             "red" ->
                 customLine =
-                    CustomLine(requireContext(), startX, startY, endX, endY, 15F, 224, 56, 23)
+                    CustomLine(requireContext(), startX -7, startY-7, endX+7, endY+7, 15F, 224, 56, 23)
         }
         customLines.add(customLine)
         layout.addView(customLine)
@@ -578,6 +564,21 @@ class Fragment1_1_juego : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        audio?.stop()
+        super.onDestroy()
+    }
+
+    override fun onPause() {
+        audio?.pause()
+        super.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        audio?.start()
     }
 
     companion object {

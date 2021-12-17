@@ -260,12 +260,13 @@ class Fragment1_6_juego : Fragment() {
                             audio?.start()
                             audio?.setOnCompletionListener {
                                 Handler(Looper.getMainLooper()).postDelayed({
-                                    //recargamos el juego
+                                    if (getView() != null) {
+                                        //recargamos el juego
 
-                                    Navigation.findNavController(view)
-                                        .navigate(R.id.action_fragment1_6_juego_self)
+                                        Navigation.findNavController(view)
+                                            .navigate(R.id.action_fragment1_6_juego_self)
 
-
+                                    }
                                 }, 1000)
                             }
                         }
@@ -307,12 +308,12 @@ class Fragment1_6_juego : Fragment() {
                     audio?.start()
                     audio?.setOnCompletionListener {
                         Handler(Looper.getMainLooper()).postDelayed({
+                            if (getView() != null) {
+                                val btnsiguiente: Button = view.findViewById(R.id.btnf1_6_siguiente)
 
-                            val btnsiguiente: Button = view.findViewById(R.id.btnf1_6_siguiente)
-
-                            //sacamos el boton para el siguiente minijuego
-                            btnsiguiente.isVisible = true
-
+                                //sacamos el boton para el siguiente minijuego
+                                btnsiguiente.isVisible = true
+                            }
                         }, 1000)
                     }
                 }
@@ -518,8 +519,10 @@ class Fragment1_6_juego : Fragment() {
 
         //llamamos a la animacion para animar a upelio
         Handler(Looper.getMainLooper()).postDelayed({
-            upelio.isVisible = false
-            talkAnimationfun(view)
+            if (getView() != null) {
+                upelio.isVisible = false
+                talkAnimationfun(view)
+            }
         }, 2000)
 
     }
@@ -538,24 +541,27 @@ class Fragment1_6_juego : Fragment() {
 
         //difuminado fondo gris y las letras
         Handler(Looper.getMainLooper()).postDelayed({
-            val txtAnimacion = view.findViewById(R.id.imgv1_6_fondo) as TextView
-            val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
-            txtAnimacion.startAnimation(aniFade)
-            txtAnimacion.isVisible = false
+            if (getView() != null) {
+                val txtAnimacion = view.findViewById(R.id.imgv1_6_fondo) as TextView
+                val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+                txtAnimacion.startAnimation(aniFade)
+                txtAnimacion.isVisible = false
+            }
         }, 1000)
 
 
         //aparece el bertso
         Handler().postDelayed({
-            txtv1_6_explicacion.isVisible = false
-            txtv1_6_bertso.isVisible = true
+            if (getView() != null) {
+                txtv1_6_explicacion.isVisible = false
+                txtv1_6_bertso.isVisible = true
 
-            val input: EditText = view.findViewById(R.id.txtv1_6_inputgeneral0)
-            val btn: Button = view.findViewById(R.id.btn1_6_comprobar)
+                val input: EditText = view.findViewById(R.id.txtv1_6_inputgeneral0)
+                val btn: Button = view.findViewById(R.id.btn1_6_comprobar)
 
-            input.isVisible = true
-            btn.isVisible = true
-
+                input.isVisible = true
+                btn.isVisible = true
+            }
         }, 2000)
 
 

@@ -375,11 +375,6 @@ class Fragment1_1_juego : Fragment() {
         return view
     }
 
-    override fun onDestroy() {
-        audio?.stop()
-        super.onDestroy()
-    }
-
     /**
      * Dibuja una linea entre una ImgView y un TextView
      * @param img la ImageView donde empieza la linea
@@ -578,6 +573,21 @@ class Fragment1_1_juego : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        audio?.stop()
+        super.onDestroy()
+    }
+
+    override fun onPause() {
+        audio?.pause()
+        super.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        audio?.start()
     }
 
     companion object {

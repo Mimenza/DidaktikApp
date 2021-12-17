@@ -8,9 +8,9 @@
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainlayout_Minijuego1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/mainlayout_Minijuego1">
+        android:layout_height="match_parent">
 
         <ImageView
             android:layout_width="371dp"
@@ -26,10 +26,13 @@
             android:id="@+id/manzanasAciertos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginBottom="52dp"
             android:text="0"
             android:textSize="34sp"
-            app:layout_constraintBottom_toTopOf="@+id/btnf2_1siguiente"
-            app:layout_constraintEnd_toStartOf="@+id/juegox_basurero"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnf2_1siguiente"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/juegox_cesta" />
 
         <ImageView
@@ -42,12 +45,14 @@
             app:layout_constraintStart_toStartOf="parent" />
 
 
+        <!-- BASURERO DESACTIVADO-->
         <ImageView
             android:id="@+id/juegox_basurero"
             android:layout_width="160dp"
             android:layout_height="160dp"
             android:scaleType="fitXY"
             android:src="@drawable/juegox_basurero"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -55,12 +60,11 @@
             android:id="@+id/btnf2_1siguiente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginBottom="52dp"
             android:text="SIGUIENTE"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <ImageButton
             android:id="@+id/btnf2_1ajustes"

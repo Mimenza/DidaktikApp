@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Context
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
+import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -40,6 +41,7 @@ class Fragment1_3_1_juego : Fragment(), DbHandler.queryResponseDone {
     private lateinit var globalView: View
     private lateinit var button: Button
     private lateinit var preguntasLayout: LinearLayout
+    private var audio: MediaPlayer? = null
     var totalWidth: Int = 0
     var totalHeight: Int = 0
     var puzzleShowing: Boolean = false
@@ -253,6 +255,21 @@ class Fragment1_3_1_juego : Fragment(), DbHandler.queryResponseDone {
             }
         }
         return null
+    }
+
+    override fun onDestroy() {
+        audio?.stop()
+        super.onDestroy()
+    }
+
+    override fun onPause() {
+        audio?.pause()
+        super.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        audio?.start()
     }
 
     companion object {

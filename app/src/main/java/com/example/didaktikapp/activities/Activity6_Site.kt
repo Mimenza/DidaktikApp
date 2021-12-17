@@ -41,18 +41,10 @@ class Activity6_Site : AppCompatActivity() {
         var editor = sharedPreferences.edit()
         editor.putString("numero", newInt.toString()).apply()
 
-        println("NUMERO "+newInt)
+
 
     }
 
-    override fun onResume() {
-
-        cerrarAjustes()
-        cerrarMenu()
-        cerrarAyuda()
-
-        super.onResume()
-    }
 
     fun menuCheck(){
 
@@ -63,6 +55,7 @@ class Activity6_Site : AppCompatActivity() {
             showMenu()
         }
     }
+
     fun ayudaCheck(){
 
         if(ayudaFirst){
@@ -102,8 +95,6 @@ class Activity6_Site : AppCompatActivity() {
 
         /* supportFragmentManager.beginTransaction().show(Fragment5_ajustes()!!).commit()*/
     }
-
-
 
     fun addMenu() {
         //añadimos el fragment del menu
@@ -146,7 +137,6 @@ class Activity6_Site : AppCompatActivity() {
        /* supportFragmentManager.beginTransaction().show(Fragment5_ajustes()!!).commit()*/
     }
 
-
     private fun cerrarAjustes() {
         //escondemos el container del fragment del menu
 
@@ -156,15 +146,17 @@ class Activity6_Site : AppCompatActivity() {
         ajustesShowing= false
 
     }
+
     private fun cerrarAyuda() {
         //escondemos el container del fragment del menu
 
         framelayout6_ayuda.isVisible=false
         /*supportFragmentManager.beginTransaction().hide(Fragment5_ajustes()!!).commit();*/
-        fragment = "Fragment6"
+        fragment = "Fragment4"
         ajustesShowing= false
 
     }
+
     private fun cerrarMenu() {
         //escondemos el container del fragment de ajustes
 
@@ -176,20 +168,18 @@ class Activity6_Site : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-
-        if(fragment == "Fragment5"){
-            cerrarAjustes()
-        }
-      else  if(fragment == "Fragment6"){
-            cerrarAyuda()
-        }
-
-        else if (fragment == "Fragment4") {
-            cerrarMenu()
-        }
-
-        else {
-            super.onBackPressed()
+        println(fragment)
+        when (fragment) {
+            "Fragment4" -> { cerrarMenu()
+                println("cerrar menu")}
+            "Fragment5" -> { cerrarAjustes()
+                println("cerrar ajustes")}
+            "Fragment6" -> {  cerrarAyuda()
+                println("cerrar ayuda")}
+            else -> {
+                super.onBackPressed()
+                println("atras")
+            }
         }
     }
 

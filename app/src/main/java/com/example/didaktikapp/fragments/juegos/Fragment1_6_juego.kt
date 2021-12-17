@@ -106,6 +106,7 @@ class Fragment1_6_juego : Fragment() {
         var respuesta4 = false
         var respuesta5 = false
         var respuesta6 = false
+
         //=====================================
         //funcion para rellenar el bertso
         insertHtml(bertsotxt, input1, input2, input3, input4, input5, input6)
@@ -316,6 +317,7 @@ class Fragment1_6_juego : Fragment() {
 
                             val btnsiguiente: Button = view.findViewById(R.id.btnf1_6siguienteJuego)
                             val btnrepetir : Button = view.findViewById(R.id.btnf1_6repetirJuego)
+
                             //sacamos el boton para el siguiente minijuego
                             btnsiguiente.isVisible = true
                             btnrepetir.isVisible = true

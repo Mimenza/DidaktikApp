@@ -30,7 +30,7 @@
                 android:id="@+id/txtv1_1titulo"
                 android:layout_width="250dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="18dp"
                 android:gravity="center"
                 android:text="@string/nombre_2juego"
                 android:textSize="32dp"
@@ -62,11 +62,12 @@
                 android:textColor="@color/black"
                 android:textSize="22sp" />
             <!--Horizontal  Linear Layout-->
+
             <ImageView
                 android:id="@+id/imgv1_2defaultimage"
                 android:layout_width="125dp"
                 android:layout_height="125dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="5dp"
                 android:src="@drawable/img_interrogacion" />
 
             <LinearLayout

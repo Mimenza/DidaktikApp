@@ -313,20 +313,18 @@ class Fragment1_6_juego : Fragment() {
                     audio?.setOnCompletionListener {
                         Handler(Looper.getMainLooper()).postDelayed({
                             if (getView() != null) {
-                                val btnsiguiente: Button = view.findViewById(R.id.btnf1_6_siguiente)
 
-<<<<<<< HEAD
                             val btnsiguiente: Button = view.findViewById(R.id.btnf1_6siguienteJuego)
                             val btnrepetir : Button = view.findViewById(R.id.btnf1_6repetirJuego)
                             //sacamos el boton para el siguiente minijuego
                             btnsiguiente.isVisible = true
                             btnrepetir.isVisible = true
 
-=======
+
                                 //sacamos el boton para el siguiente minijuego
-                                btnsiguiente.isVisible = true
+
                             }
->>>>>>> fad75e5a4a9c64a5fd9758dffcf31b6d53dfe274
+
                         }, 1000)
                     }
                 }

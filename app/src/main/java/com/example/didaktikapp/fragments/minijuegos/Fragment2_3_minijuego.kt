@@ -20,7 +20,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [Fragment2_minijuego.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Fragment2_3_1_minijuego : Fragment() {
+class Fragment2_3_minijuego : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -38,16 +38,16 @@ class Fragment2_3_1_minijuego : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view= inflater.inflate(R.layout.fragment2_3_1_minijuego, container, false)
+        val view= inflater.inflate(R.layout.fragment2_3_minijuego, container, false)
         val button: Button = view.findViewById(R.id.btnf2_3_1siguiente)
         val ajustes: ImageButton = view.findViewById(R.id.btnf2_3_1ajustes)
 
         button.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment2_3_1_minijuego_to_fragment4_menu)
+            Navigation.findNavController(view).navigate(R.id.action_fragment2_3_minijuego_to_fragment4_menu)
         }
 
         ajustes.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment2_3_1_minijuego_to_fragment4_menu)
+            Navigation.findNavController(view).navigate(R.id.action_fragment2_3_minijuego_to_fragment4_menu)
         }
         return view
     }
@@ -64,7 +64,7 @@ class Fragment2_3_1_minijuego : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Fragment2_3_1_minijuego().apply {
+            Fragment2_3_minijuego().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

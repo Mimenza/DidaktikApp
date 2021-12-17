@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.juegos.Fragment1_3_1_juego">
+    tools:context=".fragments.juegos.Fragment1_3_juego">
 
 
     <!-- TODO: Update blank fragment layout -->
@@ -14,7 +14,7 @@
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/btnf1_3_1_siguiente"
+            android:id="@+id/btnf1_3_siguiente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -26,7 +26,7 @@
             app:layout_constraintVertical_bias="0.976" />
 
         <ImageButton
-            android:id="@+id/btnf1_3_1_ajustes"
+            android:id="@+id/btnf1_3_ajustes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minHeight="48dp"
@@ -118,7 +118,7 @@
             android:layout_height="310dp"
             android:layout_marginTop="184dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/btnf1_3_1_siguiente"
+            app:layout_constraintBottom_toTopOf="@+id/btnf1_3_siguiente"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"

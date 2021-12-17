@@ -108,8 +108,8 @@
     <string name="erantzuna6">6 galderaren erantzuna</string>
 
     <!--ACERCA DE -->
-    <string name="equipodesarrollo">• EQUIPO DE DESARROLLO •</string>
-    <string name="ideaoriginal">• IDEA ORIGINAL •</string>
+    <string name="equipodesarrollo"><b>• EQUIPO DE DESARROLLO •</b></string>
+    <string name="ideaoriginal"><b>• IDEA ORIGINAL •</b></string>
 
     <!--BOTONES-->
     <string name="jugar">Jolastu</string>

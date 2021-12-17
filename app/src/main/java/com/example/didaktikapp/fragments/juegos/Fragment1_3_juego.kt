@@ -32,7 +32,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [Fragment1_juego.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Fragment1_3_1_juego : Fragment(), DbHandler.queryResponseDone {
+class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
     private val thisJuegoId = 3
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -77,11 +77,11 @@ class Fragment1_3_1_juego : Fragment(), DbHandler.queryResponseDone {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment1_3_1_juego, container, false)
+        val view = inflater.inflate(R.layout.fragment1_3_juego, container, false)
         globalView = view
-        button = view.findViewById(R.id.btnf1_3_1_siguiente)
+        button = view.findViewById(R.id.btnf1_3_siguiente)
         button.visibility = View.GONE
-        val ajustes: ImageButton = view.findViewById(R.id.btnf1_3_1_ajustes)
+        val ajustes: ImageButton = view.findViewById(R.id.btnf1_3_ajustes)
         val btnComprobarRespuesta: Button = globalView.findViewById(R.id.juego3_btnComprobar)
         preguntasLayout = view.findViewById(R.id.juego3_preguntas_layout)
 
@@ -117,7 +117,7 @@ class Fragment1_3_1_juego : Fragment(), DbHandler.queryResponseDone {
     }
 
     override fun responseDbUserUpdated(responde: Boolean) {
-        Navigation.findNavController(globalView).navigate(R.id.action_fragment1_3_1_juego_to_fragment2_3_1_minijuego)
+        Navigation.findNavController(globalView).navigate(R.id.action_fragment1_3_juego_to_fragment2_3_minijuego)
     }
 
     fun prepairPuzzleElements() {
@@ -284,7 +284,7 @@ class Fragment1_3_1_juego : Fragment(), DbHandler.queryResponseDone {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Fragment1_3_1_juego().apply {
+            Fragment1_3_juego().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

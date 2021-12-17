@@ -111,7 +111,7 @@ class Fragment3_info : Fragment() {
 
                 button.setOnClickListener {
                     Navigation.findNavController(view)
-                        .navigate(R.id.action_fragment3_info_to_fragment1_3_1_juego)
+                        .navigate(R.id.action_fragment3_info_to_fragment1_3_juego)
 
                 }
                 audioTutorialZona3()

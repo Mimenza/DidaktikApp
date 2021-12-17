@@ -17,8 +17,8 @@
             android:id="@+id/action_fragment3_info_to_fragment1_2_juego"
             app:destination="@id/fragment1_2_juego" />
         <action
-            android:id="@+id/action_fragment3_info_to_fragment1_3_1_juego"
-            app:destination="@id/fragment1_3_1_juego" />
+            android:id="@+id/action_fragment3_info_to_fragment1_3_juego"
+            app:destination="@id/fragment1_3_juego" />
         <action
             android:id="@+id/action_fragment3_info_to_fragment1_5_juego"
             app:destination="@id/fragment1_5_juego" />
@@ -76,20 +76,20 @@
 
 
     <fragment
-        android:id="@+id/fragment1_3_1_juego"
-        android:name="com.example.didaktikapp.fragments.juegos.Fragment1_3_1_juego"
-        android:label="fragment1_3_1_juego"
-        tools:layout="@layout/fragment1_3_1_juego" >
+        android:id="@+id/fragment1_3_juego"
+        android:name="com.example.didaktikapp.fragments.juegos.Fragment1_3_juego"
+        android:label="fragment1_3_juego"
+        tools:layout="@layout/fragment1_3_juego" >
 
         <action
-            android:id="@+id/action_fragment1_3_1_juego_to_fragment2_3_1_minijuego"
-            app:destination="@id/fragment2_3_1_minijuego" />
+            android:id="@+id/action_fragment1_3_juego_to_fragment2_3_minijuego"
+            app:destination="@id/fragment2_3_minijuego" />
         <action
-            android:id="@+id/action_fragment1_3_1_juego_to_fragment4_menu"
+            android:id="@+id/action_fragment1_3_juego_to_fragment4_menu"
             app:destination="@id/fragment4_menu" />
         <action
-            android:id="@+id/action_fragment1_3_1_juego_self"
-            app:destination="@id/fragment1_3_1_juego" />
+            android:id="@+id/action_fragment1_3_juego_self"
+            app:destination="@id/fragment1_3_juego" />
     </fragment>
 
     <fragment
@@ -199,16 +199,16 @@
 
 
     <fragment
-        android:id="@+id/fragment2_3_1_minijuego"
-        android:name="com.example.didaktikapp.fragments.minijuegos.Fragment2_3_1_minijuego"
-        android:label="fragment2_3_1_minijuego"
-        tools:layout="@layout/fragment2_3_1_minijuego" >
+        android:id="@+id/fragment2_3_minijuego"
+        android:name="com.example.didaktikapp.fragments.minijuegos.Fragment2_3_minijuego"
+        android:label="fragment2_3_minijuego"
+        tools:layout="@layout/fragment2_3_minijuego" >
         <action
-            android:id="@+id/action_fragment2_3_1_minijuego_to_fragment4_menu"
+            android:id="@+id/action_fragment2_3_minijuego_to_fragment4_menu"
             app:destination="@id/fragment4_menu" />
         <action
-            android:id="@+id/action_fragment2_3_1_minijuego_self"
-            app:destination="@id/fragment2_3_1_minijuego" />
+            android:id="@+id/action_fragment2_3_minijuego_self"
+            app:destination="@id/fragment2_3_minijuego" />
     </fragment>
 
     <fragment

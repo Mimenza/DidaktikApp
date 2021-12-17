@@ -66,9 +66,8 @@ class Activity7_1_Juego7_Results : AppCompatActivity() {
                 ocultaracciones()
                 audio.stop()
             }
-            //Ocultamos boton intentar de nuevo
 
-            btn7_1_saiatuberriro.isVisible=false
+
         }else{
             //Audio error
             runBlocking() {

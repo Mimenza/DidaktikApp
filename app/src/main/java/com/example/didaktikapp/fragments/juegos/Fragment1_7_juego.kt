@@ -22,10 +22,12 @@ import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.Constantsjuego7
 import com.example.didaktikapp.Model.Preguntasjuego7
 import com.example.didaktikapp.R
+
+import com.example.didaktikapp.activities.Activity6_Site
 import com.example.didaktikapp.activities.Activity7_1_Juego7_Results
-import com.example.didaktikapp.activities.Activity7_Juego2_Results
 import kotlinx.android.synthetic.main.fragment1_1_juego.*
 import kotlinx.android.synthetic.main.fragment1_2_juego.*
+
 import kotlinx.android.synthetic.main.fragment1_7_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -92,10 +94,16 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
 
 
         button.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment1_2_juego_to_fragment2_2_minijuego)
+            Navigation.findNavController(view).navigate(R.id.action_fragment1_7_juego_to_fragment2_7_minijuego)
         }
         ajustes.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment1_2_juego_to_fragment4_menu)
+
+            Navigation.findNavController(view).navigate(R.id.action_fragment1_7_juego_to_fragment4_menu)
+
+
+                (activity as Activity6_Site?)?.menuCheck()
+
+
         }
 
 
@@ -380,7 +388,7 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Fragment1_2_juego().apply {
+            Fragment1_7_juego().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

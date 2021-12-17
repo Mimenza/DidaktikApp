@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ImageButton
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
+import com.example.didaktikapp.activities.Activity6_Site
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -47,7 +48,10 @@ class Fragment1_4_juego : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_fragment1_4_juego_to_fragment2_4_minijuego)
         }
         ajustes.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment1_4_juego_to_fragment4_menu)
+
+                (activity as Activity6_Site?)?.menuCheck()
+
+
         }
         return view
     }

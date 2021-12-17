@@ -24,6 +24,7 @@ import kotlinx.android.synthetic.main.fragment1_6_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import android.widget.EditText
+import com.example.didaktikapp.activities.Activity6_Site
 import kotlinx.android.synthetic.main.fragment1_1_juego.*
 
 
@@ -72,8 +73,11 @@ class Fragment1_6_juego : Fragment() {
                 .navigate(R.id.action_fragment1_6_juego_to_fragment2_6_minijuego)
         }
         ajustes.setOnClickListener() {
-            Navigation.findNavController(view)
-                .navigate(R.id.action_fragment1_6_juego_to_fragment4_menu)
+            if (audio?.isPlaying == false){
+
+                (activity as Activity6_Site?)?.menuCheck()
+
+            }
         }
         buttonSonido.setOnClickListener() {
            animacionVolumen(view)

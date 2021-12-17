@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import com.example.didaktikapp.R
 import com.example.didaktikapp.fragments.Fragment4_menu2
 import com.example.didaktikapp.fragments.Fragment5_ajustes
+import com.example.didaktikapp.fragments.Fragment6_ayuda
 import kotlinx.android.synthetic.main.activity6_site.*
 
 
@@ -17,6 +18,7 @@ class Activity6_Site : AppCompatActivity() {
     var menuShowing: Boolean = false
     var ajustesShowing: Boolean = false
 
+    private var ayudaFirst:Boolean = true
     private var menuFirst:Boolean = true
     private var ajustesFirst:Boolean = true
 
@@ -39,17 +41,10 @@ class Activity6_Site : AppCompatActivity() {
         var editor = sharedPreferences.edit()
         editor.putString("numero", newInt.toString()).apply()
 
-        println("NUMERO "+newInt)
+
 
     }
 
-    override fun onResume() {
-
-        cerrarAjustes()
-        cerrarMenu()
-
-        super.onResume()
-    }
 
     fun menuCheck(){
 
@@ -61,6 +56,16 @@ class Activity6_Site : AppCompatActivity() {
         }
     }
 
+    fun ayudaCheck(){
+
+        if(ayudaFirst){
+            addAyuda()
+            ayudaFirst = false
+        }else{
+            showAyuda()
+        }
+    }
+
     fun ajustesCheck(){
 
         if(ajustesFirst){
@@ -69,6 +74,26 @@ class Activity6_Site : AppCompatActivity() {
         }else{
             showAjustes()
         }
+    }
+
+    fun addAyuda() {
+        //añadimos el fragment de ajustes
+
+        ayudaFirst = true
+        fragment = "Fragment6"
+        supportFragmentManager.beginTransaction().add(R.id.framelayout6_ayuda, Fragment6_ayuda()!!)
+            .addToBackStack(null).commit()
+        showAyuda()
+    }
+
+    fun showAyuda() {
+        //enseñamos el container del fragment de ajutes
+
+        ayudaFirst = true
+        fragment = "Fragment6"
+        framelayout6_ayuda.isVisible=true
+
+        /* supportFragmentManager.beginTransaction().show(Fragment5_ajustes()!!).commit()*/
     }
 
     fun addMenu() {
@@ -122,6 +147,16 @@ class Activity6_Site : AppCompatActivity() {
 
     }
 
+    private fun cerrarAyuda() {
+        //escondemos el container del fragment del menu
+
+        framelayout6_ayuda.isVisible=false
+        /*supportFragmentManager.beginTransaction().hide(Fragment5_ajustes()!!).commit();*/
+        fragment = "Fragment4"
+        ajustesShowing= false
+
+    }
+
     private fun cerrarMenu() {
         //escondemos el container del fragment de ajustes
 
@@ -133,17 +168,18 @@ class Activity6_Site : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-
-        if(fragment == "Fragment5"){
-            cerrarAjustes()
-        }
-
-        else if (fragment == "Fragment4") {
-            cerrarMenu()
-        }
-
-        else {
-            super.onBackPressed()
+        println(fragment)
+        when (fragment) {
+            "Fragment4" -> { cerrarMenu()
+                println("cerrar menu")}
+            "Fragment5" -> { cerrarAjustes()
+                println("cerrar ajustes")}
+            "Fragment6" -> {  cerrarAyuda()
+                println("cerrar ayuda")}
+            else -> {
+                super.onBackPressed()
+                println("atras")
+            }
         }
     }
 

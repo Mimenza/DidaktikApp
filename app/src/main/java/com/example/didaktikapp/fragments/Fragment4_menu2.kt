@@ -57,7 +57,7 @@ class Fragment4_menu2 : Fragment() {
         }
 
         ayuda.setOnClickListener{
-
+            (activity as Activity6_Site)?.ayudaCheck()
         }
 
         //Navegacion a activities

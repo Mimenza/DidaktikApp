@@ -118,6 +118,7 @@ class Fragment1_5_juego : Fragment() {
         btnVerVideo.setOnClickListener() {
 
             verVideo()
+            audio?.stop()
 
         }
 

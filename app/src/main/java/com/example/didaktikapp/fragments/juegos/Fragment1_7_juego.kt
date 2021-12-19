@@ -62,6 +62,7 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
     private lateinit var btnSiguiente : Button
     private  var mCorrectAnswers: Int = 0
     private lateinit var vistaanimada:TranslateAnimation
+    private var audio: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,7 +83,6 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         //Inicializar vistas
         val button:Button = view.findViewById(R.id.btnf1_7siguiente)
         val ajustes:ImageButton = view.findViewById(R.id.btnf1_7_ajustes)
-        var audio: MediaPlayer
 
         progressBar = view.findViewById(R.id.custom_progressBar)
         txtProgressBar =view.findViewById(R.id.txtv1_7_progreessbar)
@@ -127,14 +127,12 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
 
     fun audiotutorial(view:View){
 
-
-        var audio: MediaPlayer
         //Audio juego 7 tutorial
         runBlocking() {
             launch {
                 audio = MediaPlayer.create(context, R.raw.juego7audiotutorial)
-                audio.start()
-                audio.setOnCompletionListener {
+                audio?.start()
+                audio?.setOnCompletionListener {
 
                     Handler().postDelayed({
                         if (getView() != null) {
@@ -382,6 +380,22 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
             requireContext(), R.drawable.juego2_selected_option_border_bg)
 
     }
+
+    override fun onDestroy() {
+        audio?.stop()
+        super.onDestroy()
+    }
+
+    override fun onPause() {
+        audio?.pause()
+        super.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        audio?.start()
+    }
+
     companion object {
         /**
          * Use this factory method to create a new instance of

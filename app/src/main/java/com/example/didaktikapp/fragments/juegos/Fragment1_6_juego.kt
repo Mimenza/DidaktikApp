@@ -605,14 +605,18 @@ class Fragment1_6_juego : Fragment() {
             }
     }
 
+    override fun onDestroy() {
+        audio?.stop()
+        super.onDestroy()
+    }
+
     override fun onPause() {
-        super.onPause()
         audio?.pause()
+        super.onPause()
     }
 
     override fun onResume() {
         super.onResume()
-        // TODO: preguntar si esta el audio empezado
         audio?.start()
     }
 }

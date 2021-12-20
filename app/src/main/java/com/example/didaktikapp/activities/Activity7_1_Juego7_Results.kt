@@ -8,14 +8,11 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 
-import com.example.didaktikapp.Model.Constantsjuego2
 import com.example.didaktikapp.Model.Constantsjuego7
 import com.example.didaktikapp.R
 
 
-import com.example.didaktikapp.fragments.juegos.Fragment1_2_juego
 import com.example.didaktikapp.fragments.juegos.Fragment1_7_juego
-import com.example.didaktikapp.fragments.minijuegos.Fragment2_2_minijuego
 import com.example.didaktikapp.fragments.minijuegos.Fragment2_7_minijuego
 import kotlinx.android.synthetic.main.activity7_1_juego7_results.*
 
@@ -104,7 +101,7 @@ class Activity7_1_Juego7_Results : AppCompatActivity() {
         }
         juegoShowing = true
         fragment = Fragment1_7_juego()
-        supportFragmentManager.beginTransaction().add(R.id.framelayoutjuego7results, fragment!!).commit()
+        supportFragmentManager.beginTransaction().add(R.id.framelayout7menu, fragment!!).commit()
 
     }
     fun showMinijuego7(){
@@ -114,7 +111,7 @@ class Activity7_1_Juego7_Results : AppCompatActivity() {
         }
         minijuegoShowing = true
         fragment = Fragment2_7_minijuego()
-        supportFragmentManager.beginTransaction().add(R.id.framelayoutjuego7results, fragment!!).commit()
+        supportFragmentManager.beginTransaction().add(R.id.framelayout7menu, fragment!!).commit()
 
     }
 
@@ -122,7 +119,7 @@ class Activity7_1_Juego7_Results : AppCompatActivity() {
         btn7_1_terminar.isVisible=false
         btn7_1_saiatuberriro.isVisible=false
         txtv7_1_result.isVisible=false
-        txtv7_1_respuesta1.isVisible=false
+        txtv7_1_imagen1.isVisible=false
         txtv7_1_scoreuser.isVisible=false
         btn7_1_saiatuberriro2.isVisible=false
     }

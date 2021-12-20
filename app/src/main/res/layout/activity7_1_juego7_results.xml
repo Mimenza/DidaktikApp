@@ -8,7 +8,14 @@
 
 
     <FrameLayout
-        android:id="@+id/framelayoutjuego7results"
+        android:id="@+id/framelayout7ajustes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/framelayout7menu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,7 +45,7 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:id="@+id/txtv7_1_respuesta1"
+            android:id="@+id/txtv7_1_imagen1"
             android:layout_width="330dp"
             android:layout_height="283dp"
             android:src="@drawable/confeti_fin_juegos" />

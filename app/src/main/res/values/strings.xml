@@ -182,4 +182,5 @@ galderak egiteko aukera izango baitute.</string>
     <!--ADMIN DIALOG -->
     <string name="administratorAccess">Administratzaile sarbidea</string>
     <string name="administratorAccessText">Pasahitza sartu administratzaile pribilegioak lortzeko</string>
+    <string name="juego3audiotutorialtxt">Plaza honetan “Festarik festa” jolasera jolastu beharko duzue. Lehenik eta behin puzzle bat egin beharko duzue. Puzzlea bukatzean, irudi bat sortzea lortuko duzue. Animo!</string>
 </resources>

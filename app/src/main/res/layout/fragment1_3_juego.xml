@@ -14,16 +14,24 @@
         android:layout_height="match_parent">
 
         <Button
+            android:id="@+id/btnf1_3_repetir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/repetir"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
             android:id="@+id/btnf1_3_siguiente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:text="SiGUIENTE"
+            android:layout_marginEnd="52dp"
+            android:layout_marginBottom="24dp"
+            android:text="@string/siguiente"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintVertical_bias="0.976" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <ImageButton
             android:id="@+id/btnf1_3_ajustes"
@@ -44,72 +52,72 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="220dp"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:orientation="vertical">
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
                 android:gravity="center_vertical"
                 android:text="@string/juego3_pregunta1"
-                android:layout_marginTop="20dp"
-                android:layout_marginStart="20dp"
                 android:textSize="18sp" />
 
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_horizontal|center_vertical">
+                android:gravity="center_horizontal|center_vertical"
+                android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/pregunta1_respuesta_1"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:text="Bai"
                     android:layout_marginEnd="40dp"
-                    android:buttonTint="@color/primary"/>
+                    android:buttonTint="@color/primary"
+                    android:text="Bai" />
 
                 <RadioButton
                     android:id="@+id/pregunta1_respuesta_2"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:text="Ez"
                     android:layout_marginStart="40dp"
-                    android:buttonTint="@color/primary"/>
+                    android:buttonTint="@color/primary"
+                    android:text="Ez" />
             </RadioGroup>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginStart="20dp"
                 android:gravity="center_vertical"
                 android:text="@string/juego3_pregunta2"
-                android:layout_marginStart="20dp"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/juego3_pregunta2_respuesta1"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/smoothGray"
                 android:hint="Erantzun"
                 android:padding="10dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginTop="5dp"
-                android:textSize="18sp"
-                android:background="@color/smoothGray"/>
+                android:textSize="18sp" />
 
             <Button
                 android:id="@+id/juego3_btnComprobar"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="comprobar"
                 android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginTop="10dp"/>
+                android:text="comprobar" />
 
         </LinearLayout>
 
@@ -118,13 +126,13 @@
             android:layout_height="310dp"
             android:layout_marginTop="184dp"
             android:orientation="vertical"
+            android:weightSum="1"
             app:layout_constraintBottom_toTopOf="@+id/btnf1_3_siguiente"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            android:weightSum="1">
+            app:layout_constraintVertical_bias="0.0">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -135,34 +143,34 @@
                 <ImageView
                     android:id="@+id/puzzle_pieza_d_1"
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/puzzle_0000_capa_1"/>
+                    android:src="@drawable/puzzle_0000_capa_1" />
 
                 <ImageView
                     android:id="@+id/puzzle_pieza_d_2"
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/puzzle_0001_capa_2"/>
+                    android:src="@drawable/puzzle_0001_capa_2" />
 
                 <ImageView
                     android:id="@+id/puzzle_pieza_d_3"
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/puzzle_0002_capa_3"/>
+                    android:src="@drawable/puzzle_0002_capa_3" />
 
                 <ImageView
                     android:id="@+id/puzzle_pieza_d_4"
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:scaleType="fitXY"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/puzzle_0003_capa_4"/>
+                    android:src="@drawable/puzzle_0003_capa_4" />
 
             </LinearLayout>
 
@@ -175,34 +183,34 @@
                 <ImageView
                     android:id="@+id/puzzle_pieza_d_5"
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.25"
                     android:scaleType="fitXY"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/puzzle_0004_capa_5"/>
+                    android:src="@drawable/puzzle_0004_capa_5" />
 
                 <ImageView
                     android:id="@+id/puzzle_pieza_d_6"
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.25"
                     android:scaleType="fitXY"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/puzzle_0005_capa_6"/>
+                    android:src="@drawable/puzzle_0005_capa_6" />
 
                 <ImageView
                     android:id="@+id/puzzle_pieza_d_7"
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.25"
                     android:scaleType="fitXY"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/puzzle_0006_capa_7"/>
+                    android:src="@drawable/puzzle_0006_capa_7" />
 
                 <ImageView
                     android:id="@+id/puzzle_pieza_d_8"
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.25"
                     android:scaleType="fitXY"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/puzzle_0007_capa_8"/>
+                    android:src="@drawable/puzzle_0007_capa_8" />
 
             </LinearLayout>
 
@@ -215,34 +223,34 @@
                 <ImageView
                     android:id="@+id/puzzle_pieza_d_9"
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.25"
                     android:scaleType="fitXY"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/puzzle_0008_capa_9"/>
+                    android:src="@drawable/puzzle_0008_capa_9" />
 
                 <ImageView
                     android:id="@+id/puzzle_pieza_d_10"
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.25"
                     android:scaleType="fitXY"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/puzzle_0009_capa_10"/>
+                    android:src="@drawable/puzzle_0009_capa_10" />
 
                 <ImageView
                     android:id="@+id/puzzle_pieza_d_11"
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.25"
                     android:scaleType="fitXY"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/puzzle_0010_capa_11"/>
+                    android:src="@drawable/puzzle_0010_capa_11" />
 
                 <ImageView
                     android:id="@+id/puzzle_pieza_d_12"
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="0.25"
                     android:scaleType="fitXY"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/puzzle_0011_capa_12"/>
+                    android:src="@drawable/puzzle_0011_capa_12" />
 
             </LinearLayout>
         </LinearLayout>
@@ -252,100 +260,99 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="fitXY"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/puzzle_0000_capa_1"
             app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/puzzle_0000_capa_1" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/puzzle_pieza_o_2"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="fitXY"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/puzzle_0001_capa_2"
             app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/puzzle_0001_capa_2"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/puzzle_pieza_o_3"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="fitXY"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/puzzle_0002_capa_3"
             app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/puzzle_0002_capa_3"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/puzzle_pieza_o_4"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="fitXY"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/puzzle_0003_capa_4"
             app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/puzzle_0003_capa_4"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/puzzle_pieza_o_5"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="fitXY"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/puzzle_0004_capa_5"
             app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/puzzle_0004_capa_5"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/puzzle_pieza_o_6"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="fitXY"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/puzzle_0005_capa_6"
             app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/puzzle_0005_capa_6"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/puzzle_pieza_o_7"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="fitXY"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/puzzle_0006_capa_7"
             app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/puzzle_0006_capa_7"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/puzzle_pieza_o_8"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="fitXY"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/puzzle_0007_capa_8"
             app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/puzzle_0007_capa_8"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/puzzle_pieza_o_9"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="fitXY"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/puzzle_0008_capa_9"
             app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/puzzle_0008_capa_9"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/puzzle_pieza_o_10"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="fitXY"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/puzzle_0009_capa_10"
             app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/puzzle_0009_capa_10"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/puzzle_pieza_o_11"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="fitXY"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/puzzle_0010_capa_11"
             app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/puzzle_0010_capa_11"/>
-
+            app:layout_constraintTop_toTopOf="parent" />
         <ImageView
             android:id="@+id/puzzle_pieza_o_12"
             android:layout_width="100dp"
@@ -354,6 +361,52 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:src="@drawable/puzzle_0011_capa_12"/>
+
+        <TextView
+            android:id="@+id/txtv1_1fondogris"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#85000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <in.codeshuffle.typewriterview.TypeWriterView
+            android:id="@+id/txtv1_1tutorialjuego1"
+            android:layout_width="327dp"
+            android:layout_height="422dp"
+            android:focusable="true"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.13999999"
+            tools:ignore="MissingClass" />
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/imgv1_1_upelio"
+            android:layout_width="323dp"
+            android:layout_height="316dp"
+            android:src="@drawable/img_upeliosagarra"
+            app:layout_constraintBottom_toBottomOf="@+id/txtv1_1fondogris"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.79" />
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/imgv1_1_upelio2"
+            android:layout_width="323dp"
+            android:layout_height="316dp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtv1_1fondogris"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.79" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

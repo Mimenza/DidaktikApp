@@ -1,12 +1,16 @@
 package com.example.didaktikapp.fragments.juegos
 
+import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
+import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -15,11 +19,17 @@ import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
+import android.view.animation.AnimationUtils
+import android.view.animation.TranslateAnimation
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import androidx.core.view.isVisible
 import com.example.didaktikapp.Model.DragnDropImage
 import com.example.didaktikapp.activities.Activity6_Site
 import com.example.didaktikapp.activities.DbHandler
+import kotlinx.android.synthetic.main.fragment1_1_juego.*
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -38,8 +48,10 @@ class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var vistaAnimada: TranslateAnimation
     private lateinit var globalView: View
     private lateinit var button: Button
+    private lateinit var buttonRepetir: Button
     private lateinit var preguntasLayout: LinearLayout
     private var audio: MediaPlayer? = null
     var totalWidth: Int = 0
@@ -80,7 +92,9 @@ class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
         val view = inflater.inflate(R.layout.fragment1_3_juego, container, false)
         globalView = view
         button = view.findViewById(R.id.btnf1_3_siguiente)
+        buttonRepetir = view.findViewById(R.id.btnf1_3_repetir)
         button.visibility = View.GONE
+        buttonRepetir.visibility = View.GONE
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_3_ajustes)
         val btnComprobarRespuesta: Button = globalView.findViewById(R.id.juego3_btnComprobar)
         preguntasLayout = view.findViewById(R.id.juego3_preguntas_layout)
@@ -108,12 +122,45 @@ class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
                 iniciarPreguntas()
             }
         }
+
+        buttonRepetir.setOnClickListener(){
+            Navigation.findNavController(view).navigate(R.id.action_fragment1_3_juego_self)
+        }
+
         ajustes.setOnClickListener(){
 
                         (activity as Activity6_Site?)?.menuCheck()
 
         }
+
+        //Animacion manzana al iniciar el juego
+        starAnimationfun(view)
+
+        //Typewriter juego 1 tutorial
+        Handler(Looper.getMainLooper()).postDelayed({
+            if (getView() != null) {
+                typewriter(view)
+            }
+        }, 2000)
+
+        runBlocking {
+            launch {
+                audio = MediaPlayer.create(context, R.raw.juego3audiotutorial)
+                audio?.start()
+                audio?.setOnCompletionListener {
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        if (getView() != null) {
+                            //Llama a la funcion para la animacion de salida cuando el audio se termina
+                            exitAnimationfun(view)
+                        }
+                    }, 1000)
+                }
+            }
+        }
+
+
         return view
+
     }
 
     override fun responseDbUserUpdated(responde: Boolean) {
@@ -181,6 +228,66 @@ class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
         true
     }
 
+    private fun typewriter(view: View) {
+        val typeWriterView = view.findViewById(R.id.txtv1_1tutorialjuego1) as TypeWriterView
+        typeWriterView.setWithMusic(false)
+        typeWriterView.animateText(resources.getString(R.string.juego3audiotutorialtxt))
+        typeWriterView.setDelay(65)
+    }
+
+    private fun starAnimationfun(view: View) {
+        //Animacion fondo gris
+        val txtAnimacion = view.findViewById(R.id.txtv1_1fondogris) as TextView
+        val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade)
+        txtAnimacion.startAnimation(aniFade)
+
+        //Animacion entrada upelio
+        vistaAnimada = TranslateAnimation(-1000f, 0f, 0f, 0f)
+        vistaAnimada.duration = 2000
+        val upelio = view.findViewById(R.id.imgv1_1_upelio) as ImageView
+        upelio.startAnimation(vistaAnimada)
+
+        //llamamos a la animacion para animar a upelio
+        Handler(Looper.getMainLooper()).postDelayed({
+            if (getView() != null) {
+                upelio.isVisible = false
+                talkAnimationfun(view)
+            }
+        }, 2000)
+    }
+
+    private fun exitAnimationfun(view: View) {
+        val upelioAnimado = view.findViewById(R.id.imgv1_1_upelio2) as ImageView
+        upelioAnimado.isVisible = false
+
+        //Animacion upelio salido
+        vistaAnimada = TranslateAnimation(0f, 1000f, 0f, 0f)
+        vistaAnimada.duration = 2000
+
+        //VistaAnimada.fillAfter = true
+        val upelio = view.findViewById(R.id.imgv1_1_upelio) as ImageView
+        upelio.startAnimation(vistaAnimada)
+
+        //Animacion fondo gris
+        Handler(Looper.getMainLooper()).postDelayed({
+            if (getView() != null) {
+                val txtAnimacion = view.findViewById(R.id.txtv1_1fondogris) as TextView
+                val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+                txtAnimacion.startAnimation(aniFade)
+                txtv1_1tutorialjuego1.startAnimation(aniFade)
+                txtv1_1tutorialjuego1.isVisible = false
+                txtAnimacion.isVisible = false
+            }
+        }, 1000)
+    }
+
+    private fun talkAnimationfun(view: View) {
+        val upelio = view.findViewById(R.id.imgv1_1_upelio2) as ImageView
+        upelio.setBackgroundResource(R.drawable.animacion_manzana)
+        val ani = upelio.background as AnimationDrawable
+        ani.start()
+    }
+
     private fun iniciarPreguntas() {
         button.visibility = View.GONE
         puzzleShowing = true
@@ -202,6 +309,7 @@ class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
             radio2.isEnabled = false
             btnComprobarRespuesta.visibility = View.GONE
             button.visibility = View.VISIBLE
+            buttonRepetir.visibility = View.VISIBLE
             Toast.makeText(requireContext(), "Zorionak, proba gainditu duzu !", Toast.LENGTH_SHORT).show()
             hideKeyboard()
         } else {

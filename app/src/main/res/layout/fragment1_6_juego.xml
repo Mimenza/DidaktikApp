@@ -100,7 +100,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.59" />
+            app:layout_constraintVertical_bias="0.45" />
 
         <TextView
             android:id="@+id/txtv1_6_input1"
@@ -213,24 +213,24 @@
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
             android:id="@+id/imgv1_6_upelio"
-            android:layout_width="239dp"
-            android:layout_height="196dp"
+            android:layout_width="323dp"
+            android:layout_height="316dp"
             android:src="@drawable/img_upeliosagarra"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.79" />
+            app:layout_constraintVertical_bias="0.89" />
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
             android:id="@+id/imgv1_6_upelio2"
-            android:layout_width="192dp"
-            android:layout_height="194dp"
+            android:layout_width="323dp"
+            android:layout_height="316dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.79" />
+            app:layout_constraintVertical_bias="0.89" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

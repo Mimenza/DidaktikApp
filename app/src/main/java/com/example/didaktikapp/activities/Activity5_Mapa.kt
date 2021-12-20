@@ -277,19 +277,19 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.queryR
         addMarkers()
 
         //Añadir Area para mostrar al usuario si algun punto esta cerca de su radio o no
-        var myCircle: Circle = mMap.addCircle(
+        /*var myCircle: Circle = mMap.addCircle(
             CircleOptions()
             .center(LatLng(43.285576, -1.941156))
             .radius(minimumRadius.toDouble())
             .strokeColor(getResources().getColor(R.color.white))
             .strokeWidth(2f)
-            .fillColor(0x70ff0000))
+            .fillColor(0x70ff0000))*/
 
         //Variable para comprobar si la primera animacion se ha realiado correctamente
         var firstFocusAnimation = false
         mMap.setOnMyLocationChangeListener {
             //Metodos para establecer la nueva posicion del radio que rodea la ubicacion del usuario
-            myCircle.setCenter(LatLng(it.latitude, it.longitude))
+            //myCircle.setCenter(LatLng(it.latitude, it.longitude))
             myCurrentPosition = LatLng(it.latitude, it.longitude)
             if (!firstFocusAnimation) {
                 //Condicion para focalizar al usuario por primera vez

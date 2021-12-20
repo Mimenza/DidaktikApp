@@ -157,7 +157,7 @@ class Fragment1_5_juego : Fragment() {
         //Audio juego 5
         runBlocking() {
             launch {
-                audio = MediaPlayer.create(context, R.raw.juego6audio)
+                audio = MediaPlayer.create(context, R.raw.juego5audiotutorial)
                 audio?.start()
 
             }

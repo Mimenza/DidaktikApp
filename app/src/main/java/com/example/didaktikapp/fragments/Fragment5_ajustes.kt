@@ -99,7 +99,7 @@ class Fragment5_ajustes : Fragment() {
                           AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                           MyPreferences(requireContext()).darkMode = 0
                           ( requireContext() as  AppCompatActivity).delegate.applyDayNight()
-
+                          getActivity()?.onBackPressed();
                           dialog.dismiss()
                       }
                       1 -> {
@@ -108,7 +108,7 @@ class Fragment5_ajustes : Fragment() {
                           ( requireContext() as  AppCompatActivity).delegate.applyDayNight()
 
 
-
+                          getActivity()?.onBackPressed();
                           dialog.dismiss()
                       }
 

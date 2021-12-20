@@ -33,6 +33,7 @@ class Fragment2_2_minijuego : Fragment() {
     private var param2: String? = null
     private var fragment :Fragment? = null
     var menuShowing: Boolean = false
+    var ajustesShowing: Boolean = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,7 +89,28 @@ class Fragment2_2_minijuego : Fragment() {
         }
 
         ajustes.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment2_2_minijuego_to_fragment4_menu)
+            showAjustes()
+            button.visibility = View.GONE
+
+            if (btnterminar != null) {
+                btnterminar.isVisible=false
+            }
+            if (btnRetry != null) {
+                btnRetry.isVisible=false
+            }
+            if (txtResult != null) {
+                txtResult.isVisible=false
+            }
+            if (imgTrofeo != null) {
+                imgTrofeo.isVisible=false
+            }
+            if (scoreuser != null) {
+                scoreuser.isVisible=false
+            }
+            if (txtvminijuego != null) {
+                txtvminijuego.isVisible=false
+            }
+
         }
         return view
     }
@@ -101,10 +123,23 @@ class Fragment2_2_minijuego : Fragment() {
         }
         menuShowing = true
         fragment = Fragment4_menu()
-        fragManager?.beginTransaction()?.add(R.id.framelayoutjuego2results, fragment!!)?.commit()
+        fragManager?.beginTransaction()?.add(R.id.framelayout2menu, fragment!!)?.commit()
 
 
     }
+    fun showAjustes(){
+        val fragManager:FragmentManager? = fragmentManager
+
+        if (ajustesShowing) {
+            return
+        }
+        ajustesShowing = true
+        fragment = Fragment5_ajustes()
+        fragManager?.beginTransaction()?.add(R.id.framelayout2ajustes, fragment!!)?.commit()
+
+
+    }
+
 
     companion object {
         /**

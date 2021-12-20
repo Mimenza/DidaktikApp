@@ -103,7 +103,7 @@ class Activity7_Juego2_Results : AppCompatActivity() {
         }
         juegoShowing = true
         fragment = Fragment1_2_juego()
-        supportFragmentManager.beginTransaction().add(R.id.framelayoutjuego2results, fragment!!).commit()
+        supportFragmentManager.beginTransaction().add(R.id.framelayout2menu, fragment!!).commit()
 
     }
     fun showMinijuego2(){
@@ -113,7 +113,7 @@ class Activity7_Juego2_Results : AppCompatActivity() {
         }
         minijuegoShowing = true
         fragment = Fragment2_2_minijuego()
-        supportFragmentManager.beginTransaction().add(R.id.framelayoutjuego2results, fragment!!).commit()
+        supportFragmentManager.beginTransaction().add(R.id.framelayout2menu, fragment!!).commit()
 
     }
 

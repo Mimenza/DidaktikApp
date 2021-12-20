@@ -130,7 +130,7 @@
             android:layout_height="wrap_content"
             android:minHeight="48dp"
             android:src="@drawable/ic_volumen1"
-            android:visibility="invisible"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -138,6 +138,43 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.093"
             tools:ignore="SpeakableTextPresentCheck" />
+
+        <ImageView
+            android:id="@+id/juego6playpause"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="64dp"
+            android:src="@drawable/playbutton"
+            app:layout_constraintEnd_toStartOf="@+id/juego6forward"
+            app:layout_constraintStart_toEndOf="@+id/juego6backward"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/primary"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/juego6backward"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="64dp"
+            android:scaleX="-1"
+            android:src="@drawable/forbackward"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/primary"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/juego6forward"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="130dp"
+            android:src="@drawable/forbackward"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/primary"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/txtv1_6_input3"

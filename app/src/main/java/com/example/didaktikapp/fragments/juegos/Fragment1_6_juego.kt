@@ -48,6 +48,13 @@ class Fragment1_6_juego : Fragment() {
     private var sonido = false
     private var audio: MediaPlayer? = null
     private var firstTime: Boolean = true
+    private lateinit var globalView: View
+
+    private lateinit var playPauseButton: ImageView
+    private lateinit var backwardButton: ImageView
+    private lateinit var forwardButton: ImageView
+    private var audioState: Boolean = false
+    private var testAudioTemp: MediaPlayer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,10 +71,74 @@ class Fragment1_6_juego : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment1_6_juego, container, false)
+        globalView = view
         val btnsiguiente: Button = view.findViewById(R.id.btnf1_6siguienteJuego)
         val btnrepertir : Button = view.findViewById(R.id.btnf1_6repetirJuego)
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_6_ajustes)
         val buttonSonido: ImageButton = view.findViewById(R.id.btnf1_6_sonido)
+
+        playPauseButton = view.findViewById(R.id.juego6playpause)
+        backwardButton = view.findViewById(R.id.juego6backward)
+        forwardButton = view.findViewById(R.id.juego6forward)
+
+        playPauseButton.setOnClickListener() {
+            if (testAudioTemp == null) {
+                testAudioTemp = MediaPlayer.create(context, R.raw.bertsoa)
+                testAudioTemp?.setVolume(0.5F, 0.5F)
+                testAudioTemp?.start()
+                audioState = true
+                playPauseButton.setImageResource(R.drawable.pausebutton)
+                testAudioTemp?.setOnCompletionListener {
+                    audioState = false
+                    testAudioTemp = null
+                    playPauseButton.setImageResource(R.drawable.playbutton)
+                }
+            } else {
+                if (!audioState) {
+                    testAudioTemp?.start()
+                    audioState = true
+                    playPauseButton.setImageResource(R.drawable.pausebutton)
+                } else {
+                    audioState = false
+                    playPauseButton.setImageResource(R.drawable.playbutton)
+                    testAudioTemp?.pause()
+                    testAudioTemp?.currentPosition
+                    testAudioTemp?.duration
+                }
+            }
+
+        }
+
+        var forbackwardTime: Int = 5000 // 5 segundos
+
+        forwardButton.setOnClickListener() {
+            if (testAudioTemp != null) {
+                var bertsoAudioDuration: Int? = testAudioTemp?.duration
+                var currentAudioPosition: Int? = testAudioTemp?.currentPosition
+                var newPosition: Int? = (currentAudioPosition!! + forbackwardTime)
+                if (newPosition!! < bertsoAudioDuration!!) {
+                    testAudioTemp?.pause()
+                    testAudioTemp?.seekTo(newPosition)
+                    testAudioTemp?.start()
+                }
+            }
+        }
+
+        backwardButton.setOnClickListener() {
+            if (testAudioTemp != null) {
+                var bertsoAudioDuration: Int? = testAudioTemp?.duration
+                var currentAudioPosition: Int? = testAudioTemp?.currentPosition
+                var newPosition: Int? = (currentAudioPosition!! - forbackwardTime)
+                testAudioTemp?.pause()
+                if (newPosition!! > 0) {
+                    testAudioTemp?.seekTo(newPosition)
+                } else {
+                    testAudioTemp?.seekTo(0)
+                }
+                testAudioTemp?.start()
+            }
+        }
+
 
         btnsiguiente.setOnClickListener() {
             Navigation.findNavController(view)
@@ -285,6 +356,12 @@ class Fragment1_6_juego : Fragment() {
         return view
     }
 
+    private fun makeBertsoControlVisible() {
+        playPauseButton.visibility = View.VISIBLE
+        backwardButton.visibility = View.VISIBLE
+        forwardButton.visibility = View.VISIBLE
+    }
+
     private fun checkGameStatus(
         respuesta1: Boolean,
         respuesta2: Boolean,
@@ -435,7 +512,7 @@ class Fragment1_6_juego : Fragment() {
                     txtv1_6_volumen.isVisible = false
 
                     if(firstTime){
-                    startAudio2(view)
+                        startAudio2(view)
                     }else{
                         //difuminado fondo gris y las letras
 
@@ -557,6 +634,7 @@ class Fragment1_6_juego : Fragment() {
                 val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
                 txtAnimacion.startAnimation(aniFade)
                 txtAnimacion.isVisible = false
+                makeBertsoControlVisible()
             }
         }, 1000)
 
@@ -607,16 +685,19 @@ class Fragment1_6_juego : Fragment() {
 
     override fun onDestroy() {
         audio?.stop()
+        testAudioTemp?.stop()
         super.onDestroy()
     }
 
     override fun onPause() {
         audio?.pause()
+        testAudioTemp?.pause()
         super.onPause()
     }
 
     override fun onResume() {
         super.onResume()
         audio?.start()
+        testAudioTemp?.start()
     }
 }

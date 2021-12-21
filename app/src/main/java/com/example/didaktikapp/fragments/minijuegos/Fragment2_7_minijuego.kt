@@ -126,6 +126,7 @@ class Fragment2_7_minijuego : Fragment() {
 
 
     }
+
     fun showAjustes(){
         val fragManager:FragmentManager? = fragmentManager
 
@@ -135,7 +136,6 @@ class Fragment2_7_minijuego : Fragment() {
         ajustesShowing = true
         fragment = Fragment5_ajustes()
         fragManager?.beginTransaction()?.add(R.id.framelayout7ajustes, fragment!!)?.commit()
-
 
     }
  

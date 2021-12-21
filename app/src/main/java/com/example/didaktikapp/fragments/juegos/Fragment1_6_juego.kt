@@ -580,7 +580,7 @@ class Fragment1_6_juego : Fragment() {
                         //cuando el audio se termine escondemos el texto y sacamos el bertso y los inputs
                         exitAnimationfun(view)
 
-                        btnVolumen.isVisible = true
+                        //btnVolumen.isVisible = true
                     }
                 }
                 typewriter(view)

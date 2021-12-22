@@ -35,6 +35,7 @@ import kotlinx.android.synthetic.main.activity5_mapa.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import android.view.animation.Animation
+import androidx.appcompat.app.AppCompatDelegate
 import kotlinx.android.synthetic.main.activity1_principal.*
 
 
@@ -73,17 +74,20 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.queryR
 
         fusedLocation = LocationServices.getFusedLocationProviderClient(this)
 
-        if (DbHandler.getUser() != null) {
-            if (DbHandler.getUser()!!.ultima_puntuacion != null) {
-                lastUserPoint = DbHandler.getUser()!!.ultima_puntuacion!!
-            }
-            if(DbHandler.getUser()!!.nombre!=null){
-                userName=DbHandler.getUser()!!.nombre!!
-            }
-            if(DbHandler.getUser()!!.puntuacion!=null){
-                puntuacion=DbHandler.getUser()!!.puntuacion!!
-            }
-        }
+
+        //Shared preferences tema oscuro fin
+
+        /* if (DbHandler.getUser() != null) {
+             if (DbHandler.getUser()!!.ultima_puntuacion != null) {
+                 lastUserPoint = DbHandler.getUser()!!.ultima_puntuacion!!
+             }
+             if(DbHandler.getUser()!!.nombre!=null){
+                 userName=DbHandler.getUser()!!.nombre!!
+             }
+             if(DbHandler.getUser()!!.puntuacion!=null){
+                 puntuacion=DbHandler.getUser()!!.puntuacion!!
+             }
+         }*/
 
         //Metemos los datos del usuario en el mapa
 
@@ -260,7 +264,17 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.queryR
         mMap.isMyLocationEnabled = true
         mMap.uiSettings.isZoomControlsEnabled = true
         mMap.uiSettings.isCompassEnabled = true
-        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID)
+
+        //Shared preferences tema oscuro
+        val sharedPreferences = getSharedPreferences("com.example.didaktikapp_preferences", 0)
+        val numero:Int = sharedPreferences.getInt("io.github.manuelernesto.DARK_STATUS", 0)
+        if (numero==1){
+
+            mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_in_night));
+        }else{
+            mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID)
+        }
+
 
         //Set min and max zoom
         mMap.setMaxZoomPreference(18F)

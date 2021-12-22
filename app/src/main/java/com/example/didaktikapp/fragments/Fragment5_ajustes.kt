@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat
 
 import com.example.didaktikapp.Model.MyPreferences
 import com.example.didaktikapp.activities.Activity1_Principal
+import com.google.android.gms.maps.SupportMapFragment
 import java.util.*
 
 
@@ -99,6 +100,7 @@ class Fragment5_ajustes : Fragment() {
                           AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                           MyPreferences(requireContext()).darkMode = 0
                           ( requireContext() as  AppCompatActivity).delegate.applyDayNight()
+
                           getActivity()?.onBackPressed();
                           dialog.dismiss()
                       }

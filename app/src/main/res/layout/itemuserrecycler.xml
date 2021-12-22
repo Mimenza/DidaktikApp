@@ -1,41 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardUser"
     android:layout_width="match_parent"
-    android:layout_height="80dp">
+    android:layout_height="25dp"
+    android:layout_marginTop="50dp">
 
-    <TextView
-        android:id="@+id/txtv_puntuacion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="210dp"
-        android:layout_marginTop="20dp"
-        android:text="Puntuacion"
-        android:textAlignment="center"
-        android:textSize="24sp" />
 
-    <TextView
-        android:id="@+id/txtv_nombre"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="105dp"
-        android:layout_marginTop="20dp"
-        android:text="Nombre"
+        android:orientation="vertical"
         android:textAlignment="center"
-        android:textSize="24sp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/txtv_ultimopunto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="260dp"
-        android:layout_marginTop="20dp"
-        android:text="Ultimopunto"
-        android:textAlignment="center"
-        android:textSize="24sp" />
-</androidx.cardview.widget.CardView>
+        <LinearLayout
+            android:layout_width="411dp"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            android:textAlignment="center">
+
+            <TextView
+                android:id="@+id/txtv_nombre"
+                android:layout_width="51dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="30dp"
+                android:layout_weight="1"
+
+                android:text="Nombre"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txtv_puntuacion"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+
+                android:text="Puntuacion"
+
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txtv_ultimopunto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+
+                android:text="Ultimopunto"
+
+                android:textSize="20sp" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

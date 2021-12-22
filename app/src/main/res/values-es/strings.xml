@@ -3,25 +3,26 @@
     <string name="app_name">Sagarra jo</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="lorem">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
-    <string name="btnsaltar">Saltatu</string>
-    <string name="password">pasahitza</string>
-    <string name="cancel">ezeztatu</string>
-    <string name="confirm">baieztatu</string>
+    <string name="btnsaltar">Saltar</string>
+    <string name="password">Contraseña</string>
+    <string name="cancel">Cancelar</string>
+    <string name="confirm">Confirmar</string>
 
     <!--PRINCIPAL-->
     <string name="tituloprincipal">SAGARRA JO</string>
     <string name="nombregrupo">Onandi taldea</string>
-    <string name="btnhasi">Hasi</string>
-    <string name="btncargar">Partida Kargatu</string>
-    <string name="btnnueva">Partida berria</string>
+    <string name="btnhasi">Empezar</string>
+    <string name="btncargar">Cargar partida</string>
+    <string name="btnnueva">Nueva partida</string>
 
     <!--LOGIN-->
-    <string name="inputnombre">Izena</string>
-    <string name="introducirnombre">Zure izena azpian jarri</string>
+    <string name="inputnombre">Nombre</string>
+    <string name="introducirnombre">Pon tu nombre debajo</string>
 
     <!--CARGAR-->
-    <string name="titulocargar">Kargatu zure partida!</string>
-    <string name="text_bienvenida">Kaixo, lagunok! Ni Upelio
+    <string name="titulocargar">¡Carga tu partida!</string>
+    <string name="text_bienvenida">
+Kaixo, lagunok! Ni Upelio
         sagarra naiz, Astigarragako sagarrik ederrena.
         Gaurkoan nirekin batera Astigarraga ezagutuko
         duzue. Gainera, nik sagardo bilakatu nahi dut
@@ -30,27 +31,41 @@
         zehar ibilbide bat egingo dugu, txoko ezberdinak ezagutuz
         eta nire ametsa egi bilakatzeko horietako bakoitzean
         erronka ezberdin bat pasatu beharko duzue. Horretarako
-        oso oso adi egon beharko zarete! Prest zaudete? Goazen!</string>
+        oso oso adi egon beharko zarete! Prest zaudete? Goazen
+</string>
 
     <!--FRAGMENT MENU -->
-    <string name="botonhome">HASIERA</string>
+    <string name="botonhome">HOME</string>
     <string name="botonmapa">MAPA</string>
-    <string name="botonagain">ERREPIKATU</string>
-    <string name="botonnext">HURRENGOA</string>
-    <string name="botonhelp">LAGUNTZA</string>
-    <string name="botonajustes">EZARPENAK</string>
+    <string name="botonagain">REPETIR</string>
+    <string name="botonnext">SIGUIENTE</string>
+    <string name="botonhelp">AYUDA</string>
+    <string name="botonajustes">AJUSTES</string>
 
     <!--FRAGMENT AJUSTES -->
-    <string name="ajustes">EZARPENAK</string>
-    <string name="botonidioma">HIZKUNTZA</string>
-    <string name="botonoscuro">ALDATU GAIA</string>
-    <string name="botonacercade">NORTZUK GARA</string>
+    <string name="ajustes">HASIERA</string>
+    <string name="botonidioma">IDIOMA</string>
+    <string name="botonoscuro">CAMBIAR TEMA</string>
+    <string name="botonacercade">QUIENES SOMOS</string>
 
     <!--FRAGMENT JUEGO1 -->
     <string name="nombre_1juego">JOSI TA JOSI</string>
-    <string name="text_1juego">"Lehenengo geldiunera iritsi gara! Sagardoetxera! Sagardoetxea Euskal Sagardogintzaren eta horren kulturaren museoa da. Naturarekin kontaktuan izanez, hainbat gauza ikas daitezke bertan.  Horretarako, hiru gune ditu. Lehenengoa museo gunea da. Bertan sagarraren historia lantzen da, jokoen, argazkien… bitartez eta sagardo goxo-goxoa nola egiten den ikasten da. Horrez gain, panel informatibo ugari daude, oso interesgarriak gainera! Bigarren gunea sagastia da. Sagastira sagarrondoak ikustera joaten da eta nola ez, sagar ezberdinak ezagutzera. Gainera, bertan hainbat lan egiteko aukera dago!  Azkeneko gunea dastatzea denez, sagardo bilakatu aurretik sagar zukua dastatzeko aukera egoten da. A ze goxoa!! Mmmm!! "</string>
-    <string name="titulo1_juego">"1. JARDUERA: SAGARDOETXEA "</string>
-    <string name="azalpena1_juego1">Gune honetan hainbat sagar mota ezagutuko eta hartuko dituzu.</string>
+    <string name="text_1juego">
+¡Hemos llegado a la primera parada!
+¡A Sagardoetxea!
+En Sagardoetxea, se pueden aprender muchas cosas. Para ello,
+tiene tres zonas. La primera es el espacio museístico, en el que se
+se trabaja la historia a través de juegos, fotografías y sidra.
+ Además, en panel
+hay un montón de informativos, muy interesantes. Segundo
+La zona es el manzanal. A ver manzanos al manzanal
+Acude y cómo no, a conocer diferentes manzanas.
+Además, ¡hay posibilidad de realizar varios trabajos en él!
+Como el último espacio es degustar, antes de que se convierta en sidra
+Degustación de zumo de manzana. ¡Qué delicioso!! Mmmm!!
+ </string>
+    <string name="titulo1_juego">EJERCICIO 1: SAGARDOETXEA </string>
+    <string name="azalpena1_juego1">Gune honetan hainbatsagar mota ezagutuko eta hartuko dituzu.</string>
     <string name="juego1_azalpena2">Gune honetan sagar zukua dastatuko duzu.</string>
     <string name="juego1_azalpena3">Gune honetan sagarraren historia eta sagadoaren prozesuak landuko dituzu.</string>
     <string name="jositajositext">Misioari ekiteko, lehenik eta behin “Josi `ta josi” jolasera jolastu beharko duzue. Horretarako pantailaren alde batean sagardoetxeko 3 guneak eta horien argazkiak agertzen zaizkizue eta beste aldean, bertako zereginak. Beraz, guneak eginkizunekin lotu behar dituzue.</string>
@@ -58,7 +73,7 @@
     <!--FRAGMENT JUEGO2 -->
     <string name="nombre_2juego">EZETZ IGARRI</string>
     <string name="text_2juego">"Begira non gauden! Murgia Jauregian! Gune berezia inondik inora, magiaz eta xarmaz betea dagoelako. Donostiatik kilometro gutxira kokatua dago, Astigarragan. Murgia Jauregia XI. mendean sortu zen eta hasiera batean, Murgia familiaren dorretxea izan zen, jauregi bilakatu aurretik.  Jauregia, muino baten gainean dago, Urumea ibarraren gainean eta barruan historiaz betetako egongelak eta guneak ditu. Duela mende asko, zenbait sute jasan zituen jauregiak eta ondorioz, hainbat aldiz berregin behar izan zuten. Gainera, ikusten duzuen bezala, egungo sarrera nagusiaren gainean Murgia sendiaren armarria dago. Azkenik, gero ikusiko dugun moduan, Astigarragan Sagardo berriaren eguna edo Txotx irekiera ospatzen da eta normalean, egun horretako hasiera Murgiako jauregian egiten da. "</string>
-    <string name="titulo2_juego">2. JARDUERA: MURGIA JAUREGIA</string>
+    <string name="titulo2_juego">EJERCICIO 2: MURGIA JAUREGIA</string>
     <string name="que1_juego2">Ematen digu fruituak, gerizpea eta itzala, ekaitza iristen denean… azpian babes gaitzala!</string>
     <string name="que2_juego2">Zaharra naiz ni, zaharra da herria, Murgia jauregiaren ate gainean nagoen harria.</string>
     <string name="que3_juego2">Gogorra eta indartsua naiz, ez nauzue apurtuko garaiz, inguruan ikusten nauzue maiz. Nor naiz?</string>
@@ -79,51 +94,63 @@
     <string name="que4_ans2_juego2">Leihoak</string>
     <string name="que4_ans3_juego2">Zuhaitzak</string>
     <string name="que4_ans4_juego2">Hostoak</string>
-    <string name="emaitza">Emaitza</string>
-    <string name="amaitu">Amaitu</string>
+    <string name="emaitza">Resultado</string>
+    <string name="amaitu">Terminar</string>
     <string name="ezetzigarrijolasa">Bigarren jolasaren izena “Ezetz igarri?” da. Beraz, lagunduko didazue asmakizunak asmatzen? Goazen, ba! Eta gogoratu, asmakizuna asmatzen baduzu, horren argazkia atera beharko duzula.</string>
-    <string name="saiatuberriro">Saiatu berriro</string>
+    <string name="saiatuberriro">Repetir</string>
     <string name="text_bienvenidamapa">Hau izango da egingo behar duzuen ibilbidea ni sagardo bilakatzeko. Zorte on!</string>
     <string name="sagardantzajolasa">"Bosgarren geldiunera ailegatu gara!!! Astigar elkartera!!! Sagar Dantza ezagutzeko gogoekin? Zuek gustuko ahal duzue dantza egitea? Ba Astigartarrei asko gustatzen zaie ere, batez ere, Astigar Dantza taldeko kideei. Astigar Dantza taldeko neska- mutil gazteek, urtero, festa ezberdinak ospatzeko (Sagar uzta, txotx irekiera…) Sagar Dantza izeneko dantza bat egiten dute sagarrekin eta Astigarragako txoko ezberdinetan egiten da: sagardotegietan, plazan, sagardoetxean… Sagar dantza ez da soilik Astigarragan dantzatzen, beste zenbat herrietan ere dantzatzen da, baina dantza ez da guztiz berdina izaten leku guztietan. Jantziak ere herri batetik bestera aldatu egiten dira, hori dela eta, geldiune honetan egingo duzuen jardueran honekin erlazionatuta dago. Astigarragan Sagar Dantza dantzatzeko erabiltzen diren jantziak, adibidez, nahiko deigarriak dira, batez ere, “txorroko” deituriko kolorezko txapelari esker, oso bitxiak baitira! "</string>
-    <string name="ikusibideoa">Ikusi bideoa</string>
-    <string name="jolastu">Hasi jokoa</string>
+    <string name="ikusibideoa">Ver vídeo</string>
+    <string name="jolastu">Empezar juego</string>
 
     <!--FRAGMENT JUEGO3.1 -->
-    <string name="titulo31_juego">3. JARDUERA: SANTA ANA</string>
+    <string name="titulo31_juego">EJERCICIO 3: SANTA ANA</string>
     <string name="text_31juego">"Badakizue non gauden, ezta? Herriko Foru plazan! Badakizue zer ospatzen den hemen uztailaren 26an? Norbaitek asmatu du? Santa Ana, ezta? Dakizuenez, Santa Anan gure herriko sagardogileek eta Sagardun Patzuergoko kideek beren sagardoa jartzen dute festako edalontzi berezi batean, jendeak sagardo ezberdinak dastatzeko asmoz. Horrez gain, txorizo eta haragi gisatuko pintxoak ere salgai egoten dira. Zelako goxo dagoen guztia! Norbaitek daki noiztik ospatzen den jai egun hau? 1976 urtetik, Euskal Herrian ospatzen direnen artean zaharrena! Gainera, dakizuenez, idi-demak izaten dira sagardo dastaketarekin batera. Horrez gain, zanpantzarrak ere herritik barrena ibiltzen dira zintzarriak astinduz. Herri osoa alaitzen dute! "</string>
 
     <!--FRAGMENT JUEGO3.2 -->
     <string name="text_32juego">"Laugarren geldiunera iritsi gara! Foru Plazara!!! Sagar Uzta ospatzen den tokira!  Irailean ospatzen den jaia da Sagar Uzta! Jende guztiarentzako prestatutako festa da eta gaur egunean zehar burutzen diren hainbat ekintza eta jarduera ikasiko ditugu.  Badakizue zein da festa honetarako motiboa? Sagarrak biltzeko garaia heltzen dela! Hori dela eta, egun hori sagardoa egiteko prozesua erakusteko eta herritartzeko asmoarekin ospatzen da.  Baina, zeintzuk dira egun honetan burutzen diren ekintzak edo jarduerak? Adi egon! Gero, informazio honekin bi ariketa egin beharko dituzuelako sagardoa egiteko hurrengo pausua zein den ezagutu ahal izateko. Egunean zehar askotariko ekintzak daude: goizean Musika Eskolako txistulariek esnatzen dute herria, sagar dantza dantzatzen da eta txalaparta doinua entzuten da. Gainera, lehengo zanpatze erakusketa, bertako sagar erakusketa eta artisau produktuen salmenta, eta sagardo dastatze eta salmenta egiten da, baita sagarrak probatzeko aukera dago ere.  "</string>
-    <string name="titulo32_juego">4. JARDUERA: SAGAR UZTA</string>
+    <string name="titulo32_juego">EJERCICIO 4: SAGAR UZTA</string>
 
     <!--FRAGMENT JUEGO4 -->
     <string name="text_4juego">"Bosgarren geldiunera ailegatu gara!!! Astigar elkartera!!! Sagar Dantza ezagutzeko gogoekin? Zuek gustuko ahal duzue dantza egitea? Ba Astigartarrei asko gustatzen zaie ere, batez ere, Astigar Dantza taldeko kideei. Astigar Dantza taldeko neska- mutil gazteek, urtero, festa ezberdinak ospatzeko (Sagar uzta, txotx irekiera…) Sagar Dantza izeneko dantza bat egiten dute sagarrekin eta Astigarragako txoko ezberdinetan egiten da: sagardotegietan, plazan, sagardoetxean… Sagar dantza ez da soilik Astigarragan dantzatzen, beste zenbat herrietan ere dantzatzen da, baina dantza ez da guztiz berdina izaten leku guztietan. Jantziak ere herri batetik bestera aldatu egiten dira, hori dela eta, geldiune honetan egingo duzuen jardueran honekin erlazionatuta dago. Astigarragan Sagar Dantza dantzatzeko erabiltzen diren jantziak, adibidez, nahiko deigarriak dira, batez ere, “txorroko” deituriko kolorezko txapelari esker, oso bitxiak baitira!  "</string>
-    <string name="titulo4_juego">"5. JARDUERA: SAGAR DANTZA "</string>
+    <string name="titulo4_juego">EJERCICIO 5: SAGAR DANTZA </string>
 
     <!--FRAGMENT JUEGO5 -->
     <string name="text_5juego">"Badakizue zer? Astigarragan famatua den pertsona bat aurkeztuko dizuet! Prest zaudete? Bueno ba… hasiko gara! Agin Laburu du izena pertsona famatuak eta esan bezala, Astigarragan bizi da.  Oso pertsona langilea da eta Kazetaritzan lizentziatua da. Gainera, bere aitak bultzatuta egin zen bertsozale eta ordutik, Hernaniko bertso eskolan darama urte asko eta asko.  Ez duzue sinetsiko, baina hainbat txapelketa irabazi ditu. Eta, gainera, txapelketa nagusietan aritu da! Birritan izan da Gipuzkoako Bertsolari Txapelketa Nagusiko finalean eta azken Euskal Herriko txapelketan finalerdietara iritsi zen. Zelako makina dugun Astigarragan! Baina, gaur egun, zertan aritzen da batez ere Laburu? Sagardotegi batean lan egiten du, Ipintza sagardotegiko martxa darama. Baina, pentsatuko duzue zer ote den Ipintza sagardotegia ezta? lasai egon jarraian azalduko dizuedala! Ipintza sagardotegia Upategi txikia da, hau da, produkzio txikiko sagardotegia. Ipintzara etortzen denak gastronomiaz eta Euskal Sagardoaz gozatzeko aukera du! Baina, gauza bat neska mutilok… zerez egongo da eginda aipatutako sagardo hori? ez esan inori… baina... Santiagomendiko beren sagastiko sagarrez egina da.  Bukatzeko, kontatu behar dizuet Etxeko Euskal Sagardoaz gain, beste sagardotegietako Euskal Sagardoak ere dastatu daitezkeela Ipintza sagardotegian. Animatzen zarete Agin Laburu bere sagardotegian bisitatzen eta berarekin ikasten? Anima zaitezte!!! "</string>
-    <string name="titulo5_juego">6. JARDUERA: AGIN LABURU</string>
+    <string name="titulo5_juego">EJERCICIO 7: AGIN LABURU</string>
     <string name="titulo">Oraingoan, “Kantu- kanta” ariketa egin beharko duzue. Pantailan entzun berri duzuen bertsoa agertuko zaizue, bete beharreko hutsune batzuekin. Zuek, hutsune horiek  bete beharko dituzue hitz batekin, orain entzun berri duzuen bertsoaz oroituz. Oraintxe ikusiko dut zer nolako memoria duzuen… animo!</string>
-    <string name="comprobatu">komprobatu</string>
+    <string name="comprobatu">Comprobar</string>
 
     <!--FRAGMENT JUEGO6 -->
     <string name="text_6juego">"Azken geldiunera iritsi gara! Zelako bidaia polita egiten ari garen! Badakizue zer den txotx irekiera? Urtarrilaren hasieran Astigarragan ospatzen den ekitaldi bat da Txotx irekiera, Sagardo Berriaren eguna ere deiturikoa. Txotx denboraldiari hasiera emateko, eta urteko sagardo berria dastatzeko asmoz, urtero, sagardotegi desberdin batek ekitaldi bat antolatzen du sagardotegian bertan.  Sagardo berria dastatzen duen lehenengo pertsona, gonbidatu famatu bat izan ohi da: mendizalea, abeslaria, bertsolaria, futbolaria…  Ziur urteren bateko gonbidaturen bat ezaguna egingo zaizuela: Izaro Andres abeslaria, Xabi Alonso futbolaria, Indurain txirrindularia... Esan dezakegu, gonbidatuak garrantzia handia duela jai honetan, bera baita eguneko protagonistetako bat. Astigarragako sagardo berria dastatu baino lehen, gonbidatuari, besteak beste, Sagar Dantza dantzatu, txistua jo eta txalaparta jotzen zaio. Gonbidatuak urteko sagardoa probatu ondoren, ikusleek ere sagardo berria probatu eta bazkari jendetsu bat egiten da sagardotegian bertan, edonor joan daiteke bazkarira. "</string>
-    <string name="titulo6_juego">7. JARDUERA: TXOTX IREKIERA</string>
-    <string name="erantzuna1">1 galderaren erantzuna</string>
-    <string name="erantzuna2">2 galderaren erantzuna</string>
-    <string name="erantzuna3">3 galderaren erantzuna</string>
-    <string name="erantzuna4">4 galderaren erantzuna</string>
-    <string name="erantzuna5">5 galderaren erantzuna</string>
-    <string name="erantzuna6">6 galderaren erantzuna</string>
+    <string name="titulo6_juego">EJERCICIO 7: TXOTX IREKIERA</string>
+    <string name="erantzuna1">
+Respuesta a la pregunta 1
+</string>
+    <string name="erantzuna2">
+Respuesta a la pregunta 2
+</string>
+    <string name="erantzuna3">
+Respuesta a la pregunta 3
+</string>
+    <string name="erantzuna4">
+Respuesta a la pregunta 4
+</string>
+    <string name="erantzuna5">
+Respuesta a la pregunta 5
+</string>
+    <string name="erantzuna6">
+Respuesta a la pregunta 6
+</string>
 
     <!--ACERCA DE -->
     <string name="equipodesarrollo"><b>• EQUIPO DE DESARROLLO •</b></string>
     <string name="ideaoriginal"><b>• IDEA ORIGINAL •</b></string>
 
     <!--BOTONES-->
-    <string name="jugar">Jolastu</string>
-    <string name="siguiente">Hurrengoa</string>
-    <string name="repetir">Errepikatu</string>
+    <string name="jugar">Jugar</string>
+    <string name="siguiente">Siguiente</string>
+    <string name="repetir">Repetir</string>
     <string name="menu">MENU</string>
 
     <!--AYUDA-->
@@ -177,10 +204,10 @@ galderak egiteko aukera izango baitute.</string>
     <string name="sagardantzajolasatutorial">“Txotxongiloa janzten” jolasera jolastu beharko duzue. Horretarako pantailaren alde batean txotxongilo bat agertuko da eta bestean, arropa prenda desberdinak. Jolasa gainditzeko, prenda bakoitza txotxongiloaren parte bakoitzarekin lotu beharko duzue, hau da, prenda bakoitzak duen zenbakia txotxongiloaren zein ataletan doan adierazi beharko duzue prendaren zenbakia txotxongiloan adieraziz. Animo!</string>
     <string name="juego3_pregunta1">Argazki horretan agertzen dena Santa Ana festan egoten da?</string>
     <string name="juego3_pregunta2">Nortzuk dira?</string>
-    <string name="botonclaro">MODU ARGIA</string>
-    <string name="español">Gaztelania</string>
-    <string name="euskera">Euskara</string>
-    <string name="Idiomas">Hizkuntzak</string>
+    <string name="botonclaro">MODO CLARO</string>
+    <string name="español">Castellano</string>
+    <string name="euskera">Vasco</string>
+    <string name="Idiomas">Idiomas</string>
     <string name="tema">Tema</string>
     <string name="que1_ans1_juego7">28. txotx irekiera</string>
     <string name="que1_ans2_juego7">25. txotx irekiera</string>
@@ -189,10 +216,12 @@ galderak egiteko aukera izango baitute.</string>
     <string name="belarriakadi">Orain “Belarriak adi eta erantzunak egoki” ariketa egin beharko duzue. Pantailan galdera ezberdinak agertuko zaizkizue, hainbat erantzun posiblerekin. Zuek, erantzun egokia aukeratu beharko duzue abentura honetan aurrera jarraitzeko! Laguntza behar baduzue, ahaztu lotsak eta eskatu laguntza inguruan ikusten dituzuen astigartarrei. Zorte on!</string>
 
     <!--ADMIN DIALOG -->
-    <string name="administratorAccess">Administratzaile sarbidea</string>
+    <string name="administratorAccess">
+Acceso administrador
+</string>
     <string name="administratorAccessText">Pasahitza sartu administratzaile pribilegioak lortzeko</string>
     <string name="juego3audiotutorialtxt">Plaza honetan “Festarik festa” jolasera jolastu beharko duzue. Lehenik eta behin puzzle bat egin beharko duzue. Puzzlea bukatzean, irudi bat sortzea lortuko duzue. Animo!</string>
-    <string name="izena">Izena</string>
-    <string name="puntuacion">Puntuazioa</string>
-    <string name="ultimo_punto">Azken puntua</string>
+    <string name="izena">Nombre</string>
+    <string name="puntuacion">Puntuación</string>
+    <string name="ultimo_punto">Último punto</string>
 </resources>

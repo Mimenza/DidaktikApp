@@ -35,10 +35,18 @@ object CustomAudioTest {
 
     var audio: MediaPlayer? = null
 
-    fun playAudio(audioObject: MediaPlayer) {
-        stopAudio()
-        audio = audioObject
-        audio!!.start()
+    fun playAudio(audioObject: MediaPlayer): MediaPlayer? {
+        try {
+            stopAudio()
+            audio = audioObject
+            audio!!.start()
+            return  audio
+        } catch (e: Exception) {
+            return null
+        } finally {
+            return null
+        }
+
     }
 
     fun stopAudio() {

@@ -12,7 +12,7 @@ class DbHandler {
         private var lastUserid: Int = 0
         private var usuario: User? = null
         private var dbInstance: FirebaseFirestore? = null
-        private var isAdmin: Boolean = false
+        private var isAdmin: Boolean = true
 
 
         fun getDbInstance(): FirebaseFirestore {

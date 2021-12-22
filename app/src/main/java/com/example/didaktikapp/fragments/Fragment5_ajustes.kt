@@ -156,13 +156,17 @@ class Fragment5_ajustes : Fragment() {
             when (which) {
                 0 -> {
                     setLocate("eu")
+                    //Para cambiarlo directamente
                      recreate(requireContext() as Activity)
+                    //Te lleva a la principal al cambiar
+                    getActivity()?.onBackPressed()
                     MyPreferences(requireContext()).lang = 0
                     dialog.dismiss()
                 }
                 1 -> {
                     setLocate("es")
                     recreate(requireContext() as Activity)
+                    getActivity()?.onBackPressed();
                     MyPreferences(requireContext()).lang = 1
                     dialog.dismiss()
                 }

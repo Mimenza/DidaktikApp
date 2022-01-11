@@ -97,11 +97,12 @@ class Fragment2_1_minijuego : Fragment() {
         //imgManzanaGenerada.setBackgroundColor(Color.BLUE)
 
 
+
         var tipoManzana = (0..1).random()
         var mznGnrDestino: ImageView
         if (tipoManzana == 1) {
-            imgManzanaGenerada.setImageResource(R.drawable.sagarragorria)
-            mznGnrDestino = basurero
+            imgManzanaGenerada.setImageResource(R.drawable.manzanaroja)
+            mznGnrDestino = cesta
         } else {
             imgManzanaGenerada.setImageResource(R.drawable.sagarraberdea)
             mznGnrDestino = cesta
@@ -132,14 +133,7 @@ class Fragment2_1_minijuego : Fragment() {
 
                         viewElement.x = motionEvent.rawX - viewElement.width/2
                         viewElement.y = motionEvent.rawY - viewElement.height/2
-                        //var objetivoEncontrado: View = itemInList!!.objetivo
-                        // Basurero Vars
-                        val basureroLocation = IntArray(2)
-                        basurero.getLocationOnScreen(basureroLocation);
-                        var basureroPosX = basureroLocation[0]
-                        var basureroPosY = basureroLocation[1]
-                        var basureroSizeX = cesta.width
-                        var basureroSizeY = cesta.height
+
                         // Cesta Vars
                         val cestaLocation = IntArray(2)
                         cesta.getLocationOnScreen(cestaLocation);
@@ -149,12 +143,6 @@ class Fragment2_1_minijuego : Fragment() {
                         var cestaSizeY = cesta.height
                         if ( (viewElement.x + viewElement.width/2) >= cestaPosX && (viewElement.y + viewElement.height/2) >= cestaPosY && (viewElement.x + viewElement.width/2) <= cestaPosX+cestaSizeX && (viewElement.y + viewElement.height/2) <= cestaPosY+cestaSizeY) {
                             comprobarInsercionManzana(itemInList, cesta)
-                            itemInList.acertado = true
-
-                            viewElement.visibility = View.GONE
-                            viewElement.setOnTouchListener(null)
-                        } else if ((viewElement.x + viewElement.width/2) >= basureroPosX && (viewElement.y + viewElement.height/2) >= basureroPosY && (viewElement.x + viewElement.width/2) <= basureroPosX+cestaSizeX && (viewElement.y + viewElement.height/2) <= basureroPosY+basureroSizeY) {
-                            comprobarInsercionManzana(itemInList, basurero)
                             itemInList.acertado = true
 
                             viewElement.visibility = View.GONE
@@ -177,7 +165,7 @@ class Fragment2_1_minijuego : Fragment() {
     }
 
     private fun comprobarJuegoFinalizado() {
-        if (aciertosActuales >= 5) {
+        if (aciertosActuales >= 10) {
             button.visibility = View.VISIBLE
             minijuegoFinalizado = true
             Toast.makeText(requireContext(), "ZORIONAK !!", Toast.LENGTH_SHORT).show()

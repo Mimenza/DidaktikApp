@@ -14,6 +14,7 @@ import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.DragnDropImage
 import com.example.didaktikapp.R
 import kotlinx.android.synthetic.main.activity7_juego2_results.*
+import kotlinx.coroutines.NonCancellable.cancel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -233,7 +234,7 @@ class Fragment2_2_minijuego : Fragment() {
 
     //fun startTimeCounter(view: View, timeInSeconds: Int) {
     fun startTimeCounter() {
-        object: CountDownTimer((duracionJuego*1000).toLong(), (intervaloGeneracionManzanas*100).toLong()) {
+        object: CountDownTimer((duracionJuego*1000).toLong(), (intervaloGeneracionManzanas*10).toLong()) {
             override fun onTick(millisUntilFinished: Long) {
 
                 println(numManzanaRoja !=5 || numManzanaVerde !=5)
@@ -242,6 +243,7 @@ class Fragment2_2_minijuego : Fragment() {
                         generarManzana()
                     }
                 }
+                else{this.cancel()}
 
             }
             override fun onFinish() {

@@ -86,7 +86,7 @@ class Fragment2_1_minijuego : Fragment() {
     fun generarManzana() {
         var imgManzanaGenerada: ImageView = ImageView(requireContext())
         //newView = ImageView(requireContext())
-        val constraintLayoutFound = globalView.findViewById<ConstraintLayout>(R.id.mainlayout_Minijuego1)
+        val constraintLayoutFound = globalView.findViewById<ConstraintLayout>(R.id.mainlayout_Minijuego2)
         constraintLayoutFound.addView(imgManzanaGenerada)
         imgManzanaGenerada.layoutParams.height = 200
         imgManzanaGenerada.layoutParams.width = 200

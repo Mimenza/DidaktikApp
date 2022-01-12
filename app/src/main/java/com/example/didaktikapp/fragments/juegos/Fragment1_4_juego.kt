@@ -174,6 +174,10 @@ class Fragment1_4_juego : Fragment() {
 
     }
 
+    fun findMyFirstLetterKey() {
+
+    }
+
     fun checkNextLetter() {
 
     }

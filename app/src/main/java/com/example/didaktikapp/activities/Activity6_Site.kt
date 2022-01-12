@@ -41,8 +41,6 @@ class Activity6_Site : AppCompatActivity() {
         var editor = sharedPreferences.edit()
         editor.putString("numero", newInt.toString()).apply()
 
-
-
     }
 
 

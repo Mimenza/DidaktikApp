@@ -196,9 +196,6 @@ class Fragment2_2_minijuego : Fragment() {
         true
     }
 
-    private fun generarManzanaRoja(){}
-
-    private fun generarManzanaVerde(){}
     private fun comprobarInsercionManzana(item: DragnDropImage, objetivoInsertado: ImageView) {
         //item.acertado = true
         if (item.objetivo == objetivoInsertado) {

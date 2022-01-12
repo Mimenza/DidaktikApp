@@ -12,14 +12,100 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/txtv2_2minijuego2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="MINIJUEGO 3"
+            android:id="@+id/textView5"
+            android:layout_width="202dp"
+            android:layout_height="107dp"
+            android:background="#41000000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.842"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.434" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="236dp"
+            android:layout_height="154dp"
+            android:background="#41000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.811"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.779" />
+
+        <ImageView
+            android:id="@+id/imgV2_3CleanApple1"
+            android:layout_width="86dp"
+            android:layout_height="78dp"
+            android:src="@drawable/sagarraberdea"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.101"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.324" />
+
+        <ImageView
+            android:id="@+id/imgV2_3CleanApple3"
+            android:layout_width="86dp"
+            android:layout_height="78dp"
+            android:src="@drawable/sagarraberdea"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.101"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.655" />
+
+        <ImageView
+            android:id="@+id/imgV2_3CleanApple4"
+            android:layout_width="86dp"
+            android:layout_height="78dp"
+            android:src="@drawable/sagarraberdea"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.101"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.024" />
+
+        <ImageView
+            android:id="@+id/imgV2_3CleanApple5"
+            android:layout_width="86dp"
+            android:layout_height="78dp"
+            android:src="@drawable/sagarraberdea"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.101"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.165" />
+
+        <ImageView
+            android:id="@+id/imgV2_3CleanApple2"
+            android:layout_width="86dp"
+            android:layout_height="78dp"
+            android:src="@drawable/sagarraberdea"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.101"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.499" />
+
+        <TextView
+            android:id="@+id/manzanasAciertos2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
+            android:text="0"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnf2_3_1siguiente"
+            app:layout_constraintHorizontal_bias="0.341"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <Button
             android:id="@+id/btnf2_3_1siguiente"
@@ -28,10 +114,9 @@
             android:text="@string/siguiente"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.69" />
+            app:layout_constraintVertical_bias="0.95" />
 
         <ImageButton
             android:id="@+id/btnf2_3_1ajustes"
@@ -44,6 +129,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.187" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

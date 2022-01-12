@@ -55,7 +55,6 @@ class Fragment2_3_minijuego : Fragment() {
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
-
         }
     }
 
@@ -69,7 +68,7 @@ class Fragment2_3_minijuego : Fragment() {
         button = view.findViewById(R.id.btnf2_3_1siguiente)
         val ajustes: ImageButton = view.findViewById(R.id.btnf2_3_1ajustes)
 
-        agua  = view.findViewById((R.id.imgv2_3agua))
+        //agua  = view.findViewById((R.id.imgv2_3agua))
 
         button.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment2_3_minijuego_to_fragment4_menu)

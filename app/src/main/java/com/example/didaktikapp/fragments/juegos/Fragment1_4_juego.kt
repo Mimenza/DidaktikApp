@@ -143,7 +143,7 @@ class Fragment1_4_juego : Fragment() {
     fun checkOtherLettersHover(posX: Int, posY: Int) {
         for ((i, row) in lettersPosition.withIndex()) {
             for ((k, col) in lettersPosition[i].withIndex()) {
-                
+
             }
         }
 
@@ -153,6 +153,18 @@ class Fragment1_4_juego : Fragment() {
             }
         }
          */
+    }
+
+    fun findPosibleMove() {
+
+    }
+
+    fun checkNearesLetter() {
+
+    }
+
+    fun checkNextLetter() {
+
     }
 
 

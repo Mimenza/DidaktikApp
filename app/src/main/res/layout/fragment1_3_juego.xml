@@ -14,6 +14,16 @@
         android:layout_height="match_parent">
 
         <Button
+            android:id="@+id/btn_saltarjuego3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:layout_marginBottom="94dp"
+            android:text="SALTAR"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
             android:id="@+id/btnf1_3_repetir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

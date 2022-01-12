@@ -51,6 +51,7 @@ class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
     private lateinit var vistaAnimada: TranslateAnimation
     private lateinit var globalView: View
     private lateinit var button: Button
+    private lateinit var buttonSaltarJuego: Button
     private lateinit var buttonRepetir: Button
     private lateinit var preguntasLayout: LinearLayout
     private var audio: MediaPlayer? = null
@@ -92,6 +93,7 @@ class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
         val view = inflater.inflate(R.layout.fragment1_3_juego, container, false)
         globalView = view
         button = view.findViewById(R.id.btnf1_3_siguiente)
+        buttonSaltarJuego = view.findViewById(R.id.btn_saltarjuego3)
         buttonRepetir = view.findViewById(R.id.btnf1_3_repetir)
         button.visibility = View.GONE
         buttonRepetir.visibility = View.GONE
@@ -122,6 +124,12 @@ class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
                 iniciarPreguntas()
             }
         }
+
+        buttonSaltarJuego.setOnClickListener() {
+            Navigation.findNavController(globalView).navigate(R.id.action_fragment1_3_juego_to_fragment2_3_minijuego)
+        }
+
+
 
         buttonRepetir.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment1_3_juego_self)

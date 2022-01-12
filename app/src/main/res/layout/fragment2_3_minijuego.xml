@@ -11,30 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="202dp"
-            android:layout_height="107dp"
-            android:background="#41000000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.842"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.434" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="236dp"
-            android:layout_height="154dp"
-            android:background="#41000000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.811"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.779" />
-
         <ImageView
             android:id="@+id/imgV2_3CleanApple1"
             android:layout_width="86dp"
@@ -129,6 +105,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.187" />
+
+        <ImageView
+            android:id="@+id/imgv2_3cesta"
+            android:layout_width="184dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="244dp"
+            android:layout_marginEnd="32dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/juegox_cestavacia" />
+
+        <ImageView
+            android:id="@+id/imgv2_3agua"
+            android:layout_width="219dp"
+            android:layout_height="172dp"
+            android:src="@drawable/agua"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.916"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.799" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

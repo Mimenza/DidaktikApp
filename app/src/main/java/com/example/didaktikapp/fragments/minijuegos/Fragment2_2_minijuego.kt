@@ -68,6 +68,7 @@ class Fragment2_2_minijuego : Fragment() {
         val manzana3:ImageView = view.findViewById(R.id.imgv2_2_manzanav2)
         val manzana4:ImageView = view.findViewById(R.id.imgv2_2_manzanav3)
         val manzana5:ImageView = view.findViewById(R.id.imgv2_2_manzanav4)
+
          aciertoTxt = view.findViewById(R.id.manzanasAciertos)
 
         manzana1.setOnClickListener(){desaparecer(manzana1)}

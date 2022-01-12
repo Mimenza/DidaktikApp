@@ -117,10 +117,21 @@ class Fragment1_4_juego : Fragment() {
                 testHeight = txtSizeY
             }
             println("********* the element at $index is ${txtElement.text.toString()}")
+
+            if (lettersPosition.size == 0) {
+                lettersPosition.add(arrayListOf())
+            }
+
+
+
+
+            /*
             if (lettersPosition.isEmpty()) {
                 //lettersPosition.add(arrayListOf())
                 lettersPosition.add(arrayListOf())
             }
+
+             */
             //lettersPosition[0].add(arrayListOf(floatArrayOf(txtPosX,txtPosY)))
             lettersPosition[0].add(floatArrayOf(txtPosX,txtPosY))
             txtElement.setOnTouchListener(listener)
@@ -155,11 +166,11 @@ class Fragment1_4_juego : Fragment() {
          */
     }
 
-    fun findPosibleMove() {
+    fun findPossibleMove() {
 
     }
 
-    fun checkNearesLetter() {
+    fun checkNearestLetter() {
 
     }
 

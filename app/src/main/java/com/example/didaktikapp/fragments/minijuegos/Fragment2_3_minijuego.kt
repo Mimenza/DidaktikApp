@@ -2,12 +2,15 @@ package com.example.didaktikapp.fragments.minijuegos
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.*
 import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.DragnDropImage
 import com.example.didaktikapp.R
+import com.example.didaktikapp.activities.DbHandler
 import org.w3c.dom.Text
 
 // TODO: Rename parameter arguments, choose names that match
@@ -15,7 +18,6 @@ import org.w3c.dom.Text
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 lateinit var agua:ImageView
-lateinit var cesta:ImageView
 
 var manzanaList: MutableList<DragnDropImage>? = mutableListOf()
 
@@ -33,12 +35,14 @@ class Fragment2_3_minijuego : Fragment() {
     var minijuegoFinalizado: Boolean = false
     lateinit var  button:Button
     var acertados:Int = 0
+    private var tiempoCompletarComprobacion = 1000
+
     val listaImagenes = listOf(
-        listOf(R.id.imgV2_3CleanApple1,R.id.imgv2_3agua,R.id.imgv2_3cesta),
-        listOf(R.id.imgV2_3CleanApple2,R.id.imgv2_3agua,R.id.imgv2_3cesta),
-        listOf(R.id.imgV2_3CleanApple3,R.id.imgv2_3agua,R.id.imgv2_3cesta),
-        listOf(R.id.imgV2_3CleanApple4,R.id.imgv2_3agua,R.id.imgv2_3cesta),
-        listOf(R.id.imgV2_3CleanApple5,R.id.imgv2_3agua,R.id.imgv2_3cesta),
+        listOf(R.id.imgV2_3CleanApple1,R.id.imgv2_3cesta),
+        listOf(R.id.imgV2_3CleanApple2,R.id.imgv2_3cesta),
+        listOf(R.id.imgV2_3CleanApple3,R.id.imgv2_3cesta),
+        listOf(R.id.imgV2_3CleanApple4,R.id.imgv2_3cesta),
+        listOf(R.id.imgV2_3CleanApple5,R.id.imgv2_3cesta),
 
         //listOf(R.id.puzzle_pieza_otest1,R.id.puzzle_pieza_otest2),
     )
@@ -66,7 +70,6 @@ class Fragment2_3_minijuego : Fragment() {
         val ajustes: ImageButton = view.findViewById(R.id.btnf2_3_1ajustes)
 
         agua  = view.findViewById((R.id.imgv2_3agua))
-        cesta = view.findViewById((R.id.imgv2_3cesta))
 
         button.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment2_3_minijuego_to_fragment4_menu)
@@ -93,67 +96,75 @@ class Fragment2_3_minijuego : Fragment() {
         for (vItemList in listaImagenes) {
             var vItemOrigen: ImageView = globalView.findViewById(vItemList[0])
             var vItemDestino: ImageView = globalView.findViewById(vItemList[1])
-            vItemOrigen.getLayoutParams().width = vItemDestino.width
-            vItemOrigen.getLayoutParams().height = vItemDestino.height
             manzanaList!!.add(DragnDropImage(vItemOrigen,vItemDestino))
-            //vItemDestino.setColorFilter(Color.argb(150, 0, 80, 200))
             vItemOrigen.setOnTouchListener(listener)
         }
     }
+
+    private var cleanManzanaTimer: Boolean? = null
 
     @SuppressLint("ClickableViewAccessibility")
     var listener = View.OnTouchListener { viewElement, motionEvent ->
         var itemInList: DragnDropImage? = findItemByOrigen(viewElement)
 
         if (itemInList != null) {
-            if (!itemInList.acertado) {
+            //if (!itemInList.acertado) {
                 viewElement.bringToFront()
                 val action = motionEvent.action
                 when(action) {
                     MotionEvent.ACTION_MOVE -> {
                         viewElement.x = motionEvent.rawX - viewElement.width/2
                         viewElement.y = motionEvent.rawY - viewElement.height/2
+                        //Aqui comprobamos si la manzana no esta limpia.
+                        if (!itemInList.acertado) {
+                            val aguaLocation = IntArray(2)
+                            agua.getLocationOnScreen(aguaLocation);
+                            //Posicion/tamaño del agua
+                            var aguaPosX = aguaLocation[0]
+                            var aguaPosY = aguaLocation[1]
+                            var aguaSizeX = agua.width
+                            var aguaSizeY = agua.height
+
+                            // Si la imagen pasa por el agua, la manzana cambiara a limpia
+                            if ( (viewElement.x + viewElement.width/2) >= aguaPosX && (viewElement.y + viewElement.height/2) >= aguaPosY && (viewElement.x + viewElement.width/2) <= aguaPosX+aguaSizeX && (viewElement.y + viewElement.height/2) <= aguaPosY+aguaSizeY) {
+
+                                if (cleanManzanaTimer == null) {
+                                    cleanManzanaTimer = true
+                                    Handler(Looper.getMainLooper()).postDelayed({
+                                        if (getView() != null && cleanManzanaTimer != null) {
+                                            if ( (viewElement.x + viewElement.width/2) >= aguaPosX && (viewElement.y + viewElement.height/2) >= aguaPosY && (viewElement.x + viewElement.width/2) <= aguaPosX+aguaSizeX && (viewElement.y + viewElement.height/2) <= aguaPosY+aguaSizeY) {
+                                                itemInList.acertado = true
+                                                itemInList.origen.setImageResource(R.drawable.sagarraberdea)
+                                                cleanManzanaTimer = null
+                                            }
+                                        }
+                                    }, tiempoCompletarComprobacion.toLong())
+                                }
+                            } else {
+                                if (cleanManzanaTimer != null) {
+                                    cleanManzanaTimer = null
+                                }
+                            }
+                        }
                     }
-                    MotionEvent.ACTION_UP -> {
-
-                        viewElement.x = motionEvent.rawX - viewElement.width/2
-                        viewElement.y = motionEvent.rawY - viewElement.height/2
-                        //var objetivoEncontrado: View = itemInList!!.objetivo
-
-                        //=====================================================
-
-                        val aguaLocation = IntArray(2)
-                        agua.getLocationOnScreen(aguaLocation);
-
-                        //Posicion del agua
-                        var aguaPosX = aguaLocation[0]
-                        var aguaPosY = aguaLocation[1]
-                        var aguaSizeX = agua.width
-                        var aguaSizeY = agua.height
-
-                        //=====================================================
-
-                        // Cesta Vars
-                        val cestaLocation = IntArray(2)
-                        cesta.getLocationOnScreen(cestaLocation);
-
-                        //Posicion de la cesta
-                        var cestaPosX = cestaLocation[0]
-                        var cestaPosY = cestaLocation[1]
-                        var cestaSizeX = agua.width
-                        var cestaSizeY = agua.height
-
-                        //=====================================================
-                        if ( (viewElement.x + viewElement.width/2) >= aguaPosX && (viewElement.y + viewElement.height/2) >= aguaPosY && (viewElement.x + viewElement.width/2) <= aguaPosX+aguaSizeX && (viewElement.y + viewElement.height/2) <= aguaPosY+aguaSizeY) {
-                            comprobarInsercionManzana(itemInList, agua)
-                            itemInList.acertado = true
-
-
-                             viewElement.visibility = View.GONE
+                MotionEvent.ACTION_UP -> {
+                    if (itemInList.acertado) {
+                        viewElement.x = motionEvent.rawX - viewElement.width / 2
+                        viewElement.y = motionEvent.rawY - viewElement.height / 2
+                        var objetivoEncontrado: View = itemInList!!.objetivo
+                        val location = IntArray(2)
+                        objetivoEncontrado.getLocationOnScreen(location);
+                        var posX = location[0]
+                        var posY = location[1]
+                        var sizeX = objetivoEncontrado.width
+                        var sizeY = objetivoEncontrado.height
+                        if ((viewElement.x + viewElement.width / 2) >= posX && (viewElement.y + viewElement.height / 2) >= posY && (viewElement.x + viewElement.width / 2) <= posX + sizeX && (viewElement.y + viewElement.height / 2) <= posY + sizeY) {
+                            viewElement.x = posX.toFloat()
+                            viewElement.y = posY.toFloat()
                             viewElement.setOnTouchListener(null)
                         }
-
                     }
+                    cleanManzanaTimer = null
                 }
             }
         }

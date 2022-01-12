@@ -9,41 +9,90 @@
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/txtv2_2minijuego2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="MINIJUEGO 4"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/btnf2_4siguiente"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SIGUIENTE"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.69" />
+        android:layout_height="match_parent"
+        android:background="@drawable/sagarraktxikitu">
 
         <ImageButton
             android:id="@+id/btnf2_4ajustes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minHeight="48dp"
             android:src="@drawable/ic_ajustes_black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.187" />
+            app:layout_constraintVertical_bias="0.187"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/manzanasAciertos4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="52dp"
+            android:text="0"
+            android:textColor="@color/white"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btnf2_4siguiente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="28dp"
+            android:layout_marginBottom="52dp"
+            android:text="@string/siguiente"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/manzana1_minijuego4"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:src="@drawable/sagarraberdea"
+            tools:layout_editor_absoluteX="77dp"
+            tools:layout_editor_absoluteY="294dp"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/manzana2_minijuego4"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:src="@drawable/sagarraberdea"
+            tools:layout_editor_absoluteX="285dp"
+            tools:layout_editor_absoluteY="225dp"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/manzana3_minijuego4"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:src="@drawable/sagarraberdea"
+            tools:layout_editor_absoluteX="85dp"
+            tools:layout_editor_absoluteY="149dp"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/manzana4_minijuego4"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:src="@drawable/sagarraberdea"
+            tools:layout_editor_absoluteX="226dp"
+            tools:layout_editor_absoluteY="395dp"
+            tools:ignore="MissingConstraints" />
+
+        <ImageView
+            android:id="@+id/manzana5_minijuego4"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:src="@drawable/sagarraberdea"
+            tools:layout_editor_absoluteX="61dp"
+            tools:layout_editor_absoluteY="506dp"
+            tools:ignore="MissingConstraints" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

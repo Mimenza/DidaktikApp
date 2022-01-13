@@ -5,8 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
 
@@ -25,6 +29,10 @@ class Fragment2_5_minijuego : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var aciertoTxt: TextView
+    private var acierto: Int = 0
+    private lateinit var siguiente: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -39,24 +47,84 @@ class Fragment2_5_minijuego : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment2_5_minijuego, container, false)
-        val button: Button = view.findViewById(R.id.btnf2_5siguiente)
+        siguiente = view.findViewById(R.id.btnf2_5siguiente)
+        val ajustes: ImageButton = view.findViewById(R.id.btnf2_5ajustes)
 
-        button.setOnClickListener() {
-            Navigation.findNavController(view).navigate(R.id.action_fragment2_5_minijuego_to_fragment4_menu)
-        }
-        //val ajustes: ImageButton = view.findViewById(R.id.btnf2_2ajustes)
-
-        /*
-        button.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment2_5_minijuego_to_fragment4_menu)
+        siguiente.setOnClickListener() {
+            Navigation.findNavController(view)
+                .navigate(R.id.action_fragment2_5_minijuego_to_fragment4_menu)
         }
 
-        ajustes.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment2_5_minijuego_to_fragment4_menu)
+        ajustes.setOnClickListener() {
+            Navigation.findNavController(view)
+                .navigate(R.id.action_fragment2_5_minijuego_to_fragment4_menu)
         }
 
-         */
+        val manzana1: ImageView = view.findViewById(R.id.imgv2_5_applepiece1)
+        val manzana2: ImageView = view.findViewById(R.id.imgv2_5_applepiece2)
+        val manzana3: ImageView = view.findViewById(R.id.imgv2_5_applepiece3)
+        val manzana4: ImageView = view.findViewById(R.id.imgv2_5_applepiece4)
+        val manzana5: ImageView = view.findViewById(R.id.imgv2_5_applepiece5)
+        val manzana6: ImageView = view.findViewById(R.id.imgv2_5_applepiece6)
+
+
+        manzana1.setOnClickListener() { machacar(manzana1) }
+        manzana2.setOnClickListener() { machacar(manzana2) }
+        manzana3.setOnClickListener() { machacar(manzana3) }
+        manzana4.setOnClickListener() { machacar(manzana4) }
+        manzana5.setOnClickListener() { machacar(manzana5) }
+        manzana6.setOnClickListener() { machacar(manzana6) }
+
         return view
+    }
+
+    fun machacar(manzana: ImageView) {
+
+        println(manzana.id)
+        //declaramos variable a 0
+        var pulsaciones: Int = 0
+        zoom(manzana)
+        println(pulsaciones)
+
+        manzana.setOnClickListener() {
+            if (pulsaciones < 4) {
+                zoom(manzana)
+                pulsaciones++
+            }
+
+            if (pulsaciones == 4) {
+                disapear(manzana)
+
+                checkProgress()
+            }
+        }
+
+
+    }
+
+    fun checkProgress() {
+        println("check" + acierto)
+        if (acierto == 6) {
+
+            siguiente.isVisible = true
+        }
+    }
+
+    fun zoom(manzana: ImageView) {
+        println("ZOOM")
+        val zoom = AnimationUtils.loadAnimation(context, R.anim.zoom)
+        manzana.startAnimation(zoom)
+    }
+
+    fun disapear(manzana: ImageView) {
+        manzana.setOnClickListener() {}
+        println("DISAPEAR")
+        manzana.setImageResource(R.drawable.manchaverde)
+        val disapear = AnimationUtils.loadAnimation(context, R.anim.disapear)
+        manzana.startAnimation(disapear)
+        manzana.isVisible = false
+        acierto++
+
     }
 
     companion object {

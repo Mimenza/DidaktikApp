@@ -280,9 +280,7 @@ class Fragment1_5_juego : Fragment() {
         txtv1_5fondogris.isVisible=false
         btnf1_5_siguiente.isVisible=false
 
-
     }
-
 
     var opX: Float = 0F
     var opY: Float = 0F

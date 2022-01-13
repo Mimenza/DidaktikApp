@@ -11,27 +11,77 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/txtv2_2minijuego2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="MINIJUEGO 5"
+        <ImageView
+            android:id="@+id/imgv2_5_applepiece1"
+            android:layout_width="162dp"
+            android:layout_height="141dp"
+            android:layout_marginEnd="140dp"
+            android:layout_marginBottom="556dp"
+            android:src="@drawable/trozomanzana1"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgv2_5_applepiece2"
+            android:layout_width="162dp"
+            android:layout_height="141dp"
+            android:layout_marginEnd="212dp"
+            android:layout_marginBottom="388dp"
+            android:src="@drawable/trozomanzana2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgv2_5_applepiece3"
+            android:layout_width="162dp"
+            android:layout_height="141dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="388dp"
+            android:src="@drawable/trozomanzana3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgv2_5_applepiece4"
+            android:layout_width="162dp"
+            android:layout_height="141dp"
+            android:layout_marginEnd="212dp"
+            android:layout_marginBottom="236dp"
+            android:src="@drawable/trozomanzana4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgv2_5_applepiece5"
+            android:layout_width="162dp"
+            android:layout_height="141dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="236dp"
+            android:src="@drawable/trozomanzana5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgv2_5_applepiece6"
+            android:layout_width="162dp"
+            android:layout_height="141dp"
+            android:layout_marginEnd="124dp"
+            android:layout_marginBottom="56dp"
+            android:src="@drawable/trozomanzana6"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <Button
             android:id="@+id/btnf2_5siguiente"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/siguiente"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.69" />
+            app:layout_constraintVertical_bias="0.934" />
 
         <ImageButton
             android:id="@+id/btnf2_5ajustes"
@@ -44,6 +94,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.187" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

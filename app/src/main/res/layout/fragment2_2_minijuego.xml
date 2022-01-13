@@ -12,41 +12,55 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+        <!-- BASURERO DESACTIVADO-->
+
         <ImageView
-            android:id="@+id/cestavacia"
-            android:layout_width="371dp"
-            android:layout_height="522dp"
-            android:layout_marginTop="40dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/juegox_cestavacia"
+            android:id="@+id/imgv2_2_manzanav4"
+            android:layout_width="95dp"
+            android:layout_height="87dp"
+            android:src="@drawable/sagarraberdea"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.952"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgv2_2_manzanav3"
+            android:layout_width="95dp"
+            android:layout_height="87dp"
+            android:src="@drawable/sagarraberdea"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.784"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.722" />
+
+        <ImageView
+            android:id="@+id/imgv2_2_manzanav2"
+            android:layout_width="95dp"
+            android:layout_height="87dp"
+            android:src="@drawable/sagarraberdea"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.547"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.164" />
 
         <TextView
             android:id="@+id/manzanasAciertos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginBottom="52dp"
-            android:text="0"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="36dp"
+            android:text="0 / 5"
             android:textSize="34sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnf2_2siguiente"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/juegox_cesta" />
+            app:layout_constraintEnd_toStartOf="@+id/btnf2_2siguiente" />
 
-        <ImageView
-            android:id="@+id/juegox_cesta"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/juegox_cestamanzana"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-
-        <!-- BASURERO DESACTIVADO-->
         <ImageView
             android:id="@+id/juegox_basurero"
             android:layout_width="160dp"
@@ -64,6 +78,7 @@
             android:layout_marginEnd="28dp"
             android:layout_marginBottom="52dp"
             android:text="@string/siguiente"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -78,6 +93,90 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.187" />
+
+        <ImageView
+            android:id="@+id/imgv2_2_manzanav1"
+            android:layout_width="95dp"
+            android:layout_height="87dp"
+            android:src="@drawable/sagarraberdea"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.132"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.164" />
+
+        <ImageView
+            android:id="@+id/imgv2_2_manzanav"
+            android:layout_width="95dp"
+            android:layout_height="87dp"
+            android:src="@drawable/sagarraberdea"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.297"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.635" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="96dp"
+            android:layout_height="93dp"
+            android:src="@drawable/sagarragorria"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.133"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.446" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="96dp"
+            android:layout_height="93dp"
+            android:src="@drawable/sagarragorria"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.434"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.843" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="96dp"
+            android:layout_height="93dp"
+            android:src="@drawable/sagarragorria"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.482"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.376" />
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="96dp"
+            android:layout_height="93dp"
+            android:src="@drawable/sagarragorria"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.05"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.8" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="96dp"
+            android:layout_height="93dp"
+            android:src="@drawable/sagarragorria"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.952"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.324" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

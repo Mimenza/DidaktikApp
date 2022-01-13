@@ -181,21 +181,21 @@ se realiza cata y venta, así como la posibilidad de probar manzanas.
     <string name="titulo32_juego">EJERCICIO 4: SAGAR UZTA</string>
 
     <!--FRAGMENT JUEGO4 -->
-    <string name="text_4juego">"Bosgarren geldiunera
-        ailegatu gara!!! Astigar elkartera!!! Sagar Dantza
-        ezagutzeko gogoekin? Zuek gustuko ahal duzue dantza
-        egitea? Ba Astigartarrei asko gustatzen zaie ere, batez ere,
-        Astigar Dantza taldeko kideei. Astigar Dantza taldeko neska- mutil gazteek,
-        urtero, festa ezberdinak ospatzeko (Sagar uzta, txotx irekiera…) Sagar Dantza
-        izeneko dantza bat egiten dute sagarrekin eta Astigarragako txoko ezberdinetan
-        egiten da: sagardotegietan, plazan, sagardoetxean… Sagar dantza ez da soilik
-        Astigarragan dantzatzen, beste zenbat herrietan ere dantzatzen da, baina dantza
-        ez da guztiz berdina izaten leku guztietan. Jantziak ere herri batetik bestera
-        aldatu egiten dira, hori dela eta, geldiune honetan egingo duzuen
-        jardueran honekin erlazionatuta dago. Astigarragan Sagar Dantza
-        dantzatzeko erabiltzen diren jantziak, adibidez, nahiko deigarriak dira,
-        batez ere, “txorroko” deituriko kolorezko txapelari esker,
-        oso bitxiak baitira!  </string>
+    <string name="text_4juego">
+Hemos llegado a la quinta parada!!!
+¿Con ganas de conocer la Sagar Dantza?
+¿Les gusta bailar? Pues a los Astigartarras nos gusta bailar mucho
+, sobre todo, a los miembros del grupo Astigar Dantza Taldea.
+Los chicos y chicas jóvenes del grupo, cada año, para celebrar diferentes fiestas (Sagar Uzta,
+Apertura del txotx) realizan una danza titulada Sagar Dantza con manzanas.
+Se realiza en diferentes rincones de Astigarraga: sidrerías, plaza, sidrería...
+La Sagar dantza no sólo se baila en Astigarraga, sino también en otros pueblos.
+La danza no es del todo igual en todas partes.
+En la actividad que van a realizar en esta parada, está relacionado de esto.
+       Trajes con los que se baila la Sagar Dantza en Astigarraga,
+Por ejemplo, llaman bastante la atención, sobre todo, la boina de colores.
+¡Son muy curiosas!
+ </string>
     <string name="titulo4_juego">EJERCICIO 5: SAGAR DANTZA </string>
 
     <!--FRAGMENT JUEGO6 -->

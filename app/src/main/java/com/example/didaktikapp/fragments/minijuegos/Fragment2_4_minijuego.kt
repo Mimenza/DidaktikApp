@@ -51,6 +51,7 @@ class Fragment2_4_minijuego : Fragment() {
     private lateinit var manzana4: ImageView
     private lateinit var manzana5: ImageView
     private lateinit var manzanaSeleccionada: ImageView
+    private lateinit var test : ImageView
 
     var entra: Boolean = false
     var sale: Boolean = false
@@ -82,6 +83,11 @@ class Fragment2_4_minijuego : Fragment() {
         manzana3 = view.findViewById(R.id.manzana3_minijuego4)
         manzana4 = view.findViewById(R.id.manzana4_minijuego4)
         manzana5 = view.findViewById(R.id.manzana5_minijuego4)
+
+
+        //test
+         test = view.findViewById(R.id.manzanasAciertos4)
+         manzanaSeleccionada = test
 
         siguiente.setOnClickListener() {
             Navigation.findNavController(view)
@@ -228,7 +234,7 @@ class Fragment2_4_minijuego : Fragment() {
 
 
 
-                if ( this :: manzanaSeleccionada.isInitialized) {
+                if ( manzanaSeleccionada != test) {
                     println(manzanaSeleccionada.id)
 
                     //el dedo esta dentro del area
@@ -256,6 +262,7 @@ class Fragment2_4_minijuego : Fragment() {
                 entra = false
                 sale = false
                 dejarCortar = false
+                manzanaSeleccionada = test
             }
 
             MotionEvent.ACTION_UP -> {
@@ -263,6 +270,7 @@ class Fragment2_4_minijuego : Fragment() {
                 entra = false
                 sale = false
                 dejarCortar = false
+                manzanaSeleccionada = test
 
             }
 
@@ -289,6 +297,7 @@ class Fragment2_4_minijuego : Fragment() {
         manzana.startAnimation(aniFade2)
         manzana.isVisible = false
 
+        manzanaSeleccionada = test
     }
 
     companion object {

@@ -87,7 +87,7 @@ class Fragment2_2_minijuego : Fragment() {
         acierto++
         aciertoTxt.text = acierto.toString() + " / 5"
 
-        manzana.setOnClickListener(){}
+        //manzana.setOnClickListener(){}
 
         checkProgress()
 

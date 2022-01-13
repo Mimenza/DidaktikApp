@@ -55,6 +55,7 @@ class Fragment2_4_minijuego : Fragment() {
 
     var entra: Boolean = false
     var sale: Boolean = false
+    var dentro: Boolean = false
 
     var dejarCortar: Boolean = false
 
@@ -83,11 +84,6 @@ class Fragment2_4_minijuego : Fragment() {
         manzana3 = view.findViewById(R.id.manzana3_minijuego4)
         manzana4 = view.findViewById(R.id.manzana4_minijuego4)
         manzana5 = view.findViewById(R.id.manzana5_minijuego4)
-
-
-        //test
-         test = view.findViewById(R.id.manzanasAciertos4)
-         manzanaSeleccionada = test
 
         siguiente.setOnClickListener() {
             Navigation.findNavController(view)
@@ -210,43 +206,54 @@ class Fragment2_4_minijuego : Fragment() {
 
             MotionEvent.ACTION_MOVE -> {
                 //mientras mueves el dedo
-
+                println(dentro)
                 if ((x >= M1PosX1 && x <= M1PosX2) && (y >= M1PosY1 && y <= M1PosY2)) {
 
                     manzanaSeleccionada = manzana1
+                    dentro = true
                 }
-                if ((x >= M2PosX1 && x <= M2PosX2) && (y >= M2PosY1 && y <= M2PosY2)) {
+                else if ((x >= M2PosX1 && x <= M2PosX2) && (y >= M2PosY1 && y <= M2PosY2)) {
 
                     manzanaSeleccionada = manzana2
+                    dentro = true
                 }
-                if ((x >= M3PosX1 && x <= M3PosX2) && (y >= M3PosY1 && y <= M3PosY2)) {
+                else if ((x >= M3PosX1 && x <= M3PosX2) && (y >= M3PosY1 && y <= M3PosY2)) {
 
                     manzanaSeleccionada = manzana3
+                    dentro = true
                 }
-                if ((x >= M4PosX1 && x <= M4PosX2) && (y >= M4PosY1 && y <= M4PosY2)) {
+                else if ((x >= M4PosX1 && x <= M4PosX2) && (y >= M4PosY1 && y <= M4PosY2)) {
 
                     manzanaSeleccionada = manzana4
+                    dentro = true
                 }
-                if ((x >= M5PosX1 && x <= M5PosX2) && (y >= M5PosY1 && y <= M5PosY2)) {
+                else if ((x >= M5PosX1 && x <= M5PosX2) && (y >= M5PosY1 && y <= M5PosY2)) {
 
                     manzanaSeleccionada = manzana5
+                    dentro = true
+                }else{
+                    dentro = false
                 }
 
 
 
-                if ( manzanaSeleccionada != test) {
-                    println(manzanaSeleccionada.id)
+                if ( dentro == true) {
+                   //println(manzanaSeleccionada.id)
 
                     //el dedo esta dentro del area
                     if (!entra && dejarCortar) {
                         //seteamos la variable de que ha entrado
                         entra = true
+                        println("entra")
                     }
                 } else {
                     //el dedo no esta en el area
                     if (entra) {
                         //si el dedo estaba dentro significa que ha salido
                         sale = true
+                        dentro = false
+                        println("sale")
+
                     }
                     //seteamos la variable para que corte la manzana
                     dejarCortar = true
@@ -262,7 +269,7 @@ class Fragment2_4_minijuego : Fragment() {
                 entra = false
                 sale = false
                 dejarCortar = false
-                manzanaSeleccionada = test
+
             }
 
             MotionEvent.ACTION_UP -> {
@@ -270,10 +277,9 @@ class Fragment2_4_minijuego : Fragment() {
                 entra = false
                 sale = false
                 dejarCortar = false
-                manzanaSeleccionada = test
+                dentro = false
 
             }
-
 
         }
 
@@ -297,7 +303,6 @@ class Fragment2_4_minijuego : Fragment() {
         manzana.startAnimation(aniFade2)
         manzana.isVisible = false
 
-        manzanaSeleccionada = test
     }
 
     companion object {

@@ -1,7 +1,6 @@
 package com.example.didaktikapp.fragments.minijuegos
 
 import android.annotation.SuppressLint
-import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,15 +14,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
-import com.example.didaktikapp.Model.DragnDropImage
 import com.example.didaktikapp.R
 import kotlinx.android.synthetic.main.activity4_bienvenida.*
-import android.util.Log
 import android.view.View.OnTouchListener
-import android.graphics.Paint
-import android.graphics.Canvas
-import android.graphics.Rect
-import android.media.Image
 import kotlinx.android.synthetic.main.fragment2_4_minijuego.*
 
 
@@ -42,7 +35,7 @@ class Fragment2_4_minijuego : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var acierto: Int = 0
-    private lateinit var txtAciertos: TextView
+    private lateinit var aciertostxt: TextView
     private lateinit var siguiente: Button
 
     private lateinit var manzana1: ImageView
@@ -51,7 +44,7 @@ class Fragment2_4_minijuego : Fragment() {
     private lateinit var manzana4: ImageView
     private lateinit var manzana5: ImageView
     private lateinit var manzanaSeleccionada: ImageView
-    private lateinit var test : ImageView
+
 
     var entra: Boolean = false
     var sale: Boolean = false
@@ -76,7 +69,7 @@ class Fragment2_4_minijuego : Fragment() {
         val view = inflater.inflate(R.layout.fragment2_4_minijuego, container, false)
         siguiente = view.findViewById(R.id.btnf2_4siguiente)
         val ajustes: ImageButton = view.findViewById(R.id.btnf2_4ajustes)
-        txtAciertos = view.findViewById((R.id.manzanasAciertos4))
+        aciertostxt= view.findViewById(R.id.txt2_4_acierto)
 
         //manzanas
         manzana1 = view.findViewById(R.id.manzana1_minijuego4)
@@ -94,7 +87,7 @@ class Fragment2_4_minijuego : Fragment() {
                 .navigate(R.id.action_fragment2_4_minijuego_to_fragment4_menu)
         }
         siguiente.visibility = View.GONE
-        txtAciertos = view.findViewById(R.id.manzanasAciertos4)
+
 
         view.setOnTouchListener(handleTouch)
         return view
@@ -201,50 +194,45 @@ class Fragment2_4_minijuego : Fragment() {
         var M5PosY2 = manzana5PosY + (manzana5height) - 15
 
 
-
         when (event.action) {
 
             MotionEvent.ACTION_MOVE -> {
                 //mientras mueves el dedo
-                println(dentro)
+
                 if ((x >= M1PosX1 && x <= M1PosX2) && (y >= M1PosY1 && y <= M1PosY2)) {
 
                     manzanaSeleccionada = manzana1
                     dentro = true
-                }
-                else if ((x >= M2PosX1 && x <= M2PosX2) && (y >= M2PosY1 && y <= M2PosY2)) {
+                } else if ((x >= M2PosX1 && x <= M2PosX2) && (y >= M2PosY1 && y <= M2PosY2)) {
 
                     manzanaSeleccionada = manzana2
                     dentro = true
-                }
-                else if ((x >= M3PosX1 && x <= M3PosX2) && (y >= M3PosY1 && y <= M3PosY2)) {
+                } else if ((x >= M3PosX1 && x <= M3PosX2) && (y >= M3PosY1 && y <= M3PosY2)) {
 
                     manzanaSeleccionada = manzana3
                     dentro = true
-                }
-                else if ((x >= M4PosX1 && x <= M4PosX2) && (y >= M4PosY1 && y <= M4PosY2)) {
+                } else if ((x >= M4PosX1 && x <= M4PosX2) && (y >= M4PosY1 && y <= M4PosY2)) {
 
                     manzanaSeleccionada = manzana4
                     dentro = true
-                }
-                else if ((x >= M5PosX1 && x <= M5PosX2) && (y >= M5PosY1 && y <= M5PosY2)) {
+                } else if ((x >= M5PosX1 && x <= M5PosX2) && (y >= M5PosY1 && y <= M5PosY2)) {
 
                     manzanaSeleccionada = manzana5
                     dentro = true
-                }else{
+                } else {
                     dentro = false
                 }
 
 
 
-                if ( dentro == true) {
-                   //println(manzanaSeleccionada.id)
+                if (dentro == true) {
+
 
                     //el dedo esta dentro del area
                     if (!entra && dejarCortar) {
                         //seteamos la variable de que ha entrado
                         entra = true
-                        println("entra")
+
                     }
                 } else {
                     //el dedo no esta en el area
@@ -252,7 +240,7 @@ class Fragment2_4_minijuego : Fragment() {
                         //si el dedo estaba dentro significa que ha salido
                         sale = true
                         dentro = false
-                        println("sale")
+
 
                     }
                     //seteamos la variable para que corte la manzana
@@ -264,6 +252,7 @@ class Fragment2_4_minijuego : Fragment() {
                 }
 
             }
+
             MotionEvent.ACTION_DOWN -> {
                 //cuando aprietas el dedo
                 entra = false
@@ -280,28 +269,45 @@ class Fragment2_4_minijuego : Fragment() {
                 dentro = false
 
             }
-
         }
-
         true
     }
 
+
     fun checkProgress() {
-
-        if (acierto == 5) {
-
+        //si se han cortado todas las manzanas aparece el boton
+        if (acierto == 4) {
             siguiente.isVisible = true
+        } else {
+            acierto++
         }
+
     }
 
     fun cortarManzana(manzana: ImageView) {
         //reseteamos las variables para la siguiente manzana
         entra = false
         sale = false
-        //animacion
+
+        //animacion y foto random
+
+        var random =(0.. 5). random()
+
+        when (random) {
+
+            0->{ manzana.setImageResource(R.drawable.trozomanzana1)}
+            1->{ manzana.setImageResource(R.drawable.trozomanzana2)}
+            2->{ manzana.setImageResource(R.drawable.trozomanzana3)}
+            3->{ manzana.setImageResource(R.drawable.trozomanzana4)}
+            4->{ manzana.setImageResource(R.drawable.trozomanzana5)}
+            5->{ manzana.setImageResource(R.drawable.trozomanzana6)}
+        }
+
         val aniFade2 = AnimationUtils.loadAnimation(context, R.anim.slice_down)
         manzana.startAnimation(aniFade2)
         manzana.isVisible = false
+
+        checkProgress()
 
     }
 

@@ -123,15 +123,15 @@ class Fragment2_5_minijuego : Fragment() {
         val disapear = AnimationUtils.loadAnimation(context, R.anim.disapear)
         manzana.startAnimation(disapear)
         manzana.isVisible = false
-        changeVaso()
+        changeVaso(manzana)
         acierto++
 
 
 
     }
 
-    fun changeVaso(){
-
+    fun changeVaso(manzana: ImageView){
+        manzana.setOnClickListener() {}
         println("acierto"+ acierto)
 
         when (acierto) {

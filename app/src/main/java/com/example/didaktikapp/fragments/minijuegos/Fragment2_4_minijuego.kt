@@ -1,19 +1,23 @@
 package com.example.didaktikapp.fragments.minijuegos
 
 import android.annotation.SuppressLint
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.DragnDropImage
 import com.example.didaktikapp.R
+import kotlinx.android.synthetic.main.activity4_bienvenida.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,8 +33,9 @@ class Fragment2_4_minijuego : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    var manzanaList: MutableList<DragnDropImage>? = mutableListOf()
+    private var acierto:Int = 0
     private lateinit var txtAciertos:TextView
+    private lateinit var siguiente: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,13 +45,14 @@ class Fragment2_4_minijuego : Fragment() {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment2_4_minijuego, container, false)
-        val button: Button = view.findViewById(R.id.btnf2_4siguiente)
+        siguiente = view.findViewById(R.id.btnf2_4siguiente)
         val ajustes: ImageButton = view.findViewById(R.id.btnf2_4ajustes)
         txtAciertos = view.findViewById((R.id.manzanasAciertos4))
 
@@ -57,7 +63,7 @@ class Fragment2_4_minijuego : Fragment() {
         val manzana4: ImageView= view.findViewById(R.id.manzana4_minijuego4)
         val manzana5: ImageView= view.findViewById(R.id.manzana5_minijuego4)
 
-        button.setOnClickListener(){
+        siguiente.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment2_4_minijuego_to_fragment4_menu)
         }
 
@@ -65,32 +71,47 @@ class Fragment2_4_minijuego : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_fragment2_4_minijuego_to_fragment4_menu)
         }
 
-        button.visibility=View.GONE
+        siguiente.visibility=View.GONE
 
-
-        prepairApples()
+        manzana1.setOnTouchListener(listener)
+        manzana2.setOnTouchListener(listener)
+        manzana3.setOnTouchListener(listener)
+        manzana4.setOnTouchListener(listener)
+        manzana5.setOnTouchListener(listener)
+        txtAciertos = view.findViewById(R.id.manzanasAciertos4)
 
 
 
         return view
     }
 
-   fun prepairApples(){
 
+    @SuppressLint("ClickableViewAccessibility", "ResourceType")
+    var listener = View.OnTouchListener { viewElement, motionEvent ->
 
+        var touch = 1
 
-   }
+              viewElement.resources.getDrawable(R.drawable.trozomanzana1)
 
+        val aniFade2 = AnimationUtils.loadAnimation(context, R.anim.slice_down)
+        viewElement.startAnimation(aniFade2)
+        viewElement.isVisible = false
 
-    private fun findItemByOrigen(view: View): DragnDropImage? {
-        for (item in manzanaList!!) {
-            if (item.origen == view) {
-                return item
-            }
-        }
-        return null
+        acierto= acierto + touch
+
+        txtAciertos.text = acierto.toString()
+
+         checkProgress()
+        true
     }
 
+    fun checkProgress(){
+
+        if(acierto==5){
+
+            siguiente.isVisible = true
+        }
+    }
 
     companion object {
         /**

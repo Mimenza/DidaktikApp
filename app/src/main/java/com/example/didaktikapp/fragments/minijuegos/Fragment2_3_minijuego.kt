@@ -2,17 +2,12 @@ package com.example.didaktikapp.fragments.minijuegos
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.*
-import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.DragnDropImage
 import com.example.didaktikapp.R
-import com.example.didaktikapp.activities.DbHandler
-import org.w3c.dom.Text
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,11 +26,9 @@ class Fragment2_3_minijuego : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    var aciertosActuales: Int = 0
+    private var aciertosActuales: Int = 0
     private lateinit var globalView: View
-    var minijuegoFinalizado: Boolean = false
     private lateinit var button:Button
-    var acertados:Int = 0
     private var suciedadOrigen: IntArray? = null
 
     val listaImagenes = listOf(
@@ -80,14 +73,14 @@ class Fragment2_3_minijuego : Fragment() {
             ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 view.viewTreeObserver.removeOnGlobalLayoutListener(this)
-
-                prepairApples()
+                prepairDirts()
             }
         })
 
         return view
     }
-    fun prepairApples() {
+    fun prepairDirts() {
+        aciertosActuales = 0
         for (vItemList in listaImagenes) {
             var vItemOrigen: ImageView = globalView.findViewById(vItemList[0])
             var vItemDestino: ImageView = globalView.findViewById(vItemList[1])
@@ -147,13 +140,13 @@ class Fragment2_3_minijuego : Fragment() {
     }
 
     private fun manzanaLimpia() {
-        acertados++
+        aciertosActuales++
         val txtPuntuacion: TextView = globalView.findViewById(R.id.manzanasAciertos2)
-        txtPuntuacion.text = acertados.toString()
+        txtPuntuacion.text = aciertosActuales.toString()
     }
 
     private fun checkJuegoFinalizado() {
-        if (acertados >= 5) {
+        if (aciertosActuales >= 5) {
             button.visibility = View.VISIBLE
         }
     }

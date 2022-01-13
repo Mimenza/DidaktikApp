@@ -13,56 +13,12 @@
 
         <ImageView
             android:id="@+id/imgV2_3CleanApple1"
-            android:layout_width="86dp"
-            android:layout_height="86dp"
-            android:layout_marginStart="160dp"
-            android:layout_marginTop="116dp"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="84dp"
             android:scaleType="fitXY"
-            android:src="@drawable/sagarraberdea"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/imgV2_3CleanApple3"
-            android:layout_width="86dp"
-            android:layout_height="86dp"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="160dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/sagarraberdea"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/imgV2_3CleanApple4"
-            android:layout_width="86dp"
-            android:layout_height="86dp"
-            android:layout_marginStart="112dp"
-            android:layout_marginTop="264dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/sagarraberdea"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/imgV2_3CleanApple5"
-            android:layout_width="86dp"
-            android:layout_height="86dp"
-            android:layout_marginStart="212dp"
-            android:layout_marginTop="264dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/sagarraberdea"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/imgV2_3CleanApple2"
-            android:layout_width="86dp"
-            android:layout_height="86dp"
-            android:layout_marginStart="260dp"
-            android:layout_marginTop="160dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/sagarraberdea"
+            android:src="@drawable/img_upeliosagarra"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -71,7 +27,7 @@
             android:layout_width="86dp"
             android:layout_height="86dp"
             android:layout_marginStart="160dp"
-            android:layout_marginTop="116dp"
+            android:layout_marginTop="112dp"
             android:scaleType="fitXY"
             android:src="@drawable/suciedad"
             app:layout_constraintStart_toStartOf="parent"
@@ -81,10 +37,10 @@
             android:id="@+id/imgV2_suciedad2"
             android:layout_width="86dp"
             android:layout_height="86dp"
-            android:layout_marginStart="60dp"
+            android:layout_marginStart="36dp"
             android:layout_marginTop="160dp"
             android:scaleType="fitXY"
-            android:src="@drawable/suciedad"
+            android:src="@drawable/barro2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -92,10 +48,10 @@
             android:id="@+id/imgV2_suciedad3"
             android:layout_width="86dp"
             android:layout_height="86dp"
-            android:layout_marginStart="112dp"
-            android:layout_marginTop="264dp"
+            android:layout_marginStart="84dp"
+            android:layout_marginTop="320dp"
             android:scaleType="fitXY"
-            android:src="@drawable/suciedad"
+            android:src="@drawable/barro3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -103,10 +59,10 @@
             android:id="@+id/imgV2_suciedad4"
             android:layout_width="86dp"
             android:layout_height="86dp"
-            android:layout_marginStart="212dp"
-            android:layout_marginTop="264dp"
+            android:layout_marginStart="236dp"
+            android:layout_marginTop="356dp"
             android:scaleType="fitXY"
-            android:src="@drawable/suciedad"
+            android:src="@drawable/barro4"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -114,10 +70,10 @@
             android:id="@+id/imgV2_suciedad5"
             android:layout_width="86dp"
             android:layout_height="86dp"
-            android:layout_marginStart="260dp"
-            android:layout_marginTop="160dp"
+            android:layout_marginStart="280dp"
+            android:layout_marginTop="232dp"
             android:scaleType="fitXY"
-            android:src="@drawable/suciedad"
+            android:src="@drawable/barro5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

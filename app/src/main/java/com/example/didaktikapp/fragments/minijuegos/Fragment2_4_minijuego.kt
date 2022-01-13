@@ -24,6 +24,7 @@ import android.graphics.Paint
 import android.graphics.Canvas
 import android.graphics.Rect
 import android.media.Image
+import kotlinx.android.synthetic.main.fragment2_4_minijuego.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -49,6 +50,7 @@ class Fragment2_4_minijuego : Fragment() {
     private lateinit var manzana3: ImageView
     private lateinit var manzana4: ImageView
     private lateinit var manzana5: ImageView
+    private lateinit var manzanaSeleccionada: ImageView
 
     var entra: Boolean = false
     var sale: Boolean = false
@@ -99,7 +101,8 @@ class Fragment2_4_minijuego : Fragment() {
     @SuppressLint("ClickableViewAccessibility")
     private val handleTouch = OnTouchListener { v, event ->
         val x = event.x.toInt()
-        val y = event.y.toInt()
+        val y = event.y.toInt();
+
 
         var manzana1PosX = manzana1.x
         var manzana1PosY = manzana1.y
@@ -195,42 +198,56 @@ class Fragment2_4_minijuego : Fragment() {
         // manzana5 punto2 y
         var M5PosY2 = manzana5PosY + (manzana5height) - 15
 
-        when (event.action) {
 
+
+        when (event.action) {
 
             MotionEvent.ACTION_MOVE -> {
                 //mientras mueves el dedo
 
+                if ((x >= M1PosX1 && x <= M1PosX2) && (y >= M1PosY1 && y <= M1PosY2)) {
 
-                    if ((x >= M1PosX1 && x <= M1PosX2) && (y >= M1PosY1 && y <= M1PosY2)) {
+                    manzanaSeleccionada = manzana1
+                }
+                if ((x >= M2PosX1 && x <= M2PosX2) && (y >= M2PosY1 && y <= M2PosY2)) {
 
-                        println(entra)
+                    manzanaSeleccionada = manzana2
+                }
+                if ((x >= M3PosX1 && x <= M3PosX2) && (y >= M3PosY1 && y <= M3PosY2)) {
 
-                        if (!entra && dejarCortar ) {
+                    manzanaSeleccionada = manzana3
+                }
+                if ((x >= M4PosX1 && x <= M4PosX2) && (y >= M4PosY1 && y <= M4PosY2)) {
 
-                            entra = true
-                        }
-                    } else {
+                    manzanaSeleccionada = manzana4
+                }
+                if ((x >= M5PosX1 && x <= M5PosX2) && (y >= M5PosY1 && y <= M5PosY2)) {
 
-                        println(entra)
+                    manzanaSeleccionada = manzana5
+                }
 
-                        if (entra) {
 
-                            sale = true
-                        }
 
-                        dejarCortar = true
+                if ( this :: manzanaSeleccionada.isInitialized) {
+                    println(manzanaSeleccionada.id)
+
+                    //el dedo esta dentro del area
+                    if (!entra && dejarCortar) {
+                        //seteamos la variable de que ha entrado
+                        entra = true
                     }
-
+                } else {
+                    //el dedo no esta en el area
+                    if (entra) {
+                        //si el dedo estaba dentro significa que ha salido
+                        sale = true
+                    }
+                    //seteamos la variable para que corte la manzana
+                    dejarCortar = true
+                }
 
                 if (entra && sale) {
-
-                    entra = false
-                    sale = false
-
-                    val aniFade2 = AnimationUtils.loadAnimation(context, R.anim.slice_down)
-                    manzana1.startAnimation(aniFade2)
-                    manzana1.isVisible = false
+                    cortarManzana(manzanaSeleccionada)
                 }
 
             }
@@ -261,6 +278,17 @@ class Fragment2_4_minijuego : Fragment() {
 
             siguiente.isVisible = true
         }
+    }
+
+    fun cortarManzana(manzana: ImageView) {
+        //reseteamos las variables para la siguiente manzana
+        entra = false
+        sale = false
+        //animacion
+        val aniFade2 = AnimationUtils.loadAnimation(context, R.anim.slice_down)
+        manzana.startAnimation(aniFade2)
+        manzana.isVisible = false
+
     }
 
     companion object {

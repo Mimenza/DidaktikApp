@@ -40,15 +40,20 @@ class Fragment2_4_minijuego : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var acierto:Int = 0
-    private lateinit var txtAciertos:TextView
+    private var acierto: Int = 0
+    private lateinit var txtAciertos: TextView
     private lateinit var siguiente: Button
 
-    private lateinit var manzana1 : ImageView
-    private lateinit var manzana2 : ImageView
-    private lateinit var manzana3 : ImageView
-    private lateinit var manzana4 : ImageView
-    private lateinit var manzana5 : ImageView
+    private lateinit var manzana1: ImageView
+    private lateinit var manzana2: ImageView
+    private lateinit var manzana3: ImageView
+    private lateinit var manzana4: ImageView
+    private lateinit var manzana5: ImageView
+
+    var entra: Boolean = false
+    var sale: Boolean = false
+
+    var dejarCortar: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,99 +75,177 @@ class Fragment2_4_minijuego : Fragment() {
         txtAciertos = view.findViewById((R.id.manzanasAciertos4))
 
         //manzanas
-         manzana1= view.findViewById(R.id.manzana1_minijuego4)
-         manzana2= view.findViewById(R.id.manzana2_minijuego4)
-         manzana3= view.findViewById(R.id.manzana3_minijuego4)
-         manzana4= view.findViewById(R.id.manzana4_minijuego4)
-         manzana5= view.findViewById(R.id.manzana5_minijuego4)
+        manzana1 = view.findViewById(R.id.manzana1_minijuego4)
+        manzana2 = view.findViewById(R.id.manzana2_minijuego4)
+        manzana3 = view.findViewById(R.id.manzana3_minijuego4)
+        manzana4 = view.findViewById(R.id.manzana4_minijuego4)
+        manzana5 = view.findViewById(R.id.manzana5_minijuego4)
 
-        siguiente.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment2_4_minijuego_to_fragment4_menu)
+        siguiente.setOnClickListener() {
+            Navigation.findNavController(view)
+                .navigate(R.id.action_fragment2_4_minijuego_to_fragment4_menu)
         }
-
-        ajustes.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment2_4_minijuego_to_fragment4_menu)
+        ajustes.setOnClickListener() {
+            Navigation.findNavController(view)
+                .navigate(R.id.action_fragment2_4_minijuego_to_fragment4_menu)
         }
-
-        siguiente.visibility=View.GONE
-
-       /* manzana1.setOnTouchListener(listener)
-        manzana2.setOnTouchListener(listener)
-        manzana3.setOnTouchListener(listener)
-        manzana4.setOnTouchListener(listener)
-        manzana5.setOnTouchListener(listener)*/
+        siguiente.visibility = View.GONE
         txtAciertos = view.findViewById(R.id.manzanasAciertos4)
-
 
         view.setOnTouchListener(handleTouch)
         return view
     }
-
-
-   /* @SuppressLint("ClickableViewAccessibility", "ResourceType")
-    var listener = View.OnTouchListener { viewElement, motionEvent ->
-
-        var touch = 1
-
-              viewElement.resources.getDrawable(R.drawable.trozomanzana1)
-
-        val aniFade2 = AnimationUtils.loadAnimation(context, R.anim.slice_down)
-        viewElement.startAnimation(aniFade2)
-        viewElement.isVisible = false
-
-        acierto= acierto + touch
-
-        txtAciertos.text = acierto.toString()
-
-         checkProgress()
-        true
-    }*/
-
-
 
     @SuppressLint("ClickableViewAccessibility")
     private val handleTouch = OnTouchListener { v, event ->
         val x = event.x.toInt()
         val y = event.y.toInt()
 
-        var entra:Boolean = false
-        var sale:Boolean = false
-
-        val manzana1Location = IntArray(2)
-        manzana1.getLocationOnScreen(manzana1Location)
-
-        var manzana1PosX = manzana1Location[0]
-        var manzana1PosY = manzana1Location[1]
+        var manzana1PosX = manzana1.x
+        var manzana1PosY = manzana1.y
         var manzana1Width = manzana1.width
         var manzana1height = manzana1.height
 
-        //punto1 x
-        var PosX1 = manzana1PosX-(manzana1Width/2)
+        var manzana2PosX = manzana2.x
+        var manzana2PosY = manzana2.y
+        var manzana2Width = manzana2.width
+        var manzana2height = manzana2.height
 
-        //punto2 x
-        var PosX2 = manzana1PosX+(manzana1Width/2)
+        var manzana3PosX = manzana3.x
+        var manzana3PosY = manzana3.y
+        var manzana3Width = manzana3.width
+        var manzana3height = manzana3.height
 
-        //punto1 y
-        var PosY1 = manzana1PosY-(manzana1height/2)
+        var manzana4PosX = manzana4.x
+        var manzana4PosY = manzana4.y
+        var manzana4Width = manzana4.width
+        var manzana4height = manzana4.height
 
-        //punto2 y
-        var PosY2 = manzana1PosY+(manzana1height/2)
+        var manzana5PosX = manzana5.x
+        var manzana5PosY = manzana5.y
+        var manzana5Width = manzana5.width
+        var manzana5height = manzana5.height
 
-                when (event.action) {
-            MotionEvent.ACTION_MOVE ->{
+
+        // manzana1 punto1 x
+        var M1PosX1 = manzana1PosX + 15
+
+        // manzana1 punto2 x
+        var M1PosX2 = manzana1PosX + (manzana1Width) - 15
+
+        // manzana1 punto1 y
+        var M1PosY1 = manzana1PosY + 15
+
+        // manzana1 punto2 y
+        var M1PosY2 = manzana1PosY + (manzana1height) - 15
+
+        //-------------------------------------------------
+
+        // manzana2 punto1 x
+        var M2PosX1 = manzana2PosX + 15
+
+        // manzana2 punto2 x
+        var M2PosX2 = manzana2PosX + (manzana2Width) - 15
+
+        // manzana2 punto1 y
+        var M2PosY1 = manzana2PosY + 15
+
+        // manzana2 punto2 y
+        var M2PosY2 = manzana2PosY + (manzana2height) - 15
+
+        //-------------------------------------------------
+
+        // manzana3 punto1 x
+        var M3PosX1 = manzana3PosX + 15
+
+        // manzana3 punto2 x
+        var M3PosX2 = manzana3PosX + (manzana3Width) - 15
+
+        // manzana3 punto1 y
+        var M3PosY1 = manzana3PosY + 15
+
+        // manzana3 punto2 y
+        var M3PosY2 = manzana3PosY + (manzana3height) - 15
+
+        //-------------------------------------------------
+
+        // manzana4 punto1 x
+        var M4PosX1 = manzana4PosX + 15
+
+        // manzana4 punto2 x
+        var M4PosX2 = manzana4PosX + (manzana4Width) - 15
+
+        // manzana4 punto1 y
+        var M4PosY1 = manzana4PosY + 15
+
+        // manzana4 punto2 y
+        var M4PosY2 = manzana4PosY + (manzana4height) - 15
+
+        //-------------------------------------------------
+
+        // manzana5 punto1 x
+        var M5PosX1 = manzana5PosX + 15
+
+        // manzana5 punto2 x
+        var M5PosX2 = manzana5PosX + (manzana5Width) - 15
+
+        // manzana5 punto1 y
+        var M5PosY1 = manzana5PosY + 15
+
+        // manzana5 punto2 y
+        var M5PosY2 = manzana5PosY + (manzana5height) - 15
+
+        when (event.action) {
+
+
+            MotionEvent.ACTION_MOVE -> {
                 //mientras mueves el dedo
-                if ((x>= PosX1 && x <= PosX2) && (y>= PosY1 && y <= PosY2)) {
-                    println("SI")
-                }
-                else{
-                    println("NO")
+
+
+                    if ((x >= M1PosX1 && x <= M1PosX2) && (y >= M1PosY1 && y <= M1PosY2)) {
+
+                        println(entra)
+
+                        if (!entra && dejarCortar ) {
+
+                            entra = true
+                        }
+                    } else {
+
+                        println(entra)
+
+                        if (entra) {
+
+                            sale = true
+                        }
+
+                        dejarCortar = true
+                    }
+
+
+                if (entra && sale) {
+
+                    entra = false
+                    sale = false
+
+                    val aniFade2 = AnimationUtils.loadAnimation(context, R.anim.slice_down)
+                    manzana1.startAnimation(aniFade2)
+                    manzana1.isVisible = false
                 }
 
             }
-            MotionEvent.ACTION_UP ->{
+            MotionEvent.ACTION_DOWN -> {
+                //cuando aprietas el dedo
+                entra = false
+                sale = false
+                dejarCortar = false
+            }
+
+            MotionEvent.ACTION_UP -> {
                 //cuando levantas el dedo
-                 entra = false
-                 sale = false
+                entra = false
+                sale = false
+                dejarCortar = false
 
             }
 
@@ -171,9 +254,10 @@ class Fragment2_4_minijuego : Fragment() {
 
         true
     }
-    fun checkProgress(){
 
-        if(acierto==5){
+    fun checkProgress() {
+
+        if (acierto == 5) {
 
             siguiente.isVisible = true
         }

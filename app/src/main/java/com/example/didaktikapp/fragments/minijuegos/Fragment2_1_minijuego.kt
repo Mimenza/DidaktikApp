@@ -141,6 +141,7 @@ class Fragment2_1_minijuego : Fragment() {
                         var cestaPosY = cestaLocation[1]
                         var cestaSizeX = cesta.width
                         var cestaSizeY = cesta.height
+
                         if ( (viewElement.x + viewElement.width/2) >= cestaPosX && (viewElement.y + viewElement.height/2) >= cestaPosY && (viewElement.x + viewElement.width/2) <= cestaPosX+cestaSizeX && (viewElement.y + viewElement.height/2) <= cestaPosY+cestaSizeY) {
                             comprobarInsercionManzana(itemInList, cesta)
                             itemInList.acertado = true

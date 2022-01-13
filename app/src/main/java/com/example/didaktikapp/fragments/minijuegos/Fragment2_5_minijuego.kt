@@ -28,10 +28,9 @@ class Fragment2_5_minijuego : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
-    private lateinit var aciertoTxt: TextView
     private var acierto: Int = 0
     private lateinit var siguiente: Button
+    private lateinit var vaso: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,6 +48,7 @@ class Fragment2_5_minijuego : Fragment() {
         val view = inflater.inflate(R.layout.fragment2_5_minijuego, container, false)
         siguiente = view.findViewById(R.id.btnf2_5siguiente)
         val ajustes: ImageButton = view.findViewById(R.id.btnf2_5ajustes)
+        vaso  = view.findViewById(R.id.imgv2_5vaso)
 
         siguiente.setOnClickListener() {
             Navigation.findNavController(view)
@@ -104,7 +104,7 @@ class Fragment2_5_minijuego : Fragment() {
 
     fun checkProgress() {
         println("check" + acierto)
-        if (acierto == 6) {
+        if (acierto == 5) {
 
             siguiente.isVisible = true
         }
@@ -123,7 +123,28 @@ class Fragment2_5_minijuego : Fragment() {
         val disapear = AnimationUtils.loadAnimation(context, R.anim.disapear)
         manzana.startAnimation(disapear)
         manzana.isVisible = false
+        changeVaso()
         acierto++
+
+
+
+    }
+
+    fun changeVaso(){
+
+        println("acierto"+ acierto)
+
+        when (acierto) {
+            0 ->{vaso.setImageResource(R.drawable.vaso2) }
+            1 ->{vaso.setImageResource(R.drawable.vaso3) }
+            2 ->{vaso.setImageResource(R.drawable.vaso4) }
+            3 ->{vaso.setImageResource(R.drawable.vaso5) }
+            4 ->{vaso.setImageResource(R.drawable.vaso6) }
+
+            else -> {
+                print("x is neither 1 nor 2")
+            }
+        }
 
     }
 

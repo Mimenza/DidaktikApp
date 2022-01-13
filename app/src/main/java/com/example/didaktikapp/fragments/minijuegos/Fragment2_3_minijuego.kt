@@ -2,16 +2,12 @@ package com.example.didaktikapp.fragments.minijuegos
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.*
 import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.DragnDropImage
 import com.example.didaktikapp.R
-import com.example.didaktikapp.activities.DbHandler
-import org.w3c.dom.Text
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,21 +26,17 @@ class Fragment2_3_minijuego : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    var aciertosActuales: Int = 0
+    private var aciertosActuales: Int = 0
     private lateinit var globalView: View
-    var minijuegoFinalizado: Boolean = false
-    lateinit var  button:Button
-    var acertados:Int = 0
-    private var tiempoCompletarComprobacion = 1000
+    private lateinit var button:Button
+    private var suciedadOrigen: IntArray? = null
 
     val listaImagenes = listOf(
-        listOf(R.id.imgV2_3CleanApple1,R.id.imgv2_3cesta),
-        listOf(R.id.imgV2_3CleanApple2,R.id.imgv2_3cesta),
-        listOf(R.id.imgV2_3CleanApple3,R.id.imgv2_3cesta),
-        listOf(R.id.imgV2_3CleanApple4,R.id.imgv2_3cesta),
-        listOf(R.id.imgV2_3CleanApple5,R.id.imgv2_3cesta),
-
-        //listOf(R.id.puzzle_pieza_otest1,R.id.puzzle_pieza_otest2),
+        listOf(R.id.imgV2_suciedad1,R.id.minijuego3_basurero),
+        listOf(R.id.imgV2_suciedad2,R.id.minijuego3_basurero),
+        listOf(R.id.imgV2_suciedad3,R.id.minijuego3_basurero),
+        listOf(R.id.imgV2_suciedad4,R.id.minijuego3_basurero),
+        listOf(R.id.imgV2_suciedad5,R.id.minijuego3_basurero),
     )
     private lateinit var aciertosTxt:TextView
 
@@ -64,11 +56,10 @@ class Fragment2_3_minijuego : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment2_3_minijuego, container, false)
-
+        globalView = view
         button = view.findViewById(R.id.btnf2_3_1siguiente)
+        button.visibility = View.GONE
         val ajustes: ImageButton = view.findViewById(R.id.btnf2_3_1ajustes)
-
-        //agua  = view.findViewById((R.id.imgv2_3agua))
 
         button.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment2_3_minijuego_to_fragment4_menu)
@@ -78,20 +69,18 @@ class Fragment2_3_minijuego : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_fragment2_3_minijuego_to_fragment4_menu)
         }
 
-        globalView = view
-
         view.viewTreeObserver.addOnGlobalLayoutListener(object :
             ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 view.viewTreeObserver.removeOnGlobalLayoutListener(this)
-
-                prepairApples()
+                prepairDirts()
             }
         })
 
         return view
     }
-    fun prepairApples() {
+    fun prepairDirts() {
+        aciertosActuales = 0
         for (vItemList in listaImagenes) {
             var vItemOrigen: ImageView = globalView.findViewById(vItemList[0])
             var vItemDestino: ImageView = globalView.findViewById(vItemList[1])
@@ -100,13 +89,18 @@ class Fragment2_3_minijuego : Fragment() {
         }
     }
 
-    private var cleanManzanaTimer: Boolean? = null
-
     @SuppressLint("ClickableViewAccessibility")
     var listener = View.OnTouchListener { viewElement, motionEvent ->
         var itemInList: DragnDropImage? = findItemByOrigen(viewElement)
-
         if (itemInList != null) {
+            if (null == suciedadOrigen) {
+                suciedadOrigen = IntArray(2)
+                itemInList.origen.getLocationOnScreen(suciedadOrigen);
+                //Posicion/tamaño del agua
+                var suciedadOrigenX = suciedadOrigen!![0]
+                var suciedadOrigenY = suciedadOrigen!![1]
+                println("******** SUCIEDAD ORIGEN: " + suciedadOrigenX + " / " + suciedadOrigenY)
+            }
             //if (!itemInList.acertado) {
                 viewElement.bringToFront()
                 val action = motionEvent.action
@@ -114,73 +108,48 @@ class Fragment2_3_minijuego : Fragment() {
                     MotionEvent.ACTION_MOVE -> {
                         viewElement.x = motionEvent.rawX - viewElement.width/2
                         viewElement.y = motionEvent.rawY - viewElement.height/2
-                        //Aqui comprobamos si la manzana no esta limpia.
-                        if (!itemInList.acertado) {
-                            val aguaLocation = IntArray(2)
-                            agua.getLocationOnScreen(aguaLocation);
-                            //Posicion/tamaño del agua
-                            var aguaPosX = aguaLocation[0]
-                            var aguaPosY = aguaLocation[1]
-                            var aguaSizeX = agua.width
-                            var aguaSizeY = agua.height
-
-                            // Si la imagen pasa por el agua, la manzana cambiara a limpia
-                            if ( (viewElement.x + viewElement.width/2) >= aguaPosX && (viewElement.y + viewElement.height/2) >= aguaPosY && (viewElement.x + viewElement.width/2) <= aguaPosX+aguaSizeX && (viewElement.y + viewElement.height/2) <= aguaPosY+aguaSizeY) {
-
-                                if (cleanManzanaTimer == null) {
-                                    cleanManzanaTimer = true
-                                    Handler(Looper.getMainLooper()).postDelayed({
-                                        if (getView() != null && cleanManzanaTimer != null) {
-                                            if ( (viewElement.x + viewElement.width/2) >= aguaPosX && (viewElement.y + viewElement.height/2) >= aguaPosY && (viewElement.x + viewElement.width/2) <= aguaPosX+aguaSizeX && (viewElement.y + viewElement.height/2) <= aguaPosY+aguaSizeY) {
-                                                itemInList.acertado = true
-                                                itemInList.origen.setImageResource(R.drawable.sagarraberdea)
-                                                cleanManzanaTimer = null
-                                            }
-                                        }
-                                    }, tiempoCompletarComprobacion.toLong())
-                                }
-                            } else {
-                                if (cleanManzanaTimer != null) {
-                                    cleanManzanaTimer = null
-                                }
-                            }
-                        }
                     }
                 MotionEvent.ACTION_UP -> {
-                    if (itemInList.acertado) {
-                        viewElement.x = motionEvent.rawX - viewElement.width / 2
-                        viewElement.y = motionEvent.rawY - viewElement.height / 2
-                        var objetivoEncontrado: View = itemInList!!.objetivo
-                        val location = IntArray(2)
-                        objetivoEncontrado.getLocationOnScreen(location);
-                        var posX = location[0]
-                        var posY = location[1]
-                        var sizeX = objetivoEncontrado.width
-                        var sizeY = objetivoEncontrado.height
-                        if ((viewElement.x + viewElement.width / 2) >= posX && (viewElement.y + viewElement.height / 2) >= posY && (viewElement.x + viewElement.width / 2) <= posX + sizeX && (viewElement.y + viewElement.height / 2) <= posY + sizeY) {
-                            viewElement.x = posX.toFloat()
-                            viewElement.y = posY.toFloat()
-                            viewElement.setOnTouchListener(null)
-                        }
+                    viewElement.x = motionEvent.rawX - viewElement.width / 2
+                    viewElement.y = motionEvent.rawY - viewElement.height / 2
+                    var objetivoEncontrado: View = itemInList!!.objetivo
+                    val location = IntArray(2)
+                    objetivoEncontrado.getLocationOnScreen(location);
+                    var posX = location[0]
+                    var posY = location[1]
+                    var sizeX = objetivoEncontrado.width
+                    var sizeY = objetivoEncontrado.height
+                    if ((viewElement.x + viewElement.width / 2) >= posX && (viewElement.y + viewElement.height / 2) >= posY && (viewElement.x + viewElement.width / 2) <= posX + sizeX && (viewElement.y + viewElement.height / 2) <= posY + sizeY) {
+                        viewElement.x = posX.toFloat()
+                        viewElement.y = posY.toFloat()
+                        viewElement.setOnTouchListener(null)
+                        itemInList.acertado = true
+                        manzanaLimpia()
+                        checkJuegoFinalizado()
+                    } else {
+                        //println("******** SUCIEDAD DEFAULT: " +  suciedadOrigenX + " / " +suciedadOrigenY)
+                        viewElement.x = suciedadOrigen!![0].toFloat()
+                        viewElement.y = suciedadOrigen!![1].toFloat()
+
                     }
-                    cleanManzanaTimer = null
+                    suciedadOrigen = null
                 }
             }
         }
         true
     }
 
-    private fun comprobarInsercionManzana(item: DragnDropImage, objetivoInsertado: ImageView) {
-        //item.acertado = true
-        if (item.objetivo == objetivoInsertado) {
-            aciertosActuales++
-
-            println(aciertosActuales)
-        }
-        comprobarJuegoFinalizado()
+    private fun manzanaLimpia() {
+        aciertosActuales++
+        val txtPuntuacion: TextView = globalView.findViewById(R.id.manzanasAciertos2)
+        txtPuntuacion.text = aciertosActuales.toString()
     }
 
-
+    private fun checkJuegoFinalizado() {
+        if (aciertosActuales >= 5) {
+            button.visibility = View.VISIBLE
+        }
+    }
 
     private fun findItemByOrigen(view: View): DragnDropImage? {
         for (item in manzanaList!!) {
@@ -189,21 +158,6 @@ class Fragment2_3_minijuego : Fragment() {
             }
         }
         return null
-    }
-
-    private fun removeManzanasListener() {
-        for (item in manzanaList!!) {
-            item.origen.setOnTouchListener(null)
-        }
-    }
-
-    private fun comprobarJuegoFinalizado() {
-        if (aciertosActuales >= 5) {
-            button.visibility = View.VISIBLE
-            minijuegoFinalizado = true
-            Toast.makeText(requireContext(), "ZORIONAK !!", Toast.LENGTH_SHORT).show()
-            removeManzanasListener()
-        }
     }
 
     companion object {

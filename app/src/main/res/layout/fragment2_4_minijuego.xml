@@ -38,47 +38,47 @@
 
         <ImageView
             android:id="@+id/manzana1_minijuego4"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:src="@drawable/sagarraberdea"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.118"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.444"
+            app:layout_constraintVertical_bias="0.529"
             tools:ignore="MissingConstraints" />
 
         <ImageView
             android:id="@+id/manzana2_minijuego4"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:src="@drawable/sagarraberdea"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.892"
+            app:layout_constraintHorizontal_bias="0.848"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.337"
+            app:layout_constraintVertical_bias="0.429"
             tools:ignore="MissingConstraints" />
 
         <ImageView
             android:id="@+id/manzana3_minijuego4"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:src="@drawable/sagarraberdea"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.118"
+            app:layout_constraintHorizontal_bias="0.18"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.08"
+            app:layout_constraintVertical_bias="0.278"
             tools:ignore="MissingConstraints" />
 
         <ImageView
             android:id="@+id/manzana4_minijuego4"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:src="@drawable/sagarraberdea"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -90,8 +90,8 @@
 
         <ImageView
             android:id="@+id/manzana5_minijuego4"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
             android:src="@drawable/sagarraberdea"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -114,6 +114,34 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.9" />
+
+        <ImageView
+            android:id="@+id/imgv2_4woodtable"
+            android:layout_width="492dp"
+            android:layout_height="102dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/wood_board"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.506"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.022" />
+
+        <TextView
+            android:id="@+id/txtv2_4titulominijuego"
+            android:layout_width="247dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/sagarrakebaki"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.603"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.066" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

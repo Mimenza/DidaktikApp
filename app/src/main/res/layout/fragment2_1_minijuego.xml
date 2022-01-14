@@ -13,11 +13,11 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:layout_width="371dp"
-            android:layout_height="522dp"
-            android:layout_marginTop="40dp"
+            android:layout_width="370dp"
+            android:layout_height="490dp"
             android:scaleType="fitXY"
             android:src="@drawable/juegox_arbol"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -70,13 +70,43 @@
             android:id="@+id/btnf2_1ajustes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minHeight="48dp"
             android:src="@drawable/ic_ajustes_black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.187" />
+            app:layout_constraintVertical_bias="0.187"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <ImageView
+            android:id="@+id/imgv2_1woodtable"
+            android:layout_width="492dp"
+            android:layout_height="102dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/wood_board"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.506"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.041" />
+
+        <TextView
+            android:id="@+id/txtv2_1titulominijuego1"
+            android:layout_width="247dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/sagarrakbildu"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.591"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.079" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

@@ -3,38 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Luis/Documents/GitHub/DidaktikApp/app/src/main/res/layout/fragment1_3_1_juego.xml" value="0.36615384615384616" />
-        <entry key="..\:/Users/Luis/Documents/GitHub/DidaktikApp/app/src/main/res/layout/fragment1_7_juego.xml" value="0.209375" />
-        <entry key="..\:/Users/endika/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment2_4_minijuego.xml" value="0.33" />
-        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/activity1_principal.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/activity2_login.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/activity5_mapa.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/activity6_site.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/activity7_1_juego7_results.xml" value="0.31791530944625407" />
-        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/activity7_juego2_results.xml" value="0.1" />
-        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment1_1_juego.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment1_2_juego.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment1_4_juego.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment1_5_juego.xml" value="0.23854166666666668" />
-        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment1_7_juego.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment2_1_minijuego.xml" value="0.2462962962962963" />
+        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment2_1_minijuego.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment2_2_minijuego.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment2_3_1_minijuego.xml" value="0.2462962962962963" />
-        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment2_5_minijuego.xml" value="0.2462962962962963" />
+        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment2_3_minijuego.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment2_4_minijuego.xml" value="0.264" />
+        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment2_5_minijuego.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment2_6_minijuego.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment2_7_minijuego.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment4_menu.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment5_ajustes.xml" value="0.23854166666666668" />
         <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment6_ayuda.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/itemuserrecycler.xml" value="0.2" />
-        <entry key="..\:/Users/ik_2dm3/Documents/git/DidaktikApp/app/src/main/res/layout/activity1_principal.xml" value="0.25025641025641027" />
-        <entry key="..\:/Users/ik_2dm3/Documents/git/DidaktikApp/app/src/main/res/layout/fragment1_1_juego.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/ik_2dm3/Documents/git/DidaktikApp/app/src/main/res/layout/fragment1_3_1_juego.xml" value="0.2" />
-        <entry key="..\:/Users/ik_2dm3/Documents/git/DidaktikApp/app/src/main/res/layout/fragment1_3_juego.xml" value="0.19548218940052128" />
-        <entry key="..\:/Users/ik_2dm3/Documents/git/DidaktikApp/app/src/main/res/layout/fragment1_6_juego.xml" value="0.25025641025641027" />
-        <entry key="..\:/Users/ik_2dm3/Documents/git/DidaktikApp/app/src/main/res/layout/fragment2_5_minijuego.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/didaktikapp/app/src/main/res/layout/fragment2_1_minijuego.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/didaktikapp/app/src/main/res/layout/fragment2_5_minijuego.xml" value="0.16458333333333333" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

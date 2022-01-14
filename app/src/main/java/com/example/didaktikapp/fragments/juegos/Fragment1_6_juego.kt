@@ -73,9 +73,14 @@ class Fragment1_6_juego : Fragment() {
         val view = inflater.inflate(R.layout.fragment1_6_juego, container, false)
         globalView = view
         val btnsiguiente: Button = view.findViewById(R.id.btnf1_6siguienteJuego)
+        val btnsaltar: Button = view.findViewById(R.id.btnf1_6saltarjuego)
         val btnrepertir : Button = view.findViewById(R.id.btnf1_6repetirJuego)
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_6_ajustes)
         val buttonSonido: ImageButton = view.findViewById(R.id.btnf1_6_sonido)
+
+        btnsaltar.setOnClickListener() {
+            Navigation.findNavController(view).navigate(R.id.action_fragment1_6_juego_to_fragment2_6_minijuego)
+        }
 
         playPauseButton = view.findViewById(R.id.juego6playpause)
         backwardButton = view.findViewById(R.id.juego6backward)

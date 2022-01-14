@@ -2,9 +2,13 @@ package com.example.didaktikapp.fragments.minijuegos
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.os.Handler
 import android.view.*
+import android.view.animation.TranslateAnimation
 import androidx.fragment.app.Fragment
 import android.widget.*
+import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.DragnDropImage
 import com.example.didaktikapp.R
@@ -28,8 +32,13 @@ class Fragment2_3_minijuego : Fragment() {
     private var param2: String? = null
     private var aciertosActuales: Int = 0
     private lateinit var globalView: View
-    private lateinit var button:Button
+
     private var suciedadOrigen: IntArray? = null
+    private lateinit var vistaAnimada:TranslateAnimation
+    private lateinit var txtcartel: TextView
+    private lateinit var cartel: ImageView
+    private lateinit var contadorCartel: TextView
+    private lateinit var progressBar:ProgressBar
 
     val listaImagenes = listOf(
         listOf(R.id.imgV2_suciedad1,R.id.minijuego3_basurero),
@@ -57,13 +66,13 @@ class Fragment2_3_minijuego : Fragment() {
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment2_3_minijuego, container, false)
         globalView = view
-        button = view.findViewById(R.id.btnf2_3_1siguiente)
-        button.visibility = View.GONE
-        val ajustes: ImageButton = view.findViewById(R.id.btnf2_3_1ajustes)
 
-        button.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment2_3_minijuego_to_fragment4_menu)
-        }
+        val ajustes: ImageButton = view.findViewById(R.id.btnf2_3_1ajustes)
+        cartel= view.findViewById((R.id.imgv2_3cartelmadera))
+        txtcartel= view.findViewById((R.id.txtv2_3carteltexto))
+        contadorCartel= view.findViewById((R.id.txtv2_3contador))
+        progressBar= view.findViewById((R.id.progressBar_minijuego3))
+
 
         ajustes.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment2_3_minijuego_to_fragment4_menu)
@@ -147,10 +156,44 @@ class Fragment2_3_minijuego : Fragment() {
 
     private fun checkJuegoFinalizado() {
         if (aciertosActuales >= 5) {
-            button.visibility = View.VISIBLE
+            starAnimationfun()
         }
     }
+    fun starAnimationfun(){
 
+        //Diseñar cartel madera
+        contadorCartel.visibility=View.VISIBLE
+        cartel.visibility=View.VISIBLE
+        txtcartel.visibility=View.VISIBLE
+
+
+
+        vistaAnimada = TranslateAnimation(-1000f, 0f, 0f, 0f)
+        vistaAnimada.duration = 1000
+
+        cartel.startAnimation(vistaAnimada)
+        contadorCartel.startAnimation(vistaAnimada)
+        txtcartel.startAnimation(vistaAnimada)
+
+        object : CountDownTimer(5000, 1000) {
+
+            override fun onTick(millisUntilFinished: Long) {
+                contadorCartel.text= (millisUntilFinished / 1000).toString()
+            }
+
+            override fun onFinish() {
+
+                progressBar.isVisible=true
+                contadorCartel.isVisible=false
+                Handler().postDelayed({
+
+                    view?.let { Navigation.findNavController(it).navigate(R.id.action_fragment2_3_minijuego_to_fragment4_menu) }
+                }, 2000)
+
+            }
+        }.start()
+
+    }
     private fun findItemByOrigen(view: View): DragnDropImage? {
         for (item in manzanaList!!) {
             if (item.origen == view) {

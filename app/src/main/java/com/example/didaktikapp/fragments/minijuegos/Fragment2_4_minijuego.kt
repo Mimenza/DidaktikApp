@@ -2,21 +2,21 @@ package com.example.didaktikapp.fragments.minijuegos
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
 import kotlinx.android.synthetic.main.activity4_bienvenida.*
 import android.view.View.OnTouchListener
+import android.view.animation.TranslateAnimation
+import android.widget.*
 import kotlinx.android.synthetic.main.fragment2_4_minijuego.*
 
 
@@ -36,7 +36,7 @@ class Fragment2_4_minijuego : Fragment() {
     private var param2: String? = null
     private var acierto: Int = 0
     private lateinit var aciertostxt: TextView
-    private lateinit var siguiente: Button
+
 
     private lateinit var manzana1: ImageView
     private lateinit var manzana2: ImageView
@@ -55,6 +55,12 @@ class Fragment2_4_minijuego : Fragment() {
     var manzana3cortada:Boolean = false
     var manzana4cortada:Boolean = false
     var manzana5cortada:Boolean = false
+    private lateinit var vistaAnimada:TranslateAnimation
+
+    private lateinit var txtcartel: TextView
+    private lateinit var cartel: ImageView
+    private lateinit var contadorCartel: TextView
+    private lateinit var progressBar:ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,7 +77,7 @@ class Fragment2_4_minijuego : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment2_4_minijuego, container, false)
-        siguiente = view.findViewById(R.id.btnf2_4siguiente)
+
         val ajustes: ImageButton = view.findViewById(R.id.btnf2_4ajustes)
         aciertostxt= view.findViewById(R.id.txt2_4_acierto)
 
@@ -82,15 +88,17 @@ class Fragment2_4_minijuego : Fragment() {
         manzana4 = view.findViewById(R.id.manzana4_minijuego4)
         manzana5 = view.findViewById(R.id.manzana5_minijuego4)
 
-        siguiente.setOnClickListener() {
-            Navigation.findNavController(view)
-                .navigate(R.id.action_fragment2_4_minijuego_to_fragment4_menu)
-        }
+        cartel= view.findViewById((R.id.imgv2_4cartelmadera))
+        txtcartel= view.findViewById((R.id.txtv2_4carteltexto))
+        contadorCartel= view.findViewById((R.id.txtv2_4contador))
+        progressBar= view.findViewById((R.id.progressBar_minijuego4))
+
+
         ajustes.setOnClickListener() {
             Navigation.findNavController(view)
                 .navigate(R.id.action_fragment2_4_minijuego_to_fragment4_menu)
         }
-        siguiente.visibility = View.GONE
+
 
 
         view.setOnTouchListener(handleTouch)
@@ -225,7 +233,6 @@ class Fragment2_4_minijuego : Fragment() {
 
                 if (dentro == true) {
 
-
                     //el dedo esta dentro del area
                     if (!entra && dejarCortar) {
                         //seteamos la variable de que ha entrado
@@ -238,7 +245,6 @@ class Fragment2_4_minijuego : Fragment() {
                         //si el dedo estaba dentro significa que ha salido
                         sale = true
                         dentro = false
-
 
                     }
                     //seteamos la variable para que corte la manzana
@@ -275,10 +281,47 @@ class Fragment2_4_minijuego : Fragment() {
     fun checkProgress() {
         //si se han cortado todas las manzanas aparece el boton
         if (acierto == 4) {
-            siguiente.isVisible = true
+
+            starAnimationfun()
         } else {
             acierto++
         }
+
+    }
+
+    fun starAnimationfun(){
+
+        //Diseñar cartel madera
+        contadorCartel.visibility=View.VISIBLE
+        cartel.visibility=View.VISIBLE
+        txtcartel.visibility=View.VISIBLE
+
+
+
+        vistaAnimada = TranslateAnimation(-1000f, 0f, 0f, 0f)
+        vistaAnimada.duration = 1000
+
+        cartel.startAnimation(vistaAnimada)
+        contadorCartel.startAnimation(vistaAnimada)
+        txtcartel.startAnimation(vistaAnimada)
+
+        object : CountDownTimer(5000, 1000) {
+
+            override fun onTick(millisUntilFinished: Long) {
+                contadorCartel.text= (millisUntilFinished / 1000).toString()
+            }
+
+            override fun onFinish() {
+
+                progressBar.isVisible=true
+                contadorCartel.isVisible=false
+                Handler().postDelayed({
+
+                    view?.let { Navigation.findNavController(it).navigate(R.id.action_fragment2_4_minijuego_to_fragment4_menu) }
+                }, 2000)
+
+            }
+        }.start()
 
     }
 

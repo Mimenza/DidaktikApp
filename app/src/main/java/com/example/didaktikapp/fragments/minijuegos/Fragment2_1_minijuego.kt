@@ -1,18 +1,27 @@
 package com.example.didaktikapp.fragments.minijuegos
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
+import android.view.animation.TranslateAnimation
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.DragnDropImage
 import com.example.didaktikapp.R
+import android.widget.ProgressBar
+import androidx.core.view.isVisible
+import com.example.didaktikapp.activities.Activity1_Principal
+import kotlinx.android.synthetic.main.activity2_login.*
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,11 +39,15 @@ class Fragment2_1_minijuego : Fragment() {
     private var param2: String? = null
 
     private lateinit var globalView: View
-    private lateinit var button: Button
 
+    private lateinit var vistaAnimada:TranslateAnimation
     private lateinit var cesta: ImageView
     private lateinit var basurero: ImageView
     private lateinit var txtAciertos: TextView
+    private lateinit var txtcartel: TextView
+    private lateinit var cartel: ImageView
+    private lateinit var contadorCartel: TextView
+    private lateinit var progressBar:ProgressBar
     var manzanaList: MutableList<DragnDropImage>? = mutableListOf()
     val duracionJuego: Int = 60 // Duracion en segundos
     val intervaloGeneracionManzanas = 3 //Duracion en segundos
@@ -58,19 +71,18 @@ class Fragment2_1_minijuego : Fragment() {
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment2_1_minijuego, container, false)
         globalView = view
-        button = view.findViewById(R.id.btnf2_1siguiente)
+
         val ajustes: ImageButton = view.findViewById(R.id.btnf2_1ajustes)
 
         cesta = view.findViewById((R.id.juegox_cesta))
         basurero = view.findViewById((R.id.juegox_basurero))
         txtAciertos = view.findViewById((R.id.manzanasAciertos))
+        cartel= view.findViewById((R.id.imgv2_1cartelmadera))
+        txtcartel= view.findViewById((R.id.txtv2_1carteltexto))
+        contadorCartel= view.findViewById((R.id.txtv2_1contador))
+        progressBar= view.findViewById((R.id.progressBar_minijuego1))
 
 
-        button.visibility = View.GONE
-
-        button.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment2_1_minijuego_to_fragment4_menu)
-        }
 
         ajustes.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment2_1_minijuego_to_fragment4_menu)
@@ -167,11 +179,51 @@ class Fragment2_1_minijuego : Fragment() {
 
     private fun comprobarJuegoFinalizado() {
         if (aciertosActuales >= 10) {
-            button.visibility = View.VISIBLE
+
+            //Diseñar cartel madera
+            starAnimationfun()
             minijuegoFinalizado = true
             Toast.makeText(requireContext(), "ZORIONAK !!", Toast.LENGTH_SHORT).show()
             removeManzanasListener()
         }
+    }
+
+    private fun starAnimationfun(){
+        //Diseñar cartel madera
+        contadorCartel.visibility=View.VISIBLE
+        cartel.visibility=View.VISIBLE
+        txtcartel.visibility=View.VISIBLE
+
+
+
+        vistaAnimada = TranslateAnimation(-1000f, 0f, 0f, 0f)
+        vistaAnimada.duration = 1000
+
+        cartel.startAnimation(vistaAnimada)
+        contadorCartel.startAnimation(vistaAnimada)
+        txtcartel.startAnimation(vistaAnimada)
+
+        object : CountDownTimer(5000, 1000) {
+
+            override fun onTick(millisUntilFinished: Long) {
+                contadorCartel.text= (millisUntilFinished / 1000).toString()
+            }
+
+            override fun onFinish() {
+
+                progressBar.isVisible=true
+                contadorCartel.isVisible=false
+                Handler().postDelayed({
+
+                    view?.let { Navigation.findNavController(it).navigate(R.id.action_fragment2_1_minijuego_to_fragment4_menu) }
+                }, 2000)
+
+            }
+        }.start()
+
+
+
+
     }
 
     private fun findItemByOrigen(view: View): DragnDropImage? {

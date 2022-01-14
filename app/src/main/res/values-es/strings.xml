@@ -60,7 +60,7 @@ a través de ella se aprende cómo se elabora una sidra muy dulce. Además, much
 La última zona es la degustación de zumo de manzana antes de convertirse en sidra
 y se  puede degustar.¡Vaya dulce! ¡Mmmm!
  </string>
-    <string name="titulo1_juego">EJERCICIO 1: SAGARDOETXEA </string>
+    <string name="titulo1_juego">PUNTO 1: SAGARDOETXEA </string>
     <string name="azalpena1_juego1">Gune honetan hainbat sagar mota ezagutuko eta hartuko dituzu.</string>
     <string name="juego1_azalpena2">Gune honetan sagar zukua dastatuko duzu.</string>
     <string name="juego1_azalpena3">Gune honetan sagarraren historia eta sagadoaren prozesuak landuko dituzu.</string>
@@ -85,7 +85,7 @@ Además, como veis, sobre la entrada principal actual hay un escudo de la famili
 celebra el día o apertura del Txotx y, normalmente, el inicio de ese día
 se hace en palacio.
 . </string>
-    <string name="titulo2_juego">EJERCICIO 2: MURGIA JAUREGIA</string>
+    <string name="titulo2_juego">PUNTO 2: MURGIA JAUREGIA</string>
     <string name="que1_juego2">Ematen digu fruituak, gerizpea eta itzala, ekaitza iristen denean… azpian babes gaitzala!</string>
     <string name="que2_juego2">Zaharra naiz ni, zaharra da herria, Murgia jauregiaren ate gainean nagoen harria.</string>
     <string name="que3_juego2">Gogorra eta indartsua naiz, ez nauzue apurtuko garaiz, inguruan ikusten nauzue maiz. Nor naiz?</string>
@@ -136,7 +136,7 @@ Por ejemplo, llaman bastante la atención, sobre todo, la boina de colores.
     <string name="jolastu">Empezar juego</string>
 
     <!--FRAGMENT JUEGO3.1 -->
-    <string name="titulo31_juego">EJERCICIO 3: SANTA ANA</string>
+    <string name="titulo31_juego">PUNTO 3: SANTA ANA</string>
     <string name="juego3audiotutorialtxt">
     En esta plaza, tendréis que jugar al juego “Festarik festa”. Primero tendréis que hacer un puzzle.
     Al terminar el puzzle, conseguiréis crear una imagen. ¡Ánimo!
@@ -178,7 +178,7 @@ suena el sonido de la txalaparta. Además, la antigua exposición de aplastamien
 la exposición de manzanas y venta de productos artesanos, y sidra
 se realiza cata y venta, así como la posibilidad de probar manzanas.
  </string>
-    <string name="titulo32_juego">EJERCICIO 4: SAGAR UZTA</string>
+    <string name="titulo32_juego">PUNTO 4: SAGAR UZTA</string>
 
     <!--FRAGMENT JUEGO4 -->
     <string name="text_4juego">
@@ -196,7 +196,7 @@ En la actividad que van a realizar en esta parada, está relacionado de esto.
 Por ejemplo, llaman bastante la atención, sobre todo, la boina de colores.
 ¡Son muy curiosas!
  </string>
-    <string name="titulo4_juego">EJERCICIO 5: SAGAR DANTZA </string>
+    <string name="titulo4_juego">PUNTO 5: SAGAR DANTZA </string>
 
     <!--FRAGMENT JUEGO6 -->
     <string name="text_5juego">
@@ -228,7 +228,7 @@ en la sidrería Ipintza. Animando
 os visitan en su sidrería Agin Laburu
  ¡¡¡Animaos!!!
 </string>
-    <string name="titulo5_juego">EJERCICIO 6: AGIN LABURU</string>
+    <string name="titulo5_juego">PUNTO 6: AGIN LABURU</string>
     <string name="titulo">
 Esta vez,
 tendréis que hacer un ejercicio de canto.
@@ -262,7 +262,7 @@ recordando el verso que tenéis.
         ondoren, ikusleek ere sagardo berria probatu eta
         bazkari jendetsu bat egiten da sagardotegian bertan,
         edonor joan daiteke bazkarira. </string>
-    <string name="titulo6_juego">EJERCICIO 7: TXOTX IREKIERA</string>
+    <string name="titulo6_juego">PUNTO 7: TXOTX IREKIERA</string>
     <string name="erantzuna1">
 Respuesta a la pregunta 1
 </string>
@@ -381,4 +381,5 @@ Acceso administrador
     <string name="sagarrakaukeratu">Sagarrak aukeratu</string>
     <string name="sagarrakgarbitu">Sagarrak garbitu</string>
     <string name="sagarrakzanpatu">Sagarrak zanpatu</string>
+    <string name="minijuego1completado">Zorionak! Misioa gainditu duzu!</string>
 </resources>

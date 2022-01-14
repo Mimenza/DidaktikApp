@@ -13,21 +13,23 @@
 
         <ImageView
             android:id="@+id/imgV2_3CleanApple1"
-            android:layout_width="350dp"
-            android:layout_height="350dp"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="84dp"
+            android:layout_width="351dp"
+            android:layout_height="336dp"
+            android:layout_marginTop="128dp"
             android:scaleType="fitXY"
             android:src="@drawable/img_upeliosagarra"
+            app:layout_constraintBottom_toBottomOf="@+id/btnf2_3_1siguiente"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.454" />
 
         <ImageView
             android:id="@+id/imgV2_suciedad1"
             android:layout_width="86dp"
             android:layout_height="86dp"
-            android:layout_marginStart="160dp"
-            android:layout_marginTop="112dp"
+            android:layout_marginStart="140dp"
+            android:layout_marginTop="316dp"
             android:scaleType="fitXY"
             android:src="@drawable/suciedad"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,8 +39,8 @@
             android:id="@+id/imgV2_suciedad2"
             android:layout_width="86dp"
             android:layout_height="86dp"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="160dp"
+            android:layout_marginStart="44dp"
+            android:layout_marginTop="360dp"
             android:scaleType="fitXY"
             android:src="@drawable/barro2"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,8 +50,8 @@
             android:id="@+id/imgV2_suciedad3"
             android:layout_width="86dp"
             android:layout_height="86dp"
-            android:layout_marginStart="84dp"
-            android:layout_marginTop="320dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginTop="456dp"
             android:scaleType="fitXY"
             android:src="@drawable/barro3"
             app:layout_constraintStart_toStartOf="parent"
@@ -59,8 +61,8 @@
             android:id="@+id/imgV2_suciedad4"
             android:layout_width="86dp"
             android:layout_height="86dp"
-            android:layout_marginStart="236dp"
-            android:layout_marginTop="356dp"
+            android:layout_marginStart="260dp"
+            android:layout_marginTop="428dp"
             android:scaleType="fitXY"
             android:src="@drawable/barro4"
             app:layout_constraintStart_toStartOf="parent"
@@ -70,8 +72,8 @@
             android:id="@+id/imgV2_suciedad5"
             android:layout_width="86dp"
             android:layout_height="86dp"
-            android:layout_marginStart="280dp"
-            android:layout_marginTop="232dp"
+            android:layout_marginStart="260dp"
+            android:layout_marginTop="320dp"
             android:scaleType="fitXY"
             android:src="@drawable/barro5"
             app:layout_constraintStart_toStartOf="parent"
@@ -81,11 +83,11 @@
             android:id="@+id/manzanasAciertos2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="604dp"
             android:text="0"
             android:textSize="34sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.505"
+            app:layout_constraintHorizontal_bias="0.882"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -109,7 +111,8 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.187" />
+            app:layout_constraintVertical_bias="0.187"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <ImageView
             android:id="@+id/minijuego3_basurero"
@@ -122,6 +125,34 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/imgv2_3woodtable"
+            android:layout_width="492dp"
+            android:layout_height="102dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/wood_board"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.506"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.025" />
+
+        <TextView
+            android:id="@+id/txtv2_3titulominijuego3"
+            android:layout_width="247dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/sagarrakgarbitu"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.603"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.066" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

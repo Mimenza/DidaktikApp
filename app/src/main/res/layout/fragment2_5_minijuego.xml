@@ -15,29 +15,55 @@
             android:id="@+id/imgv2_5mesa"
             android:layout_width="409dp"
             android:layout_height="307dp"
+            android:layout_marginTop="576dp"
             android:src="@drawable/mesa"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imgv2_5_applepiece1"
             android:layout_width="162dp"
             android:layout_height="141dp"
-            android:layout_marginEnd="48dp"
-            android:layout_marginBottom="572dp"
+            android:layout_marginEnd="52dp"
+            android:layout_marginBottom="460dp"
             android:src="@drawable/trozomanzana1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
         <ImageView
+            android:id="@+id/imgv2_5woodtable"
+            android:layout_width="492dp"
+            android:layout_height="102dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/wood_board"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.506"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.025" />
+
+        <TextView
+            android:id="@+id/txtv2_5itulominijuego"
+            android:layout_width="247dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/sagarrakzanpatu"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.066" />
+
+        <ImageView
             android:id="@+id/imgv2_5_applepiece2"
             android:layout_width="162dp"
             android:layout_height="141dp"
-            android:layout_marginEnd="216dp"
-            android:layout_marginBottom="640dp"
+            android:layout_marginEnd="232dp"
+            android:layout_marginBottom="492dp"
             android:src="@drawable/trozomanzana2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -47,7 +73,7 @@
             android:layout_width="162dp"
             android:layout_height="141dp"
             android:layout_marginEnd="228dp"
-            android:layout_marginBottom="428dp"
+            android:layout_marginBottom="316dp"
             android:src="@drawable/trozomanzana3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -56,8 +82,8 @@
             android:id="@+id/imgv2_5_applepiece4"
             android:layout_width="162dp"
             android:layout_height="141dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="412dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="308dp"
             android:src="@drawable/trozomanzana4"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -66,8 +92,8 @@
             android:id="@+id/imgv2_5_applepiece5"
             android:layout_width="162dp"
             android:layout_height="141dp"
-            android:layout_marginEnd="68dp"
-            android:layout_marginBottom="240dp"
+            android:layout_marginEnd="44dp"
+            android:layout_marginBottom="152dp"
             android:src="@drawable/trozomanzana5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -76,8 +102,8 @@
             android:id="@+id/imgv2_5_applepiece6"
             android:layout_width="162dp"
             android:layout_height="141dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginBottom="84dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginBottom="164dp"
             android:src="@drawable/trozomanzana6"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -99,23 +125,25 @@
             android:id="@+id/btnf2_5ajustes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minHeight="48dp"
             android:src="@drawable/ic_ajustes_black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.187" />
+            app:layout_constraintVertical_bias="0.187"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageView
             android:id="@+id/imgv2_5vaso"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="240dp"
+            android:layout_marginBottom="176dp"
             android:src="@drawable/vaso1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.253"
+            app:layout_constraintHorizontal_bias="0.305"
             app:layout_constraintStart_toStartOf="parent" />
 
 

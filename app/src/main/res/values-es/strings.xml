@@ -376,4 +376,9 @@ Acceso administrador
     <string name="izena">Nombre</string>
     <string name="puntuacion">Puntuación</string>
     <string name="ultimo_punto">Último punto</string>
+    <string name="sagarrakebaki">Sagarrak ebaki</string>
+    <string name="sagarrakbildu">Sagarrak bildu</string>
+    <string name="sagarrakaukeratu">Sagarrak aukeratu</string>
+    <string name="sagarrakgarbitu">Sagarrak garbitu</string>
+    <string name="sagarrakzanpatu">Sagarrak zanpatu</string>
 </resources>

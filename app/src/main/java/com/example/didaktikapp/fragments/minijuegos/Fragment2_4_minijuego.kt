@@ -49,8 +49,12 @@ class Fragment2_4_minijuego : Fragment() {
     var entra: Boolean = false
     var sale: Boolean = false
     var dentro: Boolean = false
-
     var dejarCortar: Boolean = false
+    var manzana1cortada:Boolean = false
+    var manzana2cortada:Boolean = false
+    var manzana3cortada:Boolean = false
+    var manzana4cortada:Boolean = false
+    var manzana5cortada:Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -199,31 +203,25 @@ class Fragment2_4_minijuego : Fragment() {
             MotionEvent.ACTION_MOVE -> {
                 //mientras mueves el dedo
 
-                if ((x >= M1PosX1 && x <= M1PosX2) && (y >= M1PosY1 && y <= M1PosY2)) {
-
+                if ((x >= M1PosX1 && x <= M1PosX2) && (y >= M1PosY1 && y <= M1PosY2) && !manzana1cortada) {
                     manzanaSeleccionada = manzana1
                     dentro = true
-                } else if ((x >= M2PosX1 && x <= M2PosX2) && (y >= M2PosY1 && y <= M2PosY2)) {
-
+                } else if ((x >= M2PosX1 && x <= M2PosX2) && (y >= M2PosY1 && y <= M2PosY2) && !manzana2cortada ) {
                     manzanaSeleccionada = manzana2
                     dentro = true
-                } else if ((x >= M3PosX1 && x <= M3PosX2) && (y >= M3PosY1 && y <= M3PosY2)) {
-
+                } else if ((x >= M3PosX1 && x <= M3PosX2) && (y >= M3PosY1 && y <= M3PosY2) && !manzana3cortada) {
                     manzanaSeleccionada = manzana3
                     dentro = true
-                } else if ((x >= M4PosX1 && x <= M4PosX2) && (y >= M4PosY1 && y <= M4PosY2)) {
-
+                } else if ((x >= M4PosX1 && x <= M4PosX2) && (y >= M4PosY1 && y <= M4PosY2) && !manzana4cortada) {
                     manzanaSeleccionada = manzana4
                     dentro = true
-                } else if ((x >= M5PosX1 && x <= M5PosX2) && (y >= M5PosY1 && y <= M5PosY2)) {
-
+                } else if ((x >= M5PosX1 && x <= M5PosX2) && (y >= M5PosY1 && y <= M5PosY2) && !manzana5cortada) {
                     manzanaSeleccionada = manzana5
                     dentro = true
+
                 } else {
                     dentro = false
                 }
-
-
 
                 if (dentro == true) {
 
@@ -308,6 +306,15 @@ class Fragment2_4_minijuego : Fragment() {
         manzana.isVisible = false
 
         checkProgress()
+        //when para settear que manzana hemos cortado ya
+        when (manzana) {
+            manzana1 -> {manzana1cortada=true}
+            manzana2 -> {manzana2cortada=true}
+            manzana3 -> {manzana3cortada=true}
+            manzana4 -> {manzana4cortada=true}
+            manzana5 -> {manzana5cortada=true}
+
+        }
 
     }
 

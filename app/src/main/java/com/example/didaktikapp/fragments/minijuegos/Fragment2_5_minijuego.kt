@@ -1,15 +1,15 @@
 package com.example.didaktikapp.fragments.minijuegos
 
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
+import android.view.animation.TranslateAnimation
+import android.widget.*
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
@@ -29,8 +29,14 @@ class Fragment2_5_minijuego : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var acierto: Int = 0
-    private lateinit var siguiente: Button
+
     private lateinit var vaso: ImageView
+    private lateinit var vistaAnimada:TranslateAnimation
+
+    private lateinit var txtcartel: TextView
+    private lateinit var cartel: ImageView
+    private lateinit var contadorCartel: TextView
+    private lateinit var progressBar:ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,14 +52,14 @@ class Fragment2_5_minijuego : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment2_5_minijuego, container, false)
-        siguiente = view.findViewById(R.id.btnf2_5siguiente)
+
         val ajustes: ImageButton = view.findViewById(R.id.btnf2_5ajustes)
         vaso  = view.findViewById(R.id.imgv2_5vaso)
+        cartel= view.findViewById((R.id.imgv2_5cartelmadera))
+        txtcartel= view.findViewById((R.id.txtv2_5carteltexto))
+        contadorCartel= view.findViewById((R.id.txtv2_5contador))
+        progressBar= view.findViewById((R.id.progressBar_minijuego5))
 
-        siguiente.setOnClickListener() {
-            Navigation.findNavController(view)
-                .navigate(R.id.action_fragment2_5_minijuego_to_fragment4_menu)
-        }
 
         ajustes.setOnClickListener() {
             Navigation.findNavController(view)
@@ -65,7 +71,7 @@ class Fragment2_5_minijuego : Fragment() {
         val manzana3: ImageView = view.findViewById(R.id.imgv2_5_applepiece3)
         val manzana4: ImageView = view.findViewById(R.id.imgv2_5_applepiece4)
         val manzana5: ImageView = view.findViewById(R.id.imgv2_5_applepiece5)
-        val manzana6: ImageView = view.findViewById(R.id.imgv2_5_applepiece6)
+
 
 
         manzana1.setOnClickListener() { machacar(manzana1) }
@@ -73,7 +79,7 @@ class Fragment2_5_minijuego : Fragment() {
         manzana3.setOnClickListener() { machacar(manzana3) }
         manzana4.setOnClickListener() { machacar(manzana4) }
         manzana5.setOnClickListener() { machacar(manzana5) }
-        manzana6.setOnClickListener() { machacar(manzana6) }
+
 
         return view
     }
@@ -106,10 +112,46 @@ class Fragment2_5_minijuego : Fragment() {
         println("check" + acierto)
         if (acierto == 5) {
 
-            siguiente.isVisible = true
+
+            starAnimationfun()
         }
     }
 
+    fun starAnimationfun(){
+
+        //Diseñar cartel madera
+        contadorCartel.visibility=View.VISIBLE
+        cartel.visibility=View.VISIBLE
+        txtcartel.visibility=View.VISIBLE
+
+
+
+        vistaAnimada = TranslateAnimation(-1000f, 0f, 0f, 0f)
+        vistaAnimada.duration = 1000
+
+        cartel.startAnimation(vistaAnimada)
+        contadorCartel.startAnimation(vistaAnimada)
+        txtcartel.startAnimation(vistaAnimada)
+
+        object : CountDownTimer(5000, 1000) {
+
+            override fun onTick(millisUntilFinished: Long) {
+                contadorCartel.text= (millisUntilFinished / 1000).toString()
+            }
+
+            override fun onFinish() {
+
+                progressBar.isVisible=true
+                contadorCartel.isVisible=false
+                Handler().postDelayed({
+
+                    view?.let { Navigation.findNavController(it).navigate(R.id.action_fragment2_5_minijuego_to_fragment4_menu) }
+                }, 2000)
+
+            }
+        }.start()
+
+    }
     fun zoom(manzana: ImageView) {
         println("ZOOM")
         val zoom = AnimationUtils.loadAnimation(context, R.anim.zoom)

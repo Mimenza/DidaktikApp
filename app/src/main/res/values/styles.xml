@@ -13,6 +13,9 @@
     <style name="ProgressBarStyle">
         <item name="colorAccent">@color/primary</item>
     </style>
+    <style name="ProgressBarStyleMinijuegos">
+        <item name="colorAccent">@color/white</item>
+    </style>
 
     <style name="animation">
         <item name="android:windowEnterAnimation">@anim/fade</item>

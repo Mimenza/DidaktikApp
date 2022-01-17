@@ -15,9 +15,9 @@
             android:id="@+id/imgV2_3CleanApple1"
             android:layout_width="351dp"
             android:layout_height="336dp"
-            android:layout_marginTop="128dp"
             android:scaleType="fitXY"
             android:src="@drawable/img_upeliosagarra"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -77,17 +77,31 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/minijuego3_basurero"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/juegox_basurero"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.976" />
+
         <TextView
             android:id="@+id/manzanasAciertos2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="604dp"
             android:text="0"
             android:textSize="34sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.882"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.96" />
 
         <ImageButton
             android:id="@+id/btnf2_3_1ajustes"
@@ -101,17 +115,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.187"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
-        <ImageView
-            android:id="@+id/minijuego3_basurero"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/juegox_basurero"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="501dp" />
 
         <ImageView
             android:id="@+id/imgv2_3woodtable"
@@ -149,8 +152,10 @@
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.518"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.497" />
 
         <TextView
             android:id="@+id/txtv2_3contador"

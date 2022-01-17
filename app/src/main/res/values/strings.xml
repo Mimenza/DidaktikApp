@@ -205,8 +205,9 @@ galderak egiteko aukera izango baitute.</string>
     <string name="ultimo_punto">Azken puntua</string>
     <string name="sagarrakebaki">Sagarrak ebaki</string>
     <string name="sagarrakbildu">Sagarrak bildu</string>
-    <string name="sagarrakaukeratu">Sagarrak aukeratu</string>
+    <string name="sagarrakaukeratu">Sagar onak aukeratu</string>
     <string name="sagarrakgarbitu">Sagarrak garbitu</string>
     <string name="sagarrakzanpatu">Sagarrak zanpatu</string>
     <string name="minijuego1completado">Zorionak! Misioa gainditu duzu!</string>
+    <string name="sagarrakbotilatu">Sagarrak botilatu</string>
 </resources>

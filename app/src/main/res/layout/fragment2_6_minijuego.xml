@@ -10,16 +10,36 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mainlayout_Minijuego6"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/bodegafondo">
 
-        <Button
-            android:id="@+id/btnf2_6siguiente"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/siguiente"
+        <ImageView
+            android:id="@+id/imgv2_6woodtable"
+            android:layout_width="492dp"
+            android:layout_height="102dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/wood_board"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.506"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.025" />
+
+        <TextView
+            android:id="@+id/txtv2_6titulominijuego"
+            android:layout_width="247dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/sagarrakbotilatu"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.603"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.066" />
 
         <ImageButton
             android:id="@+id/btnf2_6ajustes"
@@ -39,8 +59,8 @@
             android:id="@+id/minijuego6_botella"
             android:layout_width="50dp"
             android:layout_height="100dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="44dp"
+            android:layout_marginStart="92dp"
+            android:layout_marginTop="148dp"
             android:scaleType="fitXY"
             android:src="@drawable/botellallena"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,38 +69,44 @@
         <ImageView
             android:id="@+id/minijuego6_vasovacio"
             android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="92dp"
+            android:layout_height="70dp"
             android:scaleType="fitXY"
             android:src="@drawable/vaso1"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.745"
+            app:layout_constraintHorizontal_bias="0.764"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.269" />
 
         <TextView
             android:id="@+id/minijuego6_txtbotellasllenas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="x0"
+            android:textColor="@color/white"
             android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.282"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/minijuego6_botella" />
+            app:layout_constraintTop_toBottomOf="@+id/minijuego6_botella"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/minijuego6_txtvasosvacios"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="x0"
+            android:textColor="@color/white"
             android:textSize="24sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.725"
+            app:layout_constraintHorizontal_bias="0.715"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.228" />
+            app:layout_constraintVertical_bias="0.366" />
 
         <ImageView
             android:id="@+id/imgv2_6mesavino"
@@ -93,34 +119,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/txtv2_6contador2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="5"
-            android:textColor="@color/white"
-            android:textSize="34sp"
+        <ImageView
+            android:id="@+id/imgv2_6cartelmadera"
+            android:layout_width="420dp"
+            android:layout_height="584dp"
+            android:src="@drawable/cartel_madera"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.469"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.635" />
-
-        <ProgressBar
-            android:id="@+id/progressBar_minijuego6"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:theme="@style/ProgressBarStyleMinijuegos"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.46"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.633" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txtv2_6carteltexto"
@@ -138,16 +146,34 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.499" />
 
-        <ImageView
-            android:id="@+id/imgv2_6cartelmadera2"
-            android:layout_width="420dp"
-            android:layout_height="584dp"
-            android:src="@drawable/cartel_madera"
+        <ProgressBar
+            android:id="@+id/progressBar_minijuego6"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:theme="@style/ProgressBarStyleMinijuegos"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.46"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.633" />
+
+        <TextView
+            android:id="@+id/txtv2_6contador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:textColor="@color/white"
+            android:textSize="34sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.469"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.635" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -271,6 +271,7 @@
             android:layout_height="100dp"
             android:scaleType="fitXY"
             android:src="@drawable/puzzle_0000_capa_1"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -280,6 +281,7 @@
             android:layout_height="100dp"
             android:scaleType="fitXY"
             android:src="@drawable/puzzle_0001_capa_2"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -289,6 +291,7 @@
             android:layout_height="100dp"
             android:scaleType="fitXY"
             android:src="@drawable/puzzle_0002_capa_3"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -298,6 +301,7 @@
             android:layout_height="100dp"
             android:scaleType="fitXY"
             android:src="@drawable/puzzle_0003_capa_4"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -307,6 +311,7 @@
             android:layout_height="100dp"
             android:scaleType="fitXY"
             android:src="@drawable/puzzle_0004_capa_5"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -316,6 +321,7 @@
             android:layout_height="100dp"
             android:scaleType="fitXY"
             android:src="@drawable/puzzle_0005_capa_6"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -325,6 +331,7 @@
             android:layout_height="100dp"
             android:scaleType="fitXY"
             android:src="@drawable/puzzle_0006_capa_7"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -334,6 +341,7 @@
             android:layout_height="100dp"
             android:scaleType="fitXY"
             android:src="@drawable/puzzle_0007_capa_8"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -343,6 +351,7 @@
             android:layout_height="100dp"
             android:scaleType="fitXY"
             android:src="@drawable/puzzle_0008_capa_9"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -352,6 +361,7 @@
             android:layout_height="100dp"
             android:scaleType="fitXY"
             android:src="@drawable/puzzle_0009_capa_10"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -361,16 +371,19 @@
             android:layout_height="100dp"
             android:scaleType="fitXY"
             android:src="@drawable/puzzle_0010_capa_11"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <ImageView
             android:id="@+id/puzzle_pieza_o_12"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="fitXY"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/puzzle_0011_capa_12"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
-            android:src="@drawable/puzzle_0011_capa_12"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txtv1_1fondogris"

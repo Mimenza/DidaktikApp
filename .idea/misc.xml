@@ -3,8 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/activity6_site.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment2_4_minijuego.xml" value="0.4" />
+        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/didaktikapp/app/src/main/res/layout/fragment1_3_juego.xml" value="0.15" />
+        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/didaktikapp/app/src/main/res/layout/fragment1_6_juego.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/didaktikapp/app/src/main/res/layout/fragment1_7_juego.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/didaktikapp/app/src/main/res/layout/fragment2_1_minijuego.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/didaktikapp/app/src/main/res/layout/fragment2_2_minijuego.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/didaktikapp/app/src/main/res/layout/fragment2_3_minijuego.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/didaktikapp/app/src/main/res/layout/fragment2_4_minijuego.xml" value="0.20260416666666667" />
+        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/didaktikapp/app/src/main/res/layout/fragment2_5_minijuego.xml" value="0.264" />
+        <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/didaktikapp/app/src/main/res/layout/fragment2_6_minijuego.xml" value="0.27447916666666666" />
       </map>
     </option>
   </component>

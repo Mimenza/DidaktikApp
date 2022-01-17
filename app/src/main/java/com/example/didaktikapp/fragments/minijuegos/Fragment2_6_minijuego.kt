@@ -215,6 +215,8 @@ class Fragment2_6_minijuego : Fragment() {
                             viewElement.visibility = View.GONE
                             itemInList.objetivo.visibility = View.GONE
                             botellaLlena()
+                            acierto++
+                            checkProgress()
                         }
                     }
 
@@ -285,8 +287,7 @@ class Fragment2_6_minijuego : Fragment() {
         val txtBotellasLlenas: TextView = globalView.findViewById(R.id.minijuego6_txtbotellasllenas)
         txtBotellasLlenas.text = "x"+(txtBotellasLlenas.text.toString().replace("x","").toInt() + 1).toString()
         generarVasonTarget()
-        acierto++
-        checkProgress()
+
     }
 
     private fun checkProgress(){

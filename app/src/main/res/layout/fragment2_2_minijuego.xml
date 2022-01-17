@@ -54,12 +54,12 @@
             android:id="@+id/manzanasAciertos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
+            android:layout_marginEnd="168dp"
             android:layout_marginBottom="36dp"
             android:text="0 / 5"
             android:textSize="34sp"
             app:layout_constraintBottom_toBottomOf="parent"
-         />
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <ImageView
             android:id="@+id/juegox_basurero"
@@ -102,8 +102,8 @@
 
         <TextView
             android:id="@+id/txtv2_2titulominijuego"
-            android:layout_width="247dp"
-            android:layout_height="56dp"
+            android:layout_width="280dp"
+            android:layout_height="58dp"
             android:layout_marginTop="20dp"
             android:text="@string/sagarrakaukeratu"
             android:textColor="@color/white"

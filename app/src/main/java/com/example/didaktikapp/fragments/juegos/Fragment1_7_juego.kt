@@ -159,6 +159,9 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade)
         txt_animacion.startAnimation(aniFade)
 
+        //desabilitar boton ajustes mientras esta el tutorial
+        val buttonAjustes = view.findViewById(R.id.btnf1_7_ajustes) as ImageButton
+        buttonAjustes.setEnabled(false)
         //animacion entrada upelio
         vistaanimada = TranslateAnimation(-1000f, 0f, 0f, 0f)
         vistaanimada.duration = 2000
@@ -205,6 +208,8 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
                 txtv1_7tutorialjuego7.startAnimation(aniFade)
                 txtv1_7tutorialjuego7.isVisible = false
                 txt_animacion.isVisible = false
+                val buttonAjustes = view.findViewById(R.id.btnf1_7_ajustes) as ImageButton
+                buttonAjustes.setEnabled(true)
             }
         }, 1000)
     }

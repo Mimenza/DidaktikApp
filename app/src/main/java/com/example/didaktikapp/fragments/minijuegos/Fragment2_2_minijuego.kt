@@ -1,24 +1,20 @@
 package com.example.didaktikapp.fragments.minijuegos
 
-import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
 import android.widget.*
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
-import com.example.didaktikapp.Model.DragnDropImage
 import com.example.didaktikapp.R
 import kotlinx.android.synthetic.main.activity7_juego2_results.*
-import kotlinx.coroutines.NonCancellable.cancel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -95,7 +91,7 @@ class Fragment2_2_minijuego : Fragment() {
         acierto++
         aciertoTxt.text = acierto.toString() + " / 5"
 
-        //manzana.setOnClickListener(){}
+        manzana.setOnClickListener(){}
 
         checkProgress()
 
@@ -109,7 +105,7 @@ class Fragment2_2_minijuego : Fragment() {
 
         }
     }
-    fun starAnimationfun(){
+    fun starAnimationfun() {
 
         //Diseñar cartel madera
         contadorCartel.visibility=View.VISIBLE
@@ -136,13 +132,30 @@ class Fragment2_2_minijuego : Fragment() {
                 progressBar.isVisible=true
                 contadorCartel.isVisible=false
                 Handler().postDelayed({
-
-                    view?.let { Navigation.findNavController(it).navigate(R.id.action_fragment2_2_minijuego_to_fragment4_menu) }
+                    Navigation.findNavController(requireContext() as Activity,R.id.nav_1).navigate(R.id.action_fragment2_2_minijuego_to_fragment4_menu);
                 }, 2000)
             }
         }.start()
 
     }
 
-
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment Fragment2_minijuego.
+         */
+        // TODO: Rename and change types and number of parameters
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            Fragment2_2_minijuego().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
+                }
+            }
+    }
 }

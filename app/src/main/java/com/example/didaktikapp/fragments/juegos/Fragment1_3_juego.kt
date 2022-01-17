@@ -44,6 +44,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
     private val thisJuegoId = 3
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -60,18 +61,18 @@ class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
     var puzzleShowing: Boolean = false
 
     val listaImagenes = listOf(
-        listOf(R.id.puzzle_pieza_o_1,R.id.puzzle_pieza_d_1),
-        listOf(R.id.puzzle_pieza_o_2,R.id.puzzle_pieza_d_2),
-        listOf(R.id.puzzle_pieza_o_3,R.id.puzzle_pieza_d_3),
-        listOf(R.id.puzzle_pieza_o_4,R.id.puzzle_pieza_d_4),
-        listOf(R.id.puzzle_pieza_o_5,R.id.puzzle_pieza_d_5),
-        listOf(R.id.puzzle_pieza_o_6,R.id.puzzle_pieza_d_6),
-        listOf(R.id.puzzle_pieza_o_7,R.id.puzzle_pieza_d_7),
-        listOf(R.id.puzzle_pieza_o_8,R.id.puzzle_pieza_d_8),
-        listOf(R.id.puzzle_pieza_o_9,R.id.puzzle_pieza_d_9),
-        listOf(R.id.puzzle_pieza_o_10,R.id.puzzle_pieza_d_10),
-        listOf(R.id.puzzle_pieza_o_11,R.id.puzzle_pieza_d_11),
-        listOf(R.id.puzzle_pieza_o_12,R.id.puzzle_pieza_d_12),
+        listOf(R.id.puzzle_pieza_o_1, R.id.puzzle_pieza_d_1),
+        listOf(R.id.puzzle_pieza_o_2, R.id.puzzle_pieza_d_2),
+        listOf(R.id.puzzle_pieza_o_3, R.id.puzzle_pieza_d_3),
+        listOf(R.id.puzzle_pieza_o_4, R.id.puzzle_pieza_d_4),
+        listOf(R.id.puzzle_pieza_o_5, R.id.puzzle_pieza_d_5),
+        listOf(R.id.puzzle_pieza_o_6, R.id.puzzle_pieza_d_6),
+        listOf(R.id.puzzle_pieza_o_7, R.id.puzzle_pieza_d_7),
+        listOf(R.id.puzzle_pieza_o_8, R.id.puzzle_pieza_d_8),
+        listOf(R.id.puzzle_pieza_o_9, R.id.puzzle_pieza_d_9),
+        listOf(R.id.puzzle_pieza_o_10, R.id.puzzle_pieza_d_10),
+        listOf(R.id.puzzle_pieza_o_11, R.id.puzzle_pieza_d_11),
+        listOf(R.id.puzzle_pieza_o_12, R.id.puzzle_pieza_d_12),
         //listOf(R.id.puzzle_pieza_otest1,R.id.puzzle_pieza_otest2),
     )
 
@@ -101,7 +102,7 @@ class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
         val btnComprobarRespuesta: Button = globalView.findViewById(R.id.juego3_btnComprobar)
         preguntasLayout = view.findViewById(R.id.juego3_preguntas_layout)
 
-        preguntasLayout.visibility =  View.GONE
+        preguntasLayout.visibility = View.GONE
 
         btnComprobarRespuesta.setOnClickListener() {
             comprobarRespuestas()
@@ -112,34 +113,30 @@ class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
                 view.viewTreeObserver.removeOnGlobalLayoutListener(this)
                 totalWidth = view.width
                 totalHeight = view.height
-                prepairPuzzleElements()
+
             }
         })
 
-        button.setOnClickListener(){
+        button.setOnClickListener() {
             if (puzzleShowing) {
                 DbHandler.userActualizarUltimoPunto(thisJuegoId)
                 DbHandler().requestDbUserUpdate(this)
-            }else {
+            } else {
                 iniciarPreguntas()
             }
         }
 
         buttonSaltarJuego.setOnClickListener() {
-            Navigation.findNavController(globalView).navigate(R.id.action_fragment1_3_juego_to_fragment2_3_minijuego)
+            Navigation.findNavController(globalView)
+                .navigate(R.id.action_fragment1_3_juego_to_fragment2_3_minijuego)
         }
 
 
 
-        buttonRepetir.setOnClickListener(){
+        buttonRepetir.setOnClickListener() {
             Navigation.findNavController(view).navigate(R.id.action_fragment1_3_juego_self)
         }
 
-        ajustes.setOnClickListener(){
-
-                        (activity as Activity6_Site?)?.menuCheck()
-
-        }
 
         //Animacion manzana al iniciar el juego
         starAnimationfun(view)
@@ -155,7 +152,15 @@ class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
             launch {
                 audio = MediaPlayer.create(context, R.raw.juego3audiotutorial)
                 audio?.start()
+
                 audio?.setOnCompletionListener {
+                    ajustes.setOnClickListener() {
+                        //activamos el listener para los ajustes
+                        (activity as Activity6_Site?)?.menuCheck()
+
+                    }
+                    prepairPuzzleElements()
+                    showPhotos()
                     Handler(Looper.getMainLooper()).postDelayed({
                         if (getView() != null) {
                             //Llama a la funcion para la animacion de salida cuando el audio se termina
@@ -171,8 +176,40 @@ class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
 
     }
 
+    fun showPhotos() {
+        //recogemos las fotos
+        val foto1: ImageView = requireView().findViewById(R.id.puzzle_pieza_o_1)
+        val foto2: ImageView = requireView().findViewById(R.id.puzzle_pieza_o_2)
+        val foto3: ImageView = requireView().findViewById(R.id.puzzle_pieza_o_3)
+        val foto4: ImageView = requireView().findViewById(R.id.puzzle_pieza_o_4)
+        val foto5: ImageView = requireView().findViewById(R.id.puzzle_pieza_o_5)
+        val foto6: ImageView = requireView().findViewById(R.id.puzzle_pieza_o_6)
+        val foto7: ImageView = requireView().findViewById(R.id.puzzle_pieza_o_7)
+        val foto8: ImageView = requireView().findViewById(R.id.puzzle_pieza_o_8)
+        val foto9: ImageView = requireView().findViewById(R.id.puzzle_pieza_o_9)
+        val foto10: ImageView = requireView().findViewById(R.id.puzzle_pieza_o_10)
+        val foto11: ImageView = requireView().findViewById(R.id.puzzle_pieza_o_11)
+        val foto12: ImageView = requireView().findViewById(R.id.puzzle_pieza_o_12)
+
+        //enseñamos las fotos
+        foto1.isVisible = true
+        foto2.isVisible = true
+        foto3.isVisible = true
+        foto4.isVisible = true
+        foto5.isVisible = true
+        foto6.isVisible = true
+        foto7.isVisible = true
+        foto8.isVisible = true
+        foto9.isVisible = true
+        foto10.isVisible = true
+        foto11.isVisible = true
+        foto12.isVisible = true
+
+    }
+
     override fun responseDbUserUpdated(responde: Boolean) {
-        Navigation.findNavController(globalView).navigate(R.id.action_fragment1_3_juego_to_fragment2_3_minijuego)
+        Navigation.findNavController(globalView)
+            .navigate(R.id.action_fragment1_3_juego_to_fragment2_3_minijuego)
     }
 
     fun prepairPuzzleElements() {
@@ -183,7 +220,7 @@ class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
             vItemOrigen.getLayoutParams().height = vItemDestino.height
             vItemOrigen.x = ((0..totalWidth - vItemDestino.width).random()).toFloat()
             vItemOrigen.y = ((0..totalHeight - vItemDestino.height).random()).toFloat()
-            manzanaList!!.add(DragnDropImage(vItemOrigen,vItemDestino))
+            manzanaList!!.add(DragnDropImage(vItemOrigen, vItemDestino))
             //vItemDestino.setColorFilter(Color.argb(150, 0, 80, 200))
             val matrix = ColorMatrix()
             matrix.setSaturation(0f)
@@ -201,14 +238,14 @@ class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
             if (!itemInList.acertado) {
                 viewElement.bringToFront()
                 val action = motionEvent.action
-                when(action) {
+                when (action) {
                     MotionEvent.ACTION_MOVE -> {
-                        viewElement.x = motionEvent.rawX - viewElement.width/2
-                        viewElement.y = motionEvent.rawY - viewElement.height/2
+                        viewElement.x = motionEvent.rawX - viewElement.width / 2
+                        viewElement.y = motionEvent.rawY - viewElement.height / 2
                     }
                     MotionEvent.ACTION_UP -> {
-                        viewElement.x = motionEvent.rawX - viewElement.width/2
-                        viewElement.y = motionEvent.rawY - viewElement.height/2
+                        viewElement.x = motionEvent.rawX - viewElement.width / 2
+                        viewElement.y = motionEvent.rawY - viewElement.height / 2
                         var objetivoEncontrado: View = itemInList!!.objetivo
                         val location = IntArray(2)
                         objetivoEncontrado.getLocationOnScreen(location);
@@ -216,7 +253,7 @@ class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
                         var posY = location[1]
                         var sizeX = objetivoEncontrado.width
                         var sizeY = objetivoEncontrado.height
-                        if ( (viewElement.x + viewElement.width/2) >= posX && (viewElement.y + viewElement.height/2) >= posY && (viewElement.x + viewElement.width/2) <= posX+sizeX && (viewElement.y + viewElement.height/2) <= posY+sizeY) {
+                        if ((viewElement.x + viewElement.width / 2) >= posX && (viewElement.y + viewElement.height / 2) >= posY && (viewElement.x + viewElement.width / 2) <= posX + sizeX && (viewElement.y + viewElement.height / 2) <= posY + sizeY) {
                             viewElement.x = posX.toFloat()
                             viewElement.y = posY.toFloat()
                             itemInList.acertado = true
@@ -226,7 +263,8 @@ class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
                                 DbHandler.userAumentarPuntuacion(5)
                                 //DbHandler().requestDbUserUpdate(this)
                                 button.visibility = View.VISIBLE
-                                Toast.makeText(requireContext(), "Bikain!", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(requireContext(), "Bikain!", Toast.LENGTH_SHORT)
+                                    .show()
                             }
                         }
                     }
@@ -311,14 +349,17 @@ class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
         val editTextRespuesta: EditText = globalView.findViewById(R.id.juego3_pregunta2_respuesta1)
         val btnComprobarRespuesta: Button = globalView.findViewById(R.id.juego3_btnComprobar)
 
-        if (radio1.isChecked && editTextRespuesta.text.toString().trim().toLowerCase().equals(respuestaPreguntasjuego2)) {
+        if (radio1.isChecked && editTextRespuesta.text.toString().trim().toLowerCase()
+                .equals(respuestaPreguntasjuego2)
+        ) {
             editTextRespuesta.isEnabled = false
             radio1.isEnabled = false
             radio2.isEnabled = false
             btnComprobarRespuesta.visibility = View.GONE
             button.visibility = View.VISIBLE
             buttonRepetir.visibility = View.VISIBLE
-            Toast.makeText(requireContext(), "Zorionak, proba gainditu duzu !", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Zorionak, proba gainditu duzu !", Toast.LENGTH_SHORT)
+                .show()
             hideKeyboard()
         } else {
             Toast.makeText(requireContext(), "Saiatu berriro", Toast.LENGTH_SHORT).show()
@@ -334,7 +375,8 @@ class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
     }
 
     fun Context.hideKeyboard(view: View) {
-        val inputMethodManager = getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        val inputMethodManager =
+            getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 

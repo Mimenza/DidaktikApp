@@ -79,7 +79,7 @@ class Fragment2_4_minijuego : Fragment() {
         val view = inflater.inflate(R.layout.fragment2_4_minijuego, container, false)
 
         val ajustes: ImageButton = view.findViewById(R.id.btnf2_4ajustes)
-        aciertostxt= view.findViewById(R.id.txt2_4_acierto)
+
 
         //manzanas
         manzana1 = view.findViewById(R.id.manzana1_minijuego4)
@@ -92,7 +92,7 @@ class Fragment2_4_minijuego : Fragment() {
         txtcartel= view.findViewById((R.id.txtv2_4carteltexto))
         contadorCartel= view.findViewById((R.id.txtv2_4contador))
         progressBar= view.findViewById((R.id.progressBar_minijuego4))
-
+        aciertostxt= view.findViewById(R.id.txt2_4_acierto)
 
         ajustes.setOnClickListener() {
             Navigation.findNavController(view)
@@ -280,11 +280,12 @@ class Fragment2_4_minijuego : Fragment() {
 
     fun checkProgress() {
         //si se han cortado todas las manzanas aparece el boton
-        if (acierto == 4) {
+        if (acierto== 4) {
 
             starAnimationfun()
         } else {
             acierto++
+            aciertostxt.text= acierto.toString()
         }
 
     }

@@ -95,7 +95,7 @@ class Fragment2_2_minijuego : Fragment() {
         acierto++
         aciertoTxt.text = acierto.toString() + " / 5"
 
-        //manzana.setOnClickListener(){}
+        manzana.setOnClickListener(){}
 
         checkProgress()
 
@@ -137,7 +137,7 @@ class Fragment2_2_minijuego : Fragment() {
                 contadorCartel.isVisible=false
                 Handler().postDelayed({
 
-                    view?.let { Navigation.findNavController(it).navigate(R.id.action_fragment2_2_minijuego_to_fragment4_menu) }
+                    Navigation.findNavController(view!!).navigate(R.id.action_fragment2_2_minijuego_to_fragment4_menu)
                 }, 2000)
             }
         }.start()

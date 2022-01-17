@@ -244,13 +244,13 @@ class Fragment2_6_minijuego : Fragment() {
 
     private fun generarVasonTarget() {
         // Generamos el vaso
-        var imgVasoLleno: ImageView = generateDinamycImageElement(R.drawable.vaso6, (globalView.width - 200), (globalView.height/2), 200,200)
+        var imgVasoLleno: ImageView = generateDinamycImageElement(R.drawable.vaso6, (globalView.width - 800), (globalView.height/2+150), 250,250)
 
         // Generamos la Botella Vacia
         var imgBotellaVacia: ImageView = generateDinamycImageElement(R.drawable.botellallena, (globalView.width/2 - 200/2), (globalView.height/2 - 200/2), 400, 400)
 
         // Generamos el corcho de la botella
-        var imgCorchoBotella: ImageView = generateDinamycImageElement(R.drawable.corchotest, (globalView.width - 400), (globalView.height - 400), 200, 200)
+        var imgCorchoBotella: ImageView = generateDinamycImageElement(R.drawable.corchotest, (globalView.width - 400), (globalView.height - 800), 200, 200)
 
         manzanaList.add(DragnDropImageLevel(imgVasoLleno,imgBotellaVacia,imgCorchoBotella))
         imgVasoLleno.setOnTouchListener(listener)

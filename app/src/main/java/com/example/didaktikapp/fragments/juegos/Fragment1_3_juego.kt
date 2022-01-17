@@ -135,11 +135,7 @@ class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
             Navigation.findNavController(view).navigate(R.id.action_fragment1_3_juego_self)
         }
 
-        ajustes.setOnClickListener(){
 
-                        (activity as Activity6_Site?)?.menuCheck()
-
-        }
 
         //Animacion manzana al iniciar el juego
         starAnimationfun(view)
@@ -155,7 +151,14 @@ class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
             launch {
                 audio = MediaPlayer.create(context, R.raw.juego3audiotutorial)
                 audio?.start()
+
                 audio?.setOnCompletionListener {
+                    ajustes.setOnClickListener(){
+                        //activamos el listener para los ajustes
+                        (activity as Activity6_Site?)?.menuCheck()
+
+                    }
+
                     Handler(Looper.getMainLooper()).postDelayed({
                         if (getView() != null) {
                             //Llama a la funcion para la animacion de salida cuando el audio se termina

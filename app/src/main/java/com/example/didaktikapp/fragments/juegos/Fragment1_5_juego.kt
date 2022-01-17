@@ -45,7 +45,7 @@ class Fragment1_5_juego : Fragment() {
     private var audio: MediaPlayer? = null
     private lateinit var globalView: View
     private lateinit var vistaanimada: TranslateAnimation
-
+    lateinit var ajustes: ImageButton
     //After using View Listener, we can get the full width and height
     var totalWidth: Int = 0
     var totalHeight: Int = 0
@@ -87,7 +87,7 @@ class Fragment1_5_juego : Fragment() {
         globalView = view
         button = view.findViewById(R.id.btnf1_5_siguiente)
         button.visibility = View.GONE
-        val ajustes: ImageButton = view.findViewById(R.id.btnf1_5_ajustes)
+        ajustes = view.findViewById(R.id.btnf1_5_ajustes)
         val btnVerVideo: Button = view.findViewById(R.id.btnf1_5_siguienteavideo)
         val btnIrAJuego: Button = view.findViewById(R.id.btnf1_5_siguienteajuego)
         myLayout = view.findViewById<ConstraintLayout>(R.id.mainlayout)
@@ -108,17 +108,19 @@ class Fragment1_5_juego : Fragment() {
         button.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment1_5_juego_to_fragment2_5_minijuego)
         }
-        ajustes.setOnClickListener(){
 
-                (activity as Activity6_Site?)?.menuCheck()
-
-
-        }
 
         btnVerVideo.setOnClickListener() {
 
             verVideo()
             audio?.stop()
+            ajustes.setOnClickListener(){
+
+                (activity as Activity6_Site?)?.menuCheck()
+
+
+            }
+
 
         }
 
@@ -160,7 +162,17 @@ class Fragment1_5_juego : Fragment() {
                 audio = MediaPlayer.create(context, R.raw.juego5audiotutorial)
                 audio?.start()
 
+                audio?.setOnCompletionListener(){
+                    ajustes.setOnClickListener(){
+
+                        (activity as Activity6_Site?)?.menuCheck()
+
+
+                    }
+                }
             }
+
+
             //animacion para la descripcion
             starAnimationfun(view)
         }

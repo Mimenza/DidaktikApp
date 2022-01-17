@@ -123,7 +123,7 @@ class Fragment2_3_minijuego : Fragment() {
                     viewElement.y = motionEvent.rawY - viewElement.height / 2
                     var objetivoEncontrado: View = itemInList!!.objetivo
                     val location = IntArray(2)
-                    objetivoEncontrado.getLocationOnScreen(location);
+                    objetivoEncontrado.getLocationOnScreen(location)
                     var posX = location[0]
                     var posY = location[1]
                     var sizeX = objetivoEncontrado.width
@@ -133,6 +133,7 @@ class Fragment2_3_minijuego : Fragment() {
                         viewElement.y = posY.toFloat()
                         viewElement.setOnTouchListener(null)
                         itemInList.acertado = true
+                        viewElement.isVisible = false
                         manzanaLimpia()
                         checkJuegoFinalizado()
                     } else {

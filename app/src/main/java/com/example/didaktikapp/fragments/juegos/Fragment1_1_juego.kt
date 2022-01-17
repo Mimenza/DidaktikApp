@@ -391,11 +391,11 @@ class Fragment1_1_juego : Fragment() {
         when (color) {
             "green" ->
                 customLine =
-                    CustomLine(requireContext(), startX -7, startY -7, endX +7, endY +7, 15F, 162, 224, 23
+                    CustomLine(requireContext(), startX -7, startY -7, endX +7, endY +7, 15F, 255, 162, 224, 23
                     )
             "red" ->
                 customLine =
-                    CustomLine(requireContext(), startX -7, startY-7, endX+7, endY+7, 15F, 224, 56, 23)
+                    CustomLine(requireContext(), startX -7, startY-7, endX+7, endY+7, 15F, 255, 224, 56, 23)
         }
         customLines.add(customLine)
         layout.addView(customLine)

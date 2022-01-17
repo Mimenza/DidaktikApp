@@ -13,8 +13,8 @@ import java.lang.Exception
 class Utils {
     companion object {
 
-        fun drawLine(globalView: View, context: Context, startX: Float, startY: Float, endX: Float, endY: Float, width: Float, r: Int, g: Int, b: Int) {
-            val myLinObjecte = CustomLine(context,startX,startY,endX,endY,width, r,g,b)
+        fun drawLine(globalView: View, context: Context, startX: Float, startY: Float, endX: Float, endY: Float, width: Float, a: Int, r: Int, g: Int, b: Int) {
+            val myLinObjecte = CustomLine(context,startX,startY,endX,endY,width, a, r,g,b)
             val constraintLayoutFound = globalView.findViewById<ConstraintLayout>(R.id.mainlayout)
             constraintLayoutFound.addView(myLinObjecte)
         }

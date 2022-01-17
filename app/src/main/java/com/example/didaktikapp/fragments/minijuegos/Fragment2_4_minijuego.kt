@@ -17,6 +17,8 @@ import kotlinx.android.synthetic.main.activity4_bienvenida.*
 import android.view.View.OnTouchListener
 import android.view.animation.TranslateAnimation
 import android.widget.*
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.didaktikapp.Model.CustomLine
 import kotlinx.android.synthetic.main.fragment2_4_minijuego.*
 
 
@@ -44,6 +46,14 @@ class Fragment2_4_minijuego : Fragment() {
     private lateinit var manzana4: ImageView
     private lateinit var manzana5: ImageView
     private lateinit var manzanaSeleccionada: ImageView
+    private lateinit var vistaAnimada:TranslateAnimation
+    private lateinit var txtcartel: TextView
+    private lateinit var cartel: ImageView
+    private lateinit var contadorCartel: TextView
+    private lateinit var progressBar:ProgressBar
+    private lateinit var layout: ConstraintLayout
+    private lateinit var customLine: CustomLine
+    private lateinit var customStroke: CustomLine
 
 
     var entra: Boolean = false
@@ -55,12 +65,12 @@ class Fragment2_4_minijuego : Fragment() {
     var manzana3cortada:Boolean = false
     var manzana4cortada:Boolean = false
     var manzana5cortada:Boolean = false
-    private lateinit var vistaAnimada:TranslateAnimation
 
-    private lateinit var txtcartel: TextView
-    private lateinit var cartel: ImageView
-    private lateinit var contadorCartel: TextView
-    private lateinit var progressBar:ProgressBar
+    private var lastX:Float = 0F
+    private var lastY:Float = 0F
+    private val customLines = arrayListOf<CustomLine>()
+    private val customStrokes = arrayListOf<CustomLine>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,7 +87,7 @@ class Fragment2_4_minijuego : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment2_4_minijuego, container, false)
-
+        layout = view.findViewById(R.id.cl2_4minijuego)
         val ajustes: ImageButton = view.findViewById(R.id.btnf2_4ajustes)
 
 
@@ -255,6 +265,26 @@ class Fragment2_4_minijuego : Fragment() {
                     cortarManzana(manzanaSeleccionada)
                 }
 
+                customLine = CustomLine(requireContext(), lastX, lastY, x.toFloat(), y.toFloat(), 8F, 255, 255, 255, 255)
+                customStroke = CustomLine(requireContext(), lastX, lastY, x.toFloat(), y.toFloat(), 20F, 128, 255, 255, 255)
+
+                layout.addView(customLine)
+                layout.addView(customStroke)
+
+                customLines.add(customLine)
+                customStrokes.add(customStroke)
+
+                lastX = event.x
+                lastY = event.y
+
+                if(customLines.size > 7){
+                    layout.removeView(customLines[0])
+                    layout.removeView(customStrokes[0])
+
+                    customLines.remove(customLines[0])
+                    customStrokes.remove(customStrokes[0])
+                }
+
             }
 
             MotionEvent.ACTION_DOWN -> {
@@ -262,6 +292,9 @@ class Fragment2_4_minijuego : Fragment() {
                 entra = false
                 sale = false
                 dejarCortar = false
+
+                lastX = event.x
+                lastY = event.y
 
             }
 
@@ -272,6 +305,13 @@ class Fragment2_4_minijuego : Fragment() {
                 dejarCortar = false
                 dentro = false
 
+                for(i in customLines){
+                    layout.removeView(i)
+                }
+
+                for(i in customStrokes){
+                    layout.removeView(i)
+                }
             }
         }
         true

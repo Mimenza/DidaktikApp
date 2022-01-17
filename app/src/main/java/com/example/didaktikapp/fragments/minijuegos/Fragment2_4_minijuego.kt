@@ -36,7 +36,7 @@ class Fragment2_4_minijuego : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private var acierto: Int = 0
+    private var acierto: Int = 1
     private lateinit var aciertostxt: TextView
 
 
@@ -320,12 +320,13 @@ class Fragment2_4_minijuego : Fragment() {
 
     fun checkProgress() {
         //si se han cortado todas las manzanas aparece el boton
-        if (acierto== 4) {
-
+        if (acierto== 5) {
+            aciertostxt.text= acierto.toString()
             starAnimationfun()
         } else {
-            acierto++
             aciertostxt.text= acierto.toString()
+            acierto++
+
         }
 
     }

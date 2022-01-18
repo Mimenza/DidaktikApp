@@ -26,15 +26,34 @@
             app:layout_constraintTop_toTopOf="parent">
 
 
+            <ImageView
+                android:id="@+id/imgv1_2woodtable"
+                android:layout_width="420dp"
+                android:layout_height="90dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/wood_board"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.506"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.022" />
+
             <TextView
-                android:id="@+id/txtv1_1titulo"
-                android:layout_width="250dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="18dp"
-                android:gravity="center"
-                android:text="@string/nombre_2juego"
-                android:textSize="32dp"
-                android:textStyle="bold" />
+                android:id="@+id/txtv1_2titulominijuego"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginTop="-70dp"
+                android:text="EZETZ IGARRI"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.609"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.067" />
 
             <ImageButton
                 android:id="@+id/btnf1_2_ajustes"

@@ -26,6 +26,23 @@
             app:layout_constraintTop_toTopOf="parent">
 
 
+            <ImageView
+                android:id="@+id/imgv1_7woodtable"
+                android:layout_width="420dp"
+                android:layout_height="90dp"
+                android:layout_marginTop="20dp"
+                android:src="@drawable/wood_board" />
+
+            <TextView
+                android:id="@+id/txtv1_7titulominijuego"
+                android:layout_width="400dp"
+                android:layout_height="130dp"
+                android:layout_marginLeft="80dp"
+                android:layout_marginTop="-65dp"
+                android:text="ERANTZUNAK EGOKI"
+                android:textColor="@color/white"
+                android:textSize="25dp" />
+
             <ImageButton
                 android:id="@+id/btnf1_7_ajustes"
                 android:layout_width="wrap_content"
@@ -131,13 +148,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                android:minHeight="48dp"
                 android:text="@string/siguiente"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.866" />
+                app:layout_constraintVertical_bias="0.866"
+                tools:ignore="TouchTargetSizeCheck" />
 
         </LinearLayout>
 

@@ -145,32 +145,24 @@
         didazue asmakizunak asmatzen? Goazen, ba! Eta gogoratu, asmakizuna asmatzen baduzu, horren argazkia atera beharko duzula.</string>
     <string name="ayudajuego3">Plaza honetan “Festarik festa” jolasera jolastu
         beharko duzue. Lehenik eta behin puzzle bat egin beharko duzue. Puzzlea bukatzean, irudi bat sortzea lortuko duzue. Animo!</string>
-    <string name="ayudajuego4">Jarduera honek Astigarragako Sagar Uzta eguna ezagutzen lagunduko die.
-Horretarako, ikasleak Foru Plazara joango dira. Bertan, Sagar Uztaren inguruko
-informazioa jasoko dute Upelio sagarraren partetik eta gero, letra-zopa (egunean zehar
-festa honetan burutzen diren jardueren izen batzuk eta ospatzen ez diren beste jardueren
-izenak topatu beharko dituzte) osatu beharko dute. Hori egin ostean, egia-gezurra
-(letra-zopan aurkitutako ekintzak egun horretan burutzen diren edo ez adieraztea)
-ariketa burutu beharko dute.</string>
+    <string name="ayudajuego4">Ekintzaz, ekintza” jolasera jolastu beharko duzue. Horretarako
+        pantailan letra-zopa bat agertuko da, festa honetan burutzen diren
+        jardueren izen batzuk eta ospatzen ez diren beste jardueren izenak topatu beharko dituzue</string>
     <string name="ayudajuego5">“Txotxongiloa janzten” jolasera jolastu beharko duzue.
         Horretarako pantailaren alde batean txotxongilo bat agertuko da eta bestean, arropa prenda desberdinak.
         Jolasa gainditzeko, prenda bakoitza txotxongiloaren parte bakoitzarekin lotu beharko duzue, hau da, prenda bakoitzak
         duen zenbakia txotxongiloaren zein ataletan doan adierazi beharko duzue prendaren zenbakia txotxongiloan adieraziz. Animo!</string>
-    <string name="ayudajuego6">Astigarragako ondare immaterialaren beste zati garrantzitsua ezagutzen lagunduko
-die. Gune honetan, ikasleek Astigarragako bertsolari famatuaren berri izango dute, hain
-zuzen ere, Agin Labururen berri, hura hobeto ezagutzeko asmoz.
-Ipintza Sagardotegian elkartuko dira harekin eta bertan, Aginek “Sagardoari”
-izeneko bertsoaren zati bat abestuko du. Ikasleek bertsoa entzun eta gozatu ondoren,
-app-an ezarritako informazioa irakurri eta entzuteaz gain, Aginek abestutako bertsoa
-agertuko zaie hutsune batzuekin. Ikasleek orduan, hutsune horiek bete beharko dituzte hitzekin, entzun berri duten bertsoaz oroituz. Ondoren, ikasle guztiek elkarrekin
-bertsoa ozen abestuko dute.</string>
-    <string name="ayudajuego7">Jarduera honek Astigarragako Txox irekieraren eguna ezagutzen lagunduko die.
-Egun horretan, Txotx irekieraren nondik norakoa ezagutzeko, Rezola Sagardotegira
-joango dira. Bertan ikasleek Upelio sagarraren partetik informazioa jaso eta gero,
-galdera sorta bati erantzuna eman beharko diote ikasleek. Galdera horiei erantzuna
-emateko, Upelio sagarrak emandako azalpenean adi egoteaz gain, sagardotegiaren
-albotik pasatzen den jendearen, hau da, astigartarren laguntza ere izango dute; beraiei
-galderak egiteko aukera izango baitute.</string>
+    <string name="ayudajuego6">Oraingoan, “Kantu- kanta” ariketa egin beharko duzue.
+        Pantailan entzun berri duzuen bertsoa agertuko zaizue, bete beharreko hutsune
+        batzuekin. Zuek, hutsune horiek  bete beharko dituzue hitz batekin,
+        orain entzun berri duzuen bertsoaz oroituz. Oraintxe ikusiko dut
+        zer nolako memoria duzuen… animo!</string>
+    <string name="ayudajuego7">Orain “Belarriak adi eta erantzunak egoki”
+        ariketa egin beharko duzue. Pantailan galdera ezberdinak agertuko
+        zaizkizue, hainbat erantzun posiblerekin. Zuek, erantzun egokia
+        aukeratu beharko duzue abentura honetan aurrera jarraitzeko!
+        Laguntza behar baduzue, ahaztu lotsak eta eskatu laguntza
+        inguruan ikusten dituzuen astigartarrei. Zorte on!</string>
     <string name="sagardantzajolasatutorial">“Txotxongiloa janzten” jolasera jolastu beharko duzue.
         Horretarako pantailaren alde batean txotxongilo bat agertuko da eta bestean, arropa prenda desberdinak.
         Jolasa gainditzeko, prenda bakoitza txotxongiloaren parte bakoitzarekin lotu beharko duzue, hau da, prenda bakoitzak
@@ -186,7 +178,12 @@ galderak egiteko aukera izango baitute.</string>
     <string name="que1_ans2_juego7">25. txotx irekiera</string>
     <string name="que1_ans3_juego7">23. txotx irekiera</string>
     <string name="que1_juego7">Aurten zenbagarren txotx irekiera izango dugu aurten?</string>
-    <string name="belarriakadi">Orain “Belarriak adi eta erantzunak egoki” ariketa egin beharko duzue. Pantailan galdera ezberdinak agertuko zaizkizue, hainbat erantzun posiblerekin. Zuek, erantzun egokia aukeratu beharko duzue abentura honetan aurrera jarraitzeko! Laguntza behar baduzue, ahaztu lotsak eta eskatu laguntza inguruan ikusten dituzuen astigartarrei. Zorte on!</string>
+    <string name="belarriakadi">Orain “Belarriak adi eta erantzunak egoki”
+        ariketa egin beharko duzue. Pantailan galdera ezberdinak agertuko
+        zaizkizue, hainbat erantzun posiblerekin. Zuek, erantzun egokia
+        aukeratu beharko duzue abentura honetan aurrera jarraitzeko!
+        Laguntza behar baduzue, ahaztu lotsak eta eskatu laguntza
+        inguruan ikusten dituzuen astigartarrei. Zorte on!</string>
 
     <!--ADMIN DIALOG -->
     <string name="administratorAccess">Administratzaile sarbidea</string>

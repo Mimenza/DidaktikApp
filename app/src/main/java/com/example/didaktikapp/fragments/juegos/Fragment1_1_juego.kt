@@ -554,12 +554,20 @@ class Fragment1_1_juego : Fragment() {
                 launch {
                     audio = MediaPlayer.create(context, R.raw.juego1ongi)
                     audio?.start()
+                    imgv1_1osoongi.isVisible=true
+                    imgv1_1osoongi2.isVisible=true
+                    imgv1_1osoongi3.isVisible=true
+                    imgv1_1osoongi4.isVisible=true
                     audio?.setOnCompletionListener {
                         val btnNext: Button = view.findViewById(R.id.btnf1_1siguienteJuego)
                         val btnAgain: Button = view.findViewById(R.id.btnf1_1repetirJuego)
-
                         btnNext.isVisible = true
                         btnAgain.isVisible = true
+                        imgv1_1osoongi.isVisible=false
+                        imgv1_1osoongi2.isVisible=false
+                        imgv1_1osoongi3.isVisible=false
+                        imgv1_1osoongi4.isVisible=false
+
                     }
                 }
             }

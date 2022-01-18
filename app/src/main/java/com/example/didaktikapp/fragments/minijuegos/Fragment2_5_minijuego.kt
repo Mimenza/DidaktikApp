@@ -168,13 +168,10 @@ class Fragment2_5_minijuego : Fragment() {
         changeVaso(manzana)
         acierto++
 
-
-
     }
 
     fun changeVaso(manzana: ImageView){
         manzana.setOnClickListener() {}
-        println("acierto"+ acierto)
 
         when (acierto) {
             0 ->{vaso.setImageResource(R.drawable.vaso2) }

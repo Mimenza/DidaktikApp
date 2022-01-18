@@ -61,7 +61,9 @@
     <string name="azalpena1_juego1">Gune honetan hainbat sagar mota ezagutuko eta hartuko dituzu.</string>
     <string name="juego1_azalpena2">Gune honetan sagar zukua dastatuko duzu.</string>
     <string name="juego1_azalpena3">Gune honetan sagarraren historia eta sagadoaren prozesuak landuko dituzu.</string>
-    <string name="jositajositext">Misioari ekiteko, lehenik eta behin “Josi `ta josi” jolasera jolastu beharko duzue. Horretarako pantailaren alde batean sagardoetxeko 3 guneak eta horien argazkiak agertzen zaizkizue eta beste aldean, bertako zereginak. Beraz, guneak eginkizunekin lotu behar dituzue.</string>
+    <string name="jositajositext">Misioari ekiteko, lehenik eta behin “Josi `ta josi” jolasera jolastu beharko
+        duzue. Horretarako pantailaren alde batean sagardoetxeko 3 guneak eta horien argazkiak
+        agertzen zaizkizue eta beste aldean, bertako zereginak. Beraz, guneak eginkizunekin lotu behar dituzue.</string>
 
     <!--FRAGMENT JUEGO2 -->
     <string name="nombre_2juego">EZETZ IGARRI</string>
@@ -89,7 +91,8 @@
     <string name="que4_ans4_juego2">Hostoak</string>
     <string name="emaitza">Emaitza</string>
     <string name="amaitu">Amaitu</string>
-    <string name="ezetzigarrijolasa">Bigarren jolasaren izena “Ezetz igarri?” da. Beraz, lagunduko didazue asmakizunak asmatzen? Goazen, ba! Eta gogoratu, asmakizuna asmatzen baduzu, horren argazkia atera beharko duzula.</string>
+    <string name="ezetzigarrijolasa">Bigarren jolasaren izena “Ezetz igarri?” da. Beraz, lagunduko
+        didazue asmakizunak asmatzen? Goazen, ba! Eta gogoratu, asmakizuna asmatzen baduzu, horren argazkia atera beharko duzula.</string>
     <string name="saiatuberriro">Saiatu berriro</string>
     <string name="text_bienvenidamapa">Hau izango da egingo behar duzuen ibilbidea ni sagardo bilakatzeko. Zorte on!</string>
     <string name="sagardantzajolasa">"Bosgarren geldiunera ailegatu gara!!! Astigar elkartera!!! Sagar Dantza ezagutzeko gogoekin? Zuek gustuko ahal duzue dantza egitea? Ba Astigartarrei asko gustatzen zaie ere, batez ere, Astigar Dantza taldeko kideei. Astigar Dantza taldeko neska- mutil gazteek, urtero, festa ezberdinak ospatzeko (Sagar uzta, txotx irekiera…) Sagar Dantza izeneko dantza bat egiten dute sagarrekin eta Astigarragako txoko ezberdinetan egiten da: sagardotegietan, plazan, sagardoetxean… Sagar dantza ez da soilik Astigarragan dantzatzen, beste zenbat herrietan ere dantzatzen da, baina dantza ez da guztiz berdina izaten leku guztietan. Jantziak ere herri batetik bestera aldatu egiten dira, hori dela eta, geldiune honetan egingo duzuen jardueran honekin erlazionatuta dago. Astigarragan Sagar Dantza dantzatzeko erabiltzen diren jantziak, adibidez, nahiko deigarriak dira, batez ere, “txorroko” deituriko kolorezko txapelari esker, oso bitxiak baitira! "</string>
@@ -135,24 +138,13 @@
     <string name="menu">MENU</string>
 
     <!--AYUDA-->
-    <string name="ayudajuego1">Jarduera honek Astigarragako ondare nagusia pixka bat ezagutzen lagunduko die,
-hau da, sagardoa. Bertan ikasleek sagardoetxearen gune guztiak ezagutuko dituzte,
-baita horietako bakoitzean zer egiten den eta horrek ibilbidean zehar egin beharko
-duten guztiaren ikuspegi orokor bat izaten lagunduko die. Bertara ailegatzeko, beste
-jarduera guztietan bezala, mapa erabiliko dute eta informazioa jaso ondoren, ariketa bat
-burutuko dute sagardoetxeko guneen argazkiak bertan egiten denarekin lotuz (hau da,
-argazkiak eta hitzak lotu behar dituzte).</string>
-    <string name="ayudajuego2">Jarduera honetan Murgia jauregiaren inguruko informazioa jasoko dute. Ondoren,
-jolas bat burutzeko eskatu diegu, kasu honetan, asmakizunak asmatu beharko dituzte,
-gure ustez, ikasleentzako oso erakargarriak direnak. Azken finean asmakizunek
-ikasleei era dibertigarri batean pentsatzeko aukera ematen die. Gainera, asmakizun
-guztiak Murgia jauregiaren inguruko elementuak direnez, hura hobeto ezagutzen
-lagunduko die.</string>
-    <string name="ayudajuego3">Jarduera honen bidez, Astigarragako Santa Ana egunean egiten denaren berri
-izango dute, hura hobeto ezagutzeko asmoz.
-Horretarako, app-an ezarritako informazioa irakurri eta entzungo dute, ondoren
-joko batzuk burutzeko. Kasu honetan, Santa Ana festan egoten diren zanpantzarren puzzlea egin beharko dute. Behin puzzlea eginda, zanpantzarrekin zerikusia duten bi
-galdera erantzun beharko dituzte.</string>
+    <string name="ayudajuego1">Misioari ekiteko, lehenik eta behin “Josi `ta josi” jolasera jolastu beharko
+        duzue. Horretarako pantailaren alde batean sagardoetxeko 3 guneak eta horien argazkiak
+        agertzen zaizkizue eta beste aldean, bertako zereginak. Beraz, guneak eginkizunekin lotu behar dituzue</string>
+    <string name="ayudajuego2">Bigarren jolasaren izena “Ezetz igarri?” da. Beraz, lagunduko
+        didazue asmakizunak asmatzen? Goazen, ba! Eta gogoratu, asmakizuna asmatzen baduzu, horren argazkia atera beharko duzula.</string>
+    <string name="ayudajuego3">Plaza honetan “Festarik festa” jolasera jolastu
+        beharko duzue. Lehenik eta behin puzzle bat egin beharko duzue. Puzzlea bukatzean, irudi bat sortzea lortuko duzue. Animo!</string>
     <string name="ayudajuego4">Jarduera honek Astigarragako Sagar Uzta eguna ezagutzen lagunduko die.
 Horretarako, ikasleak Foru Plazara joango dira. Bertan, Sagar Uztaren inguruko
 informazioa jasoko dute Upelio sagarraren partetik eta gero, letra-zopa (egunean zehar
@@ -160,13 +152,10 @@ festa honetan burutzen diren jardueren izen batzuk eta ospatzen ez diren beste j
 izenak topatu beharko dituzte) osatu beharko dute. Hori egin ostean, egia-gezurra
 (letra-zopan aurkitutako ekintzak egun horretan burutzen diren edo ez adieraztea)
 ariketa burutu beharko dute.</string>
-    <string name="ayudajuego5">Jarduera honek Astigarragako Sagar Dantza ezagutzeko aukera emango die.
-Horretarako, ikasleak Astigar elkartera joango dira. Bertan ikasleek Upelio sagarraren
-partetik dantzaren informazioa jasoko dute eta bideo bat ikusiko dute. Hori egin
-ondoren, ikasleek Sagar dantzan erabiltzen diren ohiko jantziak ezagutzeko, hurrengo
-ariketa proposatuko diegu: app-ean agertuko den txotxongilo bat jantziko dute,
-horretarako dantzan eramaten duten arroparen argazkiak eskura jarriko dizkiegu eta
-argazki bakoitza txotxongiloaren atal bakoitzarekin erlazionatu beharko dute.</string>
+    <string name="ayudajuego5">“Txotxongiloa janzten” jolasera jolastu beharko duzue.
+        Horretarako pantailaren alde batean txotxongilo bat agertuko da eta bestean, arropa prenda desberdinak.
+        Jolasa gainditzeko, prenda bakoitza txotxongiloaren parte bakoitzarekin lotu beharko duzue, hau da, prenda bakoitzak
+        duen zenbakia txotxongiloaren zein ataletan doan adierazi beharko duzue prendaren zenbakia txotxongiloan adieraziz. Animo!</string>
     <string name="ayudajuego6">Astigarragako ondare immaterialaren beste zati garrantzitsua ezagutzen lagunduko
 die. Gune honetan, ikasleek Astigarragako bertsolari famatuaren berri izango dute, hain
 zuzen ere, Agin Labururen berri, hura hobeto ezagutzeko asmoz.
@@ -182,7 +171,10 @@ galdera sorta bati erantzuna eman beharko diote ikasleek. Galdera horiei erantzu
 emateko, Upelio sagarrak emandako azalpenean adi egoteaz gain, sagardotegiaren
 albotik pasatzen den jendearen, hau da, astigartarren laguntza ere izango dute; beraiei
 galderak egiteko aukera izango baitute.</string>
-    <string name="sagardantzajolasatutorial">“Txotxongiloa janzten” jolasera jolastu beharko duzue. Horretarako pantailaren alde batean txotxongilo bat agertuko da eta bestean, arropa prenda desberdinak. Jolasa gainditzeko, prenda bakoitza txotxongiloaren parte bakoitzarekin lotu beharko duzue, hau da, prenda bakoitzak duen zenbakia txotxongiloaren zein ataletan doan adierazi beharko duzue prendaren zenbakia txotxongiloan adieraziz. Animo!</string>
+    <string name="sagardantzajolasatutorial">“Txotxongiloa janzten” jolasera jolastu beharko duzue.
+        Horretarako pantailaren alde batean txotxongilo bat agertuko da eta bestean, arropa prenda desberdinak.
+        Jolasa gainditzeko, prenda bakoitza txotxongiloaren parte bakoitzarekin lotu beharko duzue, hau da, prenda bakoitzak
+        duen zenbakia txotxongiloaren zein ataletan doan adierazi beharko duzue prendaren zenbakia txotxongiloan adieraziz. Animo!</string>
     <string name="juego3_pregunta1">Argazki horretan agertzen dena Santa Ana festan egoten da?</string>
     <string name="juego3_pregunta2">Nortzuk dira?</string>
     <string name="botonclaro">MODU ARGIA</string>
@@ -199,7 +191,8 @@ galderak egiteko aukera izango baitute.</string>
     <!--ADMIN DIALOG -->
     <string name="administratorAccess">Administratzaile sarbidea</string>
     <string name="administratorAccessText">Pasahitza sartu administratzaile pribilegioak lortzeko</string>
-    <string name="juego3audiotutorialtxt">Plaza honetan “Festarik festa” jolasera jolastu beharko duzue. Lehenik eta behin puzzle bat egin beharko duzue. Puzzlea bukatzean, irudi bat sortzea lortuko duzue. Animo!</string>
+    <string name="juego3audiotutorialtxt">Plaza honetan “Festarik festa” jolasera jolastu
+        beharko duzue. Lehenik eta behin puzzle bat egin beharko duzue. Puzzlea bukatzean, irudi bat sortzea lortuko duzue. Animo!</string>
     <string name="izena">Izena</string>
     <string name="puntuacion">Puntuazioa</string>
     <string name="ultimo_punto">Azken puntua</string>

@@ -395,6 +395,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
+            style="?android:borderlessButtonStyle"
             android:id="@+id/btnf1_4_ajustes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -402,10 +403,10 @@
             android:src="@drawable/ic_menu"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.955"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.174"
+            app:layout_constraintVertical_bias="0.08"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <!-- COMENTADO PARA EXPERIMENTO DE DRAW LINE IN REAL TIME

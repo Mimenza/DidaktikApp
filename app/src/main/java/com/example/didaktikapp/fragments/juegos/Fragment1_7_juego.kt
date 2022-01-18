@@ -164,6 +164,8 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         //desabilitar boton ajustes mientras esta el tutorial
         val buttonAjustes = view.findViewById(R.id.btnf1_7_ajustes) as ImageButton
         buttonAjustes.setEnabled(false)
+        val buttonSiguiente = view.findViewById(R.id.btnf1_7siguiente) as Button
+        buttonSiguiente.setEnabled(false)
         question1_answer1.isEnabled=false
         question1_answer2.isEnabled=false
         question1_answer3.isEnabled=false
@@ -217,6 +219,8 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
                 txt_animacion.isVisible = false
                 val buttonAjustes = view.findViewById(R.id.btnf1_7_ajustes) as ImageButton
                 buttonAjustes.setEnabled(true)
+                val buttonSiguiente = view.findViewById(R.id.btnf1_7siguiente) as Button
+                buttonSiguiente.setEnabled(true)
                 question1_answer1.isEnabled=true
                 question1_answer2.isEnabled=true
                 question1_answer3.isEnabled=true

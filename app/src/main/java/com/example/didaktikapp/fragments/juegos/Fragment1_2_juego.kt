@@ -161,6 +161,8 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         //desabilitar botones en el tutorial
         val buttonAjustes = view.findViewById(R.id.btnf1_2_ajustes) as ImageButton
         buttonAjustes.setEnabled(false)
+        val buttonSiguiente = view.findViewById(R.id.btnf1_2siguiente) as Button
+        buttonSiguiente.setEnabled(false)
         question1_answer1.isEnabled=false
         question1_answer2.isEnabled=false
         question1_answer3.isEnabled=false
@@ -211,8 +213,11 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
                 txtv1_2tutorialjuego2.startAnimation(aniFade)
                 txtv1_2tutorialjuego2.isVisible = false
                 txt_animacion.isVisible = false
+                //Habilitar botones cuando desaparece la
                 val buttonAjustes = view.findViewById(R.id.btnf1_2_ajustes) as ImageButton
                 buttonAjustes.setEnabled(true)
+                val buttonSiguiente = view.findViewById(R.id.btnf1_2siguiente) as Button
+                buttonSiguiente.setEnabled(true)
                 question1_answer1.isEnabled=true
                 question1_answer2.isEnabled=true
                 question1_answer3.isEnabled=true

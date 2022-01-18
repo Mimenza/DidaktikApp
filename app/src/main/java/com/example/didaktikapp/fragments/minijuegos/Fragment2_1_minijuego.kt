@@ -100,12 +100,12 @@ class Fragment2_1_minijuego : Fragment() {
         //newView = ImageView(requireContext())
         val constraintLayoutFound = globalView.findViewById<ConstraintLayout>(R.id.mainlayout_Minijuego2)
         constraintLayoutFound.addView(imgManzanaGenerada)
-        imgManzanaGenerada.layoutParams.height = 200
+        imgManzanaGenerada.layoutParams.height = 0
         imgManzanaGenerada.layoutParams.width = 200
         //  newView.x = 200F
         // newView.y = 200F
         imgManzanaGenerada.x = ((0..globalView.width - 200).random()).toFloat()
-        imgManzanaGenerada.y = ((0..globalView.height/2 - 200).random()).toFloat()
+        imgManzanaGenerada.y = ((0..globalView.height/2-600).random()).toFloat()
         //imgManzanaGenerada.setBackgroundColor(Color.BLUE)
 
 

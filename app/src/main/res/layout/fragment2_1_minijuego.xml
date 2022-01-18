@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageView8"
+            android:id="@+id/img2_1arbol"
             android:layout_width="370dp"
             android:layout_height="490dp"
             android:scaleType="fitXY"
@@ -26,25 +26,25 @@
 
         <!-- BASURERO DESACTIVADO-->
 
-        <TextView
-            android:id="@+id/manzanasAciertos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="76dp"
-            android:layout_marginBottom="44dp"
-            android:text="0"
-            android:textSize="34sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/juegox_cesta" />
-
         <ImageView
             android:id="@+id/juegox_cesta"
             android:layout_width="160dp"
             android:layout_height="160dp"
-            android:layout_marginStart="52dp"
+            android:layout_marginStart="124dp"
             android:scaleType="fitXY"
             android:src="@drawable/juegox_cestamanzana"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/manzanasAciertos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="0"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageView
@@ -108,8 +108,10 @@
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.496" />
 
         <TextView
             android:id="@+id/txtv2_1carteltexto"

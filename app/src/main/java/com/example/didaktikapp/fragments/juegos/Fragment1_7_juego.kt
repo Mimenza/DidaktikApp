@@ -58,7 +58,7 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
     private lateinit var question1_answer1 : TextView
     private lateinit var question1_answer2 : TextView
     private lateinit var question1_answer3 : TextView
-    private lateinit var question1_answer4: TextView
+
     private lateinit var btnSiguiente : Button
     private  var mCorrectAnswers: Int = 0
     private lateinit var vistaanimada:TranslateAnimation
@@ -90,6 +90,7 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         question1_answer1= view.findViewById(R.id.txtv1_7_respuesta1)
         question1_answer2= view.findViewById(R.id.txtv1_7_respuesta2)
         question1_answer3= view.findViewById(R.id.txtv1_7_respuesta3)
+
         btnSiguiente= view.findViewById(R.id.btnf1_7siguiente)
 
 
@@ -117,6 +118,7 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         question1_answer1!!.setOnClickListener(this)
         question1_answer2!!.setOnClickListener(this)
         question1_answer3!!.setOnClickListener(this)
+
         btnSiguiente!!.setOnClickListener(this)
 
 
@@ -162,10 +164,10 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         //desabilitar boton ajustes mientras esta el tutorial
         val buttonAjustes = view.findViewById(R.id.btnf1_7_ajustes) as ImageButton
         buttonAjustes.setEnabled(false)
-        question1_answer1.isEnabled=true
-        question1_answer2.isEnabled=true
-        question1_answer3.isEnabled=true
-        question1_answer4.isEnabled=true
+        question1_answer1.isEnabled=false
+        question1_answer2.isEnabled=false
+        question1_answer3.isEnabled=false
+
 
         //animacion entrada upelio
         vistaanimada = TranslateAnimation(-1000f, 0f, 0f, 0f)
@@ -218,7 +220,7 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
                 question1_answer1.isEnabled=true
                 question1_answer2.isEnabled=true
                 question1_answer3.isEnabled=true
-                question1_answer4.isEnabled=true
+
             }
         }, 1000)
     }

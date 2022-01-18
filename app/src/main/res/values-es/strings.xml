@@ -292,13 +292,7 @@ Respuesta a la pregunta 6
     <string name="menu">MENU</string>
 
     <!--AYUDA-->
-    <string name="ayudajuego1">Jarduera honek Astigarragako ondare nagusia pixka bat ezagutzen lagunduko die,
-hau da, sagardoa. Bertan ikasleek sagardoetxearen gune guztiak ezagutuko dituzte,
-baita horietako bakoitzean zer egiten den eta horrek ibilbidean zehar egin beharko
-duten guztiaren ikuspegi orokor bat izaten lagunduko die. Bertara ailegatzeko, beste
-jarduera guztietan bezala, mapa erabiliko dute eta informazioa jaso ondoren, ariketa bat
-burutuko dute sagardoetxeko guneen argazkiak bertan egiten denarekin lotuz (hau da,
-argazkiak eta hitzak lotu behar dituzte).</string>
+    <string name="ayudajuego1">Misioari ekiteko, lehenik eta behin “Josi `ta josi” jolasera jolastu beharko duzue. Horretarako pantailaren alde batean sagardoetxeko 3 guneak eta horien argazkiak agertzen zaizkizue eta beste aldean, bertako zereginak. Beraz, guneak eginkizunekin lotu behar dituzue.</string>
     <string name="ayudajuego2">Jarduera honetan Murgia jauregiaren inguruko informazioa jasoko dute. Ondoren,
 jolas bat burutzeko eskatu diegu, kasu honetan, asmakizunak asmatu beharko dituzte,
 gure ustez, ikasleentzako oso erakargarriak direnak. Azken finean asmakizunek

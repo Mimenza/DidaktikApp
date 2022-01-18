@@ -36,7 +36,7 @@
             <TextView
                 android:id="@+id/txtv1_7titulominijuego"
                 android:layout_width="400dp"
-                android:layout_height="130dp"
+                android:layout_height="50dp"
                 android:layout_marginLeft="80dp"
                 android:layout_marginTop="-65dp"
                 android:text="ERANTZUNAK EGOKI"

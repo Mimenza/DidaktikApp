@@ -88,6 +88,34 @@ class Fragment1_4_juego : Fragment() {
         ajustes.setOnClickListener(){
                 (activity as Activity6_Site?)?.menuCheck()
         }
+        //Typewriter juego 4 tutorial
+      /*  Handler(Looper.getMainLooper()).postDelayed({
+            if (getView() != null) {
+                typewriter(view)
+            }
+        }, 2000) */
+
+
+        //Animacion manzana al iniciar el juego
+      /*  starAnimationfun(view)
+
+
+        runBlocking {
+            launch {
+                audio = MediaPlayer.create(context, R.raw.juego4audiotutorial)
+                audio?.start()
+
+                audio?.setOnCompletionListener {
+
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        if (getView() != null) {
+                            //Llama a la funcion para la animacion de salida cuando el audio se termina
+                            exitAnimationfun(view)
+                        }
+                    }, 1000)
+                }
+            }
+        }*/
 
         view.viewTreeObserver.addOnGlobalLayoutListener(object :
             ViewTreeObserver.OnGlobalLayoutListener {
@@ -102,6 +130,40 @@ class Fragment1_4_juego : Fragment() {
 
         return view
     }
+
+   /* private fun typewriter(view: View) {
+        val typeWriterView = view.findViewById(R.id.txtv1_4tutorialjuego4) as TypeWriterView
+        typeWriterView.setWithMusic(false)
+        typeWriterView.animateText(resources.getString(R.string.juego4audiotutorialtxt))
+        typeWriterView.setDelay(65)
+    }
+
+    private fun starAnimationfun(view: View) {
+        //Animacion fondo gris
+        val txtAnimacion = view.findViewById(R.id.txtv1_4fondogris) as TextView
+        val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade)
+        txtAnimacion.startAnimation(aniFade)
+
+        //Animacion entrada upelio
+        vistaAnimada = TranslateAnimation(-1000f, 0f, 0f, 0f)
+        vistaAnimada.duration = 2000
+        val upelio = view.findViewById(R.id.imgv1_4_upelio) as ImageView
+        upelio.startAnimation(vistaAnimada)
+
+        //llamamos a la animacion para animar a upelio
+        Handler(Looper.getMainLooper()).postDelayed({
+            if (getView() != null) {
+                upelio.isVisible = false
+                talkAnimationfun(view)
+            }
+        }, 2000)
+    }
+    */
+
+
+
+
+
 
     fun prepareSopa() {
         var vFila1: ArrayList<View>? = getConstraintChildCount(constraintFila1)

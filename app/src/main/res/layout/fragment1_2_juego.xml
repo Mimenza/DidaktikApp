@@ -71,6 +71,8 @@
                 app:layout_constraintVertical_bias="0.174"
                 tools:ignore="SpeakableTextPresentCheck" />
 
+            <!--Horizontal  Linear Layout-->
+
             <TextView
                 android:id="@+id/txtv1_2_pregunta1"
                 android:layout_width="match_parent"
@@ -80,7 +82,6 @@
                 android:text="@string/que1_juego2"
                 android:textColor="@color/black"
                 android:textSize="22sp" />
-            <!--Horizontal  Linear Layout-->
 
             <ImageView
                 android:id="@+id/imgv1_2defaultimage"

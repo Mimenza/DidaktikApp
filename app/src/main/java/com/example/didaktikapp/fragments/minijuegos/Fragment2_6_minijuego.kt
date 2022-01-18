@@ -100,18 +100,23 @@ class Fragment2_6_minijuego : Fragment() {
         when(pItem.nivel) {
             4 -> {
                 pItem.origen.setImageResource(R.drawable.vaso5)
+                pItem.objetivo.setImageResource(R.drawable.mjuego5_botella2)
             }
             3 -> {
                 pItem.origen.setImageResource(R.drawable.vaso4)
+                pItem.objetivo.setImageResource(R.drawable.mjuego5_botella3)
             }
             2 -> {
                 pItem.origen.setImageResource(R.drawable.vaso3)
+                pItem.objetivo.setImageResource(R.drawable.mjuego5_botella4)
             }
             1 -> {
                 pItem.origen.setImageResource(R.drawable.vaso2)
+                pItem.objetivo.setImageResource(R.drawable.mjuego5_botella5)
             }
             else -> {
                 pItem.origen.setImageResource(R.drawable.vaso1)
+                pItem.objetivo.setImageResource(R.drawable.mjuego5_botella1)
                 pItem.acertado = true
                 vasoVaciado()
                 pItem.origen.setOnTouchListener(null)
@@ -255,7 +260,7 @@ class Fragment2_6_minijuego : Fragment() {
         var imgVasoLleno: ImageView = generateDinamycImageElement(R.drawable.vaso6, (globalView.width - 800), (globalView.height/2+150), 250,250)
 
         // Generamos la Botella Vacia
-        var imgBotellaVacia: ImageView = generateDinamycImageElement(R.drawable.botellallena, (globalView.width/2 - 200/2), (globalView.height/2 - 200/2), 475, 475)
+        var imgBotellaVacia: ImageView = generateDinamycImageElement(R.drawable.mjuego5_botella1, (globalView.width/2 - 200/2), (globalView.height/2 - 200/2), 475, 475)
 
         // Generamos el corcho de la botella
         var imgCorchoBotella: ImageView = generateDinamycImageElement(R.drawable.corchotest, (globalView.width - 400), (globalView.height - 800), 200, 200)

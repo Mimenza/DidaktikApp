@@ -109,7 +109,6 @@ class Fragment1_5_juego : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_fragment1_5_juego_to_fragment2_5_minijuego)
         }
 
-
         btnVerVideo.setOnClickListener() {
 
             verVideo()
@@ -118,9 +117,7 @@ class Fragment1_5_juego : Fragment() {
 
                 (activity as Activity6_Site?)?.menuCheck()
 
-
             }
-
 
         }
 
@@ -177,7 +174,6 @@ class Fragment1_5_juego : Fragment() {
             starAnimationfun(view)
         }
     }
-
 
     private fun videoTutorial(view: View)
     {
@@ -248,6 +244,8 @@ class Fragment1_5_juego : Fragment() {
         val upelio = view.findViewById(R.id.imgv1_5_upelio) as ImageView
         upelio.startAnimation(vistaanimada)
 
+
+
         //llamamos a la animacion para animar a upelio
         Handler(Looper.getMainLooper()).postDelayed({
             if (getView() != null) {
@@ -291,6 +289,13 @@ class Fragment1_5_juego : Fragment() {
         btnf1_5_siguienteajuego.isVisible=false
         txtv1_5fondogris.isVisible=false
         btnf1_5_siguiente.isVisible=false
+
+        //Habilitamos las piezas de los juegos
+        img_botas_move.isVisible=true
+        img_gorro_move.isVisible=true
+        img_guantedcha_move.isVisible=true
+        img_guanteizq_move.isVisible=true
+        img_ropa_move.isVisible=true
 
     }
 

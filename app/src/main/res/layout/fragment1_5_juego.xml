@@ -25,18 +25,18 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
+            style="?android:borderlessButtonStyle"
             android:id="@+id/btnf1_5_ajustes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="119dp"
-            android:layout_marginBottom="448dp"
             android:minHeight="48dp"
             android:src="@drawable/ic_menu"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.955"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.174"
+            app:layout_constraintVertical_bias="0.089999974"
             tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageView

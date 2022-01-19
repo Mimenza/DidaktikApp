@@ -124,7 +124,6 @@ class Fragment2_6_minijuego : Fragment() {
                 pItem.corcho.setOnTouchListener(listener)
             }
         }
-
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -177,40 +176,6 @@ class Fragment2_6_minijuego : Fragment() {
                     }
 
 
-                        /*
-                        //Aqui comprobamos si la manzana no esta limpia.
-                        if (!itemInList.acertado) {
-                            val aguaLocation = IntArray(2)
-                            agua.getLocationOnScreen(aguaLocation);
-                            //Posicion/tamaño del agua
-                            var aguaPosX = aguaLocation[0]
-                            var aguaPosY = aguaLocation[1]
-                            var aguaSizeX = agua.width
-                            var aguaSizeY = agua.height
-
-                            // Si la imagen pasa por el agua, la manzana cambiara a limpia
-                            if ( (viewElement.x + viewElement.width/2) >= aguaPosX && (viewElement.y + viewElement.height/2) >= aguaPosY && (viewElement.x + viewElement.width/2) <= aguaPosX+aguaSizeX && (viewElement.y + viewElement.height/2) <= aguaPosY+aguaSizeY) {
-
-                                if (cleanManzanaTimer == null) {
-                                    cleanManzanaTimer = true
-                                    Handler(Looper.getMainLooper()).postDelayed({
-                                        if (getView() != null && cleanManzanaTimer != null) {
-                                            if ( (viewElement.x + viewElement.width/2) >= aguaPosX && (viewElement.y + viewElement.height/2) >= aguaPosY && (viewElement.x + viewElement.width/2) <= aguaPosX+aguaSizeX && (viewElement.y + viewElement.height/2) <= aguaPosY+aguaSizeY) {
-                                                itemInList.acertado = true
-                                                itemInList.origen.setImageResource(R.drawable.sagarraberdea)
-                                                cleanManzanaTimer = null
-                                            }
-                                        }
-                                    }, tiempoCompletarComprobacion.toLong())
-                                }
-                            } else {
-                                if (cleanManzanaTimer != null) {
-                                    cleanManzanaTimer = null
-                                }
-                            }
-                        }
-
-                         */
                 }
                 MotionEvent.ACTION_UP -> {
 
@@ -337,10 +302,6 @@ class Fragment2_6_minijuego : Fragment() {
         }.start()
 
     }
-
-
-
-
 
 
     private fun findItemByOrigen(view: View): DragnDropImageLevel? {

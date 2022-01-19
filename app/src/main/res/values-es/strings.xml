@@ -180,6 +180,10 @@ se realiza cata y venta, así como la posibilidad de probar manzanas.
     <string name="titulo32_juego">PUNTO 4: SAGAR UZTA</string>
 
     <!--FRAGMENT JUEGO4 -->
+    <string name="juego4tutorialtxt">Tendréis que jugar al juego de la acción.
+Para ello aparecerá en la pantalla una sopa de letras que se llevará a cabo en esta fiesta.
+Algunos nombres de actividades existentes y otras que no se celebran.
+Tendréis que encontrar los nombres</string>
     <string name="text_4juego">
 Hemos llegado a la quinta parada!!!
 ¿Con ganas de conocer la Sagar Dantza?

@@ -64,7 +64,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="SiGUIENTE"
+            android:text="@string/siguiente"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
@@ -84,6 +84,53 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.08"
             tools:ignore="SpeakableTextPresentCheck" />
+
+        <TextView
+            android:id="@+id/txtv1_4fondogris"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#85000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <in.codeshuffle.typewriterview.TypeWriterView
+            android:id="@+id/txtv1_4tutorialjuego4"
+            android:layout_width="327dp"
+            android:layout_height="422dp"
+            android:focusable="true"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.13999999"
+            tools:ignore="MissingClass" />
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/imgv1_4_upelio"
+            android:layout_width="323dp"
+            android:layout_height="316dp"
+            android:src="@drawable/img_upeliosagarra"
+            app:layout_constraintBottom_toBottomOf="@+id/txtv1_4fondogris"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.79" />
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/imgv1_4_upelio2"
+            android:layout_width="323dp"
+            android:layout_height="316dp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtv1_4fondogris"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.79" />
+
 
         <!-- COMENTADO PARA EXPERIMENTO DE DRAW LINE IN REAL TIME
         <ImageView

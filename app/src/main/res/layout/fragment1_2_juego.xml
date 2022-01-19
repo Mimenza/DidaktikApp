@@ -81,6 +81,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:paddingTop="20dp"
                 android:gravity="center"
                 android:text="@string/que1_juego2"
                 android:textColor="@color/black"

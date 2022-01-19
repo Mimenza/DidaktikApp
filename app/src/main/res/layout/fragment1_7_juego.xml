@@ -63,6 +63,7 @@
 
             <TextView
                 android:id="@+id/txtv1_7_pregunta1"
+                android:paddingTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"

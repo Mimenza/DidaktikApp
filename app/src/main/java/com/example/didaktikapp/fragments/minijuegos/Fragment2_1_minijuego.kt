@@ -1,7 +1,6 @@
 package com.example.didaktikapp.fragments.minijuegos
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
@@ -10,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -19,27 +17,9 @@ import com.example.didaktikapp.Model.DragnDropImage
 import com.example.didaktikapp.R
 import android.widget.ProgressBar
 import androidx.core.view.isVisible
-import com.example.didaktikapp.activities.Activity1_Principal
-import kotlinx.android.synthetic.main.activity2_login.*
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Fragment2_minijuego.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Fragment2_1_minijuego : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
     private lateinit var globalView: View
-
     private lateinit var vistaAnimada:TranslateAnimation
     private lateinit var cesta: ImageView
     private lateinit var basurero: ImageView
@@ -48,21 +28,14 @@ class Fragment2_1_minijuego : Fragment() {
     private lateinit var cartel: ImageView
     private lateinit var contadorCartel: TextView
     private lateinit var progressBar:ProgressBar
+
     var manzanaList: MutableList<DragnDropImage>? = mutableListOf()
     val duracionJuego: Int = 60 // Duracion en segundos
     val intervaloGeneracionManzanas = 3 //Duracion en segundos
     val aciertosRequeridos: Int = 5
     var aciertosActuales: Int = 0
     var minijuegoFinalizado: Boolean = false
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    var manzanasCounter = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -81,7 +54,6 @@ class Fragment2_1_minijuego : Fragment() {
         txtcartel= view.findViewById((R.id.txtv2_1carteltexto))
         contadorCartel= view.findViewById((R.id.txtv2_1contador))
         progressBar= view.findViewById((R.id.progressBar_minijuego1))
-
 
 
         ajustes.setOnClickListener(){
@@ -104,8 +76,8 @@ class Fragment2_1_minijuego : Fragment() {
         imgManzanaGenerada.layoutParams.width = 200
         //  newView.x = 200F
         // newView.y = 200F
-        imgManzanaGenerada.x = ((0..globalView.width - 200).random()).toFloat()
-        imgManzanaGenerada.y = ((0..globalView.height/2-650).random()).toFloat()
+        imgManzanaGenerada.x = ((50..globalView.width - 250).random()).toFloat()
+        imgManzanaGenerada.y = ((450..globalView.height - 600).random()).toFloat()
         //imgManzanaGenerada.setBackgroundColor(Color.BLUE)
 
 
@@ -220,10 +192,6 @@ class Fragment2_1_minijuego : Fragment() {
 
             }
         }.start()
-
-
-
-
     }
 
     private fun findItemByOrigen(view: View): DragnDropImage? {
@@ -243,39 +211,21 @@ class Fragment2_1_minijuego : Fragment() {
 
     //fun startTimeCounter(view: View, timeInSeconds: Int) {
     fun startTimeCounter() {
-        object: CountDownTimer((duracionJuego*1000).toLong(), (intervaloGeneracionManzanas*1000).toLong()) {
+        object: CountDownTimer((duracionJuego*1000).toLong(), (intervaloGeneracionManzanas*750).toLong()) {
             override fun onTick(millisUntilFinished: Long) {
                 if (!minijuegoFinalizado) {
-                    generarManzana()
+                    if(manzanasCounter <= 9){
+                        generarManzana()
+                        manzanasCounter++
+                    }
                 }
             }
             override fun onFinish() {
                 //removeListenerManzanas()
                 //button.visibility = View.VISIBLE
                 //Actualmente queremos que no dejen de aparecer manzanas
-                //FIXME Tal vez se necesite limitar el numero de manzanas activas para evitar que se llene la pantalla de ellas
                 startTimeCounter()
             }
         }.start()
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Fragment2_minijuego.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Fragment2_1_minijuego().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 }

@@ -23,7 +23,6 @@ import com.example.didaktikapp.Model.Constantsjuego2
 import com.example.didaktikapp.Model.Preguntasjuego2
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity6_Site
-import com.example.didaktikapp.activities.Activity7_Juego2_Results
 import kotlinx.android.synthetic.main.fragment1_1_juego.*
 import kotlinx.android.synthetic.main.fragment1_2_juego.*
 import kotlinx.coroutines.launch
@@ -312,11 +311,11 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
                          recojemos las respuestas correctas y el total de preguntas
                         */
                             activity?.let{
-                                val intent = Intent (it, Activity7_Juego2_Results::class.java)
+                                /*val intent = Intent (it, Activity7_Juego2_Results::class.java)
                                 intent.putExtra(Constantsjuego2.CORRECT_ANSWERS, mCorrectAnswers)
                                 intent.putExtra(Constantsjuego2.TOTAL_QUESTIONS, mQuestionList!!.size)
-                                it.startActivity(intent)
-                                  }
+                                it.startActivity(intent)*/
+                            }
                         }
 
                     }

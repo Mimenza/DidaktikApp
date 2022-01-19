@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Luis/Documents/GitHub/DidaktikApp/app/src/main/res/layout/fragment1_3_juego.xml" value="0.209375" />
+        <entry key="..\:/Users/Luis/Documents/GitHub/DidaktikApp/app/src/main/res/layout/fragment1_4_juego.xml" value="0.371875" />
+        <entry key="..\:/Users/Luis/Documents/GitHub/DidaktikApp/app/src/main/res/layout/fragment1_6_juego.xml" value="0.25" />
+        <entry key="..\:/Users/Luis/Documents/GitHub/DidaktikApp/app/src/main/res/layout/fragment2_6_minijuego.xml" value="0.371875" />
         <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/activity7_1_juego7_results.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/activity7_juego2_results.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ik_2dm3/AndroidStudioProjects/DidaktikApp/app/src/main/res/layout/fragment1_1_juego.xml" value="0.25416666666666665" />
@@ -20,5 +24,5 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

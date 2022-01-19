@@ -1,6 +1,8 @@
 package com.example.didaktikapp.fragments.minijuegos
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
@@ -12,6 +14,8 @@ import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.DragnDropImage
 import com.example.didaktikapp.R
+import com.example.didaktikapp.activities.Activity5_Mapa
+import com.example.didaktikapp.activities.Activity6_Site
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,8 +41,8 @@ class Fragment2_3_minijuego : Fragment() {
     private lateinit var vistaAnimada:TranslateAnimation
     private lateinit var txtcartel: TextView
     private lateinit var cartel: ImageView
-    private lateinit var contadorCartel: TextView
-    private lateinit var progressBar:ProgressBar
+    private lateinit var btnsiguiente:Button
+    private lateinit var btnrepetir:Button
 
     val listaImagenes = listOf(
         listOf(R.id.imgV2_suciedad1,R.id.minijuego3_basurero),
@@ -70,12 +74,12 @@ class Fragment2_3_minijuego : Fragment() {
         val ajustes: ImageButton = view.findViewById(R.id.btnf2_3_1ajustes)
         cartel= view.findViewById((R.id.imgv2_3cartelmadera))
         txtcartel= view.findViewById((R.id.txtv2_3carteltexto))
-        contadorCartel= view.findViewById((R.id.txtv2_3contador))
-        progressBar= view.findViewById((R.id.progressBar_minijuego3))
+        btnrepetir = view.findViewById(R.id.btn2_3_repetir)
+        btnsiguiente = view.findViewById(R.id.btn2_3_siguiente)
 
 
         ajustes.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment2_3_minijuego_to_fragment4_menu)
+            (activity as Activity6_Site?)?.menuCheck()
         }
 
         view.viewTreeObserver.addOnGlobalLayoutListener(object :
@@ -163,7 +167,8 @@ class Fragment2_3_minijuego : Fragment() {
     fun starAnimationfun(){
 
         //Diseñar cartel madera
-        contadorCartel.visibility=View.VISIBLE
+        btnsiguiente.visibility = View.VISIBLE
+        btnrepetir.visibility = View.VISIBLE
         cartel.visibility=View.VISIBLE
         txtcartel.visibility=View.VISIBLE
 
@@ -173,26 +178,19 @@ class Fragment2_3_minijuego : Fragment() {
         vistaAnimada.duration = 1000
 
         cartel.startAnimation(vistaAnimada)
-        contadorCartel.startAnimation(vistaAnimada)
+        btnrepetir.startAnimation(vistaAnimada)
+        btnsiguiente.startAnimation(vistaAnimada)
         txtcartel.startAnimation(vistaAnimada)
 
-        object : CountDownTimer(5000, 1000) {
+        btnsiguiente.setOnClickListener(){
+            val i = Intent(activity, Activity5_Mapa::class.java)
+            startActivity(i)
+            (activity as Activity?)!!.overridePendingTransition(0, 0)
+        }
 
-            override fun onTick(millisUntilFinished: Long) {
-                contadorCartel.text= (millisUntilFinished / 1000).toString()
-            }
-
-            override fun onFinish() {
-
-                progressBar.isVisible=true
-                contadorCartel.isVisible=false
-                Handler().postDelayed({
-
-                    view?.let { Navigation.findNavController(it).navigate(R.id.action_fragment2_3_minijuego_to_fragment4_menu) }
-                }, 2000)
-
-            }
-        }.start()
+        btnrepetir.setOnClickListener(){
+            Navigation.findNavController(it).navigate(R.id.action_fragment2_3_minijuego_self)
+        }
 
     }
     private fun findItemByOrigen(view: View): DragnDropImage? {

@@ -25,23 +25,23 @@
             app:layout_constraintHorizontal_bias="0.506"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.022" />
+            app:layout_constraintVertical_bias="0.029999971" />
 
         <TextView
             android:id="@+id/txtv1_3titulominijuego"
             android:layout_width="320dp"
             android:layout_height="70dp"
-            android:layout_marginLeft="60dp"
             android:layout_marginTop="-70dp"
             android:text="FESTARIK FESTA"
+            android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.483"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.169" />
+            app:layout_constraintVertical_bias="0.17" />
 
         <Button
             android:id="@+id/btn_saltarjuego3"

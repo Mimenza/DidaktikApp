@@ -56,13 +56,17 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.022" />
 
+            <!--Horizontal  Linear Layout-->
+
+            <!--Horizontal  Linear Layout-->
+
             <TextView
                 android:id="@+id/txtv1_2titulominijuego"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:layout_marginLeft="60dp"
                 android:layout_marginTop="-70dp"
                 android:text="EZETZ IGARRI"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -72,15 +76,12 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.067" />
 
-            <!--Horizontal  Linear Layout-->
-
-            <!--Horizontal  Linear Layout-->
-
             <TextView
                 android:id="@+id/txtv1_2_pregunta1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:paddingTop="20dp"
                 android:gravity="center"
                 android:text="@string/que1_juego2"
                 android:textColor="@color/black"

@@ -16,6 +16,11 @@ import com.google.android.gms.maps.model.LatLng
 import org.w3c.dom.Text
 import java.util.*
 import kotlin.collections.ArrayList
+import android.widget.LinearLayout
+import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.content.ContextCompat
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,14 +46,21 @@ class Fragment1_4_juego : Fragment() {
     private var testWidth: Int? = null
     private var testHeight: Int? = null
 
+    private var nFilas: Int = 14
+    private var nCols: Int = 13
 
-    val letterList = arrayListOf<ArrayList<Any>>(
-        arrayListOf("A","B","C","D","E"),
-        arrayListOf("F","G","H","I","J"),
-        arrayListOf("K","L","M","N","O"),
-        arrayListOf("Q","R","S","T","U"),
-        arrayListOf("Q","R","S","T","U"),
-    )
+    private lateinit var globalView: View
+    private lateinit var matrizMain: LinearLayout
+    private var letterWeight = 1/nCols
+
+
+//    val letterList = arrayListOf<ArrayList<Any>>(
+//        arrayListOf("A","B","C","D","E"),
+//        arrayListOf("F","G","H","I","J"),
+//        arrayListOf("K","L","M","N","O"),
+//        arrayListOf("Q","R","S","T","U"),
+//        arrayListOf("Q","R","S","T","U"),
+//    )
 
     val lettersPosition = arrayListOf<ArrayList<Any>>(
         //arrayListOf(intArrayOf(12,12)),   // ARRAY DE EJEMPLO
@@ -68,6 +80,8 @@ class Fragment1_4_juego : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment1_4_juego, container, false)
+        globalView = view
+        matrizMain = view.findViewById(R.id.matrizprincipal)
         val button: Button = view.findViewById(R.id.btnf1_4_siguiente)
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_4_ajustes)
         layout = view.findViewById(R.id.myConstraintTest)
@@ -121,14 +135,243 @@ class Fragment1_4_juego : Fragment() {
             ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 view.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                constraintFila1 = view.findViewById(R.id.fila1)
+
+
+                //constraintFila1 = view.findViewById(R.id.fila1)
                 //val childListFila1: ViewGroup = constraintFila1 as ViewGroup
                 //println("******** CHILD COUNT: " + childListFila1.childCount)
-                prepareSopa()
+                prepararJuego()
             }
         })
 
         return view
+    }
+
+    private var letras = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
+
+    var letterList = arrayListOf<ArrayList<String>>(
+//        arrayListOf("A","B","C","D","E"),
+//        arrayListOf("F","G","H","I","J"),
+//        arrayListOf("K","L","M","N","O"),
+//        arrayListOf("Q","R","S","T","U"),
+//        arrayListOf("Q","R","S","T","U"),
+    )
+
+
+    private var palabrasPintadas = arrayListOf<String>()
+
+    private var palabras = arrayListOf<String>("TXISTULARIAK","SAGARDANTZA","TXALAPARTA","TRIKITIXA","ERAKUSKETA",
+        "SALMENTA","DASDATZEA","BILKETA","GARBTIZEA")
+
+    private var filasHuecosLibres = arrayListOf<Int>()
+    private var colsHuecosLibres = arrayListOf<Int>()
+
+    private fun prepararJuego() {
+        //Primero generamos la matriz limpia
+        for (i in 0 until nFilas) {
+            var filaLetterList = arrayListOf<String>()
+            letterList.add(filaLetterList)
+            for (k in 0 until nCols) {
+                filaLetterList.add("•")
+            }
+        }
+        //Seleccionamos una palabra aleatoria de la lista
+        //seleccionarPalabraAleatoria()
+        escribirPalabrasModoSimple()
+        // La pintamos sobre la sopa
+        pintarSopa()
+    }
+
+    private fun escribirPalabrasModoSimple() {
+        //Palabras Horizontales
+        //#SAGARDANTZA
+        letterList[0][2] = "S"
+        letterList[0][3] = "A"
+        letterList[0][4] = "G"
+        letterList[0][5] = "A"
+        letterList[0][6] = "R"
+        letterList[0][7] = "D"
+        letterList[0][8] = "A"
+        letterList[0][9] = "N"
+        letterList[0][10] = "T"
+        letterList[0][11] = "Z"
+        letterList[0][12] = "A"
+
+        //SALMENTA
+        letterList[11][3] = "S"
+        letterList[11][4] = "A"
+        letterList[11][5] = "L"
+        letterList[11][6] = "M"
+        letterList[11][7] = "E"
+        letterList[11][8] = "N"
+        letterList[11][9] = "T"
+        letterList[11][10] = "A"
+
+        //TRIKITIXA
+        letterList[12][3] = "A"
+        letterList[12][4] = "X"
+        letterList[12][5] = "I"
+        letterList[12][6] = "T"
+        letterList[12][7] = "I"
+        letterList[12][8] = "K"
+        letterList[12][9] = "I"
+        letterList[12][10] = "R"
+        letterList[12][11] = "T"
+
+        //palabras verticales
+        letterList[3][1] = "T"
+        letterList[4][1] = "X"
+        letterList[5][1] = "A"
+        letterList[6][1] = "L"
+        letterList[7][1] = "A"
+        letterList[8][1] = "P"
+        letterList[9][1] = "A"
+        letterList[10][1] = "R"
+        letterList[11][1] = "T"
+        letterList[12][1] = "A"
+
+        letterList[2][11] = "G"
+        letterList[3][11] = "A"
+        letterList[4][11] = "R"
+        letterList[5][11] = "B"
+        letterList[6][11] = "I"
+        letterList[7][11] = "T"
+        letterList[8][11] = "Z"
+        letterList[9][11] = "E"
+        letterList[10][11] = "A"
+
+        letterList[1][12] = "D"
+        letterList[2][12] = "A"
+        letterList[3][12] = "S"
+        letterList[4][12] = "T"
+        letterList[5][12] = "A"
+        letterList[6][12] = "T"
+        letterList[7][12] = "Z"
+        letterList[8][12] = "E"
+        letterList[9][12] = "A"
+
+
+        //convert0ToRandomLetters()
+        //#SALMENTZA
+        //for (i in 3 until letterList[11].size-1) {
+         //   letterList[11][i] = "SALMENTZA".get(i).toString()
+        //}
+    }
+
+    private fun convert0ToRandomLetters() {
+        for (i in 0 until letterList.size-1) {
+            for (k in 0 until letterList[i].size) {
+                if (letterList[i][k].equals("0")) {
+                    val letrasLength = letras.length
+                    val randomLetter = (0 until letrasLength-1).random()
+                    letterList[i][k] = letras.substring(randomLetter,randomLetter+1)
+                }
+            }
+        }
+    }
+
+    private var palabraPreparada: String = ""
+
+    private fun pintarSopa() {
+        /*
+        val filaRandom = (0 until filasHuecosLibres.size-1).random()
+        for ((i, value) in letterList[filaRandom].withIndex()) {
+            if (i <= palabraPreparada.length-1 ) {
+                letterList[filaRandom][i] = palabraPreparada.get(i).toString()
+            } else {
+                //break
+            }
+        }
+
+         */
+
+
+        //PINTAR
+        for (i in 0 until letterList.size-1) {
+            var filaLetterList = arrayListOf<String>()
+            //letterList.add(filaLetterList)
+            var nuevaFila = LinearLayout(requireContext())
+            val paramsLinear: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
+            )
+            paramsLinear.weight = 13.toFloat()
+            nuevaFila.setLayoutParams(paramsLinear)
+            nuevaFila.setOrientation(LinearLayout.HORIZONTAL)
+            matrizMain.addView(nuevaFila)
+
+            for (k in 0 until letterList[i].size) {
+                val letrasLength = letras.length
+                val randomLetter = (0 until letrasLength-1).random()
+                var letraElement = TextView(requireContext())
+                letraElement.id = k+(i*nCols)
+                //println("********** GENERATED ID: " + letraElement.id)
+                //letraElement.text = letras.substring(randomLetter,randomLetter+1)
+                letraElement.text = letterList[i][k]
+                //filaLetterList.add("0")
+                letraElement.textSize = 24.toFloat()
+                letraElement.width = nuevaFila.width/nCols
+                val params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT
+                )
+                params.weight = 1.toFloat()
+                letraElement.setLayoutParams(params)
+                nuevaFila.addView(letraElement)
+            }
+        }
+    }
+
+    private fun seleccionarPalabraAleatoria() {
+        //val palabraRandom = (0 until palabras.size-1).random()
+        //palabrasPintadas.add(palabras[palabraRandom])
+        for ((index, value) in palabras.withIndex()) {
+            if (!palabrasPintadas.contains(value)) {
+                palabrasPintadas.add(value)
+                palabraPreparada = value
+                findHuecosFilasLibres()
+                break
+            }
+        }
+
+    }
+
+    private fun tipoMovimiento() {
+
+    }
+
+    private fun findDiagDchaLibres() {
+
+    }
+
+    private fun findDiagIzqLibres() {
+
+    }
+
+    private fun findHuecosFilasLibres() {
+        for ((i, value) in letterList.withIndex()) {
+            var filaHuecosLibres = 0
+            for ((k, letter) in letterList.withIndex()) {
+                if (letter.equals("0")) {
+                    filaHuecosLibres++
+                    if (filaHuecosLibres >= palabraPreparada.length) {
+                        break
+                    }
+                }
+            }
+            filasHuecosLibres.add(i)
+        }
+        println(Arrays.toString(filasHuecosLibres.toIntArray()))
+    }
+
+    private fun findHuecosColsLibres() {
+
+    }
+
+    private fun findFilasLibres() {
+
+    }
+
+    private fun findColsLibres() {
+
     }
 
    /* private fun typewriter(view: View) {

@@ -3,14 +3,11 @@ package com.example.didaktikapp.fragments.juegos
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
 import android.graphics.drawable.AnimationDrawable
-import android.media.Image
 import android.media.MediaPlayer
-import androidx.core.text.HtmlCompat;
-import android.widget.TextView;
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import androidx.fragment.app.Fragment
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,15 +15,15 @@ import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
 import android.widget.*
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
+import com.example.didaktikapp.activities.Activity6_Site
 import kotlinx.android.synthetic.main.activity1_principal.*
+import kotlinx.android.synthetic.main.fragment1_1_juego.*
 import kotlinx.android.synthetic.main.fragment1_6_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import android.widget.EditText
-import com.example.didaktikapp.activities.Activity6_Site
-import kotlinx.android.synthetic.main.fragment1_1_juego.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -56,6 +53,15 @@ class Fragment1_6_juego : Fragment() {
     private var audioState: Boolean = false
     private var testAudioTemp: MediaPlayer? = null
 
+    var respuestas = listOf(
+        "sagardoaren",
+        "guztia",
+        "bizia",
+        "kupelan",
+        "prezioa",
+        "estimazioa"
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -76,11 +82,12 @@ class Fragment1_6_juego : Fragment() {
         val btnsaltar: Button = view.findViewById(R.id.btnf1_6saltarjuego)
         val btnrepertir : Button = view.findViewById(R.id.btnf1_6repetirJuego)
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_6_ajustes)
-        val buttonSonido: ImageButton = view.findViewById(R.id.btnf1_6_sonido)
+        //val buttonSonido: ImageButton = view.findViewById(R.id.btnf1_6_sonido)
 
         btnsaltar.setOnClickListener() {
             Navigation.findNavController(view).navigate(R.id.action_fragment1_6_juego_to_fragment2_6_minijuego)
         }
+
 
         playPauseButton = view.findViewById(R.id.juego6playpause)
         backwardButton = view.findViewById(R.id.juego6backward)
@@ -156,239 +163,170 @@ class Fragment1_6_juego : Fragment() {
 
             }
         }
-        buttonSonido.setOnClickListener() {
-           animacionVolumen(view)
-        }
+//        buttonSonido.setOnClickListener() {
+//           animacionVolumen(view)
+//        }
         btnrepertir.setOnClickListener(){
             Navigation.findNavController(view)
                 .navigate(R.id.action_fragment1_6_juego_self)
         }
-        //=====================================
-        val blank = "&#x2009;&#x2009;&#x2009;&#x2009;&#x2009;"
-
-        val bertsotxt: TextView = view.findViewById(R.id.txtv1_6_bertso)
-
-        var input1 = blank + "<b>1</b>" + blank
-        var input2 = blank + "<b>2</b>" + blank
-        var input3 = blank + "<b>3</b>" + blank
-        var input4 = blank + "<b>4</b>" + blank
-        var input5 = blank + "<b>5</b>" + blank
-        var input6 = blank + "<b>6</b>" + blank
-
-        //=====================================
-        var respuesta1 = false
-        var respuesta2 = false
-        var respuesta3 = false
-        var respuesta4 = false
-        var respuesta5 = false
-        var respuesta6 = false
-
-        //=====================================
-        //funcion para rellenar el bertso
-        insertHtml(bertsotxt, input1, input2, input3, input4, input5, input6)
 
         animacionVolumen(view)
 
         //JUEGO========================================================================
 
         var clickedButton = 1
-        //arraylist con las respuestas correctas
-        var respuestas = listOf(
-            "sagardoaren",
-            "guztia",
-            "bizia",
-            "kupelan",
-            "prezioa",
-            "estimazioa"
-        )
 
         //declaramos los botones
-        val input1btn: TextView = view.findViewById(R.id.txtv1_6_input1)
-        val input2btn: TextView = view.findViewById(R.id.txtv1_6_input2)
-        val input3btn: TextView = view.findViewById(R.id.txtv1_6_input3)
-        val input4btn: TextView = view.findViewById(R.id.txtv1_6_input4)
-        val input5btn: TextView = view.findViewById(R.id.txtv1_6_input5)
-        val input6btn: TextView = view.findViewById(R.id.txtv1_6_input6)
         val comprobarbtn: Button = view.findViewById(R.id.btn1_6_comprobar)
 
-        //declaramos los inputText
-        val inputgeneral0: EditText = view.findViewById(R.id.txtv1_6_inputgeneral0)
-
-        inputgeneral0.setHint(R.string.erantzuna1)
-
-        //listeners para saber que input hemos clickado
-        input1btn.setOnClickListener() {
-            clickedButton = 1
-            inputgeneral0.setHint(R.string.erantzuna1)
-        }
-        input2btn.setOnClickListener() {
-            clickedButton = 2
-            inputgeneral0.setHint(R.string.erantzuna2)
-        }
-        input3btn.setOnClickListener() {
-            clickedButton = 3
-            inputgeneral0.setHint(R.string.erantzuna3)
-        }
-        input4btn.setOnClickListener() {
-            clickedButton = 4
-            inputgeneral0.setHint(R.string.erantzuna4)
-        }
-        input5btn.setOnClickListener() {
-            clickedButton = 5
-            inputgeneral0.setHint(R.string.erantzuna5)
-        }
-        input6btn.setOnClickListener() {
-            clickedButton = 6
-            inputgeneral0.setHint(R.string.erantzuna6)
-        }
-
-        //=====================================
-        //para comprobar si la respuesta es la correcta
-
         comprobarbtn.setOnClickListener() {
-
-            //Si el input no esta vacio y si hemos clickado en alguna opcion
-            if (!inputgeneral0.text.isBlank() || clickedButton != 0) {
-
-                var respuestaCorrecta = respuestas[clickedButton - 1]
-                var respuestaIntroducida = inputgeneral0.text.toString()
-
-                respuestaCorrecta = respuestaCorrecta.replace("\\s".toRegex(), "")
-                respuestaIntroducida = respuestaIntroducida.replace("\\s".toRegex(), "")
-
-                if (respuestaCorrecta.equals(respuestaIntroducida)) {
-                    //respuesta correcta
-
-                    //seteamos el valor correcto en los inputs
-                    // guardamos que inputs hemos ya introducido correctamente
-                    //escondemos el click de los inputs para que no puedan clickar en algo que esta ya bien
-
-                    inputgeneral0.setHint("Aukeratu beste bat!")
-
-                    when (clickedButton) {
-                        1 -> {
-                            input1 = respuestaCorrecta
-                            respuesta1 = true
-                            input1btn.isVisible = false
-
-                        }
-                        2 -> {
-                            input2 = respuestaCorrecta
-                            respuesta2 = true
-                            input2btn.isVisible = false
-
-                        }
-                        3 -> {
-                            input3 = respuestaCorrecta
-                            respuesta3 = true
-                            input3btn.isVisible = false
-
-                        }
-                        4 -> {
-                            input4 = respuestaCorrecta
-                            respuesta4 = true
-                            input4btn.isVisible = false
-
-                        }
-                        5 -> {
-                            input5 = respuestaCorrecta
-                            respuesta5 = true
-                            input5btn.isVisible = false
-
-                        }
-                        6 -> {
-                            input6 = respuestaCorrecta
-                            respuesta6 = true
-                            input6btn.isVisible = false
-
-                        }
-                    }
-
-                    //volvemos a llamar a la funcion para actualizar los datos
-                    insertHtml(bertsotxt, input1, input2, input3, input4, input5, input6)
-
-                    //limpiamos el input text
-                    inputgeneral0.setText("")
-
-                    //deseleccinamos el botton clickado
-                    clickedButton = 0
-
-                    //checkeamos si hemos compleado toodo el juego o no
-                    checkGameStatus(
-                        respuesta1,
-                        respuesta2,
-                        respuesta3,
-                        respuesta4,
-                        respuesta5,
-                        respuesta6,
-                        view
-                    )
-                } else {
-                    //respuesta incorrecta
-
-                    //escondemos el input y el boton
-
-                    val input: EditText = view.findViewById(R.id.txtv1_6_inputgeneral0)
-                    val btn: Button = view.findViewById(R.id.btn1_6_comprobar)
-
-                    input.isVisible = false
-                    btn.isVisible = false
-                    //reproducimos audio de juego terminado y reiniciamos el juego
-
-                    runBlocking {
-                        launch {
-                            audio = MediaPlayer.create(context, R.raw.gaizkiaudioa)
-                            audio?.start()
-                            audio?.setOnCompletionListener {
-                                Handler(Looper.getMainLooper()).postDelayed({
-                                    if (getView() != null) {
-                                        //recargamos el juego
-
-                                        Navigation.findNavController(view)
-                                            .navigate(R.id.action_fragment1_6_juego_self)
-
-                                    }
-                                }, 1000)
-                            }
-                        }
-                    }
-                }
-            }
+            comprobarRespuestas()
         }
 
         //=====================================
-
+        prepararSpinners()
         return view
     }
 
-    private fun makeBertsoControlVisible() {
-        playPauseButton.visibility = View.VISIBLE
-        backwardButton.visibility = View.VISIBLE
-        forwardButton.visibility = View.VISIBLE
+    private fun prepararSpinners() {
+        val spinner1Element: Spinner = globalView.findViewById(R.id.juego6_opcion1)
+        val spinner1Opts = arrayOf("SELECT","sagardoaren", "otraopcion1")
+        val spinnerAdapter1: ArrayAdapter<String> = object: ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, spinner1Opts){
+            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                var v: View? = null
+                if (position === 0) {
+                    val tv = TextView(context)
+                    tv.height = 0
+                    tv.visibility = View.GONE
+                    v = tv
+                } else {
+                    v = super.getDropDownView(position, null, parent)
+                }
+                parent.setVerticalScrollBarEnabled(false)
+                return v!!
+
+            }
+        }
+        spinner1Element.adapter = spinnerAdapter1
+
+
+        val spinner2Element: Spinner = globalView.findViewById(R.id.juego6_opcion2)
+        val spinner2Opts = arrayOf("SELECT","guztia", "otraopcion2")
+        val spinnerAdapter2: ArrayAdapter<String> = object: ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, spinner2Opts){
+            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                var v: View? = null
+                if (position === 0) {
+                    val tv = TextView(context)
+                    tv.height = 0
+                    tv.visibility = View.GONE
+                    v = tv
+                } else {
+                    v = super.getDropDownView(position, null, parent)
+                }
+                parent.setVerticalScrollBarEnabled(false)
+                return v!!
+
+            }
+        }
+        spinner2Element.adapter = spinnerAdapter2
+
+        val spinner3Element: Spinner = globalView.findViewById(R.id.juego6_opcion3)
+        val spinner3Opts = arrayOf("SELECT","bizia", "otraopcion3")
+        val spinnerAdapter3: ArrayAdapter<String> = object: ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, spinner3Opts){
+            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                var v: View? = null
+                if (position === 0) {
+                    val tv = TextView(context)
+                    tv.height = 0
+                    tv.visibility = View.GONE
+                    v = tv
+                } else {
+                    v = super.getDropDownView(position, null, parent)
+                }
+                parent.setVerticalScrollBarEnabled(false)
+                return v!!
+
+            }
+        }
+        spinner3Element.adapter = spinnerAdapter3
+
+        val spinner4Element: Spinner = globalView.findViewById(R.id.juego6_opcion4)
+        val spinner4Opts = arrayOf("SELECT","kupelan", "otraopcion4")
+        val spinnerAdapter4: ArrayAdapter<String> = object: ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, spinner4Opts){
+            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                var v: View? = null
+                if (position === 0) {
+                    val tv = TextView(context)
+                    tv.height = 0
+                    tv.visibility = View.GONE
+                    v = tv
+                } else {
+                    v = super.getDropDownView(position, null, parent)
+                }
+                parent.setVerticalScrollBarEnabled(false)
+                return v!!
+
+            }
+        }
+        spinner4Element.adapter = spinnerAdapter4
+
+        val spinner5Element: Spinner = globalView.findViewById(R.id.juego6_opcion5)
+        val spinner5Opts = arrayOf("SELECT","prezioa", "opcion5")
+        val spinnerAdapter5: ArrayAdapter<String> = object: ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, spinner5Opts){
+            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                var v: View? = null
+                if (position === 0) {
+                    val tv = TextView(context)
+                    tv.height = 0
+                    tv.visibility = View.GONE
+                    v = tv
+                } else {
+                    v = super.getDropDownView(position, null, parent)
+                }
+                parent.setVerticalScrollBarEnabled(false)
+                return v!!
+
+            }
+        }
+        spinner5Element.adapter = spinnerAdapter5
+
+        val spinner6Element: Spinner = globalView.findViewById(R.id.juego6_opcion6)
+        val spinner6Opts = arrayOf("SELECT","estimazioa", "otraopcion6")
+        val spinnerAdapter6: ArrayAdapter<String> = object: ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, spinner6Opts){
+            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                var v: View? = null
+                if (position === 0) {
+                    val tv = TextView(context)
+                    tv.height = 0
+                    tv.visibility = View.GONE
+                    v = tv
+                } else {
+                    v = super.getDropDownView(position, null, parent)
+                }
+                parent.setVerticalScrollBarEnabled(false)
+                return v!!
+
+            }
+        }
+        spinner6Element.adapter = spinnerAdapter6
     }
 
-    private fun checkGameStatus(
-        respuesta1: Boolean,
-        respuesta2: Boolean,
-        respuesta3: Boolean,
-        respuesta4: Boolean,
-        respuesta5: Boolean,
-        respuesta6: Boolean,
-        view: View
-    ) {
-
-        if (respuesta1 == true && respuesta2 == true && respuesta3 == true && respuesta4 == true && respuesta5 == true && respuesta6 == true) {
-
-            //escondemos el input y el boton
-
-            val input: EditText = view.findViewById(R.id.txtv1_6_inputgeneral0)
-            val btn: Button = view.findViewById(R.id.btn1_6_comprobar)
-
-            input.isVisible = false
-            btn.isVisible = false
-
-            //reproducimos el audio de juego terminado y sacamos el boton para poder seguir
-
+    private fun comprobarRespuestas() {
+        val spinner1Element: Spinner = globalView.findViewById(R.id.juego6_opcion1)
+        val spinner2Element: Spinner = globalView.findViewById(R.id.juego6_opcion2)
+        val spinner3Element: Spinner = globalView.findViewById(R.id.juego6_opcion3)
+        val spinner4Element: Spinner = globalView.findViewById(R.id.juego6_opcion4)
+        val spinner5Element: Spinner = globalView.findViewById(R.id.juego6_opcion5)
+        val spinner6Element: Spinner = globalView.findViewById(R.id.juego6_opcion6)
+        if (spinner1Element.selectedItem.toString().lowercase().equals(respuestas[0]) &&
+                spinner2Element.selectedItem.toString().lowercase().equals(respuestas[1]) &&
+                spinner3Element.selectedItem.toString().lowercase().equals(respuestas[2]) &&
+                spinner4Element.selectedItem.toString().lowercase().equals(respuestas[3]) &&
+                spinner5Element.selectedItem.toString().lowercase().equals(respuestas[4]) &&
+                spinner6Element.selectedItem.toString().lowercase().equals(respuestas[5])) {
+            val comprobarbtn: Button = globalView.findViewById(R.id.btn1_6_comprobar)
+            comprobarbtn.visibility = View.GONE
             runBlocking {
                 launch {
                     audio = MediaPlayer.create(context, R.raw.ongiaudioa6)
@@ -397,12 +335,13 @@ class Fragment1_6_juego : Fragment() {
                         Handler(Looper.getMainLooper()).postDelayed({
                             if (getView() != null) {
 
-                            val btnsiguiente: Button = view.findViewById(R.id.btnf1_6siguienteJuego)
-                            val btnrepetir : Button = view.findViewById(R.id.btnf1_6repetirJuego)
+                                val btnsiguiente: Button = globalView.findViewById(R.id.btnf1_6siguienteJuego)
+                                val btnrepetir : Button = globalView.findViewById(R.id.btnf1_6repetirJuego)
 
-                            //sacamos el boton para el siguiente minijuego
-                            btnsiguiente.isVisible = true
-                            btnrepetir.isVisible = true
+                                //sacamos el boton para el siguiente minijuego
+                                btnsiguiente.isVisible = true
+                                btnrepetir.isVisible = true
+
 
 
                                 //sacamos el boton para el siguiente minijuego
@@ -413,46 +352,38 @@ class Fragment1_6_juego : Fragment() {
                     }
                 }
             }
+        } else {
+            runBlocking {
+                launch {
+                    audio = MediaPlayer.create(context, R.raw.gaizkiaudioa)
+                    audio?.start()
+                    audio?.setOnCompletionListener {
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            if (getView() != null) {
+                                //recargamos el juego
 
+                                Navigation.findNavController(globalView)
+                                    .navigate(R.id.action_fragment1_6_juego_self)
 
+                            }
+                        }, 1000)
+                    }
+                }
+            }
         }
+    }
+
+    private fun makeBertsoControlVisible() {
+        val layoutBertso: LinearLayout = globalView.findViewById(R.id.juego6_layoutBertso)
+        val comprobarbtn: Button = globalView.findViewById(R.id.btn1_6_comprobar)
+        playPauseButton.visibility = View.VISIBLE
+        backwardButton.visibility = View.VISIBLE
+        forwardButton.visibility = View.VISIBLE
+        layoutBertso.visibility = View.VISIBLE
+        comprobarbtn.visibility = View.VISIBLE
 
     }
 
-    private fun insertHtml(
-        bertsotxt: TextView,
-        input1: String,
-        input2: String,
-        input3: String,
-        input4: String,
-        input5: String,
-        input6: String
-    ) {
-
-        var htmlString = "<h2>Sagardotegiari</h2><br/><br/>\n" +
-                "\n" +
-                "        Bedeinkatua izan dadila <b>" + input1 + "</b> grazia<br/><br/>\n" +
-                "\n" +
-                "        Bai eta ere kupira gabe edaten duen <b>" + input2 + "</b>;<br/><br/>\n" +
-                "\n" +
-                "        Edari honek jende askori ematen dio <b>" + input3 + "</b>;,<br/><br/>\n" +
-                "\n" +
-                "        Hau edan gabe egotea da neretzat penitentzia.<br/><br/>\n" +
-                "\n" +
-                "        <b>" + input4 + "</b> dagon sagardoak dit ematen tentazioa<br/><br/>\n" +
-                "\n" +
-                "        Prezisamente edan beharra daukat pertsekuzioa;<br/><br/>\n" +
-                "\n" +
-                "        Mila deabruz josirikako orain duen <b>" + input5 + "</b><br/><br/>\n" +
-                "\n" +
-                "        Zaleak asko geran medioz dauka <b>" + input6 + "</b>"
-
-        val spanned = HtmlCompat.fromHtml(htmlString, HtmlCompat.FROM_HTML_MODE_COMPACT)
-
-        val tvOutput = bertsotxt as TextView
-
-        tvOutput.text = spanned
-    }
 
     private fun animacionVolumen(view: View) {
         //Funcion para la animacion del icono del volumen mientras se reproduce el audio del bertso
@@ -487,6 +418,8 @@ class Fragment1_6_juego : Fragment() {
         }
 
     }
+
+
 
     private fun startAudio(view: View) {
         //Funcion que reproduce el primer audio (bertso)
@@ -639,7 +572,7 @@ class Fragment1_6_juego : Fragment() {
                 val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
                 txtAnimacion.startAnimation(aniFade)
                 txtAnimacion.isVisible = false
-                makeBertsoControlVisible()
+                //makeBertsoControlVisible()
             }
         }, 1000)
 
@@ -650,15 +583,11 @@ class Fragment1_6_juego : Fragment() {
                 txtv1_6_explicacion.isVisible = false
                 txtv1_6_bertso.isVisible = true
 
-                val input: EditText = view.findViewById(R.id.txtv1_6_inputgeneral0)
                 val btn: Button = view.findViewById(R.id.btn1_6_comprobar)
-
-                input.isVisible = true
                 btn.isVisible = true
+                makeBertsoControlVisible()
             }
         }, 2000)
-
-
     }
 
     private fun talkAnimationfun(view: View) {
@@ -667,6 +596,7 @@ class Fragment1_6_juego : Fragment() {
         val ani = upelio.background as AnimationDrawable
         ani.start()
     }
+
 
     companion object {
         /**

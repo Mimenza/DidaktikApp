@@ -68,6 +68,8 @@
             app:layout_constraintVertical_bias="0.089999974"
             tools:ignore="SpeakableTextPresentCheck" />
 
+
+
         <TextView
             android:id="@+id/txtv1_6_volumen"
             android:layout_width="150dp"
@@ -103,6 +105,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.45" />
 
+
+        <!--
         <TextView
             android:id="@+id/txtv1_6_input1"
             android:layout_width="82dp"
@@ -114,6 +118,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.24000001" />
 
+           -->
+<!--
         <TextView
             android:id="@+id/txtv1_6_input2"
             android:layout_width="93dp"
@@ -124,6 +130,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.32999998" />
+
+-->
 
         <ImageButton
             android:id="@+id/btnf1_6_sonido"
@@ -176,6 +184,8 @@
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/primary"
             android:visibility="gone"/>
+
+<!--
 
         <TextView
             android:id="@+id/txtv1_6_input3"
@@ -235,6 +245,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.781"
             tools:ignore="SpeakableTextPresentCheck" />
+            -->
 
         <Button
             android:id="@+id/btn1_6_comprobar"
@@ -246,7 +257,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtv1_6_inputgeneral0"
             app:layout_constraintVertical_bias="0.147" />
 
         <androidx.constraintlayout.utils.widget.ImageFilterView
@@ -255,16 +265,6 @@
             android:layout_height="316dp"
             android:src="@drawable/img_upeliosagarra"
             android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.89" />
-
-        <androidx.constraintlayout.utils.widget.ImageFilterView
-            android:id="@+id/imgv1_6_upelio2"
-            android:layout_width="323dp"
-            android:layout_height="316dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -283,6 +283,185 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.99" />
+
+        <LinearLayout
+            android:id="@+id/juego6_layoutBertso"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="136dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="Bedeinkatua izan dadila " />
+
+                <Spinner
+                    android:id="@+id/juego6_opcion1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@null"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text=" grazia" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="Bai eta ere kupira gabe edaten duen " />
+
+                <Spinner
+                    android:id="@+id/juego6_opcion2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@null"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="Edari honek jende askori ematen dio " />
+
+                <Spinner
+                    android:id="@+id/juego6_opcion3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@null"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="Hau edan gabe egotea da neretzat penitentzia." />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/juego6_opcion4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:textAlignment="textEnd"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text=" dagon sagardoak dit ematen tentazioa" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text=" Prezisamente edan beharra daukat pertsekuzioa" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text=" Mila deabruz josirikako orain duen" />
+
+                <Spinner
+                    android:id="@+id/juego6_opcion5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@null"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="Zaleak asko geran medioz dauka" />
+
+                <Spinner
+                    android:id="@+id/juego6_opcion6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@null"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/imgv1_6_upelio2"
+            android:layout_width="323dp"
+            android:layout_height="316dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.89" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

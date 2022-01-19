@@ -1,6 +1,8 @@
 package com.example.didaktikapp.fragments.minijuegos
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
@@ -17,6 +19,8 @@ import com.example.didaktikapp.Model.DragnDropImage
 import com.example.didaktikapp.R
 import android.widget.ProgressBar
 import androidx.core.view.isVisible
+import com.example.didaktikapp.activities.Activity5_Mapa
+import com.example.didaktikapp.activities.Activity6_Site
 
 class Fragment2_1_minijuego : Fragment() {
     private lateinit var globalView: View
@@ -26,8 +30,8 @@ class Fragment2_1_minijuego : Fragment() {
     private lateinit var txtAciertos: TextView
     private lateinit var txtcartel: TextView
     private lateinit var cartel: ImageView
-    private lateinit var contadorCartel: TextView
-    private lateinit var progressBar:ProgressBar
+    private lateinit var btnsiguiente:Button
+    private lateinit var btnrepetir:Button
 
     var manzanaList: MutableList<DragnDropImage>? = mutableListOf()
     val duracionJuego: Int = 60 // Duracion en segundos
@@ -52,12 +56,13 @@ class Fragment2_1_minijuego : Fragment() {
         txtAciertos = view.findViewById((R.id.manzanasAciertos))
         cartel= view.findViewById((R.id.imgv2_1cartelmadera))
         txtcartel= view.findViewById((R.id.txtv2_1carteltexto))
-        contadorCartel= view.findViewById((R.id.txtv2_1contador))
-        progressBar= view.findViewById((R.id.progressBar_minijuego1))
 
+
+        btnrepetir = view.findViewById(R.id.btn2_1_repetir)
+        btnsiguiente = view.findViewById(R.id.btn2_1_siguiente)
 
         ajustes.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment2_1_minijuego_to_fragment4_menu)
+            (activity as Activity6_Site?)?.menuCheck()
         }
         iniciarJuegoRecogerManzanas()
         return view
@@ -162,36 +167,29 @@ class Fragment2_1_minijuego : Fragment() {
 
     private fun starAnimationfun(){
         //Diseñar cartel madera
-        contadorCartel.visibility=View.VISIBLE
+        btnsiguiente.visibility = View.VISIBLE
+        btnrepetir.visibility = View.VISIBLE
         cartel.visibility=View.VISIBLE
         txtcartel.visibility=View.VISIBLE
-
-
 
         vistaAnimada = TranslateAnimation(-1000f, 0f, 0f, 0f)
         vistaAnimada.duration = 1000
 
         cartel.startAnimation(vistaAnimada)
-        contadorCartel.startAnimation(vistaAnimada)
+        btnrepetir.startAnimation(vistaAnimada)
+        btnsiguiente.startAnimation(vistaAnimada)
         txtcartel.startAnimation(vistaAnimada)
 
-        object : CountDownTimer(5000, 1000) {
 
-            override fun onTick(millisUntilFinished: Long) {
-                contadorCartel.text= (millisUntilFinished / 1000).toString()
-            }
+        btnsiguiente.setOnClickListener(){
+            val i = Intent(activity, Activity5_Mapa::class.java)
+            startActivity(i)
+            (activity as Activity?)!!.overridePendingTransition(0, 0)
+        }
+        btnrepetir.setOnClickListener(){
+            Navigation.findNavController(it).navigate(R.id.action_fragment2_1_minijuego_self)
+        }
 
-            override fun onFinish() {
-
-                progressBar.isVisible=true
-                contadorCartel.isVisible=false
-                Handler().postDelayed({
-
-                    view?.let { Navigation.findNavController(it).navigate(R.id.action_fragment2_1_minijuego_to_fragment4_menu) }
-                }, 2000)
-
-            }
-        }.start()
     }
 
     private fun findItemByOrigen(view: View): DragnDropImage? {

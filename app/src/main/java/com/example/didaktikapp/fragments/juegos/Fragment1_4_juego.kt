@@ -1,5 +1,6 @@
 package com.example.didaktikapp.fragments.juegos
-
+import android.os.Handler
+import android.os.Looper
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
@@ -20,7 +21,15 @@ import android.widget.LinearLayout
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.launch
+import android.media.MediaPlayer
+import `in`.codeshuffle.typewriterview.TypeWriterView
+import android.graphics.drawable.AnimationDrawable
+import android.view.animation.AnimationUtils
+import android.view.animation.TranslateAnimation
+import androidx.core.view.isVisible
+import kotlinx.android.synthetic.main.fragment1_4_juego.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,7 +61,8 @@ class Fragment1_4_juego : Fragment() {
     private lateinit var globalView: View
     private lateinit var matrizMain: LinearLayout
     private var letterWeight = 1/nCols
-
+    private var audio: MediaPlayer? = null
+    private lateinit var vistaAnimada:TranslateAnimation
 
 //    val letterList = arrayListOf<ArrayList<Any>>(
 //        arrayListOf("A","B","C","D","E"),
@@ -103,15 +113,15 @@ class Fragment1_4_juego : Fragment() {
                 (activity as Activity6_Site?)?.menuCheck()
         }
         //Typewriter juego 4 tutorial
-      /*  Handler(Looper.getMainLooper()).postDelayed({
+       Handler(Looper.getMainLooper()).postDelayed({
             if (getView() != null) {
                 typewriter(view)
             }
-        }, 2000) */
+        }, 2000)
 
 
         //Animacion manzana al iniciar el juego
-      /*  starAnimationfun(view)
+       starAnimationfun(view)
 
 
         runBlocking {
@@ -129,7 +139,7 @@ class Fragment1_4_juego : Fragment() {
                     }, 1000)
                 }
             }
-        }*/
+        }
 
         view.viewTreeObserver.addOnGlobalLayoutListener(object :
             ViewTreeObserver.OnGlobalLayoutListener {
@@ -285,7 +295,6 @@ class Fragment1_4_juego : Fragment() {
 
          */
 
-
         //PINTAR
         for (i in 0 until letterList.size-1) {
             var filaLetterList = arrayListOf<String>()
@@ -374,10 +383,10 @@ class Fragment1_4_juego : Fragment() {
 
     }
 
-   /* private fun typewriter(view: View) {
+    private fun typewriter(view: View) {
         val typeWriterView = view.findViewById(R.id.txtv1_4tutorialjuego4) as TypeWriterView
         typeWriterView.setWithMusic(false)
-        typeWriterView.animateText(resources.getString(R.string.juego4audiotutorialtxt))
+        typeWriterView.animateText(resources.getString(R.string.juego4tutorialtxt))
         typeWriterView.setDelay(65)
     }
 
@@ -386,6 +395,8 @@ class Fragment1_4_juego : Fragment() {
         val txtAnimacion = view.findViewById(R.id.txtv1_4fondogris) as TextView
         val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade)
         txtAnimacion.startAnimation(aniFade)
+        val buttonSiguiente = view.findViewById(R.id.btnf1_4_siguiente) as Button
+        buttonSiguiente.isVisible=false
 
         //Animacion entrada upelio
         vistaAnimada = TranslateAnimation(-1000f, 0f, 0f, 0f)
@@ -401,9 +412,42 @@ class Fragment1_4_juego : Fragment() {
             }
         }, 2000)
     }
-    */
 
 
+    private fun talkAnimationfun(view: View) {
+        val upelio = view.findViewById(R.id.imgv1_4_upelio2) as ImageView
+        upelio.setBackgroundResource(R.drawable.animacion_manzana)
+        val ani = upelio.background as AnimationDrawable
+        ani.start()
+    }
+
+
+    private fun exitAnimationfun(view: View) {
+        val upelioAnimado = view.findViewById(R.id.imgv1_4_upelio2) as ImageView
+        upelioAnimado.isVisible = false
+
+        //Animacion upelio salido
+        vistaAnimada = TranslateAnimation(0f, 1000f, 0f, 0f)
+        vistaAnimada.duration = 2000
+
+        //VistaAnimada.fillAfter = true
+        val upelio = view.findViewById(R.id.imgv1_4_upelio) as ImageView
+        upelio.startAnimation(vistaAnimada)
+
+        //Animacion fondo gris
+        Handler(Looper.getMainLooper()).postDelayed({
+            if (getView() != null) {
+                val txtAnimacion = view.findViewById(R.id.txtv1_4fondogris) as TextView
+                val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+                txtAnimacion.startAnimation(aniFade)
+                txtv1_4tutorialjuego4.startAnimation(aniFade)
+                txtv1_4tutorialjuego4.isVisible = false
+                txtAnimacion.isVisible = false
+                val buttonSiguiente = view.findViewById(R.id.btnf1_4_siguiente) as Button
+                buttonSiguiente.isVisible=true
+            }
+        }, 1000)
+    }
 
 
 

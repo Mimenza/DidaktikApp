@@ -136,14 +136,15 @@
             android:layout_height="56dp"
             android:layout_marginTop="20dp"
             android:text="@string/sagarrakgarbitu"
+            android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.603"
+            app:layout_constraintHorizontal_bias="0.487"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.066" />
+            app:layout_constraintVertical_bias="0.064" />
 
         <ImageView
             android:id="@+id/imgv2_3cartelmadera"

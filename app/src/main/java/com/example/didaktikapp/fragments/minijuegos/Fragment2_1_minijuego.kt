@@ -145,23 +145,24 @@ class Fragment2_1_minijuego : Fragment() {
         true
     }
 
+    @SuppressLint("SetTextI18n")
     private fun comprobarInsercionManzana(item: DragnDropImage, objetivoInsertado: ImageView) {
         //item.acertado = true
         if (item.objetivo == objetivoInsertado) {
             aciertosActuales++
-            txtAciertos.text = aciertosActuales.toString()
+            txtAciertos.text = aciertosActuales.toString() +"/10"
         }
         comprobarJuegoFinalizado()
     }
 
     private fun comprobarJuegoFinalizado() {
         if (aciertosActuales >= 10) {
-
             //Diseñar cartel madera
             starAnimationfun()
             minijuegoFinalizado = true
             Toast.makeText(requireContext(), "ZORIONAK !!", Toast.LENGTH_SHORT).show()
             removeManzanasListener()
+
         }
     }
 

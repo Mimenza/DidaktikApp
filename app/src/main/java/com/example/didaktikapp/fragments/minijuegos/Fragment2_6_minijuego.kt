@@ -254,12 +254,12 @@ class Fragment2_6_minijuego : Fragment() {
     private fun vasoVaciado() {
         val txtVasosVacios: TextView = globalView.findViewById(R.id.minijuego6_txtvasosvacios)
 
-        txtVasosVacios.text = "x"+(txtVasosVacios.text.toString().replace("x","").toInt() + 1).toString()
+        txtVasosVacios.text = "x"+(txtVasosVacios.text.toString().replace("x","").toInt() + 1).toString()+"/5"
     }
 
     private fun botellaLlena() {
         val txtBotellasLlenas: TextView = globalView.findViewById(R.id.minijuego6_txtbotellasllenas)
-        txtBotellasLlenas.text = "x"+(txtBotellasLlenas.text.toString().replace("x","").toInt() + 1).toString()
+        txtBotellasLlenas.text = "x"+(txtBotellasLlenas.text.toString().replace("x","").toInt() + 1).toString()+"/5"
         generarVasonTarget()
 
     }

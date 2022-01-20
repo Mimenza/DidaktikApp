@@ -311,6 +311,7 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
                          /*Nos redirecciona a la activity de resultados,
                          recojemos las respuestas correctas y el total de preguntas
                         */
+
                             activity?.let{
                                 val intent = Intent (it, Activity7_Juego2_Results::class.java)
                                 intent.putExtra(Constantsjuego2.CORRECT_ANSWERS, mCorrectAnswers)

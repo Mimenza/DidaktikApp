@@ -70,7 +70,7 @@ class Fragment2_2_minijuego : Fragment() {
         val manzana4:ImageView = view.findViewById(R.id.imgv2_2_manzanav3)
         val manzana5:ImageView = view.findViewById(R.id.imgv2_2_manzanav4)
 
-         aciertoTxt = view.findViewById(R.id.manzanasAciertos)
+
         cartel= view.findViewById((R.id.imgv2_2cartelmadera))
         txtcartel= view.findViewById((R.id.txtv2_2carteltexto))
         btnrepetir = view.findViewById(R.id.btn2_2_repetir)
@@ -91,7 +91,7 @@ class Fragment2_2_minijuego : Fragment() {
         manzana.startAnimation(aniFade)
         manzana.isVisible = false
         acierto++
-        aciertoTxt.text = acierto.toString() + " / 5"
+
 
         manzana.setOnClickListener(){}
 

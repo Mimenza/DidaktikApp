@@ -64,15 +64,13 @@ y se  puede degustar.¡Vaya dulce! ¡Mmmm!
     <string name="azalpena1_juego1">Gune honetan hainbat sagar mota ezagutuko eta hartuko dituzu.</string>
     <string name="juego1_azalpena2">Gune honetan sagar zukua dastatuko duzu.</string>
     <string name="juego1_azalpena3">Gune honetan sagarraren historia eta sagadoaren prozesuak landuko dituzu.</string>
-    <string name="jositajositext">
-Para iniciar la misión, en primer lugar tendréis que jugar al juego "Josi `ta josi".
+    <string name="jositajositext">Para iniciar la misión, en primer lugar tendréis que jugar al juego "Josi `ta josi".
  Para ello, a un lado de la pantalla os aparecen las 3 zonas de la sidrería y en el otro lado,
         sus tareas. Por lo tanto, debéis relacionar las zonas con las tareas.</string>
 
     <!--FRAGMENT JUEGO2 -->
     <string name="nombre_2juego">EZETZ IGARRI</string>
-    <string name="text_2juego">
-¡Mira dónde estamos! ¡En el Palacio de Murgia! Zona especial,
+    <string name="text_2juego">¡Mira dónde estamos! ¡En el Palacio de Murgia! Zona especial,
         porque está lleno de magia y encanto. Situado a pocos kilometros de San Sebastián,
         en Astigarraga. El Palacio de Murgia se fundó en el siglo XI.
 En un principio fue la casa torre de los Murguía, convertida en palacio.

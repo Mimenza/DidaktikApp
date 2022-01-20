@@ -13,3 +13,8 @@ class CustomLine (context: Context, var startX: Float, var startY: Float, var en
         canvas.drawLine(startX, startY, endX, endY, pincel1)
     }
 }
+
+fun CustomLine.clone(): CustomLine {
+    val clCopy = CustomLine (context, startX, startY, endX, endY, width, a, r, g, b)
+    return clCopy
+}

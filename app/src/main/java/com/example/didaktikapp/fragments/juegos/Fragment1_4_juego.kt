@@ -1,6 +1,5 @@
 package com.example.didaktikapp.fragments.juegos
-import android.os.Handler
-import android.os.Looper
+import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
@@ -9,27 +8,26 @@ import androidx.fragment.app.Fragment
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.CustomLine
-import com.example.didaktikapp.Model.DragnDropImage
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity6_Site
-import com.example.didaktikapp.activities.DbHandler
-import com.google.android.gms.maps.model.LatLng
-import org.w3c.dom.Text
 import java.util.*
 import kotlin.collections.ArrayList
 import android.widget.LinearLayout
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.content.ContextCompat
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.launch
 import android.media.MediaPlayer
-import `in`.codeshuffle.typewriterview.TypeWriterView
+import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
 import androidx.core.view.isVisible
+import com.example.didaktikapp.Model.clone
 import kotlinx.android.synthetic.main.fragment1_4_juego.*
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -55,26 +53,16 @@ class Fragment1_4_juego : Fragment() {
     private var testWidth: Int? = null
     private var testHeight: Int? = null
 
-    private var nFilas: Int = 14
+    private var nFilas: Int = 13
     private var nCols: Int = 13
 
     private lateinit var globalView: View
     private lateinit var matrizMain: LinearLayout
+    private lateinit var constraintMain: ConstraintLayout
+
     private var letterWeight = 1/nCols
     private var audio: MediaPlayer? = null
     private lateinit var vistaAnimada:TranslateAnimation
-
-//    val letterList = arrayListOf<ArrayList<Any>>(
-//        arrayListOf("A","B","C","D","E"),
-//        arrayListOf("F","G","H","I","J"),
-//        arrayListOf("K","L","M","N","O"),
-//        arrayListOf("Q","R","S","T","U"),
-//        arrayListOf("Q","R","S","T","U"),
-//    )
-
-    val lettersPosition = arrayListOf<ArrayList<Any>>(
-        //arrayListOf(intArrayOf(12,12)),   // ARRAY DE EJEMPLO
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -92,19 +80,9 @@ class Fragment1_4_juego : Fragment() {
         val view = inflater.inflate(R.layout.fragment1_4_juego, container, false)
         globalView = view
         matrizMain = view.findViewById(R.id.matrizprincipal)
+        constraintMain = view.findViewById(R.id.juego4_constraintMain)
         val button: Button = view.findViewById(R.id.btnf1_4_siguiente)
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_4_ajustes)
-        layout = view.findViewById(R.id.myConstraintTest)
-
-
-
-        /*
-        //TODO DONT REMOVE THIS. This is drawline from a vector a to b
-        val imageTest: ImageView = view.findViewById(R.id.manzanaTest)
-        imageTest.setOnTouchListener(listener)
-        myLineTest = CustomLine(requireContext(),0f,0f,250f,250f, 15F, 162, 224, 23)
-        layout.addView(myLineTest)
-         */
 
         button.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment1_4_juego_to_fragment2_4_minijuego)
@@ -112,12 +90,17 @@ class Fragment1_4_juego : Fragment() {
         ajustes.setOnClickListener(){
                 (activity as Activity6_Site?)?.menuCheck()
         }
+
+
+
         //Typewriter juego 4 tutorial
        Handler(Looper.getMainLooper()).postDelayed({
             if (getView() != null) {
                 typewriter(view)
             }
         }, 2000)
+
+
 
 
         //Animacion manzana al iniciar el juego
@@ -158,35 +141,60 @@ class Fragment1_4_juego : Fragment() {
     }
 
     private var letras = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
+    private var letraComodin = "•"
+    private var palabraFormada: String = ""
+    private var primeraLetraSeleccionada: TextView? = null
+    private var drawingLine: CustomLine? = null
+    private var letraPosVector: ArrayList<Int>? = null
 
     var letterList = arrayListOf<ArrayList<String>>(
 //        arrayListOf("A","B","C","D","E"),
-//        arrayListOf("F","G","H","I","J"),
-//        arrayListOf("K","L","M","N","O"),
-//        arrayListOf("Q","R","S","T","U"),
-//        arrayListOf("Q","R","S","T","U"),
     )
+
+    var letterObjectList = arrayListOf<ArrayList<TextView>>(
+//        arrayListOf("A","B","C","D","E"),
+    )
+
+
+    private var arrayPlabrasCercanas = arrayListOf<ArrayList<Any>>(
+        //arrayListOf(1,arrayListOf<Int>())
+    )
+
+    private var moveSelected: Any? = null
+    private var ultimaPosFila: Int? = null
+    private var ultimaPosCol: Int? = null
+    private var drawStartX: Float? = null
+    private var drawStartY: Float? = null
 
 
     private var palabrasPintadas = arrayListOf<String>()
 
-    private var palabras = arrayListOf<String>("TXISTULARIAK","SAGARDANTZA","TXALAPARTA","TRIKITIXA","ERAKUSKETA",
-        "SALMENTA","DASDATZEA","BILKETA","GARBTIZEA")
+    //private var palabras = arrayListOf<String>("TXISTULARIAK","SAGARDANTZA","TXALAPARTA","TRIKITIXA","ERAKUSKETA",
+    //    "SALMENTA","DASTATZEA","BILKETA","GARBTIZEA")
+
+    private var palabras = arrayListOf<String>("SAGARDANTZA", "SALMENTA", "TRIKITIXA", "TXALAPARTA", "GARBITZEA", "DASTATZEA")
+
+    private var palabrasEncontradas = arrayListOf<String>()
 
     private var filasHuecosLibres = arrayListOf<Int>()
     private var colsHuecosLibres = arrayListOf<Int>()
 
     private fun prepararJuego() {
         //Primero generamos la matriz limpia
+        var letrasAmount = 0
         for (i in 0 until nFilas) {
             var filaLetterList = arrayListOf<String>()
             letterList.add(filaLetterList)
             for (k in 0 until nCols) {
-                filaLetterList.add("•")
+                filaLetterList.add(letraComodin)
+                letrasAmount++
             }
         }
+        //println("************ LETRAS AMOUNT: " + letrasAmount)
+        //Log.d("this is my array", "arr: " + letterList);
         //Seleccionamos una palabra aleatoria de la lista
         //seleccionarPalabraAleatoria()
+        //convertComodinToRandomLetters()
         escribirPalabrasModoSimple()
         // La pintamos sobre la sopa
         pintarSopa()
@@ -268,10 +276,10 @@ class Fragment1_4_juego : Fragment() {
         //}
     }
 
-    private fun convert0ToRandomLetters() {
-        for (i in 0 until letterList.size-1) {
+    private fun convertComodinToRandomLetters() {
+        for (i in 0 until letterList.size) {
             for (k in 0 until letterList[i].size) {
-                if (letterList[i][k].equals("0")) {
+                if (letterList[i][k].equals(letraComodin)) {
                     val letrasLength = letras.length
                     val randomLetter = (0 until letrasLength-1).random()
                     letterList[i][k] = letras.substring(randomLetter,randomLetter+1)
@@ -296,9 +304,11 @@ class Fragment1_4_juego : Fragment() {
          */
 
         //PINTAR
-        for (i in 0 until letterList.size-1) {
+        for (i in 0 until letterList.size) {
             var filaLetterList = arrayListOf<String>()
+            var filaLetterElementList = arrayListOf<TextView>()
             //letterList.add(filaLetterList)
+            letterObjectList.add(filaLetterElementList)
             var nuevaFila = LinearLayout(requireContext())
             val paramsLinear: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
@@ -312,20 +322,227 @@ class Fragment1_4_juego : Fragment() {
                 val letrasLength = letras.length
                 val randomLetter = (0 until letrasLength-1).random()
                 var letraElement = TextView(requireContext())
+                filaLetterElementList.add(letraElement)
                 letraElement.id = k+(i*nCols)
                 //println("********** GENERATED ID: " + letraElement.id)
                 //letraElement.text = letras.substring(randomLetter,randomLetter+1)
                 letraElement.text = letterList[i][k]
                 //filaLetterList.add("0")
-                letraElement.textSize = 24.toFloat()
+                letraElement.textSize = 25.toFloat()
                 letraElement.width = nuevaFila.width/nCols
                 val params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT
                 )
                 params.weight = 1.toFloat()
+                params.setMargins(10,0,10,30)
+                params.gravity = Gravity.CENTER
                 letraElement.setLayoutParams(params)
                 nuevaFila.addView(letraElement)
+                letraElement.setOnTouchListener(listener)
+                val rnd = Random()
+                val color: Int = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
+                //letraElement.setBackgroundColor(color)
+                letraElement.gravity = Gravity.CENTER
+                //println("*********************** ANCHO/ALTO: ${letraElement.width} / ${letraElement.getMeasuredHeight()}")
             }
+        }
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    var listener = View.OnTouchListener { viewElement, motionEvent ->
+        val vLetra = viewElement as TextView
+        val action = motionEvent.action
+        when(action) {
+            MotionEvent.ACTION_DOWN -> {
+                if (primeraLetraSeleccionada == null) {
+                    primeraLetraSeleccionada = vLetra
+                    println("********** PRIMERA LETRA SELECCIONADA: " + vLetra.text.toString())
+                    encontrarLetraEnMatriz()
+                }
+            }
+            MotionEvent.ACTION_MOVE -> {
+                if (primeraLetraSeleccionada != null && moveSelected == null) {
+                    selectMoveType(motionEvent.rawX, motionEvent.rawY)
+                } else {
+                    if (moveSelected != null) {
+
+                        var choosenMove = moveSelected as ArrayList<Int>
+                        if (letterObjectList.getOrNull(ultimaPosFila!!+choosenMove[0]) != null) {
+                            if (letterObjectList[ultimaPosFila!!+choosenMove[0]].getOrNull(ultimaPosCol!!+choosenMove[1]) != null) {
+                                val location = IntArray(2)
+                                (letterObjectList[ultimaPosFila!!+choosenMove[0]][ultimaPosCol!!+choosenMove[1]]).getLocationOnScreen(location);
+                                var palPosX = location[0]
+                                var palPosY = location[1]
+                                var palSizeX: Int = (letterObjectList[ultimaPosFila!!+choosenMove[0]][ultimaPosCol!!+choosenMove[1]]).width
+                                var palSizeY: Int = (letterObjectList[ultimaPosFila!!+choosenMove[0]][ultimaPosCol!!+choosenMove[1]]).height
+                                var dedoX = motionEvent.rawX
+                                var dedoY = motionEvent.rawY
+                                if (dedoX >= palPosX && dedoY >= palPosY && dedoX <= palPosX+palSizeX && dedoY <= palPosY+palSizeY) {
+                                    println("******** NUEVA LETRA ENCONTRADA: " + letterObjectList[ultimaPosFila!!+choosenMove[0]][ultimaPosCol!!+choosenMove[1]].text.toString())
+                                    limpiarLinea()
+                                    drawingLine = CustomLine(requireContext(), drawStartX!!.toFloat(), drawStartY!!.toFloat(), (palPosX+palSizeX/2).toFloat(), (palPosY+palSizeY/2).toFloat(), 20F, 100, 40, 103, 220)
+                                    constraintMain.addView(drawingLine)
+                                    palabraFormada = palabraFormada+(letterObjectList[ultimaPosFila!!+choosenMove[0]][ultimaPosCol!!+choosenMove[1]].text.toString())
+                                    println("*********** PALABRA ACTUAL: " + palabraFormada)
+                                    ultimaPosFila = ultimaPosFila!! + choosenMove[0]
+                                    ultimaPosCol = ultimaPosCol!! + choosenMove[1]
+                                }
+
+                            } else {
+                                viewElement.setOnTouchListener(null)
+                                reenableTouch(viewElement)
+                                //viewElement.setOnTouchListener(this)
+                            }
+                        } else {
+                            viewElement.setOnTouchListener(null)
+                            reenableTouch(viewElement)
+                            //viewElement.setOnTouchListener(listener)
+                        }
+
+
+                    }
+                }
+                //viewElement.x = motionEvent.rawX - viewElement.width/2
+                //viewElement.y = motionEvent.rawY - viewElement.height/2
+
+            }
+            MotionEvent.ACTION_UP -> {
+                comprobarPalabraEncontrada()
+                palabraFormada = ""
+                primeraLetraSeleccionada = null
+                //letraPosVector = null
+                arrayPlabrasCercanas.clear()
+                moveSelected = null
+                ultimaPosFila = null
+                ultimaPosCol = null
+                drawStartX = null
+                drawStartY = null
+            }
+        }
+        true
+    }
+
+    private fun reenableTouch(viewElement: View) {
+        viewElement.setOnTouchListener(listener)
+    }
+
+    private fun encontrarLetraEnMatriz() {
+        for ((i, fila) in letterObjectList.withIndex()) {
+            for ((k, bLetra) in fila.withIndex()) {
+                if (bLetra == primeraLetraSeleccionada) {
+                    //ultimoMovimiento = arrayListOf<Int>(i,k)
+                    ultimaPosFila = i
+                    ultimaPosCol = k
+                    val location = IntArray(2)
+                    (bLetra as View).getLocationOnScreen(location);
+                    var palPosX = location[0]
+                    var palPosY = location[1]
+                    var palSizeX: Int = (bLetra as View).width
+                    var palSizeY: Int = (bLetra as View).height
+                    drawStartX = palPosX.toFloat()+palSizeX/2
+                    drawStartY = palPosY.toFloat()+palSizeY/2
+                    palabraFormada = palabraFormada+(bLetra.text.toString())
+                    println("********** LETRA ENCONTRADA EN FILA: ${i} COLUMNA: ${k}")
+                    encontrarLetrasCercanas(i,k)
+                    break
+                }
+            }
+        }
+    }
+
+    private var movesTypesInMatrix = arrayListOf<ArrayList<Int>>(
+        //Mirar foto para entender los movimentos posibles
+        arrayListOf(0,1),
+        arrayListOf(1,1),
+        arrayListOf(1,0),
+        arrayListOf(1,-1),
+        arrayListOf(0,-1),
+        arrayListOf(-1,-1),
+        arrayListOf(-1,0),
+        arrayListOf(-1,1),
+    )
+
+    private fun encontrarLetrasCercanas(pFila: Int, pCol: Int) {
+        for ((i, move) in movesTypesInMatrix.withIndex()) {
+            //Primero comprobamos que la siguiente/anterior fila exista
+            if (letterList.getOrNull(pFila+move[0]) != null) {
+                //Comprbamos que dentro de la fila exista la siguiente/anterior letra
+                if (letterList[pFila+move[0]].getOrNull(pCol+move[1]) != null) {
+                    //println("********* LETRA CERCANA ENCONTRADA: " + letterObjectList[pFila+move[0]][pCol+move[1]].text.toString())
+                    //var arrayPalabraCercana = arrayListOf<Any>()
+                    var datosPalabraCercana = arrayListOf<Any>(
+                        letterObjectList[pFila+move[0]][pCol+move[1]],
+                        move
+                    )
+                    arrayPlabrasCercanas.add(datosPalabraCercana)
+                }
+            }
+        }
+        //Log.d("this is my array", "arr: " + arrayPlabrasCercanas);
+    }
+
+    private fun selectMoveType(rawX: Float, rawY: Float) {
+        if (moveSelected == null) {
+            for ((i, palabraCercana) in arrayPlabrasCercanas.withIndex()) {
+                val location = IntArray(2)
+                (palabraCercana[0] as View).getLocationOnScreen(location);
+                var palPosX = location[0]
+                var palPosY = location[1]
+                var palSizeX: Int = (palabraCercana[0] as View).width
+                var palSizeY: Int = (palabraCercana[0] as View).height
+                if (rawX >= palPosX && rawY >= palPosY && rawX <= palPosX+palSizeX && rawY <= palPosY+palSizeY) {
+                    if (moveSelected == null) {
+                        moveSelected = palabraCercana[1] as ArrayList<Int>
+                        var choosenMove = palabraCercana[1] as ArrayList<Int>
+                        ultimaPosFila = ultimaPosFila!! + choosenMove[0]
+                        ultimaPosCol = ultimaPosCol!! + choosenMove[1]
+                        palabraFormada = palabraFormada+((palabraCercana[0] as TextView).text.toString())
+
+                        val location = IntArray(2)
+                        (palabraCercana[0] as View).getLocationOnScreen(location);
+                        var palPosX = location[0]
+                        var palPosY = location[1]
+                        var palSizeX: Int = (palabraCercana[0] as View).width
+                        var palSizeY: Int = (palabraCercana[0] as View).height
+                        limpiarLinea()
+                        drawingLine = CustomLine(requireContext(), drawStartX!!.toFloat(), drawStartY!!.toFloat(), (palPosX+palSizeX/2).toFloat(), (palPosY+palSizeY/2).toFloat(), 20F, 100, 40, 103, 220)
+                        constraintMain.addView(drawingLine)
+
+                        println("******** MOVIMIENTO SELECCIONADO: ${choosenMove[0]} / ${choosenMove[1]} LETRA: ${(palabraCercana[0] as TextView).text.toString()}" )
+                        println("*********** PALABRA ACTUAL: " + palabraFormada)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun comprobarPalabraEncontrada() {
+
+        for ((index, value) in palabras.withIndex()) {
+            if (palabraFormada.length == value.length) {
+                if (palabraFormada.equals(value)) {
+                    if (!palabrasEncontradas.contains(palabraFormada)) {
+                        palabrasEncontradas.add(value)
+                        if (drawingLine != null) {
+                            val nuevaDrawLine = drawingLine!!.clone()
+                            constraintMain.addView(nuevaDrawLine)
+                        }
+                        if (palabrasEncontradas.size == palabras.size) {
+                            Toast.makeText(requireContext(), "ZORIONAK!", Toast.LENGTH_SHORT).show()
+                            val btnSiguiente: Button = globalView.findViewById(R.id.btnf1_4_siguiente)
+                            btnSiguiente.visibility = View.VISIBLE
+                        }
+                    }
+                }
+            }
+        }
+        limpiarLinea()
+    }
+
+    private fun limpiarLinea() {
+        if (drawingLine!= null) {
+            constraintMain.removeView(drawingLine)
+            drawingLine = null
         }
     }
 
@@ -369,18 +586,6 @@ class Fragment1_4_juego : Fragment() {
             filasHuecosLibres.add(i)
         }
         println(Arrays.toString(filasHuecosLibres.toIntArray()))
-    }
-
-    private fun findHuecosColsLibres() {
-
-    }
-
-    private fun findFilasLibres() {
-
-    }
-
-    private fun findColsLibres() {
-
     }
 
     private fun typewriter(view: View) {
@@ -449,45 +654,6 @@ class Fragment1_4_juego : Fragment() {
         }, 1000)
     }
 
-
-
-
-    fun prepareSopa() {
-        var vFila1: ArrayList<View>? = getConstraintChildCount(constraintFila1)
-
-        for ((index, value) in vFila1!!.withIndex()) {
-            var txtElement: TextView = value as TextView
-            var txtPosX = txtElement.x
-            var txtPosY = txtElement.y
-            var txtSizeX = txtElement.getLayoutParams().width
-            var txtSizeY = txtElement.getLayoutParams().width
-            if (testWidth == null ||testHeight == null) {
-                testWidth = txtSizeX
-                testHeight = txtSizeY
-            }
-            println("********* the element at $index is ${txtElement.text.toString()}")
-
-            if (lettersPosition.size == 0) {
-                lettersPosition.add(arrayListOf())
-            }
-
-
-
-
-            /*
-            if (lettersPosition.isEmpty()) {
-                //lettersPosition.add(arrayListOf())
-                lettersPosition.add(arrayListOf())
-            }
-
-             */
-            //lettersPosition[0].add(arrayListOf(floatArrayOf(txtPosX,txtPosY)))
-            lettersPosition[0].add(floatArrayOf(txtPosX,txtPosY))
-            txtElement.setOnTouchListener(listener)
-        }
-        println("******** TESTING ROW: " +lettersPosition[0])
-    }
-
     fun getConstraintChildCount(contraintView: View): ArrayList<View>? {
         //TODO TENER CUIDADO DE USAR ESTA FUNCION CON HIJOS QUE NO SON DIRECTOS (PODRIA SEGUIR INCREMENTANDO)
         val result = ArrayList<View>()
@@ -499,95 +665,6 @@ class Fragment1_4_juego : Fragment() {
         }
         return result
     }
-
-    fun checkOtherLettersHover(posX: Int, posY: Int) {
-        for ((i, row) in lettersPosition.withIndex()) {
-            for ((k, col) in lettersPosition[i].withIndex()) {
-
-            }
-        }
-
-        /*
-        for (i in 0 until lettersPosition.size-1) {
-            for (k in 0 until lettersPosition[i].size-1) {
-            }
-        }
-         */
-    }
-
-    fun findPossibleMove() {
-
-    }
-
-    fun checkNearestLetter() {
-
-    }
-
-    fun findMyFirstLetterKey() {
-
-    }
-
-    fun checkNextLetter() {
-
-    }
-
-
-
-    @SuppressLint("ClickableViewAccessibility")
-    var listener = View.OnTouchListener { viewElement, motionEvent ->
-        var tElementTxt: TextView = viewElement as TextView
-        println("******************** TECLA PRESIONADA: " + tElementTxt.text)
-        val action = motionEvent.action
-        when(action) {
-            MotionEvent.ACTION_MOVE -> {
-                checkOtherLettersHover(motionEvent.rawX.toInt(), motionEvent.rawY.toInt())
-                //motionEvent.rawX
-                /*
-                viewElement.x = motionEvent.rawX - viewElement.width/2
-                viewElement.y = motionEvent.rawY - viewElement.height/2
-                layout.removeView(myLineTest)
-                myLineTest = null
-                myLineTest = CustomLine(requireContext(),0f,0f,motionEvent.rawX,motionEvent.rawY, 15F, 162, 224, 23)
-                layout.addView(myLineTest)
-                 */
-            }
-            MotionEvent.ACTION_UP -> {
-
-                //viewElement.x = motionEvent.rawX - viewElement.width/2
-                //viewElement.y = motionEvent.rawY - viewElement.height/2
-
-
-            }
-        }
-        true
-    }
-
-
-    /*
-    //TODO DONT REMOVE THIS. This is drawline from a vector a to b
-    @SuppressLint("ClickableViewAccessibility")
-    var listener = View.OnTouchListener { viewElement, motionEvent ->
-        viewElement.bringToFront()
-        val action = motionEvent.action
-        when(action) {
-            MotionEvent.ACTION_MOVE -> {
-                viewElement.x = motionEvent.rawX - viewElement.width/2
-                viewElement.y = motionEvent.rawY - viewElement.height/2
-                layout.removeView(myLineTest)
-                myLineTest = null
-                myLineTest = CustomLine(requireContext(),0f,0f,motionEvent.rawX,motionEvent.rawY, 15F, 162, 224, 23)
-                layout.addView(myLineTest)
-            }
-            MotionEvent.ACTION_UP -> {
-                viewElement.x = motionEvent.rawX - viewElement.width/2
-                viewElement.y = motionEvent.rawY - viewElement.height/2
-
-
-            }
-        }
-        true
-    }
-     */
 
     companion object {
         /**

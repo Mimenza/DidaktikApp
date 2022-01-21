@@ -1,6 +1,5 @@
 package com.example.didaktikapp.fragments
 
-
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,11 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.navigation.Navigation
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity1_Principal
 import android.app.Activity
 import com.example.didaktikapp.activities.Activity5_Mapa
+import com.example.didaktikapp.activities.Activity6_Site
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -22,13 +21,14 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [Fragment4_menu.newInstance] factory method to
+ * Use the [Fragment4_menu2.newInstance] factory method to
  * create an instance of this fragment.
  */
 class Fragment4_menu : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+    private var fragment : Fragment?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,24 +43,19 @@ class Fragment4_menu : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment4_menu, container, false)
-        val ajustes: Button = view.findViewById(R.id.btn4f_ajustes)
-        val ayuda: Button = view.findViewById(R.id.btn4f_ayuda)
-        val inicio: Button = view.findViewById(R.id.btn4f_inicio)
-        val repetir: Button = view.findViewById(R.id.btn4f_repetir)
-        val siguiente: Button = view.findViewById(R.id.btn4f_siguiente)
+        val view = inflater.inflate(R.layout.fragment4_menu2, container, false)
+        val ajustes: Button = view.findViewById(R.id.btn4f_ajustes2)
+        val ayuda: Button = view.findViewById(R.id.btn4f_ayuda2)
+        val inicio: Button = view.findViewById(R.id.btn4f_inicio2)
+        val siguiente: Button = view.findViewById(R.id.btn4f_siguiente2)
 
         //Navegacion a los framents
         ajustes.setOnClickListener{
-            Navigation.findNavController(view).navigate(R.id.action_fragment4_menu_to_fragment5_ajustes)
+            (activity as Activity6_Site)?.ajustesCheck()
         }
 
         ayuda.setOnClickListener{
-            Navigation.findNavController(view).navigate(R.id.action_fragment4_menu_to_fragment6_ayuda)
-        }
-
-        repetir.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment4_menu_to_fragment3_info)
+            (activity as Activity6_Site)?.ayudaCheck()
         }
 
         //Navegacion a activities
@@ -81,23 +76,5 @@ class Fragment4_menu : Fragment() {
     }
 
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Fragment4_menu.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Fragment4_menu().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+
 }

@@ -2,7 +2,6 @@ package com.example.didaktikapp.fragments.juegos
 
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.AnimationDrawable
@@ -19,59 +18,32 @@ import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.example.didaktikapp.Model.Constantsjuego7
 import com.example.didaktikapp.Model.Preguntasjuego7
 import com.example.didaktikapp.R
-
 import com.example.didaktikapp.activities.Activity6_Site
-import com.example.didaktikapp.activities.Activity7_1_Juego7_Results
-import kotlinx.android.synthetic.main.fragment1_1_juego.*
-import kotlinx.android.synthetic.main.fragment1_2_juego.*
-
 import kotlinx.android.synthetic.main.fragment1_7_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.util.ArrayList
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Fragment1_juego.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Fragment1_7_juego : Fragment(), View.OnClickListener {
-
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
     private lateinit var preguntasjuego7: Preguntasjuego7
-    private var mCurrentPosition:Int=1
-    private var mQuestionList: ArrayList<Preguntasjuego7>?= null
-    private var mSelectedOptionPosition: Int= 0
     private lateinit var progressBar : ProgressBar
     private lateinit var txtProgressBar : TextView
     private lateinit var question1 : TextView
     private lateinit var question1_answer1 : TextView
     private lateinit var question1_answer2 : TextView
     private lateinit var question1_answer3 : TextView
-
     private lateinit var btnSiguiente : Button
-    private  var mCorrectAnswers: Int = 0
     private lateinit var vistaanimada:TranslateAnimation
+
+    private var mCurrentPosition:Int=1
+    private var mQuestionList: ArrayList<Preguntasjuego7>?= null
+    private var mSelectedOptionPosition: Int= 0
+    private var mCorrectAnswers: Int = 0
     private var audio: MediaPlayer? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-
-    }
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -95,24 +67,17 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
 
 
         button.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment1_7_juego_to_fragment2_7_minijuego)
+            Navigation.findNavController(view).navigate(R.id.action_fragment1_7_juego_to_fragment1_7_juego_results)
         }
+
         ajustes.setOnClickListener(){
-
-            Navigation.findNavController(view).navigate(R.id.action_fragment1_7_juego_to_fragment4_menu)
-
-
                 (activity as Activity6_Site?)?.menuCheck()
-
-
         }
-
 
         audiotutorial(view)
 
         //Creamos la pregunta y las respuestas segun la posicion
         setQuestion()
-
 
         //Cuando hacer click en la respuesta de la pregunta, lanzamos mensaje de error o de acierto
         question1_answer1!!.setOnClickListener(this)
@@ -128,7 +93,6 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
 
 
     fun audiotutorial(view:View){
-
         //Audio juego 7 tutorial
         runBlocking() {
             launch {
@@ -149,12 +113,14 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         starAnimationfun(view)
 
     }
+
     private fun typewriter(view: View) {
         val typeWriterView = view.findViewById(R.id.txtv1_7tutorialjuego7) as TypeWriterView
         typeWriterView.setWithMusic(false)
         typeWriterView.animateText(resources.getString(R.string.belarriakadi))
         typeWriterView.setDelay(70)
     }
+
     private fun starAnimationfun(view: View) {
         // animacion fondo gris
         val txt_animacion = view.findViewById(R.id.txtv1_7fondogris) as TextView
@@ -185,14 +151,13 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
                 typewriter(view)
             }
         }, 2000)
-
     }
+
     private fun talkAnimationfun(view: View) {
         val upelio = view.findViewById(R.id.imgv1_7_upelio2) as ImageView
         upelio.setBackgroundResource(R.drawable.animacion_manzana)
         val ani = upelio.getBackground() as AnimationDrawable
         ani.start()
-
     }
 
     private fun exitAnimationfun(view: View) {
@@ -224,13 +189,11 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
                 question1_answer1.isEnabled=true
                 question1_answer2.isEnabled=true
                 question1_answer3.isEnabled=true
-
             }
         }, 1000)
     }
 
     private fun setQuestion(){
-
         preguntasjuego7= Preguntasjuego7()
 
         //Recojemos las preguntas del Constants juego2
@@ -252,25 +215,19 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         question1_answer1!!.text= question!!.optionOne
         question1_answer2!!.text= question!!.optionTwo
         question1_answer3!!.text= question!!.optionThree
-
-
     }
 
     //COLOR Y FONDO POR DEFECTO DE LAS RESPUESTAS
     private fun defaultOptionsView(){
-
         val options= ArrayList<TextView>()
         options.add(0, question1_answer1)
         options.add(1, question1_answer2)
         options.add(2, question1_answer3)
 
         for (option in options){
-
             option.setTextColor(Color.parseColor("#7A8089"))
             option.typeface= Typeface.DEFAULT
-            option.background= ContextCompat.getDrawable(
-                requireContext(), R.drawable.juego2_default_option_border_bg
-            )
+            option.background= ContextCompat.getDrawable(requireContext(), R.drawable.juego2_default_option_border_bg)
         }
     }
 
@@ -308,12 +265,13 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
                         /*Nos redirecciona a la activity de resultados,
                         recojemos las respuestas correctas y el total de preguntas
                        */
-                        activity?.let{
-                            val intent = Intent (it, Activity7_1_Juego7_Results::class.java)
-                            intent.putExtra(Constantsjuego7.CORRECT_ANSWERS, mCorrectAnswers)
-                            intent.putExtra(Constantsjuego7.TOTAL_QUESTIONS, mQuestionList!!.size)
-                            it.startActivity(intent)
-                        }
+
+                        val sharedPreferences =requireContext().getSharedPreferences("scoreGame7", 0)
+                        var editor = sharedPreferences.edit()
+                        editor.putString("totalQuestions", mQuestionList!!.size.toString()).apply()
+                        editor.putString("correctAnswers", mCorrectAnswers.toString()).apply()
+                        /*Nos redirecciona al fragment de resultados*/
+                        view?.findNavController()?.navigate(R.id.action_fragment1_7_juego_to_fragment1_7_juego_results)
                     }
 
                     }
@@ -344,18 +302,12 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
 
                     mSelectedOptionPosition=0
                     //Deshabilitamos las respuestas al clickar la respuesta
-                    question1_answer1.isEnabled=false
-                    question1_answer2.isEnabled=false
-                    question1_answer3.isEnabled=false
-
-
-
+                    question1_answer1.isEnabled = false
+                    question1_answer2.isEnabled = false
+                    question1_answer3.isEnabled = false
                 }
-
             }
-
         }
-
     }
 
     //Cambiamos de color de fondo a la opcion en concreto
@@ -365,25 +317,16 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         when(answer){
 
             1->{
-
-                question1_answer1.background=ContextCompat.getDrawable(
-                    requireContext(), drawableView
-                )
+                question1_answer1.background=ContextCompat.getDrawable(requireContext(), drawableView)
             }
 
             2->{
-
-                question1_answer2.background=ContextCompat.getDrawable(
-                    requireContext(), drawableView
-                )
+                question1_answer2.background=ContextCompat.getDrawable(requireContext(), drawableView)
             }
+
             3->{
-
-                question1_answer3.background=ContextCompat.getDrawable(
-                    requireContext(), drawableView
-                )
+                question1_answer3.background=ContextCompat.getDrawable(requireContext(), drawableView)
             }
-
         }
     }
 
@@ -396,9 +339,7 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
 
         tv.setTextColor(Color.parseColor("#363A43"))
         tv.setTypeface(tv.typeface, Typeface.BOLD)
-        tv.background= ContextCompat.getDrawable(
-            requireContext(), R.drawable.juego2_selected_option_border_bg)
-
+        tv.background= ContextCompat.getDrawable(requireContext(), R.drawable.juego2_selected_option_border_bg)
     }
 
     override fun onDestroy() {
@@ -415,26 +356,4 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         super.onResume()
         audio?.start()
     }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Fragment1_juego.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Fragment1_7_juego().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
-
-
 }

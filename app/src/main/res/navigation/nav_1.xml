@@ -306,5 +306,17 @@
         android:name="com.example.didaktikapp.fragments.Fragment5_ajustes"
         android:label="fragment5_ajustes"
         tools:layout="@layout/fragment5_ajustes" />
+    <navigation android:id="@+id/navigation2"
+        app:startDestination="@id/navigation">
+        <navigation
+            android:id="@+id/navigation"
+            app:startDestination="@id/SS">
+            <fragment
+                android:id="@+id/SS"
+                android:name="com.example.didaktikapp.SS"
+                android:label="fragment_s_s"
+                tools:layout="@layout/fragment_s_s" />
+        </navigation>
+    </navigation>
 
 </navigation>

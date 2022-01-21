@@ -51,7 +51,7 @@ class Fragment2_3_minijuego : Fragment() {
         listOf(R.id.imgV2_suciedad4,R.id.minijuego3_basurero),
         listOf(R.id.imgV2_suciedad5,R.id.minijuego3_basurero),
     )
-    private lateinit var aciertosTxt:TextView
+
 
     var manzanaList: MutableList<DragnDropImage>? = mutableListOf()
 
@@ -138,7 +138,8 @@ class Fragment2_3_minijuego : Fragment() {
                         viewElement.setOnTouchListener(null)
                         itemInList.acertado = true
                         viewElement.isVisible = false
-                        manzanaLimpia()
+                       // manzanaLimpia()
+                        aciertosActuales++
                         checkJuegoFinalizado()
                     } else {
                         //println("******** SUCIEDAD DEFAULT: " +  suciedadOrigenX + " / " +suciedadOrigenY)
@@ -153,11 +154,11 @@ class Fragment2_3_minijuego : Fragment() {
         true
     }
 
-    private fun manzanaLimpia() {
-        aciertosActuales++
+    /*private fun manzanaLimpia() {
+
         val txtPuntuacion: TextView = globalView.findViewById(R.id.manzanasAciertos2)
         txtPuntuacion.text = aciertosActuales.toString()
-    }
+    }*/
 
     private fun checkJuegoFinalizado() {
         if (aciertosActuales >= 5) {

@@ -243,5 +243,4 @@
             app:destination="@id/fragment1_7_juego" />
     </fragment>
 
-
 </navigation>

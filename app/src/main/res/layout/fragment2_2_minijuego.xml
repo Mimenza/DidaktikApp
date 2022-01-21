@@ -50,17 +50,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.198" />
 
-        <TextView
-            android:id="@+id/manzanasAciertos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="168dp"
-            android:layout_marginBottom="36dp"
-            android:text="0 / 5"
-            android:textSize="34sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
         <ImageView
             android:id="@+id/juegox_basurero"
             android:layout_width="160dp"
@@ -215,6 +204,7 @@
             android:id="@+id/txtv2_2carteltexto"
             android:layout_width="221dp"
             android:layout_height="174dp"
+            android:layout_marginLeft="10dp"
             android:text="@string/minijuego1completado"
             android:textAlignment="center"
             android:textColor="@color/white"
@@ -227,31 +217,39 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.499" />
 
-        <Button
-            android:id="@+id/btn2_2_repetir"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/repetir"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.287"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.591" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/btn2_2_siguiente"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/siguiente"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.732"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.591" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn2_2_siguiente"
+                style="@style/Button.White"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="68dp"
+                android:layout_marginBottom="288dp"
+                android:background="@drawable/ic_siguiente"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/btn2_2_repetir"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn2_2_repetir"
+                style="@style/Button.White"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="112dp"
+                android:background="@drawable/ic_repetir"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/btn2_2_siguiente"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/btn2_2_siguiente"
+                app:layout_constraintVertical_bias="0.0"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

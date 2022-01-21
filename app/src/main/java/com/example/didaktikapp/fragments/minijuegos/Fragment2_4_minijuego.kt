@@ -41,7 +41,7 @@ class Fragment2_4_minijuego : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var acierto: Int = 1
-    private lateinit var aciertostxt: TextView
+
 
 
     private lateinit var manzana1: ImageView
@@ -106,7 +106,7 @@ class Fragment2_4_minijuego : Fragment() {
         txtcartel= view.findViewById((R.id.txtv2_4carteltexto))
         btnrepetir = view.findViewById(R.id.btn2_4_repetir)
         btnsiguiente = view.findViewById(R.id.btn2_4_siguiente)
-        aciertostxt= view.findViewById(R.id.txt2_4_acierto)
+
 
         ajustes.setOnClickListener() {
             (activity as Activity6_Site?)?.menuCheck()
@@ -324,10 +324,10 @@ class Fragment2_4_minijuego : Fragment() {
     fun checkProgress() {
         //si se han cortado todas las manzanas aparece el boton
         if (acierto== 5) {
-            aciertostxt.text= acierto.toString()
+
             starAnimationfun()
         } else {
-            aciertostxt.text= acierto.toString()
+
             acierto++
 
         }

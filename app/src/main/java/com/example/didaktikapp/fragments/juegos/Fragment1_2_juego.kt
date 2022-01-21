@@ -346,7 +346,7 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
 
                         }else{
 
-                            takePicture()
+                           // takePicture()
                             mCorrectAnswers++
                         }
                     question.correctAnswer?.let { answerView(it, R.drawable.juego2_correct_option_border_bg) }

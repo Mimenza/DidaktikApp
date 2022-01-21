@@ -2,13 +2,17 @@ package com.example.didaktikapp.fragments.juegos
 
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.os.Handler
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +21,7 @@ import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
 import android.widget.*
 import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.Constantsjuego2
@@ -28,7 +33,13 @@ import kotlinx.android.synthetic.main.fragment1_1_juego.*
 import kotlinx.android.synthetic.main.fragment1_2_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.io.File
+import java.io.IOException
 import java.util.ArrayList
+import androidx.core.app.ActivityCompat.startActivityForResult
+
+
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,7 +71,8 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
     private  var mCorrectAnswers: Int = 0
     private lateinit var vistaanimada:TranslateAnimation
     private var audio: MediaPlayer? = null
-
+    private lateinit var photoPath:String
+    private  var REQUEST_CODE = 200
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -334,6 +346,7 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
 
                         }else{
 
+                            takePicture()
                             mCorrectAnswers++
                         }
                     question.correctAnswer?.let { answerView(it, R.drawable.juego2_correct_option_border_bg) }
@@ -361,6 +374,71 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         }
 
     }
+
+    //Foto cuando acierta la respuesta
+
+    fun takePicture(){
+
+
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(intent, REQUEST_CODE)
+         println ("Hola")
+        if (intent.resolveActivity(requireContext().packageManager)!=null){
+
+            var photoFile:File? = null
+
+            try {
+                //Si no hay foto, creamos
+                photoFile=createImageFile()
+            }catch (e: IOException){
+                if (photoPath!= null){
+
+                    val photoUri= photoFile?.let {
+                        FileProvider.getUriForFile(
+                            requireContext(),
+                            "com.example.android.didaktikapp",
+                            it )
+                    }
+
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
+                    startActivityForResult(intent, REQUEST_CODE)
+                }
+            }
+
+        }
+
+    }
+
+    fun createImageFile (): File?{
+
+    val fileName="MyPicture"
+        val storageDir= requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+
+    val image= File.createTempFile(
+        //Nombre de la foto
+        fileName,
+        //Tipo de foto
+        "jpg",
+        //Su directorio
+        storageDir )
+
+        //Su ruta
+        photoPath= image.absolutePath
+        return image
+    }
+
+    override fun onActivityResult(requestCode:Int, resultCode:Int, data:Intent?) {
+
+        if (resultCode==REQUEST_CODE && resultCode== Activity.RESULT_OK){
+         //Metemos la foto nueva en nuestro default image
+           imgv1_2defaultimage.rotation=90f
+           imgv1_2defaultimage.setImageURI(Uri.parse(photoPath))
+       }
+
+    }
+
+
+
 
     //Cambiamos de color de fondo a la opcion en concreto
 

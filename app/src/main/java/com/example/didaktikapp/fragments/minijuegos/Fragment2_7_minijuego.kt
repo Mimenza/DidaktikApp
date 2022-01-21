@@ -51,7 +51,7 @@ class Fragment2_7_minijuego : Fragment() {
 
         val button: Button = view.findViewById(R.id.btnf2_7siguiente)
         val ajustes: ImageButton = view.findViewById(R.id.btnf2_7ajustes)
-        val btnterminar: Button? = view?.findViewById(R.id.btn7_terminar)
+        val btnterminar: Button? = view?.findViewById(R.id.btn1_2_terminar)
         val btnRetry: Button? = view?.findViewById(R.id.btn7_1_saiatuberriro)
         val txtResult: TextView? = view?.findViewById(R.id.txtv7_1_result)
         val imgTrofeo: ImageView? = view?.findViewById(R.id.txtv7_1_imagen1)

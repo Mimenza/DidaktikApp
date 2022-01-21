@@ -2,7 +2,6 @@ package com.example.didaktikapp.fragments.juegos
 
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.AnimationDrawable
@@ -18,56 +17,33 @@ import android.view.animation.TranslateAnimation
 import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.example.didaktikapp.Model.Constantsjuego2
 import com.example.didaktikapp.Model.Preguntasjuego2
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity6_Site
-import kotlinx.android.synthetic.main.fragment1_1_juego.*
 import kotlinx.android.synthetic.main.fragment1_2_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.util.ArrayList
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Fragment1_juego.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Fragment1_2_juego : Fragment(), View.OnClickListener {
     private val thisJuegoId = 2
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
     private lateinit var preguntasjuego2: Preguntasjuego2
-    private var mCurrentPosition:Int=1
-    private var mQuestionList: ArrayList<Preguntasjuego2>?= null
-    private var mSelectedOptionPosition: Int= 0
-    private lateinit var progressBar : ProgressBar
-    private lateinit var txtProgressBar : TextView
-    private lateinit var question1 : TextView
-    private lateinit var question1_answer1 : TextView
-    private lateinit var question1_answer2 : TextView
-    private lateinit var question1_answer3 : TextView
+    private var mSelectedOptionPosition: Int = 0
+    private lateinit var progressBar: ProgressBar
+    private lateinit var txtProgressBar: TextView
+    private lateinit var question1: TextView
+    private lateinit var question1_answer1: TextView
+    private lateinit var question1_answer2: TextView
+    private lateinit var question1_answer3: TextView
     private lateinit var question1_answer4: TextView
-    private lateinit var btnSiguiente : Button
-    private  var mCorrectAnswers: Int = 0
-    private lateinit var vistaanimada:TranslateAnimation
+    private lateinit var btnSiguiente: Button
+    private var mCurrentPosition: Int = 1
+    private var mQuestionList: ArrayList<Preguntasjuego2>? = null
+    private lateinit var vistaanimada: TranslateAnimation
+    private var mCorrectAnswers: Int = 0
     private var audio: MediaPlayer? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-
-    }
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -77,29 +53,20 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment1_2_juego, container, false)
         //Inicializar vistas
-        val button:Button = view.findViewById(R.id.btnf1_2siguiente)
-        val ajustes:ImageButton = view.findViewById(R.id.btnf1_2_ajustes)
+        val ajustes: ImageButton = view.findViewById(R.id.btnf1_2_ajustes)
 
-            progressBar = view.findViewById(R.id.custom_progressBar)
-            txtProgressBar =view.findViewById(R.id.txtv1_2_progreessbar)
-            question1= view.findViewById(R.id.txtv1_2_pregunta1)
-            question1_answer1= view.findViewById(R.id.txtv1_2_respuesta1)
-            question1_answer2= view.findViewById(R.id.txtv1_2_respuesta2)
-            question1_answer3= view.findViewById(R.id.txtv1_2_respuesta3)
-            question1_answer4= view.findViewById(R.id.txtv1_2_respuesta4)
-            btnSiguiente= view.findViewById(R.id.btnf1_2siguiente)
+        progressBar = view.findViewById(R.id.custom_progressBar)
+        txtProgressBar = view.findViewById(R.id.txtv1_2_progreessbar)
+        question1 = view.findViewById(R.id.txtv1_2_pregunta1)
+        question1_answer1 = view.findViewById(R.id.txtv1_2_respuesta1)
+        question1_answer2 = view.findViewById(R.id.txtv1_2_respuesta2)
+        question1_answer3 = view.findViewById(R.id.txtv1_2_respuesta3)
+        question1_answer4 = view.findViewById(R.id.txtv1_2_respuesta4)
+        btnSiguiente = view.findViewById(R.id.btnf1_2siguiente)
 
-
-        button.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment1_2_juego_to_fragment2_2_minijuego)
+        ajustes.setOnClickListener() {
+            (activity as Activity6_Site?)?.menuCheck()
         }
-        ajustes.setOnClickListener(){
-
-                (activity as Activity6_Site?)?.menuCheck()
-
-
-        }
-
 
         //Typewriter juego 2 tutorial
         Handler().postDelayed({
@@ -116,10 +83,10 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
                 audio?.setOnCompletionListener {
 
                     //Handler().postDelayed({
-                        //if (getView() != null) {
-                            //llama a la funcion para la animacion de salida cuando el audio se termina
-                            exitAnimationfun(view)
-                        //}
+                    //if (getView() != null) {
+                    //llama a la funcion para la animacion de salida cuando el audio se termina
+                    exitAnimationfun(view)
+                    //}
                     //}, 1000)
                 }
             }
@@ -127,11 +94,8 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         //animacion para la descripcion
         starAnimationfun(view)
 
-
-
-         //Creamos la pregunta y las respuestas segun la posicion
+        //Creamos la pregunta y las respuestas segun la posicion
         setQuestion()
-
 
         //Cuando hacer click en la respuesta de la pregunta, lanzamos mensaje de error o de acierto
         question1_answer1!!.setOnClickListener(this)
@@ -140,10 +104,8 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         question1_answer4!!.setOnClickListener(this)
         btnSiguiente!!.setOnClickListener(this)
 
-
         return view
     }
-
 
     private fun typewriter(view: View) {
         val typeWriterView = view.findViewById(R.id.txtv1_2tutorialjuego2) as TypeWriterView
@@ -151,6 +113,7 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         typeWriterView.animateText(resources.getString(R.string.ezetzigarrijolasa))
         typeWriterView.setDelay(70)
     }
+
     private fun starAnimationfun(view: View) {
         // animacion fondo gris
         val txt_animacion = view.findViewById(R.id.txtv1_2fondogris) as TextView
@@ -160,12 +123,14 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         //desabilitar botones en el tutorial
         val buttonAjustes = view.findViewById(R.id.btnf1_2_ajustes) as ImageButton
         buttonAjustes.setEnabled(false)
+
         val buttonSiguiente = view.findViewById(R.id.btnf1_2siguiente) as Button
         buttonSiguiente.setEnabled(false)
-        question1_answer1.isEnabled=false
-        question1_answer2.isEnabled=false
-        question1_answer3.isEnabled=false
-        question1_answer4.isEnabled=false
+
+        question1_answer1.isEnabled = false
+        question1_answer2.isEnabled = false
+        question1_answer3.isEnabled = false
+        question1_answer4.isEnabled = false
 
         //animacion entrada upelio
         vistaanimada = TranslateAnimation(-1000f, 0f, 0f, 0f)
@@ -180,14 +145,13 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
                 talkAnimationfun(view)
             }
         }, 2000)
-
     }
+
     private fun talkAnimationfun(view: View) {
         val upelio = view.findViewById(R.id.imgv1_2_upelio2) as ImageView
         upelio.setBackgroundResource(R.drawable.animacion_manzana)
         val ani = upelio.getBackground() as AnimationDrawable
         ani.start()
-
     }
 
     private fun exitAnimationfun(view: View) {
@@ -217,199 +181,175 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
                 buttonAjustes.setEnabled(true)
                 val buttonSiguiente = view.findViewById(R.id.btnf1_2siguiente) as Button
                 buttonSiguiente.setEnabled(true)
-                question1_answer1.isEnabled=true
-                question1_answer2.isEnabled=true
-                question1_answer3.isEnabled=true
-                question1_answer4.isEnabled=true
+                question1_answer1.isEnabled = true
+                question1_answer2.isEnabled = true
+                question1_answer3.isEnabled = true
+                question1_answer4.isEnabled = true
             }
         }, 1000)
     }
 
-    private fun setQuestion(){
+    private fun setQuestion() {
 
-        preguntasjuego2= Preguntasjuego2()
+        preguntasjuego2 = Preguntasjuego2()
 
         //Recojemos las preguntas del Constants juego2
-        mQuestionList= Constantsjuego2.getQuestions()
+        mQuestionList = Constantsjuego2.getQuestions()
 
         //Posición de la pregunta en el progress bar (0)
-        val question: Preguntasjuego2 = mQuestionList!! [mCurrentPosition-1]
+        val question: Preguntasjuego2 = mQuestionList!![mCurrentPosition - 1]
         defaultOptionsView()
 
-        if (mCurrentPosition==mQuestionList!!.size){
-
-            btnSiguiente.text="Amaitu"
-        }else{
-            btnSiguiente.text="Bidali"
+        if (mCurrentPosition == mQuestionList!!.size) {
+            btnSiguiente.text = "Amaitu"
+        } else {
+            btnSiguiente.text = "Bidali"
         }
-        progressBar!!.progress= mCurrentPosition
-        txtProgressBar!!.text= "$mCurrentPosition" + "/" + progressBar.max
-        question1!!.text= question!!.question
-        question1_answer1!!.text= question!!.optionOne
-        question1_answer2!!.text= question!!.optionTwo
-        question1_answer3!!.text= question!!.optionThree
-        question1_answer4!!.text= question!!.optionFour
-
-
-
+        progressBar!!.progress = mCurrentPosition
+        txtProgressBar!!.text = "$mCurrentPosition" + "/" + progressBar.max
+        question1!!.text = question!!.question
+        question1_answer1!!.text = question!!.optionOne
+        question1_answer2!!.text = question!!.optionTwo
+        question1_answer3!!.text = question!!.optionThree
+        question1_answer4!!.text = question!!.optionFour
     }
 
     //COLOR Y FONDO POR DEFECTO DE LAS RESPUESTAS
-    private fun defaultOptionsView(){
+    private fun defaultOptionsView() {
 
-         val options= ArrayList<TextView>()
+        val options = ArrayList<TextView>()
         options.add(0, question1_answer1)
         options.add(1, question1_answer2)
         options.add(2, question1_answer3)
         options.add(3, question1_answer4)
 
-        for (option in options){
-
+        for (option in options) {
             option.setTextColor(Color.parseColor("#7A8089"))
-            option.typeface= Typeface.DEFAULT
-            option.background= ContextCompat.getDrawable(
-                requireContext(), R.drawable.juego2_default_option_border_bg
-            )
+            option.typeface = Typeface.DEFAULT
+            option.background = ContextCompat.getDrawable(requireContext(), R.drawable.juego2_default_option_border_bg)
         }
     }
 
-    override fun onClick(v:View?) {
-
-     //Según el botón que hayamos clickado, pasamos la id a la función selectedOptionView
-        when(v?.id){
-
-            R.id.txtv1_2_respuesta1->{
-                  selectedOptionView(txtv1_2_respuesta1, 1)
+    override fun onClick(v: View?) {
+        //Según el botón que hayamos clickado, pasamos la id a la función selectedOptionView
+        when (v?.id) {
+            R.id.txtv1_2_respuesta1 -> {
+                selectedOptionView(txtv1_2_respuesta1, 1)
             }
-            R.id.txtv1_2_respuesta2->{
+
+            R.id.txtv1_2_respuesta2 -> {
                 selectedOptionView(txtv1_2_respuesta2, 2)
             }
-            R.id.txtv1_2_respuesta3->{
+
+            R.id.txtv1_2_respuesta3 -> {
                 selectedOptionView(txtv1_2_respuesta3, 3)
             }
-            R.id.txtv1_2_respuesta4->{
+
+            R.id.txtv1_2_respuesta4 -> {
                 selectedOptionView(txtv1_2_respuesta4, 4)
             }
-            R.id.btnf1_2siguiente->{
-            //El usuario no ha elegido la opcion, cuando elija nos movemos de posicion
-                if (mSelectedOptionPosition==0){
+
+            R.id.btnf1_2siguiente -> {
+                //El usuario no ha elegido la opcion, cuando elija nos movemos de posicion
+                if (mSelectedOptionPosition == 0) {
                     mCurrentPosition++
                     //Habilitamos las respuestas al clickar la respuesta
-                    question1_answer1.isEnabled=true
-                    question1_answer2.isEnabled=true
-                    question1_answer3.isEnabled=true
-                    question1_answer4.isEnabled=true
+                    question1_answer1.isEnabled = true
+                    question1_answer2.isEnabled = true
+                    question1_answer3.isEnabled = true
+                    question1_answer4.isEnabled = true
                     //Si mi posicion es menor o igual que el tamaño de la lista, reseteamos la pregunta
-                    when{
-                        mCurrentPosition<=mQuestionList!!.size->{
-
-                             setQuestion()
-
-                        }else->{
-
-                         /*Nos redirecciona a la activity de resultados,
-                         recojemos las respuestas correctas y el total de preguntas
-                        */
-                            activity?.let{
-                                /*val intent = Intent (it, Activity7_Juego2_Results::class.java)
-                                intent.putExtra(Constantsjuego2.CORRECT_ANSWERS, mCorrectAnswers)
-                                intent.putExtra(Constantsjuego2.TOTAL_QUESTIONS, mQuestionList!!.size)
-                                it.startActivity(intent)*/
-                            }
+                    when {
+                        mCurrentPosition <= mQuestionList!!.size -> {
+                            setQuestion()
                         }
-
+                        else -> {
+                            val sharedPreferences =requireContext().getSharedPreferences("scoreGame2", 0)
+                            var editor = sharedPreferences.edit()
+                            editor.putString("totalQuestions", mQuestionList!!.size.toString()).apply()
+                            editor.putString("correctAnswers", mCorrectAnswers.toString()).apply()
+                            /*Nos redirecciona al fragment de resultados*/
+                            view?.findNavController()?.navigate(R.id.action_fragment1_2_juego_to_fragment1_2_juego_results)
+                        }
                     }
-                }else{
-               /*Si ya ha clickado en la respuesta, cojemos la pregunta de la posicion en la que esta.
-                 Si la respuesta correcta no es igual a la respuesta que ha elegido el usuario, sacamos mensaje de error.
-                   sino, añadimos la respuesta correcta a la variable CorrectAnswers para despues mostrar los aciertos
-                   al acabar el quiz. La respuesta correcta va fuera del if, ya que siempre saldrá independientemente de si
-                   el usuario ha acertado o ha fallado*/
-                    val question= mQuestionList?.get(mCurrentPosition-1)
-                        if (question!!.correctAnswer!=mSelectedOptionPosition){
+                } else {
+                    /*Si ya ha clickado en la respuesta, cojemos la pregunta de la posicion en la que esta.
+                      Si la respuesta correcta no es igual a la respuesta que ha elegido el usuario, sacamos mensaje de error.
+                        sino, añadimos la respuesta correcta a la variable CorrectAnswers para despues mostrar los aciertos
+                        al acabar el quiz. La respuesta correcta va fuera del if, ya que siempre saldrá independientemente de si
+                        el usuario ha acertado o ha fallado*/
+                    val question = mQuestionList?.get(mCurrentPosition - 1)
+                    if (question!!.correctAnswer != mSelectedOptionPosition) {
 
-                            answerView(mSelectedOptionPosition, R.drawable.juego2_error_option_border_bg)
+                        answerView(
+                            mSelectedOptionPosition,
+                            R.drawable.juego2_error_option_border_bg
+                        )
 
-                        }else{
+                    } else {
+                        mCorrectAnswers++
+                    }
+                    question.correctAnswer?.let {
+                        answerView(
+                            it,
+                            R.drawable.juego2_correct_option_border_bg
+                        )
+                    }
 
-                            mCorrectAnswers++
-                        }
-                    question.correctAnswer?.let { answerView(it, R.drawable.juego2_correct_option_border_bg) }
+                    if (mCurrentPosition == mQuestionList!!.size) {
+                        btnSiguiente.text = "Amaitu jokoa"
+                    } else {
+                        btnSiguiente.text = "Joan hurrengo galderara"
+                    }
 
-                  if (mCurrentPosition==mQuestionList!!.size){
-
-                       btnSiguiente.text="Amaitu jokoa"
-                  }else{
-
-                      btnSiguiente.text="Joan hurrengo galderara"
-                  }
-
-                    mSelectedOptionPosition=0
+                    mSelectedOptionPosition = 0
                     //Deshabilitamos las respuestas al clickar la respuesta
-                    question1_answer1.isEnabled=false
-                    question1_answer2.isEnabled=false
-                    question1_answer3.isEnabled=false
-                    question1_answer4.isEnabled=false
-
-
+                    question1_answer1.isEnabled = false
+                    question1_answer2.isEnabled = false
+                    question1_answer3.isEnabled = false
+                    question1_answer4.isEnabled = false
                 }
-
             }
-
         }
-
     }
 
     //Cambiamos de color de fondo a la opcion en concreto
 
-    fun answerView(answer: Int, drawableView:Int){
+    fun answerView(answer: Int, drawableView: Int) {
         //Cambiamos el fondo a cada respuesta
-        when(answer){
+        when (answer) {
 
-            1->{
-
-                question1_answer1.background=ContextCompat.getDrawable(
-                    requireContext(), drawableView
-                )
+            1 -> {
+                question1_answer1.background =
+                    ContextCompat.getDrawable(requireContext(), drawableView)
             }
 
-            2->{
-
-                question1_answer2.background=ContextCompat.getDrawable(
-                    requireContext(), drawableView
-                )
-            }
-            3->{
-
-                question1_answer3.background=ContextCompat.getDrawable(
-                    requireContext(), drawableView
-                )
+            2 -> {
+                question1_answer2.background =
+                    ContextCompat.getDrawable(requireContext(), drawableView)
             }
 
-            4->{
-
-                question1_answer4.background=ContextCompat.getDrawable(
-                    requireContext(), drawableView
-                )
+            3 -> {
+                question1_answer3.background =
+                    ContextCompat.getDrawable(requireContext(), drawableView)
             }
 
-
-
+            4 -> {
+                question1_answer4.background =
+                    ContextCompat.getDrawable(requireContext(), drawableView)
+            }
         }
     }
 
-
     //COLOR Y FONDO RESPUESTA SELECCIONADA
-    private  fun selectedOptionView(tv:TextView, selectedOptiomNum:Int){
-
+    private fun selectedOptionView(tv: TextView, selectedOptiomNum: Int) {
         defaultOptionsView()
-        mSelectedOptionPosition= selectedOptiomNum
+        mSelectedOptionPosition = selectedOptiomNum
 
         tv.setTextColor(Color.parseColor("#363A43"))
         tv.setTypeface(tv.typeface, Typeface.BOLD)
-        tv.background= ContextCompat.getDrawable(
-            requireContext(), R.drawable.juego2_selected_option_border_bg)
-
+        tv.background =
+            ContextCompat.getDrawable(requireContext(), R.drawable.juego2_selected_option_border_bg)
     }
 
     //AUDIO EVENTS FIX ON DESTROYING
@@ -427,26 +367,4 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         super.onResume()
         audio?.start()
     }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Fragment1_juego.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Fragment1_2_juego().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
-
-
 }

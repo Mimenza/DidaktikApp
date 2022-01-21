@@ -6,30 +6,44 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import androidx.core.view.isVisible
-import com.example.didaktikapp.Model.Constantsjuego7
+import androidx.navigation.findNavController
 import com.example.didaktikapp.R
-import kotlinx.android.synthetic.main.fragment1_7_juego_results.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class Fragment1_7_juego_results : Fragment() {
 
     private lateinit var audio: MediaPlayer
+    private lateinit var scoreUser: TextView
+    private lateinit var btnTerminar: Button
+    private lateinit var btnRetry: Button
+    private lateinit var btnRetry2: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment1_7_juego_results, container, false)
+        val view = inflater.inflate(R.layout.fragment1_7_juego_results, container, false)
 
-        val totalQuestions = activity?.intent?.getIntExtra(Constantsjuego7.TOTAL_QUESTIONS, 0)
-        val correctAnswers = activity?.intent?.getIntExtra(Constantsjuego7.CORRECT_ANSWERS, 0)
+        scoreUser = view.findViewById(R.id.txtv7_1_scoreuser)
+        btnTerminar = view.findViewById(R.id.btn7_1_terminar)
+        btnRetry = view.findViewById(R.id.btn7_1_saiatuberriro)
+        btnRetry2 = view.findViewById(R.id.btn7_1_saiatuberriro2)
 
 
+        //Recojemos los datos del intent en el fragment del juego 2
+        val sharedPreferences = requireContext().getSharedPreferences("scoreGame7", 0)
+        val correctAnswers = sharedPreferences?.getString("correctAnswers", null)?.toInt()
+        val totalQuestions = sharedPreferences?.getString("totalQuestions", null)?.toInt()
 
-        txtv7_1_scoreuser.text = "Zure emaitza: $correctAnswers/$totalQuestions"
+        println(correctAnswers)
+        println(totalQuestions)
+
+        scoreUser.text = "Zure emaitza: $correctAnswers/$totalQuestions"
 
 
         //Boton finish que nos redirecciona al mapa
@@ -43,13 +57,18 @@ class Fragment1_7_juego_results : Fragment() {
                         audio.start()
                     }
                 }
-                btn7_1_terminar.setOnClickListener {
-                    audio.stop()
-                }
-                btn7_1_saiatuberriro.setOnClickListener {
 
+                btnTerminar.setOnClickListener {
+                    audio.stop()
+                    view?.findNavController()?.navigate(R.id.action_fragment1_7_juego_results_to_fragment2_7_minijuego)
                 }
-                btn7_1_saiatuberriro2.isVisible = false
+
+                btnRetry.setOnClickListener {
+                    audio.stop()
+                    view?.findNavController()?.navigate(R.id.action_fragment1_7_juego_results_to_fragment1_7_juego)
+                }
+
+                btnRetry2.isVisible = false
 
             } else {
                 //Audio error
@@ -61,11 +80,13 @@ class Fragment1_7_juego_results : Fragment() {
                 }
             }
 
-            btn7_1_terminar.isVisible = false
-            btn7_1_saiatuberriro.isVisible = false
-            btn7_1_saiatuberriro2.setOnClickListener {
-
+            btnTerminar.isVisible = false
+            btnRetry.isVisible = false
+            btnRetry2.setOnClickListener {
+                audio.stop()
+                view?.findNavController()?.navigate(R.id.action_fragment1_7_juego_results_to_fragment1_7_juego)
             }
         }
+        return view
     }
 }

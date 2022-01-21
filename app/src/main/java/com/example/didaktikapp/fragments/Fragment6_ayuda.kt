@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
+import com.example.didaktikapp.activities.Activity6_Site
 import kotlinx.android.synthetic.main.fragment6_ayuda.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -45,8 +46,8 @@ class Fragment6_ayuda : Fragment() {
         //Recojemos el shared prefs
 
         btnBackToGame.setOnClickListener{
-            Navigation.findNavController(view)
-                .navigate(R.id.action_fragment6_ayuda_to_fragment4_menu)
+            (activity as Activity6_Site?)?.menuCheck()
+            (activity as Activity6_Site?)?.cerrarAyuda()
         }
 
         val sharedPreferences = this.activity?.getSharedPreferences("site", 0)

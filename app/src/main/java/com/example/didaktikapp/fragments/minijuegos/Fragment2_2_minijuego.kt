@@ -3,8 +3,6 @@ package com.example.didaktikapp.fragments.minijuegos
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.os.CountDownTimer
-import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +15,6 @@ import androidx.navigation.Navigation
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity5_Mapa
 import com.example.didaktikapp.activities.Activity6_Site
-import kotlinx.android.synthetic.main.activity7_juego2_results.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

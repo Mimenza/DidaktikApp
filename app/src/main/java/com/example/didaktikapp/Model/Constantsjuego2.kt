@@ -42,7 +42,7 @@ object Constantsjuego2 {
         3)
 
     val que4= Preguntasjuego2(4,
-      "Tipi-tapa tipi-tapa banoa gorantza, tipi-tapa tipi-tapa banoa beherantza, tipi-tapa tipi-tapa guztiak batera igo eta jaistean datza.",
+      "Tipi-tapa banoa gorantza, tipi-tapa banoa beherantza, tipi-tapa guztiak batera igo eta jaistean datza.",
        "Eskailerak",
        "Leihoak",
         "Zuhaitzak",

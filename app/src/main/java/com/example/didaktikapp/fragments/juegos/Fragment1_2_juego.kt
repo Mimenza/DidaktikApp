@@ -2,15 +2,20 @@ package com.example.didaktikapp.fragments.juegos
 
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
@@ -19,6 +24,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import com.example.didaktikapp.Model.Constantsjuego2
+import com.example.didaktikapp.Model.MyPreferences
 import com.example.didaktikapp.Model.Preguntasjuego2
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity6_Site
@@ -38,12 +44,18 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
     private lateinit var question1_answer2: TextView
     private lateinit var question1_answer3: TextView
     private lateinit var question1_answer4: TextView
+    private lateinit var defaultImage: ImageView
+    private lateinit var upelio1: ImageView
+    private lateinit var upelio2: ImageView
+    private lateinit var fondoTutorial: TextView
+    private lateinit var txtTutorial: TextView
     private lateinit var btnSiguiente: Button
     private var mCurrentPosition: Int = 1
     private var mQuestionList: ArrayList<Preguntasjuego2>? = null
     private lateinit var vistaanimada: TranslateAnimation
     private var mCorrectAnswers: Int = 0
     private var audio: MediaPlayer? = null
+    private var REQUEST_CODE= 200
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -63,6 +75,13 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         question1_answer3 = view.findViewById(R.id.txtv1_2_respuesta3)
         question1_answer4 = view.findViewById(R.id.txtv1_2_respuesta4)
         btnSiguiente = view.findViewById(R.id.btnf1_2siguiente)
+        defaultImage = view.findViewById(R.id.imgv1_2defaultimage)
+        upelio1= view.findViewById(R.id.imgv1_2_upelio)
+        upelio2= view.findViewById(R.id.imgv1_2_upelio2)
+        txtTutorial= view.findViewById(R.id.txtv1_2tutorialjuego2)
+        fondoTutorial= view.findViewById(R.id.txtv1_2fondogris)
+
+
 
         ajustes.setOnClickListener() {
             (activity as Activity6_Site?)?.menuCheck()
@@ -176,15 +195,16 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
                 txtv1_2tutorialjuego2.startAnimation(aniFade)
                 txtv1_2tutorialjuego2.isVisible = false
                 txt_animacion.isVisible = false
-                //Habilitar botones cuando desaparece la
+                //Habilitar botones cuando desaparece la animacion
                 val buttonAjustes = view.findViewById(R.id.btnf1_2_ajustes) as ImageButton
-                buttonAjustes.setEnabled(true)
+                buttonAjustes.isEnabled=true
                 val buttonSiguiente = view.findViewById(R.id.btnf1_2siguiente) as Button
-                buttonSiguiente.setEnabled(true)
+                buttonSiguiente.isEnabled=true
                 question1_answer1.isEnabled = true
                 question1_answer2.isEnabled = true
                 question1_answer3.isEnabled = true
                 question1_answer4.isEnabled = true
+
             }
         }, 1000)
     }
@@ -212,6 +232,7 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         question1_answer2!!.text = question!!.optionTwo
         question1_answer3!!.text = question!!.optionThree
         question1_answer4!!.text = question!!.optionFour
+        defaultImage.setImageResource(R.drawable.img_interrogacion)
     }
 
     //COLOR Y FONDO POR DEFECTO DE LAS RESPUESTAS
@@ -283,10 +304,13 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
 
                         answerView(
                             mSelectedOptionPosition,
-                            R.drawable.juego2_error_option_border_bg
-                        )
+                            R.drawable.juego2_error_option_border_bg  )
 
                     } else {
+                         upelio1.isVisible=false
+                        upelio2.isVisible=false
+                        takePicture()
+
                         mCorrectAnswers++
                     }
                     question.correctAnswer?.let {
@@ -295,7 +319,6 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
                             R.drawable.juego2_correct_option_border_bg
                         )
                     }
-
                     if (mCurrentPosition == mQuestionList!!.size) {
                         btnSiguiente.text = "Amaitu jokoa"
                     } else {
@@ -312,6 +335,29 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
             }
         }
     }
+     //Función para sacar foto
+    fun takePicture() {
+
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(cameraIntent, REQUEST_CODE)
+  }
+
+    //Función para guardar foto
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+      super.onActivityResult(requestCode, resultCode, data)
+      if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE && data != null){
+
+
+
+          imgv1_2defaultimage.setImageBitmap(data.extras?.get("data") as Bitmap)
+          audio?.stop()
+          return
+
+
+      }
+  }
+
+
 
     //Cambiamos de color de fondo a la opcion en concreto
 

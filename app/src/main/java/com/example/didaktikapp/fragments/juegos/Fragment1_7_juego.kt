@@ -2,12 +2,16 @@ package com.example.didaktikapp.fragments.juegos
 
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
+import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -23,6 +27,7 @@ import com.example.didaktikapp.Model.Constantsjuego7
 import com.example.didaktikapp.Model.Preguntasjuego7
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity6_Site
+import kotlinx.android.synthetic.main.fragment1_2_juego.*
 import kotlinx.android.synthetic.main.fragment1_7_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -38,12 +43,13 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
     private lateinit var question1_answer3 : TextView
     private lateinit var btnSiguiente : Button
     private lateinit var vistaanimada:TranslateAnimation
-
+    private lateinit var defaultImage: ImageView
     private var mCurrentPosition:Int=1
     private var mQuestionList: ArrayList<Preguntasjuego7>?= null
     private var mSelectedOptionPosition: Int= 0
     private var mCorrectAnswers: Int = 0
     private var audio: MediaPlayer? = null
+   private  var REQUEST_CODE =200
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -62,7 +68,7 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         question1_answer1= view.findViewById(R.id.txtv1_7_respuesta1)
         question1_answer2= view.findViewById(R.id.txtv1_7_respuesta2)
         question1_answer3= view.findViewById(R.id.txtv1_7_respuesta3)
-
+        defaultImage = view.findViewById(R.id.imgv1_7defaultimage)
         btnSiguiente= view.findViewById(R.id.btnf1_7siguiente)
 
 
@@ -183,9 +189,9 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
                 txtv1_7tutorialjuego7.isVisible = false
                 txt_animacion.isVisible = false
                 val buttonAjustes = view.findViewById(R.id.btnf1_7_ajustes) as ImageButton
-                buttonAjustes.setEnabled(true)
+                buttonAjustes.isEnabled=true
                 val buttonSiguiente = view.findViewById(R.id.btnf1_7siguiente) as Button
-                buttonSiguiente.setEnabled(true)
+                buttonSiguiente.isEnabled=true
                 question1_answer1.isEnabled=true
                 question1_answer2.isEnabled=true
                 question1_answer3.isEnabled=true
@@ -215,6 +221,7 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         question1_answer1!!.text= question!!.optionOne
         question1_answer2!!.text= question!!.optionTwo
         question1_answer3!!.text= question!!.optionThree
+        defaultImage.setImageResource(R.drawable.img_interrogacion)
     }
 
     //COLOR Y FONDO POR DEFECTO DE LAS RESPUESTAS
@@ -287,7 +294,7 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
                         answerView(mSelectedOptionPosition, R.drawable.juego2_error_option_border_bg)
 
                     }else{
-
+                        takePicture()
                         mCorrectAnswers++
                     }
                     question.correctAnswer?.let { answerView(it, R.drawable.juego2_correct_option_border_bg) }
@@ -309,6 +316,26 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
             }
         }
     }
+
+    //Función para sacar foto
+    fun takePicture() {
+
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        startActivityForResult(cameraIntent, REQUEST_CODE)
+    }
+
+    //Función para guardar foto
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE && data != null){
+            imgv1_7defaultimage.setImageBitmap(data.extras?.get("data") as Bitmap)
+            audio?.stop()
+            return
+
+
+        }
+    }
+
 
     //Cambiamos de color de fondo a la opcion en concreto
 

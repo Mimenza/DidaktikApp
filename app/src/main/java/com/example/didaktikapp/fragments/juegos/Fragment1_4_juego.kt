@@ -6,7 +6,6 @@ import android.view.*
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.CustomLine
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity6_Site
@@ -205,8 +204,39 @@ class Fragment1_4_juego : Fragment() {
         escribirPalabrasModoSimple()
         actualizarPalabrasRestantes()
         rotarMatriz()
+        //voltearMatriz()
         // La pintamos sobre la sopa
         pintarSopa()
+    }
+
+    private fun rotarMatriz() {
+        var retArray = arrayListOf<ArrayList<String>>()
+        retArray.addAll(letterList)
+        Log.d("this is my array", "arr: " + retArray);
+
+        //retArray = letterList.toArray()
+
+        //var capas: Int = nFilas / 2
+        var capas: Int = retArray.size
+        println("******** Matriz Size: " + capas)
+        for (i in 0 until retArray.size) {
+            for (k in 0 until retArray.size) {
+                //letterList[i][k] = retArray[capas-k-1][i]
+                letterList[i][k] = letterList[capas - 1 - k][i]
+                letterList[capas - 1 - k][i] = letterList[capas - 1 - i][capas - 1 - k]
+                letterList[capas - 1 - i][capas - 1 - k] = letterList[k][capas - 1 - i]
+                letterList[k][capas - 1 - i] = retArray[i][k]
+            }
+        }
+
+        /*
+        for ((i, fila) in retArray!!.withIndex()) {
+            for ((k, col) in retArray!!.withIndex()) {
+                letterList[i][k] = retArray[capas-k-1][i]
+            }
+        }
+
+         */
     }
 
     private var respuestasCorrectas = arrayListOf<Int>(1,3,5,8,9,12,13,16,17) // Radio button index Respuestas correctas
@@ -686,7 +716,7 @@ class Fragment1_4_juego : Fragment() {
         storedLines.clear()
     }
 
-    private fun rotarMatriz() {
+    private fun voltearMatriz() {
         val matrizOption = (1 until 4).random()
         when (matrizOption) {
             2 -> {

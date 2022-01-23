@@ -286,6 +286,8 @@ class Fragment1_4_juego : Fragment() {
     }
 
     private fun escribirPalabrasModoSimple() {
+        //TODO: This might could be moved to an constant class
+
         // #Palabra SAGARDANTZA
         letterList[0][1] = "S"
         letterList[0][2] = "A"
@@ -433,7 +435,12 @@ class Fragment1_4_juego : Fragment() {
             val paramsLinear: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
             )
-            paramsLinear.weight = 13.toFloat()
+            paramsLinear.weight = nCols.toFloat()
+            var colorlinear: Int = Color.argb(100, 80,80,80)
+            if (i%2 == 0) {
+                colorlinear = Color.argb(100, 220,40,40)
+            }
+            //nuevaFila.setBackgroundColor(colorlinear)
             nuevaFila.setLayoutParams(paramsLinear)
             nuevaFila.setOrientation(LinearLayout.HORIZONTAL)
             matrizMain.addView(nuevaFila)
@@ -450,19 +457,22 @@ class Fragment1_4_juego : Fragment() {
                 //filaLetterList.add("0")
                 letraElement.textSize = 25.toFloat()
                 letraElement.width = nuevaFila.width/nCols
+                letraElement.gravity = Gravity.CENTER
                 val params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT
+                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
                 )
                 params.weight = 1.toFloat()
-                params.setMargins(10,0,10,20)
+                params.setMargins(10,10,10,10)
                 params.gravity = Gravity.CENTER
                 letraElement.setLayoutParams(params)
                 nuevaFila.addView(letraElement)
                 letraElement.setOnTouchListener(listener)
                 val rnd = Random()
-                //val color: Int = Color.argb(100, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
-                val color: Int = Color.argb(100, 80,80,80)
-                letraElement.setBackgroundColor(color)
+                val color: Int = Color.argb(100, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
+                //val color: Int = Color.argb(100, 80,80,80)
+                //letraElement.setBackgroundColor(color)
+                letraElement.setBackgroundResource(R.drawable.roundedcorners)
+                letraElement.setClipToOutline(true)
                 letraElement.gravity = Gravity.CENTER
                 //println("*********************** ANCHO/ALTO: ${letraElement.width} / ${letraElement.getMeasuredHeight()}")
             }

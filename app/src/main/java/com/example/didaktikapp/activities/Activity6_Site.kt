@@ -1,16 +1,14 @@
 package com.example.didaktikapp.activities
 
-
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import com.example.didaktikapp.R
-import com.example.didaktikapp.fragments.Fragment4_menu2
+import com.example.didaktikapp.fragments.Fragment4_menu
 import com.example.didaktikapp.fragments.Fragment5_ajustes
 import com.example.didaktikapp.fragments.Fragment6_ayuda
 import kotlinx.android.synthetic.main.activity6_site.*
-
 
 class Activity6_Site : AppCompatActivity() {
 
@@ -40,9 +38,7 @@ class Activity6_Site : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("site", 0)
         var editor = sharedPreferences.edit()
         editor.putString("numero", newInt.toString()).apply()
-
     }
-
 
     fun menuCheck(){
 
@@ -99,7 +95,7 @@ class Activity6_Site : AppCompatActivity() {
 
         menuShowing = true
         fragment = "Fragment4"
-        supportFragmentManager.beginTransaction().add(R.id.framelayout6_menu, Fragment4_menu2()!!)
+        supportFragmentManager.beginTransaction().add(R.id.framelayout6_menu, Fragment4_menu()!!)
             .addToBackStack(null).commit()
 
         showMenu()
@@ -145,7 +141,7 @@ class Activity6_Site : AppCompatActivity() {
 
     }
 
-    private fun cerrarAyuda() {
+    fun cerrarAyuda() {
         //escondemos el container del fragment del menu
 
         framelayout6_ayuda.isVisible=false

@@ -12,12 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Didaktikapp" >
-        <activity
-            android:name=".activities.Activity7_1_Juego7_Results"
-            android:exported="true" />
-        <activity
-            android:name=".activities.Activity7_Juego2_Results"
-            android:exported="true" />
+
         <activity
             android:name=".activities.Activity6_Site"
             android:exported="false" />

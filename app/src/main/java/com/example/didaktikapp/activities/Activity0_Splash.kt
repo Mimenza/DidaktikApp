@@ -24,11 +24,7 @@ class Activity0_Splash : AppCompatActivity() {
         binding = Activity0SplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        /*Handler().postDelayed({
-            val aniFade = AnimationUtils.loadAnimation(this, R.anim.zoom)
-            binding.txtv0Upelio.startAnimation(aniFade)
 
-        }, 2000)*/
         //Shared preferences tema oscuro
         val sharedPreferences = getSharedPreferences("com.example.didaktikapp_preferences", 0)
         val numero:Int = sharedPreferences.getInt("io.github.manuelernesto.DARK_STATUS", 0)

@@ -6,7 +6,6 @@ import android.view.*
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.CustomLine
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity6_Site
@@ -53,8 +52,8 @@ class Fragment1_4_juego : Fragment() {
     private var testWidth: Int? = null
     private var testHeight: Int? = null
 
-    private var nFilas: Int = 13
-    private var nCols: Int = 13
+    private var nFilas: Int = 12
+    private var nCols: Int = 12
 
     private lateinit var globalView: View
     private lateinit var matrizMain: LinearLayout
@@ -84,8 +83,12 @@ class Fragment1_4_juego : Fragment() {
         val button: Button = view.findViewById(R.id.btnf1_4_siguiente)
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_4_ajustes)
 
+
+
         button.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_fragment1_4_juego_to_fragment2_4_minijuego)
+            //Navigation.findNavController(view).navigate(R.id.action_fragment1_4_juego_to_fragment2_4_minijuego)
+            prepararPreguntas()
+
         }
         ajustes.setOnClickListener(){
                 (activity as Activity6_Site?)?.menuCheck()
@@ -134,6 +137,7 @@ class Fragment1_4_juego : Fragment() {
                 //val childListFila1: ViewGroup = constraintFila1 as ViewGroup
                 //println("******** CHILD COUNT: " + childListFila1.childCount)
                 prepararJuego()
+                button.visibility = View.VISIBLE
             }
         })
 
@@ -146,6 +150,8 @@ class Fragment1_4_juego : Fragment() {
     private var primeraLetraSeleccionada: TextView? = null
     private var drawingLine: CustomLine? = null
     private var letraPosVector: ArrayList<Int>? = null
+
+    var storedLines = arrayListOf<CustomLine>()
 
     var letterList = arrayListOf<ArrayList<String>>(
 //        arrayListOf("A","B","C","D","E"),
@@ -172,7 +178,7 @@ class Fragment1_4_juego : Fragment() {
     //private var palabras = arrayListOf<String>("TXISTULARIAK","SAGARDANTZA","TXALAPARTA","TRIKITIXA","ERAKUSKETA",
     //    "SALMENTA","DASTATZEA","BILKETA","GARBTIZEA")
 
-    private var palabras = arrayListOf<String>("SAGARDANTZA", "SALMENTA", "TRIKITIXA", "TXALAPARTA", "GARBITZEA", "DASTATZEA")
+    private var palabras = arrayListOf<String>("SAGARDANTZA", "SALMENTA", "TRIKITIXA", "TXALAPARTA", "GARBITZEA", "DASTATZEA", "TXISTULARIAK", "BILKETA", "ERAKUSKETA")
 
     private var palabrasEncontradas = arrayListOf<String>()
 
@@ -196,78 +202,224 @@ class Fragment1_4_juego : Fragment() {
         //seleccionarPalabraAleatoria()
         //convertComodinToRandomLetters()
         escribirPalabrasModoSimple()
+        actualizarPalabrasRestantes()
+        rotarMatriz()
+        //voltearMatriz()
         // La pintamos sobre la sopa
         pintarSopa()
     }
 
+    private fun rotarMatriz() {
+        var retArray = arrayListOf<ArrayList<String>>()
+        retArray.addAll(letterList)
+        Log.d("this is my array", "arr: " + retArray);
+
+        //retArray = letterList.toArray()
+
+        //var capas: Int = nFilas / 2
+        var capas: Int = retArray.size
+        println("******** Matriz Size: " + capas)
+        for (i in 0 until retArray.size) {
+            for (k in 0 until retArray.size) {
+                //letterList[i][k] = retArray[capas-k-1][i]
+                letterList[i][k] = letterList[capas - 1 - k][i]
+                letterList[capas - 1 - k][i] = letterList[capas - 1 - i][capas - 1 - k]
+                letterList[capas - 1 - i][capas - 1 - k] = letterList[k][capas - 1 - i]
+                letterList[k][capas - 1 - i] = retArray[i][k]
+            }
+        }
+
+        /*
+        for ((i, fila) in retArray!!.withIndex()) {
+            for ((k, col) in retArray!!.withIndex()) {
+                letterList[i][k] = retArray[capas-k-1][i]
+            }
+        }
+
+         */
+    }
+
+    private var respuestasCorrectas = arrayListOf<Int>(1,3,5,8,9,12,13,16,17) // Radio button index Respuestas correctas
+
+    private fun prepararPreguntas() {
+        limpiarLineas()
+        val sopaLayout: LinearLayout = globalView.findViewById(R.id.matrizprincipal)
+        val btnComprobarPreguntas: Button = globalView.findViewById(R.id.juego4_comprobarPreguntas)
+        val btnSiguiente: Button = globalView.findViewById(R.id.btnf1_4_siguiente)
+        val scrollViewPreguntas: ScrollView = globalView.findViewById(R.id.juego4_scroll_preguntas)
+        val txtPlabras: TextView = globalView.findViewById(R.id.juego4_sopa_palabras)
+        btnSiguiente.visibility = View.GONE
+        txtPlabras.visibility = View.GONE
+        sopaLayout.visibility = View.GONE
+        scrollViewPreguntas.visibility = View.VISIBLE
+        btnComprobarPreguntas.visibility = View.VISIBLE
+
+        val pregLayout: LinearLayout = globalView.findViewById(R.id.juego4_linearlayout_preguntas)
+
+        btnComprobarPreguntas.setOnClickListener() {
+            var vFila1: ArrayList<View>? = getChildLLinearLayoutCustom(pregLayout)
+            var todosSeleccionados: Boolean = true
+            var todosAcertados = true
+            for ((index, value) in vFila1!!.withIndex()) {
+                var valueElementCasted: RadioGroup = value as RadioGroup
+                if (valueElementCasted.getCheckedRadioButtonId() != -1) {
+                    if (valueElementCasted.getCheckedRadioButtonId() != respuestasCorrectas[index]) {
+                        todosAcertados = false
+                    }
+                } else {
+                    todosSeleccionados = false
+                    break
+                }
+            }
+            if (todosSeleccionados) {
+                if (todosAcertados) {
+                    Toast.makeText(requireContext(), "ERES UN CRACK!", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireContext(), "VAYA ! HAS FALLADO!", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                Toast.makeText(requireContext(), "SELECCIONAD TODAS LAS OPCIONES!", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+    }
+
+
+    private fun getChildLLinearLayoutCustom(pLinearElement: View): ArrayList<View>? {
+        val result = ArrayList<View>()
+        val childList: ViewGroup = pLinearElement as ViewGroup
+        for (i in 0 until childList.childCount) {
+            val child = childList.getChildAt(i)
+            if (child is RadioGroup) {
+                println("************** CHILD INSTANCE OF: " + child )
+                result.add(child)
+            }
+
+        }
+        return result
+    }
+
+    private fun actualizarPalabrasRestantes() {
+        val palabrasRestantesElement: TextView = globalView.findViewById(R.id.juego4_sopa_palabras)
+        var palabrasRestantes = ""
+        for ((i, palabra) in palabras.withIndex()) {
+            if (!palabrasEncontradas.contains(palabra)) {
+                if (!palabrasRestantes.isEmpty()) {
+                    palabrasRestantes = palabrasRestantes + ", " + palabra
+                } else {
+                    palabrasRestantes = palabrasRestantes + palabra
+                }
+
+            }
+        }
+        palabrasRestantesElement.text = palabrasRestantes
+    }
+
     private fun escribirPalabrasModoSimple() {
-        //Palabras Horizontales
-        //#SAGARDANTZA
-        letterList[0][2] = "S"
-        letterList[0][3] = "A"
-        letterList[0][4] = "G"
-        letterList[0][5] = "A"
-        letterList[0][6] = "R"
-        letterList[0][7] = "D"
-        letterList[0][8] = "A"
-        letterList[0][9] = "N"
-        letterList[0][10] = "T"
-        letterList[0][11] = "Z"
-        letterList[0][12] = "A"
+        //TODO: This might could be moved to an constant class
 
-        //SALMENTA
-        letterList[11][3] = "S"
-        letterList[11][4] = "A"
-        letterList[11][5] = "L"
-        letterList[11][6] = "M"
-        letterList[11][7] = "E"
-        letterList[11][8] = "N"
-        letterList[11][9] = "T"
-        letterList[11][10] = "A"
+        // #Palabra SAGARDANTZA
+        letterList[0][1] = "S"
+        letterList[0][2] = "A"
+        letterList[0][3] = "G"
+        letterList[0][4] = "A"
+        letterList[0][5] = "R"
+        letterList[0][6] = "D"
+        letterList[0][7] = "A"
+        letterList[0][8] = "N"
+        letterList[0][9] = "T"
+        letterList[0][10] = "Z"
+        letterList[0][11] = "A"
 
-        //TRIKITIXA
-        letterList[12][3] = "A"
-        letterList[12][4] = "X"
-        letterList[12][5] = "I"
-        letterList[12][6] = "T"
-        letterList[12][7] = "I"
-        letterList[12][8] = "K"
-        letterList[12][9] = "I"
-        letterList[12][10] = "R"
-        letterList[12][11] = "T"
+        // #TXISTULARIAK
+        letterList[0][0] = "K"
+        letterList[1][1] = "A"
+        letterList[2][2] = "I"
+        letterList[3][3] = "R"
+        letterList[4][4] = "A"
+        letterList[5][5] = "L"
+        letterList[6][6] = "U"
+        letterList[7][7] = "T"
+        letterList[8][8] = "S"
+        letterList[9][9] = "I"
+        letterList[10][10] = "X"
+        letterList[11][11] = "T"
 
-        //palabras verticales
-        letterList[3][1] = "T"
-        letterList[4][1] = "X"
-        letterList[5][1] = "A"
-        letterList[6][1] = "L"
-        letterList[7][1] = "A"
-        letterList[8][1] = "P"
-        letterList[9][1] = "A"
+        // TXALAPARTA
+        letterList[1][0] = "T"
+        letterList[2][0] = "X"
+        letterList[3][0] = "A"
+        letterList[4][0] = "L"
+        letterList[5][0] = "A"
+        letterList[6][0] = "P"
+        letterList[7][0] = "A"
+        letterList[8][0] = "R"
+        letterList[9][0] = "T"
+        letterList[10][0] = "A"
+
+        // BILKETA
+        letterList[7][3] = "B"
+        letterList[6][4] = "I"
+        letterList[5][5] = "L"
+        letterList[4][6] = "K"
+        letterList[3][7] = "E"
+        letterList[2][8] = "T"
+        letterList[1][9] = "A"
+
+        // ERAKUSKETA
+        letterList[11][0] = "E"
         letterList[10][1] = "R"
-        letterList[11][1] = "T"
-        letterList[12][1] = "A"
+        letterList[9][2] = "A"
+        letterList[8][3] = "K"
+        letterList[7][4] = "U"
+        letterList[6][5] = "S"
+        letterList[5][6] = "K"
+        letterList[4][7] = "E"
+        letterList[3][8] = "T"
+        letterList[2][9] = "A"
 
-        letterList[2][11] = "G"
-        letterList[3][11] = "A"
-        letterList[4][11] = "R"
-        letterList[5][11] = "B"
-        letterList[6][11] = "I"
-        letterList[7][11] = "T"
-        letterList[8][11] = "Z"
-        letterList[9][11] = "E"
-        letterList[10][11] = "A"
+        // SALMENTA
+        letterList[10][2] = "S"
+        letterList[10][3] = "A"
+        letterList[10][4] = "L"
+        letterList[10][5] = "M"
+        letterList[10][6] = "E"
+        letterList[10][7] = "N"
+        letterList[10][8] = "T"
+        letterList[10][9] = "A"
 
-        letterList[1][12] = "D"
-        letterList[2][12] = "A"
-        letterList[3][12] = "S"
-        letterList[4][12] = "T"
-        letterList[5][12] = "A"
-        letterList[6][12] = "T"
-        letterList[7][12] = "Z"
-        letterList[8][12] = "E"
-        letterList[9][12] = "A"
+        // TRIKITIXA
+        letterList[11][10] = "T"
+        letterList[11][9] = "R"
+        letterList[11][8] = "I"
+        letterList[11][7] = "K"
+        letterList[11][6] = "I"
+        letterList[11][5] = "T"
+        letterList[11][4] = "I"
+        letterList[11][3] = "X"
+        letterList[11][2] = "A"
 
+        // GARBITZEA
+        letterList[1][10] = "G"
+        letterList[2][10] = "A"
+        letterList[3][10] = "R"
+        letterList[4][10] = "B"
+        letterList[5][10] = "I"
+        letterList[6][10] = "T"
+        letterList[7][10] = "Z"
+        letterList[8][10] = "E"
+        letterList[9][10] = "A"
+
+        // DASTATZEA
+        letterList[1][11] = "D"
+        letterList[2][11] = "A"
+        letterList[3][11] = "S"
+        letterList[4][11] = "T"
+        letterList[5][11] = "A"
+        letterList[6][11] = "T"
+        letterList[7][11] = "Z"
+        letterList[8][11] = "E"
+        letterList[9][11] = "A"
 
         //convert0ToRandomLetters()
         //#SALMENTZA
@@ -313,7 +465,12 @@ class Fragment1_4_juego : Fragment() {
             val paramsLinear: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
             )
-            paramsLinear.weight = 13.toFloat()
+            paramsLinear.weight = nCols.toFloat()
+            var colorlinear: Int = Color.argb(100, 80,80,80)
+            if (i%2 == 0) {
+                colorlinear = Color.argb(100, 220,40,40)
+            }
+            //nuevaFila.setBackgroundColor(colorlinear)
             nuevaFila.setLayoutParams(paramsLinear)
             nuevaFila.setOrientation(LinearLayout.HORIZONTAL)
             matrizMain.addView(nuevaFila)
@@ -330,18 +487,22 @@ class Fragment1_4_juego : Fragment() {
                 //filaLetterList.add("0")
                 letraElement.textSize = 25.toFloat()
                 letraElement.width = nuevaFila.width/nCols
+                letraElement.gravity = Gravity.CENTER
                 val params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT
+                    ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
                 )
                 params.weight = 1.toFloat()
-                params.setMargins(10,0,10,30)
+                params.setMargins(10,10,10,10)
                 params.gravity = Gravity.CENTER
                 letraElement.setLayoutParams(params)
                 nuevaFila.addView(letraElement)
                 letraElement.setOnTouchListener(listener)
                 val rnd = Random()
-                val color: Int = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
+                val color: Int = Color.argb(100, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
+                //val color: Int = Color.argb(100, 80,80,80)
                 //letraElement.setBackgroundColor(color)
+                letraElement.setBackgroundResource(R.drawable.roundedcorners)
+                letraElement.setClipToOutline(true)
                 letraElement.gravity = Gravity.CENTER
                 //println("*********************** ANCHO/ALTO: ${letraElement.width} / ${letraElement.getMeasuredHeight()}")
             }
@@ -523,9 +684,11 @@ class Fragment1_4_juego : Fragment() {
                 if (palabraFormada.equals(value)) {
                     if (!palabrasEncontradas.contains(palabraFormada)) {
                         palabrasEncontradas.add(value)
+                        actualizarPalabrasRestantes()
                         if (drawingLine != null) {
                             val nuevaDrawLine = drawingLine!!.clone()
                             constraintMain.addView(nuevaDrawLine)
+                            storedLines.add(nuevaDrawLine)
                         }
                         if (palabrasEncontradas.size == palabras.size) {
                             Toast.makeText(requireContext(), "ZORIONAK!", Toast.LENGTH_SHORT).show()
@@ -543,6 +706,36 @@ class Fragment1_4_juego : Fragment() {
         if (drawingLine!= null) {
             constraintMain.removeView(drawingLine)
             drawingLine = null
+        }
+    }
+
+    private fun limpiarLineas() {
+        for ((index,value) in storedLines.withIndex()) {
+            constraintMain.removeView(value)
+        }
+        storedLines.clear()
+    }
+
+    private fun voltearMatriz() {
+        val matrizOption = (1 until 4).random()
+        when (matrizOption) {
+            2 -> {
+                //La matriz va a rotar en el eje vertical
+                letterList.reverse()
+            }
+            3 -> {
+                // La matriz girara en el eje horizontal
+                for ((i, fila) in letterList.withIndex()) {
+                    fila.reverse()
+                }
+            }
+            4 -> {
+                //La matriz va a rotar en el eje vertical y horizontal
+                letterList.reverse()
+                for ((i, fila) in letterList.withIndex()) {
+                    fila.reverse()
+                }
+            }
         }
     }
 
@@ -649,7 +842,7 @@ class Fragment1_4_juego : Fragment() {
                 txtv1_4tutorialjuego4.isVisible = false
                 txtAnimacion.isVisible = false
                 val buttonSiguiente = view.findViewById(R.id.btnf1_4_siguiente) as Button
-                buttonSiguiente.isVisible=true
+                //buttonSiguiente.isVisible=true
             }
         }, 1000)
     }

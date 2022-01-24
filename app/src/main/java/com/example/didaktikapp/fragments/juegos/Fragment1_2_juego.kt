@@ -56,6 +56,7 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
     private var mCorrectAnswers: Int = 0
     private var audio: MediaPlayer? = null
     private var REQUEST_CODE= 200
+    private var introFinished: Boolean = false
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -88,6 +89,7 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         }
 
         //Typewriter juego 2 tutorial
+        introFinished = false
         Handler().postDelayed({
             if (getView() != null) {
                 typewriter(view)
@@ -174,39 +176,42 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
     }
 
     private fun exitAnimationfun(view: View) {
-        //escondemos la manzanda de la animacion
-        val upelioanimado = view.findViewById(R.id.imgv1_2_upelio2) as ImageView
-        upelioanimado.isVisible = false
+        if (!introFinished) {
+            //escondemos la manzanda de la animacion
+            val upelioanimado = view.findViewById(R.id.imgv1_2_upelio2) as ImageView
+            upelioanimado.isVisible = false
 
-        //animacion salido upelio
-        vistaanimada = TranslateAnimation(0f, 1000f, 0f, 0f)
-        vistaanimada.duration = 2000
+            //animacion salido upelio
+            vistaanimada = TranslateAnimation(0f, 1000f, 0f, 0f)
+            vistaanimada.duration = 2000
 
-        //vistaanimada.fillAfter = true
-        val upelio = view.findViewById(R.id.imgv1_2_upelio) as ImageView
-        upelio.startAnimation(vistaanimada)
+            //vistaanimada.fillAfter = true
+            val upelio = view.findViewById(R.id.imgv1_2_upelio) as ImageView
+            upelio.startAnimation(vistaanimada)
 
-        //animacion fondo gris
-        Handler().postDelayed({
-            if (getView() != null) {
-                val txt_animacion = view.findViewById(R.id.txtv1_2fondogris) as TextView
-                val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
-                txt_animacion.startAnimation(aniFade)
-                txtv1_2tutorialjuego2.startAnimation(aniFade)
-                txtv1_2tutorialjuego2.isVisible = false
-                txt_animacion.isVisible = false
-                //Habilitar botones cuando desaparece la animacion
-                val buttonAjustes = view.findViewById(R.id.btnf1_2_ajustes) as ImageButton
-                buttonAjustes.isEnabled=true
-                val buttonSiguiente = view.findViewById(R.id.btnf1_2siguiente) as Button
-                buttonSiguiente.isEnabled=true
-                question1_answer1.isEnabled = true
-                question1_answer2.isEnabled = true
-                question1_answer3.isEnabled = true
-                question1_answer4.isEnabled = true
+            //animacion fondo gris
+            Handler().postDelayed({
+                if (getView() != null) {
+                    val txt_animacion = view.findViewById(R.id.txtv1_2fondogris) as TextView
+                    val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+                    txt_animacion.startAnimation(aniFade)
+                    txtv1_2tutorialjuego2.startAnimation(aniFade)
+                    txtv1_2tutorialjuego2.isVisible = false
+                    txt_animacion.isVisible = false
+                    //Habilitar botones cuando desaparece la animacion
+                    val buttonAjustes = view.findViewById(R.id.btnf1_2_ajustes) as ImageButton
+                    buttonAjustes.isEnabled = true
+                    val buttonSiguiente = view.findViewById(R.id.btnf1_2siguiente) as Button
+                    buttonSiguiente.isEnabled = true
+                    question1_answer1.isEnabled = true
+                    question1_answer2.isEnabled = true
+                    question1_answer3.isEnabled = true
+                    question1_answer4.isEnabled = true
+                    introFinished = true
 
-            }
-        }, 1000)
+                }
+            }, 1000)
+        }
     }
 
     private fun setQuestion() {

@@ -188,8 +188,8 @@ class Fragment2_6_minijuego : Fragment() {
                             viewElement.setOnTouchListener(null)
                             viewElement.visibility = View.GONE
                             itemInList.objetivo.visibility = View.GONE
-                            botellaLlena()
                             acierto++
+                            botellaLlena()
                             checkProgress()
                         }
                     }
@@ -260,8 +260,9 @@ class Fragment2_6_minijuego : Fragment() {
     private fun botellaLlena() {
         val txtBotellasLlenas: TextView = globalView.findViewById(R.id.minijuego6_txtbotellasllenas)
         txtBotellasLlenas.text = "x"+(txtBotellasLlenas.text.toString().replace("x","").toInt() + 1).toString()
-        generarVasonTarget()
-
+        if (acierto < 5) {
+            generarVasonTarget()
+        }
     }
 
     private fun checkProgress(){

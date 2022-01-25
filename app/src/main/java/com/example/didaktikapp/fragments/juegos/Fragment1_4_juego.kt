@@ -1,6 +1,7 @@
 package com.example.didaktikapp.fragments.juegos
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.os.Bundle
 import android.view.*
 import android.widget.*
@@ -23,6 +24,7 @@ import android.util.Log
 import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
 import androidx.core.view.isVisible
+import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.clone
 import kotlinx.android.synthetic.main.fragment1_4_juego.*
 import kotlinx.coroutines.launch
@@ -44,7 +46,7 @@ class Fragment1_4_juego : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var layout: ConstraintLayout
-
+    private lateinit var btnInfoJuego: ImageButton
     private lateinit var constraintFila1: View
 
     private var myLineTest: CustomLine? = null
@@ -82,7 +84,10 @@ class Fragment1_4_juego : Fragment() {
         constraintMain = view.findViewById(R.id.juego4_constraintMain)
         val button: Button = view.findViewById(R.id.btnf1_4_siguiente)
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_4_ajustes)
-
+        btnInfoJuego= view.findViewById((R.id.btn1_4_infojuego))
+        btnInfoJuego.setOnClickListener(){
+            showDialogInfo()
+        }
 
 
         button.setOnClickListener(){
@@ -160,6 +165,43 @@ class Fragment1_4_juego : Fragment() {
     //Variables Juego Verdadero/Falso
     private var respuestasCorrectas = arrayListOf<Int>(1,3,5,8,9,12,13,16,17) // Radio button index Respuestas correctas
 
+
+    fun showDialogInfo(){
+
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.info_minijuego)
+        dialog.show()
+        dialog.window!!.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+
+        val textInfo = dialog.findViewById<View>(R.id.txtv_infominijuego) as TextView
+        var texto =""
+        //Recojemos datos de shared preferences
+        val sharedPreferences = this.activity?.getSharedPreferences("site", 0)
+        val numero = sharedPreferences?.getString("numero", null)?.toInt()
+        println(numero)
+        when(numero){
+
+            0->  {texto=resources.getString(R.string.ayudajuego1)}
+            1->  {texto=resources.getString(R.string.ayudajuego2)}
+            2->  {texto=resources.getString(R.string.ayudajuego3)}
+            3->  {texto=resources.getString(R.string.ayudajuego4)}
+            4->  {texto=resources.getString(R.string.ayudajuego5)}
+            5->  {texto=resources.getString(R.string.ayudajuego6)}
+
+        }
+        println(texto)
+        if (textInfo!=null){
+
+            textInfo.setText(texto)
+        }
+    }
+
+
     //Funciones Juego Verdadero / Flaso
 
     //Funcion que gestiona el juego de verdadero falso
@@ -199,6 +241,10 @@ class Fragment1_4_juego : Fragment() {
             if (todosSeleccionados) {
                 if (todosAcertados) {
                     Toast.makeText(requireContext(), "ERES UN CRACK!", Toast.LENGTH_SHORT).show()
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        //llamamos a la animacion para animar a upelio
+                        Navigation.findNavController(it).navigate(R.id.action_fragment1_4_juego_to_fragment2_4_minijuego)
+                    }, 1000)
                 } else {
                     Toast.makeText(requireContext(), "VAYA ! HAS FALLADO!", Toast.LENGTH_SHORT).show()
                 }

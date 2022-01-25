@@ -378,4 +378,10 @@ Acceso administrador
     <string name="sagarrakzanpatu">Sagarrak zanpatu</string>
     <string name="minijuego1completado">Zorionak! Misioa gainditu duzu!</string>
     <string name="sagarrakbotilatu">Sagarrak botilatu</string>
+    <string name="ayudaminijuego1">Pantailan zehar hainbat sagar txiki agertuko dira eta pantailaren azpialdean saski bat agertuko da. Beraz, bertara sagarrak atzamarrarekin eraman beharko dituzte.</string>
+    <string name="ayudaminijuego2">Pantailan zehar hainbat sagar txiki agertuko dira, hauetako batzuk marroiak (ustelduta) izango dira eta gainontzekoak berdeak. Beraz, ikasleek berdeak soilik aukeratu beharko dituzte atzamarrarekin ukituz.</string>
+    <string name="ayudaminijuego3">Pantailan sagar berde bat agertuko da (Upelio sagarra), kasu honetan, zikinduta. Beraz, ikasleek sagarra garbitu beharko dute.</string>
+    <string name="ayudaminijuego4">Pantailan zehar hainbat sagar txiki agertuko dira eta ikasleek euren atzamarrekin sagarrak moztu beharko dituzte.</string>
+    <string name="ayudaminijuego5">Pantailan zehar hainbat sagar txikituta agertuko dira eta ikasleek euren atzamarrekin sagarrak zapaldu beharko dituzte.</string>
+    <string name="ayudaminijuego6">Sagardo botila ezberdinak hartu eta sagardoa gordeta dagoen ontzia pixka bat okertu eta sagardo botilak beteko ditugu sagardoz. Amaitzeko sagardo botilei kortxoa jarriko diegu.</string>
 </resources>

@@ -45,7 +45,7 @@ class Fragment4_menu : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment4_menu2, container, false)
         val ajustes: Button = view.findViewById(R.id.btn4f_ajustes2)
-        val ayuda: Button = view.findViewById(R.id.btn4f_ayuda2)
+
         val inicio: Button = view.findViewById(R.id.btn4f_inicio2)
         val siguiente: Button = view.findViewById(R.id.btn4f_siguiente2)
 
@@ -54,9 +54,6 @@ class Fragment4_menu : Fragment() {
             (activity as Activity6_Site)?.ajustesCheck()
         }
 
-        ayuda.setOnClickListener{
-            (activity as Activity6_Site)?.ayudaCheck()
-        }
 
         //Navegacion a activities
         inicio.setOnClickListener(){

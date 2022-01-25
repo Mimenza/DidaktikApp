@@ -3,6 +3,7 @@ package com.example.didaktikapp.fragments.juegos
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
 import android.widget.*
@@ -50,7 +52,7 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
     private var mCorrectAnswers: Int = 0
     private var audio: MediaPlayer? = null
    private  var REQUEST_CODE =200
-
+    private lateinit var btnInfoJuego: ImageButton
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,7 +72,7 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         question1_answer3= view.findViewById(R.id.txtv1_7_respuesta3)
         defaultImage = view.findViewById(R.id.imgv1_7defaultimage)
         btnSiguiente= view.findViewById(R.id.btnf1_7siguiente)
-
+        btnInfoJuego= view.findViewById((R.id.btn1_7_infojuego))
 
         button.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment1_7_juego_to_fragment1_7_juego_results)
@@ -78,6 +80,9 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
 
         ajustes.setOnClickListener(){
                 (activity as Activity6_Site?)?.menuCheck()
+        }
+        btnInfoJuego.setOnClickListener(){
+            showDialogInfo()
         }
 
         audiotutorial(view)
@@ -336,7 +341,40 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         }
     }
 
+    fun showDialogInfo(){
 
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.info_minijuego)
+        dialog.show()
+        dialog.window!!.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+
+        val textInfo = dialog.findViewById<View>(R.id.txtv_infominijuego) as TextView
+        var texto =""
+        //Recojemos datos de shared preferences
+        val sharedPreferences = this.activity?.getSharedPreferences("site", 0)
+        val numero = sharedPreferences?.getString("numero", null)?.toInt()
+        println(numero)
+        when(numero){
+
+            0->  {texto=resources.getString(R.string.ayudajuego1)}
+            1->  {texto=resources.getString(R.string.ayudajuego2)}
+            2->  {texto=resources.getString(R.string.ayudajuego3)}
+            3->  {texto=resources.getString(R.string.ayudajuego4)}
+            4->  {texto=resources.getString(R.string.ayudajuego5)}
+            5->  {texto=resources.getString(R.string.ayudajuego6)}
+
+        }
+        println(texto)
+        if (textInfo!=null){
+
+            textInfo.setText(texto)
+        }
+    }
     //Cambiamos de color de fondo a la opcion en concreto
 
     fun answerView(answer: Int, drawableView:Int){

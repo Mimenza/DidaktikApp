@@ -3,6 +3,7 @@ package com.example.didaktikapp.fragments.juegos
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
@@ -11,11 +12,8 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
@@ -54,6 +52,7 @@ class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
     private lateinit var button: Button
     private lateinit var buttonSaltarJuego: Button
     private lateinit var buttonRepetir: Button
+    private lateinit var btnInfoJuego: ImageButton
     private lateinit var preguntasLayout: LinearLayout
     private var audio: MediaPlayer? = null
     var totalWidth: Int = 0
@@ -101,12 +100,16 @@ class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_3_ajustes)
         val btnComprobarRespuesta: Button = globalView.findViewById(R.id.juego3_btnComprobar)
         preguntasLayout = view.findViewById(R.id.juego3_preguntas_layout)
-
+        btnInfoJuego= view.findViewById((R.id.btn1_3_infojuego))
         preguntasLayout.visibility = View.GONE
 
         btnComprobarRespuesta.setOnClickListener() {
             comprobarRespuestas()
         }
+        btnInfoJuego.setOnClickListener(){
+            showDialogInfo()
+        }
+
 
         view.viewTreeObserver.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
             override fun onGlobalLayout() {
@@ -176,6 +179,40 @@ class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
 
     }
 
+    fun showDialogInfo(){
+
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.info_minijuego)
+        dialog.show()
+        dialog.window!!.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+
+        val textInfo = dialog.findViewById<View>(R.id.txtv_infominijuego) as TextView
+        var texto =""
+        //Recojemos datos de shared preferences
+        val sharedPreferences = this.activity?.getSharedPreferences("site", 0)
+        val numero = sharedPreferences?.getString("numero", null)?.toInt()
+        println(numero)
+        when(numero){
+
+            0->  {texto=resources.getString(R.string.ayudajuego1)}
+            1->  {texto=resources.getString(R.string.ayudajuego2)}
+            2->  {texto=resources.getString(R.string.ayudajuego3)}
+            3->  {texto=resources.getString(R.string.ayudajuego4)}
+            4->  {texto=resources.getString(R.string.ayudajuego5)}
+            5->  {texto=resources.getString(R.string.ayudajuego6)}
+
+        }
+        println(texto)
+        if (textInfo!=null){
+
+            textInfo.setText(texto)
+        }
+    }
     fun showPhotos() {
         //recogemos las fotos
         val foto1: ImageView = requireView().findViewById(R.id.puzzle_pieza_o_1)

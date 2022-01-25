@@ -74,7 +74,6 @@
             app:layout_constraintEnd_toEndOf="parent" />
 
         <ImageButton
-            style="?android:borderlessButtonStyle"
             android:id="@+id/btnf1_3_ajustes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -82,11 +81,24 @@
             android:src="@drawable/ic_menu"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.044"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.087"
+            tools:ignore="SpeakableTextPresentCheck" />
+        <ImageButton
+            android:id="@+id/btn1_3_infojuego"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:minHeight="48dp"
+            android:src="@drawable/ic_baseline_info_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.955"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/txtv1_1fondogris"
-            app:layout_constraintVertical_bias="0.08"
-            tools:ignore="SpeakableTextPresentCheck" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.086"
+            tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
         <LinearLayout
             android:id="@+id/juego3_preguntas_layout"

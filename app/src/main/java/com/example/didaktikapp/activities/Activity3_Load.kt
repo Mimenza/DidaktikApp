@@ -13,26 +13,28 @@ import com.example.reto01.Model.User
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity3_load.*
 
-
 class Activity3_Load : AppCompatActivity() {
-    private val activity = this
-    private lateinit var recyclerViewUsers:RecyclerView
-    lateinit private var Usuario : User
+
+    private lateinit var recyclerViewUsers: RecyclerView
+    private lateinit var binding: Activity3LoadBinding
     private lateinit var listUsers: MutableList<User>
-    private lateinit var usersRecyclerAdapter:UsersRecyclerAdapter
-    private lateinit var context:Context
-    private lateinit var binding:Activity3LoadBinding
+    private lateinit var context: Context
+    private lateinit var usuario: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getSupportActionBar()?.hide()
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+        supportActionBar?.hide()
+        window.decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
 
-        binding= Activity3LoadBinding.inflate(layoutInflater)
+        binding = Activity3LoadBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         comprobarPermisos()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        this.overridePendingTransition(0, 0)
     }
 
     private fun comprobarPermisos() {
@@ -44,33 +46,31 @@ class Activity3_Load : AppCompatActivity() {
         }
     }
 
-    private fun initViews(){
-        recyclerViewUsers =rview3_usuarios as RecyclerView
+    private fun initViews() {
+        recyclerViewUsers = rview3_usuarios as RecyclerView
 
     }
-    private fun initObjects(){
+
+    private fun initObjects() {
         listUsers = ArrayList()
-        var db:FirebaseFirestore = FirebaseFirestore.getInstance()
-        context =this
+        val db: FirebaseFirestore = FirebaseFirestore.getInstance()
+        context = this
 
         getUsersData(db)
-
-
     }
 
-    private fun  getUsersData(db:FirebaseFirestore){
+    private fun getUsersData(db: FirebaseFirestore) {
 
-
-        db.collection("Usuarios").get().
-        addOnSuccessListener { documentos->
-            for (documento in documentos){
-                Usuario = User()
-                Usuario.id = documento.data.get("id").toString().replace("u","").toInt()
-                Usuario.nombre=documento.data.get("nombre").toString()
-                Usuario.tutorialFinalizado=documento.data.get("tutorialFinalizado").toString().toInt()
-                Usuario.ultima_puntuacion=documento.data.get("ultimo_punto").toString().toInt()
-                Usuario.puntuacion=documento.data.get("puntuacion").toString().toInt()
-                listUsers.add(Usuario)
+        db.collection("Usuarios").get().addOnSuccessListener { documentos ->
+            for (documento in documentos) {
+                usuario = User()
+                usuario.id = documento.data["id"].toString().replace("u", "").toInt()
+                usuario.nombre = documento.data["nombre"].toString()
+                usuario.tutorialFinalizado =
+                    documento.data["tutorialFinalizado"].toString().toInt()
+                usuario.ultima_puntuacion = documento.data["ultimo_punto"].toString().toInt()
+                usuario.puntuacion = documento.data["puntuacion"].toString().toInt()
+                listUsers.add(usuario)
             }
 
             cargarAdapter()
@@ -78,18 +78,23 @@ class Activity3_Load : AppCompatActivity() {
         }
 
     }
-    private fun cargarAdapter(){
+
+    private fun cargarAdapter() {
 
         //Cargar el adapter después de llamar a la bbdd
-        val adapter = UsersRecyclerAdapter(this,listUsers, context)
+        val adapter = UsersRecyclerAdapter(this, listUsers, context)
 
         recyclerViewUsers.layoutManager = LinearLayoutManager(context)
         recyclerViewUsers.adapter = adapter
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String?>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String?>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (grantResults.size > 0 && grantResults[0] != -1 ) {
+        if (grantResults.isNotEmpty() && grantResults[0] != -1) {
             initViews()
             initObjects()
         } else {
@@ -98,6 +103,10 @@ class Activity3_Load : AppCompatActivity() {
     }
 
     private fun askForMapPermission() {
-        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+            1
+        )
     }
 }

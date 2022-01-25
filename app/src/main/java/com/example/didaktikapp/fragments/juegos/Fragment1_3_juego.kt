@@ -42,7 +42,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [Fragment1_juego.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Fragment1_3_juego : Fragment(), DbHandler.queryResponseDone {
+class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
     private val thisJuegoId = 3
 
     // TODO: Rename and change types of parameters

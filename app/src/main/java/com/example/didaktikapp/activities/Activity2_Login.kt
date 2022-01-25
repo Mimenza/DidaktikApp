@@ -5,37 +5,34 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import com.example.didaktikapp.R
 import com.example.didaktikapp.databinding.Activity2LoginBinding
-import com.example.reto01.Model.User
 
-
-class Activity2_Login : AppCompatActivity(), DbHandler.queryResponseDone {
+class Activity2_Login : AppCompatActivity(), DbHandler.QueryResponseDone {
     private lateinit var binding:Activity2LoginBinding
-    lateinit private var Usuario : User
     private val dbHandlerInstance = DbHandler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getSupportActionBar()?.hide()
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
-        setContentView(R.layout.activity2_login)
+        supportActionBar?.hide()
+        window.decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
 
-        binding= Activity2LoginBinding.inflate(layoutInflater)
+        binding = Activity2LoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btn1Hasi.setOnClickListener() {
+        binding.btn1Hasi.setOnClickListener {
             if (binding.txt2Nombre.text.isNotBlank()) {
                 // Llamamos al metodo Login de la clase hibrida que gestiona queriess de la BD.
                 dbHandlerInstance.requestDbUserLogin(binding.txt2Nombre.text.toString(), this)
                 binding.progressBar.visibility = View.VISIBLE
                 binding.btn1Hasi.isEnabled = false
-            } else {
-                Toast.makeText(this, "[ERROR] Escriba un nombre", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        this.overridePendingTransition(0, 0)
+    }
 
 
     /*
@@ -44,8 +41,8 @@ class Activity2_Login : AppCompatActivity(), DbHandler.queryResponseDone {
         cambio en todos los metodos desde los que se llama
      */
     private fun startActivityBienvenida() {
-        var bvIntent = Intent(this, Activity4_bienvenida::class.java)
-        startActivity(bvIntent)
+        val intent = Intent(this, Activity4_bienvenida::class.java)
+        startActivity(intent)
         this.overridePendingTransition(0, 0)
     }
 
@@ -91,6 +88,4 @@ class Activity2_Login : AppCompatActivity(), DbHandler.queryResponseDone {
         startActivityBienvenida()
         finish()
     }
-
-
 }

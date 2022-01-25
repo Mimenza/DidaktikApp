@@ -13,22 +13,19 @@ import kotlinx.android.synthetic.main.activity6_site.*
 class Activity6_Site : AppCompatActivity() {
 
     private var fragment : String? = null
-    var menuShowing: Boolean = false
-    var ajustesShowing: Boolean = false
-
     private var ayudaFirst:Boolean = true
     private var menuFirst:Boolean = true
     private var ajustesFirst:Boolean = true
+    private var menuShowing: Boolean = false
+    private var ajustesShowing: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getSupportActionBar()?.hide()
+        supportActionBar?.hide()
+        window.decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
         setContentView(R.layout.activity6_site)
 
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
-
-        val newInt: Int?
-        newInt = if (savedInstanceState == null) {
+        val newInt: Int? = if (savedInstanceState == null) {
             val extras = intent.extras
             extras?.getInt("numero")
         } else {
@@ -36,12 +33,11 @@ class Activity6_Site : AppCompatActivity() {
         }
 
         val sharedPreferences = getSharedPreferences("site", 0)
-        var editor = sharedPreferences.edit()
+        val editor = sharedPreferences.edit()
         editor.putString("numero", newInt.toString()).apply()
     }
 
     fun menuCheck(){
-
         if(menuFirst){
             addMenu()
             menuFirst = false
@@ -70,17 +66,17 @@ class Activity6_Site : AppCompatActivity() {
         }
     }
 
-    fun addAyuda() {
+    private fun addAyuda() {
         //añadimos el fragment de ajustes
 
         ayudaFirst = true
         fragment = "Fragment6"
-        supportFragmentManager.beginTransaction().add(R.id.framelayout6_ayuda, Fragment6_ayuda()!!)
+        supportFragmentManager.beginTransaction().add(R.id.framelayout6_ayuda, Fragment6_ayuda())
             .addToBackStack(null).commit()
         showAyuda()
     }
 
-    fun showAyuda() {
+    private fun showAyuda() {
         //enseñamos el container del fragment de ajutes
 
         ayudaFirst = true
@@ -90,18 +86,18 @@ class Activity6_Site : AppCompatActivity() {
         /* supportFragmentManager.beginTransaction().show(Fragment5_ajustes()!!).commit()*/
     }
 
-    fun addMenu() {
+    private fun addMenu() {
         //añadimos el fragment del menu
 
         menuShowing = true
         fragment = "Fragment4"
-        supportFragmentManager.beginTransaction().add(R.id.framelayout6_menu, Fragment4_menu()!!)
+        supportFragmentManager.beginTransaction().add(R.id.framelayout6_menu, Fragment4_menu())
             .addToBackStack(null).commit()
 
         showMenu()
     }
 
-    fun showMenu() {
+    private fun showMenu() {
         //enseñamos el container del fragment del menu
 
         menuShowing = true
@@ -109,20 +105,19 @@ class Activity6_Site : AppCompatActivity() {
 
         framelayout6_menu.isVisible=true
         /*supportFragmentManager.beginTransaction().show(Fragment4_menu2()!!).commit()*/
-4
     }
 
-    fun addAjustes() {
+    private fun addAjustes() {
         //añadimos el fragment de ajustes
 
         ajustesShowing = true
         fragment = "Fragment5"
-        supportFragmentManager.beginTransaction().add(R.id.framelayout6_ajustes, Fragment5_ajustes()!!)
+        supportFragmentManager.beginTransaction().add(R.id.framelayout6_ajustes, Fragment5_ajustes())
             .addToBackStack(null).commit()
         showAjustes()
     }
 
-    fun showAjustes() {
+    private fun showAjustes() {
         //enseñamos el container del fragment de ajutes
 
         ajustesShowing = true
@@ -176,7 +171,4 @@ class Activity6_Site : AppCompatActivity() {
             }
         }
     }
-
-
-
 }

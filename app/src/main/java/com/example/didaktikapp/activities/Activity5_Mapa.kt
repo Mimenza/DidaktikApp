@@ -6,40 +6,42 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.view.WindowManager
+import android.view.animation.Animation
 import android.view.animation.TranslateAnimation
-import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.didaktikapp.R
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
 import com.example.didaktikapp.databinding.Activity5MapaBinding
 import com.example.didaktikapp.fragments.Fragment5_ajustes
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import kotlinx.android.synthetic.main.activity1_principal.*
 import kotlinx.android.synthetic.main.activity4_bienvenida.*
 import kotlinx.android.synthetic.main.activity5_mapa.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import android.view.animation.Animation
-import androidx.appcompat.app.AppCompatDelegate
-import kotlinx.android.synthetic.main.activity1_principal.*
+import kotlin.math.acos
+import kotlin.math.cos
+import kotlin.math.sin
 
 
-class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.queryResponseDone {
+class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.QueryResponseDone {
 
     private val thisActivity: Activity = this
     private lateinit var mMap: GoogleMap
@@ -47,35 +49,29 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.queryR
     private lateinit var fusedLocation: FusedLocationProviderClient
     private var myCurrentPosition: LatLng = LatLng(45.0, 123.0)
     private var lastUserPoint: Int = 0
-    private var userName:String? = null
-    private var puntuacion:Int? = null
     private var minimumRadius: Int = 50
     private lateinit var audio: MediaPlayer
-    private lateinit var vistaanimada: TranslateAnimation
     private var fragment :Fragment? = null
-    var ajustesShowing: Boolean = false
+    private var ajustesShowing: Boolean = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getSupportActionBar()?.hide()
-
+        supportActionBar?.hide()
         binding = Activity5MapaBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         binding.imgv5Manzanatutorial.visibility = GONE
         binding.imgv5ManzanatutorialAnimado.visibility = GONE
         binding.imgv5Bocadillo.visibility = GONE
         binding.txtv5Presentacionmapa.visibility = GONE
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         fusedLocation = LocationServices.getFusedLocationProviderClient(this)
 
-
-        //Shared preferences tema oscuro fin
 
         /* if (DbHandler.getUser() != null) {
              if (DbHandler.getUser()!!.ultima_puntuacion != null) {
@@ -121,6 +117,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.queryR
         ajustesShowing = true
         fragment = Fragment5_ajustes()
         supportFragmentManager.beginTransaction().add(R.id.framelayoutajustes, fragment!!).commit()
+        window.decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
     }
 
     override fun onBackPressed() {
@@ -132,11 +129,11 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.queryR
     }
 
     private fun cerrarAjustes() {
-        supportFragmentManager.beginTransaction().remove(fragment!!).commit();
+        supportFragmentManager.beginTransaction().remove(fragment!!).commit()
         fragment = null
         ajustesShowing = false
         verMapa()
-
+        window.decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE)
     }
 
     private fun verMapa(){
@@ -165,7 +162,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.queryR
 
     private fun audioSound() {
         //funcion para la reproduccion del sonido
-        runBlocking() {
+        runBlocking {
             launch {
                 audio = MediaPlayer.create(this@Activity5_Mapa, R.raw.mapa_aurkezpena)
                 audio.start()
@@ -182,7 +179,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.queryR
 
     override fun onDestroy() {
         if(this::audio.isInitialized){
-            audio?.stop()
+            audio.stop()
         }
         super.onDestroy()
     }
@@ -213,7 +210,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.queryR
         binding.imgv5Manzanatutorial.visibility = GONE
         binding.imgv5ManzanatutorialAnimado.visibility = VISIBLE
         binding.imgv5ManzanatutorialAnimado.setBackgroundResource(R.drawable.animacion_manzana)
-        val ani = binding.imgv5ManzanatutorialAnimado.getBackground() as AnimationDrawable
+        val ani = binding.imgv5ManzanatutorialAnimado.background as AnimationDrawable
         ani.start()
     }
 
@@ -264,20 +261,24 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.queryR
         mMap.isMyLocationEnabled = true
         mMap.uiSettings.isZoomControlsEnabled = true
         mMap.uiSettings.isCompassEnabled = true
+        mMap.mapType = GoogleMap.MAP_TYPE_HYBRID
 
-        //Shared preferences tema oscuro
-        val sharedPreferences = getSharedPreferences("com.example.didaktikapp_preferences", 0)
-        val numero:Int = sharedPreferences.getInt("io.github.manuelernesto.DARK_STATUS", 0)
-        if (numero==1){
+        val locationButton = (thisActivity.findViewById<View>(Integer.parseInt("1")).parent as View).findViewById<View>(Integer.parseInt("2"))
+        val relativeLayoutParamsLocation = locationButton.layoutParams as (RelativeLayout.LayoutParams)
 
-            mMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(this, R.raw.map_in_night));
-        }else{
-            mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID)
-        }
+        relativeLayoutParamsLocation.addRule(RelativeLayout.ALIGN_PARENT_TOP,0)
+        relativeLayoutParamsLocation.addRule(RelativeLayout.ALIGN_PARENT_TOP,RelativeLayout.TRUE)
+        relativeLayoutParamsLocation.setMargins(0,100,0,0)
 
+        val compass = (thisActivity.findViewById<View>(Integer.parseInt("1")).parent as View).findViewById<View>(Integer.parseInt("5"))
+        val relativeLayoutParamsCompass = compass.layoutParams as (RelativeLayout.LayoutParams)
+
+        relativeLayoutParamsCompass.addRule(RelativeLayout.ALIGN_PARENT_TOP,0)
+        relativeLayoutParamsCompass.addRule(RelativeLayout.ALIGN_PARENT_TOP,RelativeLayout.TRUE)
+        relativeLayoutParamsCompass.setMargins(0,100,0,0)
 
         //Set min and max zoom
-        mMap.setMaxZoomPreference(18F)
+        mMap.setMaxZoomPreference(21F)
         mMap.setMinZoomPreference(14F)
 
         // Constrain the camera target to the Astigarraga bounds.
@@ -307,13 +308,13 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.queryR
             myCurrentPosition = LatLng(it.latitude, it.longitude)
             if (!firstFocusAnimation) {
                 //Condicion para focalizar al usuario por primera vez
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.latitude, it.longitude), 16F))
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(it.latitude, it.longitude), 16.5F))
                 firstFocusAnimation = true
             }
         }
     }
 
-    val placesList = arrayListOf<ArrayList<Any>>(
+    private val placesList = arrayListOf(
         arrayListOf("Sagardoetxea",LatLng(43.28124016860453, -1.9469706252948757)),
         arrayListOf("Murgia jauregia",LatLng(43.28124645002352, -1.9487146619854678)),
         arrayListOf("Foru plaza 1",LatLng(43.28009128981247, -1.9489651924963394)),
@@ -361,7 +362,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.queryR
             val latLon = marker.position
 
             fun irAPunto(puntoSeleccionado: Int) {
-                val intent:Intent =  Intent(this, Activity6_Site::class.java)
+                val intent =  Intent(this, Activity6_Site::class.java)
                 intent.putExtra("numero",puntoSeleccionado)
                 startActivity(intent)
                 this.overridePendingTransition(0, 0)
@@ -369,7 +370,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.queryR
 
             for ((i,item) in placesList.withIndex()) {
                 if (item[1] as LatLng == latLon) {
-                    var distanceToPoint = getDistBetweenPoints(myCurrentPosition, latLon)
+                    val distanceToPoint = getDistBetweenPoints(myCurrentPosition, latLon)
                     if (DbHandler.getAdmin()) {
                         irAPunto(i)
                     } else {
@@ -389,18 +390,18 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.queryR
         })
     }
 
-    fun getDistBetweenPoints(localPoint: LatLng, gamePoint: LatLng): Int {
+    private fun getDistBetweenPoints(localPoint: LatLng, gamePoint: LatLng): Int {
         val theta: Double = localPoint.longitude - gamePoint.longitude
-        var dist = (Math.sin(deg2rad(localPoint.latitude))
-                * Math.sin(deg2rad(gamePoint.latitude))
-                + (Math.cos(deg2rad(localPoint.latitude))
-                * Math.cos(deg2rad(gamePoint.latitude))
-                * Math.cos(deg2rad(theta))))
-        dist = Math.acos(dist)
+        var dist = (sin(deg2rad(localPoint.latitude))
+                * sin(deg2rad(gamePoint.latitude))
+                + (cos(deg2rad(localPoint.latitude))
+                * cos(deg2rad(gamePoint.latitude))
+                * cos(deg2rad(theta))))
+        dist = acos(dist)
         dist = rad2deg(dist)
-        dist = dist * 60 * 1.1515
-        var kms: Double = dist / 0.62137
-        var meters: Double = kms * 1000
+        dist *= 60 * 1.1515
+        val kms: Double = dist / 0.62137
+        val meters: Double = kms * 1000
         return meters.toInt()
     }
 

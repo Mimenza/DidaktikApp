@@ -32,11 +32,10 @@
 
             <ImageButton
                 android:id="@+id/btn5_ajustes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="47dp"
+                android:layout_height="49.5dp"
                 android:layout_marginLeft="338dp"
-                android:layout_marginTop="50dp"
-                android:minHeight="48dp"
+                android:layout_marginTop="80dp"
                 android:backgroundTint="#B3FFFFFF"
                 android:src="@drawable/ic_ajustes_black"
                 tools:ignore="SpeakableTextPresentCheck"

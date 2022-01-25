@@ -1,10 +1,8 @@
 package com.example.didaktikapp.activities
 
-import android.widget.Toast
 import com.example.reto01.Model.User
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
-import kotlinx.coroutines.test.withTestContext
 
 class DbHandler {
 
@@ -13,7 +11,6 @@ class DbHandler {
         private var usuario: User? = null
         private var dbInstance: FirebaseFirestore? = null
         private var isAdmin: Boolean = true
-
 
         fun getDbInstance(): FirebaseFirestore {
             if (dbInstance == null) {
@@ -55,10 +52,9 @@ class DbHandler {
                 this.usuario!!.ultima_puntuacion = pNuevoPunto
             }
         }
-
     }
 
-    fun requestDbUserCount(pUserRegister: String?, callback: queryResponseDone) {
+    fun requestDbUserCount(pUserRegister: String?, callback: QueryResponseDone) {
         getDbInstance().collection("Usuarios").get()
         .addOnSuccessListener {
             lastUserid = it.size()
@@ -66,16 +62,16 @@ class DbHandler {
         }
     }
 
-    fun requestDbUserLogin(pUsername: String, callback: queryResponseDone) {
+    fun requestDbUserLogin(pUsername: String, callback: QueryResponseDone) {
         getDbInstance().collection("Usuarios").whereEqualTo("nombre", pUsername).get()
         .addOnSuccessListener {
             if (it.size() > 0) {
-                var vId:Int = it.documents[0]["id"].toString().replace("u","").toInt()
-                var vNombre:String = it.documents[0]["nombre"].toString()
+                val vId:Int = it.documents[0]["id"].toString().replace("u","").toInt()
+                val vNombre:String = it.documents[0]["nombre"].toString()
                 //var vAdmin:Int = it.documents[0]["admin"].toString().toInt()
-                var vTutoFinalizado:Int = it.documents[0]["tutorialFinalizado"].toString().toInt()
-                var vPuntuacion:Int = it.documents[0]["puntuacion"].toString().toInt()
-                var vUltimoPto:Int = it.documents[0]["ultimo_punto"].toString().toInt()
+                val vTutoFinalizado:Int = it.documents[0]["tutorialFinalizado"].toString().toInt()
+                val vPuntuacion:Int = it.documents[0]["puntuacion"].toString().toInt()
+                val vUltimoPto:Int = it.documents[0]["ultimo_punto"].toString().toInt()
                 setUser(User(vId, vNombre, vTutoFinalizado, vPuntuacion, vUltimoPto))
                 callback.responseDbUserLogin(null)
             } else {
@@ -89,7 +85,7 @@ class DbHandler {
 
     }
 
-    fun requestDbUserUpdate(callback: queryResponseDone) {
+    fun requestDbUserUpdate(callback: QueryResponseDone) {
         if (usuario == null) {
             return
         }
@@ -118,17 +114,17 @@ class DbHandler {
             }
     }
 
-    fun requestDbUserRegister(pUsername: String, callback: queryResponseDone) {
+    fun requestDbUserRegister(pUsername: String, callback: QueryResponseDone) {
         val newQuickId: Int = lastUserid + 1
         val defaultData = hashMapOf(
             //"admin" to 0,
-            "id" to "u"+(newQuickId),
+            "id" to "u$newQuickId",
             "nombre" to pUsername,
             "tutorialFinalizado" to 0,
             "puntuacion" to 0,
             "ultimo_punto" to 0)
         getDbInstance().collection("Usuarios").document(newQuickId.toString())
-            .set(defaultData, )
+            .set(defaultData)
             .addOnSuccessListener {
                 setUser(User(newQuickId, pUsername,0,  0, 0))
                 setLastUserId(newQuickId)
@@ -140,7 +136,7 @@ class DbHandler {
     }
 
 
-    interface queryResponseDone {
+    interface QueryResponseDone {
         fun responseDbUserLogin(accountRegister: String?) {}
 
         fun responseDbUserCount(accountRegister: String?, response: Int) {}

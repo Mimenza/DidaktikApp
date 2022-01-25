@@ -7,13 +7,12 @@ import androidx.core.view.isVisible
 import com.example.didaktikapp.R
 import com.example.didaktikapp.fragments.Fragment4_menu
 import com.example.didaktikapp.fragments.Fragment5_ajustes
-import com.example.didaktikapp.fragments.Fragment6_ayuda
+
 import kotlinx.android.synthetic.main.activity6_site.*
 
 class Activity6_Site : AppCompatActivity() {
 
     private var fragment : String? = null
-    private var ayudaFirst:Boolean = true
     private var menuFirst:Boolean = true
     private var ajustesFirst:Boolean = true
     private var menuShowing: Boolean = false
@@ -46,16 +45,6 @@ class Activity6_Site : AppCompatActivity() {
         }
     }
 
-    fun ayudaCheck(){
-
-        if(ayudaFirst){
-            addAyuda()
-            ayudaFirst = false
-        }else{
-            showAyuda()
-        }
-    }
-
     fun ajustesCheck(){
 
         if(ajustesFirst){
@@ -64,26 +53,6 @@ class Activity6_Site : AppCompatActivity() {
         }else{
             showAjustes()
         }
-    }
-
-    private fun addAyuda() {
-        //añadimos el fragment de ajustes
-
-        ayudaFirst = true
-        fragment = "Fragment6"
-        supportFragmentManager.beginTransaction().add(R.id.framelayout6_ayuda, Fragment6_ayuda())
-            .addToBackStack(null).commit()
-        showAyuda()
-    }
-
-    private fun showAyuda() {
-        //enseñamos el container del fragment de ajutes
-
-        ayudaFirst = true
-        fragment = "Fragment6"
-        framelayout6_ayuda.isVisible=true
-
-        /* supportFragmentManager.beginTransaction().show(Fragment5_ajustes()!!).commit()*/
     }
 
     private fun addMenu() {
@@ -133,17 +102,6 @@ class Activity6_Site : AppCompatActivity() {
         /*supportFragmentManager.beginTransaction().hide(Fragment5_ajustes()!!).commit();*/
         fragment = "Fragment4"
         ajustesShowing= false
-
-    }
-
-    fun cerrarAyuda() {
-        //escondemos el container del fragment del menu
-
-        framelayout6_ayuda.isVisible=false
-        /*supportFragmentManager.beginTransaction().hide(Fragment5_ajustes()!!).commit();*/
-        fragment = "Fragment4"
-        ajustesShowing= false
-
     }
 
     private fun cerrarMenu() {
@@ -163,8 +121,7 @@ class Activity6_Site : AppCompatActivity() {
                 println("cerrar menu")}
             "Fragment5" -> { cerrarAjustes()
                 println("cerrar ajustes")}
-            "Fragment6" -> {  cerrarAyuda()
-                println("cerrar ayuda")}
+
             else -> {
                 super.onBackPressed()
                 println("atras")

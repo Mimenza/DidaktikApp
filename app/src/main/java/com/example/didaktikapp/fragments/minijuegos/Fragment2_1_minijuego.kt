@@ -2,15 +2,13 @@ package com.example.didaktikapp.fragments.minijuegos
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
 import android.view.animation.TranslateAnimation
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -18,9 +16,19 @@ import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.DragnDropImage
 import com.example.didaktikapp.R
 import android.widget.ProgressBar
+import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.isVisible
 import com.example.didaktikapp.activities.Activity5_Mapa
 import com.example.didaktikapp.activities.Activity6_Site
+import kotlinx.android.synthetic.main.info_minijuego.*
+import android.widget.TextView
+import android.widget.EditText
+
+
+
+
+
+
 
 class Fragment2_1_minijuego : Fragment() {
     private lateinit var globalView: View
@@ -32,6 +40,9 @@ class Fragment2_1_minijuego : Fragment() {
     private lateinit var cartel: ImageView
     private lateinit var btnsiguiente:Button
     private lateinit var btnrepetir:Button
+    private lateinit var btninfominijuego: ImageButton
+
+
 
     var manzanaList: MutableList<DragnDropImage>? = mutableListOf()
     val duracionJuego: Int = 60 // Duracion en segundos
@@ -56,6 +67,8 @@ class Fragment2_1_minijuego : Fragment() {
         txtAciertos = view.findViewById((R.id.manzanasAciertos))
         cartel= view.findViewById((R.id.imgv2_1cartelmadera))
         txtcartel= view.findViewById((R.id.txtv2_1carteltexto))
+        btninfominijuego= view.findViewById((R.id.btn2_1_infominijuego))
+
 
 
         btnrepetir = view.findViewById(R.id.btn2_1_repetir)
@@ -63,10 +76,52 @@ class Fragment2_1_minijuego : Fragment() {
 
         ajustes.setOnClickListener(){
             (activity as Activity6_Site?)?.menuCheck()
+
         }
+        btninfominijuego.setOnClickListener(){
+            showDialogInfo()
+        }
+
+
         iniciarJuegoRecogerManzanas()
         return view
     }
+
+    fun showDialogInfo(){
+
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.info_minijuego)
+        dialog.show()
+        dialog.window!!.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+
+        val textInfo = dialog.findViewById<View>(R.id.txtv_infominijuego) as TextView
+        var texto =""
+        //Recojemos datos de shared preferences
+        val sharedPreferences = this.activity?.getSharedPreferences("site", 0)
+        val numero = sharedPreferences?.getString("numero", null)?.toInt()
+        println(numero)
+        when(numero){
+
+            0->  {texto=resources.getString(R.string.ayudaminijuego1)}
+            1->  {texto=resources.getString(R.string.ayudaminijuego2)}
+            2->  {texto=resources.getString(R.string.ayudaminijuego3)}
+            3->  {texto=resources.getString(R.string.ayudaminijuego4)}
+            4->  {texto=resources.getString(R.string.ayudaminijuego5)}
+            5->  {texto=resources.getString(R.string.ayudaminijuego6)}
+
+        }
+        println(texto)
+        if (textInfo!=null){
+
+            textInfo.setText(texto)
+        }
+    }
+
 
     fun iniciarJuegoRecogerManzanas() {
         startTimeCounter()

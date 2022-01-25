@@ -1,8 +1,10 @@
+
 package com.example.didaktikapp.fragments.juegos
 
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -17,6 +19,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
+import android.view.Window
 import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
 import android.widget.*
@@ -56,7 +59,8 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
     private var mCorrectAnswers: Int = 0
     private var audio: MediaPlayer? = null
     private var REQUEST_CODE= 200
-
+    private var introFinished: Boolean = false
+    private lateinit var btnInfoJuego: ImageButton
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -81,13 +85,17 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         txtTutorial= view.findViewById(R.id.txtv1_2tutorialjuego2)
         fondoTutorial= view.findViewById(R.id.txtv1_2fondogris)
 
-
+        btnInfoJuego= view.findViewById((R.id.btn1_2_infojuego))
+        btnInfoJuego.setOnClickListener(){
+            showDialogInfo()
+        }
 
         ajustes.setOnClickListener() {
             (activity as Activity6_Site?)?.menuCheck()
         }
 
         //Typewriter juego 2 tutorial
+        introFinished = false
         Handler().postDelayed({
             if (getView() != null) {
                 typewriter(view)
@@ -125,7 +133,40 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
 
         return view
     }
+    fun showDialogInfo(){
 
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.info_minijuego)
+        dialog.show()
+        dialog.window!!.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+
+        val textInfo = dialog.findViewById<View>(R.id.txtv_infominijuego) as TextView
+        var texto =""
+        //Recojemos datos de shared preferences
+        val sharedPreferences = this.activity?.getSharedPreferences("site", 0)
+        val numero = sharedPreferences?.getString("numero", null)?.toInt()
+        println(numero)
+        when(numero){
+
+            0->  {texto=resources.getString(R.string.ayudajuego1)}
+            1->  {texto=resources.getString(R.string.ayudajuego2)}
+            2->  {texto=resources.getString(R.string.ayudajuego3)}
+            3->  {texto=resources.getString(R.string.ayudajuego4)}
+            4->  {texto=resources.getString(R.string.ayudajuego5)}
+            5->  {texto=resources.getString(R.string.ayudajuego6)}
+
+        }
+        println(texto)
+        if (textInfo!=null){
+
+            textInfo.setText(texto)
+        }
+    }
     private fun typewriter(view: View) {
         val typeWriterView = view.findViewById(R.id.txtv1_2tutorialjuego2) as TypeWriterView
         typeWriterView.setWithMusic(false)
@@ -174,39 +215,43 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
     }
 
     private fun exitAnimationfun(view: View) {
-        //escondemos la manzanda de la animacion
-        val upelioanimado = view.findViewById(R.id.imgv1_2_upelio2) as ImageView
-        upelioanimado.isVisible = false
+        //si la intro se ha acabado
+        if (!introFinished) {
+            //escondemos la manzanda de la animacion
+            val upelioanimado = view.findViewById(R.id.imgv1_2_upelio2) as ImageView
+            upelioanimado.isVisible = false
 
-        //animacion salido upelio
-        vistaanimada = TranslateAnimation(0f, 1000f, 0f, 0f)
-        vistaanimada.duration = 2000
+            //animacion salido upelio
+            vistaanimada = TranslateAnimation(0f, 1000f, 0f, 0f)
+            vistaanimada.duration = 2000
 
-        //vistaanimada.fillAfter = true
-        val upelio = view.findViewById(R.id.imgv1_2_upelio) as ImageView
-        upelio.startAnimation(vistaanimada)
+            //vistaanimada.fillAfter = true
+            val upelio = view.findViewById(R.id.imgv1_2_upelio) as ImageView
+            upelio.startAnimation(vistaanimada)
 
-        //animacion fondo gris
-        Handler().postDelayed({
-            if (getView() != null) {
-                val txt_animacion = view.findViewById(R.id.txtv1_2fondogris) as TextView
-                val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
-                txt_animacion.startAnimation(aniFade)
-                txtv1_2tutorialjuego2.startAnimation(aniFade)
-                txtv1_2tutorialjuego2.isVisible = false
-                txt_animacion.isVisible = false
-                //Habilitar botones cuando desaparece la animacion
-                val buttonAjustes = view.findViewById(R.id.btnf1_2_ajustes) as ImageButton
-                buttonAjustes.isEnabled=true
-                val buttonSiguiente = view.findViewById(R.id.btnf1_2siguiente) as Button
-                buttonSiguiente.isEnabled=true
-                question1_answer1.isEnabled = true
-                question1_answer2.isEnabled = true
-                question1_answer3.isEnabled = true
-                question1_answer4.isEnabled = true
+            //animacion fondo gris
+            Handler().postDelayed({
+                if (getView() != null) {
+                    val txt_animacion = view.findViewById(R.id.txtv1_2fondogris) as TextView
+                    val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+                    txt_animacion.startAnimation(aniFade)
+                    txtv1_2tutorialjuego2.startAnimation(aniFade)
+                    txtv1_2tutorialjuego2.isVisible = false
+                    txt_animacion.isVisible = false
+                    //Habilitar botones cuando desaparece la animacion
+                    val buttonAjustes = view.findViewById(R.id.btnf1_2_ajustes) as ImageButton
+                    buttonAjustes.isEnabled = true
+                    val buttonSiguiente = view.findViewById(R.id.btnf1_2siguiente) as Button
+                    buttonSiguiente.isEnabled = true
+                    question1_answer1.isEnabled = true
+                    question1_answer2.isEnabled = true
+                    question1_answer3.isEnabled = true
+                    question1_answer4.isEnabled = true
+                    introFinished = true
 
-            }
-        }, 1000)
+                }
+            }, 1000)
+        }
     }
 
     private fun setQuestion() {
@@ -307,7 +352,7 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
                             R.drawable.juego2_error_option_border_bg  )
 
                     } else {
-                         upelio1.isVisible=false
+                        upelio1.isVisible=false
                         upelio2.isVisible=false
                         takePicture()
 
@@ -335,27 +380,27 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
             }
         }
     }
-     //Función para sacar foto
+    //Función para sacar foto
     fun takePicture() {
 
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(cameraIntent, REQUEST_CODE)
-  }
+    }
 
     //Función para guardar foto
-  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-      super.onActivityResult(requestCode, resultCode, data)
-      if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE && data != null){
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE && data != null){
 
 
 
-          imgv1_2defaultimage.setImageBitmap(data.extras?.get("data") as Bitmap)
-          audio?.stop()
-          return
+            imgv1_2defaultimage.setImageBitmap(data.extras?.get("data") as Bitmap)
+            audio?.stop()
+            return
 
 
-      }
-  }
+        }
+    }
 
 
 
@@ -414,3 +459,4 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         audio?.start()
     }
 }
+

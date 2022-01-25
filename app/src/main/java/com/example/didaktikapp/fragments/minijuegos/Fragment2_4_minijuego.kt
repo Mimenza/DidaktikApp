@@ -2,15 +2,13 @@ package com.example.didaktikapp.fragments.minijuegos
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
@@ -69,7 +67,7 @@ class Fragment2_4_minijuego : Fragment() {
     var manzana3cortada:Boolean = false
     var manzana4cortada:Boolean = false
     var manzana5cortada:Boolean = false
-
+    private lateinit var btninfominijuego: ImageButton
     private var lastX:Float = 0F
     private var lastY:Float = 0F
     private val customLines = arrayListOf<CustomLine>()
@@ -106,12 +104,14 @@ class Fragment2_4_minijuego : Fragment() {
         txtcartel= view.findViewById((R.id.txtv2_4carteltexto))
         btnrepetir = view.findViewById(R.id.btn2_4_repetir)
         btnsiguiente = view.findViewById(R.id.btn2_4_siguiente)
-
+        btninfominijuego= view.findViewById((R.id.btn2_4_infominijuego))
 
         ajustes.setOnClickListener() {
             (activity as Activity6_Site?)?.menuCheck()
         }
-
+        btninfominijuego.setOnClickListener(){
+            showDialogInfo()
+        }
 
 
         view.setOnTouchListener(handleTouch)
@@ -320,6 +320,41 @@ class Fragment2_4_minijuego : Fragment() {
         true
     }
 
+
+    fun showDialogInfo(){
+
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.info_minijuego)
+        dialog.show()
+        dialog.window!!.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+
+        val textInfo = dialog.findViewById<View>(R.id.txtv_infominijuego) as TextView
+        var texto =""
+        //Recojemos datos de shared preferences
+        val sharedPreferences = this.activity?.getSharedPreferences("site", 0)
+        val numero = sharedPreferences?.getString("numero", null)?.toInt()
+        println(numero)
+        when(numero){
+
+            0->  {texto=resources.getString(R.string.ayudaminijuego1)}
+            1->  {texto=resources.getString(R.string.ayudaminijuego2)}
+            2->  {texto=resources.getString(R.string.ayudaminijuego3)}
+            3->  {texto=resources.getString(R.string.ayudaminijuego4)}
+            4->  {texto=resources.getString(R.string.ayudaminijuego5)}
+            5->  {texto=resources.getString(R.string.ayudaminijuego6)}
+
+        }
+        println(texto)
+        if (textInfo!=null){
+
+            textInfo.setText(texto)
+        }
+    }
 
     fun checkProgress() {
         //si se han cortado todas las manzanas aparece el boton

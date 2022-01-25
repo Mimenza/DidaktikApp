@@ -53,11 +53,6 @@
                 android:drawableLeft="@drawable/ic_home"
                 android:text="@string/botonhome" />
 
-            <Button
-                android:id="@+id/btn4f_ayuda2"
-                style="@style/botonesMenu"
-                android:drawableLeft="@drawable/ic_ayuda"
-                android:text="@string/botonhelp" />
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

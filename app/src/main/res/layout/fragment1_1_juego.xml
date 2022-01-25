@@ -44,20 +44,33 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.95" />
 
+
         <ImageButton
-            android:id="@+id/btnf1_1ajustes"
-            style="?android:borderlessButtonStyle"
+            android:id="@+id/btnf1_1_ajustes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minHeight="48dp"
             android:src="@drawable/ic_menu"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.044"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.087"
+            tools:ignore="SpeakableTextPresentCheck" />
+        <ImageButton
+            android:id="@+id/btn1_1_infojuego"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:minHeight="48dp"
+            android:src="@drawable/ic_baseline_info_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.955"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.08"
-            tools:ignore="SpeakableTextPresentCheck" />
+            app:layout_constraintVertical_bias="0.086"
+            tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
 
         <ImageView
             android:id="@+id/imgv1_1imagen2"

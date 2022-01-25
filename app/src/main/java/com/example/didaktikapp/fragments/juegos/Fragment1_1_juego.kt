@@ -2,6 +2,7 @@ package com.example.didaktikapp.fragments.juegos
 
 import com.example.didaktikapp.R
 import `in`.codeshuffle.typewriterview.TypeWriterView
+import android.app.Dialog
 import android.media.MediaPlayer
 import androidx.fragment.app.Fragment
 import android.os.Handler
@@ -17,6 +18,7 @@ import android.widget.TextView
 import android.widget.Button
 import android.widget.ImageButton
 import android.graphics.drawable.AnimationDrawable
+import android.view.Window
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
@@ -44,7 +46,7 @@ class Fragment1_1_juego : Fragment() {
     private lateinit var vistaAnimada: TranslateAnimation
     private lateinit var layout: ConstraintLayout
     private lateinit var customLine: CustomLine
-
+    private lateinit var btnInfoJuego: ImageButton
     private val customLines = arrayListOf<CustomLine>()
 
     private var audio: MediaPlayer? = null
@@ -93,10 +95,10 @@ class Fragment1_1_juego : Fragment() {
         txtv1 = view.findViewById(R.id.txtv1_1azalpena1)
         txtv2 = view.findViewById(R.id.txtv1_1azalpena2)
         txtv3 = view.findViewById(R.id.txtv1_1azalpena3)
-
+        btnInfoJuego= view.findViewById((R.id.btn1_1_infojuego))
         val button: Button = view.findViewById(R.id.btnf1_1siguienteJuego)
         val buttonAgain: Button = view.findViewById(R.id.btnf1_1repetirJuego)
-        val ajustes: ImageButton = view.findViewById(R.id.btnf1_1ajustes)
+        val ajustes: ImageButton = view.findViewById(R.id.btnf1_1_ajustes)
 
         button.setOnClickListener {
             Navigation.findNavController(view)
@@ -115,7 +117,9 @@ class Fragment1_1_juego : Fragment() {
 
             }
         }
-
+        btnInfoJuego.setOnClickListener(){
+            showDialogInfo()
+        }
 
         //Typewriter juego 1 tutorial
         Handler(Looper.getMainLooper()).postDelayed({
@@ -372,6 +376,42 @@ class Fragment1_1_juego : Fragment() {
         }
         return view
     }
+
+    fun showDialogInfo(){
+
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.info_minijuego)
+        dialog.show()
+        dialog.window!!.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+
+        val textInfo = dialog.findViewById<View>(R.id.txtv_infominijuego) as TextView
+        var texto =""
+        //Recojemos datos de shared preferences
+        val sharedPreferences = this.activity?.getSharedPreferences("site", 0)
+        val numero = sharedPreferences?.getString("numero", null)?.toInt()
+        println(numero)
+        when(numero){
+
+            0->  {texto=resources.getString(R.string.ayudajuego1)}
+            1->  {texto=resources.getString(R.string.ayudajuego2)}
+            2->  {texto=resources.getString(R.string.ayudajuego3)}
+            3->  {texto=resources.getString(R.string.ayudajuego4)}
+            4->  {texto=resources.getString(R.string.ayudajuego5)}
+            5->  {texto=resources.getString(R.string.ayudajuego6)}
+
+        }
+        println(texto)
+        if (textInfo!=null){
+
+            textInfo.setText(texto)
+        }
+    }
+
 
     /**
      * Dibuja una linea entre una ImgView y un TextView

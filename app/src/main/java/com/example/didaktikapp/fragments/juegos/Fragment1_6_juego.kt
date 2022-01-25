@@ -2,15 +2,13 @@ package com.example.didaktikapp.fragments.juegos
 
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
 import android.widget.*
@@ -46,7 +44,7 @@ class Fragment1_6_juego : Fragment() {
     private var audio: MediaPlayer? = null
     private var firstTime: Boolean = true
     private lateinit var globalView: View
-
+    private lateinit var btnInfoJuego: ImageButton
     private lateinit var playPauseButton: ImageView
     private lateinit var backwardButton: ImageView
     private lateinit var forwardButton: ImageView
@@ -59,8 +57,7 @@ class Fragment1_6_juego : Fragment() {
         "bizia",
         "kupelan",
         "prezioa",
-        "estimazioa"
-    )
+        "estimazioa")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,7 +80,7 @@ class Fragment1_6_juego : Fragment() {
         val btnrepertir : Button = view.findViewById(R.id.btnf1_6repetirJuego)
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_6_ajustes)
         //val buttonSonido: ImageButton = view.findViewById(R.id.btnf1_6_sonido)
-
+        btnInfoJuego= view.findViewById((R.id.btn1_6_infojuego))
         btnsaltar.setOnClickListener() {
             Navigation.findNavController(view).navigate(R.id.action_fragment1_6_juego_to_fragment2_6_minijuego)
         }
@@ -170,6 +167,9 @@ class Fragment1_6_juego : Fragment() {
             Navigation.findNavController(view)
                 .navigate(R.id.action_fragment1_6_juego_self)
         }
+        btnInfoJuego.setOnClickListener(){
+            showDialogInfo()
+        }
 
         animacionVolumen(view)
 
@@ -189,6 +189,40 @@ class Fragment1_6_juego : Fragment() {
         return view
     }
 
+    fun showDialogInfo(){
+
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.info_minijuego)
+        dialog.show()
+        dialog.window!!.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+
+        val textInfo = dialog.findViewById<View>(R.id.txtv_infominijuego) as TextView
+        var texto =""
+        //Recojemos datos de shared preferences
+        val sharedPreferences = this.activity?.getSharedPreferences("site", 0)
+        val numero = sharedPreferences?.getString("numero", null)?.toInt()
+        println(numero)
+        when(numero){
+
+            0->  {texto=resources.getString(R.string.ayudajuego1)}
+            1->  {texto=resources.getString(R.string.ayudajuego2)}
+            2->  {texto=resources.getString(R.string.ayudajuego3)}
+            3->  {texto=resources.getString(R.string.ayudajuego4)}
+            4->  {texto=resources.getString(R.string.ayudajuego5)}
+            5->  {texto=resources.getString(R.string.ayudajuego6)}
+
+        }
+        println(texto)
+        if (textInfo!=null){
+
+            textInfo.setText(texto)
+        }
+    }
     private fun prepararSpinners() {
         val spinner1Element: Spinner = globalView.findViewById(R.id.juego6_opcion1)
         val spinner1Opts = arrayOf("SELECT","sagardoaren", "ardiaren", "ibaiaren", "basoaren")

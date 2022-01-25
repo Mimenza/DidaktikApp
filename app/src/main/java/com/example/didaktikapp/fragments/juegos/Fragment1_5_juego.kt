@@ -2,6 +2,7 @@ package com.example.didaktikapp.fragments.juegos
 
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
 import android.net.Uri
@@ -38,7 +39,7 @@ class Fragment1_5_juego : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+    private lateinit var btnInfoJuego: ImageButton
     private lateinit var button: Button
     private lateinit var myLayout: View
     private lateinit var video: VideoView
@@ -91,7 +92,7 @@ class Fragment1_5_juego : Fragment() {
         val btnVerVideo: Button = view.findViewById(R.id.btnf1_5_siguienteavideo)
         val btnIrAJuego: Button = view.findViewById(R.id.btnf1_5_siguienteajuego)
         myLayout = view.findViewById<ConstraintLayout>(R.id.mainlayout)
-
+        btnInfoJuego= view.findViewById((R.id.btn1_5_infojuego))
         btnIrAJuego.isVisible=false
 
         //We set a Global View Listener since it is not fill up even with the events onCreatedView...etc
@@ -104,6 +105,9 @@ class Fragment1_5_juego : Fragment() {
                 prepairVestimentaElements()
             }
         })
+        btnInfoJuego.setOnClickListener(){
+            showDialogInfo()
+        }
 
         button.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment1_5_juego_to_fragment2_5_minijuego)
@@ -133,6 +137,40 @@ class Fragment1_5_juego : Fragment() {
         videoTutorial(view)
 
         return view
+    }
+    fun showDialogInfo(){
+
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.info_minijuego)
+        dialog.show()
+        dialog.window!!.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+
+        val textInfo = dialog.findViewById<View>(R.id.txtv_infominijuego) as TextView
+        var texto =""
+        //Recojemos datos de shared preferences
+        val sharedPreferences = this.activity?.getSharedPreferences("site", 0)
+        val numero = sharedPreferences?.getString("numero", null)?.toInt()
+        println(numero)
+        when(numero){
+
+            0->  {texto=resources.getString(R.string.ayudajuego1)}
+            1->  {texto=resources.getString(R.string.ayudajuego2)}
+            2->  {texto=resources.getString(R.string.ayudajuego3)}
+            3->  {texto=resources.getString(R.string.ayudajuego4)}
+            4->  {texto=resources.getString(R.string.ayudajuego5)}
+            5->  {texto=resources.getString(R.string.ayudajuego6)}
+
+        }
+        println(texto)
+        if (textInfo!=null){
+
+            textInfo.setText(texto)
+        }
     }
 
     private fun prepairVestimentaElements() {

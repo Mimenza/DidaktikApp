@@ -14,11 +14,11 @@ class MyPreferences(context:Context) {
 
     }
 
-
-
+    
     private val preferences = PreferenceManager.getDefaultSharedPreferences(context)
 
     var darkMode = preferences.getInt(DARK_STATUS, 0)
+        //Aplica segun el numero metido
         set(value) = preferences.edit().putInt(DARK_STATUS, value).apply()
     var lang = preferences.getInt(LANGUAGE, 0)
         set(value) = preferences.edit().putInt(LANGUAGE, value).apply()

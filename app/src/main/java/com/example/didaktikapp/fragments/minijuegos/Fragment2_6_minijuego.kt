@@ -2,6 +2,7 @@ package com.example.didaktikapp.fragments.minijuegos
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -42,16 +43,9 @@ class Fragment2_6_minijuego : Fragment() {
     private lateinit var cartel: ImageView
     private lateinit var btnsiguiente:Button
     private lateinit var btnrepetir:Button
-
+    private lateinit var btninfominijuego: ImageButton
     private var tiempoCompletarComprobacion = 1000
 
-//    val listaImagenes = listOf(
-//        listOf(R.id.imgV2_3CleanApple1,R.id.imgv2_3cesta),
-//        listOf(R.id.imgV2_3CleanApple2,R.id.imgv2_3cesta),
-//        listOf(R.id.imgV2_3CleanApple3,R.id.imgv2_3cesta),
-//        listOf(R.id.imgV2_3CleanApple4,R.id.imgv2_3cesta),
-//        listOf(R.id.imgV2_3CleanApple5,R.id.imgv2_3cesta),
-//    )
 
     private var manzanaList: MutableList<DragnDropImageLevel> = mutableListOf()
 
@@ -76,11 +70,14 @@ class Fragment2_6_minijuego : Fragment() {
         txtcartel= view.findViewById((R.id.txtv2_6carteltexto))
         btnrepetir = view.findViewById(R.id.btn2_6_repetir)
         btnsiguiente = view.findViewById(R.id.btn2_6_siguiente)
+        btninfominijuego= view.findViewById((R.id.btn2_6_infominijuego))
 
         ajustes.setOnClickListener(){
             (activity as Activity6_Site?)?.menuCheck()
         }
-
+        btninfominijuego.setOnClickListener(){
+            showDialogInfo()
+        }
         view.viewTreeObserver.addOnGlobalLayoutListener(object :
             ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
@@ -188,8 +185,8 @@ class Fragment2_6_minijuego : Fragment() {
                             viewElement.setOnTouchListener(null)
                             viewElement.visibility = View.GONE
                             itemInList.objetivo.visibility = View.GONE
-                            botellaLlena()
                             acierto++
+                            botellaLlena()
                             checkProgress()
                         }
                     }
@@ -260,14 +257,51 @@ class Fragment2_6_minijuego : Fragment() {
     private fun botellaLlena() {
         val txtBotellasLlenas: TextView = globalView.findViewById(R.id.minijuego6_txtbotellasllenas)
         txtBotellasLlenas.text = "x"+(txtBotellasLlenas.text.toString().replace("x","").toInt() + 1).toString()
-        generarVasonTarget()
-
+        if (acierto < 5) {
+            generarVasonTarget()
+        }
     }
 
     private fun checkProgress(){
 
         if (acierto==5){
             starAnimationfun()
+        }
+    }
+
+
+    fun showDialogInfo(){
+
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.info_minijuego)
+        dialog.show()
+        dialog.window!!.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+
+        val textInfo = dialog.findViewById<View>(R.id.txtv_infominijuego) as TextView
+        var texto =""
+        //Recojemos datos de shared preferences
+        val sharedPreferences = this.activity?.getSharedPreferences("site", 0)
+        val numero = sharedPreferences?.getString("numero", null)?.toInt()
+        println(numero)
+        when(numero){
+
+            0->  {texto=resources.getString(R.string.ayudaminijuego1)}
+            1->  {texto=resources.getString(R.string.ayudaminijuego2)}
+            2->  {texto=resources.getString(R.string.ayudaminijuego3)}
+            3->  {texto=resources.getString(R.string.ayudaminijuego4)}
+            4->  {texto=resources.getString(R.string.ayudaminijuego5)}
+            5->  {texto=resources.getString(R.string.ayudaminijuego6)}
+
+        }
+        println(texto)
+        if (textInfo!=null){
+
+            textInfo.setText(texto)
         }
     }
 
@@ -278,7 +312,6 @@ class Fragment2_6_minijuego : Fragment() {
         btnrepetir.visibility = View.VISIBLE
         cartel.visibility=View.VISIBLE
         txtcartel.visibility=View.VISIBLE
-
 
 
         vistaAnimada = TranslateAnimation(-1000f, 0f, 0f, 0f)

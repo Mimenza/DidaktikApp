@@ -143,8 +143,6 @@ class Fragment5_ajustes : Fragment() {
     //IDIOMAS DIALOG
     fun chooseLanguageDialog() {
 
-
-
         val spanish = getString(R.string.español)
         val euskera = getString(R.string.euskera)
 
@@ -188,12 +186,8 @@ class Fragment5_ajustes : Fragment() {
         val config = Configuration()
         config.locale =locale
         requireContext().resources?.updateConfiguration(config, requireContext().resources.displayMetrics)
-        //   val editor = getSharedPreferences("settings", Context.MODE_PRIVATE).edit()
-        //editor.putString("my_lang", lang)
-        // editor.apply()
+
     }
-
-
 
     fun showAcercaDeInfo(){
         var dialog = Dialog(requireContext())

@@ -1,6 +1,7 @@
 package com.example.didaktikapp.fragments.juegos
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.os.Bundle
 import android.view.*
 import android.widget.*
@@ -23,6 +24,7 @@ import android.util.Log
 import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
 import androidx.core.view.isVisible
+import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.clone
 import kotlinx.android.synthetic.main.fragment1_4_juego.*
 import kotlinx.coroutines.launch
@@ -44,7 +46,7 @@ class Fragment1_4_juego : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var layout: ConstraintLayout
-
+    private lateinit var btnInfoJuego: ImageButton
     private lateinit var constraintFila1: View
 
     private var myLineTest: CustomLine? = null
@@ -82,7 +84,10 @@ class Fragment1_4_juego : Fragment() {
         constraintMain = view.findViewById(R.id.juego4_constraintMain)
         val button: Button = view.findViewById(R.id.btnf1_4_siguiente)
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_4_ajustes)
-
+        btnInfoJuego= view.findViewById((R.id.btn1_4_infojuego))
+        btnInfoJuego.setOnClickListener(){
+            showDialogInfo()
+        }
 
 
         button.setOnClickListener(){
@@ -102,9 +107,6 @@ class Fragment1_4_juego : Fragment() {
                 typewriter(view)
             }
         }, 2000)
-
-
-
 
         //Animacion manzana al iniciar el juego
        starAnimationfun(view)
@@ -131,11 +133,6 @@ class Fragment1_4_juego : Fragment() {
             ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 view.viewTreeObserver.removeOnGlobalLayoutListener(this)
-
-
-                //constraintFila1 = view.findViewById(R.id.fila1)
-                //val childListFila1: ViewGroup = constraintFila1 as ViewGroup
-                //println("******** CHILD COUNT: " + childListFila1.childCount)
                 prepararJuego()
                 button.visibility = View.VISIBLE
             }
@@ -144,103 +141,70 @@ class Fragment1_4_juego : Fragment() {
         return view
     }
 
+    // SOPA DE LETRAS VARAIBLES
     private var letras = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
     private var letraComodin = "•"
     private var palabraFormada: String = ""
     private var primeraLetraSeleccionada: TextView? = null
     private var drawingLine: CustomLine? = null
-    private var letraPosVector: ArrayList<Int>? = null
-
     var storedLines = arrayListOf<CustomLine>()
-
-    var letterList = arrayListOf<ArrayList<String>>(
-//        arrayListOf("A","B","C","D","E"),
-    )
-
-    var letterObjectList = arrayListOf<ArrayList<TextView>>(
-//        arrayListOf("A","B","C","D","E"),
-    )
-
-
-    private var arrayPlabrasCercanas = arrayListOf<ArrayList<Any>>(
-        //arrayListOf(1,arrayListOf<Int>())
-    )
-
+    var letterList = arrayListOf<ArrayList<String>>()
+    var letterObjectList = arrayListOf<ArrayList<TextView>>()
+    private var arrayPlabrasCercanas = arrayListOf<ArrayList<Any>>()
     private var moveSelected: Any? = null
     private var ultimaPosFila: Int? = null
     private var ultimaPosCol: Int? = null
     private var drawStartX: Float? = null
     private var drawStartY: Float? = null
-
-
     private var palabrasPintadas = arrayListOf<String>()
-
-    //private var palabras = arrayListOf<String>("TXISTULARIAK","SAGARDANTZA","TXALAPARTA","TRIKITIXA","ERAKUSKETA",
-    //    "SALMENTA","DASTATZEA","BILKETA","GARBTIZEA")
-
     private var palabras = arrayListOf<String>("SAGARDANTZA", "SALMENTA", "TRIKITIXA", "TXALAPARTA", "GARBITZEA", "DASTATZEA", "TXISTULARIAK", "BILKETA", "ERAKUSKETA")
-
     private var palabrasEncontradas = arrayListOf<String>()
-
     private var filasHuecosLibres = arrayListOf<Int>()
-    private var colsHuecosLibres = arrayListOf<Int>()
+    private var palabraPreparada: String = ""
 
-    private fun prepararJuego() {
-        //Primero generamos la matriz limpia
-        var letrasAmount = 0
-        for (i in 0 until nFilas) {
-            var filaLetterList = arrayListOf<String>()
-            letterList.add(filaLetterList)
-            for (k in 0 until nCols) {
-                filaLetterList.add(letraComodin)
-                letrasAmount++
-            }
-        }
-        //println("************ LETRAS AMOUNT: " + letrasAmount)
-        //Log.d("this is my array", "arr: " + letterList);
-        //Seleccionamos una palabra aleatoria de la lista
-        //seleccionarPalabraAleatoria()
-        //convertComodinToRandomLetters()
-        escribirPalabrasModoSimple()
-        actualizarPalabrasRestantes()
-        rotarMatriz()
-        //voltearMatriz()
-        // La pintamos sobre la sopa
-        pintarSopa()
-    }
-
-    private fun rotarMatriz() {
-        var retArray = arrayListOf<ArrayList<String>>()
-        retArray.addAll(letterList)
-        Log.d("this is my array", "arr: " + retArray);
-
-        //retArray = letterList.toArray()
-
-        //var capas: Int = nFilas / 2
-        var capas: Int = retArray.size
-        println("******** Matriz Size: " + capas)
-        for (i in 0 until retArray.size) {
-            for (k in 0 until retArray.size) {
-                //letterList[i][k] = retArray[capas-k-1][i]
-                letterList[i][k] = letterList[capas - 1 - k][i]
-                letterList[capas - 1 - k][i] = letterList[capas - 1 - i][capas - 1 - k]
-                letterList[capas - 1 - i][capas - 1 - k] = letterList[k][capas - 1 - i]
-                letterList[k][capas - 1 - i] = retArray[i][k]
-            }
-        }
-
-        /*
-        for ((i, fila) in retArray!!.withIndex()) {
-            for ((k, col) in retArray!!.withIndex()) {
-                letterList[i][k] = retArray[capas-k-1][i]
-            }
-        }
-
-         */
-    }
-
+    //Variables Juego Verdadero/Falso
     private var respuestasCorrectas = arrayListOf<Int>(1,3,5,8,9,12,13,16,17) // Radio button index Respuestas correctas
 
+
+    fun showDialogInfo(){
+
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.info_minijuego)
+        dialog.show()
+        dialog.window!!.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+
+        val textInfo = dialog.findViewById<View>(R.id.txtv_infominijuego) as TextView
+        var texto =""
+        //Recojemos datos de shared preferences
+        val sharedPreferences = this.activity?.getSharedPreferences("site", 0)
+        val numero = sharedPreferences?.getString("numero", null)?.toInt()
+        println(numero)
+        when(numero){
+
+            0->  {texto=resources.getString(R.string.ayudajuego1)}
+            1->  {texto=resources.getString(R.string.ayudajuego2)}
+            2->  {texto=resources.getString(R.string.ayudajuego3)}
+            3->  {texto=resources.getString(R.string.ayudajuego4)}
+            4->  {texto=resources.getString(R.string.ayudajuego5)}
+            5->  {texto=resources.getString(R.string.ayudajuego6)}
+
+        }
+        println(texto)
+        if (textInfo!=null){
+
+            textInfo.setText(texto)
+        }
+    }
+
+
+    //Funciones Juego Verdadero / Flaso
+
+    //Funcion que gestiona el juego de verdadero falso
     private fun prepararPreguntas() {
         limpiarLineas()
         val sopaLayout: LinearLayout = globalView.findViewById(R.id.matrizprincipal)
@@ -256,6 +220,7 @@ class Fragment1_4_juego : Fragment() {
 
         val pregLayout: LinearLayout = globalView.findViewById(R.id.juego4_linearlayout_preguntas)
 
+        //Comprobamos las respuestas mediante bucles para no tener que ir elemento por elemento
         btnComprobarPreguntas.setOnClickListener() {
             var vFila1: ArrayList<View>? = getChildLLinearLayoutCustom(pregLayout)
             var todosSeleccionados: Boolean = true
@@ -271,9 +236,15 @@ class Fragment1_4_juego : Fragment() {
                     break
                 }
             }
+            //Si todas estan seleccionadas, se pasara a comprobar que sean correctas las opciones seleccionadas
+            // Caso contrario, se mostrara mensajes de error/fallo
             if (todosSeleccionados) {
                 if (todosAcertados) {
                     Toast.makeText(requireContext(), "ERES UN CRACK!", Toast.LENGTH_SHORT).show()
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        //llamamos a la animacion para animar a upelio
+                        Navigation.findNavController(it).navigate(R.id.action_fragment1_4_juego_to_fragment2_4_minijuego)
+                    }, 1000)
                 } else {
                     Toast.makeText(requireContext(), "VAYA ! HAS FALLADO!", Toast.LENGTH_SHORT).show()
                 }
@@ -284,21 +255,40 @@ class Fragment1_4_juego : Fragment() {
         }
     }
 
-
+    //Con este metodo obtenemos los hijos directos de un elemento
     private fun getChildLLinearLayoutCustom(pLinearElement: View): ArrayList<View>? {
         val result = ArrayList<View>()
         val childList: ViewGroup = pLinearElement as ViewGroup
         for (i in 0 until childList.childCount) {
             val child = childList.getChildAt(i)
             if (child is RadioGroup) {
-                println("************** CHILD INSTANCE OF: " + child )
                 result.add(child)
             }
-
         }
         return result
     }
 
+    //-------------------------------------------------------------------------------
+
+    // FUNCIONES PARA EL JUEGO DE LA SOPA DE LETRAS
+    private fun prepararJuego() {
+        //Primero generamos la matriz limpia de n filas n columnas
+        for (i in 0 until nFilas) {
+            var filaLetterList = arrayListOf<String>()
+            letterList.add(filaLetterList)
+            for (k in 0 until nCols) {
+                filaLetterList.add(letraComodin)
+            }
+        }
+        //Metodos para preparar la sopa de letras
+        escribirPalabrasModoSimple()
+        convertComodinToRandomLetters()
+        actualizarPalabrasRestantes()
+        voltearMatriz()
+        pintarSopa()
+    }
+
+    //Este metodo actuaiza las palabras restantes de la sopa de letras
     private fun actualizarPalabrasRestantes() {
         val palabrasRestantesElement: TextView = globalView.findViewById(R.id.juego4_sopa_palabras)
         var palabrasRestantes = ""
@@ -315,8 +305,8 @@ class Fragment1_4_juego : Fragment() {
         palabrasRestantesElement.text = palabrasRestantes
     }
 
+    // Metodo para escribir las palabras sobre la matriz
     private fun escribirPalabrasModoSimple() {
-        //TODO: This might could be moved to an constant class
 
         // #Palabra SAGARDANTZA
         letterList[0][1] = "S"
@@ -421,13 +411,9 @@ class Fragment1_4_juego : Fragment() {
         letterList[8][11] = "E"
         letterList[9][11] = "A"
 
-        //convert0ToRandomLetters()
-        //#SALMENTZA
-        //for (i in 3 until letterList[11].size-1) {
-         //   letterList[11][i] = "SALMENTZA".get(i).toString()
-        //}
     }
 
+    //Metodo para convertir las letras que no formen parte de la palabra en letras aleatorias
     private fun convertComodinToRandomLetters() {
         for (i in 0 until letterList.size) {
             for (k in 0 until letterList[i].size) {
@@ -440,51 +426,25 @@ class Fragment1_4_juego : Fragment() {
         }
     }
 
-    private var palabraPreparada: String = ""
-
+    // Pintamos la sopa de letra sobre el layout
     private fun pintarSopa() {
-        /*
-        val filaRandom = (0 until filasHuecosLibres.size-1).random()
-        for ((i, value) in letterList[filaRandom].withIndex()) {
-            if (i <= palabraPreparada.length-1 ) {
-                letterList[filaRandom][i] = palabraPreparada.get(i).toString()
-            } else {
-                //break
-            }
-        }
-
-         */
-
-        //PINTAR
         for (i in 0 until letterList.size) {
-            var filaLetterList = arrayListOf<String>()
             var filaLetterElementList = arrayListOf<TextView>()
-            //letterList.add(filaLetterList)
             letterObjectList.add(filaLetterElementList)
             var nuevaFila = LinearLayout(requireContext())
             val paramsLinear: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
             )
             paramsLinear.weight = nCols.toFloat()
-            var colorlinear: Int = Color.argb(100, 80,80,80)
-            if (i%2 == 0) {
-                colorlinear = Color.argb(100, 220,40,40)
-            }
-            //nuevaFila.setBackgroundColor(colorlinear)
             nuevaFila.setLayoutParams(paramsLinear)
             nuevaFila.setOrientation(LinearLayout.HORIZONTAL)
             matrizMain.addView(nuevaFila)
 
             for (k in 0 until letterList[i].size) {
-                val letrasLength = letras.length
-                val randomLetter = (0 until letrasLength-1).random()
                 var letraElement = TextView(requireContext())
                 filaLetterElementList.add(letraElement)
                 letraElement.id = k+(i*nCols)
-                //println("********** GENERATED ID: " + letraElement.id)
-                //letraElement.text = letras.substring(randomLetter,randomLetter+1)
                 letraElement.text = letterList[i][k]
-                //filaLetterList.add("0")
                 letraElement.textSize = 25.toFloat()
                 letraElement.width = nuevaFila.width/nCols
                 letraElement.gravity = Gravity.CENTER
@@ -497,36 +457,32 @@ class Fragment1_4_juego : Fragment() {
                 letraElement.setLayoutParams(params)
                 nuevaFila.addView(letraElement)
                 letraElement.setOnTouchListener(listener)
-                val rnd = Random()
-                val color: Int = Color.argb(100, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
-                //val color: Int = Color.argb(100, 80,80,80)
-                //letraElement.setBackgroundColor(color)
                 letraElement.setBackgroundResource(R.drawable.roundedcorners)
                 letraElement.setClipToOutline(true)
-                letraElement.gravity = Gravity.CENTER
-                //println("*********************** ANCHO/ALTO: ${letraElement.width} / ${letraElement.getMeasuredHeight()}")
             }
         }
     }
 
+    //Listener que esta a la escucha del click y del movimiento de las letras
     @SuppressLint("ClickableViewAccessibility")
     var listener = View.OnTouchListener { viewElement, motionEvent ->
         val vLetra = viewElement as TextView
         val action = motionEvent.action
         when(action) {
             MotionEvent.ACTION_DOWN -> {
+                //Bajo esta condicion, obtenemos la primera letra seleccioanda
                 if (primeraLetraSeleccionada == null) {
                     primeraLetraSeleccionada = vLetra
-                    println("********** PRIMERA LETRA SELECCIONADA: " + vLetra.text.toString())
                     encontrarLetraEnMatriz()
                 }
             }
             MotionEvent.ACTION_MOVE -> {
                 if (primeraLetraSeleccionada != null && moveSelected == null) {
+                    //Si la direccion del movimiento no esta definida, se llama a este metodo
                     selectMoveType(motionEvent.rawX, motionEvent.rawY)
                 } else {
+                    // Si tenemos la direccion del movimiento se realizaran comprobaciones SOLO DE LA SIGUIENTE LETRA POSIBILE
                     if (moveSelected != null) {
-
                         var choosenMove = moveSelected as ArrayList<Int>
                         if (letterObjectList.getOrNull(ultimaPosFila!!+choosenMove[0]) != null) {
                             if (letterObjectList[ultimaPosFila!!+choosenMove[0]].getOrNull(ultimaPosCol!!+choosenMove[1]) != null) {
@@ -539,12 +495,10 @@ class Fragment1_4_juego : Fragment() {
                                 var dedoX = motionEvent.rawX
                                 var dedoY = motionEvent.rawY
                                 if (dedoX >= palPosX && dedoY >= palPosY && dedoX <= palPosX+palSizeX && dedoY <= palPosY+palSizeY) {
-                                    println("******** NUEVA LETRA ENCONTRADA: " + letterObjectList[ultimaPosFila!!+choosenMove[0]][ultimaPosCol!!+choosenMove[1]].text.toString())
                                     limpiarLinea()
                                     drawingLine = CustomLine(requireContext(), drawStartX!!.toFloat(), drawStartY!!.toFloat(), (palPosX+palSizeX/2).toFloat(), (palPosY+palSizeY/2).toFloat(), 20F, 100, 40, 103, 220)
                                     constraintMain.addView(drawingLine)
                                     palabraFormada = palabraFormada+(letterObjectList[ultimaPosFila!!+choosenMove[0]][ultimaPosCol!!+choosenMove[1]].text.toString())
-                                    println("*********** PALABRA ACTUAL: " + palabraFormada)
                                     ultimaPosFila = ultimaPosFila!! + choosenMove[0]
                                     ultimaPosCol = ultimaPosCol!! + choosenMove[1]
                                 }
@@ -552,26 +506,19 @@ class Fragment1_4_juego : Fragment() {
                             } else {
                                 viewElement.setOnTouchListener(null)
                                 reenableTouch(viewElement)
-                                //viewElement.setOnTouchListener(this)
                             }
                         } else {
                             viewElement.setOnTouchListener(null)
                             reenableTouch(viewElement)
-                            //viewElement.setOnTouchListener(listener)
                         }
-
-
                     }
                 }
-                //viewElement.x = motionEvent.rawX - viewElement.width/2
-                //viewElement.y = motionEvent.rawY - viewElement.height/2
-
             }
             MotionEvent.ACTION_UP -> {
+                // Si se levanta el dedo, se comprobara la palabra formada y se restableceran las variables
                 comprobarPalabraEncontrada()
                 palabraFormada = ""
                 primeraLetraSeleccionada = null
-                //letraPosVector = null
                 arrayPlabrasCercanas.clear()
                 moveSelected = null
                 ultimaPosFila = null
@@ -583,15 +530,16 @@ class Fragment1_4_juego : Fragment() {
         true
     }
 
+    //Metodo creado para llamar a itself, dado que no puedes llamar al mismo metodo desde donde ejecutas la accion
     private fun reenableTouch(viewElement: View) {
         viewElement.setOnTouchListener(listener)
     }
 
+    //Metodo para comprobar que elemento es de la matriz
     private fun encontrarLetraEnMatriz() {
         for ((i, fila) in letterObjectList.withIndex()) {
             for ((k, bLetra) in fila.withIndex()) {
                 if (bLetra == primeraLetraSeleccionada) {
-                    //ultimoMovimiento = arrayListOf<Int>(i,k)
                     ultimaPosFila = i
                     ultimaPosCol = k
                     val location = IntArray(2)
@@ -603,7 +551,6 @@ class Fragment1_4_juego : Fragment() {
                     drawStartX = palPosX.toFloat()+palSizeX/2
                     drawStartY = palPosY.toFloat()+palSizeY/2
                     palabraFormada = palabraFormada+(bLetra.text.toString())
-                    println("********** LETRA ENCONTRADA EN FILA: ${i} COLUMNA: ${k}")
                     encontrarLetrasCercanas(i,k)
                     break
                 }
@@ -611,6 +558,7 @@ class Fragment1_4_juego : Fragment() {
         }
     }
 
+    // Variable para determinar que tipo de movimiento son posibles
     private var movesTypesInMatrix = arrayListOf<ArrayList<Int>>(
         //Mirar foto para entender los movimentos posibles
         arrayListOf(0,1),
@@ -750,18 +698,6 @@ class Fragment1_4_juego : Fragment() {
                 break
             }
         }
-
-    }
-
-    private fun tipoMovimiento() {
-
-    }
-
-    private fun findDiagDchaLibres() {
-
-    }
-
-    private fun findDiagIzqLibres() {
 
     }
 

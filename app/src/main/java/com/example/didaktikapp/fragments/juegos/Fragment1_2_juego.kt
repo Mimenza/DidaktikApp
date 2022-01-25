@@ -1,25 +1,16 @@
+
 package com.example.didaktikapp.fragments.juegos
 
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
-<<<<<<< HEAD
-<<<<<<< HEAD
-import android.app.Activity
-import android.content.Intent
-=======
->>>>>>> 03f0ffeb8e787aa033b03a3787e04eabadc0736e
-=======
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
->>>>>>> 476ff70d4aaf330c3a837e132b1566150764857e
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
-import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.os.Handler
 import android.provider.MediaStore
 import androidx.fragment.app.Fragment
@@ -31,7 +22,6 @@ import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
 import android.widget.*
 import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import com.example.didaktikapp.Model.Constantsjuego2
@@ -42,13 +32,7 @@ import com.example.didaktikapp.activities.Activity6_Site
 import kotlinx.android.synthetic.main.fragment1_2_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import java.io.File
-import java.io.IOException
 import java.util.ArrayList
-import androidx.core.app.ActivityCompat.startActivityForResult
-
-
-
 
 class Fragment1_2_juego : Fragment(), View.OnClickListener {
     private val thisJuegoId = 2
@@ -72,23 +56,8 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
     private lateinit var vistaanimada: TranslateAnimation
     private var mCorrectAnswers: Int = 0
     private var audio: MediaPlayer? = null
-<<<<<<< HEAD
-<<<<<<< HEAD
-    private lateinit var photoPath:String
-    private  var REQUEST_CODE = 200
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-
-    }
-=======
->>>>>>> 03f0ffeb8e787aa033b03a3787e04eabadc0736e
-=======
     private var REQUEST_CODE= 200
->>>>>>> 476ff70d4aaf330c3a837e132b1566150764857e
+    private var introFinished: Boolean = false
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -121,6 +90,7 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         }
 
         //Typewriter juego 2 tutorial
+        introFinished = false
         Handler().postDelayed({
             if (getView() != null) {
                 typewriter(view)
@@ -207,39 +177,42 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
     }
 
     private fun exitAnimationfun(view: View) {
-        //escondemos la manzanda de la animacion
-        val upelioanimado = view.findViewById(R.id.imgv1_2_upelio2) as ImageView
-        upelioanimado.isVisible = false
+        if (!introFinished) {
+            //escondemos la manzanda de la animacion
+            val upelioanimado = view.findViewById(R.id.imgv1_2_upelio2) as ImageView
+            upelioanimado.isVisible = false
 
-        //animacion salido upelio
-        vistaanimada = TranslateAnimation(0f, 1000f, 0f, 0f)
-        vistaanimada.duration = 2000
+            //animacion salido upelio
+            vistaanimada = TranslateAnimation(0f, 1000f, 0f, 0f)
+            vistaanimada.duration = 2000
 
-        //vistaanimada.fillAfter = true
-        val upelio = view.findViewById(R.id.imgv1_2_upelio) as ImageView
-        upelio.startAnimation(vistaanimada)
+            //vistaanimada.fillAfter = true
+            val upelio = view.findViewById(R.id.imgv1_2_upelio) as ImageView
+            upelio.startAnimation(vistaanimada)
 
-        //animacion fondo gris
-        Handler().postDelayed({
-            if (getView() != null) {
-                val txt_animacion = view.findViewById(R.id.txtv1_2fondogris) as TextView
-                val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
-                txt_animacion.startAnimation(aniFade)
-                txtv1_2tutorialjuego2.startAnimation(aniFade)
-                txtv1_2tutorialjuego2.isVisible = false
-                txt_animacion.isVisible = false
-                //Habilitar botones cuando desaparece la animacion
-                val buttonAjustes = view.findViewById(R.id.btnf1_2_ajustes) as ImageButton
-                buttonAjustes.isEnabled=true
-                val buttonSiguiente = view.findViewById(R.id.btnf1_2siguiente) as Button
-                buttonSiguiente.isEnabled=true
-                question1_answer1.isEnabled = true
-                question1_answer2.isEnabled = true
-                question1_answer3.isEnabled = true
-                question1_answer4.isEnabled = true
+            //animacion fondo gris
+            Handler().postDelayed({
+                if (getView() != null) {
+                    val txt_animacion = view.findViewById(R.id.txtv1_2fondogris) as TextView
+                    val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+                    txt_animacion.startAnimation(aniFade)
+                    txtv1_2tutorialjuego2.startAnimation(aniFade)
+                    txtv1_2tutorialjuego2.isVisible = false
+                    txt_animacion.isVisible = false
+                    //Habilitar botones cuando desaparece la animacion
+                    val buttonAjustes = view.findViewById(R.id.btnf1_2_ajustes) as ImageButton
+                    buttonAjustes.isEnabled = true
+                    val buttonSiguiente = view.findViewById(R.id.btnf1_2siguiente) as Button
+                    buttonSiguiente.isEnabled = true
+                    question1_answer1.isEnabled = true
+                    question1_answer2.isEnabled = true
+                    question1_answer3.isEnabled = true
+                    question1_answer4.isEnabled = true
+                    introFinished = true
 
-            }
-        }, 1000)
+                }
+            }, 1000)
+        }
     }
 
     private fun setQuestion() {
@@ -317,25 +290,6 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
                         mCurrentPosition <= mQuestionList!!.size -> {
                             setQuestion()
                         }
-
-
-                    }
-                }else{
-               /*Si ya ha clickado en la respuesta, cojemos la pregunta de la posicion en la que esta.
-                 Si la respuesta correcta no es igual a la respuesta que ha elegido el usuario, sacamos mensaje de error.
-                   sino, añadimos la respuesta correcta a la variable CorrectAnswers para despues mostrar los aciertos
-                   al acabar el quiz. La respuesta correcta va fuera del if, ya que siempre saldrá independientemente de si
-                   el usuario ha acertado o ha fallado*/
-                    val question= mQuestionList?.get(mCurrentPosition-1)
-                        if (question!!.correctAnswer!=mSelectedOptionPosition){
-
-                            answerView(mSelectedOptionPosition, R.drawable.juego2_error_option_border_bg)
-
-                        }else{
-
-                           // takePicture()
-                            mCorrectAnswers++
-
                         else -> {
                             val sharedPreferences =requireContext().getSharedPreferences("scoreGame2", 0)
                             var editor = sharedPreferences.edit()
@@ -343,7 +297,6 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
                             editor.putString("correctAnswers", mCorrectAnswers.toString()).apply()
                             /*Nos redirecciona al fragment de resultados*/
                             view?.findNavController()?.navigate(R.id.action_fragment1_2_juego_to_fragment1_2_juego_results)
-
                         }
                     }
                 } else {
@@ -360,7 +313,7 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
                             R.drawable.juego2_error_option_border_bg  )
 
                     } else {
-                         upelio1.isVisible=false
+                        upelio1.isVisible=false
                         upelio2.isVisible=false
                         takePicture()
 
@@ -388,92 +341,27 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
             }
         }
     }
-     //Función para sacar foto
+    //Función para sacar foto
     fun takePicture() {
 
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(cameraIntent, REQUEST_CODE)
-  }
+    }
 
     //Función para guardar foto
-  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-      super.onActivityResult(requestCode, resultCode, data)
-      if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE && data != null){
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE && data != null){
 
 
 
-          imgv1_2defaultimage.setImageBitmap(data.extras?.get("data") as Bitmap)
-          audio?.stop()
-          return
+            imgv1_2defaultimage.setImageBitmap(data.extras?.get("data") as Bitmap)
+            audio?.stop()
+            return
 
-
-      }
-  }
-
-
-
-    //Foto cuando acierta la respuesta
-
-    fun takePicture(){
-
-
-        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(intent, REQUEST_CODE)
-         println ("Hola")
-        if (intent.resolveActivity(requireContext().packageManager)!=null){
-
-            var photoFile:File? = null
-
-            try {
-                //Si no hay foto, creamos
-                photoFile=createImageFile()
-            }catch (e: IOException){
-                if (photoPath!= null){
-
-                    val photoUri= photoFile?.let {
-                        FileProvider.getUriForFile(
-                            requireContext(),
-                            "com.example.android.didaktikapp",
-                            it )
-                    }
-
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
-                    startActivityForResult(intent, REQUEST_CODE)
-                }
-            }
 
         }
-
     }
-
-    fun createImageFile (): File?{
-
-    val fileName="MyPicture"
-        val storageDir= requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-
-    val image= File.createTempFile(
-        //Nombre de la foto
-        fileName,
-        //Tipo de foto
-        "jpg",
-        //Su directorio
-        storageDir )
-
-        //Su ruta
-        photoPath= image.absolutePath
-        return image
-    }
-
-    override fun onActivityResult(requestCode:Int, resultCode:Int, data:Intent?) {
-
-        if (resultCode==REQUEST_CODE && resultCode== Activity.RESULT_OK){
-         //Metemos la foto nueva en nuestro default image
-           imgv1_2defaultimage.rotation=90f
-           imgv1_2defaultimage.setImageURI(Uri.parse(photoPath))
-       }
-
-    }
-
 
 
 
@@ -532,3 +420,4 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         audio?.start()
     }
 }
+

@@ -55,9 +55,10 @@ class Fragment1_5_juego : Fragment() {
     val listaImagenes = listOf(
         listOf(R.id.img_gorro_move,R.id.img_gorro_destino),
         listOf(R.id.img_ropa_move,R.id.img_ropa_destino),
-        listOf(R.id.img_guantedcha_move,R.id.img_guantedcha_destino),
-        listOf(R.id.img_guanteizq_move,R.id.img_guanteizq_destino),
-        listOf(R.id.img_botas_move,R.id.img_botas_destino),
+        listOf(R.id.juego5_zp_manodcha_move,R.id.juego5_zp_manodcha),
+        listOf(R.id.ijuego5_manoizq_move,R.id.juego5_manoizq_destino),
+        listOf(R.id.img_botasizq_move,R.id.img_botasizq_destino),
+        listOf(R.id.img_botasdcha_move,R.id.img_botasdcha_destino),
         /*
         // OLD LIST (DONT REMOVE)
         listOf(R.id.imgOrigenCamisa,R.id.imgObjetivoCamisa),
@@ -329,10 +330,11 @@ class Fragment1_5_juego : Fragment() {
         btnf1_5_siguiente.isVisible=false
 
         //Habilitamos las piezas de los juegos
-        img_botas_move.isVisible=true
+        img_botasdcha_move.isVisible=true
+        img_botasizq_move.isVisible=true
         img_gorro_move.isVisible=true
-        img_guantedcha_move.isVisible=true
-        img_guanteizq_move.isVisible=true
+        juego5_zp_manodcha_move.isVisible=true
+        ijuego5_manoizq_move.isVisible=true
         img_ropa_move.isVisible=true
 
     }

@@ -410,7 +410,6 @@ class Fragment1_4_juego : Fragment() {
         letterList[7][11] = "Z"
         letterList[8][11] = "E"
         letterList[9][11] = "A"
-
     }
 
     //Metodo para convertir las letras que no formen parte de la palabra en letras aleatorias
@@ -428,10 +427,12 @@ class Fragment1_4_juego : Fragment() {
 
     // Pintamos la sopa de letra sobre el layout
     private fun pintarSopa() {
+        // Creamos n cantidad de linearLayouts(FILAS) que son los que tendran cada letrs
         for (i in 0 until letterList.size) {
             var filaLetterElementList = arrayListOf<TextView>()
             letterObjectList.add(filaLetterElementList)
             var nuevaFila = LinearLayout(requireContext())
+            // Aplicamos los parametros del layout para que se ajuste al espacio del layout padre de estos linear
             val paramsLinear: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
             )
@@ -439,7 +440,7 @@ class Fragment1_4_juego : Fragment() {
             nuevaFila.setLayoutParams(paramsLinear)
             nuevaFila.setOrientation(LinearLayout.HORIZONTAL)
             matrizMain.addView(nuevaFila)
-
+            // creamos m cantidad de letras (COLUMNAS) que estaran dentro de cada layout que hemos creado previamente
             for (k in 0 until letterList[i].size) {
                 var letraElement = TextView(requireContext())
                 filaLetterElementList.add(letraElement)
@@ -560,7 +561,7 @@ class Fragment1_4_juego : Fragment() {
 
     // Variable para determinar que tipo de movimiento son posibles
     private var movesTypesInMatrix = arrayListOf<ArrayList<Int>>(
-        //Mirar foto para entender los movimentos posibles
+        // Lista de todos los movimientos que se presentan en el juego como vectores
         arrayListOf(0,1),
         arrayListOf(1,1),
         arrayListOf(1,0),
@@ -571,14 +572,17 @@ class Fragment1_4_juego : Fragment() {
         arrayListOf(-1,1),
     )
 
+    /*
+        El siguiente metodo encuentra las letras mas cercanas a la que se ha hecho click
+        basandose en los movimientos posibles del metodo anterior
+        Si la palabra da por valido que dicho movimiento es posible, se añadira a una lista de posibles
+        movimientos para limitarlo solo a la segunda letra
+     */
+
     private fun encontrarLetrasCercanas(pFila: Int, pCol: Int) {
         for ((i, move) in movesTypesInMatrix.withIndex()) {
-            //Primero comprobamos que la siguiente/anterior fila exista
             if (letterList.getOrNull(pFila+move[0]) != null) {
-                //Comprbamos que dentro de la fila exista la siguiente/anterior letra
                 if (letterList[pFila+move[0]].getOrNull(pCol+move[1]) != null) {
-                    //println("********* LETRA CERCANA ENCONTRADA: " + letterObjectList[pFila+move[0]][pCol+move[1]].text.toString())
-                    //var arrayPalabraCercana = arrayListOf<Any>()
                     var datosPalabraCercana = arrayListOf<Any>(
                         letterObjectList[pFila+move[0]][pCol+move[1]],
                         move
@@ -587,9 +591,9 @@ class Fragment1_4_juego : Fragment() {
                 }
             }
         }
-        //Log.d("this is my array", "arr: " + arrayPlabrasCercanas);
     }
 
+    // Con este metodo vamos a determinar que tipo de movimiento se seguira tras tener seleccionadas 2 letras
     private fun selectMoveType(rawX: Float, rawY: Float) {
         if (moveSelected == null) {
             for ((i, palabraCercana) in arrayPlabrasCercanas.withIndex()) {
@@ -606,7 +610,6 @@ class Fragment1_4_juego : Fragment() {
                         ultimaPosFila = ultimaPosFila!! + choosenMove[0]
                         ultimaPosCol = ultimaPosCol!! + choosenMove[1]
                         palabraFormada = palabraFormada+((palabraCercana[0] as TextView).text.toString())
-
                         val location = IntArray(2)
                         (palabraCercana[0] as View).getLocationOnScreen(location);
                         var palPosX = location[0]
@@ -616,17 +619,15 @@ class Fragment1_4_juego : Fragment() {
                         limpiarLinea()
                         drawingLine = CustomLine(requireContext(), drawStartX!!.toFloat(), drawStartY!!.toFloat(), (palPosX+palSizeX/2).toFloat(), (palPosY+palSizeY/2).toFloat(), 20F, 100, 40, 103, 220)
                         constraintMain.addView(drawingLine)
-
-                        println("******** MOVIMIENTO SELECCIONADO: ${choosenMove[0]} / ${choosenMove[1]} LETRA: ${(palabraCercana[0] as TextView).text.toString()}" )
-                        println("*********** PALABRA ACTUAL: " + palabraFormada)
                     }
                 }
             }
         }
     }
 
+    // Al llamar a este metodo, comprobaremos el valor de la variable de la 'Palabra Formada' con la lista de todas
+    // las palabras
     private fun comprobarPalabraEncontrada() {
-
         for ((index, value) in palabras.withIndex()) {
             if (palabraFormada.length == value.length) {
                 if (palabraFormada.equals(value)) {
@@ -650,6 +651,7 @@ class Fragment1_4_juego : Fragment() {
         limpiarLinea()
     }
 
+    // Mediante este metodo limpiaremos la linea previamente dibujada en caso de que se seleccione una nueva letra
     private fun limpiarLinea() {
         if (drawingLine!= null) {
             constraintMain.removeView(drawingLine)
@@ -657,6 +659,8 @@ class Fragment1_4_juego : Fragment() {
         }
     }
 
+    // Metodo para limpiar todas las lineas de todas las palabras marcadas en la sopa de letras
+    // Este metodo se usa para cambiar a la parte de verdadero / falso
     private fun limpiarLineas() {
         for ((index,value) in storedLines.withIndex()) {
             constraintMain.removeView(value)
@@ -664,6 +668,7 @@ class Fragment1_4_juego : Fragment() {
         storedLines.clear()
     }
 
+    // Metodo para genrar nuevas posibilidades de la matriz (Actualmente hay un total de 4 posibilidades)
     private fun voltearMatriz() {
         val matrizOption = (1 until 4).random()
         when (matrizOption) {
@@ -685,36 +690,6 @@ class Fragment1_4_juego : Fragment() {
                 }
             }
         }
-    }
-
-    private fun seleccionarPalabraAleatoria() {
-        //val palabraRandom = (0 until palabras.size-1).random()
-        //palabrasPintadas.add(palabras[palabraRandom])
-        for ((index, value) in palabras.withIndex()) {
-            if (!palabrasPintadas.contains(value)) {
-                palabrasPintadas.add(value)
-                palabraPreparada = value
-                findHuecosFilasLibres()
-                break
-            }
-        }
-
-    }
-
-    private fun findHuecosFilasLibres() {
-        for ((i, value) in letterList.withIndex()) {
-            var filaHuecosLibres = 0
-            for ((k, letter) in letterList.withIndex()) {
-                if (letter.equals("0")) {
-                    filaHuecosLibres++
-                    if (filaHuecosLibres >= palabraPreparada.length) {
-                        break
-                    }
-                }
-            }
-            filasHuecosLibres.add(i)
-        }
-        println(Arrays.toString(filasHuecosLibres.toIntArray()))
     }
 
     private fun typewriter(view: View) {
@@ -778,21 +753,9 @@ class Fragment1_4_juego : Fragment() {
                 txtv1_4tutorialjuego4.isVisible = false
                 txtAnimacion.isVisible = false
                 val buttonSiguiente = view.findViewById(R.id.btnf1_4_siguiente) as Button
-                //buttonSiguiente.isVisible=true
+                buttonSiguiente.isVisible=true
             }
         }, 1000)
-    }
-
-    fun getConstraintChildCount(contraintView: View): ArrayList<View>? {
-        //TODO TENER CUIDADO DE USAR ESTA FUNCION CON HIJOS QUE NO SON DIRECTOS (PODRIA SEGUIR INCREMENTANDO)
-        val result = ArrayList<View>()
-        val childList: ViewGroup = contraintView as ViewGroup
-        // No se puede realizar un bucle a un viewgroup
-        for (i in 0 until childList.childCount) {
-            val child = childList.getChildAt(i)
-            result.add(child)
-        }
-        return result
     }
 
     companion object {

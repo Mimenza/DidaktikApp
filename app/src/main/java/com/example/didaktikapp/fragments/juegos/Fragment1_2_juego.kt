@@ -31,6 +31,7 @@ import com.example.didaktikapp.Model.MyPreferences
 import com.example.didaktikapp.Model.Preguntasjuego2
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity6_Site
+import com.example.didaktikapp.activities.Utils
 import kotlinx.android.synthetic.main.fragment1_2_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -346,7 +347,7 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
                         el usuario ha acertado o ha fallado*/
                     val question = mQuestionList?.get(mCurrentPosition - 1)
                     if (question!!.correctAnswer != mSelectedOptionPosition) {
-
+                        Utils.vibrarTelefono(requireContext())
                         answerView(
                             mSelectedOptionPosition,
                             R.drawable.juego2_error_option_border_bg  )

@@ -9,6 +9,16 @@ import androidx.core.app.ActivityCompat
 import com.example.didaktikapp.Model.CustomLine
 import com.example.didaktikapp.R
 import java.lang.Exception
+import android.os.VibrationEffect
+
+import android.os.Build
+
+import androidx.core.content.ContextCompat.getSystemService
+
+import android.os.Vibrator
+import android.os.VibratorManager
+import androidx.core.content.ContextCompat
+
 
 class Utils {
 
@@ -47,6 +57,15 @@ class Utils {
                 return true
             }
             return false
+        }
+
+        fun vibrarTelefono(pContext: Context) {
+            val vibrator = pContext?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+            if (Build.VERSION.SDK_INT >= 26) {
+                vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE))
+            } else {
+                vibrator.vibrate(200)
+            }
         }
     }
 }

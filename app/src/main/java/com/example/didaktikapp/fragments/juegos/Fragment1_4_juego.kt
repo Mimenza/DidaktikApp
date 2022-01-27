@@ -26,6 +26,7 @@ import android.view.animation.TranslateAnimation
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.clone
+import com.example.didaktikapp.activities.Utils
 import kotlinx.android.synthetic.main.fragment1_4_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -94,27 +95,41 @@ class Fragment1_4_juego : Fragment() {
             //Navigation.findNavController(view).navigate(R.id.action_fragment1_4_juego_to_fragment2_4_minijuego)
             prepararPreguntas()
 
+
         }
         ajustes.setOnClickListener(){
                 (activity as Activity6_Site?)?.menuCheck()
         }
 
-
-
         //Typewriter juego 4 tutorial
-       Handler(Looper.getMainLooper()).postDelayed({
+        Handler(Looper.getMainLooper()).postDelayed({
             if (getView() != null) {
                 typewriter(view)
             }
         }, 2000)
 
         //Animacion manzana al iniciar el juego
-       starAnimationfun(view)
+        starAnimationfun(view)
+        playAudio(R.raw.juego4audiotutorial)
 
 
+
+        view.viewTreeObserver.addOnGlobalLayoutListener(object :
+            ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                view.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                prepararJuego()
+            }
+        })
+
+        return view
+    }
+
+    private fun playAudio(audioResource: Int) {
         runBlocking {
             launch {
-                audio = MediaPlayer.create(context, R.raw.juego4audiotutorial)
+                audio?.stop()
+                audio = MediaPlayer.create(context, audioResource)
                 audio?.start()
 
                 audio?.setOnCompletionListener {
@@ -122,23 +137,12 @@ class Fragment1_4_juego : Fragment() {
                     Handler(Looper.getMainLooper()).postDelayed({
                         if (getView() != null) {
                             //Llama a la funcion para la animacion de salida cuando el audio se termina
-                            exitAnimationfun(view)
+                            exitAnimationfun(globalView)
                         }
                     }, 1000)
                 }
             }
         }
-
-        view.viewTreeObserver.addOnGlobalLayoutListener(object :
-            ViewTreeObserver.OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-                view.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                prepararJuego()
-                button.visibility = View.VISIBLE
-            }
-        })
-
-        return view
     }
 
     // SOPA DE LETRAS VARAIBLES
@@ -206,6 +210,7 @@ class Fragment1_4_juego : Fragment() {
 
     //Funcion que gestiona el juego de verdadero falso
     private fun prepararPreguntas() {
+        playAudio(R.raw.juego4_egiagezurra)
         limpiarLineas()
         val sopaLayout: LinearLayout = globalView.findViewById(R.id.matrizprincipal)
         val btnComprobarPreguntas: Button = globalView.findViewById(R.id.juego4_comprobarPreguntas)
@@ -243,12 +248,15 @@ class Fragment1_4_juego : Fragment() {
                     Toast.makeText(requireContext(), "ERES UN CRACK!", Toast.LENGTH_SHORT).show()
                     Handler(Looper.getMainLooper()).postDelayed({
                         //llamamos a la animacion para animar a upelio
+                        playAudio(R.raw.ongiaudioa)
                         Navigation.findNavController(it).navigate(R.id.action_fragment1_4_juego_to_fragment2_4_minijuego)
                     }, 1000)
                 } else {
+                    playAudio(R.raw.gaizkiaudioa)
                     Toast.makeText(requireContext(), "VAYA ! HAS FALLADO!", Toast.LENGTH_SHORT).show()
                 }
             } else {
+                playAudio(R.raw.gaizkiaudioa)
                 Toast.makeText(requireContext(), "SELECCIONAD TODAS LAS OPCIONES!", Toast.LENGTH_SHORT).show()
             }
 
@@ -756,6 +764,21 @@ class Fragment1_4_juego : Fragment() {
                 buttonSiguiente.isVisible=true
             }
         }, 1000)
+    }
+
+    override fun onDestroy() {
+        audio?.stop()
+        super.onDestroy()
+    }
+
+    override fun onPause() {
+        audio?.pause()
+        super.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        audio?.start()
     }
 
     companion object {

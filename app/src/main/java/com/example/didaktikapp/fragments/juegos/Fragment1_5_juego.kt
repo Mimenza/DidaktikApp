@@ -185,7 +185,7 @@ class Fragment1_5_juego : Fragment() {
             matrix.setSaturation(0f)
             val filter = ColorMatrixColorFilter(matrix)
             vItemDestino.setColorFilter(filter)
-            vItemDestino.setAlpha(70)
+            vItemDestino.setAlpha(255)
             vItemOrigen.setOnTouchListener(listener)
         }
     }

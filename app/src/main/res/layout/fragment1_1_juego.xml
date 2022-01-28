@@ -45,12 +45,13 @@
             app:layout_constraintVertical_bias="0.95" />
 
 
+
         <ImageButton
-            android:id="@+id/btnf1_1_ajustes"
+            android:id="@+id/btnf1_1_mapa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minHeight="48dp"
-            android:src="@drawable/ic_menu"
+            android:src="@drawable/ic_map"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.044"
@@ -63,7 +64,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:minHeight="48dp"
-            android:src="@drawable/ic_baseline_info_24"
+            android:src="@drawable/ic_info"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.955"
@@ -182,7 +183,7 @@
             android:id="@+id/txtv1_1fondogris"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="#85000000"
+            android:background="#D3000000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -260,10 +261,10 @@
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.061"
+            app:layout_constraintHorizontal_bias="0.875"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.685"
+            app:layout_constraintVertical_bias="0.887"
             tools:ignore="MissingClass" />
 
         <pl.droidsonroids.gif.GifImageView
@@ -274,10 +275,10 @@
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.938"
+            app:layout_constraintHorizontal_bias="0.067"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.943"
+            app:layout_constraintVertical_bias="0.643"
             tools:ignore="MissingClass" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

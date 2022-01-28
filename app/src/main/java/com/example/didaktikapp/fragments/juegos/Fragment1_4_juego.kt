@@ -2,6 +2,7 @@ package com.example.didaktikapp.fragments.juegos
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.*
@@ -9,46 +10,28 @@ import androidx.fragment.app.Fragment
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.didaktikapp.Model.CustomLine
 import com.example.didaktikapp.R
-import com.example.didaktikapp.activities.Activity6_Site
 import java.util.*
 import kotlin.collections.ArrayList
 import android.widget.LinearLayout
 import android.view.ViewGroup
 import android.widget.TextView
 import android.media.MediaPlayer
-import android.graphics.Color
 import android.graphics.drawable.AnimationDrawable
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.clone
-import com.example.didaktikapp.activities.Utils
+import com.example.didaktikapp.activities.Activity5_Mapa
 import kotlinx.android.synthetic.main.fragment1_4_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Fragment1_juego.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Fragment1_4_juego : Fragment() {
-    private val thisJuegoId = 4
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
     private lateinit var btnInfoJuego: ImageButton
-    private var introFinished: Boolean = false
-
     private var nFilas: Int = 12
     private var nCols: Int = 12
 
@@ -56,16 +39,10 @@ class Fragment1_4_juego : Fragment() {
     private lateinit var matrizMain: LinearLayout
     private lateinit var constraintMain: ConstraintLayout
 
+    private var letterWeight = 1/nCols
     private var audio: MediaPlayer? = null
     private lateinit var vistaAnimada:TranslateAnimation
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,20 +54,25 @@ class Fragment1_4_juego : Fragment() {
         matrizMain = view.findViewById(R.id.matrizprincipal)
         constraintMain = view.findViewById(R.id.juego4_constraintMain)
         val button: Button = view.findViewById(R.id.btnf1_4_siguiente)
-        val ajustes: ImageButton = view.findViewById(R.id.btnf1_4_ajustes)
+
         btnInfoJuego= view.findViewById((R.id.btn1_4_infojuego))
         btnInfoJuego.setOnClickListener(){
             showDialogInfo()
         }
-        introFinished = false
 
-
+        val mapa: ImageButton = view.findViewById(R.id.btnf1_4_mapa)
+        mapa.setOnClickListener {
+            if (audio?.isPlaying == false){
+                activity?.let{
+                    val intent = Intent (it, Activity5_Mapa::class.java)
+                    it.startActivity(intent)
+                }
+            }
+        }
         button.setOnClickListener(){
             prepararPreguntas()
         }
-        ajustes.setOnClickListener(){
-                (activity as Activity6_Site?)?.menuCheck()
-        }
+
 
         //Typewriter juego 4 tutorial
         Handler(Looper.getMainLooper()).postDelayed({
@@ -102,6 +84,8 @@ class Fragment1_4_juego : Fragment() {
         //Animacion manzana al iniciar el juego
         starAnimationfun(view)
         playAudio(R.raw.juego4audiotutorial)
+
+
 
         view.viewTreeObserver.addOnGlobalLayoutListener(object :
             ViewTreeObserver.OnGlobalLayoutListener {
@@ -149,22 +133,27 @@ class Fragment1_4_juego : Fragment() {
     private var ultimaPosCol: Int? = null
     private var drawStartX: Float? = null
     private var drawStartY: Float? = null
+    private var palabrasPintadas = arrayListOf<String>()
     private var palabras = arrayListOf<String>("SAGARDANTZA", "SALMENTA", "TRIKITIXA", "TXALAPARTA", "GARBITZEA", "DASTATZEA", "TXISTULARIAK", "BILKETA", "ERAKUSKETA")
     private var palabrasEncontradas = arrayListOf<String>()
+    private var filasHuecosLibres = arrayListOf<Int>()
+    private var palabraPreparada: String = ""
 
     //Variables Juego Verdadero/Falso
     private var respuestasCorrectas = arrayListOf<Int>(1,3,5,8,9,12,13,16,17) // Radio button index Respuestas correctas
 
 
     fun showDialogInfo(){
+
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.info_minijuego)
+        dialog.setContentView(R.layout.info_dialog)
         dialog.show()
         dialog.window!!.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
+
 
         val textInfo = dialog.findViewById<View>(R.id.txtv_infominijuego) as TextView
         var texto =""
@@ -173,15 +162,18 @@ class Fragment1_4_juego : Fragment() {
         val numero = sharedPreferences?.getString("numero", null)?.toInt()
         println(numero)
         when(numero){
+
             0->  {texto=resources.getString(R.string.ayudajuego1)}
             1->  {texto=resources.getString(R.string.ayudajuego2)}
             2->  {texto=resources.getString(R.string.ayudajuego3)}
             3->  {texto=resources.getString(R.string.ayudajuego4)}
             4->  {texto=resources.getString(R.string.ayudajuego5)}
             5->  {texto=resources.getString(R.string.ayudajuego6)}
+
         }
         println(texto)
         if (textInfo!=null){
+
             textInfo.setText(texto)
         }
     }
@@ -721,33 +713,30 @@ class Fragment1_4_juego : Fragment() {
 
 
     private fun exitAnimationfun(view: View) {
-        if (!introFinished) {
-            val upelioAnimado = view.findViewById(R.id.imgv1_4_upelio2) as ImageView
-            upelioAnimado.isVisible = false
+        val upelioAnimado = view.findViewById(R.id.imgv1_4_upelio2) as ImageView
+        upelioAnimado.isVisible = false
 
-            //Animacion upelio salido
-            vistaAnimada = TranslateAnimation(0f, 1000f, 0f, 0f)
-            vistaAnimada.duration = 2000
+        //Animacion upelio salido
+        vistaAnimada = TranslateAnimation(0f, 1000f, 0f, 0f)
+        vistaAnimada.duration = 2000
 
-            //VistaAnimada.fillAfter = true
-            val upelio = view.findViewById(R.id.imgv1_4_upelio) as ImageView
-            upelio.startAnimation(vistaAnimada)
+        //VistaAnimada.fillAfter = true
+        val upelio = view.findViewById(R.id.imgv1_4_upelio) as ImageView
+        upelio.startAnimation(vistaAnimada)
 
-            //Animacion fondo gris
-            Handler(Looper.getMainLooper()).postDelayed({
-                if (getView() != null) {
-                    val txtAnimacion = view.findViewById(R.id.txtv1_4fondogris) as TextView
-                    val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
-                    txtAnimacion.startAnimation(aniFade)
-                    txtv1_4tutorialjuego4.startAnimation(aniFade)
-                    txtv1_4tutorialjuego4.isVisible = false
-                    txtAnimacion.isVisible = false
-                    val buttonSiguiente = view.findViewById(R.id.btnf1_4_siguiente) as Button
-                    buttonSiguiente.isVisible = true
-                    introFinished = true
-                }
-            }, 1000)
-        }
+        //Animacion fondo gris
+        Handler(Looper.getMainLooper()).postDelayed({
+            if (getView() != null) {
+                val txtAnimacion = view.findViewById(R.id.txtv1_4fondogris) as TextView
+                val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+                txtAnimacion.startAnimation(aniFade)
+                txtv1_4tutorialjuego4.startAnimation(aniFade)
+                txtv1_4tutorialjuego4.isVisible = false
+                txtAnimacion.isVisible = false
+                val buttonSiguiente = view.findViewById(R.id.btnf1_4_siguiente) as Button
+                buttonSiguiente.isVisible=true
+            }
+        }, 1000)
     }
 
     override fun onDestroy() {
@@ -765,23 +754,4 @@ class Fragment1_4_juego : Fragment() {
         audio?.start()
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Fragment1_juego.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Fragment1_4_juego().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

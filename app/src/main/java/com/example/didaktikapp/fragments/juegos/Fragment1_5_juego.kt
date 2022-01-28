@@ -3,6 +3,7 @@ package com.example.didaktikapp.fragments.juegos
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
 import android.net.Uri
@@ -25,6 +26,7 @@ import android.graphics.ColorMatrixColorFilter
 import android.graphics.ColorMatrix
 import android.view.*
 import com.example.didaktikapp.Model.DragnDropImage
+import com.example.didaktikapp.activities.Activity5_Mapa
 import com.example.didaktikapp.activities.Activity6_Site
 
 
@@ -89,7 +91,7 @@ class Fragment1_5_juego : Fragment() {
         globalView = view
         button = view.findViewById(R.id.btnf1_5_siguiente)
         button.visibility = View.GONE
-        ajustes = view.findViewById(R.id.btnf1_5_ajustes)
+
         val btnVerVideo: Button = view.findViewById(R.id.btnf1_5_siguienteavideo)
         val btnIrAJuego: Button = view.findViewById(R.id.btnf1_5_siguienteajuego)
         myLayout = view.findViewById<ConstraintLayout>(R.id.mainlayout)
@@ -106,6 +108,15 @@ class Fragment1_5_juego : Fragment() {
                 prepairVestimentaElements()
             }
         })
+        val mapa: ImageButton = view.findViewById(R.id.btnf1_5_mapa)
+        mapa.setOnClickListener {
+            if (audio?.isPlaying == false){
+                activity?.let{
+                    val intent = Intent (it, Activity5_Mapa::class.java)
+                    it.startActivity(intent)
+                }
+            }
+        }
         btnInfoJuego.setOnClickListener(){
             showDialogInfo()
         }
@@ -118,12 +129,6 @@ class Fragment1_5_juego : Fragment() {
 
             verVideo()
             audio?.stop()
-            ajustes.setOnClickListener(){
-
-                (activity as Activity6_Site?)?.menuCheck()
-
-            }
-
         }
 
         //Typewriter juego 5 tutorial
@@ -143,7 +148,7 @@ class Fragment1_5_juego : Fragment() {
 
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.info_minijuego)
+        dialog.setContentView(R.layout.info_dialog)
         dialog.show()
         dialog.window!!.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -198,14 +203,6 @@ class Fragment1_5_juego : Fragment() {
                 audio = MediaPlayer.create(context, R.raw.juego5audiotutorial)
                 audio?.start()
 
-                audio?.setOnCompletionListener(){
-                    ajustes.setOnClickListener(){
-
-                        (activity as Activity6_Site?)?.menuCheck()
-
-
-                    }
-                }
             }
 
 

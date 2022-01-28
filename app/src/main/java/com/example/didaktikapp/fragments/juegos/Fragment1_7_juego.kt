@@ -2,17 +2,14 @@ package com.example.didaktikapp.fragments.juegos
 
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
-import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -28,9 +25,9 @@ import androidx.navigation.findNavController
 import com.example.didaktikapp.Model.Constantsjuego7
 import com.example.didaktikapp.Model.Preguntasjuego7
 import com.example.didaktikapp.R
+import com.example.didaktikapp.activities.Activity5_Mapa
 import com.example.didaktikapp.activities.Activity6_Site
 import com.example.didaktikapp.activities.Utils
-import kotlinx.android.synthetic.main.fragment1_2_juego.*
 import kotlinx.android.synthetic.main.fragment1_7_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -64,7 +61,7 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         val view = inflater.inflate(R.layout.fragment1_7_juego, container, false)
         //Inicializar vistas
         val button:Button = view.findViewById(R.id.btnf1_7siguiente)
-        val ajustes:ImageButton = view.findViewById(R.id.btnf1_7_ajustes)
+
 
         progressBar = view.findViewById(R.id.custom_progressBar)
         txtProgressBar =view.findViewById(R.id.txtv1_7_progreessbar)
@@ -72,17 +69,22 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         question1_answer1= view.findViewById(R.id.txtv1_7_respuesta1)
         question1_answer2= view.findViewById(R.id.txtv1_7_respuesta2)
         question1_answer3= view.findViewById(R.id.txtv1_7_respuesta3)
-        defaultImage = view.findViewById(R.id.imgv1_7defaultimage)
         btnSiguiente= view.findViewById(R.id.btnf1_7siguiente)
         btnInfoJuego= view.findViewById((R.id.btn1_7_infojuego))
 
+        val mapa: ImageButton = view.findViewById(R.id.btnf1_7_mapa)
+        mapa.setOnClickListener {
+            if (audio?.isPlaying == false){
+                activity?.let{
+                    val intent = Intent (it, Activity5_Mapa::class.java)
+                    it.startActivity(intent)
+                }
+            }
+        }
         button.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment1_7_juego_to_fragment1_7_juego_results)
         }
 
-        ajustes.setOnClickListener(){
-                (activity as Activity6_Site?)?.menuCheck()
-        }
         btnInfoJuego.setOnClickListener(){
             showDialogInfo()
         }
@@ -141,8 +143,6 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         txt_animacion.startAnimation(aniFade)
 
         //desabilitar boton ajustes mientras esta el tutorial
-        val buttonAjustes = view.findViewById(R.id.btnf1_7_ajustes) as ImageButton
-        buttonAjustes.setEnabled(false)
         val buttonSiguiente = view.findViewById(R.id.btnf1_7siguiente) as Button
         buttonSiguiente.setEnabled(false)
         question1_answer1.isEnabled=false
@@ -196,8 +196,6 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
                     txtv1_7tutorialjuego7.startAnimation(aniFade)
                     txtv1_7tutorialjuego7.isVisible = false
                     txt_animacion.isVisible = false
-                    val buttonAjustes = view.findViewById(R.id.btnf1_7_ajustes) as ImageButton
-                    buttonAjustes.isEnabled=true
                     val buttonSiguiente = view.findViewById(R.id.btnf1_7siguiente) as Button
                     buttonSiguiente.isEnabled=true
                     question1_answer1.isEnabled=true
@@ -231,7 +229,7 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         question1_answer1!!.text= question!!.optionOne
         question1_answer2!!.text= question!!.optionTwo
         question1_answer3!!.text= question!!.optionThree
-        defaultImage.setImageResource(R.drawable.img_interrogacion)
+
     }
 
     //COLOR Y FONDO POR DEFECTO DE LAS RESPUESTAS
@@ -333,7 +331,7 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
 
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.info_minijuego)
+        dialog.setContentView(R.layout.info_dialog)
         dialog.show()
         dialog.window!!.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,

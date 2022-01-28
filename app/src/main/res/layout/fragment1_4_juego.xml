@@ -71,12 +71,13 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent" />
 
+
         <ImageButton
-            android:id="@+id/btnf1_4_ajustes"
+            android:id="@+id/btnf1_4_mapa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minHeight="48dp"
-            android:src="@drawable/ic_menu"
+            android:src="@drawable/ic_map"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.044"
@@ -89,7 +90,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:minHeight="48dp"
-            android:src="@drawable/ic_baseline_info_24"
+            android:src="@drawable/ic_info"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.955"
@@ -398,7 +399,7 @@
             android:id="@+id/txtv1_4fondogris"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="#85000000"
+            android:background="#D3000000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

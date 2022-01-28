@@ -44,7 +44,7 @@
             android:id="@+id/imgv1_6_fondo"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="#77000000"
+            android:background="#D3000000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.011"
@@ -53,12 +53,13 @@
             app:layout_constraintVertical_bias="0.066" />
 
 
+
         <ImageButton
-            android:id="@+id/btnf1_6_ajustes"
+            android:id="@+id/btnf1_6_mapa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minHeight="48dp"
-            android:src="@drawable/ic_menu"
+            android:src="@drawable/ic_map"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.044"
@@ -71,7 +72,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:minHeight="48dp"
-            android:src="@drawable/ic_baseline_info_24"
+            android:src="@drawable/ic_info"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.955"

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,79 +17,59 @@ import com.example.didaktikapp.activities.DbHandler
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat.recreate
-import androidx.core.content.ContextCompat
 
 import com.example.didaktikapp.Model.MyPreferences
 import com.example.didaktikapp.activities.Activity1_Principal
 import com.example.didaktikapp.activities.Activity5_Mapa
-import com.google.android.gms.maps.SupportMapFragment
 import java.util.*
 
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Fragment5_ajustes.newInstance] factory method to
- * create an instance of this fragment.
- */
-class Fragment5_ajustes : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    private val pass: String = "admin"
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+class Fragment4_ajustes : Fragment() {
+    private val pass: String = "upelio"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment5_ajustes, container, false)
-        val buttonAcercaDe: Button = view.findViewById(R.id.btn5f_acercade)
-        val buttonAdmin: Button = view.findViewById(R.id.btn5f_admin)
-        val buttonTheme: Button = view.findViewById(R.id.btn5f_oscuro)
-        val buttonIdiomas: Button = view.findViewById(R.id.btn5f_idioma)
+        val view = inflater.inflate(R.layout.fragment4_ajustes, container, false)
+        val buttonAcercaDe: Button = view.findViewById(R.id.btn4f_acercade)
+        val buttonAdmin: Button = view.findViewById(R.id.btn4f_admin)
+        val buttonTheme: Button = view.findViewById(R.id.btn4f_oscuro)
+        val buttonIdiomas: Button = view.findViewById(R.id.btn4f_idioma)
+        val buttonHome: Button = view.findViewById(R.id.btn4f_home)
 
         //Segun la opcion seleccionada, clickamos oscuro o claro
         checkTheme(requireContext())
 
+        buttonAcercaDe.setOnClickListener{
+            showAcercaDeInfo()
+        }
 
-
-        buttonAcercaDe.setOnClickListener{ showAcercaDeInfo()}
         buttonAdmin.setOnClickListener{
             showModoAdminDialog()
         }
 
         buttonTheme.setOnClickListener{
             chooseThemeDialog(view)
-
         }
 
         buttonIdiomas.setOnClickListener{
-
             chooseLanguageDialog()
         }
 
+        buttonHome.setOnClickListener{
+            activity?.let{
+                val intent = Intent (it, Activity1_Principal::class.java)
+                it.startActivity(intent)
+            }
+        }
 
         return view
     }
 
 
           fun chooseThemeDialog(view:View){
-
               val builder = AlertDialog.Builder(requireContext())
               builder.setTitle(getString(R.string.tema))
               val styles = arrayOf("Claro", "Oscuro")
@@ -102,7 +83,7 @@ class Fragment5_ajustes : Fragment() {
                           MyPreferences(requireContext()).darkMode = 0
                           ( requireContext() as  AppCompatActivity).delegate.applyDayNight()
 
-                          getActivity()?.onBackPressed();
+                          getActivity()?.onBackPressed()
                           dialog.dismiss()
                       }
                       1 -> {
@@ -111,7 +92,7 @@ class Fragment5_ajustes : Fragment() {
                           ( requireContext() as  AppCompatActivity).delegate.applyDayNight()
 
 
-                          getActivity()?.onBackPressed();
+                          getActivity()?.onBackPressed()
                           dialog.dismiss()
                       }
 
@@ -295,23 +276,5 @@ class Fragment5_ajustes : Fragment() {
 
 
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Fragment5_ajustes.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Fragment5_ajustes().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+
 }

@@ -5,35 +5,21 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.os.CountDownTimer
-import android.os.Handler
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.view.animation.AnimationUtils
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
-import kotlinx.android.synthetic.main.activity4_bienvenida.*
 import android.view.View.OnTouchListener
 import android.view.animation.TranslateAnimation
 import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.didaktikapp.Model.CustomLine
 import com.example.didaktikapp.activities.Activity5_Mapa
-import com.example.didaktikapp.activities.Activity6_Site
-import kotlinx.android.synthetic.main.fragment2_4_minijuego.*
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Fragment2_minijuego.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Fragment2_4_minijuego : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -74,13 +60,7 @@ class Fragment2_4_minijuego : Fragment() {
     private val customStrokes = arrayListOf<CustomLine>()
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
@@ -90,7 +70,7 @@ class Fragment2_4_minijuego : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment2_4_minijuego, container, false)
         layout = view.findViewById(R.id.cl2_4minijuego)
-        val ajustes: ImageButton = view.findViewById(R.id.btnf2_4ajustes)
+
 
 
         //manzanas
@@ -106,8 +86,13 @@ class Fragment2_4_minijuego : Fragment() {
         btnsiguiente = view.findViewById(R.id.btn2_4_siguiente)
         btninfominijuego= view.findViewById((R.id.btn2_4_infominijuego))
 
-        ajustes.setOnClickListener() {
-            (activity as Activity6_Site?)?.menuCheck()
+        val mapa: ImageButton = view.findViewById(R.id.btnf2_4_mapa)
+        mapa.setOnClickListener {
+            activity?.let{
+                val intent = Intent (it, Activity5_Mapa::class.java)
+                it.startActivity(intent)
+            }
+
         }
         btninfominijuego.setOnClickListener(){
             showDialogInfo()
@@ -325,7 +310,7 @@ class Fragment2_4_minijuego : Fragment() {
 
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.info_minijuego)
+        dialog.setContentView(R.layout.info_dialog)
         dialog.show()
         dialog.window!!.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -435,24 +420,5 @@ class Fragment2_4_minijuego : Fragment() {
 
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Fragment2_minijuego.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Fragment2_4_minijuego().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }
 

@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import androidx.fragment.app.Fragment
 import com.example.didaktikapp.R
-import com.example.didaktikapp.fragments.Fragment5_ajustes
+import com.example.didaktikapp.fragments.Fragment4_ajustes
 
 class Activity1_Principal : AppCompatActivity() {
 
@@ -124,7 +124,7 @@ class Activity1_Principal : AppCompatActivity() {
         }
 
         ajustesShowing = true
-        fragment = Fragment5_ajustes()
+        fragment = Fragment4_ajustes()
         supportFragmentManager.beginTransaction().add(R.id.cl1_principal, fragment!!).commit()
         ocultartodo()
     }

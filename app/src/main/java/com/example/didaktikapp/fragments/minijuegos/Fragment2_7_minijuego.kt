@@ -1,5 +1,6 @@
 package com.example.didaktikapp.fragments.minijuegos
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,34 +13,13 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentManager
 import com.example.didaktikapp.R
-import com.example.didaktikapp.fragments.Fragment4_menu
-import com.example.didaktikapp.fragments.Fragment5_ajustes
+import com.example.didaktikapp.activities.Activity5_Mapa
+import com.example.didaktikapp.fragments.Fragment4_ajustes
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Fragment2_minijuego.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Fragment2_7_minijuego : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    private var fragment :Fragment? = null
-    var menuShowing: Boolean = false
-    var ajustesShowing: Boolean = false
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +30,6 @@ class Fragment2_7_minijuego : Fragment() {
         // Inflate the layout for this fragment
 
         val button: Button = view.findViewById(R.id.btnf2_7siguiente)
-        val ajustes: ImageButton = view.findViewById(R.id.btnf2_7ajustes)
         val btnterminar: Button? = view?.findViewById(R.id.btn1_2_terminar)
         val btnRetry: Button? = view?.findViewById(R.id.btn7_1_saiatuberriro)
         val txtResult: TextView? = view?.findViewById(R.id.txtv7_1_result)
@@ -59,12 +38,18 @@ class Fragment2_7_minijuego : Fragment() {
         val txtvminijuego: TextView? = view?.findViewById(R.id.txtv2_7minijuego7)
 
 
+        val mapa: ImageButton = view.findViewById(R.id.btnf2_7_mapa)
+        mapa.setOnClickListener {
+            activity?.let{
+                val intent = Intent (it, Activity5_Mapa::class.java)
+                it.startActivity(intent)
+            }
+
+        }
         button.setOnClickListener(){
 
             //de activity(Resultsactivity) a fragment
             button.visibility = View.GONE
-            showMenu()
-
 
             if (btnterminar != null) {
                 btnterminar.isVisible=false
@@ -87,75 +72,9 @@ class Fragment2_7_minijuego : Fragment() {
 
         }
 
-        ajustes.setOnClickListener(){
-           showAjustes()
-            button.visibility = View.GONE
-
-                    if (btnterminar != null) {
-                        btnterminar.isVisible=false
-                    }
-            if (btnRetry != null) {
-                btnRetry.isVisible=false
-            }
-            if (txtResult != null) {
-                txtResult.isVisible=false
-            }
-            if (imgTrofeo != null) {
-                imgTrofeo.isVisible=false
-            }
-            if (scoreuser != null) {
-                scoreuser.isVisible=false
-            }
-            if (txtvminijuego != null) {
-                txtvminijuego.isVisible=false
-            }
-        }
         return view
     }
 
 
-    fun showMenu(){
-        val fragManager:FragmentManager? = fragmentManager
 
-        if (menuShowing) {
-            return
-        }
-        menuShowing = true
-        fragment = Fragment4_menu()
-        fragManager?.beginTransaction()?.add(R.id.framelayout7menu, fragment!!)?.commit()
-
-
-    }
-
-    fun showAjustes(){
-        val fragManager:FragmentManager? = fragmentManager
-
-        if (ajustesShowing) {
-            return
-        }
-        ajustesShowing = true
-        fragment = Fragment5_ajustes()
-        fragManager?.beginTransaction()?.add(R.id.framelayout7ajustes, fragment!!)?.commit()
-
-    }
- 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Fragment2_minijuego.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Fragment2_7_minijuego().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

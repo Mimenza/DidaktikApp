@@ -4,8 +4,6 @@ import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
-import android.os.CountDownTimer
-import android.os.Handler
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -20,20 +18,9 @@ import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity5_Mapa
 import com.example.didaktikapp.activities.Activity6_Site
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Fragment2_minijuego.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Fragment2_5_minijuego : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
     private var acierto: Int = 0
 
     private lateinit var vaso: ImageView
@@ -44,13 +31,7 @@ class Fragment2_5_minijuego : Fragment() {
     private lateinit var btnsiguiente:Button
     private lateinit var btnrepetir:Button
     private lateinit var btninfominijuego: ImageButton
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,7 +40,6 @@ class Fragment2_5_minijuego : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment2_5_minijuego, container, false)
 
-        val ajustes: ImageButton = view.findViewById(R.id.btnf2_5ajustes)
         vaso  = view.findViewById(R.id.imgv2_5vaso)
         cartel= view.findViewById((R.id.imgv2_5cartelmadera))
         txtcartel= view.findViewById((R.id.txtv2_5carteltexto))
@@ -71,9 +51,7 @@ class Fragment2_5_minijuego : Fragment() {
             showDialogInfo()
         }
 
-        ajustes.setOnClickListener() {
-            (activity as Activity6_Site?)?.menuCheck()
-        }
+
 
         val manzana1: ImageView = view.findViewById(R.id.imgv2_5_applepiece1)
         val manzana2: ImageView = view.findViewById(R.id.imgv2_5_applepiece2)
@@ -81,7 +59,14 @@ class Fragment2_5_minijuego : Fragment() {
         val manzana4: ImageView = view.findViewById(R.id.imgv2_5_applepiece4)
         val manzana5: ImageView = view.findViewById(R.id.imgv2_5_applepiece5)
 
+        val mapa: ImageButton = view.findViewById(R.id.btnf2_5_mapa)
+        mapa.setOnClickListener {
+            activity?.let{
+                val intent = Intent (it, Activity5_Mapa::class.java)
+                it.startActivity(intent)
+            }
 
+        }
 
         manzana1.setOnClickListener() { machacar(manzana1) }
         manzana2.setOnClickListener() { machacar(manzana2) }
@@ -98,7 +83,7 @@ class Fragment2_5_minijuego : Fragment() {
 
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.info_minijuego)
+        dialog.setContentView(R.layout.info_dialog)
         dialog.show()
         dialog.window!!.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -226,23 +211,4 @@ class Fragment2_5_minijuego : Fragment() {
 
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Fragment2_minijuego.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Fragment2_5_minijuego().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

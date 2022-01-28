@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.drawable.AnimationDrawable
@@ -23,6 +24,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.core.view.isVisible
 import com.example.didaktikapp.Model.DragnDropImage
+import com.example.didaktikapp.activities.Activity5_Mapa
 import com.example.didaktikapp.activities.Activity6_Site
 import com.example.didaktikapp.activities.DbHandler
 import kotlinx.android.synthetic.main.fragment1_1_juego.*
@@ -97,12 +99,20 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
         buttonRepetir = view.findViewById(R.id.btnf1_3_repetir)
         button.visibility = View.GONE
         buttonRepetir.visibility = View.GONE
-        val ajustes: ImageButton = view.findViewById(R.id.btnf1_3_ajustes)
+
         val btnComprobarRespuesta: Button = globalView.findViewById(R.id.juego3_btnComprobar)
         preguntasLayout = view.findViewById(R.id.juego3_preguntas_layout)
         btnInfoJuego= view.findViewById((R.id.btn1_3_infojuego))
         preguntasLayout.visibility = View.GONE
-
+        val mapa: ImageButton = view.findViewById(R.id.btnf1_3_mapa)
+        mapa.setOnClickListener {
+            if (audio?.isPlaying == false){
+                activity?.let{
+                    val intent = Intent (it, Activity5_Mapa::class.java)
+                    it.startActivity(intent)
+                }
+            }
+        }
         btnComprobarRespuesta.setOnClickListener() {
             comprobarRespuestas()
         }
@@ -157,11 +167,7 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
                 audio?.start()
 
                 audio?.setOnCompletionListener {
-                    ajustes.setOnClickListener() {
-                        //activamos el listener para los ajustes
-                        (activity as Activity6_Site?)?.menuCheck()
 
-                    }
                     prepairPuzzleElements()
                     showPhotos()
                     Handler(Looper.getMainLooper()).postDelayed({
@@ -183,7 +189,7 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
 
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.info_minijuego)
+        dialog.setContentView(R.layout.info_dialog)
         dialog.show()
         dialog.window!!.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,

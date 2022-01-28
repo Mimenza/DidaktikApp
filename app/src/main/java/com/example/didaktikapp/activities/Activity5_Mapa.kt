@@ -14,7 +14,6 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.animation.Animation
 import android.view.animation.TranslateAnimation
-import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -22,7 +21,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.didaktikapp.R
 import com.example.didaktikapp.databinding.Activity5MapaBinding
-import com.example.didaktikapp.fragments.Fragment5_ajustes
+import com.example.didaktikapp.fragments.Fragment4_ajustes
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -127,7 +126,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.QueryR
             return
         }
         ajustesShowing = true
-        fragment = Fragment5_ajustes()
+        fragment = Fragment4_ajustes()
         supportFragmentManager.beginTransaction().add(R.id.framelayoutajustes, fragment!!).commit()
         window.decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
     }
@@ -273,22 +272,9 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.QueryR
 
         mMap.isMyLocationEnabled = true
         mMap.uiSettings.isZoomControlsEnabled = true
-        mMap.uiSettings.isCompassEnabled = true
+        mMap.uiSettings.isCompassEnabled = false
+        mMap.uiSettings.isMyLocationButtonEnabled = false
         mMap.mapType = GoogleMap.MAP_TYPE_HYBRID
-
-        val locationButton = (thisActivity.findViewById<View>(Integer.parseInt("1")).parent as View).findViewById<View>(Integer.parseInt("2"))
-        val relativeLayoutParamsLocation = locationButton.layoutParams as (RelativeLayout.LayoutParams)
-
-        relativeLayoutParamsLocation.addRule(RelativeLayout.ALIGN_PARENT_TOP,0)
-        relativeLayoutParamsLocation.addRule(RelativeLayout.ALIGN_PARENT_TOP,RelativeLayout.TRUE)
-        relativeLayoutParamsLocation.setMargins(0,100,0,0)
-
-        val compass = (thisActivity.findViewById<View>(Integer.parseInt("1")).parent as View).findViewById<View>(Integer.parseInt("5"))
-        val relativeLayoutParamsCompass = compass.layoutParams as (RelativeLayout.LayoutParams)
-
-        relativeLayoutParamsCompass.addRule(RelativeLayout.ALIGN_PARENT_TOP,0)
-        relativeLayoutParamsCompass.addRule(RelativeLayout.ALIGN_PARENT_TOP,RelativeLayout.TRUE)
-        relativeLayoutParamsCompass.setMargins(0,100,0,0)
 
         //Set min and max zoom
         mMap.setMaxZoomPreference(21F)

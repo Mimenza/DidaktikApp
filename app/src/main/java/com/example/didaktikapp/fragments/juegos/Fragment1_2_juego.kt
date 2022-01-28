@@ -17,7 +17,6 @@ import android.provider.MediaStore
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
 import android.view.ViewGroup
 import android.view.Window
 import android.view.animation.AnimationUtils
@@ -27,9 +26,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import com.example.didaktikapp.Model.Constantsjuego2
-import com.example.didaktikapp.Model.MyPreferences
 import com.example.didaktikapp.Model.Preguntasjuego2
 import com.example.didaktikapp.R
+import com.example.didaktikapp.activities.Activity5_Mapa
 import com.example.didaktikapp.activities.Activity6_Site
 import com.example.didaktikapp.activities.Utils
 import kotlinx.android.synthetic.main.fragment1_2_juego.*
@@ -70,7 +69,6 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment1_2_juego, container, false)
         //Inicializar vistas
-        val ajustes: ImageButton = view.findViewById(R.id.btnf1_2_ajustes)
 
         progressBar = view.findViewById(R.id.custom_progressBar)
         txtProgressBar = view.findViewById(R.id.txtv1_2_progreessbar)
@@ -86,13 +84,19 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         txtTutorial= view.findViewById(R.id.txtv1_2tutorialjuego2)
         fondoTutorial= view.findViewById(R.id.txtv1_2fondogris)
 
+
         btnInfoJuego= view.findViewById((R.id.btn1_2_infojuego))
         btnInfoJuego.setOnClickListener(){
             showDialogInfo()
         }
-
-        ajustes.setOnClickListener() {
-            (activity as Activity6_Site?)?.menuCheck()
+        val mapa: ImageButton = view.findViewById(R.id.btnf1_2_mapa)
+        mapa.setOnClickListener {
+            if (audio?.isPlaying == false){
+                activity?.let{
+                    val intent = Intent (it, Activity5_Mapa::class.java)
+                    it.startActivity(intent)
+                }
+            }
         }
 
         //Typewriter juego 2 tutorial
@@ -138,7 +142,7 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
 
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.info_minijuego)
+        dialog.setContentView(R.layout.info_dialog)
         dialog.show()
         dialog.window!!.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -181,9 +185,6 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade)
         txt_animacion.startAnimation(aniFade)
 
-        //desabilitar botones en el tutorial
-        val buttonAjustes = view.findViewById(R.id.btnf1_2_ajustes) as ImageButton
-        buttonAjustes.setEnabled(false)
 
         val buttonSiguiente = view.findViewById(R.id.btnf1_2siguiente) as Button
         buttonSiguiente.setEnabled(false)
@@ -240,8 +241,7 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
                     txtv1_2tutorialjuego2.isVisible = false
                     txt_animacion.isVisible = false
                     //Habilitar botones cuando desaparece la animacion
-                    val buttonAjustes = view.findViewById(R.id.btnf1_2_ajustes) as ImageButton
-                    buttonAjustes.isEnabled = true
+
                     val buttonSiguiente = view.findViewById(R.id.btnf1_2siguiente) as Button
                     buttonSiguiente.isEnabled = true
                     question1_answer1.isEnabled = true

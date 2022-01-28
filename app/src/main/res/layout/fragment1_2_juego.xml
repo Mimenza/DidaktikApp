@@ -13,12 +13,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <ImageButton
-            android:id="@+id/btnf1_2_ajustes"
+            android:id="@+id/btnf1_2_mapa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minHeight="48dp"
-            android:src="@drawable/ic_menu"
+            android:src="@drawable/ic_map"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.044"
@@ -31,7 +32,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:minHeight="48dp"
-            android:src="@drawable/ic_baseline_info_24"
+            android:src="@drawable/ic_info"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.955"
@@ -93,7 +94,6 @@
                 android:paddingTop="20dp"
                 android:gravity="center"
                 android:text="@string/que1_juego2"
-                android:textColor="@color/black"
                 android:textSize="22sp" />
 
             <ImageView

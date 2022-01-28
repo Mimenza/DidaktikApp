@@ -14,12 +14,13 @@
         android:layout_height="match_parent">
 
 
+
         <ImageButton
-            android:id="@+id/btnf1_7_ajustes"
+            android:id="@+id/btnf1_7_mapa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minHeight="48dp"
-            android:src="@drawable/ic_menu"
+            android:src="@drawable/ic_map"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.044"
@@ -32,7 +33,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:minHeight="48dp"
-            android:src="@drawable/ic_baseline_info_24"
+            android:src="@drawable/ic_info"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.955"
@@ -79,15 +80,8 @@
                 android:layout_margin="10dp"
                 android:gravity="center"
                 android:text="@string/que1_juego7"
-                android:textColor="@color/black"
                 android:textSize="22sp" />
             <!--Horizontal  Linear Layout-->
-            <ImageView
-                android:id="@+id/imgv1_7defaultimage"
-                android:layout_width="125dp"
-                android:layout_height="125dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/img_interrogacion" />
 
             <LinearLayout
                 android:layout_width="match_parent"

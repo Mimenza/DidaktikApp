@@ -303,7 +303,7 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
                         answerView(mSelectedOptionPosition, R.drawable.juego2_error_option_border_bg)
 
                     }else{
-                        takePicture()
+
                         mCorrectAnswers++
                     }
                     question.correctAnswer?.let { answerView(it, R.drawable.juego2_correct_option_border_bg) }
@@ -326,24 +326,7 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         }
     }
 
-    //Función para sacar foto
-    fun takePicture() {
 
-        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-        startActivityForResult(cameraIntent, REQUEST_CODE)
-    }
-
-    //Función para guardar foto
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE && data != null){
-            imgv1_7defaultimage.setImageBitmap(data.extras?.get("data") as Bitmap)
-            audio?.stop()
-            return
-
-
-        }
-    }
 
     fun showDialogInfo(){
 

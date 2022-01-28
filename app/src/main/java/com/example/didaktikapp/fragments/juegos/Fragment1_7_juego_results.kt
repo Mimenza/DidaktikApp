@@ -68,6 +68,8 @@ class Fragment1_7_juego_results : Fragment() {
                     view?.findNavController()?.navigate(R.id.action_fragment1_7_juego_results_to_fragment1_7_juego)
                 }
 
+                btnTerminar.isVisible = true
+                btnRetry.isVisible = true
                 btnRetry2.isVisible = false
 
             } else {
@@ -78,10 +80,12 @@ class Fragment1_7_juego_results : Fragment() {
                         audio.start()
                     }
                 }
+                btnTerminar.isVisible = false
+                btnRetry.isVisible = false
+                btnRetry2.isVisible = true
             }
 
-            btnTerminar.isVisible = false
-            btnRetry.isVisible = false
+
             btnRetry2.setOnClickListener {
                 audio.stop()
                 view?.findNavController()?.navigate(R.id.action_fragment1_7_juego_results_to_fragment1_7_juego)

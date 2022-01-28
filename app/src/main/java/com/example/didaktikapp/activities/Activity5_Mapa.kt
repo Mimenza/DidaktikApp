@@ -43,10 +43,18 @@ import kotlin.math.sin
 
 class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.QueryResponseDone {
 
+    companion object {
+//        lateinit var instancia: Activity5_Mapa
+        var instancia: Activity5_Mapa? = null
+
+    }
+
     private val thisActivity: Activity = this
     private lateinit var mMap: GoogleMap
     private lateinit var binding: Activity5MapaBinding
     private lateinit var fusedLocation: FusedLocationProviderClient
+    private var markerPointList = arrayListOf<Marker>()
+    //private var markerPointIcon: Marker? = null
     private var myCurrentPosition: LatLng = LatLng(45.0, 123.0)
     private var lastUserPoint: Int = 0
     private var minimumRadius: Int = 50
@@ -57,6 +65,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.QueryR
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        instancia = this
         supportActionBar?.hide()
         binding = Activity5MapaBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -73,17 +82,20 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.QueryR
         fusedLocation = LocationServices.getFusedLocationProviderClient(this)
 
 
-        /* if (DbHandler.getUser() != null) {
+         if (DbHandler.getUser() != null) {
              if (DbHandler.getUser()!!.ultima_puntuacion != null) {
                  lastUserPoint = DbHandler.getUser()!!.ultima_puntuacion!!
              }
+             /*
              if(DbHandler.getUser()!!.nombre!=null){
                  userName=DbHandler.getUser()!!.nombre!!
              }
              if(DbHandler.getUser()!!.puntuacion!=null){
                  puntuacion=DbHandler.getUser()!!.puntuacion!!
              }
-         }*/
+
+              */
+         }
 
         //Metemos los datos del usuario en el mapa
 
@@ -182,6 +194,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.QueryR
             audio.stop()
         }
         super.onDestroy()
+        instancia = null
     }
 
     private fun starAnimationfun() {
@@ -324,22 +337,28 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.QueryR
                     )
             )
 
+            markerPointList.add(markerPointIcon!!)
+
+            /*
             //We check the kind of user and, in case that is NOT ADMIN
             if (markerPointIcon != null) {
                 if (DbHandler.getAdmin()) {
-                    markerPointIcon.setIcon(BitmapDescriptorFactory
+                    markerPointIcon!!.setIcon(BitmapDescriptorFactory
                         .defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
                 } else {
                     if (i < lastUserPoint) {
-                        markerPointIcon.setIcon(BitmapDescriptorFactory
+                        markerPointIcon!!.setIcon(BitmapDescriptorFactory
                             .defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
                     } else if (i == lastUserPoint) {
-                        markerPointIcon.setIcon(BitmapDescriptorFactory
+                        markerPointIcon!!.setIcon(BitmapDescriptorFactory
                             .defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
                     }
                 }
             }
+
+             */
         }
+        checkPoints()
 
         mMap.setOnInfoWindowClickListener(OnInfoWindowClickListener { marker ->
             if(DbHandler.getTutorialFinalizado() == 0) {
@@ -375,6 +394,28 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.QueryR
                 }
             }
         })
+    }
+
+    fun checkPoints() {
+        for ((i,item) in markerPointList.withIndex()) {
+            item!!.setIcon(BitmapDescriptorFactory
+                .defaultMarker(BitmapDescriptorFactory.HUE_RED))
+            //We check the kind of user and, in case that is NOT ADMIN
+            if (item != null) {
+                if (DbHandler.getAdmin()) {
+                    item!!.setIcon(BitmapDescriptorFactory
+                        .defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                } else {
+                    if (i < lastUserPoint) {
+                        item!!.setIcon(BitmapDescriptorFactory
+                            .defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
+                    } else if (i == lastUserPoint) {
+                        item!!.setIcon(BitmapDescriptorFactory
+                            .defaultMarker(BitmapDescriptorFactory.HUE_ORANGE))
+                    }
+                }
+            }
+        }
     }
 
     private fun getDistBetweenPoints(localPoint: LatLng, gamePoint: LatLng): Int {

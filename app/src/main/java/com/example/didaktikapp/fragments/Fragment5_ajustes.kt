@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat
 
 import com.example.didaktikapp.Model.MyPreferences
 import com.example.didaktikapp.activities.Activity1_Principal
+import com.example.didaktikapp.activities.Activity5_Mapa
 import com.google.android.gms.maps.SupportMapFragment
 import java.util.*
 
@@ -235,6 +236,7 @@ class Fragment5_ajustes : Fragment() {
                     DbHandler.setAdmin(true)
                     Toast.makeText(requireContext(), "Modo Administrador activado correctamente", Toast.LENGTH_SHORT).show()
                     dialog.dismiss()
+                    callSingletonMapClass()
                 } else {
                     Toast.makeText(requireContext(), "Error al activar el modo administrador", Toast.LENGTH_SHORT).show()
                 }
@@ -242,8 +244,11 @@ class Fragment5_ajustes : Fragment() {
                 DbHandler.setAdmin(false)
                 dialog.dismiss()
                 Toast.makeText(requireContext(), "Modo Administrador desactivado correctamente", Toast.LENGTH_SHORT).show()
+                callSingletonMapClass()
             }
         }
+
+
 
         //dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
@@ -280,6 +285,13 @@ class Fragment5_ajustes : Fragment() {
         builder.show()
 
          */
+    }
+
+    private fun callSingletonMapClass() {
+        if (Activity5_Mapa.instancia != null) {
+            println("************ INSTANCIA OBTENIDA")
+            Activity5_Mapa.instancia!!.checkPoints()
+        }
     }
 
 

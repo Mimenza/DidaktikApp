@@ -46,14 +46,8 @@ class Fragment1_4_juego : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private lateinit var layout: ConstraintLayout
     private lateinit var btnInfoJuego: ImageButton
-    private lateinit var constraintFila1: View
-
-    private var myLineTest: CustomLine? = null
-
-    private var testWidth: Int? = null
-    private var testHeight: Int? = null
+    private var introFinished: Boolean = false
 
     private var nFilas: Int = 12
     private var nCols: Int = 12
@@ -62,7 +56,6 @@ class Fragment1_4_juego : Fragment() {
     private lateinit var matrizMain: LinearLayout
     private lateinit var constraintMain: ConstraintLayout
 
-    private var letterWeight = 1/nCols
     private var audio: MediaPlayer? = null
     private lateinit var vistaAnimada:TranslateAnimation
 
@@ -89,13 +82,11 @@ class Fragment1_4_juego : Fragment() {
         btnInfoJuego.setOnClickListener(){
             showDialogInfo()
         }
+        introFinished = false
 
 
         button.setOnClickListener(){
-            //Navigation.findNavController(view).navigate(R.id.action_fragment1_4_juego_to_fragment2_4_minijuego)
             prepararPreguntas()
-
-
         }
         ajustes.setOnClickListener(){
                 (activity as Activity6_Site?)?.menuCheck()
@@ -111,8 +102,6 @@ class Fragment1_4_juego : Fragment() {
         //Animacion manzana al iniciar el juego
         starAnimationfun(view)
         playAudio(R.raw.juego4audiotutorial)
-
-
 
         view.viewTreeObserver.addOnGlobalLayoutListener(object :
             ViewTreeObserver.OnGlobalLayoutListener {
@@ -160,18 +149,14 @@ class Fragment1_4_juego : Fragment() {
     private var ultimaPosCol: Int? = null
     private var drawStartX: Float? = null
     private var drawStartY: Float? = null
-    private var palabrasPintadas = arrayListOf<String>()
     private var palabras = arrayListOf<String>("SAGARDANTZA", "SALMENTA", "TRIKITIXA", "TXALAPARTA", "GARBITZEA", "DASTATZEA", "TXISTULARIAK", "BILKETA", "ERAKUSKETA")
     private var palabrasEncontradas = arrayListOf<String>()
-    private var filasHuecosLibres = arrayListOf<Int>()
-    private var palabraPreparada: String = ""
 
     //Variables Juego Verdadero/Falso
     private var respuestasCorrectas = arrayListOf<Int>(1,3,5,8,9,12,13,16,17) // Radio button index Respuestas correctas
 
 
     fun showDialogInfo(){
-
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.info_minijuego)
@@ -181,7 +166,6 @@ class Fragment1_4_juego : Fragment() {
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
 
-
         val textInfo = dialog.findViewById<View>(R.id.txtv_infominijuego) as TextView
         var texto =""
         //Recojemos datos de shared preferences
@@ -189,18 +173,15 @@ class Fragment1_4_juego : Fragment() {
         val numero = sharedPreferences?.getString("numero", null)?.toInt()
         println(numero)
         when(numero){
-
             0->  {texto=resources.getString(R.string.ayudajuego1)}
             1->  {texto=resources.getString(R.string.ayudajuego2)}
             2->  {texto=resources.getString(R.string.ayudajuego3)}
             3->  {texto=resources.getString(R.string.ayudajuego4)}
             4->  {texto=resources.getString(R.string.ayudajuego5)}
             5->  {texto=resources.getString(R.string.ayudajuego6)}
-
         }
         println(texto)
         if (textInfo!=null){
-
             textInfo.setText(texto)
         }
     }
@@ -740,30 +721,33 @@ class Fragment1_4_juego : Fragment() {
 
 
     private fun exitAnimationfun(view: View) {
-        val upelioAnimado = view.findViewById(R.id.imgv1_4_upelio2) as ImageView
-        upelioAnimado.isVisible = false
+        if (!introFinished) {
+            val upelioAnimado = view.findViewById(R.id.imgv1_4_upelio2) as ImageView
+            upelioAnimado.isVisible = false
 
-        //Animacion upelio salido
-        vistaAnimada = TranslateAnimation(0f, 1000f, 0f, 0f)
-        vistaAnimada.duration = 2000
+            //Animacion upelio salido
+            vistaAnimada = TranslateAnimation(0f, 1000f, 0f, 0f)
+            vistaAnimada.duration = 2000
 
-        //VistaAnimada.fillAfter = true
-        val upelio = view.findViewById(R.id.imgv1_4_upelio) as ImageView
-        upelio.startAnimation(vistaAnimada)
+            //VistaAnimada.fillAfter = true
+            val upelio = view.findViewById(R.id.imgv1_4_upelio) as ImageView
+            upelio.startAnimation(vistaAnimada)
 
-        //Animacion fondo gris
-        Handler(Looper.getMainLooper()).postDelayed({
-            if (getView() != null) {
-                val txtAnimacion = view.findViewById(R.id.txtv1_4fondogris) as TextView
-                val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
-                txtAnimacion.startAnimation(aniFade)
-                txtv1_4tutorialjuego4.startAnimation(aniFade)
-                txtv1_4tutorialjuego4.isVisible = false
-                txtAnimacion.isVisible = false
-                val buttonSiguiente = view.findViewById(R.id.btnf1_4_siguiente) as Button
-                buttonSiguiente.isVisible=true
-            }
-        }, 1000)
+            //Animacion fondo gris
+            Handler(Looper.getMainLooper()).postDelayed({
+                if (getView() != null) {
+                    val txtAnimacion = view.findViewById(R.id.txtv1_4fondogris) as TextView
+                    val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+                    txtAnimacion.startAnimation(aniFade)
+                    txtv1_4tutorialjuego4.startAnimation(aniFade)
+                    txtv1_4tutorialjuego4.isVisible = false
+                    txtAnimacion.isVisible = false
+                    val buttonSiguiente = view.findViewById(R.id.btnf1_4_siguiente) as Button
+                    buttonSiguiente.isVisible = true
+                    introFinished = true
+                }
+            }, 1000)
+        }
     }
 
     override fun onDestroy() {

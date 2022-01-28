@@ -43,11 +43,18 @@ class Fragment1_1_juego : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var globalView: View
     private lateinit var vistaAnimada: TranslateAnimation
     private lateinit var layout: ConstraintLayout
     private lateinit var customLine: CustomLine
     private lateinit var btnInfoJuego: ImageButton
     private val customLines = arrayListOf<CustomLine>()
+    private var introFinished: Boolean = false
+    private var doubleTabHandler: Handler? = null
+    private var typeWriterHandler: Handler? = null
+    private var exitAnimationHandler: Handler? = null
+    private var talkAnimationHandler: Handler? = null
+    private var fondoAnimationHandler: Handler? = null
 
     private var audio: MediaPlayer? = null
 
@@ -85,8 +92,11 @@ class Fragment1_1_juego : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment1_1_juego, container, false)
+        globalView = view
         layout = view.findViewById(R.id.cl1_1juego)
+        introFinished = false
 
+        val introFondo: TextView = view.findViewById(R.id.txtv1_1fondogris)
 
         img1 = view.findViewById(R.id.imgv1_1imagen1)
         img2 = view.findViewById(R.id.imgv1_1imagen2)
@@ -99,6 +109,19 @@ class Fragment1_1_juego : Fragment() {
         val button: Button = view.findViewById(R.id.btnf1_1siguienteJuego)
         val buttonAgain: Button = view.findViewById(R.id.btnf1_1repetirJuego)
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_1_ajustes)
+
+        introFondo.setOnClickListener() {
+            if (null == doubleTabHandler) {
+                doubleTabHandler = Handler()
+                doubleTabHandler?.postDelayed({
+                    doubleTabHandler?.removeCallbacksAndMessages(null)
+                    doubleTabHandler = null
+                }, 200)
+            } else {
+                endIntroManually()
+            }
+
+        }
 
         button.setOnClickListener {
             Navigation.findNavController(view)
@@ -122,11 +145,15 @@ class Fragment1_1_juego : Fragment() {
         }
 
         //Typewriter juego 1 tutorial
-        Handler(Looper.getMainLooper()).postDelayed({
-            if (getView() != null) {
-                typewriter(view)
-            }
+        typeWriterHandler?.removeCallbacksAndMessages(null)
+        typeWriterHandler = Handler()
+        typeWriterHandler?.postDelayed({
+            typewriter(view)
+            typeWriterHandler?.removeCallbacksAndMessages(null)
+            typeWriterHandler = null
         }, 2000)
+
+
         //Typewriter juego 1 tutorial fin
 
         //Audio juego 1
@@ -136,11 +163,12 @@ class Fragment1_1_juego : Fragment() {
                 audio = MediaPlayer.create(context, R.raw.juego1audiotutorial)
                 audio?.start()
                 audio?.setOnCompletionListener {
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        if (getView() != null) {
-                            //Llama a la funcion para la animacion de salida cuando el audio se termina
-                            exitAnimationfun(view)
-                        }
+                    exitAnimationHandler?.removeCallbacksAndMessages(null)
+                    exitAnimationHandler = Handler()
+                    exitAnimationHandler?.postDelayed({
+                        exitAnimationfun(view)
+                        exitAnimationHandler?.removeCallbacksAndMessages(null)
+                        exitAnimationHandler = null
                     }, 1000)
                 }
             }
@@ -454,6 +482,10 @@ class Fragment1_1_juego : Fragment() {
      * Muestra la manzana de la animacion con una transicion
      * @param view la vista en la que se encuentra
      */
+
+    private var upelioStatic: ImageView? = null
+    private var upelioTalking: ImageView? = null
+
     private fun starAnimationfun(view: View) {
         //Animacion fondo gris
         val txtAnimacion = view.findViewById(R.id.txtv1_1fondogris) as TextView
@@ -463,16 +495,19 @@ class Fragment1_1_juego : Fragment() {
         //Animacion entrada upelio
         vistaAnimada = TranslateAnimation(-1000f, 0f, 0f, 0f)
         vistaAnimada.duration = 2000
-        val upelio = view.findViewById(R.id.imgv1_1_upelio) as ImageView
-        upelio.startAnimation(vistaAnimada)
+        upelioStatic = view.findViewById(R.id.imgv1_1_upelio) as ImageView
+        upelioStatic?.startAnimation(vistaAnimada)
 
         //llamamos a la animacion para animar a upelio
-        Handler(Looper.getMainLooper()).postDelayed({
-            if (getView() != null) {
-                upelio.isVisible = false
-                talkAnimationfun(view)
-            }
+        talkAnimationHandler?.removeCallbacksAndMessages(null)
+        talkAnimationHandler = Handler()
+        talkAnimationHandler?.postDelayed({
+            upelioStatic?.isVisible = false
+            talkAnimationfun(view)
+            talkAnimationHandler?.removeCallbacksAndMessages(null)
+            talkAnimationHandler = null
         }, 2000)
+
 
     }
 
@@ -482,6 +517,9 @@ class Fragment1_1_juego : Fragment() {
      * @param view la vista en la que se encuentra
      */
     private fun exitAnimationfun(view: View) {
+        if (introFinished) {
+            return
+        }
         val upelioAnimado = view.findViewById(R.id.imgv1_1_upelio2) as ImageView
         upelioAnimado.isVisible = false
 
@@ -494,27 +532,53 @@ class Fragment1_1_juego : Fragment() {
         upelio.startAnimation(vistaAnimada)
 
         //Animacion fondo gris
-        Handler(Looper.getMainLooper()).postDelayed({
-            if (getView() != null) {
-                val txtAnimacion = view.findViewById(R.id.txtv1_1fondogris) as TextView
-                val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
-                txtAnimacion.startAnimation(aniFade)
-                txtv1_1tutorialjuego1.startAnimation(aniFade)
-                txtv1_1tutorialjuego1.isVisible = false
-                txtAnimacion.isVisible = false
-            }
+        fondoAnimationHandler?.removeCallbacksAndMessages(null)
+        fondoAnimationHandler = Handler()
+        fondoAnimationHandler?.postDelayed({
+            introFinished = true
+            val txtAnimacion = view.findViewById(R.id.txtv1_1fondogris) as TextView
+            val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+            txtAnimacion.startAnimation(aniFade)
+            txtv1_1tutorialjuego1.startAnimation(aniFade)
+            txtv1_1tutorialjuego1.isVisible = false
+            txtAnimacion.isVisible = false
+            fondoAnimationHandler?.removeCallbacksAndMessages(null)
+            fondoAnimationHandler = null
         }, 1000)
+
     }
 
     /**
      * Anima la manzana como que habla
      * @param view la vista en la que se encuentra
      */
+
     private fun talkAnimationfun(view: View) {
-        val upelio = view.findViewById(R.id.imgv1_1_upelio2) as ImageView
-        upelio.setBackgroundResource(R.drawable.animacion_manzana)
-        val ani = upelio.background as AnimationDrawable
+        upelioTalking = view.findViewById(R.id.imgv1_1_upelio2) as ImageView
+        upelioTalking?.setBackgroundResource(R.drawable.animacion_manzana)
+        val ani = upelioTalking?.background as AnimationDrawable
         ani.start()
+    }
+
+    private fun endIntroManually() {
+        if (introFinished) {
+            return
+        }
+        doubleTabHandler?.removeCallbacksAndMessages(null)
+        typeWriterHandler?.removeCallbacksAndMessages(null)
+        exitAnimationHandler?.removeCallbacksAndMessages(null)
+        introFinished = true
+        val upelio1 = globalView.findViewById(R.id.imgv1_1_upelio) as ImageView
+        upelio1.clearAnimation()
+        upelio1.visibility = View.GONE
+        val upelio2 = globalView.findViewById(R.id.imgv1_1_upelio2) as ImageView
+        upelio2.clearAnimation()
+        upelio2.visibility = View.GONE
+        val txtAnimacion = globalView.findViewById(R.id.txtv1_1fondogris) as TextView
+        txtAnimacion.clearAnimation()
+        txtv1_1tutorialjuego1.isVisible = false
+        txtAnimacion.isVisible = false
+        audio?.stop()
     }
 
     /**
@@ -614,6 +678,17 @@ class Fragment1_1_juego : Fragment() {
 
     override fun onDestroy() {
         audio?.stop()
+        doubleTabHandler?.removeCallbacksAndMessages(null)
+        typeWriterHandler?.removeCallbacksAndMessages(null)
+        exitAnimationHandler?.removeCallbacksAndMessages(null)
+        talkAnimationHandler?.removeCallbacksAndMessages(null)
+        fondoAnimationHandler?.removeCallbacksAndMessages(null)
+        doubleTabHandler = null
+        typeWriterHandler = null
+        exitAnimationHandler = null
+        talkAnimationHandler = null
+        fondoAnimationHandler = null
+
         super.onDestroy()
     }
 

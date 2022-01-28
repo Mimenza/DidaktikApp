@@ -289,7 +289,6 @@ class Fragment5_ajustes : Fragment() {
 
     private fun callSingletonMapClass() {
         if (Activity5_Mapa.instancia != null) {
-            println("************ INSTANCIA OBTENIDA")
             Activity5_Mapa.instancia!!.checkPoints()
         }
     }

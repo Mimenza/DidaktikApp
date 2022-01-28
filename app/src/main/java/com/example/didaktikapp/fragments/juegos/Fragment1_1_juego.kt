@@ -25,7 +25,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.CustomLine
-import com.example.didaktikapp.activities.Activity1_Principal
 import com.example.didaktikapp.activities.Activity5_Mapa
 import com.example.didaktikapp.activities.Activity6_Site
 import com.example.didaktikapp.activities.Utils
@@ -81,7 +80,7 @@ class Fragment1_1_juego : Fragment() {
         btnInfoJuego= view.findViewById((R.id.btn1_1_infojuego))
         val button: Button = view.findViewById(R.id.btnf1_1siguienteJuego)
         val buttonAgain: Button = view.findViewById(R.id.btnf1_1repetirJuego)
-        val ajustes: ImageButton = view.findViewById(R.id.btnf1_1_ajustes)
+
         val mapa: ImageButton = view.findViewById(R.id.btnf1_1_mapa)
 
         button.setOnClickListener {
@@ -94,13 +93,7 @@ class Fragment1_1_juego : Fragment() {
                 .navigate(R.id.action_fragment1_1_juego_self)
         }
 
-        ajustes.setOnClickListener {
-            if (audio?.isPlaying == false){
 
-                (activity as Activity6_Site?)?.menuCheck()
-
-            }
-        }
 
         mapa.setOnClickListener {
             if (audio?.isPlaying == false){
@@ -381,7 +374,7 @@ class Fragment1_1_juego : Fragment() {
 
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.info)
+        dialog.setContentView(R.layout.info_dialog)
         dialog.show()
         dialog.window!!.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,

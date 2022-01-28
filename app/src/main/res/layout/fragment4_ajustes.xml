@@ -5,7 +5,7 @@
     android:id="@+id/fragment5layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Fragment5_ajustes">
+    tools:context=".fragments.Fragment4_ajustes">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_ajustes"
@@ -14,7 +14,7 @@
         android:background="@color/white">
 
         <TextView
-            android:id="@+id/txtv6_titulo"
+            android:id="@+id/txtv4_titulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ajustes"
@@ -38,31 +38,31 @@
             tools:layout_editor_absoluteX="0dp">
 
             <Button
-                android:id="@+id/btn5f_home"
+                android:id="@+id/btn4f_home"
                 style="@style/botonesMenu"
                 android:drawableLeft="@drawable/ic_home"
                 android:text="@string/botonhome" />
 
             <Button
-                android:id="@+id/btn5f_idioma"
+                android:id="@+id/btn4f_idioma"
                 style="@style/botonesMenu"
                 android:drawableLeft="@drawable/ic_language"
                 android:text="@string/botonidioma" />
 
             <Button
-                android:id="@+id/btn5f_oscuro"
+                android:id="@+id/btn4f_oscuro"
                 style="@style/botonesMenu"
                 android:drawableLeft="@drawable/ic_theme"
                 android:text="@string/botonoscuro" />
 
             <Button
-                android:id="@+id/btn5f_admin"
+                android:id="@+id/btn4f_admin"
                 style="@style/botonesMenu"
                 android:drawableLeft="@drawable/ic_person"
                 android:text="ADMIN" />
 
             <Button
-                android:id="@+id/btn5f_acercade"
+                android:id="@+id/btn4f_acercade"
                 style="@style/botonesMenu"
                 android:drawableLeft="@drawable/ic_ayuda"
                 android:text="@string/botonacercade" />

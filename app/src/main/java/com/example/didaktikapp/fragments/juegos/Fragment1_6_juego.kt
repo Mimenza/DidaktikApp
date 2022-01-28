@@ -3,6 +3,7 @@ package com.example.didaktikapp.fragments.juegos
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -16,7 +17,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
-import com.example.didaktikapp.activities.Activity6_Site
+import com.example.didaktikapp.activities.Activity5_Mapa
 import kotlinx.android.synthetic.main.activity1_principal.*
 import kotlinx.android.synthetic.main.fragment1_1_juego.*
 import kotlinx.android.synthetic.main.fragment1_6_juego.*
@@ -59,13 +60,7 @@ class Fragment1_6_juego : Fragment() {
         "prezioa",
         "estimazioa")
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+
 
     @SuppressLint("ResourceAsColor")
     override fun onCreateView(
@@ -78,7 +73,7 @@ class Fragment1_6_juego : Fragment() {
         val btnsiguiente: Button = view.findViewById(R.id.btnf1_6siguienteJuego)
         val btnsaltar: Button = view.findViewById(R.id.btnf1_6saltarjuego)
         val btnrepertir : Button = view.findViewById(R.id.btnf1_6repetirJuego)
-        val ajustes: ImageButton = view.findViewById(R.id.btnf1_6_ajustes)
+
         //val buttonSonido: ImageButton = view.findViewById(R.id.btnf1_6_sonido)
         btnInfoJuego= view.findViewById((R.id.btn1_6_infojuego))
         btnsaltar.setOnClickListener() {
@@ -147,19 +142,22 @@ class Fragment1_6_juego : Fragment() {
                 testAudioTemp?.start()
             }
         }
-
+        val mapa: ImageButton = view.findViewById(R.id.btnf1_6_mapa)
+        mapa.setOnClickListener {
+            if (audio?.isPlaying == false){
+                activity?.let{
+                    val intent = Intent (it, Activity5_Mapa::class.java)
+                    it.startActivity(intent)
+                }
+            }
+        }
 
         btnsiguiente.setOnClickListener() {
             Navigation.findNavController(view)
                 .navigate(R.id.action_fragment1_6_juego_to_fragment2_6_minijuego)
         }
-        ajustes.setOnClickListener() {
-            if (audio?.isPlaying == false){
 
-                (activity as Activity6_Site?)?.menuCheck()
 
-            }
-        }
 //        buttonSonido.setOnClickListener() {
 //           animacionVolumen(view)
 //        }
@@ -193,7 +191,7 @@ class Fragment1_6_juego : Fragment() {
 
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.info)
+        dialog.setContentView(R.layout.info_dialog)
         dialog.show()
         dialog.window!!.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,

@@ -15,7 +15,6 @@ import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.DragnDropImage
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity5_Mapa
-import com.example.didaktikapp.activities.Activity6_Site
 import android.widget.TextView
 
 
@@ -36,7 +35,6 @@ class Fragment2_1_minijuego : Fragment() {
     var manzanaList: MutableList<DragnDropImage>? = mutableListOf()
     val duracionJuego: Int = 60 // Duracion en segundos
     val intervaloGeneracionManzanas = 3 //Duracion en segundos
-    val aciertosRequeridos: Int = 5
     var aciertosActuales: Int = 0
     var minijuegoFinalizado: Boolean = false
     var manzanasCounter = 0
@@ -49,7 +47,6 @@ class Fragment2_1_minijuego : Fragment() {
         val view= inflater.inflate(R.layout.fragment2_1_minijuego, container, false)
         globalView = view
 
-        val ajustes: ImageButton = view.findViewById(R.id.btnf2_1ajustes)
 
         cesta = view.findViewById((R.id.juegox_cesta))
         basurero = view.findViewById((R.id.juegox_basurero))
@@ -63,10 +60,15 @@ class Fragment2_1_minijuego : Fragment() {
         btnrepetir = view.findViewById(R.id.btn2_1_repetir)
         btnsiguiente = view.findViewById(R.id.btn2_1_siguiente)
 
-        ajustes.setOnClickListener(){
-            (activity as Activity6_Site?)?.menuCheck()
-
+        val mapa: ImageButton = view.findViewById(R.id.btnf2_1_mapa)
+        mapa.setOnClickListener {
+                activity?.let{
+                    val intent = Intent (it, Activity5_Mapa::class.java)
+                    it.startActivity(intent)
+                }
         }
+
+
         btninfominijuego.setOnClickListener(){
             showDialogInfo()
         }
@@ -80,7 +82,7 @@ class Fragment2_1_minijuego : Fragment() {
 
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.info)
+        dialog.setContentView(R.layout.info_dialog)
         dialog.show()
         dialog.window!!.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,

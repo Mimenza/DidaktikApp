@@ -17,30 +17,27 @@ import com.example.didaktikapp.activities.DbHandler
 import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat.recreate
-import androidx.core.content.ContextCompat
 
 import com.example.didaktikapp.Model.MyPreferences
 import com.example.didaktikapp.activities.Activity1_Principal
 import com.example.didaktikapp.activities.Activity5_Mapa
-import com.google.android.gms.maps.SupportMapFragment
 import java.util.*
 
-class Fragment5_ajustes : Fragment() {
-    private val pass: String = "admin"
+class Fragment4_ajustes : Fragment() {
+    private val pass: String = "upelio"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment5_ajustes, container, false)
-        val buttonAcercaDe: Button = view.findViewById(R.id.btn5f_acercade)
-        val buttonAdmin: Button = view.findViewById(R.id.btn5f_admin)
-        val buttonTheme: Button = view.findViewById(R.id.btn5f_oscuro)
-        val buttonIdiomas: Button = view.findViewById(R.id.btn5f_idioma)
-        val buttonHome: Button = view.findViewById(R.id.btn5f_home)
+        val view = inflater.inflate(R.layout.fragment4_ajustes, container, false)
+        val buttonAcercaDe: Button = view.findViewById(R.id.btn4f_acercade)
+        val buttonAdmin: Button = view.findViewById(R.id.btn4f_admin)
+        val buttonTheme: Button = view.findViewById(R.id.btn4f_oscuro)
+        val buttonIdiomas: Button = view.findViewById(R.id.btn4f_idioma)
+        val buttonHome: Button = view.findViewById(R.id.btn4f_home)
 
         //Segun la opcion seleccionada, clickamos oscuro o claro
         checkTheme(requireContext())

@@ -3,6 +3,7 @@ package com.example.didaktikapp.fragments.juegos
 import com.example.didaktikapp.R
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.app.Dialog
+import android.content.Intent
 import android.media.MediaPlayer
 import androidx.fragment.app.Fragment
 import android.os.Handler
@@ -24,25 +25,15 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.CustomLine
+import com.example.didaktikapp.activities.Activity1_Principal
+import com.example.didaktikapp.activities.Activity5_Mapa
 import com.example.didaktikapp.activities.Activity6_Site
+import com.example.didaktikapp.activities.Utils
 import kotlinx.coroutines.runBlocking
 import kotlinx.android.synthetic.main.fragment1_1_juego.*
 import kotlinx.coroutines.launch
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Fragment1_juego.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Fragment1_1_juego : Fragment() {
-    private val thisJuegoId = 1
-
-    private var param1: String? = null
-    private var param2: String? = null
-
     private lateinit var vistaAnimada: TranslateAnimation
     private lateinit var layout: ConstraintLayout
     private lateinit var customLine: CustomLine
@@ -70,14 +61,6 @@ class Fragment1_1_juego : Fragment() {
     private lateinit var txtv2: TextView
     private lateinit var txtv3: TextView
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -99,6 +82,7 @@ class Fragment1_1_juego : Fragment() {
         val button: Button = view.findViewById(R.id.btnf1_1siguienteJuego)
         val buttonAgain: Button = view.findViewById(R.id.btnf1_1repetirJuego)
         val ajustes: ImageButton = view.findViewById(R.id.btnf1_1_ajustes)
+        val mapa: ImageButton = view.findViewById(R.id.btnf1_1_mapa)
 
         button.setOnClickListener {
             Navigation.findNavController(view)
@@ -117,6 +101,16 @@ class Fragment1_1_juego : Fragment() {
 
             }
         }
+
+        mapa.setOnClickListener {
+            if (audio?.isPlaying == false){
+                activity?.let{
+                    val intent = Intent (it, Activity5_Mapa::class.java)
+                    it.startActivity(intent)
+                }
+            }
+        }
+
         btnInfoJuego.setOnClickListener(){
             showDialogInfo()
         }
@@ -274,6 +268,8 @@ class Fragment1_1_juego : Fragment() {
                     }
                     setBorder(txtv1, "red")
 
+                    Utils.vibrarTelefono(requireContext())
+
                     runBlocking {
                         launch {
                             audio = MediaPlayer.create(context, R.raw.gaizkiaudioa)
@@ -316,6 +312,8 @@ class Fragment1_1_juego : Fragment() {
                         }
                     }
                     setBorder(txtv2, "red")
+
+                    Utils.vibrarTelefono(requireContext())
 
                     runBlocking {
                         launch {
@@ -361,6 +359,8 @@ class Fragment1_1_juego : Fragment() {
                     }
                     setBorder(txtv3, "red")
 
+                    Utils.vibrarTelefono(requireContext())
+
                     runBlocking {
                         launch {
                             audio = MediaPlayer.create(context, R.raw.gaizkiaudioa)
@@ -381,7 +381,7 @@ class Fragment1_1_juego : Fragment() {
 
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.info_minijuego)
+        dialog.setContentView(R.layout.info)
         dialog.show()
         dialog.window!!.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -587,7 +587,7 @@ class Fragment1_1_juego : Fragment() {
      * @param progress el progeso de la partida
      */
     private fun checkProgress(view: View, progress: Int) {
-        if (progress == 3) {
+        if (progress >= 3) {
             runBlocking {
                 launch {
                     audio = MediaPlayer.create(context, R.raw.juego1ongi)
@@ -625,25 +625,5 @@ class Fragment1_1_juego : Fragment() {
     override fun onResume() {
         super.onResume()
         audio?.start()
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Fragment1_juego.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Fragment1_1_juego().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 }

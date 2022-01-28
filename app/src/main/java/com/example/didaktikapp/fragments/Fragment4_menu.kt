@@ -43,7 +43,7 @@ class Fragment4_menu : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment4_menu2, container, false)
+        val view = inflater.inflate(R.layout.fragment4_menu, container, false)
         val ajustes: Button = view.findViewById(R.id.btn4f_ajustes2)
 
         val inicio: Button = view.findViewById(R.id.btn4f_inicio2)

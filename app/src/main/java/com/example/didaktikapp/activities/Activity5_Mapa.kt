@@ -260,22 +260,9 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.QueryR
 
         mMap.isMyLocationEnabled = true
         mMap.uiSettings.isZoomControlsEnabled = true
-        mMap.uiSettings.isCompassEnabled = true
+        mMap.uiSettings.isCompassEnabled = false
+        mMap.uiSettings.isMyLocationButtonEnabled = false
         mMap.mapType = GoogleMap.MAP_TYPE_HYBRID
-
-        val locationButton = (thisActivity.findViewById<View>(Integer.parseInt("1")).parent as View).findViewById<View>(Integer.parseInt("2"))
-        val relativeLayoutParamsLocation = locationButton.layoutParams as (RelativeLayout.LayoutParams)
-
-        relativeLayoutParamsLocation.addRule(RelativeLayout.ALIGN_PARENT_TOP,0)
-        relativeLayoutParamsLocation.addRule(RelativeLayout.ALIGN_PARENT_TOP,RelativeLayout.TRUE)
-        relativeLayoutParamsLocation.setMargins(0,100,0,0)
-
-        val compass = (thisActivity.findViewById<View>(Integer.parseInt("1")).parent as View).findViewById<View>(Integer.parseInt("5"))
-        val relativeLayoutParamsCompass = compass.layoutParams as (RelativeLayout.LayoutParams)
-
-        relativeLayoutParamsCompass.addRule(RelativeLayout.ALIGN_PARENT_TOP,0)
-        relativeLayoutParamsCompass.addRule(RelativeLayout.ALIGN_PARENT_TOP,RelativeLayout.TRUE)
-        relativeLayoutParamsCompass.setMargins(0,100,0,0)
 
         //Set min and max zoom
         mMap.setMaxZoomPreference(21F)

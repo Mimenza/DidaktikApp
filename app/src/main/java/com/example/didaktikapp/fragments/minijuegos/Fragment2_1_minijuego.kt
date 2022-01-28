@@ -6,7 +6,6 @@ import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.Handler
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.view.animation.TranslateAnimation
@@ -15,19 +14,9 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.DragnDropImage
 import com.example.didaktikapp.R
-import android.widget.ProgressBar
-import androidx.appcompat.widget.AppCompatButton
-import androidx.core.view.isVisible
 import com.example.didaktikapp.activities.Activity5_Mapa
 import com.example.didaktikapp.activities.Activity6_Site
-import kotlinx.android.synthetic.main.info_minijuego.*
 import android.widget.TextView
-import android.widget.EditText
-
-
-
-
-
 
 
 class Fragment2_1_minijuego : Fragment() {
@@ -91,7 +80,7 @@ class Fragment2_1_minijuego : Fragment() {
 
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.info_minijuego)
+        dialog.setContentView(R.layout.info)
         dialog.show()
         dialog.window!!.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,

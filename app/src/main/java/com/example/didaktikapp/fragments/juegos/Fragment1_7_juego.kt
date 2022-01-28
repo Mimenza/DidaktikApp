@@ -30,7 +30,6 @@ import com.example.didaktikapp.Model.Preguntasjuego7
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity6_Site
 import com.example.didaktikapp.activities.Utils
-import kotlinx.android.synthetic.main.fragment1_2_juego.*
 import kotlinx.android.synthetic.main.fragment1_7_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -350,7 +349,7 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
 
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.info_minijuego)
+        dialog.setContentView(R.layout.info)
         dialog.show()
         dialog.window!!.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,

@@ -6,11 +6,6 @@ import com.example.didaktikapp.R
 
 object Constantsjuego7 {
 
-    //Recojemos todas las preguntas
-    const val TOTAL_QUESTIONS: String= "total_question"
-    //Recojemos las respuestas correctas
-    const val CORRECT_ANSWERS: String="correct_answers"
-
 
     //HACEMOS UN GET DE TODAS LAS PREGUNTAS
     fun getQuestions(): ArrayList<Preguntasjuego7>{

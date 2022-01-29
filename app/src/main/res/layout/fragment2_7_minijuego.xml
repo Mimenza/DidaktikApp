@@ -12,42 +12,55 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <TextView
-            android:id="@+id/txtv2_7minijuego7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="MINIJUEGO 7"
+            android:id="@+id/txtv2_7fondogris2"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#D3000000"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/btnf2_7siguiente"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SIGUIENTE"
+        <in.codeshuffle.typewriterview.TypeWriterView
+            android:id="@+id/txtv2_7felicitacionesminijuego7"
+            android:layout_width="327dp"
+            android:layout_height="422dp"
+            android:focusable="true"
+            android:textColor="@color/white"
+            android:textSize="24dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.491"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.69" />
+            app:layout_constraintVertical_bias="0.13999999"
+            tools:ignore="MissingClass" />
 
 
-        <ImageButton
-            android:id="@+id/btnf2_7_mapa"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minHeight="48dp"
-            android:src="@drawable/ic_map"
-            app:layout_constraintBottom_toBottomOf="parent"
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/imgv2_7_upelio3"
+            android:layout_width="323dp"
+            android:layout_height="316dp"
+            android:src="@drawable/img_upeliosagarra"
+            app:layout_constraintBottom_toBottomOf="@+id/txtv2_7fondogris2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.044"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.087"
-            tools:ignore="SpeakableTextPresentCheck" />
+            app:layout_constraintVertical_bias="0.79" />
+
+        <androidx.constraintlayout.utils.widget.ImageFilterView
+            android:id="@+id/imgv2_7_upelio4"
+            android:layout_width="323dp"
+            android:layout_height="316dp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtv2_7fondogris2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.79" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

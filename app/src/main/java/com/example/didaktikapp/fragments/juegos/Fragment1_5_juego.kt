@@ -32,15 +32,10 @@ import com.example.didaktikapp.activities.Activity6_Site
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
 
 class Fragment1_5_juego : Fragment() {
     private val thisJuegoId = 5
     // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
     private lateinit var btnInfoJuego: ImageButton
     private lateinit var button: Button
     private lateinit var myLayout: View
@@ -48,7 +43,7 @@ class Fragment1_5_juego : Fragment() {
     private var audio: MediaPlayer? = null
     private lateinit var globalView: View
     private lateinit var vistaanimada: TranslateAnimation
-    lateinit var ajustes: ImageButton
+    private lateinit var  mapa: ImageButton
     //After using View Listener, we can get the full width and height
     var totalWidth: Int = 0
     var totalHeight: Int = 0
@@ -73,14 +68,6 @@ class Fragment1_5_juego : Fragment() {
 
     var manzanaList: MutableList<DragnDropImage>? = mutableListOf()
     //private lateinit var objetivo: ImageView
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -108,18 +95,7 @@ class Fragment1_5_juego : Fragment() {
                 prepairVestimentaElements()
             }
         })
-        val mapa: ImageButton = view.findViewById(R.id.btnf1_5_mapa)
-        mapa.setOnClickListener {
-            if (audio?.isPlaying == false){
-                activity?.let{
-                    val intent = Intent (it, Activity5_Mapa::class.java)
-                    it.startActivity(intent)
-                }
-            }
-        }
-        btnInfoJuego.setOnClickListener(){
-            showDialogInfo()
-        }
+         mapa = view.findViewById(R.id.btnf1_5_mapa)
 
         button.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment1_5_juego_to_fragment2_5_minijuego)
@@ -314,6 +290,8 @@ class Fragment1_5_juego : Fragment() {
         btnf1_5_siguienteajuego.setOnClickListener{
 
             exitAnimationfun()
+
+            activateBtn()
         }
 
     }
@@ -415,6 +393,21 @@ class Fragment1_5_juego : Fragment() {
         return null
     }
 
+    private fun activateBtn() {
+        mapa.setOnClickListener {
+            if (audio?.isPlaying == false){
+                activity?.let{
+                    val intent = Intent (it, Activity5_Mapa::class.java)
+                    it.startActivity(intent)
+                }
+            }
+        }
+
+        btnInfoJuego.setOnClickListener(){
+            showDialogInfo()
+        }
+    }
+
     override fun onDestroy() {
         audio?.stop()
         super.onDestroy()
@@ -437,25 +430,6 @@ class Fragment1_5_juego : Fragment() {
         audio?.start()
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Fragment1_juego.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Fragment1_5_juego().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 
 }
 

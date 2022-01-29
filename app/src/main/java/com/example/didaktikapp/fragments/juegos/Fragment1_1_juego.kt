@@ -3,6 +3,7 @@ package com.example.didaktikapp.fragments.juegos
 import com.example.didaktikapp.R
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.app.Dialog
+import android.content.Intent
 import android.media.MediaPlayer
 import androidx.fragment.app.Fragment
 import android.os.Handler
@@ -24,6 +25,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.CustomLine
+import com.example.didaktikapp.activities.Activity5_Mapa
 import com.example.didaktikapp.activities.Activity6_Site
 import kotlinx.coroutines.runBlocking
 import kotlinx.android.synthetic.main.fragment1_1_juego.*
@@ -39,9 +41,6 @@ private const val ARG_PARAM2 = "param2"
  */
 class Fragment1_1_juego : Fragment() {
     private val thisJuegoId = 1
-
-    private var param1: String? = null
-    private var param2: String? = null
 
     private lateinit var globalView: View
     private lateinit var vistaAnimada: TranslateAnimation
@@ -76,15 +75,7 @@ class Fragment1_1_juego : Fragment() {
     private lateinit var txtv1: TextView
     private lateinit var txtv2: TextView
     private lateinit var txtv3: TextView
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    private lateinit var  mapa: ImageButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -108,7 +99,7 @@ class Fragment1_1_juego : Fragment() {
         btnInfoJuego= view.findViewById((R.id.btn1_1_infojuego))
         val button: Button = view.findViewById(R.id.btnf1_1siguienteJuego)
         val buttonAgain: Button = view.findViewById(R.id.btnf1_1repetirJuego)
-        val ajustes: ImageButton = view.findViewById(R.id.btnf1_1_ajustes)
+        mapa = view.findViewById(R.id.btnf1_1_mapa)
 
         introFondo.setOnClickListener() {
             if (null == doubleTabHandler) {
@@ -120,7 +111,6 @@ class Fragment1_1_juego : Fragment() {
             } else {
                 endIntroManually()
             }
-
         }
 
         button.setOnClickListener {
@@ -133,16 +123,7 @@ class Fragment1_1_juego : Fragment() {
                 .navigate(R.id.action_fragment1_1_juego_self)
         }
 
-        ajustes.setOnClickListener {
-            if (audio?.isPlaying == false){
-
-                (activity as Activity6_Site?)?.menuCheck()
-
-            }
-        }
-        btnInfoJuego.setOnClickListener(){
-            showDialogInfo()
-        }
+        println(audio?.isPlaying == false)
 
         //Typewriter juego 1 tutorial
         typeWriterHandler?.removeCallbacksAndMessages(null)
@@ -170,6 +151,8 @@ class Fragment1_1_juego : Fragment() {
                         exitAnimationHandler?.removeCallbacksAndMessages(null)
                         exitAnimationHandler = null
                     }, 1000)
+
+                    activateBtn()
                 }
             }
         }
@@ -409,7 +392,7 @@ class Fragment1_1_juego : Fragment() {
 
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.info_minijuego)
+        dialog.setContentView(R.layout.info_dialog)
         dialog.show()
         dialog.window!!.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,
@@ -439,7 +422,6 @@ class Fragment1_1_juego : Fragment() {
             textInfo.setText(texto)
         }
     }
-
 
     /**
      * Dibuja una linea entre una ImgView y un TextView
@@ -511,7 +493,6 @@ class Fragment1_1_juego : Fragment() {
 
     }
 
-
     /**
      * Esconde la manzana de la animacion con una transicion
      * @param view la vista en la que se encuentra
@@ -560,7 +541,7 @@ class Fragment1_1_juego : Fragment() {
         ani.start()
     }
 
-    private fun endIntroManually() {
+     fun endIntroManually() {
         if (introFinished) {
             return
         }
@@ -579,6 +560,23 @@ class Fragment1_1_juego : Fragment() {
         txtv1_1tutorialjuego1.isVisible = false
         txtAnimacion.isVisible = false
         audio?.stop()
+
+         activateBtn()
+    }
+
+    private fun activateBtn() {
+        mapa.setOnClickListener {
+            if (audio?.isPlaying == false){
+                activity?.let{
+                    val intent = Intent (it, Activity5_Mapa::class.java)
+                    it.startActivity(intent)
+                }
+            }
+        }
+
+        btnInfoJuego.setOnClickListener(){
+            showDialogInfo()
+        }
     }
 
     /**

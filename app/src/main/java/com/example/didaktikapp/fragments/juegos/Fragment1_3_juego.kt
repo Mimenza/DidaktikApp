@@ -57,6 +57,7 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
     private lateinit var btnInfoJuego: ImageButton
     private lateinit var preguntasLayout: LinearLayout
     private var audio: MediaPlayer? = null
+    private lateinit var  mapa: ImageButton
     var totalWidth: Int = 0
     var totalHeight: Int = 0
     var puzzleShowing: Boolean = false
@@ -104,22 +105,12 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
         preguntasLayout = view.findViewById(R.id.juego3_preguntas_layout)
         btnInfoJuego= view.findViewById((R.id.btn1_3_infojuego))
         preguntasLayout.visibility = View.GONE
-        val mapa: ImageButton = view.findViewById(R.id.btnf1_3_mapa)
-        mapa.setOnClickListener {
-            if (audio?.isPlaying == false){
-                activity?.let{
-                    val intent = Intent (it, Activity5_Mapa::class.java)
-                    it.startActivity(intent)
-                }
-            }
-        }
+
+        mapa= view.findViewById(R.id.btnf1_3_mapa)
+
         btnComprobarRespuesta.setOnClickListener() {
             comprobarRespuestas()
         }
-        btnInfoJuego.setOnClickListener(){
-            showDialogInfo()
-        }
-
 
         view.viewTreeObserver.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
             override fun onGlobalLayout() {
@@ -144,8 +135,6 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
                 .navigate(R.id.action_fragment1_3_juego_to_fragment2_3_minijuego)
         }
 
-
-
         buttonRepetir.setOnClickListener() {
             Navigation.findNavController(view).navigate(R.id.action_fragment1_3_juego_self)
         }
@@ -167,7 +156,6 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
                 audio?.start()
 
                 audio?.setOnCompletionListener {
-
                     prepairPuzzleElements()
                     showPhotos()
                     Handler(Looper.getMainLooper()).postDelayed({
@@ -176,6 +164,7 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
                             exitAnimationfun(view)
                         }
                     }, 1000)
+                    activateBtn()
                 }
             }
         }
@@ -456,6 +445,21 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
             }
         }
         return null
+    }
+
+    private fun activateBtn() {
+        mapa.setOnClickListener {
+            if (audio?.isPlaying == false){
+                activity?.let{
+                    val intent = Intent (it, Activity5_Mapa::class.java)
+                    it.startActivity(intent)
+                }
+            }
+        }
+
+        btnInfoJuego.setOnClickListener(){
+            showDialogInfo()
+        }
     }
 
     override fun onDestroy() {

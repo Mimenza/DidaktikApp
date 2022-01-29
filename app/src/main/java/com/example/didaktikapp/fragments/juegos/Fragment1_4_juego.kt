@@ -42,6 +42,7 @@ class Fragment1_4_juego : Fragment() {
     private var letterWeight = 1/nCols
     private var audio: MediaPlayer? = null
     private lateinit var vistaAnimada:TranslateAnimation
+    private lateinit var  mapa: ImageButton
 
 
     override fun onCreateView(
@@ -56,19 +57,9 @@ class Fragment1_4_juego : Fragment() {
         val button: Button = view.findViewById(R.id.btnf1_4_siguiente)
 
         btnInfoJuego= view.findViewById((R.id.btn1_4_infojuego))
-        btnInfoJuego.setOnClickListener(){
-            showDialogInfo()
-        }
 
-        val mapa: ImageButton = view.findViewById(R.id.btnf1_4_mapa)
-        mapa.setOnClickListener {
-            if (audio?.isPlaying == false){
-                activity?.let{
-                    val intent = Intent (it, Activity5_Mapa::class.java)
-                    it.startActivity(intent)
-                }
-            }
-        }
+        mapa = view.findViewById(R.id.btnf1_4_mapa)
+
         button.setOnClickListener(){
             prepararPreguntas()
         }
@@ -113,6 +104,7 @@ class Fragment1_4_juego : Fragment() {
                             exitAnimationfun(globalView)
                         }
                     }, 1000)
+                    activateBtn()
                 }
             }
         }
@@ -141,7 +133,6 @@ class Fragment1_4_juego : Fragment() {
 
     //Variables Juego Verdadero/Falso
     private var respuestasCorrectas = arrayListOf<Int>(1,3,5,8,9,12,13,16,17) // Radio button index Respuestas correctas
-
 
     fun showDialogInfo(){
 
@@ -177,7 +168,6 @@ class Fragment1_4_juego : Fragment() {
             textInfo.setText(texto)
         }
     }
-
 
     //Funciones Juego Verdadero / Flaso
 
@@ -703,14 +693,12 @@ class Fragment1_4_juego : Fragment() {
         }, 2000)
     }
 
-
     private fun talkAnimationfun(view: View) {
         val upelio = view.findViewById(R.id.imgv1_4_upelio2) as ImageView
         upelio.setBackgroundResource(R.drawable.animacion_manzana)
         val ani = upelio.background as AnimationDrawable
         ani.start()
     }
-
 
     private fun exitAnimationfun(view: View) {
         val upelioAnimado = view.findViewById(R.id.imgv1_4_upelio2) as ImageView
@@ -737,6 +725,21 @@ class Fragment1_4_juego : Fragment() {
                 buttonSiguiente.isVisible=true
             }
         }, 1000)
+    }
+
+    private fun activateBtn() {
+        mapa.setOnClickListener {
+            if (audio?.isPlaying == false){
+                activity?.let{
+                    val intent = Intent (it, Activity5_Mapa::class.java)
+                    it.startActivity(intent)
+                }
+            }
+        }
+
+        btnInfoJuego.setOnClickListener(){
+            showDialogInfo()
+        }
     }
 
     override fun onDestroy() {

@@ -52,6 +52,8 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
     private  var REQUEST_CODE =200
     private var introFinished: Boolean = false
     private lateinit var btnInfoJuego: ImageButton
+    private lateinit var  mapa: ImageButton
+
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,21 +74,10 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         btnSiguiente= view.findViewById(R.id.btnf1_7siguiente)
         btnInfoJuego= view.findViewById((R.id.btn1_7_infojuego))
 
-        val mapa: ImageButton = view.findViewById(R.id.btnf1_7_mapa)
-        mapa.setOnClickListener {
-            if (audio?.isPlaying == false){
-                activity?.let{
-                    val intent = Intent (it, Activity5_Mapa::class.java)
-                    it.startActivity(intent)
-                }
-            }
-        }
+        mapa = view.findViewById(R.id.btnf1_7_mapa)
+
         button.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment1_7_juego_to_fragment1_7_juego_results)
-        }
-
-        btnInfoJuego.setOnClickListener(){
-            showDialogInfo()
         }
 
         audiotutorial(view)
@@ -105,8 +96,6 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         return view
     }
 
-
-
     fun audiotutorial(view:View){
         //Audio juego 7 tutorial
         runBlocking() {
@@ -121,6 +110,7 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
                             exitAnimationfun(view)
                         }
                     }, 1000)
+                    activateBtn()
                 }
             }
         }
@@ -325,8 +315,6 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         }
     }
 
-
-
     fun showDialogInfo(){
 
         val dialog = Dialog(requireContext())
@@ -381,7 +369,6 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         }
     }
 
-
     //COLOR Y FONDO RESPUESTA SELECCIONADA
     private  fun selectedOptionView(tv:TextView, selectedOptiomNum:Int){
 
@@ -391,6 +378,21 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         tv.setTextColor(Color.parseColor("#363A43"))
         tv.setTypeface(tv.typeface, Typeface.BOLD)
         tv.background= ContextCompat.getDrawable(requireContext(), R.drawable.juego2_selected_option_border_bg)
+    }
+
+    private fun activateBtn() {
+        mapa.setOnClickListener {
+            if (audio?.isPlaying == false){
+                activity?.let{
+                    val intent = Intent (it, Activity5_Mapa::class.java)
+                    it.startActivity(intent)
+                }
+            }
+        }
+
+        btnInfoJuego.setOnClickListener(){
+            showDialogInfo()
+        }
     }
 
     override fun onDestroy() {

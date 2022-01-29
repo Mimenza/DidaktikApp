@@ -51,6 +51,7 @@ class Fragment1_6_juego : Fragment() {
     private lateinit var forwardButton: ImageView
     private var audioState: Boolean = false
     private var testAudioTemp: MediaPlayer? = null
+    private lateinit var  mapa: ImageButton
 
     var respuestas = listOf(
         "sagardoaren",
@@ -59,8 +60,6 @@ class Fragment1_6_juego : Fragment() {
         "kupelan",
         "prezioa",
         "estimazioa")
-
-
 
     @SuppressLint("ResourceAsColor")
     override fun onCreateView(
@@ -79,7 +78,6 @@ class Fragment1_6_juego : Fragment() {
         btnsaltar.setOnClickListener() {
             Navigation.findNavController(view).navigate(R.id.action_fragment1_6_juego_to_fragment2_6_minijuego)
         }
-
 
         playPauseButton = view.findViewById(R.id.juego6playpause)
         backwardButton = view.findViewById(R.id.juego6backward)
@@ -142,31 +140,20 @@ class Fragment1_6_juego : Fragment() {
                 testAudioTemp?.start()
             }
         }
-        val mapa: ImageButton = view.findViewById(R.id.btnf1_6_mapa)
-        mapa.setOnClickListener {
-            if (audio?.isPlaying == false){
-                activity?.let{
-                    val intent = Intent (it, Activity5_Mapa::class.java)
-                    it.startActivity(intent)
-                }
-            }
-        }
+        mapa = view.findViewById(R.id.btnf1_6_mapa)
 
         btnsiguiente.setOnClickListener() {
             Navigation.findNavController(view)
                 .navigate(R.id.action_fragment1_6_juego_to_fragment2_6_minijuego)
         }
 
-
 //        buttonSonido.setOnClickListener() {
 //           animacionVolumen(view)
 //        }
+
         btnrepertir.setOnClickListener(){
             Navigation.findNavController(view)
                 .navigate(R.id.action_fragment1_6_juego_self)
-        }
-        btnInfoJuego.setOnClickListener(){
-            showDialogInfo()
         }
 
         animacionVolumen(view)
@@ -416,7 +403,6 @@ class Fragment1_6_juego : Fragment() {
 
     }
 
-
     private fun animacionVolumen(view: View) {
         //Funcion para la animacion del icono del volumen mientras se reproduce el audio del bertso
         //Recogemos el icono del volumen y le añadimos la animacion
@@ -450,8 +436,6 @@ class Fragment1_6_juego : Fragment() {
         }
 
     }
-
-
 
     private fun startAudio(view: View) {
         //Funcion que reproduce el primer audio (bertso)
@@ -550,7 +534,7 @@ class Fragment1_6_juego : Fragment() {
                         //cuando el audio se termine escondemos el texto y sacamos el bertso y los inputs
                         exitAnimationfun(view)
 
-                        //btnVolumen.isVisible = true
+                        activateBtn()
                     }
                 }
                 typewriter(view)
@@ -558,6 +542,8 @@ class Fragment1_6_juego : Fragment() {
             }
             //Variable para settear que el texto ya ha sido escrito y no es la primera vez
             firstTime = false
+
+
     }
 
     private fun typewriter(view: View) {
@@ -629,6 +615,20 @@ class Fragment1_6_juego : Fragment() {
         ani.start()
     }
 
+    private fun activateBtn() {
+        mapa.setOnClickListener {
+            if (audio?.isPlaying == false){
+                activity?.let{
+                    val intent = Intent (it, Activity5_Mapa::class.java)
+                    it.startActivity(intent)
+                }
+            }
+        }
+
+        btnInfoJuego.setOnClickListener(){
+            showDialogInfo()
+        }
+    }
 
     override fun onDestroy() {
         audio?.stop()

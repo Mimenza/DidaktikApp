@@ -61,6 +61,8 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
     private var REQUEST_CODE= 200
     private var introFinished: Boolean = false
     private lateinit var btnInfoJuego: ImageButton
+    private lateinit var  mapa: ImageButton
+
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -86,18 +88,8 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
 
 
         btnInfoJuego= view.findViewById((R.id.btn1_2_infojuego))
-        btnInfoJuego.setOnClickListener(){
-            showDialogInfo()
-        }
-        val mapa: ImageButton = view.findViewById(R.id.btnf1_2_mapa)
-        mapa.setOnClickListener {
-            if (audio?.isPlaying == false){
-                activity?.let{
-                    val intent = Intent (it, Activity5_Mapa::class.java)
-                    it.startActivity(intent)
-                }
-            }
-        }
+
+         mapa = view.findViewById(R.id.btnf1_2_mapa)
 
         //Typewriter juego 2 tutorial
         introFinished = false
@@ -113,13 +105,9 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
                 audio = MediaPlayer.create(context, R.raw.juego2audiotutorial)
                 audio?.start()
                 audio?.setOnCompletionListener {
-
-                    //Handler().postDelayed({
-                    //if (getView() != null) {
                     //llama a la funcion para la animacion de salida cuando el audio se termina
                     exitAnimationfun(view)
-                    //}
-                    //}, 1000)
+                    activateBtn()
                 }
             }
         }
@@ -403,8 +391,6 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         }
     }
 
-
-
     //Cambiamos de color de fondo a la opcion en concreto
 
     fun answerView(answer: Int, drawableView: Int) {
@@ -442,6 +428,21 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         tv.setTypeface(tv.typeface, Typeface.BOLD)
         tv.background =
             ContextCompat.getDrawable(requireContext(), R.drawable.juego2_selected_option_border_bg)
+    }
+
+    private fun activateBtn() {
+        mapa.setOnClickListener {
+            if (audio?.isPlaying == false){
+                activity?.let{
+                    val intent = Intent (it, Activity5_Mapa::class.java)
+                    it.startActivity(intent)
+                }
+            }
+        }
+
+        btnInfoJuego.setOnClickListener(){
+            showDialogInfo()
+        }
     }
 
     //AUDIO EVENTS FIX ON DESTROYING

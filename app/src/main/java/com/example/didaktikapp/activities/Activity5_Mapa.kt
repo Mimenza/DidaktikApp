@@ -329,7 +329,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.QueryR
             val markerPointIcon = mMap.addMarker(
                 MarkerOptions()
                     .position(item[1] as LatLng)
-                    .title(item[0] as String)
+                    .title( (i+1).toString() + " | " + item[0] as String)
                     .icon(
                         BitmapDescriptorFactory
                             .defaultMarker(BitmapDescriptorFactory.HUE_RED)

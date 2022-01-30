@@ -9,7 +9,7 @@
 
     <Button
         android:id="@+id/btn1_cargar"
-        android:layout_width="170dp"
+        android:layout_width="150dp"
         android:layout_height="85dp"
         android:text="@string/btncargar"
         android:textSize="22sp"
@@ -22,7 +22,7 @@
 
     <Button
         android:id="@+id/btn1_nuevo"
-        android:layout_width="170dp"
+        android:layout_width="150dp"
         android:layout_height="85dp"
         android:text="@string/btnnueva"
         android:textSize="22sp"

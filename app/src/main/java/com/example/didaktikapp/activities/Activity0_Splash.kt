@@ -16,7 +16,6 @@ class Activity0_Splash : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
-        window.decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
 
         binding = Activity0SplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -27,6 +26,7 @@ class Activity0_Splash : AppCompatActivity() {
 
         //Cambia entre modo oscuro y modo claro
         if (numero == 0) {
+            window.decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
             delegate.applyDayNight()
         } else {

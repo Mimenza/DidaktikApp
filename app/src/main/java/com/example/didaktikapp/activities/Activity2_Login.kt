@@ -14,7 +14,12 @@ class Activity2_Login : AppCompatActivity(), DbHandler.QueryResponseDone {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
-        window.decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+        val sharedPreferences = this.getSharedPreferences("com.example.didaktikapp_preferences", 0)
+        val darkStatus = sharedPreferences?.getInt("io.github.manuelernesto.DARK_STATUS",0)
+
+        if(darkStatus == 0){
+            window.decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+        }
 
         binding = Activity2LoginBinding.inflate(layoutInflater)
         setContentView(binding.root)

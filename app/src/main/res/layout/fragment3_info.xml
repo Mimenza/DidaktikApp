@@ -13,11 +13,11 @@
         <ImageView
             android:id="@+id/imgv3f_fotozona"
             android:layout_width="match_parent"
-            android:layout_height="283dp"
-            android:scaleType="fitXY"
+            android:layout_height="273dp"
+            android:layout_gravity="center|top"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
-            android:layout_gravity="center|top"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -26,11 +26,11 @@
 
         <TextView
             android:id="@+id/txtv3f_nombrezona"
-            android:layout_width="281dp"
-            android:layout_height="56dp"
+            android:layout_width="265dp"
+            android:layout_height="50dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="40dp"
-            android:layout_marginEnd="50dp"
+            android:layout_marginEnd="44dp"
             android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -39,8 +39,8 @@
 
         <ScrollView
             android:id="@+id/scrollView2"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_width="393dp"
+            android:layout_height="218dp"
             android:layout_marginTop="305dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,27 +50,27 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp">
+                android:layout_marginEnd="30dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/txtv3f_textozona"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
             </LinearLayout>
         </ScrollView>
 
         <ImageView
             android:id="@+id/imgv3f_backtomap"
-            android:layout_width="47dp"
+            android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginTop="44dp"
             android:src="@drawable/ic_arrow_back"
             app:layout_constraintEnd_toStartOf="@+id/txtv3f_nombrezona"
-            app:layout_constraintHorizontal_bias="0.85"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

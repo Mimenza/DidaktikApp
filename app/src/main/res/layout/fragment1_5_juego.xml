@@ -11,7 +11,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mainlayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/juego5_pueblo">
 
         <Button
             android:id="@+id/btnf1_5_siguiente"
@@ -27,11 +28,13 @@
 
         <ImageView
             android:layout_width="700dp"
-            android:layout_height="760dp"
+            android:layout_height="780dp"
+            android:layout_marginTop="4dp"
             android:scaleType="fitXY"
             android:src="@drawable/juego5_pueblo"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.657"
+            app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -268,14 +271,14 @@
 
         <VideoView
             android:id="@+id/videoViewjuego5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.498" />
+            app:layout_constraintVertical_bias="0.498"
+            app:layout_constraintDimensionRatio="16:9"/>
 
 
         <Button

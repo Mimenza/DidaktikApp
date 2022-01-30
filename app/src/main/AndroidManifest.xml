@@ -19,7 +19,9 @@
         <activity
             android:name=".activities.Activity6_Site"
             android:exported="false"
-            android:screenOrientation="portrait"/>
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".activities.Activity5_Mapa"
             android:exported="false"

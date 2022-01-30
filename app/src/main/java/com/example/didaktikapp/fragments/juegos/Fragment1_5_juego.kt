@@ -4,6 +4,7 @@ import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
 import android.net.Uri
@@ -277,6 +278,9 @@ class Fragment1_5_juego : Fragment() {
     }
 
     private fun verVideo(){
+        //dejamos que se pueda ver el video en landscape
+        getActivity()?.setRequestedOrientation(
+            ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
 
         //Ocultamos acciones menos el video
         imgv1_5_upelio.isVisible=false
@@ -296,7 +300,11 @@ class Fragment1_5_juego : Fragment() {
 
     }
 
+
     private fun exitAnimationfun() {
+//volvemos a ponerlo en portrait
+        getActivity()?.setRequestedOrientation(
+            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
 
         //Ocultamos las acciones
         videoViewjuego5.isVisible=false

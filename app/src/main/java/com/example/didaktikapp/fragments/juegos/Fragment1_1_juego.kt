@@ -587,7 +587,7 @@ class Fragment1_1_juego : Fragment() {
     private fun setBorder(img: ImageView, color: String) {
         var colorId = 0
         when (color) {
-            "black" -> colorId = R.drawable.bg_border_black
+            "black" -> colorId = R.drawable.bg_border_selected
             "green" -> colorId = R.drawable.bg_border_green
             "red" -> colorId = R.drawable.bg_border_red
         }
@@ -605,7 +605,7 @@ class Fragment1_1_juego : Fragment() {
     private fun setBorder(txtv: TextView, color: String) {
         var colorId = 0
         when (color) {
-            "black" -> colorId = R.drawable.bg_border_black
+            "black" -> colorId = R.drawable.bg_border_selected
             "green" -> colorId = R.drawable.bg_border_green
             "red" -> colorId = R.drawable.bg_border_red
         }

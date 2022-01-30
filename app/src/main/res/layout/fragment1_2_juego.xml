@@ -108,7 +108,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-
                 <ProgressBar
                     android:id="@+id/custom_progressBar"
                     style="?android:attr/progressBarStyleHorizontal"
@@ -119,7 +118,7 @@
                     android:max="4"
                     android:minHeight="50dp"
                     android:progress="0"
-                    android:theme="@style/ProgressBarStyle" />
+                    android:theme="@style/ProgressBarStyle"/>
 
                 <TextView
                     android:id="@+id/txtv1_2_progreessbar"
@@ -136,7 +135,10 @@
                 android:id="@+id/txtv1_2_respuesta1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="0dp"
                 android:background="@drawable/juego2_default_option_border_bg"
                 android:gravity="center"
                 android:padding="15dp"
@@ -150,7 +152,7 @@
                 android:id="@+id/txtv1_2_respuesta2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:background="@drawable/juego2_default_option_border_bg"
                 android:gravity="center"
                 android:padding="15dp"
@@ -162,7 +164,7 @@
                 android:id="@+id/txtv1_2_respuesta3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:background="@drawable/juego2_default_option_border_bg"
                 android:gravity="center"
                 android:padding="15dp"
@@ -174,7 +176,7 @@
                 android:id="@+id/txtv1_2_respuesta4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:background="@drawable/juego2_default_option_border_bg"
                 android:gravity="center"
                 android:padding="15dp"

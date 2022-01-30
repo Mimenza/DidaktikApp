@@ -41,17 +41,18 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.086"
             tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
+
         <LinearLayout
             android:id="@+id/linearLayout7"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="412dp"
+            android:layout_height="730dp"
             android:gravity="center"
             android:orientation="vertical"
             android:padding="15dp"
+            app:layout_constraintBottom_toBottomOf="@+id/txtv1_7fondogris"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
 
 
             <ImageView
@@ -74,11 +75,11 @@
 
             <TextView
                 android:id="@+id/txtv1_7_pregunta1"
-                android:paddingTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:gravity="center"
+                android:paddingTop="20dp"
                 android:text="@string/que1_juego7"
                 android:textSize="22sp" />
             <!--Horizontal  Linear Layout-->

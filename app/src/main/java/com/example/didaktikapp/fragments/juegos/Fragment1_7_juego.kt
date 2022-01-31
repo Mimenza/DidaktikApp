@@ -435,6 +435,12 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener, DbHandler.QueryRespo
         txtAnimacion.isVisible = false
         audio?.stop()
 
+        val buttonSiguiente = globalView.findViewById(R.id.btnf1_7siguiente) as Button
+        buttonSiguiente.isEnabled=true
+        question1_answer1.isEnabled=true
+        question1_answer2.isEnabled=true
+        question1_answer3.isEnabled=true
+
         activateBtn()
     }
 

@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity5_Mapa
+import com.example.didaktikapp.activities.DbHandler
 import kotlinx.android.synthetic.main.activity1_principal.*
 import kotlinx.android.synthetic.main.fragment1_1_juego.*
 import kotlinx.android.synthetic.main.fragment1_4_juego.*
@@ -38,7 +39,7 @@ private lateinit var vistaAnimada: TranslateAnimation
  * create an instance of this fragment.
  */
 
-class Fragment1_6_juego : Fragment() {
+class Fragment1_6_juego : Fragment(), DbHandler.QueryResponseDone {
     private val thisJuegoId = 6
     private var param1: String? = null
     private var param2: String? = null
@@ -153,6 +154,9 @@ class Fragment1_6_juego : Fragment() {
         mapa = view.findViewById(R.id.btnf1_6_mapa)
 
         btnsiguiente.setOnClickListener() {
+            DbHandler.userAumentarPuntuacion(10)
+            DbHandler.userActualizarUltimoPunto(thisJuegoId)
+            DbHandler().requestDbUserUpdate(this)
             Navigation.findNavController(view)
                 .navigate(R.id.action_fragment1_6_juego_to_fragment2_6_minijuego)
         }

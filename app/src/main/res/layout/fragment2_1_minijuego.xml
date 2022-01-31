@@ -100,22 +100,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.496" />
 
-        <TextView
-            android:id="@+id/txtv2_1carteltexto"
-            android:layout_width="221dp"
-            android:layout_height="174dp"
-            android:layout_marginLeft="10dp"
-            android:text="@string/minijuego1completado"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="30dp"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.499" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -126,12 +110,12 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="68dp"
-                android:layout_marginBottom="288dp"
+                android:layout_marginBottom="264dp"
                 android:background="@drawable/ic_siguiente"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.058"
                 app:layout_constraintStart_toEndOf="@+id/btn2_1_repetir"
                 tools:ignore="SpeakableTextPresentCheck" />
 
@@ -140,7 +124,7 @@
                 style="@style/Button.White"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginStart="112dp"
+                android:layout_marginStart="124dp"
                 android:background="@drawable/ic_repetir"
                 android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/btn2_1_siguiente"
@@ -177,6 +161,22 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.087"
                 tools:ignore="SpeakableTextPresentCheck" />
+
+            <TextView
+                android:id="@+id/txtv2_1carteltexto"
+                android:layout_width="221dp"
+                android:layout_height="174dp"
+                android:text="@string/minijuego1completado"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="30dp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.563"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.499" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

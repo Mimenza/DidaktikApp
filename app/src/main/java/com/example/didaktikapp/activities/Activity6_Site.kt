@@ -12,7 +12,12 @@ class Activity6_Site : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
-        window.decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+        val sharedPreferences = this.getSharedPreferences("com.example.didaktikapp_preferences", 0)
+        val darkStatus = sharedPreferences?.getInt("io.github.manuelernesto.DARK_STATUS",0)
+
+        if(darkStatus == 0){
+            window.decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR)
+        }
         setContentView(R.layout.activity6_site)
 
         val newInt: Int? = if (savedInstanceState == null) {
@@ -22,8 +27,8 @@ class Activity6_Site : AppCompatActivity() {
             savedInstanceState.getSerializable("numero") as Int?
         }
 
-        val sharedPreferences = getSharedPreferences("site", 0)
-        val editor = sharedPreferences.edit()
+        val sharedPreferences2 = getSharedPreferences("site", 0)
+        val editor = sharedPreferences2.edit()
         editor.putString("numero", newInt.toString()).apply()
     }
 

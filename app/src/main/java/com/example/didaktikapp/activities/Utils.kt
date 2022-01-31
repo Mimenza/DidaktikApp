@@ -10,14 +10,8 @@ import com.example.didaktikapp.Model.CustomLine
 import com.example.didaktikapp.R
 import java.lang.Exception
 import android.os.VibrationEffect
-
 import android.os.Build
-
-import androidx.core.content.ContextCompat.getSystemService
-
 import android.os.Vibrator
-import android.os.VibratorManager
-import androidx.core.content.ContextCompat
 
 
 class Utils {

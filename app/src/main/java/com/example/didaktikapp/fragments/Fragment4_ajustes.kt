@@ -176,10 +176,11 @@ class Fragment4_ajustes : Fragment() {
         val layout:View = layoutInflater.inflate(R.layout.acercadedialog, null)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(layout)
-        dialog.show()
         dialog.window!!.setLayout(
             900, 1400
         )
+        dialog.show()
+
     }
 
     fun showModoAdminDialog(){

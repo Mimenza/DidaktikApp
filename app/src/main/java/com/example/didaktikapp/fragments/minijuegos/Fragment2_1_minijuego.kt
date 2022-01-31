@@ -176,7 +176,7 @@ class Fragment2_1_minijuego : Fragment(), DbHandler.QueryResponseDone {
                         var cestaPosX = cestaLocation[0]
                         var cestaPosY = cestaLocation[1]
                         var cestaSizeX = cesta.width
-                        var cestaSizeY = cesta.height
+                        var cestaSizeY = cesta.height + 200
 
                         if ( (viewElement.x + viewElement.width/2) >= cestaPosX && (viewElement.y + viewElement.height/2) >= cestaPosY && (viewElement.x + viewElement.width/2) <= cestaPosX+cestaSizeX && (viewElement.y + viewElement.height/2) <= cestaPosY+cestaSizeY) {
                             comprobarInsercionManzana(itemInList, cesta)
@@ -259,10 +259,10 @@ class Fragment2_1_minijuego : Fragment(), DbHandler.QueryResponseDone {
 
     //fun startTimeCounter(view: View, timeInSeconds: Int) {
     fun startTimeCounter() {
-        object: CountDownTimer((duracionJuego*1000).toLong(), (intervaloGeneracionManzanas*750).toLong()) {
+        object: CountDownTimer((duracionJuego*1000).toLong(), (intervaloGeneracionManzanas*250).toLong()) {
             override fun onTick(millisUntilFinished: Long) {
                 if (!minijuegoFinalizado) {
-                    if(manzanasCounter <= 9){
+                    if(manzanasCounter <= 14){
                         generarManzana()
                         manzanasCounter++
                     }

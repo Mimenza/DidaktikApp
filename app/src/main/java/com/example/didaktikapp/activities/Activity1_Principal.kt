@@ -124,12 +124,6 @@ class Activity1_Principal : AppCompatActivity() {
     }
 
     private fun showAjustes() {
-        if (ajustesShowing) {
-            cerrarAjustes()
-            return
-        }
-
-        ajustesShowing = true
         fragment = Fragment4_ajustes()
         supportFragmentManager.beginTransaction().add(R.id.cl1_principal, fragment!!).commit()
         ocultartodo()
@@ -140,10 +134,10 @@ class Activity1_Principal : AppCompatActivity() {
         //ocultamos lo que no nos interesa
         binding.btn1Nuevo.isVisible = false
         binding.btn1Cargar.isVisible = false
-
         binding.img1Upelio.isVisible = false
         binding.txtv1Gruponombre.isVisible = false
         binding.txtv1Titulo.isVisible = false
+        binding.btn1Ajustes.isVisible = false
     }
 
     /**
@@ -156,6 +150,7 @@ class Activity1_Principal : AppCompatActivity() {
         binding.img1Upelio.isVisible = true
         binding.txtv1Gruponombre.isVisible = true
         binding.txtv1Titulo.isVisible = true
+        binding.btn1Ajustes.isVisible = true
     }
 }
 

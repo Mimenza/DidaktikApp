@@ -25,12 +25,14 @@ import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.clone
 import com.example.didaktikapp.activities.Activity5_Mapa
+import com.example.didaktikapp.activities.DbHandler
 import kotlinx.android.synthetic.main.fragment1_4_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 
-class Fragment1_4_juego : Fragment() {
+class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
+    val thisJuegoId: Int = 4
     private lateinit var btnInfoJuego: ImageButton
     private var nFilas: Int = 12
     private var nCols: Int = 12
@@ -230,6 +232,9 @@ class Fragment1_4_juego : Fragment() {
             // Caso contrario, se mostrara mensajes de error/fallo
             if (todosSeleccionados) {
                 if (todosAcertados) {
+                    DbHandler.userAumentarPuntuacion(10)
+                    DbHandler.userActualizarUltimoPunto(thisJuegoId)
+                    DbHandler().requestDbUserUpdate(this)
                     Toast.makeText(requireContext(), "ERES UN CRACK!", Toast.LENGTH_SHORT).show()
                     Handler(Looper.getMainLooper()).postDelayed({
                         //llamamos a la animacion para animar a upelio
@@ -763,8 +768,7 @@ class Fragment1_4_juego : Fragment() {
         mapa.setOnClickListener {
             if (audio?.isPlaying == false){
                 activity?.let{
-                    val intent = Intent (it, Activity5_Mapa::class.java)
-                    it.startActivity(intent)
+                    getActivity()?.finish()
                 }
             }
         }

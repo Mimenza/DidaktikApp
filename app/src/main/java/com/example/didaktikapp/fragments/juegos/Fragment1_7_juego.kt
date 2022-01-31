@@ -27,14 +27,16 @@ import com.example.didaktikapp.Model.Preguntasjuego7
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity5_Mapa
 import com.example.didaktikapp.activities.Activity6_Site
+import com.example.didaktikapp.activities.DbHandler
 import com.example.didaktikapp.activities.Utils
 import kotlinx.android.synthetic.main.fragment1_7_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.util.ArrayList
 
-class Fragment1_7_juego : Fragment(), View.OnClickListener {
+class Fragment1_7_juego : Fragment(), View.OnClickListener, DbHandler.QueryResponseDone {
     private lateinit var preguntasjuego7: Preguntasjuego7
+    private lateinit var globalView: View
     private lateinit var progressBar : ProgressBar
     private lateinit var txtProgressBar : TextView
     private lateinit var question1 : TextView
@@ -54,6 +56,10 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
     private lateinit var btnInfoJuego: ImageButton
     private lateinit var  mapa: ImageButton
 
+    private var doubleTabHandler: Handler? = null
+    private var typeWriterHandler: Handler? = null
+    private var exitAnimationHandler: Handler? = null
+
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,6 +67,7 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment1_7_juego, container, false)
+        globalView = view
         //Inicializar vistas
         val button:Button = view.findViewById(R.id.btnf1_7siguiente)
 
@@ -78,6 +85,19 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
 
         button.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment1_7_juego_to_fragment1_7_juego_results)
+        }
+
+        val introFondo: TextView = view.findViewById(R.id.txtv1_7fondogris)
+        introFondo.setOnClickListener() {
+            if (null == doubleTabHandler) {
+                doubleTabHandler = Handler()
+                doubleTabHandler?.postDelayed({
+                    doubleTabHandler?.removeCallbacksAndMessages(null)
+                    doubleTabHandler = null
+                }, 200)
+            } else {
+                endIntroManually()
+            }
         }
 
         audiotutorial(view)
@@ -103,14 +123,12 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
                 audio = MediaPlayer.create(context, R.raw.juego7audiotutorial)
                 audio?.start()
                 audio?.setOnCompletionListener {
-
-                    Handler().postDelayed({
-                        if (getView() != null) {
-                            //llama a la funcion para la animacion de salida cuando el audio se termina
-                            exitAnimationfun(view)
-                        }
+                    exitAnimationHandler?.postDelayed({
+                        exitAnimationfun(globalView)
+                        activateBtn()
+                        exitAnimationHandler?.removeCallbacksAndMessages(null)
+                        exitAnimationHandler = null
                     }, 1000)
-                    activateBtn()
                 }
             }
         }
@@ -147,12 +165,14 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         upelio.startAnimation(vistaanimada)
 
         //llamamos a la animacion para animar a upelio
-        Handler().postDelayed({
-            if (getView() != null) {
-                upelio.isVisible = false
-                talkAnimationfun(view)
-                typewriter(view)
-            }
+        typeWriterHandler?.removeCallbacksAndMessages(null)
+        typeWriterHandler = Handler()
+        typeWriterHandler?.postDelayed({
+            upelio.isVisible = false
+            talkAnimationfun(view)
+            typewriter(view)
+            typeWriterHandler?.removeCallbacksAndMessages(null)
+            typeWriterHandler = null
         }, 2000)
     }
 
@@ -178,21 +198,23 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
             upelio.startAnimation(vistaanimada)
 
             //animacion fondo gris
-            Handler().postDelayed({
-                if (getView() != null) {
-                    val txt_animacion = view.findViewById(R.id.txtv1_7fondogris) as TextView
-                    val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
-                    txt_animacion.startAnimation(aniFade)
-                    txtv1_7tutorialjuego7.startAnimation(aniFade)
-                    txtv1_7tutorialjuego7.isVisible = false
-                    txt_animacion.isVisible = false
-                    val buttonSiguiente = view.findViewById(R.id.btnf1_7siguiente) as Button
-                    buttonSiguiente.isEnabled=true
-                    question1_answer1.isEnabled=true
-                    question1_answer2.isEnabled=true
-                    question1_answer3.isEnabled=true
-                    introFinished = true
-                }
+            exitAnimationHandler?.removeCallbacksAndMessages(null)
+            exitAnimationHandler = Handler()
+            exitAnimationHandler?.postDelayed({
+                val txt_animacion = view.findViewById(R.id.txtv1_7fondogris) as TextView
+                val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+                txt_animacion.startAnimation(aniFade)
+                txtv1_7tutorialjuego7.startAnimation(aniFade)
+                txtv1_7tutorialjuego7.isVisible = false
+                txt_animacion.isVisible = false
+                val buttonSiguiente = view.findViewById(R.id.btnf1_7siguiente) as Button
+                buttonSiguiente.isEnabled=true
+                question1_answer1.isEnabled=true
+                question1_answer2.isEnabled=true
+                question1_answer3.isEnabled=true
+                introFinished = true
+                exitAnimationHandler?.removeCallbacksAndMessages(null)
+                exitAnimationHandler = null
             }, 1000)
         }
     }
@@ -384,8 +406,7 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         mapa.setOnClickListener {
             if (audio?.isPlaying == false){
                 activity?.let{
-                    val intent = Intent (it, Activity5_Mapa::class.java)
-                    it.startActivity(intent)
+                    getActivity()?.finish()
                 }
             }
         }
@@ -395,8 +416,36 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener {
         }
     }
 
+    fun endIntroManually() {
+        if (introFinished) {
+            return
+        }
+        doubleTabHandler?.removeCallbacksAndMessages(null)
+        introFinished = true
+        val upelio1 = globalView.findViewById(R.id.imgv1_7_upelio) as ImageView
+        upelio1.clearAnimation()
+        upelio1.visibility = View.GONE
+        val upelio2 = globalView.findViewById(R.id.imgv1_7_upelio2) as ImageView
+        upelio2.clearAnimation()
+        upelio2.visibility = View.GONE
+        val txtAnimacion = globalView.findViewById(R.id.txtv1_7fondogris) as TextView
+        txtAnimacion.clearAnimation()
+        val typeWriterElement = globalView.findViewById(R.id.txtv1_7tutorialjuego7) as TextView
+        typeWriterElement.isVisible = false
+        txtAnimacion.isVisible = false
+        audio?.stop()
+
+        activateBtn()
+    }
+
     override fun onDestroy() {
         audio?.stop()
+        doubleTabHandler?.removeCallbacksAndMessages(null)
+        typeWriterHandler?.removeCallbacksAndMessages(null)
+        exitAnimationHandler?.removeCallbacksAndMessages(null)
+        doubleTabHandler = null
+        typeWriterHandler = null
+        exitAnimationHandler = null
         super.onDestroy()
     }
 

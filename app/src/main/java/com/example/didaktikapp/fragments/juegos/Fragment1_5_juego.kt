@@ -29,12 +29,13 @@ import android.view.*
 import com.example.didaktikapp.Model.DragnDropImage
 import com.example.didaktikapp.activities.Activity5_Mapa
 import com.example.didaktikapp.activities.Activity6_Site
+import com.example.didaktikapp.activities.DbHandler
 
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
-class Fragment1_5_juego : Fragment() {
+class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
     private val thisJuegoId = 5
     // TODO: Rename and change types of parameters
     private lateinit var btnInfoJuego: ImageButton
@@ -361,6 +362,9 @@ class Fragment1_5_juego : Fragment() {
                             sendToTopImagesNotFinished()
                             viewElement.setOnTouchListener(null)
                             if (juegoCompletado()) {
+                                DbHandler.userAumentarPuntuacion(10)
+                                DbHandler.userActualizarUltimoPunto(thisJuegoId)
+                                DbHandler().requestDbUserUpdate(this)
                                 audio?.stop()
                                 button.visibility = View.VISIBLE
                                 Toast.makeText(requireContext(), "Bikain!", Toast.LENGTH_SHORT).show()
@@ -405,8 +409,7 @@ class Fragment1_5_juego : Fragment() {
         mapa.setOnClickListener {
             if (audio?.isPlaying == false){
                 activity?.let{
-                    val intent = Intent (it, Activity5_Mapa::class.java)
-                    it.startActivity(intent)
+                    getActivity()?.finish()
                 }
             }
         }

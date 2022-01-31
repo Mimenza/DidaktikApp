@@ -38,7 +38,6 @@ import kotlinx.coroutines.runBlocking
 import java.util.ArrayList
 
 class Fragment1_2_juego : Fragment(), View.OnClickListener {
-    private val thisJuegoId = 2
     private lateinit var globalView: View
     private lateinit var preguntasjuego2: Preguntasjuego2
     private var mSelectedOptionPosition: Int = 0
@@ -463,8 +462,7 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         mapa.setOnClickListener {
             if (audio?.isPlaying == false){
                 activity?.let{
-                    val intent = Intent (it, Activity5_Mapa::class.java)
-                    it.startActivity(intent)
+                    getActivity()?.finish()
                 }
             }
         }

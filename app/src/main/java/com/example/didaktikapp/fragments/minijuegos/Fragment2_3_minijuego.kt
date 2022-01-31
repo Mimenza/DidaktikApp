@@ -15,6 +15,7 @@ import com.example.didaktikapp.Model.DragnDropImage
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity5_Mapa
 import com.example.didaktikapp.activities.Activity6_Site
+import com.example.didaktikapp.activities.DbHandler
 
 
 lateinit var agua:ImageView
@@ -22,7 +23,7 @@ lateinit var agua:ImageView
 var manzanaList: MutableList<DragnDropImage>? = mutableListOf()
 
 
-class Fragment2_3_minijuego : Fragment() {
+class Fragment2_3_minijuego : Fragment(), DbHandler.QueryResponseDone {
 
     private var aciertosActuales: Int = 0
     private lateinit var globalView: View
@@ -189,6 +190,8 @@ class Fragment2_3_minijuego : Fragment() {
 
     private fun checkJuegoFinalizado() {
         if (aciertosActuales >= 5) {
+            DbHandler.userAumentarPuntuacion(5)
+            DbHandler().requestDbUserUpdate(this)
             starAnimationfun()
         }
     }

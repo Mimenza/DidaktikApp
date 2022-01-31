@@ -315,7 +315,7 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
                             sendToTopImagesNotFinished()
                             viewElement.setOnTouchListener(null)
                             if (puzzleCompletado()) {
-                                DbHandler.userAumentarPuntuacion(5)
+                                DbHandler.userAumentarPuntuacion(10)
                                 //DbHandler().requestDbUserUpdate(this)
                                 button.visibility = View.VISIBLE
                                 Toast.makeText(requireContext(), "Bikain!", Toast.LENGTH_SHORT)
@@ -482,8 +482,7 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
         mapa.setOnClickListener {
             if (audio?.isPlaying == false){
                 activity?.let{
-                    val intent = Intent (it, Activity5_Mapa::class.java)
-                    it.startActivity(intent)
+                    getActivity()?.finish()
                 }
             }
         }

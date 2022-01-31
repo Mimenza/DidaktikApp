@@ -11,19 +11,21 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import com.example.didaktikapp.R
+import com.example.didaktikapp.activities.DbHandler
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class Fragment1_2_juego_results : Fragment() {
+class Fragment1_2_juego_results : Fragment(), DbHandler.QueryResponseDone {
 
     private lateinit var audio: MediaPlayer
     private lateinit var scoreUser: TextView
     private lateinit var btnTerminar: Button
     private lateinit var btnRetry: Button
     private lateinit var btnRetry2: Button
-
+    val thisJuegoId: Int = 2
 
     override fun onCreateView(
+
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
@@ -46,6 +48,9 @@ class Fragment1_2_juego_results : Fragment() {
         if (correctAnswers != null) {
             if (correctAnswers.toInt() >= 2) {
                 //Audio acierto
+                DbHandler.userAumentarPuntuacion(10)
+                DbHandler.userActualizarUltimoPunto(thisJuegoId)
+                DbHandler().requestDbUserUpdate(this)
                 runBlocking() {
                     launch {
                         audio = MediaPlayer.create(requireContext(), R.raw.ongiaudioa)

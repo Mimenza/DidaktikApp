@@ -20,6 +20,7 @@ import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity5_Mapa
 import kotlinx.android.synthetic.main.activity1_principal.*
 import kotlinx.android.synthetic.main.fragment1_1_juego.*
+import kotlinx.android.synthetic.main.fragment1_4_juego.*
 import kotlinx.android.synthetic.main.fragment1_6_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -53,6 +54,14 @@ class Fragment1_6_juego : Fragment() {
     private var testAudioTemp: MediaPlayer? = null
     private lateinit var  mapa: ImageButton
 
+    private var introFinished: Boolean = false
+    private var doubleTabHandler: Handler? = null
+    private var activarBtnsHanler: Handler? = null
+    private var recargarJuegoHandler: Handler? = null
+    private var bertsoHandler: Handler? = null
+    private var talkAnimationHandler: Handler? = null
+    private var fondoAnimationHandler: Handler? = null
+
     var respuestas = listOf(
         "sagardoaren",
         "guztia",
@@ -69,6 +78,7 @@ class Fragment1_6_juego : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment1_6_juego, container, false)
         globalView = view
+        introFinished = false
         val btnsiguiente: Button = view.findViewById(R.id.btnf1_6siguienteJuego)
         val btnsaltar: Button = view.findViewById(R.id.btnf1_6saltarjuego)
         val btnrepertir : Button = view.findViewById(R.id.btnf1_6repetirJuego)
@@ -351,22 +361,18 @@ class Fragment1_6_juego : Fragment() {
                     audio = MediaPlayer.create(context, R.raw.ongiaudioa6)
                     audio?.start()
                     audio?.setOnCompletionListener {
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            if (getView() != null) {
 
-                                val btnsiguiente: Button = globalView.findViewById(R.id.btnf1_6siguienteJuego)
-                                val btnrepetir : Button = globalView.findViewById(R.id.btnf1_6repetirJuego)
+                        activarBtnsHanler?.removeCallbacksAndMessages(null)
+                        activarBtnsHanler = Handler()
+                        activarBtnsHanler?.postDelayed({
+                            val btnsiguiente: Button = globalView.findViewById(R.id.btnf1_6siguienteJuego)
+                            val btnrepetir : Button = globalView.findViewById(R.id.btnf1_6repetirJuego)
 
-                                //sacamos el boton para el siguiente minijuego
-                                btnsiguiente.isVisible = true
-                                btnrepetir.isVisible = true
-
-
-
-                                //sacamos el boton para el siguiente minijuego
-
-                            }
-
+                            //sacamos el boton para el siguiente minijuego
+                            btnsiguiente.isVisible = true
+                            btnrepetir.isVisible = true
+                            activarBtnsHanler?.removeCallbacksAndMessages(null)
+                            activarBtnsHanler = null
                         }, 1000)
                     }
                 }
@@ -377,14 +383,13 @@ class Fragment1_6_juego : Fragment() {
                     audio = MediaPlayer.create(context, R.raw.gaizkiaudioa)
                     audio?.start()
                     audio?.setOnCompletionListener {
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            if (getView() != null) {
-                                //recargamos el juego
-
-                                Navigation.findNavController(globalView)
-                                    .navigate(R.id.action_fragment1_6_juego_self)
-
-                            }
+                        recargarJuegoHandler?.removeCallbacksAndMessages(null)
+                        recargarJuegoHandler = Handler()
+                        recargarJuegoHandler?.postDelayed({
+                            Navigation.findNavController(globalView)
+                                .navigate(R.id.action_fragment1_6_juego_self)
+                            recargarJuegoHandler?.removeCallbacksAndMessages(null)
+                            recargarJuegoHandler = null
                         }, 1000)
                     }
                 }
@@ -511,10 +516,23 @@ class Fragment1_6_juego : Fragment() {
     }
 
     private fun startAudio2(view: View) {
+        val introFondo: TextView = view.findViewById(R.id.imgv1_6_fondo)
+        introFondo.setOnClickListener(null)
+
+        introFondo.setOnClickListener() {
+            if (null == doubleTabHandler) {
+                doubleTabHandler = Handler()
+                doubleTabHandler?.postDelayed({
+                    doubleTabHandler?.removeCallbacksAndMessages(null)
+                    doubleTabHandler = null
+                }, 200)
+            } else {
+                endIntroManually()
+            }
+        }
         //Funcion para el segundo audio(descripcion del juego)
         //disable set on click listener
-        val fondo: TextView = view.findViewById(R.id.imgv1_6_fondo)
-        fondo.setOnClickListener(null)
+
 
         val btnVolumen : ImageButton = view.findViewById(R.id.btnf1_6_sonido)
         btnVolumen.isVisible = false
@@ -562,17 +580,23 @@ class Fragment1_6_juego : Fragment() {
         upelio.startAnimation(vistaAnimada)
 
         //llamamos a la animacion para animar a upelio
-        Handler(Looper.getMainLooper()).postDelayed({
-            if (getView() != null) {
-                upelio.isVisible = false
-                talkAnimationfun(view)
-            }
+        talkAnimationHandler?.removeCallbacksAndMessages(null)
+        talkAnimationHandler = Handler()
+        talkAnimationHandler?.postDelayed({
+            upelio.isVisible = false
+            talkAnimationfun(view)
+            talkAnimationHandler?.removeCallbacksAndMessages(null)
+            talkAnimationHandler = null
         }, 2000)
 
     }
 
     private fun exitAnimationfun(view: View) {
-
+        if (introFinished) {
+            return
+        }
+        doubleTabHandler?.removeCallbacksAndMessages(null)
+        introFinished = true
         //animacion salida de upelio
         vistaAnimada = TranslateAnimation(0f, 1000f, 0f, 0f)
         vistaAnimada.duration = 2000
@@ -584,27 +608,25 @@ class Fragment1_6_juego : Fragment() {
         upelioAnimado.isVisible = false
 
         //difuminado fondo gris y las letras
-        Handler(Looper.getMainLooper()).postDelayed({
-            if (getView() != null) {
-                val txtAnimacion = view.findViewById(R.id.imgv1_6_fondo) as TextView
-                val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
-                txtAnimacion.startAnimation(aniFade)
-                txtAnimacion.isVisible = false
-                //makeBertsoControlVisible()
-            }
+        fondoAnimationHandler?.removeCallbacksAndMessages(null)
+        fondoAnimationHandler = Handler()
+        fondoAnimationHandler?.postDelayed({
+            val txtAnimacion = view.findViewById(R.id.imgv1_6_fondo) as TextView
+            val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+            txtAnimacion.startAnimation(aniFade)
+            txtAnimacion.isVisible = false
         }, 1000)
 
-
         //aparece el bertso
-        Handler().postDelayed({
-            if (getView() != null) {
-                txtv1_6_explicacion.isVisible = false
-                txtv1_6_bertso.isVisible = true
+        bertsoHandler?.removeCallbacksAndMessages(null)
+        bertsoHandler = Handler()
+        bertsoHandler?.postDelayed({
+            txtv1_6_explicacion.isVisible = false
+            txtv1_6_bertso.isVisible = true
 
-                val btn: Button = view.findViewById(R.id.btn1_6_comprobar)
-                btn.isVisible = true
-                makeBertsoControlVisible()
-            }
+            val btn: Button = view.findViewById(R.id.btn1_6_comprobar)
+            btn.isVisible = true
+            makeBertsoControlVisible()
         }, 2000)
     }
 
@@ -630,7 +652,44 @@ class Fragment1_6_juego : Fragment() {
         }
     }
 
+    fun endIntroManually() {
+        if (introFinished) {
+            return
+        }
+        doubleTabHandler?.removeCallbacksAndMessages(null)
+        introFinished = true
+        val upelio1 = globalView.findViewById(R.id.imgv1_6_upelio) as ImageView
+        upelio1.clearAnimation()
+        upelio1.visibility = View.GONE
+        val upelio2 = globalView.findViewById(R.id.imgv1_6_upelio2) as ImageView
+        upelio2.clearAnimation()
+        upelio2.visibility = View.GONE
+        val txtAnimacion = globalView.findViewById(R.id.imgv1_6_fondo) as TextView
+        txtAnimacion.clearAnimation()
+        val typeWriterElement = globalView.findViewById(R.id.txtv1_6_explicacion) as TextView
+        typeWriterElement.isVisible = false
+        txtAnimacion.isVisible = false
+        audio?.stop()
+        val btn: Button = globalView.findViewById(R.id.btn1_6_comprobar)
+        btn.isVisible = true
+        makeBertsoControlVisible()
+        activateBtn()
+    }
+
     override fun onDestroy() {
+        doubleTabHandler?.removeCallbacksAndMessages(null)
+        activarBtnsHanler?.removeCallbacksAndMessages(null)
+        recargarJuegoHandler?.removeCallbacksAndMessages(null)
+        bertsoHandler?.removeCallbacksAndMessages(null)
+        talkAnimationHandler?.removeCallbacksAndMessages(null)
+        fondoAnimationHandler?.removeCallbacksAndMessages(null)
+
+        doubleTabHandler = null
+        activarBtnsHanler = null
+        recargarJuegoHandler = null
+        bertsoHandler = null
+        talkAnimationHandler = null
+        fondoAnimationHandler = null
         audio?.stop()
         testAudioTemp?.stop()
         super.onDestroy()

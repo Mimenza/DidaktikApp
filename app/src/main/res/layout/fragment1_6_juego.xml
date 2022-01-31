@@ -164,11 +164,11 @@
             android:id="@+id/juego6playpause"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_marginTop="64dp"
             android:src="@drawable/playbutton"
+            android:layout_marginBottom="20dp"
             app:layout_constraintEnd_toStartOf="@+id/juego6forward"
             app:layout_constraintStart_toEndOf="@+id/juego6backward"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/juego6_layoutBertso"
             app:tint="@color/primary"
             android:visibility="gone"/>
 
@@ -177,11 +177,11 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginStart="130dp"
-            android:layout_marginTop="64dp"
             android:scaleX="-1"
+            android:layout_marginBottom="20dp"
             android:src="@drawable/forbackward"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/juego6_layoutBertso"
             app:tint="@color/primary"
             android:visibility="gone"/>
 
@@ -189,11 +189,12 @@
             android:id="@+id/juego6forward"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:layout_marginTop="64dp"
+            android:layout_marginTop="144dp"
             android:layout_marginEnd="130dp"
+            android:layout_marginBottom="20dp"
             android:src="@drawable/forbackward"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/juego6_layoutBertso"
             app:tint="@color/primary"
             android:visibility="gone"/>
 
@@ -301,13 +302,13 @@
             android:id="@+id/juego6_layoutBertso"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="136dp"
+            android:layout_marginTop="250dp"
             android:orientation="vertical"
-            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="wrap_content"

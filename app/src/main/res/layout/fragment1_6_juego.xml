@@ -12,6 +12,32 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/imgv1_6woodtable"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:src="@drawable/wood_board"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.063" />
+
+        <TextView
+            android:id="@+id/txtv1_6titulominijuego"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="KANTU - KANTA"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.096" />
+
         <Button
             android:id="@+id/btnf1_6repetirJuego"
             android:layout_width="wrap_content"
@@ -50,7 +76,8 @@
             app:layout_constraintHorizontal_bias="0.011"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.066" />
+            app:layout_constraintVertical_bias="0.066"
+            tools:visibility="gone" />
 
 
 
@@ -304,11 +331,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="250dp"
             android:orientation="vertical"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:visibility="gone">
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -326,7 +353,7 @@
                     android:id="@+id/juego6_opcion1"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:background="@null"/>
+                    android:background="@null" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -352,7 +379,7 @@
                     android:id="@+id/juego6_opcion2"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:background="@null"/>
+                    android:background="@null" />
 
             </LinearLayout>
 
@@ -372,7 +399,7 @@
                     android:id="@+id/juego6_opcion3"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:background="@null"/>
+                    android:background="@null" />
 
             </LinearLayout>
 
@@ -401,7 +428,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:background="@null"
-                    android:textAlignment="textEnd"/>
+                    android:textAlignment="textEnd" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -441,7 +468,7 @@
                     android:id="@+id/juego6_opcion5"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:background="@null"/>
+                    android:background="@null" />
 
             </LinearLayout>
 
@@ -461,7 +488,7 @@
                     android:id="@+id/juego6_opcion6"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:background="@null"/>
+                    android:background="@null" />
 
             </LinearLayout>
 

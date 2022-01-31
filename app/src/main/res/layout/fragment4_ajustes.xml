@@ -49,13 +49,6 @@
                     android:text="@string/botonhome" />
 
                 <Button
-                    android:id="@+id/btn4f_acercade"
-                    style="@style/botonesMenu"
-                    android:layout_width="match_parent"
-                    android:drawableLeft="@drawable/ic_ayuda"
-                    android:text="@string/botonacercade" />
-
-                <Button
                     android:id="@+id/btn4f_idioma"
                     style="@style/botonesMenu"
                     android:layout_width="match_parent"
@@ -75,6 +68,13 @@
                     android:layout_width="match_parent"
                     android:drawableLeft="@drawable/ic_person"
                     android:text="ADMIN" />
+
+                <Button
+                    android:id="@+id/btn4f_acercade"
+                    style="@style/botonesMenu"
+                    android:layout_width="match_parent"
+                    android:drawableLeft="@drawable/ic_ayuda"
+                    android:text="@string/botonacercade" />
             </LinearLayout>
         </ScrollView>
 

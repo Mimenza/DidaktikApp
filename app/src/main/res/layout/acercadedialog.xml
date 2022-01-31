@@ -14,13 +14,12 @@
         android:id="@+id/imgv_upv"
         android:layout_width="115dp"
         android:layout_height="115dp"
+        android:layout_marginStart="32dp"
         android:src="@drawable/img_upv"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1" />
+        app:layout_constraintVertical_bias="0.045" />
 
     <ImageView
         android:id="@+id/imgv_txurdinaga"
@@ -29,10 +28,10 @@
         android:src="@drawable/img_txurdinaga"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.84"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.453"
+        app:layout_constraintStart_toEndOf="@+id/imgv_upv"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.115" />
+        app:layout_constraintVertical_bias="0.068" />
 
     <TextView
         android:id="@+id/txtv_titleidea"
@@ -42,9 +41,10 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.537"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35" />
+        app:layout_constraintTop_toBottomOf="@+id/imgv_upv"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/txtv_titledesarrollo"
@@ -56,8 +56,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.65" />
+        app:layout_constraintTop_toBottomOf="@+id/txtv_nombresidea"
+        app:layout_constraintVertical_bias="0.181" />
 
     <TextView
         android:id="@+id/txtv_nombresidea"
@@ -68,10 +68,10 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.46" />
+        app:layout_constraintTop_toBottomOf="@+id/txtv_titleidea"
+        app:layout_constraintVertical_bias="0.035" />
 
     <TextView
         android:id="@+id/txtv_nombredesarrollo"
@@ -82,10 +82,10 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.78" />
+        app:layout_constraintTop_toBottomOf="@+id/txtv_titledesarrollo"
+        app:layout_constraintVertical_bias="0.125" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -220,7 +220,7 @@ class Fragment1_6_juego : Fragment() {
     }
     private fun prepararSpinners() {
         val spinner1Element: Spinner = globalView.findViewById(R.id.juego6_opcion1)
-        val spinner1Opts = arrayOf("SELECT","sagardoaren", "ardiaren", "ibaiaren", "basoaren")
+        val spinner1Opts = arrayOf("__________▼","sagardoaren", "ardiaren", "ibaiaren", "basoaren")
         val spinnerAdapter1: ArrayAdapter<String> = object: ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, spinner1Opts){
             override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
                 var v: View? = null
@@ -241,7 +241,7 @@ class Fragment1_6_juego : Fragment() {
 
 
         val spinner2Element: Spinner = globalView.findViewById(R.id.juego6_opcion2)
-        val spinner2Opts = arrayOf("SELECT","edaria","guztia", "eskaria", "bidaria")
+        val spinner2Opts = arrayOf("__________▼","edaria","guztia", "eskaria", "bidaria")
         val spinnerAdapter2: ArrayAdapter<String> = object: ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, spinner2Opts){
             override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
                 var v: View? = null
@@ -261,7 +261,7 @@ class Fragment1_6_juego : Fragment() {
         spinner2Element.adapter = spinnerAdapter2
 
         val spinner3Element: Spinner = globalView.findViewById(R.id.juego6_opcion3)
-        val spinner3Opts = arrayOf("SELECT","basatia","azkuria", "errekoia", "bizia")
+        val spinner3Opts = arrayOf("__________▼","basatia","azkuria", "errekoia", "bizia")
         val spinnerAdapter3: ArrayAdapter<String> = object: ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, spinner3Opts){
             override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
                 var v: View? = null
@@ -281,7 +281,7 @@ class Fragment1_6_juego : Fragment() {
         spinner3Element.adapter = spinnerAdapter3
 
         val spinner4Element: Spinner = globalView.findViewById(R.id.juego6_opcion4)
-        val spinner4Opts = arrayOf("SELECT","kupelan","amaitzian","atzerkijan", "arean")
+        val spinner4Opts = arrayOf("__________▼","kupelan","amaitzian","atzerkijan", "arean")
         val spinnerAdapter4: ArrayAdapter<String> = object: ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, spinner4Opts){
             override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
                 var v: View? = null
@@ -301,7 +301,7 @@ class Fragment1_6_juego : Fragment() {
         spinner4Element.adapter = spinnerAdapter4
 
         val spinner5Element: Spinner = globalView.findViewById(R.id.juego6_opcion5)
-        val spinner5Opts = arrayOf("SELECT","prezioa", "opioa", "lekzioa", "ilusioa")
+        val spinner5Opts = arrayOf("__________▼","prezioa", "opioa", "lekzioa", "ilusioa")
         val spinnerAdapter5: ArrayAdapter<String> = object: ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, spinner5Opts){
             override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
                 var v: View? = null
@@ -321,7 +321,7 @@ class Fragment1_6_juego : Fragment() {
         spinner5Element.adapter = spinnerAdapter5
 
         val spinner6Element: Spinner = globalView.findViewById(R.id.juego6_opcion6)
-        val spinner6Opts = arrayOf("SELECT","pertzepzioa","estimazioa", "pentsioa", "ekuazioa")
+        val spinner6Opts = arrayOf("__________▼","pertzepzioa","estimazioa", "pentsioa", "ekuazioa")
         val spinnerAdapter6: ArrayAdapter<String> = object: ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_dropdown_item, spinner6Opts){
             override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
                 var v: View? = null

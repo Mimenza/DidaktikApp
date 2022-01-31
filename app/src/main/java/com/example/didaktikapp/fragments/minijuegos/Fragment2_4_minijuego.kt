@@ -17,10 +17,10 @@ import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.didaktikapp.Model.CustomLine
 import com.example.didaktikapp.activities.Activity5_Mapa
+import com.example.didaktikapp.activities.DbHandler
 
 
-
-class Fragment2_4_minijuego : Fragment() {
+class Fragment2_4_minijuego : Fragment(), DbHandler.QueryResponseDone {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -344,7 +344,8 @@ class Fragment2_4_minijuego : Fragment() {
     fun checkProgress() {
         //si se han cortado todas las manzanas aparece el boton
         if (acierto== 5) {
-
+            DbHandler.userAumentarPuntuacion(5)
+            DbHandler().requestDbUserUpdate(this)
             starAnimationfun()
         } else {
 

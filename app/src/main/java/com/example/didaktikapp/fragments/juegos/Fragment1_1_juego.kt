@@ -27,6 +27,7 @@ import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.CustomLine
 import com.example.didaktikapp.activities.Activity5_Mapa
 import com.example.didaktikapp.activities.Activity6_Site
+import com.example.didaktikapp.activities.DbHandler
 import kotlinx.coroutines.runBlocking
 import kotlinx.android.synthetic.main.fragment1_1_juego.*
 import kotlinx.coroutines.launch
@@ -39,7 +40,7 @@ private const val ARG_PARAM2 = "param2"
  * Use the [Fragment1_juego.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Fragment1_1_juego : Fragment() {
+class Fragment1_1_juego : Fragment(), DbHandler.QueryResponseDone {
     private val thisJuegoId = 1
 
     private lateinit var globalView: View
@@ -115,11 +116,15 @@ class Fragment1_1_juego : Fragment() {
         }
 
         button.setOnClickListener {
+            DbHandler.userActualizarUltimoPunto(thisJuegoId)
+            DbHandler().requestDbUserUpdate(this)
             Navigation.findNavController(view)
                 .navigate(R.id.action_fragment1_1_juego_to_fragment2_1_minijuego)
         }
 
         buttonAgain.setOnClickListener() {
+            DbHandler.userActualizarUltimoPunto(thisJuegoId)
+            DbHandler().requestDbUserUpdate(this)
             Navigation.findNavController(view)
                 .navigate(R.id.action_fragment1_1_juego_self)
         }
@@ -568,8 +573,7 @@ class Fragment1_1_juego : Fragment() {
         mapa.setOnClickListener {
             if (audio?.isPlaying == false){
                 activity?.let{
-                    val intent = Intent (it, Activity5_Mapa::class.java)
-                    it.startActivity(intent)
+                    getActivity()?.finish()
                 }
             }
         }
@@ -649,7 +653,8 @@ class Fragment1_1_juego : Fragment() {
      * @param progress el progeso de la partida
      */
     private fun checkProgress(view: View, progress: Int) {
-        if (progress == 3) {
+        if (progress >= 3) {
+            DbHandler.userAumentarPuntuacion(10)
             runBlocking {
                 launch {
                     audio = MediaPlayer.create(context, R.raw.juego1ongi)

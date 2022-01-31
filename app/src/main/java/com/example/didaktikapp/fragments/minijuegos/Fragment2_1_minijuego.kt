@@ -16,9 +16,10 @@ import com.example.didaktikapp.Model.DragnDropImage
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity5_Mapa
 import android.widget.TextView
+import com.example.didaktikapp.activities.DbHandler
 
 
-class Fragment2_1_minijuego : Fragment() {
+class Fragment2_1_minijuego : Fragment(), DbHandler.QueryResponseDone {
     private lateinit var globalView: View
     private lateinit var vistaAnimada:TranslateAnimation
     private lateinit var cesta: ImageView
@@ -203,6 +204,8 @@ class Fragment2_1_minijuego : Fragment() {
 
     private fun comprobarJuegoFinalizado() {
         if (aciertosActuales >= 10) {
+            DbHandler.userAumentarPuntuacion(5)
+            DbHandler().requestDbUserUpdate(this)
             //Diseñar cartel madera
             starAnimationfun()
             minijuegoFinalizado = true

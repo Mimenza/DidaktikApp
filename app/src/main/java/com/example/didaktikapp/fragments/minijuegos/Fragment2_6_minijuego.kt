@@ -15,10 +15,10 @@ import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.DragnDropImageLevel
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity5_Mapa
+import com.example.didaktikapp.activities.DbHandler
 
 
-
-class Fragment2_6_minijuego : Fragment() {
+class Fragment2_6_minijuego : Fragment(), DbHandler.QueryResponseDone {
 
     private var acierto: Int = 0
     private lateinit var globalView: View
@@ -249,6 +249,8 @@ class Fragment2_6_minijuego : Fragment() {
     private fun checkProgress(){
 
         if (acierto==5){
+            DbHandler.userAumentarPuntuacion(5)
+            DbHandler().requestDbUserUpdate(this)
             starAnimationfun()
         }
     }

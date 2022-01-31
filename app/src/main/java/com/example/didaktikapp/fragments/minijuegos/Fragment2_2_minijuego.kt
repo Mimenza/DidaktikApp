@@ -16,10 +16,11 @@ import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity5_Mapa
+import com.example.didaktikapp.activities.DbHandler
 import com.example.didaktikapp.activities.Utils
 
 
-class Fragment2_2_minijuego : Fragment() {
+class Fragment2_2_minijuego : Fragment(), DbHandler.QueryResponseDone {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -144,8 +145,9 @@ class Fragment2_2_minijuego : Fragment() {
 
     fun checkProgress(){
 
-        if(acierto==5){
-
+        if(acierto>=5){
+            DbHandler.userAumentarPuntuacion(5)
+            DbHandler().requestDbUserUpdate(this)
             starAnimationfun()
 
         }

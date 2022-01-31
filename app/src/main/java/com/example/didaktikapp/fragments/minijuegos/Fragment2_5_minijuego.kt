@@ -17,9 +17,10 @@ import androidx.navigation.Navigation
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity5_Mapa
 import com.example.didaktikapp.activities.Activity6_Site
+import com.example.didaktikapp.activities.DbHandler
 
 
-class Fragment2_5_minijuego : Fragment() {
+class Fragment2_5_minijuego : Fragment(), DbHandler.QueryResponseDone {
 
     private var acierto: Int = 0
 
@@ -141,8 +142,8 @@ class Fragment2_5_minijuego : Fragment() {
     fun checkProgress() {
         println("check" + acierto)
         if (acierto == 5) {
-
-
+            DbHandler.userAumentarPuntuacion(5)
+            DbHandler().requestDbUserUpdate(this)
             starAnimationfun()
         }
     }

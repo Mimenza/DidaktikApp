@@ -56,9 +56,9 @@ class Utils {
         fun vibrarTelefono(pContext: Context) {
             val vibrator = pContext?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
             if (Build.VERSION.SDK_INT >= 26) {
-                vibrator.vibrate(VibrationEffect.createOneShot(400, VibrationEffect.EFFECT_HEAVY_CLICK))
+                vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE))
             } else {
-                vibrator.vibrate(400)
+                vibrator.vibrate(200)
             }
         }
     }

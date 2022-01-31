@@ -16,8 +16,7 @@ import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity5_Mapa
-
-
+import com.example.didaktikapp.activities.Utils
 
 
 class Fragment2_2_minijuego : Fragment() {
@@ -48,6 +47,13 @@ class Fragment2_2_minijuego : Fragment() {
         val manzana4:ImageView = view.findViewById(R.id.imgv2_2_manzanav3)
         val manzana5:ImageView = view.findViewById(R.id.imgv2_2_manzanav4)
 
+        val manzana6:ImageView = view.findViewById(R.id.imgv2_2_manzanav5)
+        val manzana7:ImageView = view.findViewById(R.id.imgv2_2_manzanav6)
+        val manzana8:ImageView = view.findViewById(R.id.imgv2_2_manzanav7)
+        val manzana9:ImageView = view.findViewById(R.id.imgv2_2_manzanav8)
+        val manzana10:ImageView = view.findViewById(R.id.imgv2_2_manzanav9)
+
+
 
         cartel= view.findViewById((R.id.imgv2_2cartelmadera))
         txtcartel= view.findViewById((R.id.txtv2_2carteltexto))
@@ -73,6 +79,13 @@ class Fragment2_2_minijuego : Fragment() {
         manzana3.setOnClickListener(){desaparecer(manzana3)}
         manzana4.setOnClickListener(){desaparecer(manzana4)}
         manzana5.setOnClickListener(){desaparecer(manzana5)}
+
+        manzana6.setOnClickListener(){vibrar()}
+        manzana7.setOnClickListener(){vibrar()}
+        manzana8.setOnClickListener(){vibrar()}
+        manzana9.setOnClickListener(){vibrar()}
+        manzana10.setOnClickListener(){vibrar()}
+
         return view
     }
 
@@ -123,6 +136,10 @@ class Fragment2_2_minijuego : Fragment() {
 
         checkProgress()
 
+    }
+
+    private fun vibrar(){
+        Utils.vibrarTelefono(requireContext())
     }
 
     fun checkProgress(){

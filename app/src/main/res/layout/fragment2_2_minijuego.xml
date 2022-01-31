@@ -115,7 +115,7 @@
             app:layout_constraintVertical_bias="0.635" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/imgv2_2_manzanav7"
             android:layout_width="96dp"
             android:layout_height="93dp"
             android:src="@drawable/sagarragorria"
@@ -127,7 +127,7 @@
             app:layout_constraintVertical_bias="0.446" />
 
         <ImageView
-            android:id="@+id/imageView4"
+            android:id="@+id/imgv2_2_manzanav8"
             android:layout_width="96dp"
             android:layout_height="93dp"
             android:src="@drawable/sagarragorria"
@@ -139,7 +139,7 @@
             app:layout_constraintVertical_bias="0.843" />
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/imgv2_2_manzanav6"
             android:layout_width="96dp"
             android:layout_height="93dp"
             android:src="@drawable/sagarragorria"
@@ -151,7 +151,7 @@
             app:layout_constraintVertical_bias="0.376" />
 
         <ImageView
-            android:id="@+id/imageView7"
+            android:id="@+id/imgv2_2_manzanav9"
             android:layout_width="96dp"
             android:layout_height="93dp"
             android:src="@drawable/sagarragorria"
@@ -163,7 +163,7 @@
             app:layout_constraintVertical_bias="0.8" />
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/imgv2_2_manzanav5"
             android:layout_width="96dp"
             android:layout_height="93dp"
             android:src="@drawable/sagarragorria"

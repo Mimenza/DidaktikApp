@@ -61,6 +61,12 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
     var totalWidth: Int = 0
     var totalHeight: Int = 0
     var puzzleShowing: Boolean = false
+    private var introFinished: Boolean = false
+    private var doubleTabHandler: Handler? = null
+    private var typeWriterHandler: Handler? = null
+    private var exitAnimationHandler: Handler? = null
+    private var talkAnimationHandler: Handler? = null
+    private var fondoAnimationHandler: Handler? = null
 
     val listaImagenes = listOf(
         listOf(R.id.puzzle_pieza_o_1, R.id.puzzle_pieza_d_1),
@@ -100,6 +106,7 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
         buttonRepetir = view.findViewById(R.id.btnf1_3_repetir)
         button.visibility = View.GONE
         buttonRepetir.visibility = View.GONE
+        introFinished = false
 
         val btnComprobarRespuesta: Button = globalView.findViewById(R.id.juego3_btnComprobar)
         preguntasLayout = view.findViewById(R.id.juego3_preguntas_layout)
@@ -143,11 +150,26 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
         //Animacion manzana al iniciar el juego
         starAnimationfun(view)
 
-        //Typewriter juego 1 tutorial
-        Handler(Looper.getMainLooper()).postDelayed({
-            if (getView() != null) {
-                typewriter(view)
+        val introFondo: TextView = view.findViewById(R.id.txtv1_1fondogris)
+        introFondo.setOnClickListener() {
+            if (null == doubleTabHandler) {
+                doubleTabHandler = Handler()
+                doubleTabHandler?.postDelayed({
+                    doubleTabHandler?.removeCallbacksAndMessages(null)
+                    doubleTabHandler = null
+                }, 200)
+            } else {
+                endIntroManually()
             }
+        }
+
+        //Typewriter juego 1 tutorial
+        typeWriterHandler?.removeCallbacksAndMessages(null)
+        typeWriterHandler = Handler()
+        typeWriterHandler?.postDelayed({
+            typewriter(view)
+            typeWriterHandler?.removeCallbacksAndMessages(null)
+            typeWriterHandler = null
         }, 2000)
 
         runBlocking {
@@ -158,13 +180,14 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
                 audio?.setOnCompletionListener {
                     prepairPuzzleElements()
                     showPhotos()
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        if (getView() != null) {
-                            //Llama a la funcion para la animacion de salida cuando el audio se termina
-                            exitAnimationfun(view)
-                        }
+                    exitAnimationHandler?.removeCallbacksAndMessages(null)
+                    exitAnimationHandler = Handler()
+                    exitAnimationHandler?.postDelayed({
+                        exitAnimationfun(view)
+                        activateBtn()
+                        exitAnimationHandler?.removeCallbacksAndMessages(null)
+                        exitAnimationHandler = null
                     }, 1000)
-                    activateBtn()
                 }
             }
         }
@@ -326,15 +349,21 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
         upelio.startAnimation(vistaAnimada)
 
         //llamamos a la animacion para animar a upelio
-        Handler(Looper.getMainLooper()).postDelayed({
-            if (getView() != null) {
-                upelio.isVisible = false
-                talkAnimationfun(view)
-            }
+        val upelioStatic = view.findViewById(R.id.imgv1_1_upelio) as ImageView
+        talkAnimationHandler?.removeCallbacksAndMessages(null)
+        talkAnimationHandler = Handler()
+        talkAnimationHandler?.postDelayed({
+            upelioStatic.isVisible = false
+            talkAnimationfun(view)
+            talkAnimationHandler?.removeCallbacksAndMessages(null)
+            talkAnimationHandler = null
         }, 2000)
     }
 
     private fun exitAnimationfun(view: View) {
+        if (introFinished) {
+            return
+        }
         val upelioAnimado = view.findViewById(R.id.imgv1_1_upelio2) as ImageView
         upelioAnimado.isVisible = false
 
@@ -347,15 +376,17 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
         upelio.startAnimation(vistaAnimada)
 
         //Animacion fondo gris
-        Handler(Looper.getMainLooper()).postDelayed({
-            if (getView() != null) {
-                val txtAnimacion = view.findViewById(R.id.txtv1_1fondogris) as TextView
-                val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
-                txtAnimacion.startAnimation(aniFade)
-                txtv1_1tutorialjuego1.startAnimation(aniFade)
-                txtv1_1tutorialjuego1.isVisible = false
-                txtAnimacion.isVisible = false
-            }
+        fondoAnimationHandler?.removeCallbacksAndMessages(null)
+        fondoAnimationHandler = Handler()
+        fondoAnimationHandler?.postDelayed({
+            introFinished = true
+            val txtAnimacion = view.findViewById(R.id.txtv1_1fondogris) as TextView
+            val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+            txtAnimacion.startAnimation(aniFade)
+            txtv1_1tutorialjuego1.startAnimation(aniFade)
+            txtv1_1tutorialjuego1.isVisible = false
+            txtAnimacion.isVisible = false
+            introFinished = true
         }, 1000)
     }
 
@@ -462,8 +493,40 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
+    fun endIntroManually() {
+        if (introFinished) {
+            return
+        }
+        doubleTabHandler?.removeCallbacksAndMessages(null)
+        introFinished = true
+        val upelio1 = globalView.findViewById(R.id.imgv1_1_upelio) as ImageView
+        upelio1.clearAnimation()
+        upelio1.visibility = View.GONE
+        val upelio2 = globalView.findViewById(R.id.imgv1_1_upelio2) as ImageView
+        upelio2.clearAnimation()
+        upelio2.visibility = View.GONE
+        val txtAnimacion = globalView.findViewById(R.id.txtv1_1fondogris) as TextView
+        txtAnimacion.clearAnimation()
+        val typeWriterElement = globalView.findViewById(R.id.txtv1_1tutorialjuego1) as TextView
+        typeWriterElement.isVisible = false
+        txtAnimacion.isVisible = false
+        audio?.stop()
+
+        activateBtn()
+    }
+
     override fun onDestroy() {
         audio?.stop()
+        doubleTabHandler?.removeCallbacksAndMessages(null)
+        typeWriterHandler?.removeCallbacksAndMessages(null)
+        exitAnimationHandler?.removeCallbacksAndMessages(null)
+        talkAnimationHandler?.removeCallbacksAndMessages(null)
+        fondoAnimationHandler?.removeCallbacksAndMessages(null)
+        doubleTabHandler = null
+        typeWriterHandler = null
+        exitAnimationHandler = null
+        talkAnimationHandler = null
+        fondoAnimationHandler = null
         super.onDestroy()
     }
 

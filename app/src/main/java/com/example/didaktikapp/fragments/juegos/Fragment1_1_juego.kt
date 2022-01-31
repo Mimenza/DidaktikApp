@@ -87,7 +87,7 @@ class Fragment1_1_juego : Fragment() {
         layout = view.findViewById(R.id.cl1_1juego)
         introFinished = false
 
-        val introFondo: TextView = view.findViewById(R.id.txtv1_1fondogris)
+
 
         img1 = view.findViewById(R.id.imgv1_1imagen1)
         img2 = view.findViewById(R.id.imgv1_1imagen2)
@@ -101,6 +101,7 @@ class Fragment1_1_juego : Fragment() {
         val buttonAgain: Button = view.findViewById(R.id.btnf1_1repetirJuego)
         mapa = view.findViewById(R.id.btnf1_1_mapa)
 
+        val introFondo: TextView = view.findViewById(R.id.txtv1_1fondogris)
         introFondo.setOnClickListener() {
             if (null == doubleTabHandler) {
                 doubleTabHandler = Handler()
@@ -148,11 +149,10 @@ class Fragment1_1_juego : Fragment() {
                     exitAnimationHandler = Handler()
                     exitAnimationHandler?.postDelayed({
                         exitAnimationfun(view)
+                        activateBtn()
                         exitAnimationHandler?.removeCallbacksAndMessages(null)
                         exitAnimationHandler = null
                     }, 1000)
-
-                    activateBtn()
                 }
             }
         }

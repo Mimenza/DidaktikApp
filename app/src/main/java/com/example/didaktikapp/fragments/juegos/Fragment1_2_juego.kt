@@ -31,6 +31,7 @@ import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity5_Mapa
 import com.example.didaktikapp.activities.Activity6_Site
 import com.example.didaktikapp.activities.Utils
+import kotlinx.android.synthetic.main.fragment1_1_juego.*
 import kotlinx.android.synthetic.main.fragment1_2_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -38,6 +39,7 @@ import java.util.ArrayList
 
 class Fragment1_2_juego : Fragment(), View.OnClickListener {
     private val thisJuegoId = 2
+    private lateinit var globalView: View
     private lateinit var preguntasjuego2: Preguntasjuego2
     private var mSelectedOptionPosition: Int = 0
     private lateinit var progressBar: ProgressBar
@@ -60,6 +62,11 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
     private var audio: MediaPlayer? = null
     private var REQUEST_CODE= 200
     private var introFinished: Boolean = false
+    private var doubleTabHandler: Handler? = null
+    private var typeWriterHandler: Handler? = null
+    private var exitAnimationHandler: Handler? = null
+    private var talkAnimationHandler: Handler? = null
+    private var fondoAnimationHandler: Handler? = null
     private lateinit var btnInfoJuego: ImageButton
     private lateinit var  mapa: ImageButton
 
@@ -70,6 +77,7 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment1_2_juego, container, false)
+        globalView = view
         //Inicializar vistas
 
         progressBar = view.findViewById(R.id.custom_progressBar)
@@ -91,12 +99,26 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
 
          mapa = view.findViewById(R.id.btnf1_2_mapa)
 
-        //Typewriter juego 2 tutorial
-        introFinished = false
-        Handler().postDelayed({
-            if (getView() != null) {
-                typewriter(view)
+        val introFondo: TextView = view.findViewById(R.id.txtv1_2fondogris)
+        introFondo.setOnClickListener() {
+            if (null == doubleTabHandler) {
+                doubleTabHandler = Handler()
+                doubleTabHandler?.postDelayed({
+                    doubleTabHandler?.removeCallbacksAndMessages(null)
+                    doubleTabHandler = null
+                }, 200)
+            } else {
+                endIntroManually()
             }
+        }
+
+        //Typewriter juego 2 tutorial
+        typeWriterHandler?.removeCallbacksAndMessages(null)
+        typeWriterHandler = Handler()
+        typeWriterHandler?.postDelayed({
+            typewriter(view)
+            typeWriterHandler?.removeCallbacksAndMessages(null)
+            typeWriterHandler = null
         }, 2000)
 
         //Audio juego 2 tutorial
@@ -105,9 +127,14 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
                 audio = MediaPlayer.create(context, R.raw.juego2audiotutorial)
                 audio?.start()
                 audio?.setOnCompletionListener {
-                    //llama a la funcion para la animacion de salida cuando el audio se termina
-                    exitAnimationfun(view)
-                    activateBtn()
+                    exitAnimationHandler?.removeCallbacksAndMessages(null)
+                    exitAnimationHandler = Handler()
+                    exitAnimationHandler?.postDelayed({
+                        exitAnimationfun(view)
+                        activateBtn()
+                        exitAnimationHandler?.removeCallbacksAndMessages(null)
+                        exitAnimationHandler = null
+                    }, 1000)
                 }
             }
         }
@@ -189,11 +216,14 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         upelio.startAnimation(vistaanimada)
 
         //llamamos a la animacion para animar a upelio
-        Handler().postDelayed({
-            if (getView() != null) {
-                upelio.isVisible = false
-                talkAnimationfun(view)
-            }
+        val upelioStatic = view.findViewById(R.id.imgv1_2_upelio2) as ImageView
+        talkAnimationHandler?.removeCallbacksAndMessages(null)
+        talkAnimationHandler = Handler()
+        talkAnimationHandler?.postDelayed({
+            upelioStatic.isVisible = false
+            talkAnimationfun(view)
+            talkAnimationHandler?.removeCallbacksAndMessages(null)
+            talkAnimationHandler = null
         }, 2000)
     }
 
@@ -220,25 +250,24 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
             upelio.startAnimation(vistaanimada)
 
             //animacion fondo gris
-            Handler().postDelayed({
-                if (getView() != null) {
-                    val txt_animacion = view.findViewById(R.id.txtv1_2fondogris) as TextView
-                    val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
-                    txt_animacion.startAnimation(aniFade)
-                    txtv1_2tutorialjuego2.startAnimation(aniFade)
-                    txtv1_2tutorialjuego2.isVisible = false
-                    txt_animacion.isVisible = false
-                    //Habilitar botones cuando desaparece la animacion
+            fondoAnimationHandler?.removeCallbacksAndMessages(null)
+            fondoAnimationHandler = Handler()
+            fondoAnimationHandler?.postDelayed({
+                introFinished = true
+                val txt_animacion = view.findViewById(R.id.txtv1_2fondogris) as TextView
+                val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+                txt_animacion.startAnimation(aniFade)
+                txtv1_2tutorialjuego2.startAnimation(aniFade)
+                txtv1_2tutorialjuego2.isVisible = false
+                txt_animacion.isVisible = false
+                //Habilitar botones cuando desaparece la animacion
 
-                    val buttonSiguiente = view.findViewById(R.id.btnf1_2siguiente) as Button
-                    buttonSiguiente.isEnabled = true
-                    question1_answer1.isEnabled = true
-                    question1_answer2.isEnabled = true
-                    question1_answer3.isEnabled = true
-                    question1_answer4.isEnabled = true
-                    introFinished = true
-
-                }
+                val buttonSiguiente = view.findViewById(R.id.btnf1_2siguiente) as Button
+                buttonSiguiente.isEnabled = true
+                question1_answer1.isEnabled = true
+                question1_answer2.isEnabled = true
+                question1_answer3.isEnabled = true
+                question1_answer4.isEnabled = true
             }, 1000)
         }
     }
@@ -445,9 +474,49 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         }
     }
 
+    fun endIntroManually() {
+        if (introFinished) {
+            return
+        }
+        doubleTabHandler?.removeCallbacksAndMessages(null)
+        typeWriterHandler?.removeCallbacksAndMessages(null)
+        exitAnimationHandler?.removeCallbacksAndMessages(null)
+        introFinished = true
+        val upelio1 = globalView.findViewById(R.id.imgv1_2_upelio) as ImageView
+        upelio1.clearAnimation()
+        upelio1.visibility = View.GONE
+        val upelio2 = globalView.findViewById(R.id.imgv1_2_upelio2) as ImageView
+        upelio2.clearAnimation()
+        upelio2.visibility = View.GONE
+        val txtAnimacion = globalView.findViewById(R.id.txtv1_2fondogris) as TextView
+        txtAnimacion.clearAnimation()
+        val typeWriterElement = globalView.findViewById(R.id.txtv1_2tutorialjuego2) as TextView
+        typeWriterElement.isVisible = false
+        txtAnimacion.isVisible = false
+        audio?.stop()
+        val buttonSiguiente = globalView.findViewById(R.id.btnf1_2siguiente) as Button
+        buttonSiguiente.isEnabled = true
+        question1_answer1.isEnabled = true
+        question1_answer2.isEnabled = true
+        question1_answer3.isEnabled = true
+        question1_answer4.isEnabled = true
+
+        activateBtn()
+    }
+
     //AUDIO EVENTS FIX ON DESTROYING
     override fun onDestroy() {
         audio?.stop()
+        doubleTabHandler?.removeCallbacksAndMessages(null)
+        typeWriterHandler?.removeCallbacksAndMessages(null)
+        exitAnimationHandler?.removeCallbacksAndMessages(null)
+        talkAnimationHandler?.removeCallbacksAndMessages(null)
+        fondoAnimationHandler?.removeCallbacksAndMessages(null)
+        doubleTabHandler = null
+        typeWriterHandler = null
+        exitAnimationHandler = null
+        talkAnimationHandler = null
+        fondoAnimationHandler = null
         super.onDestroy()
     }
 

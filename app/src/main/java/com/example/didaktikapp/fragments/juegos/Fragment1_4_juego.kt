@@ -43,6 +43,12 @@ class Fragment1_4_juego : Fragment() {
     private var audio: MediaPlayer? = null
     private lateinit var vistaAnimada:TranslateAnimation
     private lateinit var  mapa: ImageButton
+    private var introFinished: Boolean = false
+    private var doubleTabHandler: Handler? = null
+    private var typeWriterHandler: Handler? = null
+    private var exitAnimationHandler: Handler? = null
+    private var talkAnimationHandler: Handler? = null
+    private var fondoAnimationHandler: Handler? = null
 
 
     override fun onCreateView(
@@ -52,6 +58,7 @@ class Fragment1_4_juego : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment1_4_juego, container, false)
         globalView = view
+        introFinished = false
         matrizMain = view.findViewById(R.id.matrizprincipal)
         constraintMain = view.findViewById(R.id.juego4_constraintMain)
         val button: Button = view.findViewById(R.id.btnf1_4_siguiente)
@@ -64,12 +71,26 @@ class Fragment1_4_juego : Fragment() {
             prepararPreguntas()
         }
 
+        val introFondo: TextView = view.findViewById(R.id.txtv1_4fondogris)
+        introFondo.setOnClickListener() {
+            if (null == doubleTabHandler) {
+                doubleTabHandler = Handler()
+                doubleTabHandler?.postDelayed({
+                    doubleTabHandler?.removeCallbacksAndMessages(null)
+                    doubleTabHandler = null
+                }, 200)
+            } else {
+                endIntroManually()
+            }
+        }
 
         //Typewriter juego 4 tutorial
-        Handler(Looper.getMainLooper()).postDelayed({
-            if (getView() != null) {
-                typewriter(view)
-            }
+        typeWriterHandler?.removeCallbacksAndMessages(null)
+        typeWriterHandler = Handler()
+        typeWriterHandler?.postDelayed({
+            typewriter(view)
+            typeWriterHandler?.removeCallbacksAndMessages(null)
+            typeWriterHandler = null
         }, 2000)
 
         //Animacion manzana al iniciar el juego
@@ -98,13 +119,14 @@ class Fragment1_4_juego : Fragment() {
 
                 audio?.setOnCompletionListener {
 
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        if (getView() != null) {
-                            //Llama a la funcion para la animacion de salida cuando el audio se termina
-                            exitAnimationfun(globalView)
-                        }
+                    exitAnimationHandler?.removeCallbacksAndMessages(null)
+                    exitAnimationHandler = Handler()
+                    exitAnimationHandler?.postDelayed({
+                        exitAnimationfun(globalView)
+                        activateBtn()
+                        exitAnimationHandler?.removeCallbacksAndMessages(null)
+                        exitAnimationHandler = null
                     }, 1000)
-                    activateBtn()
                 }
             }
         }
@@ -274,6 +296,10 @@ class Fragment1_4_juego : Fragment() {
             }
         }
         palabrasRestantesElement.text = palabrasRestantes
+        if (palabrasRestantes.isEmpty()) {
+            val buttonSiguiente = globalView.findViewById(R.id.btnf1_4_siguiente) as Button
+            buttonSiguiente.isVisible=true
+        }
     }
 
     // Metodo para escribir las palabras sobre la matriz
@@ -685,11 +711,14 @@ class Fragment1_4_juego : Fragment() {
         upelio.startAnimation(vistaAnimada)
 
         //llamamos a la animacion para animar a upelio
-        Handler(Looper.getMainLooper()).postDelayed({
-            if (getView() != null) {
-                upelio.isVisible = false
-                talkAnimationfun(view)
-            }
+        val upelioStatic = view.findViewById(R.id.imgv1_4_upelio) as ImageView
+        talkAnimationHandler?.removeCallbacksAndMessages(null)
+        talkAnimationHandler = Handler()
+        talkAnimationHandler?.postDelayed({
+            upelioStatic.isVisible = false
+            talkAnimationfun(view)
+            talkAnimationHandler?.removeCallbacksAndMessages(null)
+            talkAnimationHandler = null
         }, 2000)
     }
 
@@ -701,6 +730,10 @@ class Fragment1_4_juego : Fragment() {
     }
 
     private fun exitAnimationfun(view: View) {
+        if (introFinished) {
+            return
+        }
+        introFinished = true
         val upelioAnimado = view.findViewById(R.id.imgv1_4_upelio2) as ImageView
         upelioAnimado.isVisible = false
 
@@ -713,17 +746,16 @@ class Fragment1_4_juego : Fragment() {
         upelio.startAnimation(vistaAnimada)
 
         //Animacion fondo gris
-        Handler(Looper.getMainLooper()).postDelayed({
-            if (getView() != null) {
-                val txtAnimacion = view.findViewById(R.id.txtv1_4fondogris) as TextView
-                val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
-                txtAnimacion.startAnimation(aniFade)
-                txtv1_4tutorialjuego4.startAnimation(aniFade)
-                txtv1_4tutorialjuego4.isVisible = false
-                txtAnimacion.isVisible = false
-                val buttonSiguiente = view.findViewById(R.id.btnf1_4_siguiente) as Button
-                buttonSiguiente.isVisible=true
-            }
+        fondoAnimationHandler?.removeCallbacksAndMessages(null)
+        fondoAnimationHandler = Handler()
+        fondoAnimationHandler?.postDelayed({
+            introFinished = true
+            val txtAnimacion = view.findViewById(R.id.txtv1_4fondogris) as TextView
+            val aniFade = AnimationUtils.loadAnimation(context, R.anim.fade_out)
+            txtAnimacion.startAnimation(aniFade)
+            txtv1_4tutorialjuego4.startAnimation(aniFade)
+            txtv1_4tutorialjuego4.isVisible = false
+            txtAnimacion.isVisible = false
         }, 1000)
     }
 
@@ -742,8 +774,40 @@ class Fragment1_4_juego : Fragment() {
         }
     }
 
+    fun endIntroManually() {
+        if (introFinished) {
+            return
+        }
+        doubleTabHandler?.removeCallbacksAndMessages(null)
+        introFinished = true
+        val upelio1 = globalView.findViewById(R.id.imgv1_4_upelio) as ImageView
+        upelio1.clearAnimation()
+        upelio1.visibility = View.GONE
+        val upelio2 = globalView.findViewById(R.id.imgv1_4_upelio2) as ImageView
+        upelio2.clearAnimation()
+        upelio2.visibility = View.GONE
+        val txtAnimacion = globalView.findViewById(R.id.txtv1_4fondogris) as TextView
+        txtAnimacion.clearAnimation()
+        val typeWriterElement = globalView.findViewById(R.id.txtv1_4tutorialjuego4) as TextView
+        typeWriterElement.isVisible = false
+        txtAnimacion.isVisible = false
+        audio?.stop()
+
+        activateBtn()
+    }
+
     override fun onDestroy() {
         audio?.stop()
+        doubleTabHandler?.removeCallbacksAndMessages(null)
+        typeWriterHandler?.removeCallbacksAndMessages(null)
+        exitAnimationHandler?.removeCallbacksAndMessages(null)
+        talkAnimationHandler?.removeCallbacksAndMessages(null)
+        fondoAnimationHandler?.removeCallbacksAndMessages(null)
+        doubleTabHandler = null
+        typeWriterHandler = null
+        exitAnimationHandler = null
+        talkAnimationHandler = null
+        fondoAnimationHandler = null
         super.onDestroy()
     }
 

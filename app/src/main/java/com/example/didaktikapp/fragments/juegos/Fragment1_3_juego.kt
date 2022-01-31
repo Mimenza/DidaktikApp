@@ -233,18 +233,18 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
     }
     fun showPhotos() {
         //recogemos las fotos
-        val foto1: ImageView = requireView().findViewById(R.id.puzzle_pieza_o_1)
-        val foto2: ImageView = requireView().findViewById(R.id.puzzle_pieza_o_2)
-        val foto3: ImageView = requireView().findViewById(R.id.puzzle_pieza_o_3)
-        val foto4: ImageView = requireView().findViewById(R.id.puzzle_pieza_o_4)
-        val foto5: ImageView = requireView().findViewById(R.id.puzzle_pieza_o_5)
-        val foto6: ImageView = requireView().findViewById(R.id.puzzle_pieza_o_6)
-        val foto7: ImageView = requireView().findViewById(R.id.puzzle_pieza_o_7)
-        val foto8: ImageView = requireView().findViewById(R.id.puzzle_pieza_o_8)
-        val foto9: ImageView = requireView().findViewById(R.id.puzzle_pieza_o_9)
-        val foto10: ImageView = requireView().findViewById(R.id.puzzle_pieza_o_10)
-        val foto11: ImageView = requireView().findViewById(R.id.puzzle_pieza_o_11)
-        val foto12: ImageView = requireView().findViewById(R.id.puzzle_pieza_o_12)
+        val foto1: ImageView = globalView.findViewById(R.id.puzzle_pieza_o_1)
+        val foto2: ImageView = globalView.findViewById(R.id.puzzle_pieza_o_2)
+        val foto3: ImageView = globalView.findViewById(R.id.puzzle_pieza_o_3)
+        val foto4: ImageView = globalView.findViewById(R.id.puzzle_pieza_o_4)
+        val foto5: ImageView = globalView.findViewById(R.id.puzzle_pieza_o_5)
+        val foto6: ImageView = globalView.findViewById(R.id.puzzle_pieza_o_6)
+        val foto7: ImageView = globalView.findViewById(R.id.puzzle_pieza_o_7)
+        val foto8: ImageView = globalView.findViewById(R.id.puzzle_pieza_o_8)
+        val foto9: ImageView = globalView.findViewById(R.id.puzzle_pieza_o_9)
+        val foto10: ImageView = globalView.findViewById(R.id.puzzle_pieza_o_10)
+        val foto11: ImageView = globalView.findViewById(R.id.puzzle_pieza_o_11)
+        val foto12: ImageView = globalView.findViewById(R.id.puzzle_pieza_o_12)
 
         //enseñamos las fotos
         foto1.isVisible = true
@@ -511,7 +511,8 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
         typeWriterElement.isVisible = false
         txtAnimacion.isVisible = false
         audio?.stop()
-
+        prepairPuzzleElements()
+        showPhotos()
         activateBtn()
     }
 

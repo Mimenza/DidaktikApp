@@ -119,12 +119,14 @@ class Fragment2_6_minijuego : Fragment(), DbHandler.QueryResponseDone {
             itemInList = findItemByCorcho(viewElement)
         }
 
+        println("x = ${viewElement.x} | y = ${viewElement.y}")
+
        // if (itemInList != null && !itemInList.acertado) {
             viewElement.bringToFront()
 
             var objetivoEncontrado: View = itemInList!!.objetivo
             val location = IntArray(2)
-            objetivoEncontrado.getLocationOnScreen(location);
+            objetivoEncontrado.getLocationOnScreen(location)
             var posX = location[0]
             var posY = location[1]
             var sizeX = objetivoEncontrado.width
@@ -147,8 +149,6 @@ class Fragment2_6_minijuego : Fragment(), DbHandler.QueryResponseDone {
                                     updateHandler = null
                                 }, 1000)
                             }
-                        } else {
-
                         }
                     } else {
                         if (!itemInList.acertado) {
@@ -172,7 +172,13 @@ class Fragment2_6_minijuego : Fragment(), DbHandler.QueryResponseDone {
                             acierto++
                             botellaLlena()
                             checkProgress()
+                        }else{
+                            viewElement.x = 710F
+                            viewElement.y = 1290F
                         }
+                    }else{
+                        viewElement.x = 280F
+                        viewElement.y = 1255F
                     }
 
                     if (updateHandler != null) {

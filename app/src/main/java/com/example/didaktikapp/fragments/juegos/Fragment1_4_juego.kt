@@ -227,6 +227,9 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
                 if (valueElementCasted.checkedRadioButtonId != -1) {
                     if (valueElementCasted.checkedRadioButtonId != respuestasCorrectas[index]) {
                         valueElementCasted.setBackgroundColor(0x33ff0000)
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            valueElementCasted.setBackgroundColor(0x00000000)
+                        }, 1000)
                         Utils.vibrarTelefono(requireContext())
                         todosAcertados = false
                     }

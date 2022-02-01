@@ -175,8 +175,8 @@ class Fragment2_1_minijuego : Fragment(), DbHandler.QueryResponseDone {
                         cesta.getLocationOnScreen(cestaLocation);
                         var cestaPosX = cestaLocation[0]
                         var cestaPosY = cestaLocation[1]
-                        var cestaSizeX = cesta.width + 600
-                        var cestaSizeY = cesta.height + 300
+                        var cestaSizeX = cesta.width
+                        var cestaSizeY = cesta.height
 
                         if ( (viewElement.x + viewElement.width/2) >= cestaPosX && (viewElement.y + viewElement.height/2) >= cestaPosY && (viewElement.x + viewElement.width/2) <= cestaPosX+cestaSizeX && (viewElement.y + viewElement.height/2) <= cestaPosY+cestaSizeY) {
                             comprobarInsercionManzana(itemInList, cesta)
@@ -184,6 +184,9 @@ class Fragment2_1_minijuego : Fragment(), DbHandler.QueryResponseDone {
 
                             viewElement.visibility = View.GONE
                             viewElement.setOnTouchListener(null)
+                        }else{
+                            viewElement.x = ((50..globalView.width - 250).random()).toFloat()
+                            viewElement.y = ((450..globalView.height - 600).random()).toFloat()
                         }
                     }
                 }

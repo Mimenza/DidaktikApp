@@ -280,8 +280,7 @@ class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
 
     private fun verVideo(){
         //dejamos que se pueda ver el video en landscape
-        getActivity()?.setRequestedOrientation(
-            ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
 
         //Ocultamos acciones menos el video
         imgv1_5_upelio.isVisible=false
@@ -304,8 +303,7 @@ class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
 
     private fun exitAnimationfun() {
 //volvemos a ponerlo en portrait
-        getActivity()?.setRequestedOrientation(
-            ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+        activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         //Ocultamos las acciones
         videoViewjuego5.isVisible=false
@@ -328,46 +326,48 @@ class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
 
     @SuppressLint("ClickableViewAccessibility")
     var listener = View.OnTouchListener { viewElement, motionEvent ->
-        var itemInList: DragnDropImage? = findItemByOrigen(viewElement)
-        if (itemInList != null) {
-            if (!itemInList.acertado) {
-                viewElement.bringToFront()
-                val action = motionEvent.action
-                when(action) {
-                    MotionEvent.ACTION_DOWN -> {
-                        opX = viewElement.x
-                        opY = viewElement.y
-                    }
-                    MotionEvent.ACTION_MOVE -> {
-                        viewElement.x = motionEvent.rawX - viewElement.width/2
-                        viewElement.y = motionEvent.rawY - viewElement.height/2
-                    }
-                    MotionEvent.ACTION_UP -> {
-                        viewElement.x = motionEvent.rawX - viewElement.width/2
-                        viewElement.y = motionEvent.rawY - viewElement.height/2
-                        var objetivoEncontrado: View = itemInList!!.objetivo
-                        var posX = objetivoEncontrado.getLeft()
-                        var posY = objetivoEncontrado.getTop()
-                        var sizeX = objetivoEncontrado.width
-                        var sizeY = objetivoEncontrado.height
+        if(!videoViewjuego5.isVisible && audio?.isPlaying == false){
+            var itemInList: DragnDropImage? = findItemByOrigen(viewElement)
+            if (itemInList != null) {
+                if (!itemInList.acertado) {
+                    viewElement.bringToFront()
+                    val action = motionEvent.action
+                    when(action) {
+                        MotionEvent.ACTION_DOWN -> {
+                            opX = viewElement.x
+                            opY = viewElement.y
+                        }
+                        MotionEvent.ACTION_MOVE -> {
+                            viewElement.x = motionEvent.rawX - viewElement.width/2
+                            viewElement.y = motionEvent.rawY - viewElement.height/2
+                        }
+                        MotionEvent.ACTION_UP -> {
+                            viewElement.x = motionEvent.rawX - viewElement.width/2
+                            viewElement.y = motionEvent.rawY - viewElement.height/2
+                            var objetivoEncontrado: View = itemInList!!.objetivo
+                            var posX = objetivoEncontrado.getLeft()
+                            var posY = objetivoEncontrado.getTop()
+                            var sizeX = objetivoEncontrado.width
+                            var sizeY = objetivoEncontrado.height
 
-                        if ( (viewElement.x + viewElement.width/2) >= posX && (viewElement.y + viewElement.height/2) >= posY && (viewElement.x + viewElement.width/2) <= posX+sizeX && (viewElement.y + viewElement.height/2) <= posY+sizeY) {
-                            //viewElement.visibility = View.GONE
-                            //viewElement.x = opX
-                            //viewElement.y = opY
-                            viewElement.x = posX.toFloat()
-                            viewElement.y = posY.toFloat()
-                            //Utils.drawLine(globalView, requireContext(),opX,opY,posX.toFloat(),posY.toFloat(),15F, (0..255).random(),(0..255).random(),(0..255).random())
-                            itemInList.acertado = true
-                            sendToTopImagesNotFinished()
-                            viewElement.setOnTouchListener(null)
-                            if (juegoCompletado()) {
-                                DbHandler.userAumentarPuntuacion(10)
-                                DbHandler.userActualizarUltimoPunto(thisJuegoId)
-                                DbHandler().requestDbUserUpdate(this)
-                                audio?.stop()
-                                button.visibility = View.VISIBLE
-                                Toast.makeText(requireContext(), "Bikain!", Toast.LENGTH_SHORT).show()
+                            if ( (viewElement.x + viewElement.width/2) >= posX && (viewElement.y + viewElement.height/2) >= posY && (viewElement.x + viewElement.width/2) <= posX+sizeX && (viewElement.y + viewElement.height/2) <= posY+sizeY) {
+                                //viewElement.visibility = View.GONE
+                                //viewElement.x = opX
+                                //viewElement.y = opY
+                                viewElement.x = posX.toFloat()
+                                viewElement.y = posY.toFloat()
+                                //Utils.drawLine(globalView, requireContext(),opX,opY,posX.toFloat(),posY.toFloat(),15F, (0..255).random(),(0..255).random(),(0..255).random())
+                                itemInList.acertado = true
+                                sendToTopImagesNotFinished()
+                                viewElement.setOnTouchListener(null)
+                                if (juegoCompletado()) {
+                                    DbHandler.userAumentarPuntuacion(10)
+                                    DbHandler.userActualizarUltimoPunto(thisJuegoId)
+                                    DbHandler().requestDbUserUpdate(this)
+                                    audio?.stop()
+                                    button.visibility = View.VISIBLE
+                                    Toast.makeText(requireContext(), "Bikain!", Toast.LENGTH_SHORT).show()
+                                }
                             }
                         }
                     }

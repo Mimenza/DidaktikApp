@@ -28,6 +28,7 @@ import com.example.didaktikapp.Model.CustomLine
 import com.example.didaktikapp.activities.Activity5_Mapa
 import com.example.didaktikapp.activities.Activity6_Site
 import com.example.didaktikapp.activities.DbHandler
+import com.example.didaktikapp.activities.Utils
 import kotlinx.coroutines.runBlocking
 import kotlinx.android.synthetic.main.fragment1_1_juego.*
 import kotlinx.coroutines.launch
@@ -288,6 +289,8 @@ class Fragment1_1_juego : Fragment(), DbHandler.QueryResponseDone {
                             setLine(img3, txtv1, "red")
                         }
                     }
+
+                    Utils.vibrarTelefono(requireContext())
                     setBorder(txtv1, "red")
 
                     runBlocking {
@@ -331,6 +334,8 @@ class Fragment1_1_juego : Fragment(), DbHandler.QueryResponseDone {
                             setLine(img3, txtv2, "red")
                         }
                     }
+
+                    Utils.vibrarTelefono(requireContext())
                     setBorder(txtv2, "red")
 
                     runBlocking {
@@ -375,6 +380,8 @@ class Fragment1_1_juego : Fragment(), DbHandler.QueryResponseDone {
                             setLine(img3, txtv3, "red")
                         }
                     }
+
+                    Utils.vibrarTelefono(requireContext())
                     setBorder(txtv3, "red")
 
                     runBlocking {

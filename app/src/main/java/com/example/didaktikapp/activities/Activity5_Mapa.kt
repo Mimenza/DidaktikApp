@@ -290,20 +290,10 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.QueryR
         //Añadir Markers junto a sus nombres
         addMarkers()
 
-        //Añadir Area para mostrar al usuario si algun punto esta cerca de su radio o no
-        /*var myCircle: Circle = mMap.addCircle(
-            CircleOptions()
-            .center(LatLng(43.285576, -1.941156))
-            .radius(minimumRadius.toDouble())
-            .strokeColor(getResources().getColor(R.color.white))
-            .strokeWidth(2f)
-            .fillColor(0x70ff0000))*/
-
         //Variable para comprobar si la primera animacion se ha realiado correctamente
         var firstFocusAnimation = false
         mMap.setOnMyLocationChangeListener {
             //Metodos para establecer la nueva posicion del radio que rodea la ubicacion del usuario
-            //myCircle.setCenter(LatLng(it.latitude, it.longitude))
             myCurrentPosition = LatLng(it.latitude, it.longitude)
             if (!firstFocusAnimation) {
                 //Condicion para focalizar al usuario por primera vez
@@ -387,6 +377,22 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.QueryR
                             }
                         } else {
                             Toast.makeText(this, "No estas suficientemente cerca del punto de juego", Toast.LENGTH_SHORT).show()
+
+                            //Añadir Area para mostrar al usuario si algun punto esta cerca de su radio o no
+                            var myCircle: Circle = mMap.addCircle(
+                                CircleOptions()
+                                    .center(LatLng(43.285576, -1.941156))
+                                    .radius(minimumRadius.toDouble())
+                                    .strokeWidth(0f)
+                                    .fillColor(0x33ff0000))
+
+                            myCircle.setCenter(LatLng(latLon.latitude, latLon.longitude))
+
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                if(myCircle != null){
+                                    myCircle.remove()
+                                }
+                            }, 2000)
                         }
                     }
                     break

@@ -1,6 +1,7 @@
 package com.example.didaktikapp.fragments.juegos
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
@@ -17,15 +18,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.media.MediaPlayer
 import android.graphics.drawable.AnimationDrawable
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
+import androidx.annotation.RequiresApi
+import androidx.core.graphics.toColor
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.clone
 import com.example.didaktikapp.activities.Activity5_Mapa
 import com.example.didaktikapp.activities.DbHandler
+import com.example.didaktikapp.activities.Utils
 import kotlinx.android.synthetic.main.fragment1_4_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -219,8 +224,10 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
             var todosAcertados = true
             for ((index, value) in vFila1!!.withIndex()) {
                 var valueElementCasted: RadioGroup = value as RadioGroup
-                if (valueElementCasted.getCheckedRadioButtonId() != -1) {
-                    if (valueElementCasted.getCheckedRadioButtonId() != respuestasCorrectas[index]) {
+                if (valueElementCasted.checkedRadioButtonId != -1) {
+                    if (valueElementCasted.checkedRadioButtonId != respuestasCorrectas[index]) {
+                        valueElementCasted.setBackgroundColor(0x33ff0000)
+                        Utils.vibrarTelefono(requireContext())
                         todosAcertados = false
                     }
                 } else {

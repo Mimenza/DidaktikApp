@@ -213,7 +213,7 @@ class Fragment2_6_minijuego : Fragment(), DbHandler.QueryResponseDone {
         var imgBotellaVacia: ImageView = generateDinamycImageElement(R.drawable.mjuego5_botella1, (globalView.width/2 - 200/2), (globalView.height/2 - 200/2), 475, 475)
 
         // Generamos el corcho de la botella
-        var imgCorchoBotella: ImageView = generateDinamycImageElement(R.drawable.corchotest, (globalView.width - 400), (globalView.height - 800), 200, 200)
+        var imgCorchoBotella: ImageView = generateDinamycImageElement(R.drawable.corchotest, (globalView.width - 370), (globalView.height - 920), 200, 200)
 
         manzanaList.add(DragnDropImageLevel(imgVasoLleno,imgBotellaVacia,imgCorchoBotella))
         imgVasoLleno.setOnTouchListener(listener)
@@ -235,12 +235,12 @@ class Fragment2_6_minijuego : Fragment(), DbHandler.QueryResponseDone {
     private fun vasoVaciado() {
         val txtVasosVacios: TextView = globalView.findViewById(R.id.minijuego6_txtvasosvacios)
 
-        txtVasosVacios.text = "${(txtVasosVacios.text.trim()[0]-1).toString()}" + "/5"
+        txtVasosVacios.text = "${(txtVasosVacios.text.trim()[0]-1)}" + "/5"
     }
 
     private fun botellaLlena() {
         val txtBotellasLlenas: TextView = globalView.findViewById(R.id.minijuego6_txtbotellasllenas)
-        txtBotellasLlenas.text = "${txtBotellasLlenas.text.trim()[0]+1.toString()}" + "/5"
+        txtBotellasLlenas.text = "${txtBotellasLlenas.text.trim()[0]+1}" + "/5"
         if (acierto < 5) {
             generarVasonTarget()
         }

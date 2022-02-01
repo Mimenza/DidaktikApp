@@ -44,9 +44,9 @@
 
         <ImageView
             android:id="@+id/minijuego6_botella"
-            android:layout_width="50dp"
+            android:layout_width="40dp"
             android:layout_height="100dp"
-            android:layout_marginStart="92dp"
+            android:layout_marginStart="102dp"
             android:layout_marginTop="148dp"
             android:scaleType="fitXY"
             android:src="@drawable/mjuego5_botella6"
@@ -54,11 +54,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/minijuego6_vasovacio"
+            android:id="@+id/minijuego6_vaso"
             android:layout_width="50dp"
             android:layout_height="70dp"
             android:scaleType="fitXY"
-            android:src="@drawable/vaso1"
+            android:src="@drawable/vaso6"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.764"

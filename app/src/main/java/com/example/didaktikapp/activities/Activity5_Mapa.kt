@@ -351,7 +351,7 @@ class Activity5_Mapa : AppCompatActivity(), OnMapReadyCallback, DbHandler.QueryR
 
         mMap.setOnInfoWindowClickListener(OnInfoWindowClickListener { marker ->
             if(DbHandler.getTutorialFinalizado() == 0) {
-                Toast.makeText(this, "Espera a que termine la explicacion", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.finishExplanation), Toast.LENGTH_SHORT).show()
                 return@OnInfoWindowClickListener
             }
             val latLon = marker.position

@@ -363,9 +363,7 @@ vergüenza y pedid ayuda a los astigartarras que veáis alrededor. ¡Buena suert
 </string>
 
     <!--ADMIN DIALOG -->
-    <string name="administratorAccess">
-Acceso administrador
-</string>
+    <string name="administratorAccess">Acceso administrador</string>
     <string name="administratorAccessText">Pasahitza sartu administratzaile pribilegioak lortzeko</string>
 
     <string name="izena">Nombre</string>
@@ -385,4 +383,11 @@ Acceso administrador
     <string name="ayudaminijuego5">Pantailan zehar hainbat sagar txikituta agertuko dira eta ikasleek euren atzamarrekin sagarrak zapaldu beharko dituzte.</string>
     <string name="ayudaminijuego6">Sagardo botila ezberdinak hartu eta sagardoa gordeta dagoen ontzia pixka bat okertu eta sagardo botilak beteko ditugu sagardoz. Amaitzeko sagardo botilei kortxoa jarriko diegu.</string>
     <string name="findelosjuegos">Bikain! Azkenengo erronka gainditu duzue! Beraz, eskerrak eman behar dizkizuet bidaiagatik eta interesgarri honetan zehar laguntzagatik. Hau guztia ez litzateke posible izango zuen laguntzarik gabe. Laster arte! Eta espero dut asko ikasi izana!</string>
+    <string name="finishExplanation">Espera a que termine la explicacion</string>
+    <string name="logged">LOGEADO CORRECTAMENTE</string>
+    <string name="registered">REGISTRADO CORRECTAMENTE</string>
+    <string name="registeredError">[ERROR] No se ha podido registrar</string>
+    <string name="adminActivated">Modo Administrador activado correctamente</string>
+    <string name="adminNotActivated">Error al activar el modo administrador</string>
+    <string name="adminDesactivated">Modo Administrador desactivado correctamente</string>
 </resources>

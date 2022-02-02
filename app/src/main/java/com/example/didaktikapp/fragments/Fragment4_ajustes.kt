@@ -200,12 +200,12 @@ class Fragment4_ajustes : Fragment() {
         if (!DbHandler.getAdmin()) {
             txtAdmin.visibility = View.VISIBLE
             txtInfo.visibility = View.VISIBLE
-            btnLogin.setBackgroundColor(getResources().getColor(R.color.primary))
+            btnLogin.setBackgroundColor(resources.getColor(R.color.primary))
         } else {
             txtInfo.visibility = View.GONE
             txtAdmin.visibility = View.GONE
-            btnLogin.text = "LOGOUT"
-            btnLogin.setBackgroundColor(getResources().getColor(R.color.red))
+            btnLogin.text = getString(R.string.adminActivated)
+            btnLogin.setBackgroundColor(resources.getColor(R.color.red))
         }
 
         btnCancel.setOnClickListener() {
@@ -216,16 +216,16 @@ class Fragment4_ajustes : Fragment() {
             if (!DbHandler.getAdmin()) {
                 if (pass.equals(txtAdmin.text.toString())) {
                     DbHandler.setAdmin(true)
-                    Toast.makeText(requireContext(), "Modo Administrador activado correctamente", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.adminActivated), Toast.LENGTH_SHORT).show()
                     dialog.dismiss()
                     callSingletonMapClass()
                 } else {
-                    Toast.makeText(requireContext(), "Error al activar el modo administrador", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.adminNotActivated), Toast.LENGTH_SHORT).show()
                 }
             } else {
                 DbHandler.setAdmin(false)
                 dialog.dismiss()
-                Toast.makeText(requireContext(), "Modo Administrador desactivado correctamente", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.adminDesactivated), Toast.LENGTH_SHORT).show()
                 callSingletonMapClass()
             }
         }

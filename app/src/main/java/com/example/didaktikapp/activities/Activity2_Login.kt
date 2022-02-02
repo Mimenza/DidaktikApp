@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import com.example.didaktikapp.R
 import com.example.didaktikapp.databinding.Activity2LoginBinding
 
 class Activity2_Login : AppCompatActivity(), DbHandler.QueryResponseDone {
@@ -65,7 +66,7 @@ class Activity2_Login : AppCompatActivity(), DbHandler.QueryResponseDone {
             dbHandlerInstance.requestDbUserCount(accountToRegister, this)
             return
         }
-        Toast.makeText(this, "LOGEADO CORRECTAMENTE", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.logged), Toast.LENGTH_SHORT).show()
         startActivityBienvenida()
         finish()
     }
@@ -84,12 +85,12 @@ class Activity2_Login : AppCompatActivity(), DbHandler.QueryResponseDone {
      */
     override fun responseDbUserRegister(response: Boolean) {
         if (!response) {
-            Toast.makeText(this, "[ERROR] No se ha podido registrar", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.registeredError), Toast.LENGTH_SHORT).show()
             binding.progressBar.visibility = View.GONE
             binding.btn1Hasi.isEnabled = true
             return
         }
-        Toast.makeText(this, "REGISTRADO CORRECTAMENTE", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, getString(R.string.registered), Toast.LENGTH_SHORT).show()
         startActivityBienvenida()
         finish()
     }

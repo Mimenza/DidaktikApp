@@ -57,20 +57,23 @@ class Fragment1_7_juego_results : Fragment(), DbHandler.QueryResponseDone {
                 DbHandler.userAumentarPuntuacion(10)
                 DbHandler.userActualizarUltimoPunto(thisJuegoId)
                 DbHandler().requestDbUserUpdate(this)
-                runBlocking() {
-                    launch {
-                        audio = MediaPlayer.create(requireContext(), R.raw.ongiaudioa7)
-                        audio.start()
-                    }
-                }
 
                 btnTerminar.setOnClickListener {
-                    audio.stop()
+                    if (this::audio.isInitialized){
+                        if(audio.isPlaying){
+                            audio.stop()
+                        }
+                    }
+
                     view?.findNavController()?.navigate(R.id.action_fragment1_7_juego_results_to_fragment2_7_minijuego)
                 }
 
                 btnRetry.setOnClickListener {
-                    audio.stop()
+                    if (this::audio.isInitialized){
+                        if(audio.isPlaying){
+                            audio.stop()
+                        }
+                    }
                     view?.findNavController()?.navigate(R.id.action_fragment1_7_juego_results_to_fragment1_7_juego)
                 }
 
@@ -93,7 +96,11 @@ class Fragment1_7_juego_results : Fragment(), DbHandler.QueryResponseDone {
 
 
             btnRetry2.setOnClickListener {
-                audio.stop()
+                if (this::audio.isInitialized){
+                    if(audio.isPlaying){
+                        audio.stop()
+                    }
+                }
                 view?.findNavController()?.navigate(R.id.action_fragment1_7_juego_results_to_fragment1_7_juego)
             }
         }

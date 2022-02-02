@@ -49,7 +49,7 @@ object Constantsjuego7 {
             "6. Zein da hitz hauen esanahia?: txotx, kizki, kupela, ama, zizarra, dolare." +
                     "    TXOTX:",
             "Sagardotegian txotx garaian kupel bat ireki aurretik sagardogileak ozen botatzen duen deia da.",
-            "SAurtengo sagardoa. Horregatik, “Gure sagardo berria” esanez hasten da sagardotegien denboraldia.",
+            "Aurtengo sagardoa. Horregatik, “Gure sagardo berria” esanez hasten da sagardotegien denboraldia.",
             "Sagarrak ematen dituen fruta-arbola.",
             1)
         val que6_2= Preguntasjuego7(6_2,

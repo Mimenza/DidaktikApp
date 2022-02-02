@@ -65,8 +65,7 @@ class Fragment2_2_minijuego : Fragment(), DbHandler.QueryResponseDone {
         val mapa: ImageButton = view.findViewById(R.id.btnf2_2_mapa)
         mapa.setOnClickListener {
                 activity?.let{
-                    val intent = Intent (it, Activity5_Mapa::class.java)
-                    it.startActivity(intent)
+                    getActivity()?.finish()
                 }
 
         }
@@ -171,9 +170,7 @@ class Fragment2_2_minijuego : Fragment(), DbHandler.QueryResponseDone {
         txtcartel.startAnimation(vistaAnimada)
 
         btnsiguiente.setOnClickListener(){
-            val i = Intent(activity, Activity5_Mapa::class.java)
-            startActivity(i)
-            (activity as Activity?)!!.overridePendingTransition(0, 0)
+            getActivity()?.finish()
         }
 
         btnrepetir.setOnClickListener(){

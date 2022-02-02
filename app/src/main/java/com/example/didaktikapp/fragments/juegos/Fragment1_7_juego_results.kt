@@ -1,5 +1,6 @@
 package com.example.didaktikapp.fragments.juegos
 
+import android.app.Activity
 import android.media.MediaPlayer
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.core.view.isVisible
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.DbHandler

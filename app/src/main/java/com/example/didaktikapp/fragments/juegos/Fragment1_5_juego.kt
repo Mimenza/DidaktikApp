@@ -365,8 +365,11 @@ class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
                                     DbHandler.userActualizarUltimoPunto(thisJuegoId)
                                     DbHandler().requestDbUserUpdate(this)
                                     audio?.stop()
-                                    button.visibility = View.VISIBLE
-                                    Toast.makeText(requireContext(), "Bikain!", Toast.LENGTH_SHORT).show()
+                                    audio = MediaPlayer.create(context, R.raw.ongiaudiogeneral)
+                                    audio?.start()
+                                    audio?.setOnCompletionListener {
+                                        button.visibility = View.VISIBLE
+                                    }
                                 }
                             }
                         }

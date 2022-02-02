@@ -65,8 +65,7 @@ class Fragment2_7_minijuego : Fragment() {
                     exitAnimationfun(view)
                     Handler().postDelayed({
                         activity?.let{
-                            val intent = Intent (it, Activity5_Mapa::class.java)
-                            it.startActivity(intent)
+                            getActivity()?.finish()
                         }
                     }, 2000)
 

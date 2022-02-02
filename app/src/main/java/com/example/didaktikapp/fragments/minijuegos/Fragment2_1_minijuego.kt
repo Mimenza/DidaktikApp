@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.*
@@ -16,6 +17,7 @@ import com.example.didaktikapp.Model.DragnDropImage
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity5_Mapa
 import android.widget.TextView
+import com.example.didaktikapp.Model.CustomAudioTest.audio
 import com.example.didaktikapp.activities.DbHandler
 
 
@@ -64,8 +66,7 @@ class Fragment2_1_minijuego : Fragment(), DbHandler.QueryResponseDone {
         val mapa: ImageButton = view.findViewById(R.id.btnf2_1_mapa)
         mapa.setOnClickListener {
                 activity?.let{
-                    val intent = Intent (it, Activity5_Mapa::class.java)
-                    it.startActivity(intent)
+                    getActivity()?.finish()
                 }
         }
 
@@ -212,7 +213,9 @@ class Fragment2_1_minijuego : Fragment(), DbHandler.QueryResponseDone {
             //Diseñar cartel madera
             starAnimationfun()
             minijuegoFinalizado = true
-            Toast.makeText(requireContext(), "ZORIONAK !!", Toast.LENGTH_SHORT).show()
+            audio?.stop()
+            audio = MediaPlayer.create(context, R.raw.ongiaudiogeneral)
+            audio?.start()
             removeManzanasListener()
 
         }
@@ -235,9 +238,7 @@ class Fragment2_1_minijuego : Fragment(), DbHandler.QueryResponseDone {
 
 
         btnsiguiente.setOnClickListener(){
-            val i = Intent(activity, Activity5_Mapa::class.java)
-            startActivity(i)
-            (activity as Activity?)!!.overridePendingTransition(0, 0)
+            getActivity()?.finish()
         }
         btnrepetir.setOnClickListener(){
             Navigation.findNavController(it).navigate(R.id.action_fragment2_1_minijuego_self)
@@ -266,8 +267,10 @@ class Fragment2_1_minijuego : Fragment(), DbHandler.QueryResponseDone {
             override fun onTick(millisUntilFinished: Long) {
                 if (!minijuegoFinalizado) {
                     if(manzanasCounter <= 9){
-                        generarManzana()
-                        manzanasCounter++
+                        if (getView() != null) {
+                            generarManzana()
+                            manzanasCounter++
+                        }
                     }
                 }
             }

@@ -360,9 +360,11 @@ class Fragment1_6_juego : Fragment(), DbHandler.QueryResponseDone {
                 spinner6Element.selectedItem.toString().lowercase().equals(respuestas[5])) {
             val comprobarbtn: Button = globalView.findViewById(R.id.btn1_6_comprobar)
             comprobarbtn.visibility = View.GONE
+            playPauseButton.setOnClickListener(null)
+            backwardButton.setOnClickListener(null)
+            forwardButton.setOnClickListener(null)
             if(testAudioTemp?.isPlaying == true){
                 testAudioTemp?.stop()
-
             }
 
             runBlocking {

@@ -316,10 +316,12 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
                             viewElement.setOnTouchListener(null)
                             if (puzzleCompletado()) {
                                 DbHandler.userAumentarPuntuacion(10)
-                                //DbHandler().requestDbUserUpdate(this)
-                                button.visibility = View.VISIBLE
-                                Toast.makeText(requireContext(), "Bikain!", Toast.LENGTH_SHORT)
-                                    .show()
+                                audio?.stop()
+                                audio = MediaPlayer.create(context, R.raw.ongiaudiogeneral)
+                                audio?.start()
+                                audio?.setOnCompletionListener {
+                                    button.visibility = View.VISIBLE
+                                }
                             }
                         }
                     }
@@ -421,11 +423,14 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
             btnComprobarRespuesta.visibility = View.GONE
             button.visibility = View.VISIBLE
             buttonRepetir.visibility = View.VISIBLE
-            Toast.makeText(requireContext(), "Zorionak, proba gainditu duzu !", Toast.LENGTH_SHORT)
-                .show()
+            audio?.stop()
+            audio = MediaPlayer.create(context, R.raw.ongiaudiogeneral)
+            audio?.start()
             hideKeyboard()
         } else {
-            Toast.makeText(requireContext(), "Saiatu berriro", Toast.LENGTH_SHORT).show()
+            audio?.stop()
+            audio = MediaPlayer.create(context, R.raw.gaizkiaudioa)
+            audio?.start()
         }
     }
 

@@ -228,8 +228,10 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
                     if (valueElementCasted.checkedRadioButtonId != respuestasCorrectas[index]) {
                         valueElementCasted.setBackgroundColor(0x33ff0000)
                         Handler(Looper.getMainLooper()).postDelayed({
-                            valueElementCasted.setBackgroundColor(0x00000000)
-                        }, 1000)
+                            if (getView() != null) {
+                                valueElementCasted.setBackgroundColor(0x00000000)
+                            }
+                        }, 3000)
                         Utils.vibrarTelefono(requireContext())
                         todosAcertados = false
                     }
@@ -245,19 +247,19 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
                     DbHandler.userAumentarPuntuacion(10)
                     DbHandler.userActualizarUltimoPunto(thisJuegoId)
                     DbHandler().requestDbUserUpdate(this)
-                    Toast.makeText(requireContext(), "ERES UN CRACK!", Toast.LENGTH_SHORT).show()
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        //llamamos a la animacion para animar a upelio
-                        playAudio(R.raw.ongiaudioa)
-                        Navigation.findNavController(it).navigate(R.id.action_fragment1_4_juego_to_fragment2_4_minijuego)
-                    }, 1000)
+                    playAudio(R.raw.ongiaudiogeneral)
+                    audio?.setOnCompletionListener {
+                        Navigation.findNavController(globalView).navigate(R.id.action_fragment1_4_juego_to_fragment2_4_minijuego)
+                    }
                 } else {
                     playAudio(R.raw.gaizkiaudioa)
-                    Toast.makeText(requireContext(), "VAYA ! HAS FALLADO!", Toast.LENGTH_SHORT).show()
+                    audio?.stop()
+                    audio = MediaPlayer.create(context, R.raw.gaizkiaudioa)
+                    audio?.start()
                 }
             } else {
                 playAudio(R.raw.gaizkiaudioa)
-                Toast.makeText(requireContext(), "SELECCIONAD TODAS LAS OPCIONES!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "SELECCIONA TODAS LAS OPCIONES!", Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -652,9 +654,14 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
                             storedLines.add(nuevaDrawLine)
                         }
                         if (palabrasEncontradas.size == palabras.size) {
-                            Toast.makeText(requireContext(), "ZORIONAK!", Toast.LENGTH_SHORT).show()
-                            val btnSiguiente: Button = globalView.findViewById(R.id.btnf1_4_siguiente)
-                            btnSiguiente.visibility = View.VISIBLE
+                            audio?.stop()
+                            audio = MediaPlayer.create(context, R.raw.ongiaudiogeneral)
+                            audio?.start()
+                            audio?.setOnCompletionListener {
+                                val btnSiguiente: Button = globalView.findViewById(R.id.btnf1_4_siguiente)
+                                btnSiguiente.visibility = View.VISIBLE
+                            }
+
                         }
                     }
                 }

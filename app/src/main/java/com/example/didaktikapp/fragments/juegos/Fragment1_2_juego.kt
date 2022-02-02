@@ -259,6 +259,7 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
                 txtv1_2tutorialjuego2.startAnimation(aniFade)
                 txtv1_2tutorialjuego2.isVisible = false
                 txt_animacion.isVisible = false
+                upelio.isVisible = false
                 //Habilitar botones cuando desaparece la animacion
 
                 val buttonSiguiente = view.findViewById(R.id.btnf1_2siguiente) as Button

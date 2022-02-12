@@ -19,17 +19,17 @@ import com.example.didaktikapp.activities.DbHandler
 
 class Fragment2_3_minijuego : Fragment(), DbHandler.QueryResponseDone {
 
-    private var aciertosActuales: Int = 0
-    private lateinit var globalView: View
+    private var aciertosActuales: Int = 0                               // numero de aciertos
+    private lateinit var globalView: View                               //
 
-    private var suciedadOrigen: IntArray? = null
-    private lateinit var vistaAnimada:TranslateAnimation
-    private lateinit var txtcartel: TextView
-    private lateinit var cartel: ImageView
-    private lateinit var btnsiguiente:Button
-    private lateinit var btnrepetir:Button
-    private lateinit var btninfominijuego: ImageButton
-    val listaImagenes = listOf(
+    private var suciedadOrigen: IntArray? = null                        // array con el origen de donde se van a generar la suciedad
+    private lateinit var vistaAnimada:TranslateAnimation                // variable para la animacion
+    private lateinit var txtcartel: TextView                            // text del cartel del final
+    private lateinit var cartel: ImageView                              // text del cartel del final
+    private lateinit var btnsiguiente:Button                            // boton de siguiente
+    private lateinit var btnrepetir:Button                              // boton de repetir
+    private lateinit var btninfominijuego: ImageButton                  // boton de ayuda del juego
+    val listaImagenes = listOf(                                         // lista con la suciedad
         listOf(R.id.imgV2_suciedad1,R.id.minijuego3_basurero),
         listOf(R.id.imgV2_suciedad2,R.id.minijuego3_basurero),
         listOf(R.id.imgV2_suciedad3,R.id.minijuego3_basurero),
@@ -38,7 +38,7 @@ class Fragment2_3_minijuego : Fragment(), DbHandler.QueryResponseDone {
     )
 
 
-    var manzanaList: MutableList<DragnDropImage>? = mutableListOf()
+    var manzanaList: MutableList<DragnDropImage>? = mutableListOf()    // lista con las manzanas
 
 
     override fun onCreateView(

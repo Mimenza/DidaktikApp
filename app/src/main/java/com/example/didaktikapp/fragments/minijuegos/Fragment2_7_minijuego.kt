@@ -30,11 +30,11 @@ import kotlinx.coroutines.runBlocking
 
 
 class Fragment2_7_minijuego : Fragment() {
-    private lateinit var upelio1: ImageView
-    private lateinit var upelio2: ImageView
-    private lateinit var fondoTutorial: TextView
-    private lateinit var txtTutorial: TextView
-    private lateinit var vistaanimada: TranslateAnimation
+    private lateinit var upelio1: ImageView                                     // upelio sin animacion
+    private lateinit var upelio2: ImageView                                     // upelio para animacion
+    private lateinit var fondoTutorial: TextView                                // fondo gris
+    private lateinit var txtTutorial: TextView                                  // texto del tutorial
+    private lateinit var vistaanimada: TranslateAnimation                       // variable para animacion
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

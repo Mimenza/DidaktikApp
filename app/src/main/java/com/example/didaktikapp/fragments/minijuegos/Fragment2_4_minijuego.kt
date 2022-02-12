@@ -21,38 +21,38 @@ import com.example.didaktikapp.activities.DbHandler
 
 
 class Fragment2_4_minijuego : Fragment(), DbHandler.QueryResponseDone {
-    private var acierto: Int = 1
-    private lateinit var manzana1: ImageView
-    private lateinit var manzana2: ImageView
-    private lateinit var manzana3: ImageView
-    private lateinit var manzana4: ImageView
-    private lateinit var manzana5: ImageView
-    private lateinit var manzanaSeleccionada: ImageView
-    private lateinit var vistaAnimada:TranslateAnimation
-    private lateinit var txtcartel: TextView
-    private lateinit var cartel: ImageView
-    private lateinit var btnsiguiente:Button
-    private lateinit var btnrepetir:Button
-    private lateinit var layout: ConstraintLayout
-    private lateinit var customLine: CustomLine
-    private lateinit var customStroke: CustomLine
+    private var acierto: Int = 1                                // numero de aciertos
+    private lateinit var manzana1: ImageView                    // manzana que vamos a cortar 1
+    private lateinit var manzana2: ImageView                    // manzana que vamos a cortar 2
+    private lateinit var manzana3: ImageView                    // manzana que vamos a cortar 3
+    private lateinit var manzana4: ImageView                    // manzana que vamos a cortar 4
+    private lateinit var manzana5: ImageView                    // manzana que vamos a cortar 5
+    private lateinit var manzanaSeleccionada: ImageView         // manzana que estamos cortando
+    private lateinit var vistaAnimada:TranslateAnimation        // variable para animacion
+    private lateinit var txtcartel: TextView                    // texto cartel del final
+    private lateinit var cartel: ImageView                      // cartel del final
+    private lateinit var btnsiguiente:Button                    // boton de siguiente
+    private lateinit var btnrepetir:Button                      // boton de repetir
+    private lateinit var layout: ConstraintLayout               //
+    private lateinit var customLine: CustomLine                 // Linea de dibujado cuando cortamos 1
+    private lateinit var customStroke: CustomLine               // Linea de dibujado cuando cortamos 2
 
 
-    var entra: Boolean = false
-    var sale: Boolean = false
-    var dentro: Boolean = false
-    var dejarCortar: Boolean = false
-    var manzana1cortada:Boolean = false
-    var manzana2cortada:Boolean = false
-    var manzana3cortada:Boolean = false
-    var manzana4cortada:Boolean = false
-    var manzana5cortada:Boolean = false
+    var entra: Boolean = false                                  // variable de si hemos empezado a cortar una manzana
+    var sale: Boolean = false                                   // variable de si hemos salido de cortar una manzana
+    var dentro: Boolean = false                                 // variable para saber si estamos dentro de una manzana
+    var dejarCortar: Boolean = false                            // variable para dejarnos cortar la manzana
+    var manzana1cortada:Boolean = false                         // variable para saber si hemos cortado la manzana 1
+    var manzana2cortada:Boolean = false                         // variable para saber si hemos cortado la manzana 2
+    var manzana3cortada:Boolean = false                         // variable para saber si hemos cortado la manzana 3
+    var manzana4cortada:Boolean = false                         // variable para saber si hemos cortado la manzana 4
+    var manzana5cortada:Boolean = false                         // variable para saber si hemos cortado la manzana 5
 
-    private lateinit var btninfominijuego: ImageButton
-    private var lastX:Float = 0F
-    private var lastY:Float = 0F
-    private val customLines = arrayListOf<CustomLine>()
-    private val customStrokes = arrayListOf<CustomLine>()
+    private lateinit var btninfominijuego: ImageButton          // boton para ayuda de juego
+    private var lastX:Float = 0F                                // coordinada par dibujado
+    private var lastY:Float = 0F                                // coordinada par dibujado
+    private val customLines = arrayListOf<CustomLine>()         // array para guardar los puntos de lineas 1
+    private val customStrokes = arrayListOf<CustomLine>()       // array para guardar los puntos de lineas 2
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(

@@ -20,17 +20,17 @@ import com.example.didaktikapp.activities.DbHandler
 
 class Fragment2_6_minijuego : Fragment(), DbHandler.QueryResponseDone {
 
-    private var acierto: Int = 0
-    private lateinit var globalView: View
+    private var acierto: Int = 0                                                    // numero de aciertos
+    private lateinit var globalView: View                                           //
 
-    private lateinit var vistaAnimada:TranslateAnimation
-    private lateinit var txtcartel: TextView
-    private lateinit var cartel: ImageView
-    private lateinit var btnsiguiente:Button
-    private lateinit var btnrepetir:Button
-    private lateinit var btninfominijuego: ImageButton
+    private lateinit var vistaAnimada:TranslateAnimation                            // variable para animacion
+    private lateinit var txtcartel: TextView                                        // texto cartel final
+    private lateinit var cartel: ImageView                                          // cartel final
+    private lateinit var btnsiguiente:Button                                        // boton de siguiente
+    private lateinit var btnrepetir:Button                                          // boton de repetir
+    private lateinit var btninfominijuego: ImageButton                              // boton de ayuda del juego
 
-    private var manzanaList: MutableList<DragnDropImageLevel> = mutableListOf()
+    private var manzanaList: MutableList<DragnDropImageLevel> = mutableListOf()     // lista para las manzanas
 
 
     override fun onCreateView(

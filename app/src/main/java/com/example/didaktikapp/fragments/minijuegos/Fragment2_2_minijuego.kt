@@ -22,13 +22,13 @@ import com.example.didaktikapp.activities.Utils
 
 class Fragment2_2_minijuego : Fragment(), DbHandler.QueryResponseDone {
 
-    private lateinit var vistaAnimada:TranslateAnimation
-    private var acierto:Int = 0
-    private lateinit var txtcartel: TextView
-    private lateinit var cartel: ImageView
-    private lateinit var btnsiguiente:Button
-    private lateinit var btnrepetir:Button
-    private lateinit var btninfominijuego: ImageButton
+    private lateinit var vistaAnimada:TranslateAnimation        //variable para la animacion
+    private var acierto:Int = 0                                 // numero de aciertos
+    private lateinit var txtcartel: TextView                    // text del cartel
+    private lateinit var cartel: ImageView                      // cartel final
+    private lateinit var btnsiguiente:Button                    // boton de siguiente
+    private lateinit var btnrepetir:Button                      // boton repetir
+    private lateinit var btninfominijuego: ImageButton          // boton de informacion del juego
 
 
 

@@ -23,23 +23,23 @@ import com.example.didaktikapp.activities.DbHandler
 
 class Fragment2_1_minijuego : Fragment(), DbHandler.QueryResponseDone {
     private lateinit var globalView: View
-    private lateinit var vistaAnimada:TranslateAnimation
-    private lateinit var cesta: ImageView
-    private lateinit var basurero: ImageView
-    private lateinit var txtAciertos: TextView
-    private lateinit var txtcartel: TextView
-    private lateinit var cartel: ImageView
-    private lateinit var btnsiguiente:Button
-    private lateinit var btnrepetir:Button
-    private lateinit var btninfominijuego: ImageButton
+    private lateinit var vistaAnimada:TranslateAnimation    //variable para la animacion
+    private lateinit var cesta: ImageView                   //cesta para las manzanas
+    private lateinit var basurero: ImageView                //basurero para la manzanas
+    private lateinit var txtAciertos: TextView              //texto con numero de aciertos
+    private lateinit var txtcartel: TextView                //texto cartel final
+    private lateinit var cartel: ImageView                  //cartel final
+    private lateinit var btnsiguiente:Button                //boton siguiente juego
+    private lateinit var btnrepetir:Button                  //boton repetir juego
+    private lateinit var btninfominijuego: ImageButton      //boton informacion juego
 
 
-    var manzanaList: MutableList<DragnDropImage>? = mutableListOf()
-    val duracionJuego: Int = 60 // Duracion en segundos
-    val intervaloGeneracionManzanas = 3 //Duracion en segundos
-    var aciertosActuales: Int = 0
-    var minijuegoFinalizado: Boolean = false
-    var manzanasCounter = 0
+    var manzanaList: MutableList<DragnDropImage>? = mutableListOf() //
+    val duracionJuego: Int = 60                                     // Duracion en segundos del juego
+    val intervaloGeneracionManzanas = 3                             //Duracion en segundos generar manzanas
+    var aciertosActuales: Int = 0                                   // numero de aciertos
+    var minijuegoFinalizado: Boolean = false                        // variable de juego terminado
+    var manzanasCounter = 0                                         // numero de manzanas generadas
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -127,7 +127,7 @@ class Fragment2_1_minijuego : Fragment(), DbHandler.QueryResponseDone {
     }
 
     /**
-     * Funcion que genera manzanas de manera aleatoria en el view, las manzanzas se van añadiendo
+     * Funcion que genera manzanas de manera aleatoria en el view(Rojas y verdes), las manzanzas se van añadiendo
      * a una mutable list, despues se les añade un setontouch listener
      *
      */
@@ -311,9 +311,6 @@ class Fragment2_1_minijuego : Fragment(), DbHandler.QueryResponseDone {
                 }
             }
             override fun onFinish() {
-                //removeListenerManzanas()
-                //button.visibility = View.VISIBLE
-                //Actualmente queremos que no dejen de aparecer manzanas
                 startTimeCounter()
             }
         }.start()

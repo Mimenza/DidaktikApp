@@ -35,27 +35,26 @@ import kotlinx.coroutines.runBlocking
 import java.util.ArrayList
 
 class Fragment1_7_juego : Fragment(), View.OnClickListener, DbHandler.QueryResponseDone {
-    private lateinit var preguntasjuego7: Preguntasjuego7
-    private lateinit var globalView: View
-    private lateinit var progressBar : ProgressBar
-    private lateinit var txtProgressBar : TextView
-    private lateinit var question1 : TextView
-    private lateinit var question1_answer1 : TextView
-    private lateinit var question1_answer2 : TextView
-    private lateinit var question1_answer3 : TextView
-    private lateinit var btnSiguiente : Button
-    private lateinit var vistaanimada:TranslateAnimation
-    private lateinit var defaultImage: ImageView
-    private var mCurrentPosition:Int=1
-    private var mQuestionList: ArrayList<Preguntasjuego7>?= null
-    private var mSelectedOptionPosition: Int= 0
-    private var mCorrectAnswers: Int = 0
-    private var audio: MediaPlayer? = null
-    private  var REQUEST_CODE =200
-    private var introFinished: Boolean = false
-    private lateinit var btnInfoJuego: ImageButton
-    private lateinit var  mapa: ImageButton
+    private lateinit var preguntasjuego7: Preguntasjuego7 //data class preguntas7
+    private lateinit var globalView: View //vista del fragment
+    private lateinit var progressBar : ProgressBar //progress bar de las preguntas
+    private lateinit var txtProgressBar : TextView // Texto de posición del progress bar
+    private lateinit var question1 : TextView    //La pregunta
+    private lateinit var question1_answer1 : TextView //Respuesta 1
+    private lateinit var question1_answer2 : TextView //Respuesta 2
+    private lateinit var question1_answer3 : TextView  //Respuesta 3
+    private lateinit var btnSiguiente : Button      //Botón siguiente
+    private lateinit var vistaanimada:TranslateAnimation // Animación vista para la manzana
+    private var mCurrentPosition:Int=1 // Posición inicial del usuario
+    private var mQuestionList: ArrayList<Preguntasjuego7>?= null //Arraylist vacío de las pregunta 7
+    private var mSelectedOptionPosition: Int= 0 //posicion de la opción de la respuesta seleccionada
+    private var mCorrectAnswers: Int = 0 //respuestas correctas
+    private var audio: MediaPlayer? = null //audio mediaplayer
+    private var introFinished: Boolean = false //Booleano para que la intro solo se muestre una vez
+    private lateinit var btnInfoJuego: ImageButton //icono de la información del juego
+    private lateinit var  mapa: ImageButton //Icono del mapa
 
+    //variables para saltar el tutorial al hacer doble click en la pantalla
     private var doubleTabHandler: Handler? = null
     private var typeWriterHandler: Handler? = null
     private var exitAnimationHandler: Handler? = null
@@ -70,8 +69,6 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener, DbHandler.QueryRespo
         globalView = view
         //Inicializar vistas
         val button:Button = view.findViewById(R.id.btnf1_7siguiente)
-
-
         progressBar = view.findViewById(R.id.custom_progressBar)
         txtProgressBar =view.findViewById(R.id.txtv1_7_progreessbar)
         question1= view.findViewById(R.id.txtv1_7_pregunta1)
@@ -80,12 +77,12 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener, DbHandler.QueryRespo
         question1_answer3= view.findViewById(R.id.txtv1_7_respuesta3)
         btnSiguiente= view.findViewById(R.id.btnf1_7siguiente)
         btnInfoJuego= view.findViewById((R.id.btn1_7_infojuego))
-
         mapa = view.findViewById(R.id.btnf1_7_mapa)
 
         button.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_fragment1_7_juego_to_fragment1_7_juego_results)
         }
+
 
         val introFondo: TextView = view.findViewById(R.id.txtv1_7fondogris)
         introFondo.setOnClickListener() {
@@ -99,7 +96,7 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener, DbHandler.QueryRespo
                 endIntroManually()
             }
         }
-
+        //Función para inicial el audio en el tutorial
         audiotutorial(view)
 
         //Creamos la pregunta y las respuestas segun la posicion
@@ -109,13 +106,17 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener, DbHandler.QueryRespo
         question1_answer1!!.setOnClickListener(this)
         question1_answer2!!.setOnClickListener(this)
         question1_answer3!!.setOnClickListener(this)
-
         btnSiguiente!!.setOnClickListener(this)
 
         introFinished = false
         return view
     }
 
+    /**
+     * Función para el audio del tutorial
+     *
+     * @param view
+     */
     fun audiotutorial(view:View){
         //Audio juego 7 tutorial
         runBlocking() {
@@ -136,14 +137,23 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener, DbHandler.QueryRespo
         starAnimationfun(view)
 
     }
-
+    /**
+     * Crea la animación para el typewritter
+     *
+     * @param view
+     */
     private fun typewriter(view: View) {
         val typeWriterView = view.findViewById(R.id.txtv1_7tutorialjuego7) as TypeWriterView
         typeWriterView.setWithMusic(false)
         typeWriterView.animateText(resources.getString(R.string.belarriakadi))
         typeWriterView.setDelay(70)
     }
-
+    /**
+     * Función que usa la animación de la vista a la manzana, de la izquierda a la derecha
+     * con el fondo en negro, y al acabar el audio,
+     * desaparece la manzana y el fondo
+     * @param view
+     */
     private fun starAnimationfun(view: View) {
         // animacion fondo gris
         val txt_animacion = view.findViewById(R.id.txtv1_7fondogris) as TextView
@@ -176,13 +186,24 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener, DbHandler.QueryRespo
         }, 2000)
     }
 
+    /**
+     * Función que crea la animacion gráfica de la manzana
+     *
+     * @param view
+     */
     private fun talkAnimationfun(view: View) {
         val upelio = view.findViewById(R.id.imgv1_7_upelio2) as ImageView
         upelio.setBackgroundResource(R.drawable.animacion_manzana)
         val ani = upelio.getBackground() as AnimationDrawable
         ani.start()
     }
+    /**
+     *  Función que usa la animación de la vista a la manzana
+     * Cuando acaba la manzana de hablar upelio hace una vista animada a
+     * la derecha y desaperece
+     * @param view
 
+     */
     private fun exitAnimationfun(view: View) {
         if (!introFinished) {
             //escondemos la manzanda de la animacion
@@ -218,7 +239,12 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener, DbHandler.QueryRespo
             }, 1000)
         }
     }
-
+    /**
+     * Función que settea las preguntas, es decir, al dar al botón de siguiente
+     * pregunta, según la posición en la que estés, saldrán nuevas preguntas y respuetas
+     * para esa posición
+     *
+     */
     private fun setQuestion(){
         preguntasjuego7= Preguntasjuego7()
 
@@ -244,7 +270,10 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener, DbHandler.QueryRespo
 
     }
 
-    //COLOR Y FONDO POR DEFECTO DE LAS RESPUESTAS
+    /**
+     * COLOR Y FONDO POR DEFECTO DE LAS RESPUESTAS
+     *
+     */
     private fun defaultOptionsView(){
         val options= ArrayList<TextView>()
         options.add(0, question1_answer1)
@@ -257,7 +286,17 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener, DbHandler.QueryRespo
             option.background= ContextCompat.getDrawable(requireContext(), R.drawable.juego2_default_option_border_bg)
         }
     }
-
+    /**
+     *
+     * Override de los botones de respuesta, según que respuesta ha clickado el usuario,
+     * se mostrará la opción seleccionada con el borde en negro. Al clickar en siguiente,
+     * saldrá la respuesta correcta y la incorrecta en caso de haberla fallarlo. Si la posición
+     * del usuario es igual que la lista de preguntas, al dar a sigueinte, nos llevará a la pestaña
+     * de resultados, si no es igual, setteara las preguntas y respuestas llamando a la función
+     * setQuestion()
+     *
+     * @param v
+     */
     override fun onClick(v:View?) {
 
         //Según el botón que hayamos clickado, pasamos la id a la función selectedOptionView
@@ -337,6 +376,10 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener, DbHandler.QueryRespo
         }
     }
 
+    /**
+     * Dialogo que carge la informacion dell juego 7
+     *
+     */
     fun showDialogInfo(){
 
         val dialog = Dialog(requireContext())
@@ -371,7 +414,12 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener, DbHandler.QueryRespo
             textInfo.setText(texto)
         }
     }
-    //Cambiamos de color de fondo a la opcion en concreto
+    /**
+     * Cambiamos de color de fondo a la opción en concreto
+     *
+     * @param answer la posición de la respuesta correcta
+     * @param drawableView pone de el fondo de color verde la respuesta correcta
+     */
 
     fun answerView(answer: Int, drawableView:Int){
         //Cambiamos el fondo a cada respuesta
@@ -391,7 +439,12 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener, DbHandler.QueryRespo
         }
     }
 
-    //COLOR Y FONDO RESPUESTA SELECCIONADA
+    /**
+     * COLOR Y FONDO RESPUESTA SELECCIONADA
+     *
+     * @param tv textview de las respuesta que el usuario ha clickado
+     * @param selectedOptiomNum posición del textview de la respuesta que el usuario ha clickado
+     */
     private  fun selectedOptionView(tv:TextView, selectedOptiomNum:Int){
 
         defaultOptionsView()
@@ -401,7 +454,11 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener, DbHandler.QueryRespo
         tv.setTypeface(tv.typeface, Typeface.BOLD)
         tv.background= ContextCompat.getDrawable(requireContext(), R.drawable.juego2_selected_option_border_bg)
     }
-
+    /**
+     * Función de los botones info juego e ir al mapa
+     * el botón de ir al mapa se activa cuando el audio no está en play
+     *
+     */
     private fun activateBtn() {
         mapa.setOnClickListener {
             if (audio?.isPlaying == false){
@@ -415,7 +472,10 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener, DbHandler.QueryRespo
             showDialogInfo()
         }
     }
-
+    /**
+     * Función para terminar la intro manualmente
+     *
+     */
     fun endIntroManually() {
         if (introFinished) {
             return
@@ -443,7 +503,10 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener, DbHandler.QueryRespo
 
         activateBtn()
     }
-
+    /**
+     * AUDIO EVENTS FIX ON DESTROYING
+     *
+     */
     override fun onDestroy() {
         audio?.stop()
         doubleTabHandler?.removeCallbacksAndMessages(null)
@@ -454,12 +517,18 @@ class Fragment1_7_juego : Fragment(), View.OnClickListener, DbHandler.QueryRespo
         exitAnimationHandler = null
         super.onDestroy()
     }
-
+    /**
+     * AUDIO EVENTS ON PAUSE
+     *
+     */
     override fun onPause() {
         audio?.pause()
         super.onPause()
     }
-
+    /**
+     * AUDIO EVENTS ON RESUME
+     *
+     */
     override fun onResume() {
         super.onResume()
         audio?.start()

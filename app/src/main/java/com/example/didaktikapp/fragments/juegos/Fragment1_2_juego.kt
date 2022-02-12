@@ -38,36 +38,39 @@ import kotlinx.coroutines.runBlocking
 import java.util.ArrayList
 
 class Fragment1_2_juego : Fragment(), View.OnClickListener {
-    private lateinit var globalView: View
-    private lateinit var preguntasjuego2: Preguntasjuego2
-    private var mSelectedOptionPosition: Int = 0
-    private lateinit var progressBar: ProgressBar
-    private lateinit var txtProgressBar: TextView
-    private lateinit var question1: TextView
-    private lateinit var question1_answer1: TextView
-    private lateinit var question1_answer2: TextView
-    private lateinit var question1_answer3: TextView
-    private lateinit var question1_answer4: TextView
-    private lateinit var defaultImage: ImageView
-    private lateinit var upelio1: ImageView
-    private lateinit var upelio2: ImageView
-    private lateinit var fondoTutorial: TextView
-    private lateinit var txtTutorial: TextView
-    private lateinit var btnSiguiente: Button
-    private var mCurrentPosition: Int = 1
-    private var mQuestionList: ArrayList<Preguntasjuego2>? = null
-    private lateinit var vistaanimada: TranslateAnimation
-    private var mCorrectAnswers: Int = 0
+    private lateinit var globalView: View//vista del fragment
+    private lateinit var preguntasjuego2: Preguntasjuego2 //data class preguntas2
+    private var mSelectedOptionPosition: Int = 0//posicion de la opción de la respuesta seleccionada
+    private lateinit var progressBar: ProgressBar//progress bar de las preguntas
+    private lateinit var txtProgressBar: TextView// Texto de posición del progress bar
+    private lateinit var question1: TextView//La pregunta
+    private lateinit var question1_answer1: TextView //Respuesta 1
+    private lateinit var question1_answer2: TextView //Respuesta 2
+    private lateinit var question1_answer3: TextView //Respuesta 3
+    private lateinit var question1_answer4: TextView //Respuesta 4
+    private lateinit var defaultImage: ImageView //Imagen por defecto de las preguntas
+    private lateinit var upelio1: ImageView //upelio 1 para la animacion de la vista
+    private lateinit var upelio2: ImageView //upelio 2 animacion grafica para que hable
+    private lateinit var fondoTutorial: TextView //fondo negro para el tutorial
+    private lateinit var txtTutorial: TextView //texto en el tutuorial
+    private lateinit var btnSiguiente: Button //boton siguiente preguntas
+    private var mCurrentPosition: Int = 1 //Posición inicial del usuario
+    private var mQuestionList: ArrayList<Preguntasjuego2>? = null//Arraylist vacío de las pregunta 2
+    private lateinit var vistaanimada: TranslateAnimation// Animación vista para la manzana
+    private var mCorrectAnswers: Int = 0//respuestas correctas
     private var audio: MediaPlayer? = null
-    private var REQUEST_CODE= 200
-    private var introFinished: Boolean = false
+    private var REQUEST_CODE= 200 //request success foto
+    private var introFinished: Boolean = false//Booleano para que la intro solo se muestre una vez el tutorial
+
+    //variables para saltar el tutorial al hacer doble click en la pantalla
     private var doubleTabHandler: Handler? = null
     private var typeWriterHandler: Handler? = null
     private var exitAnimationHandler: Handler? = null
     private var talkAnimationHandler: Handler? = null
     private var fondoAnimationHandler: Handler? = null
-    private lateinit var btnInfoJuego: ImageButton
-    private lateinit var  mapa: ImageButton
+
+    private lateinit var btnInfoJuego: ImageButton//icono de la información del juego
+    private lateinit var mapa: ImageButton//icono del mapa
 
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
@@ -78,7 +81,6 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         val view = inflater.inflate(R.layout.fragment1_2_juego, container, false)
         globalView = view
         //Inicializar vistas
-
         progressBar = view.findViewById(R.id.custom_progressBar)
         txtProgressBar = view.findViewById(R.id.txtv1_2_progreessbar)
         question1 = view.findViewById(R.id.txtv1_2_pregunta1)
@@ -92,11 +94,8 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         upelio2= view.findViewById(R.id.imgv1_2_upelio2)
         txtTutorial= view.findViewById(R.id.txtv1_2tutorialjuego2)
         fondoTutorial= view.findViewById(R.id.txtv1_2fondogris)
-
-
         btnInfoJuego= view.findViewById((R.id.btn1_2_infojuego))
-
-         mapa = view.findViewById(R.id.btnf1_2_mapa)
+        mapa = view.findViewById(R.id.btnf1_2_mapa)
 
         val introFondo: TextView = view.findViewById(R.id.txtv1_2fondogris)
         introFondo.setOnClickListener() {
@@ -152,6 +151,11 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
 
         return view
     }
+
+    /**
+     * Carga y muestra el diálogo con la ayuda del minijuego
+     *
+     */
     fun showDialogInfo(){
 
         val dialog = Dialog(requireContext())
@@ -162,7 +166,6 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
-
 
         val textInfo = dialog.findViewById<View>(R.id.txtv_infominijuego) as TextView
         var texto =""
@@ -186,6 +189,12 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
             textInfo.setText(texto)
         }
     }
+
+    /**
+     * Crea la animación para el typewritter
+     *
+     * @param view
+     */
     private fun typewriter(view: View) {
         val typeWriterView = view.findViewById(R.id.txtv1_2tutorialjuego2) as TypeWriterView
         typeWriterView.setWithMusic(false)
@@ -193,6 +202,12 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         typeWriterView.setDelay(70)
     }
 
+    /**
+     * Función que usa la animación de la vista a la manzana, de la izquierda a la derecha
+     * con el fondo en negro, y al acabar el audio,
+     * desaparece la manzana y el fondo
+     * @param view
+     */
     private fun starAnimationfun(view: View) {
         // animacion fondo gris
         val txt_animacion = view.findViewById(R.id.txtv1_2fondogris) as TextView
@@ -226,6 +241,11 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         }, 2000)
     }
 
+    /**
+     * Función que crea la animacion gráfica de la manzana
+     *
+     * @param view
+     */
     private fun talkAnimationfun(view: View) {
         val upelio = view.findViewById(R.id.imgv1_2_upelio2) as ImageView
         upelio.setBackgroundResource(R.drawable.animacion_manzana)
@@ -233,6 +253,13 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         ani.start()
     }
 
+    /**
+     *  Función que usa la animación de la vista a la manzana
+     * Cuando acaba la manzana de hablar upelio hace una vista animada a
+     * la derecha y desaperece
+     * @param view
+
+     */
     private fun exitAnimationfun(view: View) {
         //si la intro se ha acabado
         if (!introFinished) {
@@ -272,6 +299,12 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         }
     }
 
+    /**
+     * Función que settea las preguntas, es decir, al dar al botón de siguiente
+     * pregunta, según la posición en la que estés, saldrán nuevas preguntas y respuetas
+     * para esa posición
+     *
+     */
     private fun setQuestion() {
 
         preguntasjuego2 = Preguntasjuego2()
@@ -298,7 +331,10 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         defaultImage.setImageResource(R.drawable.img_interrogacion)
     }
 
-    //COLOR Y FONDO POR DEFECTO DE LAS RESPUESTAS
+    /**
+     * COLOR Y FONDO POR DEFECTO DE LAS RESPUESTAS
+     *
+     */
     private fun defaultOptionsView() {
 
         val options = ArrayList<TextView>()
@@ -314,6 +350,17 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         }
     }
 
+    /**
+     *
+     * Override de los botones de respuesta, según que respuesta ha clickado el usuario,
+     * se mostrará la opción seleccionada con el borde en negro. Al clickar en siguiente,
+     * saldrá la respuesta correcta y la incorrecta en caso de haberla fallarlo. Si la posición
+     * del usuario es igual que la lista de preguntas, al dar a sigueinte, nos llevará a la pestaña
+     * de resultados, si no es igual, setteara las preguntas y respuestas llamando a la función
+     * setQuestion()
+     *
+     * @param v
+     */
     override fun onClick(v: View?) {
         //Según el botón que hayamos clickado, pasamos la id a la función selectedOptionView
         when (v?.id) {
@@ -398,30 +445,42 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
             }
         }
     }
-    //Función para sacar foto
+
+    /**
+     * Función para sacar foto
+     *
+     */
     fun takePicture() {
 
         val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         startActivityForResult(cameraIntent, REQUEST_CODE)
     }
 
-    //Función para guardar foto
+
+    /**
+     * Función para guardar foto
+     *
+     * @param requestCode si ha dado error o un success 200
+     * @param resultCode
+     * @param data si el usuario ha sacado la foto o no
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE && data != null){
-
-
-
             imgv1_2defaultimage.setImageBitmap(data.extras?.get("data") as Bitmap)
             audio?.stop()
             return
 
-
         }
     }
 
-    //Cambiamos de color de fondo a la opcion en concreto
 
+    /**
+     * Cambiamos de color de fondo a la opción en concreto
+     *
+     * @param answer la posición de la respuesta correcta
+     * @param drawableView pone de el fondo de color verde la respuesta correcta
+     */
     fun answerView(answer: Int, drawableView: Int) {
         //Cambiamos el fondo a cada respuesta
         when (answer) {
@@ -448,7 +507,13 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         }
     }
 
-    //COLOR Y FONDO RESPUESTA SELECCIONADA
+
+    /**
+     * COLOR Y FONDO RESPUESTA SELECCIONADA
+     *
+     * @param tv textview de las respuesta que el usuario ha clickado
+     * @param selectedOptiomNum posición del textview de la respuesta que el usuario ha clickado
+     */
     private fun selectedOptionView(tv: TextView, selectedOptiomNum: Int) {
         defaultOptionsView()
         mSelectedOptionPosition = selectedOptiomNum
@@ -459,11 +524,16 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
             ContextCompat.getDrawable(requireContext(), R.drawable.juego2_selected_option_border_bg)
     }
 
+    /**
+     * Función de los botones info juego e ir al mapa
+     * el botón de ir al mapa se activa cuando el audio no está en play
+     *
+     */
     private fun activateBtn() {
         mapa.setOnClickListener {
             if (audio?.isPlaying == false){
                 activity?.let{
-                    getActivity()?.finish()
+                    activity?.finish()
                 }
             }
         }
@@ -473,6 +543,10 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         }
     }
 
+    /**
+     * Función para terminar la intro manualmente
+     *
+     */
     fun endIntroManually() {
         if (introFinished) {
             return
@@ -503,7 +577,10 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         activateBtn()
     }
 
-    //AUDIO EVENTS FIX ON DESTROYING
+    /**
+     * AUDIO EVENTS FIX ON DESTROYING
+     *
+     */
     override fun onDestroy() {
         audio?.stop()
         doubleTabHandler?.removeCallbacksAndMessages(null)
@@ -519,11 +596,19 @@ class Fragment1_2_juego : Fragment(), View.OnClickListener {
         super.onDestroy()
     }
 
+    /**
+     * AUDIO EVENTS ON PAUSE
+     *
+     */
     override fun onPause() {
         audio?.pause()
         super.onPause()
     }
 
+    /**
+     * AUDIO EVENTS ON RESUME
+     *
+     */
     override fun onResume() {
         super.onResume()
         audio?.start()

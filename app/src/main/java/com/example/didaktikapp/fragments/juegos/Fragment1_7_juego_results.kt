@@ -18,12 +18,16 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 class Fragment1_7_juego_results : Fragment(), DbHandler.QueryResponseDone {
-    private val thisJuegoId = 7
-    private lateinit var audio: MediaPlayer
-    private lateinit var scoreUser: TextView
-    private lateinit var btnTerminar: Button
-    private lateinit var btnRetry: Button
-    private lateinit var btnRetry2: Button
+
+    /*hay dos botones retry, si el usuario aprueba se mostrará
+     el boton btnTerminar y el boton btnRetry. Si supende, el boton btnRetry2 solo*/
+
+    private val thisJuegoId = 7 //id del juego (para las puntuaciones al terminar el juego)
+    private lateinit var audio: MediaPlayer //audio
+    private lateinit var scoreUser: TextView //resultado del juego 7
+    private lateinit var btnTerminar: Button //boton para terminar e ir al minijuego 7
+    private lateinit var btnRetry: Button //boton para reiniciar el juego 7
+    private lateinit var btnRetry2: Button //boton para reiniciar el juego 7
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +35,7 @@ class Fragment1_7_juego_results : Fragment(), DbHandler.QueryResponseDone {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment1_7_juego_results, container, false)
-
+       //Inicializar las vistas
         scoreUser = view.findViewById(R.id.txtv7_1_scoreuser)
         btnTerminar = view.findViewById(R.id.btn7_1_terminar)
         btnRetry = view.findViewById(R.id.btn7_1_saiatuberriro)
@@ -43,21 +47,18 @@ class Fragment1_7_juego_results : Fragment(), DbHandler.QueryResponseDone {
         val correctAnswers = sharedPreferences?.getString("correctAnswers", null)?.toInt()
         val totalQuestions = sharedPreferences?.getString("totalQuestions", null)?.toInt()
 
-        println(correctAnswers)
-        println(totalQuestions)
 
         scoreUser.text = "Zure emaitza: $correctAnswers/$totalQuestions"
 
 
-        //Boton finish que nos redirecciona al mapa
-
+        //Si aprueba el juego (6/11) o más
         if (correctAnswers != null) {
             if (correctAnswers >= 6) {
                 //Audio acierto
                 DbHandler.userAumentarPuntuacion(10)
                 DbHandler.userActualizarUltimoPunto(thisJuegoId)
                 DbHandler().requestDbUserUpdate(this)
-
+                //al hacer click en terminar, para el audio y a traves del nav nos redirecciona al minijuego 7
                 btnTerminar.setOnClickListener {
                     if (this::audio.isInitialized){
                         if(audio.isPlaying){
@@ -67,7 +68,7 @@ class Fragment1_7_juego_results : Fragment(), DbHandler.QueryResponseDone {
 
                     view?.findNavController()?.navigate(R.id.action_fragment1_7_juego_results_to_fragment2_7_minijuego)
                 }
-
+                //al hacer click en terminar, para el audio y a traves del nav nos redirecciona al juego 2
                 btnRetry.setOnClickListener {
                     if (this::audio.isInitialized){
                         if(audio.isPlaying){
@@ -94,7 +95,7 @@ class Fragment1_7_juego_results : Fragment(), DbHandler.QueryResponseDone {
                 btnRetry2.isVisible = true
             }
 
-
+            //al hacer click en terminar, para el audio y a traves del nav nos redirecciona al juego 2
             btnRetry2.setOnClickListener {
                 if (this::audio.isInitialized){
                     if(audio.isPlaying){

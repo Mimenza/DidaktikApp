@@ -35,18 +35,22 @@ import kotlinx.android.synthetic.main.fragment1_4_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
+/**
+ * Esta clase gestiona toda la funcionalidad y los elementos de UI del juego 4
+ *
+ */
 
 class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
+    /**
+     * Lista de variables generales del juego
+     */
     val thisJuegoId: Int = 4
     private lateinit var btnInfoJuego: ImageButton
     private var nFilas: Int = 12
     private var nCols: Int = 12
-
     private lateinit var globalView: View
     private lateinit var matrizMain: LinearLayout
     private lateinit var constraintMain: ConstraintLayout
-
-    private var letterWeight = 1/nCols
     private var audio: MediaPlayer? = null
     private lateinit var vistaAnimada:TranslateAnimation
     private lateinit var  mapa: ImageButton
@@ -57,12 +61,13 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
     private var talkAnimationHandler: Handler? = null
     private var fondoAnimationHandler: Handler? = null
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        /**
+         * Variable para obtener una fotografia de los elementos UI tras haber creado la vista
+         */
         val view = inflater.inflate(R.layout.fragment1_4_juego, container, false)
         globalView = view
         introFinished = false
@@ -74,10 +79,16 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
 
         mapa = view.findViewById(R.id.btnf1_4_mapa)
 
+        /**
+         * Tras superar el juego, se preparan las preguntas que se solicitan
+         */
         button.setOnClickListener(){
             prepararPreguntas()
         }
 
+        /**
+         * Saltar intro funcionalidad
+         */
         val introFondo: TextView = view.findViewById(R.id.txtv1_4fondogris)
         introFondo.setOnClickListener() {
             if (null == doubleTabHandler) {
@@ -91,7 +102,9 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
             }
         }
 
-        //Typewriter juego 4 tutorial
+        /**
+         * Typewriter juego 4 tutorial
+         */
         typeWriterHandler?.removeCallbacksAndMessages(null)
         typeWriterHandler = Handler()
         typeWriterHandler?.postDelayed({
@@ -100,12 +113,16 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
             typeWriterHandler = null
         }, 2000)
 
-        //Animacion manzana al iniciar el juego
+        /**
+         * Animacion manzana al iniciar el juego
+         */
         starAnimationfun(view)
         playAudio(R.raw.juego4audiotutorial)
 
 
-
+        /**
+         * Evento para controlar que todos los elementos de UI de la view han sido completamente inicializados
+         */
         view.viewTreeObserver.addOnGlobalLayoutListener(object :
             ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
@@ -117,6 +134,11 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
         return view
     }
 
+    /**
+     * Metodo para cargar diferentes audios y evitar que se solapen
+     *
+     * @param audioResource Integer indicando el recurso del audio que se va a reproducir
+     */
     private fun playAudio(audioResource: Int) {
         runBlocking {
             launch {
@@ -125,7 +147,6 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
                 audio?.start()
 
                 audio?.setOnCompletionListener {
-
                     exitAnimationHandler?.removeCallbacksAndMessages(null)
                     exitAnimationHandler = Handler()
                     exitAnimationHandler?.postDelayed({
@@ -139,7 +160,9 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
-    // SOPA DE LETRAS VARAIBLES
+    /**
+     * Variables para la sopa de letras
+     */
     private var letras = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ"
     private var letraComodin = "•"
     private var palabraFormada: String = ""
@@ -154,17 +177,19 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
     private var ultimaPosCol: Int? = null
     private var drawStartX: Float? = null
     private var drawStartY: Float? = null
-    private var palabrasPintadas = arrayListOf<String>()
     private var palabras = arrayListOf<String>("SAGARDANTZA", "SALMENTA", "TRIKITIXA", "TXALAPARTA", "GARBITZEA", "DASTATZEA", "TXISTULARIAK", "BILKETA", "ERAKUSKETA")
     private var palabrasEncontradas = arrayListOf<String>()
-    private var filasHuecosLibres = arrayListOf<Int>()
-    private var palabraPreparada: String = ""
 
-    //Variables Juego Verdadero/Falso
+    /**
+     * Variables Juego Verdadero/Falso (Es una lista indicando la respuesta correcta del elemento de radio button correcto)
+     */
     private var respuestasCorrectas = arrayListOf<Int>(1,3,5,8,9,12,13,16,17) // Radio button index Respuestas correctas
 
+    /**
+     * Este metodo gestiona el menu de ayuda de los diferentes juegos y mostrara el objetivo de cada juego
+     *
+     */
     fun showDialogInfo(){
-
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.info_dialog)
@@ -193,14 +218,16 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
         }
         println(texto)
         if (textInfo!=null){
-
             textInfo.setText(texto)
         }
     }
 
-    //Funciones Juego Verdadero / Flaso
 
-    //Funcion que gestiona el juego de verdadero falso
+    /**
+     * Funcion que gestiona el juego de verdadero falso. No usa elementos del layout, sino que se crean dinamicamente
+     * conforme se necesiten x preguntas/respuestas
+     *
+     */
     private fun prepararPreguntas() {
         playAudio(R.raw.juego4_egiagezurra)
         limpiarLineas()
@@ -265,7 +292,12 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
-    //Con este metodo obtenemos los hijos directos de un elemento
+    /**
+     * Con este metodo obtenemos los hijos directos de un elemento
+     *
+     * @param pLinearElement Layout que agrupe los hijos que se desean obtener
+     * @return Una lista con todos los elementos hijos del layout previamente pasado
+     */
     private fun getChildLLinearLayoutCustom(pLinearElement: View): ArrayList<View>? {
         val result = ArrayList<View>()
         val childList: ViewGroup = pLinearElement as ViewGroup
@@ -280,7 +312,10 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
 
     //-------------------------------------------------------------------------------
 
-    // FUNCIONES PARA EL JUEGO DE LA SOPA DE LETRAS
+    /**
+     * FUNCIONES PARA EL JUEGO DE LA SOPA DE LETRAS
+     * La siguiente funcion inicializa todos los metodos necearios para su correcto funcionamiento
+     */
     private fun prepararJuego() {
         //Primero generamos la matriz limpia de n filas n columnas
         for (i in 0 until nFilas) {
@@ -298,7 +333,10 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
         pintarSopa()
     }
 
-    //Este metodo actuaiza las palabras restantes de la sopa de letras
+    /**
+     * Este metodo actuaiza las palabras restantes de la sopa de letras
+     *
+     */
     private fun actualizarPalabrasRestantes() {
         val palabrasRestantesElement: TextView = globalView.findViewById(R.id.juego4_sopa_palabras)
         var palabrasRestantes = ""
@@ -319,7 +357,10 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
-    // Metodo para escribir las palabras sobre la matriz
+    /**
+     * Metodo para escribir las palabras sobre la matriz
+     *
+     */
     private fun escribirPalabrasModoSimple() {
 
         // #Palabra SAGARDANTZA
@@ -426,7 +467,10 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
         letterList[9][11] = "A"
     }
 
-    //Metodo para convertir las letras que no formen parte de la palabra en letras aleatorias
+    /**
+     * Metodo para convertir las letras que no formen parte de la palabra en letras aleatorias
+     *
+     */
     private fun convertComodinToRandomLetters() {
         for (i in 0 until letterList.size) {
             for (k in 0 until letterList[i].size) {
@@ -439,7 +483,10 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
-    // Pintamos la sopa de letra sobre el layout
+    /**
+     * Pintamos la sopa de letra sobre el layout
+     *
+     */
     private fun pintarSopa() {
         // Creamos n cantidad de linearLayouts(FILAS) que son los que tendran cada letrs
         for (i in 0 until letterList.size) {
@@ -478,7 +525,9 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
-    //Listener que esta a la escucha del click y del movimiento de las letras
+    /**
+     * Listener que esta a la escucha del click y del movimiento de las letras
+     */
     @SuppressLint("ClickableViewAccessibility")
     var listener = View.OnTouchListener { viewElement, motionEvent ->
         val vLetra = viewElement as TextView
@@ -545,12 +594,19 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
         true
     }
 
-    //Metodo creado para llamar a itself, dado que no puedes llamar al mismo metodo desde donde ejecutas la accion
+    /**
+     * Metodo creado para llamar a itself, dado que no puedes llamar al mismo metodo desde donde ejecutas la accion
+     *
+     * @param viewElement El elemento al que se le quiere volver a activar el listener (Metodo hard-coded debido a que no se puede quitar el evento desde dentro del mismo evento)
+     */
     private fun reenableTouch(viewElement: View) {
         viewElement.setOnTouchListener(listener)
     }
 
-    //Metodo para comprobar que elemento es de la matriz
+    /**
+     * Metodo para comprobar que elemento es de la matriz
+     *
+     */
     private fun encontrarLetraEnMatriz() {
         for ((i, fila) in letterObjectList.withIndex()) {
             for ((k, bLetra) in fila.withIndex()) {
@@ -573,7 +629,9 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
-    // Variable para determinar que tipo de movimiento son posibles
+    /**
+     * Variable para determinar que tipo de movimiento son posibles
+     */
     private var movesTypesInMatrix = arrayListOf<ArrayList<Int>>(
         // Lista de todos los movimientos que se presentan en el juego como vectores
         arrayListOf(0,1),
@@ -586,13 +644,15 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
         arrayListOf(-1,1),
     )
 
-    /*
-        El siguiente metodo encuentra las letras mas cercanas a la que se ha hecho click
-        basandose en los movimientos posibles del metodo anterior
-        Si la palabra da por valido que dicho movimiento es posible, se añadira a una lista de posibles
-        movimientos para limitarlo solo a la segunda letra
+    /**
+     * El siguiente metodo encuentra las letras mas cercanas a la que se ha hecho click
+     * basandose en los movimientos posibles del metodo anterior
+     * Si la palabra da por valido que dicho movimiento es posible, se añadira a una lista de posibles
+     * movimientos para limitarlo solo a la segunda letra
+     *
+     * @param pFila Entero para encontrar elementos dentro de la misma fila
+     * @param pCol Entero para encontrar elementos dentro de la misma columna
      */
-
     private fun encontrarLetrasCercanas(pFila: Int, pCol: Int) {
         for ((i, move) in movesTypesInMatrix.withIndex()) {
             if (letterList.getOrNull(pFila+move[0]) != null) {
@@ -607,7 +667,12 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
-    // Con este metodo vamos a determinar que tipo de movimiento se seguira tras tener seleccionadas 2 letras
+    /**
+     * Con este metodo vamos a determinar que tipo de movimiento se seguira tras tener seleccionadas 2 letras
+     *
+     * @param rawX FloatX para buscar palabras cercanas al movimento que se ejecute
+     * @param rawY FloatY para buscar palabras cercanas al movimento que se ejecute
+     */
     private fun selectMoveType(rawX: Float, rawY: Float) {
         if (moveSelected == null) {
             for ((i, palabraCercana) in arrayPlabrasCercanas.withIndex()) {
@@ -639,8 +704,10 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
-    // Al llamar a este metodo, comprobaremos el valor de la variable de la 'Palabra Formada' con la lista de todas
-    // las palabras
+    /**
+     * Al llamar a este metodo, comprobaremos el valor de la variable de la 'Palabra Formada' con la lista de todas las palabras
+     *
+     */
     private fun comprobarPalabraEncontrada() {
         for ((index, value) in palabras.withIndex()) {
             if (palabraFormada.length == value.length) {
@@ -670,7 +737,10 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
         limpiarLinea()
     }
 
-    // Mediante este metodo limpiaremos la linea previamente dibujada en caso de que se seleccione una nueva letra
+    /**
+     * Mediante este metodo limpiaremos la linea previamente dibujada en caso de que se seleccione una nueva letra
+     *
+     */
     private fun limpiarLinea() {
         if (drawingLine!= null) {
             constraintMain.removeView(drawingLine)
@@ -678,8 +748,11 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
-    // Metodo para limpiar todas las lineas de todas las palabras marcadas en la sopa de letras
-    // Este metodo se usa para cambiar a la parte de verdadero / falso
+    /**
+     * Metodo para limpiar todas las lineas de todas las palabras marcadas en la sopa de letras
+     * Este metodo se usa al cambiar a la parte de verdadero / falso
+     *
+     */
     private fun limpiarLineas() {
         for ((index,value) in storedLines.withIndex()) {
             constraintMain.removeView(value)
@@ -687,7 +760,10 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
         storedLines.clear()
     }
 
-    // Metodo para genrar nuevas posibilidades de la matriz (Actualmente hay un total de 4 posibilidades)
+    /**
+     * Metodo para genrar nuevas posibilidades de la matriz (Actualmente hay un total de 4 posibilidades)
+     *
+     */
     private fun voltearMatriz() {
         val matrizOption = (1 until 4).random()
         when (matrizOption) {
@@ -711,6 +787,11 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
+    /**
+     * Metodo que gestiona el tutorial explicativo al iniciar el juego mostrandose letra por letra
+     *
+     * @param view Elemento sobre el que se va a mostrar el texto
+     */
     private fun typewriter(view: View) {
         val typeWriterView = view.findViewById(R.id.txtv1_4tutorialjuego4) as TypeWriterView
         typeWriterView.setWithMusic(false)
@@ -718,6 +799,11 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
         typeWriterView.setDelay(65)
     }
 
+    /**
+     * Metodo que gestiona la animacion de entrada de cada juego
+     *
+     * @param view Elemento de la interfaz global para acceder a elementos hijos
+     */
     private fun starAnimationfun(view: View) {
         //Animacion fondo gris
         val txtAnimacion = view.findViewById(R.id.txtv1_4fondogris) as TextView
@@ -744,6 +830,11 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
         }, 2000)
     }
 
+    /**
+     * Metodo para iniciar la animacion de hablar de la manzana
+     *
+     * @param view Elemento de la interfaz global para acceder a elementos hijos
+     */
     private fun talkAnimationfun(view: View) {
         val upelio = view.findViewById(R.id.imgv1_4_upelio2) as ImageView
         upelio.setBackgroundResource(R.drawable.animacion_manzana)
@@ -751,6 +842,11 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
         ani.start()
     }
 
+    /**
+     * Metodo para terminar correctamente la animacion del tutorial inicial
+     *
+     * @param view Elemento de la interfaz global para acceder a elementos hijos
+     */
     private fun exitAnimationfun(view: View) {
         if (introFinished) {
             return
@@ -781,6 +877,10 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
         }, 1000)
     }
 
+    /**
+     * Metodo para gestionar la vuelta al mapa
+     *
+     */
     private fun activateBtn() {
         mapa.setOnClickListener {
             if (audio?.isPlaying == false){
@@ -795,6 +895,10 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
+    /**
+     * Metodo que gestion la finalizacion del tutorial de manera manual (Double tap)
+     *
+     */
     fun endIntroManually() {
         if (introFinished) {
             return
@@ -817,6 +921,10 @@ class Fragment1_4_juego : Fragment(), DbHandler.QueryResponseDone {
         activateBtn()
     }
 
+    /**
+     * Metodos overrideados para gestionar la finalizacion / intercambio / restauracion de actividades / fragments.
+     *
+     */
     override fun onDestroy() {
         audio?.stop()
         doubleTabHandler?.removeCallbacksAndMessages(null)

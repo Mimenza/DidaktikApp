@@ -52,8 +52,6 @@ class Fragment2_5_minijuego : Fragment(), DbHandler.QueryResponseDone {
             showDialogInfo()
         }
 
-
-
         val manzana1: ImageView = view.findViewById(R.id.imgv2_5_applepiece1)
         val manzana2: ImageView = view.findViewById(R.id.imgv2_5_applepiece2)
         val manzana3: ImageView = view.findViewById(R.id.imgv2_5_applepiece3)
@@ -78,7 +76,11 @@ class Fragment2_5_minijuego : Fragment(), DbHandler.QueryResponseDone {
         return view
     }
 
-
+    /**
+     * Recogemos del shared preferences en que minijuego estamos y depende de cual sea muestra una
+     * info de ayuda u otra
+     *
+     */
     fun showDialogInfo(){
 
         val dialog = Dialog(requireContext())
@@ -114,6 +116,11 @@ class Fragment2_5_minijuego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
+    /**
+     * Ponemos una animacion a la manzana que hemos clickado, si es menos de 5 pulsaciones animacion de zoom, sino desaparece
+     *
+     * @param manzana manzana que hemos clickado
+     */
     fun machacar(manzana: ImageView) {
 
         println(manzana.id)
@@ -138,6 +145,10 @@ class Fragment2_5_minijuego : Fragment(), DbHandler.QueryResponseDone {
 
     }
 
+    /**
+     * Checkeamos si hemos terminado el juego o no
+     *
+     */
     fun checkProgress() {
         println("check" + acierto)
         if (acierto == 5) {
@@ -147,6 +158,10 @@ class Fragment2_5_minijuego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
+    /**
+     * Animacion de cierre del minijuego, generamos un cartel con un texto y dos botones
+     *
+     */
     fun starAnimationfun(){
 
         //Diseñar cartel madera
@@ -174,12 +189,23 @@ class Fragment2_5_minijuego : Fragment(), DbHandler.QueryResponseDone {
         }
 
     }
+
+    /**
+     * Animacion de zoom
+     *
+     * @param manzana manzana que hemos clickado
+     */
     fun zoom(manzana: ImageView) {
         println("ZOOM")
         val zoom = AnimationUtils.loadAnimation(context, R.anim.zoom)
         manzana.startAnimation(zoom)
     }
 
+    /**
+     * Animacion cuando desaparece
+     *
+     * @param manzana manzana que hemos clickado
+     */
     fun disapear(manzana: ImageView) {
         manzana.setOnClickListener() {}
         println("DISAPEAR")
@@ -192,6 +218,11 @@ class Fragment2_5_minijuego : Fragment(), DbHandler.QueryResponseDone {
 
     }
 
+    /**
+     * Funcion que cambia la imagen del baso depende de como de lleno este
+     *
+     * @param manzana manzana que hemos clickado
+     */
     fun changeVaso(manzana: ImageView){
         manzana.setOnClickListener() {}
 

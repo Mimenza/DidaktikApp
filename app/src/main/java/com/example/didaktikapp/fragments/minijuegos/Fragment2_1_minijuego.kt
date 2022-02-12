@@ -34,7 +34,6 @@ class Fragment2_1_minijuego : Fragment(), DbHandler.QueryResponseDone {
     private lateinit var btninfominijuego: ImageButton
 
 
-
     var manzanaList: MutableList<DragnDropImage>? = mutableListOf()
     val duracionJuego: Int = 60 // Duracion en segundos
     val intervaloGeneracionManzanas = 3 //Duracion en segundos
@@ -70,7 +69,6 @@ class Fragment2_1_minijuego : Fragment(), DbHandler.QueryResponseDone {
                 }
         }
 
-
         btninfominijuego.setOnClickListener(){
             showDialogInfo()
         }
@@ -80,6 +78,11 @@ class Fragment2_1_minijuego : Fragment(), DbHandler.QueryResponseDone {
         return view
     }
 
+    /**
+     * Recogemos del shared preferences en que minijuego estamos y depende de cual sea muestra una
+     * info de ayuda u otra
+     *
+     */
     fun showDialogInfo(){
 
         val dialog = Dialog(requireContext())
@@ -115,11 +118,19 @@ class Fragment2_1_minijuego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
-
+    /**
+     * Inicia el minijuego llamando a una funcion
+     *
+     */
     fun iniciarJuegoRecogerManzanas() {
         startTimeCounter()
     }
 
+    /**
+     * Funcion que genera manzanas de manera aleatoria en el view, las manzanzas se van añadiendo
+     * a una mutable list, despues se les añade un setontouch listener
+     *
+     */
     fun generarManzana() {
         var imgManzanaGenerada: ImageView = ImageView(requireContext())
         //newView = ImageView(requireContext())
@@ -148,13 +159,11 @@ class Fragment2_1_minijuego : Fragment(), DbHandler.QueryResponseDone {
 
         imgManzanaGenerada.setOnTouchListener(listener)
 
-        //OPTIONAL TO DO
-        //val newAnimation: AnimatorSet = AnimatorSet()
-        //newAnimation.stop
 
     }
 
     @SuppressLint("ClickableViewAccessibility")
+
     var listener = View.OnTouchListener { viewElement, motionEvent ->
         var itemInList: DragnDropImage? = findItemByOrigen(viewElement)
         if (itemInList != null) {
@@ -197,6 +206,12 @@ class Fragment2_1_minijuego : Fragment(), DbHandler.QueryResponseDone {
     }
 
     @SuppressLint("SetTextI18n")
+            /**
+             * Comprobamos si hemos dejado la manzana en el cesto o no
+             *
+             * @param item   manzana que estamos arrastrando en el momento
+             * @param objetivoInsertado destino de la manzana que estamos arrastrando
+             */
     private fun comprobarInsercionManzana(item: DragnDropImage, objetivoInsertado: ImageView) {
         //item.acertado = true
         if (item.objetivo == objetivoInsertado) {
@@ -206,7 +221,11 @@ class Fragment2_1_minijuego : Fragment(), DbHandler.QueryResponseDone {
         comprobarJuegoFinalizado()
     }
 
-    private fun comprobarJuegoFinalizado() {
+    /**
+     * Comprobamos si hemos terminado de meter todas las manzanas
+     *
+     */
+     private fun comprobarJuegoFinalizado() {
         if (aciertosActuales >= 10) {
             DbHandler.userAumentarPuntuacion(5)
             DbHandler().requestDbUserUpdate(this)
@@ -221,6 +240,10 @@ class Fragment2_1_minijuego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
+    /**
+     * Animacion de cierre del minijuego, generamos un cartel con un texto y dos botones
+     *
+     */
     private fun starAnimationfun(){
         //Diseñar cartel madera
         btnsiguiente.visibility = View.VISIBLE
@@ -246,6 +269,12 @@ class Fragment2_1_minijuego : Fragment(), DbHandler.QueryResponseDone {
 
     }
 
+    /**
+     * TODO
+     *
+     * @param view
+     * @return
+     */
     private fun findItemByOrigen(view: View): DragnDropImage? {
         for (item in manzanaList!!) {
             if (item.origen == view) {
@@ -255,13 +284,20 @@ class Fragment2_1_minijuego : Fragment(), DbHandler.QueryResponseDone {
         return null
     }
 
+    /**
+     * Cuando hemos dejado la manzana el el cesto no la podemos arrastrar mas
+     *
+     */
     private fun removeManzanasListener() {
         for (item in manzanaList!!) {
             item.origen.setOnTouchListener(null)
         }
     }
 
-    //fun startTimeCounter(view: View, timeInSeconds: Int) {
+    /**
+     * Generamos manzanas cada X tiempo siempre que no se hayan generado ya 10 manzanas
+     *
+     */
     fun startTimeCounter() {
         object: CountDownTimer((duracionJuego*1000).toLong(), (intervaloGeneracionManzanas*350).toLong()) {
             override fun onTick(millisUntilFinished: Long) {

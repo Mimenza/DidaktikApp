@@ -21,13 +21,7 @@ import com.example.didaktikapp.activities.DbHandler
 
 
 class Fragment2_4_minijuego : Fragment(), DbHandler.QueryResponseDone {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
     private var acierto: Int = 1
-
-
-
     private lateinit var manzana1: ImageView
     private lateinit var manzana2: ImageView
     private lateinit var manzana3: ImageView
@@ -53,14 +47,12 @@ class Fragment2_4_minijuego : Fragment(), DbHandler.QueryResponseDone {
     var manzana3cortada:Boolean = false
     var manzana4cortada:Boolean = false
     var manzana5cortada:Boolean = false
+
     private lateinit var btninfominijuego: ImageButton
     private var lastX:Float = 0F
     private var lastY:Float = 0F
     private val customLines = arrayListOf<CustomLine>()
     private val customStrokes = arrayListOf<CustomLine>()
-
-
-
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
@@ -70,8 +62,6 @@ class Fragment2_4_minijuego : Fragment(), DbHandler.QueryResponseDone {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment2_4_minijuego, container, false)
         layout = view.findViewById(R.id.cl2_4minijuego)
-
-
 
         //manzanas
         manzana1 = view.findViewById(R.id.manzana1_minijuego4)
@@ -96,7 +86,6 @@ class Fragment2_4_minijuego : Fragment(), DbHandler.QueryResponseDone {
         btninfominijuego.setOnClickListener(){
             showDialogInfo()
         }
-
 
         view.setOnTouchListener(handleTouch)
         return view
@@ -304,7 +293,11 @@ class Fragment2_4_minijuego : Fragment(), DbHandler.QueryResponseDone {
         true
     }
 
-
+    /**
+     * Recogemos del shared preferences en que minijuego estamos y depende de cual sea muestra una
+     * info de ayuda u otra
+     *
+     */
     fun showDialogInfo(){
 
         val dialog = Dialog(requireContext())
@@ -340,6 +333,10 @@ class Fragment2_4_minijuego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
+    /**
+     * Miramos si hemos cortado todas las manzanas par saber si hemos teminado el juego o no
+     *
+     */
     fun checkProgress() {
         //si se han cortado todas las manzanas aparece el boton
         if (acierto== 5) {
@@ -354,6 +351,10 @@ class Fragment2_4_minijuego : Fragment(), DbHandler.QueryResponseDone {
 
     }
 
+    /**
+     * Animacion de cierre del minijuego, generamos un cartel con un texto y dos botones
+     *
+     */
     fun starAnimationfun(){
 
         //Diseñar cartel madera
@@ -382,6 +383,11 @@ class Fragment2_4_minijuego : Fragment(), DbHandler.QueryResponseDone {
 
     }
 
+    /**
+     * Cuando hemos cortado una manzana se ejecuta esta funcion, generamos una foto random y animacion
+     *
+     * @param manzana manzana que hemos cortado
+     */
     fun cortarManzana(manzana: ImageView) {
         //reseteamos las variables para la siguiente manzana
         entra = false

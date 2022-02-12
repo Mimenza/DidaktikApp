@@ -79,6 +79,11 @@ class Fragment2_7_minijuego : Fragment() {
         return view
     }
 
+    /**
+     * escribimos el texto de felicitaciones
+     *
+     * @param view
+     */
     private fun typewriter(view: View) {
         val typeWriterView = view.findViewById(R.id.txtv2_7felicitacionesminijuego7) as TypeWriterView
         typeWriterView.setWithMusic(false)
@@ -86,6 +91,11 @@ class Fragment2_7_minijuego : Fragment() {
         typeWriterView.setDelay(70)
     }
 
+    /**
+     * Animacion de cierre del minijuego, generamos un cartel con un texto y dos botones
+     *
+     * @param view
+     */
     private fun starAnimationfun(view: View) {
         // animacion fondo gris
         val txt_animacion = view.findViewById(R.id.txtv2_7fondogris2) as TextView
@@ -108,6 +118,11 @@ class Fragment2_7_minijuego : Fragment() {
         }, 2000)
     }
 
+    /**
+     * Animacion de hablar de upelio
+     *
+     * @param view
+     */
     private fun talkAnimationfun(view: View) {
         val upelio = view.findViewById(R.id.imgv2_7_upelio4) as ImageView
         upelio.setBackgroundResource(R.drawable.animacion_manzana)
@@ -115,6 +130,11 @@ class Fragment2_7_minijuego : Fragment() {
         ani.start()
     }
 
+    /**
+     * Animacion de salida de la manzana
+     *
+     * @param view
+     */
     private fun exitAnimationfun(view: View) {
         //si la intro se ha acabado
 

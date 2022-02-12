@@ -29,8 +29,6 @@ class Fragment2_6_minijuego : Fragment(), DbHandler.QueryResponseDone {
     private lateinit var btnsiguiente:Button
     private lateinit var btnrepetir:Button
     private lateinit var btninfominijuego: ImageButton
-    private var tiempoCompletarComprobacion = 1000
-
 
     private var manzanaList: MutableList<DragnDropImageLevel> = mutableListOf()
 
@@ -73,10 +71,13 @@ class Fragment2_6_minijuego : Fragment(), DbHandler.QueryResponseDone {
 
         return view
     }
-
-    private var timerActive: Boolean? = null
     private var updateHandler: Handler? = null
 
+    /**
+     * TODO
+     *
+     * @param pItem
+     */
     private fun itemActionCallback(pItem: DragnDropImageLevel) {
         //pItem.acertado = true
         //pItem.origen.setImageResource(R.drawable.vaso1)
@@ -184,32 +185,17 @@ class Fragment2_6_minijuego : Fragment(), DbHandler.QueryResponseDone {
                         updateHandler?.removeCallbacksAndMessages(null)
                         updateHandler = null
                     }
-                    /*
-                    if (itemInList.acertado) {
-                        viewElement.x = motionEvent.rawX - viewElement.width / 2
-                        viewElement.y = motionEvent.rawY - viewElement.height / 2
-                        var objetivoEncontrado: View = itemInList!!.objetivo
-                        val location = IntArray(2)
-                        objetivoEncontrado.getLocationOnScreen(location);
-                        var posX = location[0]
-                        var posY = location[1]
-                        var sizeX = objetivoEncontrado.width
-                        var sizeY = objetivoEncontrado.height
-                        if ((viewElement.x + viewElement.width / 2) >= posX && (viewElement.y + viewElement.height / 2) >= posY && (viewElement.x + viewElement.width / 2) <= posX + sizeX && (viewElement.y + viewElement.height / 2) <= posY + sizeY) {
-                            viewElement.x = posX.toFloat()
-                            viewElement.y = posY.toFloat()
-                            viewElement.setOnTouchListener(null)
-                        }
-                    }
-                    cleanManzanaTimer = null
 
-                     */
                 }
             }
         //}
         true
     }
 
+    /**
+     * Generamos en la pantalla el vaso, la botella, el corcho y les añadimos un setontouch listener
+     *
+     */
     private fun generarVasonTarget() {
         // Generamos el vaso
         var imgVasoLleno: ImageView = generateDinamycImageElement(R.drawable.vaso6, (globalView.width - 800), (globalView.height/2+150), 250,250)
@@ -224,7 +210,17 @@ class Fragment2_6_minijuego : Fragment(), DbHandler.QueryResponseDone {
         imgVasoLleno.setOnTouchListener(listener)
     }
 
-    //Metodo para generar Una imagen dentro del layout de manera dinamica.
+
+    /**
+     * Metodo para generar Una imagen dentro del layout de manera dinamica.
+     *
+     * @param resourceInt
+     * @param posX  posicion x del elemento
+     * @param posY  posicion y del elemento
+     * @param sizeX anchura x del elemento
+     * @param sizeY anchura y del elemento
+     * @return  elemento
+     */
     private fun generateDinamycImageElement(resourceInt: Int, posX: Int, posY: Int, sizeX: Int, sizeY: Int): ImageView  {
         val constraintLayoutFound = globalView.findViewById<ConstraintLayout>(R.id.mainlayout_Minijuego6)
         var imgElement: ImageView = ImageView(requireContext())
@@ -237,12 +233,20 @@ class Fragment2_6_minijuego : Fragment(), DbHandler.QueryResponseDone {
         return imgElement
     }
 
+    /**
+     * Mostramos en pantalla cuantos vasos hemos llenado y tenemos restantos
+     *
+     */
     private fun vasoVaciado() {
         val txtVasosVacios: TextView = globalView.findViewById(R.id.minijuego6_txtvasosvacios)
 
         txtVasosVacios.text = "${(txtVasosVacios.text.trim()[0]-1)}" + "/5"
     }
 
+    /**
+     * Mostramos en pantalla cuantas botellas hemos llenado y si no hemos llegado al maximo generamos una nueva
+     *
+     */
     private fun botellaLlena() {
         val txtBotellasLlenas: TextView = globalView.findViewById(R.id.minijuego6_txtbotellasllenas)
         txtBotellasLlenas.text = "${txtBotellasLlenas.text.trim()[0]+1}" + "/5"
@@ -251,6 +255,10 @@ class Fragment2_6_minijuego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
+    /**
+     * Miramos si hemos terminado el juego o no
+     *
+     */
     private fun checkProgress(){
 
         if (acierto==5){
@@ -260,7 +268,11 @@ class Fragment2_6_minijuego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
-
+    /**
+     * Recogemos del shared preferences en que minijuego estamos y depende de cual sea muestra una
+     * info de ayuda u otra
+     *
+     */
     fun showDialogInfo(){
 
         val dialog = Dialog(requireContext())
@@ -296,6 +308,10 @@ class Fragment2_6_minijuego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
+    /**
+     * Animacion de cierre del minijuego, generamos un cartel con un texto y dos botones
+     *
+     */
     fun starAnimationfun(){
 
         //Diseñar cartel madera
@@ -323,7 +339,12 @@ class Fragment2_6_minijuego : Fragment(), DbHandler.QueryResponseDone {
 
     }
 
-
+    /**
+     * TODO
+     *
+     * @param view
+     * @return
+     */
     private fun findItemByOrigen(view: View): DragnDropImageLevel? {
         for (item in manzanaList!!) {
             if (item.origen == view) {
@@ -333,6 +354,12 @@ class Fragment2_6_minijuego : Fragment(), DbHandler.QueryResponseDone {
         return null
     }
 
+    /**
+     * TODO
+     *
+     * @param view
+     * @return
+     */
     private fun findItemByCorcho(view: View): DragnDropImageLevel? {
         for (item in manzanaList!!) {
             if (item.corcho == view) {

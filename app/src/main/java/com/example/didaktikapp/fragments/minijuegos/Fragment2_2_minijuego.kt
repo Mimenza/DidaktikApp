@@ -21,9 +21,7 @@ import com.example.didaktikapp.activities.Utils
 
 
 class Fragment2_2_minijuego : Fragment(), DbHandler.QueryResponseDone {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
     private lateinit var vistaAnimada:TranslateAnimation
     private var acierto:Int = 0
     private lateinit var txtcartel: TextView
@@ -88,7 +86,11 @@ class Fragment2_2_minijuego : Fragment(), DbHandler.QueryResponseDone {
 
         return view
     }
-
+    /**
+     * Recogemos del shared preferences en que minijuego estamos y depende de cual sea muestra una
+     * info de ayuda u otra
+     *
+     */
     fun showDialogInfo(){
 
         val dialog = Dialog(requireContext())
@@ -124,6 +126,12 @@ class Fragment2_2_minijuego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
+    /**
+     * Una vez hemos clickado en una manzana, esta desaparece,
+     * despues miramos si hemos compleado el juego o todavia quedan manzanas por seleccionar
+     *
+     * @param manzana manzana en la que hemos clickado
+     */
     fun desaparecer(manzana:ImageView){
 
         val aniFade = AnimationUtils.loadAnimation(context, R.anim.disapear)
@@ -138,10 +146,18 @@ class Fragment2_2_minijuego : Fragment(), DbHandler.QueryResponseDone {
 
     }
 
+    /**
+     * Si hemos cometido un error el movil vibra
+     *
+     */
     private fun vibrar(){
         Utils.vibrarTelefono(requireContext())
     }
 
+    /**
+     * Miramos si hemos clickado en todas las manzanas o todabia quedan manzanas
+     *
+     */
     fun checkProgress(){
 
         if(acierto>=5){
@@ -151,6 +167,11 @@ class Fragment2_2_minijuego : Fragment(), DbHandler.QueryResponseDone {
 
         }
     }
+
+    /**
+     * Animacion de cierre del minijuego, generamos un cartel con un texto y dos botones
+     *
+     */
     fun starAnimationfun() {
 
         //Diseñar cartel madera

@@ -17,12 +17,6 @@ import com.example.didaktikapp.activities.Activity5_Mapa
 import com.example.didaktikapp.activities.Activity6_Site
 import com.example.didaktikapp.activities.DbHandler
 
-
-lateinit var agua:ImageView
-
-var manzanaList: MutableList<DragnDropImage>? = mutableListOf()
-
-
 class Fragment2_3_minijuego : Fragment(), DbHandler.QueryResponseDone {
 
     private var aciertosActuales: Int = 0
@@ -83,7 +77,11 @@ class Fragment2_3_minijuego : Fragment(), DbHandler.QueryResponseDone {
         return view
     }
 
-
+    /**
+     * Recogemos del shared preferences en que minijuego estamos y depende de cual sea muestra una
+     * info de ayuda u otra
+     *
+     */
     fun showDialogInfo(){
 
         val dialog = Dialog(requireContext())
@@ -119,6 +117,11 @@ class Fragment2_3_minijuego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
+    /**
+     * Preparamos la suciedad que esta en la manzana, añadiendolas a una mutable list y
+     * un setontouch listener para poder arrastrarla por la pantalla
+     *
+     */
     fun prepairDirts() {
         aciertosActuales = 0
         for (vItemList in listaImagenes) {
@@ -181,12 +184,11 @@ class Fragment2_3_minijuego : Fragment(), DbHandler.QueryResponseDone {
         true
     }
 
-    /*private fun manzanaLimpia() {
-
-        val txtPuntuacion: TextView = globalView.findViewById(R.id.manzanasAciertos2)
-        txtPuntuacion.text = aciertosActuales.toString()
-    }*/
-
+    /**
+     * Miramos si hemos recogido toda la basura o no,
+     * si hemos terminado llamamos a la funcion del fin
+     *
+     */
     private fun checkJuegoFinalizado() {
         if (aciertosActuales >= 5) {
             DbHandler.userAumentarPuntuacion(5)
@@ -194,6 +196,11 @@ class Fragment2_3_minijuego : Fragment(), DbHandler.QueryResponseDone {
             starAnimationfun()
         }
     }
+
+    /**
+     * Animacion de cierre del minijuego, generamos un cartel con un texto y dos botones
+     *
+     */
     fun starAnimationfun(){
 
         //Diseñar cartel madera
@@ -221,6 +228,13 @@ class Fragment2_3_minijuego : Fragment(), DbHandler.QueryResponseDone {
         }
 
     }
+
+    /**
+     * TODO
+     *
+     * @param view
+     * @return
+     */
     private fun findItemByOrigen(view: View): DragnDropImage? {
         for (item in manzanaList!!) {
             if (item.origen == view) {

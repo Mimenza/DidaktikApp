@@ -8,7 +8,6 @@ import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
 import android.view.*
 import android.view.animation.AnimationUtils
 import android.view.animation.TranslateAnimation
@@ -19,25 +18,9 @@ import androidx.navigation.Navigation
 import com.example.didaktikapp.R
 import com.example.didaktikapp.activities.Activity5_Mapa
 import com.example.didaktikapp.activities.DbHandler
-import kotlinx.android.synthetic.main.activity1_principal.*
-import kotlinx.android.synthetic.main.fragment1_1_juego.*
-import kotlinx.android.synthetic.main.fragment1_4_juego.*
 import kotlinx.android.synthetic.main.fragment1_6_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-private lateinit var vistaAnimada: TranslateAnimation
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Fragment1_juego.newInstance] factory method to
- * create an instance of this fragment.
- */
 
 class Fragment1_6_juego : Fragment(), DbHandler.QueryResponseDone {
     private val thisJuegoId = 6
@@ -54,7 +37,6 @@ class Fragment1_6_juego : Fragment(), DbHandler.QueryResponseDone {
     private var audioState: Boolean = false
     private var testAudioTemp: MediaPlayer? = null
     private lateinit var  mapa: ImageButton
-
     private var introFinished: Boolean = false
     private var doubleTabHandler: Handler? = null
     private var activarBtnsHanler: Handler? = null
@@ -62,6 +44,7 @@ class Fragment1_6_juego : Fragment(), DbHandler.QueryResponseDone {
     private var bertsoHandler: Handler? = null
     private var talkAnimationHandler: Handler? = null
     private var fondoAnimationHandler: Handler? = null
+    private lateinit var vistaAnimada: TranslateAnimation
 
     var respuestas = listOf(
         "sagardoaren",
@@ -161,10 +144,6 @@ class Fragment1_6_juego : Fragment(), DbHandler.QueryResponseDone {
                 .navigate(R.id.action_fragment1_6_juego_to_fragment2_6_minijuego)
         }
 
-//        buttonSonido.setOnClickListener() {
-//           animacionVolumen(view)
-//        }
-
         btnrepertir.setOnClickListener(){
             Navigation.findNavController(view)
                 .navigate(R.id.action_fragment1_6_juego_self)
@@ -188,6 +167,10 @@ class Fragment1_6_juego : Fragment(), DbHandler.QueryResponseDone {
         return view
     }
 
+    /**
+     * Recogemos del shared preferences en que minijuego estamos y depende de cual sea muestra una
+     * info de ayuda u otra
+     */
     fun showDialogInfo(){
 
         val dialog = Dialog(requireContext())
@@ -222,6 +205,10 @@ class Fragment1_6_juego : Fragment(), DbHandler.QueryResponseDone {
             textInfo.setText(texto)
         }
     }
+
+    /**
+     * Prepara los spinners del bertso
+     */
     private fun prepararSpinners() {
         val spinner1Element: Spinner = globalView.findViewById(R.id.juego6_opcion1)
         val spinner1Opts = arrayOf("__________▼","sagardoaren", "ardiaren", "ibaiaren", "basoaren")
@@ -345,6 +332,9 @@ class Fragment1_6_juego : Fragment(), DbHandler.QueryResponseDone {
         spinner6Element.adapter = spinnerAdapter6
     }
 
+    /**
+     * Comprueba las respuestas del bertso
+     */
     private fun comprobarRespuestas() {
         val spinner1Element: Spinner = globalView.findViewById(R.id.juego6_opcion1)
         val spinner2Element: Spinner = globalView.findViewById(R.id.juego6_opcion2)
@@ -408,6 +398,9 @@ class Fragment1_6_juego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
+    /**
+    * Hace los controles del audio visibles
+    */
     private fun makeBertsoControlVisible() {
         val layoutBertso: LinearLayout = globalView.findViewById(R.id.juego6_layoutBertso)
         val comprobarbtn: Button = globalView.findViewById(R.id.btn1_6_comprobar)
@@ -419,8 +412,10 @@ class Fragment1_6_juego : Fragment(), DbHandler.QueryResponseDone {
 
     }
 
+    /**
+     * Hace la animacion del icono del volumen mientras se reproduce el audio del bertso
+     */
     private fun animacionVolumen(view: View) {
-        //Funcion para la animacion del icono del volumen mientras se reproduce el audio del bertso
         //Recogemos el icono del volumen y le añadimos la animacion
         val volumen: TextView = view.findViewById(R.id.txtv1_6_volumen)
         volumen.isVisible=true
@@ -453,9 +448,10 @@ class Fragment1_6_juego : Fragment(), DbHandler.QueryResponseDone {
 
     }
 
+    /**
+     * Reproduce el primer audio (bertso)
+     */
     private fun startAudio(view: View) {
-        //Funcion que reproduce el primer audio (bertso)
-
         //escondemos el boton de reproducir el audio mientras el audio ya se esta reproducciendo
         val reproducirAudio: ImageButton = view.findViewById(R.id.btnf1_6_sonido)
         reproducirAudio.isVisible = false
@@ -526,6 +522,9 @@ class Fragment1_6_juego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
+    /**
+     * Reproduce el segundo audio(descripcion del juego)
+     */
     private fun startAudio2(view: View) {
         val introFondo: TextView = view.findViewById(R.id.imgv1_6_fondo)
         introFondo.setOnClickListener(null)
@@ -541,7 +540,6 @@ class Fragment1_6_juego : Fragment(), DbHandler.QueryResponseDone {
                 endIntroManually()
             }
         }
-        //Funcion para el segundo audio(descripcion del juego)
         //disable set on click listener
 
 
@@ -575,6 +573,11 @@ class Fragment1_6_juego : Fragment(), DbHandler.QueryResponseDone {
 
     }
 
+    /**
+     * Hace que el texto del juego se escriba letra por letra
+     *
+     * @param view la vista en la que se encuentra
+     */
     private fun typewriter(view: View) {
 
         val typeWriterView = view.findViewById(R.id.txtv1_6_explicacion) as TypeWriterView
@@ -583,6 +586,11 @@ class Fragment1_6_juego : Fragment(), DbHandler.QueryResponseDone {
         typeWriterView.setDelay(70)
     }
 
+    /**
+     * Muestra la manzana de la animacion con una transicion
+     *
+     * @param view la vista en la que se encuentra
+     */
     private fun starAnimationfun(view: View) {
         //Animacion entrada upelio
         vistaAnimada = TranslateAnimation(-1000f, 0f, 0f, 0f)
@@ -602,6 +610,11 @@ class Fragment1_6_juego : Fragment(), DbHandler.QueryResponseDone {
 
     }
 
+    /**
+     * Esconde la manzana de la animacion con una transicion
+     *
+     * @param view la vista en la que se encuentra
+     */
     private fun exitAnimationfun(view: View) {
         if (introFinished) {
             return
@@ -641,6 +654,11 @@ class Fragment1_6_juego : Fragment(), DbHandler.QueryResponseDone {
         }, 2000)
     }
 
+    /**
+     * Anima la manzana como que habla
+     *
+     * @param view la vista en la que se encuentra
+     */
     private fun talkAnimationfun(view: View) {
         val upelio = view.findViewById(R.id.imgv1_6_upelio2) as ImageView
         upelio.setBackgroundResource(R.drawable.animacion_manzana)
@@ -648,6 +666,9 @@ class Fragment1_6_juego : Fragment(), DbHandler.QueryResponseDone {
         ani.start()
     }
 
+    /**
+     * Añade funcionalidades al los botones (mapa/info)
+     */
     private fun activateBtn() {
         mapa.setOnClickListener {
             if (audio?.isPlaying == false){
@@ -663,7 +684,10 @@ class Fragment1_6_juego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
-    fun endIntroManually() {
+    /**
+     * Función para terminar la intro manualmente
+     */
+    private fun endIntroManually() {
         if (introFinished) {
             return
         }
@@ -687,6 +711,9 @@ class Fragment1_6_juego : Fragment(), DbHandler.QueryResponseDone {
         activateBtn()
     }
 
+    /**
+     * Al destuir el fragment termina con todos los elementos que puedan dar errores
+     */
     override fun onDestroy() {
         doubleTabHandler?.removeCallbacksAndMessages(null)
         activarBtnsHanler?.removeCallbacksAndMessages(null)
@@ -706,12 +733,18 @@ class Fragment1_6_juego : Fragment(), DbHandler.QueryResponseDone {
         super.onDestroy()
     }
 
+    /**
+     * Al pausar el fragment pausa el audio para que no de error
+     */
     override fun onPause() {
         audio?.pause()
         testAudioTemp?.pause()
         super.onPause()
     }
 
+    /**
+     * Al reanudar el fragment resume el audio
+     */
     override fun onResume() {
         super.onResume()
         audio?.start()

@@ -3,7 +3,6 @@ package com.example.didaktikapp.fragments.juegos
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
@@ -23,53 +22,36 @@ import kotlinx.android.synthetic.main.fragment1_5_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import android.graphics.ColorMatrixColorFilter
-
 import android.graphics.ColorMatrix
 import android.view.*
 import com.example.didaktikapp.Model.DragnDropImage
-import com.example.didaktikapp.activities.Activity5_Mapa
-import com.example.didaktikapp.activities.Activity6_Site
 import com.example.didaktikapp.activities.DbHandler
-
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
 class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
     private val thisJuegoId = 5
-    // TODO: Rename and change types of parameters
+
     private lateinit var btnInfoJuego: ImageButton
     private lateinit var button: Button
     private lateinit var myLayout: View
     private lateinit var video: VideoView
-    private var audio: MediaPlayer? = null
     private lateinit var globalView: View
     private lateinit var vistaanimada: TranslateAnimation
     private lateinit var  mapa: ImageButton
-    //After using View Listener, we can get the full width and height
-    var totalWidth: Int = 0
-    var totalHeight: Int = 0
-
-    //We store the resources ID in a list to later create the element and apply then an event
-    val listaImagenes = listOf(
+    private var audio: MediaPlayer? = null
+    private var totalWidth: Int = 0
+    private var totalHeight: Int = 0
+    private var opX: Float = 0F
+    private var opY: Float = 0F
+    private var manzanaList: MutableList<DragnDropImage>? = mutableListOf()
+    private val listaImagenes = listOf(
         listOf(R.id.img_gorro_move,R.id.img_gorro_destino),
         listOf(R.id.img_ropa_move,R.id.img_ropa_destino),
         listOf(R.id.juego5_zp_manodcha_move,R.id.juego5_zp_manodcha),
         listOf(R.id.ijuego5_manoizq_move,R.id.juego5_manoizq_destino),
         listOf(R.id.img_botasizq_move,R.id.img_botasizq_destino),
         listOf(R.id.img_botasdcha_move,R.id.img_botasdcha_destino),
-        /*
-        // OLD LIST (DONT REMOVE)
-        listOf(R.id.imgOrigenCamisa,R.id.imgObjetivoCamisa),
-        listOf(R.id.imgOrigenCinturon,R.id.imgObjetivoCinturon),
-        listOf(R.id.imgOrigenGorro,R.id.imgObjetivoGorro),
-        listOf(R.id.imgOrigenManzana,R.id.imgObjetivoManzana),
-        listOf(R.id.imgOrigenZapatos,R.id.imgObjetivoZapatos)
-         */
     )
 
-    var manzanaList: MutableList<DragnDropImage>? = mutableListOf()
-    //private lateinit var objetivo: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -122,8 +104,12 @@ class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
 
         return view
     }
-    fun showDialogInfo(){
 
+    /**
+     * Recogemos del shared preferences en que minijuego estamos y depende de cual sea muestra una
+     * info de ayuda u otra
+     */
+    fun showDialogInfo(){
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.info_dialog)
@@ -132,7 +118,6 @@ class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
-
 
         val textInfo = dialog.findViewById<View>(R.id.txtv_infominijuego) as TextView
         var texto =""
@@ -157,6 +142,9 @@ class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
+    /**
+     * Prepara la imegenes de la vestimenta
+     */
     private fun prepairVestimentaElements() {
         for (vItemList in listaImagenes) {
             var vItemOrigen: ImageView = globalView.findViewById(vItemList[0])
@@ -173,9 +161,10 @@ class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
+    /**
+     * Reproduce el audio del tutorial del juego
+     */
     private fun audioTutorial(view: View){
-
-        //Audio juego 5
         runBlocking() {
             launch {
                 audio = MediaPlayer.create(context, R.raw.juego5audiotutorial)
@@ -183,14 +172,15 @@ class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
 
             }
 
-
             //animacion para la descripcion
             starAnimationfun(view)
         }
     }
 
-    private fun videoTutorial(view: View)
-    {
+    /**
+     * Reproduce el video del tutorial del juego
+     */
+    private fun videoTutorial(view: View) {
         //----------------VIDEO on start on destroy---------------------------
         video= view.findViewById(R.id.videoViewjuego5)
         video.isVisible=false
@@ -210,35 +200,11 @@ class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
 
     }
 
-    /*
-    //Old Way to stop it
-    override fun onDestroy() {
-        video.stopPlayback()
-
-        audio?.stop()
-
-        super.onDestroy()
-    }
-
-    override fun onStop() {
-        video.stopPlayback()
-        audio?.stop()
-        super.onStop()
-    }
-
-    override fun onPause() {
-
-        audio?.pause()
-        super.onPause()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        audio?.start()
-    }
+    /**
+     * Hace que el texto del juego se escriba letra por letra
+     *
+     * @param view la vista en la que se encuentra
      */
-
-
     private fun typewriter(view: View) {
         val typeWriterView = view.findViewById(R.id.txtv1_5tutorialjuego5) as TypeWriterView
         typeWriterView.setWithMusic(false)
@@ -246,6 +212,11 @@ class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
         typeWriterView.setDelay(70)
     }
 
+    /**
+     * Muestra la manzana de la animacion con una transicion
+     *
+     * @param view la vista en la que se encuentra
+     */
     private fun starAnimationfun(view: View) {
         // animacion fondo gris
         val txtAnimacion = view.findViewById(R.id.txtv1_5tutorialjuego5) as TextView
@@ -258,8 +229,6 @@ class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
         val upelio = view.findViewById(R.id.imgv1_5_upelio) as ImageView
         upelio.startAnimation(vistaanimada)
 
-
-
         //llamamos a la animacion para animar a upelio
         Handler(Looper.getMainLooper()).postDelayed({
             if (getView() != null) {
@@ -270,6 +239,11 @@ class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
 
     }
 
+    /**
+     * Anima la manzana como que habla
+     *
+     * @param view la vista en la que se encuentra
+     */
     private fun talkAnimationfun(view: View) {
         val upelio = view.findViewById(R.id.imgv1_5_upelio2) as ImageView
         upelio.setBackgroundResource(R.drawable.animacion_manzana)
@@ -278,6 +252,9 @@ class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
 
     }
 
+    /**
+     * Ocultamos todos los elementos mientra se ve el video
+     */
     private fun verVideo(){
         //dejamos que se pueda ver el video en landscape
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
@@ -300,9 +277,13 @@ class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
 
     }
 
-
+    /**
+     * Esconde la manzana de la animacion con una transicion
+     *
+     * @param view la vista en la que se encuentra
+     */
     private fun exitAnimationfun() {
-//volvemos a ponerlo en portrait
+        //volvemos a ponerlo en portrait
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         //Ocultamos las acciones
@@ -321,9 +302,9 @@ class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
 
     }
 
-    var opX: Float = 0F
-    var opY: Float = 0F
-
+    /**
+     * Añade la opcion de arrastar la imagenes
+     */
     @SuppressLint("ClickableViewAccessibility")
     var listener = View.OnTouchListener { viewElement, motionEvent ->
         if(!videoViewjuego5.isVisible && audio?.isPlaying == false){
@@ -345,18 +326,14 @@ class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
                             viewElement.x = motionEvent.rawX - viewElement.width/2
                             viewElement.y = motionEvent.rawY - viewElement.height/2
                             var objetivoEncontrado: View = itemInList!!.objetivo
-                            var posX = objetivoEncontrado.getLeft()
-                            var posY = objetivoEncontrado.getTop()
+                            var posX = objetivoEncontrado.left
+                            var posY = objetivoEncontrado.top
                             var sizeX = objetivoEncontrado.width
                             var sizeY = objetivoEncontrado.height
 
                             if ( (viewElement.x + viewElement.width/2) >= posX && (viewElement.y + viewElement.height/2) >= posY && (viewElement.x + viewElement.width/2) <= posX+sizeX && (viewElement.y + viewElement.height/2) <= posY+sizeY) {
-                                //viewElement.visibility = View.GONE
-                                //viewElement.x = opX
-                                //viewElement.y = opY
                                 viewElement.x = posX.toFloat()
                                 viewElement.y = posY.toFloat()
-                                //Utils.drawLine(globalView, requireContext(),opX,opY,posX.toFloat(),posY.toFloat(),15F, (0..255).random(),(0..255).random(),(0..255).random())
                                 itemInList.acertado = true
                                 sendToTopImagesNotFinished()
                                 viewElement.setOnTouchListener(null)
@@ -380,6 +357,11 @@ class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
         true
     }
 
+    /**
+     * Comprueba si el juego se ha completado
+     *
+     * @return el estado del juego
+     */
     private fun juegoCompletado(): Boolean {
         var finalizado: Boolean = true
         for (item in manzanaList!!) {
@@ -391,6 +373,9 @@ class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
         return finalizado
     }
 
+    /**
+     * Envia las imagenes al primer plano
+     */
     private fun sendToTopImagesNotFinished() {
         for (item in manzanaList!!) {
             if (!item.acertado) {
@@ -399,6 +384,12 @@ class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
+    /**
+     * Busca la view que le pasamos en el array manzanasList
+     *
+     * @param view la vista que tiene que buscar
+     * @return la vista que se encuentra el el array manzanasList
+     */
     private fun findItemByOrigen(view: View): DragnDropImage? {
         for (item in manzanaList!!) {
             if (item.origen == view) {
@@ -408,6 +399,9 @@ class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
         return null
     }
 
+    /**
+     * Añade funcionalidades al los botones (mapa/info)
+     */
     private fun activateBtn() {
         mapa.setOnClickListener {
             if (audio?.isPlaying == false){
@@ -422,11 +416,17 @@ class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
+    /**
+     * Al destuir el fragment termina con todos los elementos que puedan dar errores
+     */
     override fun onDestroy() {
         audio?.stop()
         super.onDestroy()
     }
 
+    /**
+     * Al pausar el fragment pausa el audio para que no de error
+     */
     override fun onPause() {
         //video.stopPlayback()
         if (video != null && video.isPlaying) {
@@ -436,6 +436,9 @@ class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
         super.onPause()
     }
 
+    /**
+     * Al reanudar el fragment resume el audio
+     */
     override fun onResume() {
         if (video != null && !video.isPlaying) {
             video.resume()
@@ -443,8 +446,6 @@ class Fragment1_5_juego : Fragment(), DbHandler.QueryResponseDone {
         super.onResume()
         audio?.start()
     }
-
-
 }
 
 

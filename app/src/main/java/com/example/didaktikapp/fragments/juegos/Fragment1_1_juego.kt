@@ -3,12 +3,10 @@ package com.example.didaktikapp.fragments.juegos
 import com.example.didaktikapp.R
 import `in`.codeshuffle.typewriterview.TypeWriterView
 import android.app.Dialog
-import android.content.Intent
 import android.media.MediaPlayer
 import androidx.fragment.app.Fragment
 import android.os.Handler
 import android.os.Bundle
-import android.os.Looper
 import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
@@ -25,22 +23,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation
 import com.example.didaktikapp.Model.CustomLine
-import com.example.didaktikapp.activities.Activity5_Mapa
-import com.example.didaktikapp.activities.Activity6_Site
 import com.example.didaktikapp.activities.DbHandler
 import com.example.didaktikapp.activities.Utils
 import kotlinx.coroutines.runBlocking
 import kotlinx.android.synthetic.main.fragment1_1_juego.*
 import kotlinx.coroutines.launch
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Fragment1_juego.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Fragment1_1_juego : Fragment(), DbHandler.QueryResponseDone {
     private val thisJuegoId = 1
 
@@ -49,6 +37,13 @@ class Fragment1_1_juego : Fragment(), DbHandler.QueryResponseDone {
     private lateinit var layout: ConstraintLayout
     private lateinit var customLine: CustomLine
     private lateinit var btnInfoJuego: ImageButton
+    private lateinit var img1: ImageView
+    private lateinit var img2: ImageView
+    private lateinit var img3: ImageView
+    private lateinit var txtv1: TextView
+    private lateinit var txtv2: TextView
+    private lateinit var txtv3: TextView
+    private lateinit var  mapa: ImageButton
     private val customLines = arrayListOf<CustomLine>()
     private var introFinished: Boolean = false
     private var doubleTabHandler: Handler? = null
@@ -56,28 +51,17 @@ class Fragment1_1_juego : Fragment(), DbHandler.QueryResponseDone {
     private var exitAnimationHandler: Handler? = null
     private var talkAnimationHandler: Handler? = null
     private var fondoAnimationHandler: Handler? = null
-
     private var audio: MediaPlayer? = null
-
     private var progress: Int = 0
     private var pressedImg: Int = 0
-
     private var point1: Boolean = false
     private var point2: Boolean = false
     private var point3: Boolean = false
-
     private var border1: Boolean = false
     private var border2: Boolean = false
     private var border3: Boolean = false
-
-    private lateinit var img1: ImageView
-    private lateinit var img2: ImageView
-    private lateinit var img3: ImageView
-
-    private lateinit var txtv1: TextView
-    private lateinit var txtv2: TextView
-    private lateinit var txtv3: TextView
-    private lateinit var  mapa: ImageButton
+    private var upelioStatic: ImageView? = null
+    private var upelioTalking: ImageView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -400,8 +384,11 @@ class Fragment1_1_juego : Fragment(), DbHandler.QueryResponseDone {
         return view
     }
 
-    fun showDialogInfo(){
-
+    /**
+     * Recogemos del shared preferences en que minijuego estamos y depende de cual sea muestra una
+     * info de ayuda u otra
+     */
+    private fun showDialogInfo(){
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.info_dialog)
@@ -410,7 +397,6 @@ class Fragment1_1_juego : Fragment(), DbHandler.QueryResponseDone {
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
-
 
         val textInfo = dialog.findViewById<View>(R.id.txtv_infominijuego) as TextView
         var texto =""
@@ -437,6 +423,7 @@ class Fragment1_1_juego : Fragment(), DbHandler.QueryResponseDone {
 
     /**
      * Dibuja una linea entre una ImgView y un TextView
+     *
      * @param img la ImageView donde empieza la linea
      * @param txtv el TextView donde termina la linea
      * @param color el color de la linea
@@ -463,6 +450,7 @@ class Fragment1_1_juego : Fragment(), DbHandler.QueryResponseDone {
 
     /**
      * Hace que el texto del juego se escriba letra por letra
+     *
      * @param view la vista en la que se encuentra
      */
     private fun typewriter(view: View) {
@@ -474,12 +462,9 @@ class Fragment1_1_juego : Fragment(), DbHandler.QueryResponseDone {
 
     /**
      * Muestra la manzana de la animacion con una transicion
+     *
      * @param view la vista en la que se encuentra
      */
-
-    private var upelioStatic: ImageView? = null
-    private var upelioTalking: ImageView? = null
-
     private fun starAnimationfun(view: View) {
         //Animacion fondo gris
         val txtAnimacion = view.findViewById(R.id.txtv1_1fondogris) as TextView
@@ -507,6 +492,7 @@ class Fragment1_1_juego : Fragment(), DbHandler.QueryResponseDone {
 
     /**
      * Esconde la manzana de la animacion con una transicion
+     *
      * @param view la vista en la que se encuentra
      */
     private fun exitAnimationfun(view: View) {
@@ -543,9 +529,9 @@ class Fragment1_1_juego : Fragment(), DbHandler.QueryResponseDone {
 
     /**
      * Anima la manzana como que habla
+     *
      * @param view la vista en la que se encuentra
      */
-
     private fun talkAnimationfun(view: View) {
         upelioTalking = view.findViewById(R.id.imgv1_1_upelio2) as ImageView
         upelioTalking?.setBackgroundResource(R.drawable.animacion_manzana)
@@ -553,7 +539,10 @@ class Fragment1_1_juego : Fragment(), DbHandler.QueryResponseDone {
         ani.start()
     }
 
-     fun endIntroManually() {
+    /**
+     * Función para terminar la intro manualmente
+     */
+    private fun endIntroManually() {
         if (introFinished) {
             return
         }
@@ -576,6 +565,10 @@ class Fragment1_1_juego : Fragment(), DbHandler.QueryResponseDone {
          activateBtn()
     }
 
+    /**
+     * Función de los botones info juego e ir al mapa
+     * el botón de ir al mapa se activa cuando el audio no está en play
+     */
     private fun activateBtn() {
         mapa.setOnClickListener {
             if (audio?.isPlaying == false){
@@ -592,6 +585,7 @@ class Fragment1_1_juego : Fragment(), DbHandler.QueryResponseDone {
 
     /**
      * Coloca bordes de colores a una ImageView
+     *
      * @param img la ImageView a la que se le pone el borde
      * @param color el color del borde
      */
@@ -686,6 +680,9 @@ class Fragment1_1_juego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
+    /**
+     * Al destuir el fragment termina con todos los elementos que puedan dar errores
+     */
     override fun onDestroy() {
         audio?.stop()
         doubleTabHandler?.removeCallbacksAndMessages(null)
@@ -702,14 +699,19 @@ class Fragment1_1_juego : Fragment(), DbHandler.QueryResponseDone {
         super.onDestroy()
     }
 
+    /**
+     * Al pausar el fragment pausa el audio para que no de error
+     */
     override fun onPause() {
         audio?.pause()
         super.onPause()
     }
 
+    /**
+     * Al reanudar el fragment resume el audio
+     */
     override fun onResume() {
         super.onResume()
         audio?.start()
     }
-
 }

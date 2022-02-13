@@ -5,14 +5,12 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
-import android.content.Intent
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
 import android.graphics.drawable.AnimationDrawable
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
@@ -24,30 +22,14 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.core.view.isVisible
 import com.example.didaktikapp.Model.DragnDropImage
-import com.example.didaktikapp.activities.Activity5_Mapa
-import com.example.didaktikapp.activities.Activity6_Site
 import com.example.didaktikapp.activities.DbHandler
 import kotlinx.android.synthetic.main.fragment1_1_juego.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [Fragment1_juego.newInstance] factory method to
- * create an instance of this fragment.
- */
 class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
     private val thisJuegoId = 3
-
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
     private lateinit var vistaAnimada: TranslateAnimation
     private lateinit var globalView: View
@@ -56,19 +38,20 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
     private lateinit var buttonRepetir: Button
     private lateinit var btnInfoJuego: ImageButton
     private lateinit var preguntasLayout: LinearLayout
-    private var audio: MediaPlayer? = null
     private lateinit var  mapa: ImageButton
-    var totalWidth: Int = 0
-    var totalHeight: Int = 0
-    var puzzleShowing: Boolean = false
+    private var audio: MediaPlayer? = null
+    private var totalWidth: Int = 0
+    private var totalHeight: Int = 0
+    private var puzzleShowing: Boolean = false
     private var introFinished: Boolean = false
     private var doubleTabHandler: Handler? = null
     private var typeWriterHandler: Handler? = null
     private var exitAnimationHandler: Handler? = null
     private var talkAnimationHandler: Handler? = null
     private var fondoAnimationHandler: Handler? = null
-
-    val listaImagenes = listOf(
+    private var respuestaPreguntasjuego2: String = "zanpantzarrak"
+    private var manzanaList: MutableList<DragnDropImage>? = mutableListOf()
+    private val listaImagenes = listOf(
         listOf(R.id.puzzle_pieza_o_1, R.id.puzzle_pieza_d_1),
         listOf(R.id.puzzle_pieza_o_2, R.id.puzzle_pieza_d_2),
         listOf(R.id.puzzle_pieza_o_3, R.id.puzzle_pieza_d_3),
@@ -81,18 +64,8 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
         listOf(R.id.puzzle_pieza_o_10, R.id.puzzle_pieza_d_10),
         listOf(R.id.puzzle_pieza_o_11, R.id.puzzle_pieza_d_11),
         listOf(R.id.puzzle_pieza_o_12, R.id.puzzle_pieza_d_12),
-        //listOf(R.id.puzzle_pieza_otest1,R.id.puzzle_pieza_otest2),
     )
 
-    var manzanaList: MutableList<DragnDropImage>? = mutableListOf()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -197,8 +170,11 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
 
     }
 
+    /**
+     * Recogemos del shared preferences en que minijuego estamos y depende de cual sea muestra una
+     * info de ayuda u otra
+     */
     fun showDialogInfo(){
-
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.info_dialog)
@@ -207,7 +183,6 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
-
 
         val textInfo = dialog.findViewById<View>(R.id.txtv_infominijuego) as TextView
         var texto =""
@@ -231,7 +206,11 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
             textInfo.setText(texto)
         }
     }
-    fun showPhotos() {
+
+    /**
+     * Hace que las imagenes del puzzle se vean
+     */
+    private fun showPhotos() {
         //recogemos las fotos
         val foto1: ImageView = globalView.findViewById(R.id.puzzle_pieza_o_1)
         val foto2: ImageView = globalView.findViewById(R.id.puzzle_pieza_o_2)
@@ -262,12 +241,18 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
 
     }
 
+    /**
+     * Una vez que le llega la respuesta de la DB pasa al minijuego
+     */
     override fun responseDbUserUpdated(responde: Boolean) {
         Navigation.findNavController(globalView)
             .navigate(R.id.action_fragment1_3_juego_to_fragment2_3_minijuego)
     }
 
-    fun prepairPuzzleElements() {
+    /**
+     * Prepara los elementos del puzzle
+     */
+    private fun prepairPuzzleElements() {
         for (vItemList in listaImagenes) {
             var vItemOrigen: ImageView = globalView.findViewById(vItemList[0])
             var vItemDestino: ImageView = globalView.findViewById(vItemList[1])
@@ -286,6 +271,9 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
+    /**
+     * Añade la opcion de arrastar la imagenes
+     */
     @SuppressLint("ClickableViewAccessibility")
     var listener = View.OnTouchListener { viewElement, motionEvent ->
         var itemInList: DragnDropImage? = findItemByOrigen(viewElement)
@@ -331,6 +319,11 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
         true
     }
 
+    /**
+     * Hace que el texto del juego se escriba letra por letra
+     *
+     * @param view la vista en la que se encuentra
+     */
     private fun typewriter(view: View) {
         val typeWriterView = view.findViewById(R.id.txtv1_1tutorialjuego1) as TypeWriterView
         typeWriterView.setWithMusic(false)
@@ -338,6 +331,11 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
         typeWriterView.setDelay(65)
     }
 
+    /**
+     * Muestra la manzana de la animacion con una transicion
+     *
+     * @param view la vista en la que se encuentra
+     */
     private fun starAnimationfun(view: View) {
         //Animacion fondo gris
         val txtAnimacion = view.findViewById(R.id.txtv1_1fondogris) as TextView
@@ -362,6 +360,11 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
         }, 2000)
     }
 
+    /**
+     * Esconde la manzana de la animacion con una transicion
+     *
+     * @param view la vista en la que se encuentra
+     */
     private fun exitAnimationfun(view: View) {
         if (introFinished) {
             return
@@ -392,6 +395,11 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
         }, 1000)
     }
 
+    /**
+     * Anima la manzana como que habla
+     *
+     * @param view la vista en la que se encuentra
+     */
     private fun talkAnimationfun(view: View) {
         val upelio = view.findViewById(R.id.imgv1_1_upelio2) as ImageView
         upelio.setBackgroundResource(R.drawable.animacion_manzana)
@@ -399,6 +407,9 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
         ani.start()
     }
 
+    /**
+     * Inicia las preguntas que salen despues del puzzle
+     */
     private fun iniciarPreguntas() {
         button.visibility = View.GONE
         puzzleShowing = true
@@ -406,8 +417,9 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
         preguntasLayout.visibility = View.VISIBLE
     }
 
-    private var respuestaPreguntasjuego2: String = "zanpantzarrak"
-
+    /**
+     * Comprueba las respuestas de despues del puzzle
+     */
     private fun comprobarRespuestas() {
         val radio1: RadioButton = globalView.findViewById(R.id.pregunta1_respuesta_1)
         val radio2: RadioButton = globalView.findViewById(R.id.pregunta1_respuesta_2)
@@ -434,20 +446,32 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
+    /**
+     * Esconde el teclado
+     */
     fun Fragment.hideKeyboard() {
         view?.let { activity?.hideKeyboard(it) }
     }
 
+    /**
+     * Esconde el teclado
+     */
     fun Activity.hideKeyboard() {
         hideKeyboard(currentFocus ?: View(this))
     }
 
-    fun Context.hideKeyboard(view: View) {
+    /**
+     * Esconde el teclado
+     */
+    private fun Context.hideKeyboard(view: View) {
         val inputMethodManager =
             getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
+    /**
+     * Oculta el puzzle
+     */
     private fun ocultarPuzzle() {
         for (item in manzanaList!!) {
             item.origen.visibility = View.GONE
@@ -455,6 +479,9 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
+    /**
+     * Envia las imagenes al primer plano
+     */
     private fun sendToTopImagesNotFinished() {
         for (item in manzanaList!!) {
             if (!item.acertado) {
@@ -463,6 +490,11 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
+    /**
+     * Comprueba si el puzzle se ha completado
+     *
+     * @return el estado del puzzle
+     */
     private fun puzzleCompletado(): Boolean {
         var finalizado: Boolean = true
         for (item in manzanaList!!) {
@@ -474,6 +506,12 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
         return finalizado
     }
 
+    /**
+     * Busca la view que le pasamos en el array manzanasList
+     *
+     * @param view la vista que tiene que buscar
+     * @return la vista que se encuentra el el array manzanasList
+     */
     private fun findItemByOrigen(view: View): DragnDropImage? {
         for (item in manzanaList!!) {
             if (item.origen == view) {
@@ -483,11 +521,14 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
         return null
     }
 
+    /**
+     * Añade funcionalidades al los botones (mapa/info)
+     */
     private fun activateBtn() {
         mapa.setOnClickListener {
             if (audio?.isPlaying == false){
                 activity?.let{
-                    getActivity()?.finish()
+                    activity?.finish()
                 }
             }
         }
@@ -497,6 +538,9 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
         }
     }
 
+    /**
+     * Función para terminar la intro manualmente
+     */
     fun endIntroManually() {
         if (introFinished) {
             return
@@ -520,6 +564,9 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
         activateBtn()
     }
 
+    /**
+     * Al destuir el fragment termina con todos los elementos que puedan dar errores
+     */
     override fun onDestroy() {
         audio?.stop()
         doubleTabHandler?.removeCallbacksAndMessages(null)
@@ -535,34 +582,19 @@ class Fragment1_3_juego : Fragment(), DbHandler.QueryResponseDone {
         super.onDestroy()
     }
 
+    /**
+     * Al pausar el fragment pausa el audio para que no de error
+     */
     override fun onPause() {
         audio?.pause()
         super.onPause()
     }
 
+    /**
+     * Al reanudar el fragment resume el audio
+     */
     override fun onResume() {
         super.onResume()
         audio?.start()
     }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Fragment1_juego.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Fragment1_3_juego().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
-
 }
